@@ -1,0 +1,175 @@
+---
+interface Props {
+  lang: string;
+}
+const { lang } = Astro.props;
+---
+
+<div id="consent-banner" hidden role="region" aria-label={lang === "en" ? "Cookie Settings" : "Cookie-Einstellungen"}>
+  <div class="consent-inner">
+    {lang === "en" ? (
+      <p class="consent-text">
+        <strong>Cookies for anonymous statistics</strong><br />
+        We use Google Analytics to understand how our website is used.
+        The data is anonymized. You can decline and the website will work without any restrictions.
+        Details: <a href="/en/privacy">Privacy policy</a>
+      </p>
+    ) : (
+      <p class="consent-text">
+        <strong>Cookies für anonyme Statistiken</strong><br />
+        Wir nutzen Google Analytics, um zu verstehen, wie unsere Website genutzt wird.
+        Die Daten sind anonymisiert. Sie können ablehnen, die Website funktioniert dann
+        uneingeschränkt. Details: <a href="/datenschutz">Datenschutzerklärung</a>
+      </p>
+    )}
+    <div class="consent-buttons">
+      <button type="button" id="consent-accept">{lang === "en" ? "Accept" : "Akzeptieren"}</button>
+      <button type="button" id="consent-decline">{lang === "en" ? "Decline" : "Ablehnen"}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  #consent-banner {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-top: 1px solid #e8e8e8;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    padding: 16px;
+  }
+  #consent-banner[hidden] { display: none; }
+  .consent-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .consent-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+  .consent-text a {
+    color: #1a1a1a;
+    text-decoration: underline;
+  }
+  .consent-buttons { display: flex; gap: 12px; }
+  .consent-buttons button {
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  #consent-accept {
+    background: #6366f1;
+    border: 1px solid #6366f1;
+    color: #ffffff;
+  }
+  #consent-accept:hover { background: #4f46e5; border-color: #4f46e5; }
+  #consent-decline {
+    background: transparent;
+    border: 1px solid #1a1a1a;
+    color: #1a1a1a;
+  }
+  #consent-decline:hover { background: #f5f5f5; }
+  @media (max-width: 480px) {
+    .consent-inner { flex-direction: column; align-items: stretch; }
+    .consent-buttons { flex-wrap: wrap; }
+    .consent-buttons button { flex: 1; }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var KEY = 'avorix_consent';
+  var VERSION = 1;
+  var GTM_ID = 'GTM-TGC3HD6M';
+
+  function read() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      if (obj && obj.version === VERSION &&
+          (obj.status === 'granted' || obj.status === 'denied')) return obj.status;
+      return null;
+    } catch (e) { return null; }
+  }
+
+  function write(status) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify({
+        status: status, version: VERSION, timestamp: new Date().toISOString()
+      }));
+    } catch (e) { /* Privatmodus: gilt nur für diese Sitzung */ }
+  }
+
+  function consentUpdate(status) {
+    gtag('consent', 'update', {
+      ad_storage: status,
+      ad_user_data: status,
+      ad_personalization: status,
+      analytics_storage: status
+    });
+  }
+
+  function loadGTM() {
+    if (window.__gtmLoaded) return;
+    window.__gtmLoaded = true;
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+    document.head.appendChild(s);
+  }
+
+  function showBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = false; }
+  function hideBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = true; }
+
+  function accept() {
+    write('granted');
+    consentUpdate('granted');
+    loadGTM();
+    hideBanner();
+  }
+
+  function decline() {
+    write('denied');
+    consentUpdate('denied');
+    hideBanner();
+  }
+
+  window.avorixConsent = { open: showBanner, get: read };
+
+  function init() {
+    var status = read();
+    if (status === 'granted') { consentUpdate('granted'); loadGTM(); }
+    else if (status === null) { showBanner(); }
+
+    var b = document.getElementById('consent-banner');
+    if (b && !b.dataset.bound) {
+      b.dataset.bound = '1';
+      document.getElementById('consent-accept').addEventListener('click', accept);
+      document.getElementById('consent-decline').addEventListener('click', decline);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  document.addEventListener('astro:page-load', init);
+})();
+</script>

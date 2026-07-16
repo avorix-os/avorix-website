@@ -60,7 +60,7 @@ const schema = {
           </div>
         </div>
 
-        <form class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
+        <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Demo request via avorix.cloud" />
           <div>
             <label for="name" class="block text-sm font-medium text-avorix-dark mb-1">
@@ -109,4 +109,43 @@ const schema = {
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const contactForm = document.getElementById('contact-form') as HTMLFormElement;
+  if (contactForm) {
+    let leadSent = false;
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending\u2026';
+      }
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok && !leadSent) {
+          leadSent = true;
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'generate_lead', form_name: 'demo_kontakt' });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = response.ok ? 'Sent \u2714' : 'Send';
+        }
+        if (response.ok) {
+          contactForm.reset();
+        }
+      } catch {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send';
+        }
+      }
+    });
+  }
+</script>
 

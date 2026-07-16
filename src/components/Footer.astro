@@ -46,10 +46,24 @@ const year = new Date().getFullYear();
 
     <div class="border-t border-avorix-gray/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-avorix-silver/50">
       <p>&copy; {year} Avorix. {t("footer.rights")}</p>
-      <div class="flex gap-6">
+      <div class="flex gap-6 items-center">
         <a href={lang === "de" ? "/impressum" : "/en/legal-notice"} class="hover:text-avorix-silver transition-colors">{t("footer.imprint")}</a>
         <a href={lang === "de" ? "/datenschutz" : "/en/privacy"} class="hover:text-avorix-silver transition-colors">{t("footer.privacy")}</a>
+        <button type="button" id="footer-cookie-settings" class="hover:text-avorix-silver transition-colors bg-transparent border-0 p-0 text-xs text-avorix-silver/50 cursor-pointer font-normal">
+          {lang === "en" ? "Cookie settings" : "Cookie-Einstellungen"}
+        </button>
       </div>
     </div>
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('footer-cookie-settings');
+        if (el && !el.dataset.bound) {
+          el.dataset.bound = '1';
+          el.addEventListener('click', function () {
+            if (window.avorixConsent) window.avorixConsent.open();
+          });
+        }
+      })();
+    </script>
   </div>
 </footer>

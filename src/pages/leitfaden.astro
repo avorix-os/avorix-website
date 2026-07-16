@@ -218,6 +218,7 @@ const schema = {
       </p>
       <a
         href="/kontakt"
+        data-cta-location="leitfaden"
         class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold text-sm hover:bg-brand-700 transition-colors"
       >
         Demo vereinbaren
@@ -254,6 +255,8 @@ const schema = {
       });
 
       if (response.ok) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'lead_magnet_download', asset: 'leitfaden_fachkraeftemangel' });
         showSuccess();
       } else {
         // Fallback: still show success + trigger download

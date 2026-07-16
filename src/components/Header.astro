@@ -26,7 +26,7 @@ const t = useTranslations(lang);
       <a href={getLocalizedPath(lang === "de" ? "/produkt" : "/product", lang)} class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
         {t("nav.produkt")}
       </a>
-      <a href={getLocalizedPath(lang === "de" ? "/kontakt" : "/contact", lang)} class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
+      <a href={getLocalizedPath(lang === "de" ? "/kontakt" : "/contact", lang)} data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
         {t("nav.contact")}
       </a>
       <LanguageSwitcher />
