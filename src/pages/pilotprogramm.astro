@@ -1,10 +1,77 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Startseite",
+      "item": "https://avorix.cloud/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Pilotprogramm",
+      "item": "https://avorix.cloud/pilotprogramm"
+    }
+  ]
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet mich das Pilotprogramm?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Deutlich weniger als der reguläre Preis. Die genaue Zahl hängt von Ihrer Karte ab und steht nach der Küchen-Analyse fest, schriftlich und ohne versteckte Posten."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange bin ich gebunden?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die App-Nutzung läuft über 12 Monate. Kürzer ist nicht seriös: Ein System, das Ihre Küche verändert, beweist sich nicht in vier Wochen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Muss ich als Referenz auftreten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Anonyme Auswertung ja, öffentliche Referenz nur, wenn Sie das ausdrücklich wollen. Dann mit eigenem Deal."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was ist, wenn es bei uns nicht funktioniert?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Dann sagen wir uns das offen, im Zweifel auch: Abbruch. Genau dafür sind Pilotprojekte da. Ihre Rezeptdokumentation behalten Sie in jedem Fall, die Arbeit war dann nicht umsonst."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wir haben gar keinen Küchenchef mehr. Geht es trotzdem?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gerade dann. Für die Übergangszeit können wir zusätzlich einen unserer festangestellten Köche rechtssicher ausleihen. Sprechen Sie es im Kennenlern-Gespräch an."
+      }
+    }
+  ]
+};
 ---
 
 <BaseLayout
-  title="Pilotprogramm 2026"
-  description="Wir suchen 3 Hotelküchen, die 2026 mit uns den Beweis antreten. Pilotkonditionen, direkter Draht zum Gründer, Priorität bei allem."
+  title="Pilotprogramm 2026 für Hotel- und Restaurantküchen | Avorix"
+  description="Werden Sie Pilotbetrieb: das komplette Avorix-System zu Pilotkonditionen, gegen ehrliches Feedback und anonyme Auswertung."
+  schemaOrg={[breadcrumbSchema, faqSchema]}
 >
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
@@ -20,7 +87,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Die Avorix Koch-App ist neu. Was nicht neu ist: unsere Köche und unsere Abläufe, die seit Jahren in Profiküchen stehen. Was uns noch fehlt, sind Betriebe, deren Ergebnisse wir zeigen dürfen. Deshalb machen wir Ihnen ein Angebot, das wir so nur den ersten Häusern machen.
       </p>
       <a
-        href="/kontakt"
+        href="#anfrage"
         data-cta-location="hero"
         class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors shadow-lg shadow-brand-200"
       >
@@ -42,25 +109,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Das komplette Avorix-System — App, Rezepte, Schulung, Begleitung.</span>
+              <span>Das komplette Avorix-System: Rezeptaufnahme durch einen erfahrenen Koch, Schulung Ihres Teams direkt am Herd, die Koch-App für Ihren ganzen Betrieb.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Pilotkonditionen — rund die Hälfte dessen, was wir ab 2027 berechnen.</span>
+              <span><strong>Pilotkonditionen: rund die Hälfte des regulären Preises.</strong></span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Direkter Draht zum Gründer — kein Ticket-System, kein Callcenter.</span>
+              <span>Den direkten Draht zum Gründer: Börge Penk betreut die Pilotbetriebe persönlich.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Priorität bei allem — Feature-Wünsche, Support, Anpassungen.</span>
+              <span>Priorität bei allem: Ihre Wünsche fließen zuerst in die App ein.</span>
             </li>
           </ul>
         </div>
@@ -72,19 +139,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Ehrliches Feedback — was funktioniert, was nicht, was fehlt.</span>
+              <span>Ihr ehrliches Feedback. Auch das unbequeme.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Die Erlaubnis, Ihre Ergebnisse anonymisiert auszuwerten und zu zeigen.</span>
+              <span>Die Erlaubnis, Ihre Ergebnisse anonym auszuwerten (zum Beispiel: „Ein Ferienhotel am Bodensee senkte den Wareneinsatz um X Prozent"). Ihr Name taucht dabei nirgends auf, das sichern wir vertraglich zu.</span>
             </li>
           </ul>
         </div>
       </div>
-      <p class="text-neutral-600 text-center mt-8 max-w-2xl mx-auto">
-        Wenn Sie darüber hinaus bereit sind, öffentlich als Referenz aufzutreten, sprechen wir über einen eigenen Deal.
+      <p class="text-neutral-500 text-center mt-8 max-w-2xl mx-auto">
+        Wenn Sie darüber hinaus bereit sind, öffentlich als Referenz aufzutreten, sprechen wir über einen eigenen Deal mit noch besseren Konditionen. Das ist aber freiwillig und keine Bedingung.
       </p>
     </div>
   </section>
@@ -102,19 +169,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Sie ein Hotel oder Restaurant in Deutschland oder Österreich betreiben.</span>
+              <span>Sie ein Hotel oder Restaurant in Deutschland oder Österreich führen, idealerweise mit Halbpension oder fester Karte.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Fachkräftemangel für Sie ein reales, spürbares Problem ist.</span>
+              <span>Der Fachkräftemangel bei Ihnen real ist: offene Stellen, Abhängigkeit von einzelnen Köpfen, schwankende Qualität.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
-              <span>Sie bereit sind, Abläufe in der Küche zu verändern — nicht nur eine App zu installieren.</span>
+              <span>Sie bereit sind, Abläufe zu verändern. Nicht alles auf einmal, aber ernsthaft.</span>
             </li>
           </ul>
         </div>
@@ -126,17 +193,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
               <svg class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              <span>Sie eine täglich wechselnde Spitzengastronomie-Karte fahren.</span>
+              <span>Sie eine täglich wechselnde Spitzengastronomie mit eigenem Patron am Herd führen. Dafür ist Avorix nicht gebaut.</span>
             </li>
             <li class="flex items-start gap-3">
               <svg class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>
-              <span>Sie nur eine App suchen, ohne Ihre Abläufe anzupassen.</span>
+              <span>Sie nur die App wollen, aber nichts am Ablauf ändern möchten. Dann verbrennen wir beide Zeit und Geld.</span>
             </li>
           </ul>
         </div>
       </div>
+      <p class="text-neutral-500 text-center mt-8 max-w-2xl mx-auto">
+        Diese Ehrlichkeit sparen wir uns nicht. Ein Pilotprojekt, das nicht passt, schadet Ihnen und uns.
+      </p>
     </div>
   </section>
 
@@ -149,32 +219,32 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flex gap-4 items-start">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-lg shrink-0">1</div>
           <div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Kennenlern-Gespräch</h3>
-            <p class="text-neutral-600">30 Minuten per Videocall oder Telefon. Wir lernen Ihren Betrieb kennen, Sie lernen unser System kennen. Danach wissen beide Seiten, ob es passt.</p>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Kennenlern-Gespräch (30 Minuten, kostenlos).</h3>
+            <p class="text-neutral-600">Per Video oder Telefon. Sie schildern Ihre Situation, wir prüfen gemeinsam, ob das Pilotprogramm passt. Danach entscheiden beide Seiten in Ruhe.</p>
           </div>
         </div>
         <!-- Schritt 2 -->
         <div class="flex gap-4 items-start">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-lg shrink-0">2</div>
           <div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Küchen-Analyse</h3>
-            <p class="text-neutral-600">Wir schauen uns Ihre Speisekarte, Ihre Abläufe und Ihr Team an. Daraus entsteht ein konkreter Plan, was Avorix bei Ihnen verändern kann.</p>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Küchen-Analyse vor Ort.</h3>
+            <p class="text-neutral-600">Ein Avorix-Koch schaut sich Ihre Küche, Ihre Karte und Ihr Team an. Sie bekommen einen konkreten Fahrplan mit Aufwand und Kosten, auf den Euro genau.</p>
           </div>
         </div>
         <!-- Schritt 3 -->
         <div class="flex gap-4 items-start">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-lg shrink-0">3</div>
           <div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Aufnahme und Schulung</h3>
-            <p class="text-neutral-600">Wir digitalisieren Ihre Rezepte, richten die App ein und schulen Ihr Team vor Ort. Kein Handbuch, kein Selbststudium — wir machen das zusammen.</p>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Aufnahme und Schulung.</h3>
+            <p class="text-neutral-600">Wir dokumentieren Ihre Karte, richten die App ein und schulen Ihr Team am Herd, während der Betrieb normal weiterläuft.</p>
           </div>
         </div>
         <!-- Schritt 4 -->
         <div class="flex gap-4 items-start">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-lg shrink-0">4</div>
           <div>
-            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Laufender Betrieb</h3>
-            <p class="text-neutral-600">Ab jetzt läuft das System. Wir bleiben dran, optimieren mit Ihnen und messen die Ergebnisse. Sie haben jederzeit direkten Zugang zu uns.</p>
+            <h3 class="text-lg font-semibold text-neutral-900 mb-1">Laufender Betrieb mit Begleitung.</h3>
+            <p class="text-neutral-600">Ihr Team arbeitet mit dem System. Wir bleiben dran, sammeln Ihr Feedback und justieren nach. Alle paar Wochen ein kurzes Gespräch mit Börge.</p>
           </div>
         </div>
       </div>
@@ -195,10 +265,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
         <div class="md:col-span-2">
           <p class="text-neutral-600 leading-relaxed mb-6">
-            Börge Penk, Gründer von Avorix. Koch, Küchenleiter, Betriebsleiter — seit über 15 Jahren in der Gastronomie. Nicht als Berater, sondern als jemand, der selbst am Pass stand und weiß, was passiert, wenn der Abend kippt.
+            Börge Penk, Küchenchef mit 20 Jahren Praxis, hat Avorix aus dem eigenen Küchenalltag heraus entwickelt. Für die Pilotbetriebe ist er persönlich verantwortlich:
           </p>
           <blockquote class="border-l-4 border-brand-500 pl-6 italic text-neutral-600">
-            "Bei den ersten Häusern stehe ich selbst gerade. Nicht weil ich muss, sondern weil ich will, dass es funktioniert — und weil ich aus jeder Küche lerne, wie wir Avorix besser machen."
+            „Bei den ersten Häusern stehe ich selbst gerade. Wenn es dort nicht funktioniert, funktioniert unser Geschäftsmodell nicht. Einfacher kann ich Ihr Risiko nicht machen."
           </blockquote>
         </div>
       </div>
@@ -210,7 +280,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="max-w-4xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-neutral-900 mb-6">Warum nur 3 Plätze?</h2>
       <p class="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
-        Weil wir jeden Pilotbetrieb persönlich begleiten. Keine Skalierung auf Kosten der Qualität. Drei Häuser, bei denen wir sicher sein können, dass das Ergebnis stimmt — das ist mehr wert als dreißig, bei denen wir nur die Hälfte schaffen.
+        Weil jede Einführung echte Menschen braucht: Ein Avorix-Koch steht bei Ihnen in der Küche, nicht in einem Callcenter. Mehr als einen neuen Betrieb pro Monat können wir sauber betreuen, und Qualität geht vor Wachstum. Deshalb ist bei 3 Pilotbetrieben Schluss. Danach gelten reguläre Konditionen.
       </p>
     </div>
   </section>
@@ -220,92 +290,198 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">Häufige Fragen</h2>
       <div class="space-y-4">
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 group">
+        <details open class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Was kostet das Pilotprogramm?
+            Was kostet mich das Pilotprogramm?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">Rund die Hälfte dessen, was wir ab 2027 regulär berechnen. Die genauen Konditionen besprechen wir im Kennenlern-Gespräch, weil sie von Ihrer Betriebsgröße abhängen.</p>
+          <p class="text-neutral-600 mt-3 leading-relaxed">Deutlich weniger als der reguläre Preis. Die genaue Zahl hängt von Ihrer Karte ab und steht nach der Küchen-Analyse fest, schriftlich und ohne versteckte Posten.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 group">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
             Wie lange bin ich gebunden?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">Die Pilotphase läuft über 6 Monate. Danach entscheiden Sie, ob Sie weitermachen — zu den dann gültigen Konditionen. Keine automatische Verlängerung, kein Kleingedrucktes.</p>
+          <p class="text-neutral-600 mt-3 leading-relaxed">Die App-Nutzung läuft über 12 Monate. Kürzer ist nicht seriös: Ein System, das Ihre Küche verändert, beweist sich nicht in vier Wochen.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 group">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
             Muss ich als Referenz auftreten?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">Nein. Wir brauchen nur die Erlaubnis, Ihre Ergebnisse anonymisiert auszuwerten. Wenn Sie darüber hinaus öffentlich auftreten möchten, machen wir Ihnen ein separates Angebot.</p>
+          <p class="text-neutral-600 mt-3 leading-relaxed">Nein. Anonyme Auswertung ja, öffentliche Referenz nur, wenn Sie das ausdrücklich wollen. Dann mit eigenem Deal.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 group">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
             Was ist, wenn es bei uns nicht funktioniert?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">Dann ist das so. Wir sind ehrlich: Nicht jede Küche passt zu unserem System. Wenn wir im Kennenlern-Gespräch merken, dass es nicht passt, sagen wir das. Und wenn es im laufenden Betrieb nicht funktioniert, finden wir gemeinsam eine Lösung — oder beenden die Zusammenarbeit fair.</p>
+          <p class="text-neutral-600 mt-3 leading-relaxed">Dann sagen wir uns das offen, im Zweifel auch: Abbruch. Genau dafür sind Pilotprojekte da. Ihre Rezeptdokumentation behalten Sie in jedem Fall, die Arbeit war dann nicht umsonst.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4 group">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Brauche ich dann keinen Küchenchef mehr?
+            Wir haben gar keinen Küchenchef mehr. Geht es trotzdem?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">Avorix ersetzt keinen Küchenchef. Aber es sorgt dafür, dass Ihre Küche auch dann auf Niveau produziert, wenn der Küchenchef nicht da ist — im Urlaub, am freien Tag oder wenn die Stelle gerade unbesetzt ist.</p>
+          <p class="text-neutral-600 mt-3 leading-relaxed">Gerade dann. Für die Übergangszeit können wir zusätzlich einen unserer festangestellten Köche rechtssicher ausleihen. Sprechen Sie es im Kennenlern-Gespräch an.</p>
         </details>
       </div>
     </div>
   </section>
 
   <!-- Pilotplatz anfragen -->
-  <section class="py-16 px-6 border-t border-neutral-100">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Pilotplatz anfragen. Unverbindlich.</h2>
-      <p class="text-neutral-600 text-lg mb-10">Drei Minuten. Danach melden wir uns innerhalb von zwei Werktagen.</p>
-      <div class="bg-white rounded-2xl border border-neutral-100 shadow-sm p-8 max-w-xl mx-auto mb-10 text-left">
-        <p class="text-neutral-600 mb-4 font-medium">Was wir von Ihnen wissen möchten:</p>
-        <ul class="space-y-2 text-neutral-600">
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0"></span>
-            Name und Position
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0"></span>
-            Betrieb und Standort
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0"></span>
-            Anzahl Covers pro Tag
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0"></span>
-            Größte Herausforderung in der Küche
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="w-1.5 h-1.5 rounded-full bg-brand-500 shrink-0"></span>
-            Bevorzugter Kontaktweg
-          </li>
-        </ul>
-      </div>
-      <a
-        href="/kontakt"
-        data-cta-location="final"
-        class="inline-block bg-brand-500 text-white px-10 py-4 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors shadow-lg shadow-brand-200"
-      >
-        Pilotplatz anfragen
-      </a>
+  <section id="anfrage" class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-2xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">Pilotplatz anfragen. Unverbindlich.</h2>
+      <p class="text-neutral-600 text-lg text-center mb-10">Drei Minuten. Danach melden wir uns innerhalb von zwei Werktagen.</p>
+
+      <form id="pilot-form" class="space-y-5 bg-white rounded-2xl border border-neutral-100 shadow-sm p-8" action="https://formspree.io/f/xqegwngo" method="POST">
+        <input type="hidden" name="_subject" value="Pilot-Anfrage über avorix.cloud" />
+
+        <div>
+          <label for="pilot-name" class="block text-sm font-medium text-avorix-dark mb-1">
+            Name <span class="text-brand-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="pilot-name"
+            name="name"
+            required
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+          />
+        </div>
+
+        <div>
+          <label for="pilot-betrieb" class="block text-sm font-medium text-avorix-dark mb-1">
+            Betrieb (Hotel/Restaurant) + Ort <span class="text-brand-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="pilot-betrieb"
+            name="betrieb"
+            required
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+          />
+        </div>
+
+        <div>
+          <label for="pilot-email" class="block text-sm font-medium text-avorix-dark mb-1">
+            E-Mail <span class="text-brand-500">*</span>
+          </label>
+          <input
+            type="email"
+            id="pilot-email"
+            name="email"
+            required
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+          />
+        </div>
+
+        <div>
+          <label for="pilot-telefon" class="block text-sm font-medium text-avorix-dark mb-1">
+            Telefon <span class="text-neutral-400 font-normal">(optional, für schnellere Rückmeldung)</span>
+          </label>
+          <input
+            type="tel"
+            id="pilot-telefon"
+            name="telefon"
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+          />
+        </div>
+
+        <div>
+          <label for="pilot-teamgroesse" class="block text-sm font-medium text-avorix-dark mb-1">
+            Wie groß ist Ihr Küchenteam?
+          </label>
+          <select
+            id="pilot-teamgroesse"
+            name="kuechenteam"
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark bg-white"
+          >
+            <option value="">Bitte wählen</option>
+            <option value="1 bis 3">1 bis 3</option>
+            <option value="4 bis 8">4 bis 8</option>
+            <option value="mehr als 8">mehr als 8</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="pilot-problem" class="block text-sm font-medium text-avorix-dark mb-1">
+            Was ist gerade Ihr größtes Küchenproblem? <span class="text-neutral-400 font-normal">(optional)</span>
+          </label>
+          <textarea
+            id="pilot-problem"
+            name="kuechenproblem"
+            rows="4"
+            class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark resize-none"
+          ></textarea>
+        </div>
+
+        <div id="pilot-success" class="hidden bg-brand-50 border border-brand-100 rounded-lg px-4 py-3 text-brand-700 text-sm font-medium">
+          Danke. Wir melden uns innerhalb von zwei Werktagen.
+        </div>
+
+        <button
+          type="submit"
+          data-cta-location="final"
+          class="bg-brand-500 text-white px-8 py-3 rounded-lg text-sm font-semibold hover:bg-brand-600 active:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 transition-colors w-full"
+        >
+          Pilotplatz anfragen
+        </button>
+      </form>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const pilotForm = document.getElementById('pilot-form') as HTMLFormElement;
+  if (pilotForm) {
+    let pilotSent = false;
+    pilotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = pilotForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      const successMsg = document.getElementById('pilot-success');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet\u2026';
+      }
+      try {
+        const response = await fetch(pilotForm.action, {
+          method: 'POST',
+          body: new FormData(pilotForm),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok && !pilotSent) {
+          pilotSent = true;
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'pilot_bewerbung', form_name: 'pilotprogramm' });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = response.ok ? 'Gesendet \u2714' : 'Pilotplatz anfragen';
+        }
+        if (response.ok) {
+          pilotForm.reset();
+          if (successMsg) {
+            successMsg.classList.remove('hidden');
+          }
+        }
+      } catch {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Pilotplatz anfragen';
+        }
+      }
+    });
+  }
+</script>

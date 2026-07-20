@@ -3,9 +3,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Für Sporthotels"
-  description="Avorix für Sporthotels: Halbpension auf Niveau, Gruppen-Menüs, Saisonkräfte ab Tag eins. Koch-App, Schulung und Personal."
+  title="Küchensystem für Sporthotels | Avorix"
+  description="Halbpension, Gruppen und Trainingslager mit halber Mannschaft stemmen: Avorix macht Ihre Sporthotel-Küche verlässlich."
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+          { "@type": "ListItem", "position": 2, "name": "Für Sporthotels", "item": "https://avorix.cloud/fuer-sporthotels" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Wir fahren Buffet und Menü gemischt. Geht das?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jede Komponente wird als eigenes Rezept mit Stückzahlen geführt, egal ob sie auf dem Teller oder im Chafing-Dish landet." } },
+          { "@type": "Question", "name": "Wie kurz vor Saisonstart können wir noch anfangen?", "acceptedAnswer": { "@type": "Answer", "text": "Je nach Karte typischerweise wenige Wochen für Aufnahme und Schulung. Je früher vor der Saison, desto entspannter." } },
+          { "@type": "Question", "name": "Können Sonderwünsche von Sportlergruppen abgebildet werden?", "acceptedAnswer": { "@type": "Answer", "text": "Varianten (vegetarisch, kalorienbewusst) werden wie eigene Gerichte dokumentiert und sind damit genauso reproduzierbar." } },
+          { "@type": "Question", "name": "Bekommen wir für die Saison auch Personal?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, das ist Teil des Systems: festangestellte Köche, rechtssicher verliehen, für Wochen oder die ganze Saison." } }
+        ]
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
     <div class="max-w-4xl mx-auto">
@@ -15,7 +37,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Halbpension auf Niveau, Gruppen-Menüs in Stückzahl, Saisonkräfte ab Tag eins produktiv: Avorix macht Ihre Sporthotel-Küche unabhängig davon, wen Sie diese Saison gefunden haben.
       </p>
       <a href="/kontakt" data-cta-location="sporthotels-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <p class="text-sm text-neutral-500 mt-4">Avorix verfügt über eine Arbeitnehmerüberlassungserlaubnis.</p>
+      <div class="mt-4">
+        <span class="text-sm text-neutral-600">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
     </div>
   </section>
 
@@ -26,18 +50,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Aktive Gäste verzeihen wenig.</h3>
-          <p class="text-neutral-600 text-sm">Wer den ganzen Tag auf der Piste oder im Sattel war, erwartet abends ein Essen, das den Tag abrundet. Nicht nur satt, sondern gut.</p>
+          <p class="text-neutral-600 text-sm">Wer tagsüber Leistung bringt, erwartet abends verlässlich gutes Essen. Jeden Abend, die ganze Saison.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Gruppen sprengen jede Routine.</h3>
-          <p class="text-neutral-600 text-sm">Ein Trainingslager mit 40 Sportlern, Sonderwünsche, Diätvorgaben. Dazu das normale Abendgeschäft. Ohne System wird das zum Glücksspiel.</p>
+          <p class="text-neutral-600 text-sm">Trainingslager, Vereine, Camps: 60 Essen auf einmal, zusätzlich zum Haus. Ihr Stammteam federt das nicht ab.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Saisonkräfte kommen ohne Einarbeitung.</h3>
-          <p class="text-neutral-600 text-sm">Neue Leute, neue Karte, kein Vorlauf. Trotzdem muss ab dem ersten Abend alles sitzen.</p>
+          <p class="text-neutral-600 text-sm">Und gehen nach einer Saison wieder. Jedes Jahr fängt Ihre Küche von vorn an.</p>
         </div>
       </div>
-      <p class="text-sm text-neutral-500 mt-6">Wenn die Küche wackelt, wackelt der Ruf. Und Sportler reden — untereinander, mit Trainern, mit Verbänden.</p>
+      <p class="text-neutral-600 mt-6">Wenn die Küche wackelt, wackelt der Ruf des Hauses. Und der entscheidet, ob die Gruppe nächstes Jahr wiederkommt.</p>
     </div>
   </section>
 
@@ -47,21 +71,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Das Avorix-System: drei Bausteine für eine Küche, die durchhält.</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Das System</h3>
-          <p class="text-neutral-600 text-sm">Ihre Karte wird in der Koch-App dokumentiert: Rezepte, Schritte, Fotos, Mengen. Jede Kraft arbeitet nach demselben Standard.</p>
-          <p class="text-neutral-500 text-xs mt-3">Inkl. Portionsrechner: Heute 120 statt 80 Portionen? Die App skaliert automatisch.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Unser System</h3>
+          <p class="text-neutral-600 text-sm">Ihre Halbpensions-Zyklen und Menüfolgen als Schritt-für-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Der Portionsrechner skaliert jedes Gericht automatisch von 40 auf 100 Essen.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Schulung</h3>
-          <p class="text-neutral-600 text-sm">Ein Avorix-Koch schult Ihr Team vor Ort — direkt am Herd, an Ihren Gerichten. Nicht im Seminarraum, sondern in Ihrer Küche.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Die Schulung</h3>
+          <p class="text-neutral-600 text-sm">Ein Avorix-Koch (mindestens Sous-Chef-Erfahrung) nimmt Ihre Karte auf und lernt Ihr Team an.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Verstärkung</h3>
-          <p class="text-neutral-600 text-sm">Wenn Ihnen Köche fehlen, stellen wir sie. Rechtssicher per Arbeitnehmerüberlassung, eingearbeitet durch das System.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Die Verstärkung</h3>
+          <p class="text-neutral-600 text-sm">Für die Saison leihen wir Ihnen festangestellte Köche aus. Rechtssicher, mit Arbeitnehmerüberlassungserlaubnis.</p>
         </div>
       </div>
       <div class="mt-8">
-        <a href="/system" data-cta-location="sporthotels-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das Avorix-System</a>
+        <a href="/system" data-cta-location="sporthotels-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das System</a>
       </div>
     </div>
   </section>
@@ -70,11 +93,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Gruppen-Menüs in Stückzahl sind der Idealfall für das System.</h2>
-      <p class="text-neutral-600 leading-relaxed mb-4">
-        Trainingslager-Menüfolgen sind planbar und reproduzierbar. Drei Gänge, 40 Portionen, feste Vorgaben — genau das, was ein System braucht, um zu glänzen.
-      </p>
       <p class="text-neutral-600 leading-relaxed">
-        Die Koch-App skaliert die Mengen automatisch. Die Abläufe sind dokumentiert. Und Ihr Team arbeitet die Schritte ab, statt zu improvisieren. Das Ergebnis: gleichbleibende Qualität, egal ob 40 oder 120 Portionen.
+        Trainingslager-Menüfolgen und Halbpensions-Zyklen sind planbar: gleiche Gerichte, klare Mengen, feste Termine. Genau das kann das System am besten. Einmal sauber dokumentiert, wird jede Menüfolge reproduzierbar, jeden Abend, von jeder Kraft, in jeder Stückzahl. Ihre Küche weiß am Morgen, was am Abend auf 80 Tellern liegt.
       </p>
     </div>
   </section>
@@ -84,12 +104,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Köche für die Saison. Rechtssicher. Ab Tag eins produktiv.</h2>
       <p class="text-neutral-600 leading-relaxed mb-4">
-        Avorix stellt Ihnen Köche per Arbeitnehmerüberlassung — in Deutschland, Österreich und Tirol. Kein Scheinselbständigkeits-Risiko, kein Vertragswirrwarr. Unsere Arbeitnehmerüberlassungserlaubnis deckt das ab.
+        Wir arbeiten in Deutschland und Österreich, auch in Tirol. Unsere Köche sind bei uns fest angestellt und werden mit behördlicher Arbeitnehmerüberlassungserlaubnis verliehen. Das schützt Sie vor dem Scheinselbständigkeits-Risiko, das bei „selbstständigen" Saisonköchen schnell 50.000 Euro und mehr kosten kann.
       </p>
-      <p class="text-neutral-600 leading-relaxed mb-4">
-        Und weil Ihre Küche im System dokumentiert ist, arbeiten die Saisonkräfte ab dem ersten Tag nach Ihrem Standard. Kein wochenlanges Einarbeiten, kein Hoffen, dass es schon klappen wird.
+      <p class="text-neutral-600 leading-relaxed">
+        Und weil jeder Avorix-Koch mit der App arbeitet, gilt: Der Saisonkoch geht im Frühjahr. Sein Wissen bleibt bei Ihnen.
       </p>
-      <p class="text-sm text-neutral-500 mt-4">Der Saisonkoch geht, das Wissen bleibt — in der App, nicht im Kopf einer einzelnen Person.</p>
     </div>
   </section>
 
@@ -98,7 +117,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Vor der Saison ist der beste Zeitpunkt.</h2>
       <p class="text-neutral-600 leading-relaxed mb-6">
-        In den ruhigen Wochen vor dem Saisonstart dokumentieren wir Ihre Karte, schulen Ihr Team und bauen das System auf. Wenn die ersten Gäste kommen, steht alles.
+        Die ruhigen Wochen vor Saisonstart sind ideal für Aufnahme und Schulung: Wenn die ersten Gruppen anreisen, läuft Ihr System schon. Als einer unserer Pilotbetriebe 2026 starten Sie zu Konditionen von rund der Hälfte des regulären Preises.
       </p>
       <a href="/pilotprogramm" data-cta-location="sporthotels-pilot" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Zum Pilotprogramm</a>
     </div>
@@ -110,20 +129,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Häufige Fragen</h2>
       <div class="space-y-3">
         <details open class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wir machen Buffet und Menü gemischt. Geht das?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Die Koch-App dokumentiert beides: Buffet-Komponenten genauso wie Menüfolgen. Der Portionsrechner skaliert auf die jeweilige Gästezahl.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Wir fahren Buffet und Menü gemischt. Geht das?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Ja. Jede Komponente wird als eigenes Rezept mit Stückzahlen geführt, egal ob sie auf dem Teller oder im Chafing-Dish landet.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wie kurzfristig vor Saisonstart können wir noch starten?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ideal sind vier bis sechs Wochen Vorlauf. In dringenden Fällen geht es auch schneller — dann priorisieren wir die wichtigsten Gerichte und erweitern laufend.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Wie kurz vor Saisonstart können wir noch anfangen?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Je nach Karte typischerweise wenige Wochen für Aufnahme und Schulung. Je früher vor der Saison, desto entspannter.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Sportlergruppen haben oft Sonderwünsche. Kann das System das?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Varianten, Allergien und Ernährungspläne lassen sich in der App hinterlegen. Ihr Team sieht die Anpassungen direkt am Posten.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Können Sonderwünsche von Sportlergruppen abgebildet werden?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Varianten (vegetarisch, kalorienbewusst) werden wie eigene Gerichte dokumentiert und sind damit genauso reproduzierbar.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Können wir auch nur Personal für die Saison bekommen, ohne App?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Grundsätzlich ja. Aber das System macht den größten Unterschied: Saisonkräfte sind sofort produktiv, weil alles dokumentiert ist. Ohne System dauert die Einarbeitung Wochen.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Bekommen wir für die Saison auch Personal?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Ja, das ist Teil des Systems: festangestellte Köche, rechtssicher verliehen, für Wochen oder die ganze Saison.</p>
         </details>
       </div>
     </div>
@@ -132,8 +151,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Final CTA -->
   <section class="py-20 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Die nächste Saison kommt bestimmt. Diesmal mit System.</h2>
-      <p class="text-neutral-600 mb-6">Lassen Sie uns in einem kurzen Gespräch klären, wie Avorix in Ihre Küche passt.</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Die nächste Saison kommt bestimmt. Diesmal mit System.</h2>
       <a href="/kontakt" data-cta-location="sporthotels-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
     </div>
   </section>

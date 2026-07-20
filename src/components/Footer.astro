@@ -8,58 +8,89 @@ const year = new Date().getFullYear();
 
 <footer class="bg-neutral-950 text-avorix-silver border-t-4 border-brand-500">
   <div class="max-w-6xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <!-- Logo & Beschreibung -->
-      <div>
-        <img src="/logo.png" alt="Avorix" class="h-8 brightness-200 mb-4" />
-        <p class="text-sm text-avorix-silver/70 max-w-xs">
-          {lang === "de"
-            ? "Software, Schulung und Personal f\u00fcr konsistente K\u00fcchenqualit\u00e4t in der Hotellerie."
-            : "Software, training and staff for consistent kitchen quality in hospitality."}
-        </p>
-      </div>
+    {lang === "de" ? (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Spalte 1: Alle 10 Seiten-Links */}
+        <div>
+          <h3 class="text-avorix-white font-semibold text-sm mb-4">Seiten</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/" class="hover:text-avorix-white transition-colors">Startseite</a></li>
+            <li><a href="/system" class="hover:text-avorix-white transition-colors">So funktioniert es</a></li>
+            <li><a href="/koch-app" class="hover:text-avorix-white transition-colors">Die Koch-App</a></li>
+            <li><a href="/schulung" class="hover:text-avorix-white transition-colors">Die Schulung</a></li>
+            <li><a href="/personal" class="hover:text-avorix-white transition-colors">Das Personal</a></li>
+            <li><a href="/pilotprogramm" class="hover:text-avorix-white transition-colors">Pilotprogramm</a></li>
+            <li><a href="/ueber-uns" class="hover:text-avorix-white transition-colors">&Uuml;ber uns</a></li>
+            <li><a href="/fuer-hotels" class="hover:text-avorix-white transition-colors">F&uuml;r Ferienhotels</a></li>
+            <li><a href="/fuer-restaurants" class="hover:text-avorix-white transition-colors">F&uuml;r Restaurants &amp; Gasth&ouml;fe</a></li>
+            <li><a href="/fuer-sporthotels" class="hover:text-avorix-white transition-colors">F&uuml;r Sporthotels</a></li>
+          </ul>
+        </div>
 
-      <!-- Unser System -->
-      <div>
-        <h3 class="text-avorix-white font-semibold text-sm mb-4">{t("nav.system")}</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href={lang === "de" ? "/system" : "/en/system"} class="hover:text-avorix-white transition-colors">{t("nav.system.overview")}</a></li>
-          <li><a href={lang === "de" ? "/koch-app" : "/en/cook-app"} class="hover:text-avorix-white transition-colors">{t("nav.system.app")}</a></li>
-          <li><a href={lang === "de" ? "/schulung" : "/en/training"} class="hover:text-avorix-white transition-colors">{t("nav.system.training")}</a></li>
-          <li><a href={lang === "de" ? "/personal" : "/en/staff"} class="hover:text-avorix-white transition-colors">{t("nav.system.staff")}</a></li>
-        </ul>
-      </div>
+        {/* Spalte 2: Leitfaden + Kontakt */}
+        <div>
+          <h3 class="text-avorix-white font-semibold text-sm mb-4">Service</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/leitfaden" class="hover:text-avorix-white transition-colors">Kostenloser Leitfaden</a></li>
+            <li><a href="/kontakt" class="hover:text-avorix-white transition-colors">Kontakt</a></li>
+          </ul>
+        </div>
 
-      <!-- Für wen -->
-      <div>
-        <h3 class="text-avorix-white font-semibold text-sm mb-4">{t("nav.target")}</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href={lang === "de" ? "/fuer-hotels" : "/en/for-hotels"} class="hover:text-avorix-white transition-colors">{t("nav.target.hotels")}</a></li>
-          <li><a href={lang === "de" ? "/fuer-restaurants" : "/en/for-restaurants"} class="hover:text-avorix-white transition-colors">{t("nav.target.restaurants")}</a></li>
-          <li><a href={lang === "de" ? "/fuer-sporthotels" : "/en/for-sports-hotels"} class="hover:text-avorix-white transition-colors">{t("nav.target.sporthotels")}</a></li>
-        </ul>
+        {/* Spalte 3: Impressum, Datenschutz, Cookie */}
+        <div>
+          <h3 class="text-avorix-white font-semibold text-sm mb-4">Rechtliches</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/impressum" class="hover:text-avorix-white transition-colors">Impressum</a></li>
+            <li><a href="/datenschutz" class="hover:text-avorix-white transition-colors">Datenschutz</a></li>
+            <li>
+              <button type="button" id="footer-cookie-settings" class="hover:text-avorix-white transition-colors bg-transparent border-0 p-0 text-sm text-avorix-silver cursor-pointer font-normal">
+                Cookie-Einstellungen
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-
-      <!-- Weiteres -->
-      <div>
-        <h3 class="text-avorix-white font-semibold text-sm mb-4">{lang === "de" ? "Weiteres" : "More"}</h3>
-        <ul class="space-y-2 text-sm">
-          <li><a href={lang === "de" ? "/pilotprogramm" : "/en/pilot-program"} class="hover:text-avorix-white transition-colors">{t("nav.pilot")}</a></li>
-          <li><a href={lang === "de" ? "/ueber-uns" : "/en/about"} class="hover:text-avorix-white transition-colors">{t("nav.about")}</a></li>
-          <li><a href={lang === "de" ? "/kontakt" : "/en/contact"} class="hover:text-avorix-white transition-colors">{t("nav.contact")}</a></li>
-        </ul>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <img src="/logo.png" alt="Avorix" class="h-8 brightness-200 mb-4" />
+          <p class="text-sm text-avorix-silver/70 max-w-xs">
+            Software and processes for consistent kitchen quality in hospitality.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-avorix-white font-semibold text-sm mb-4">Navigation</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/en" class="hover:text-avorix-white transition-colors">{t("nav.home")}</a></li>
+            <li><a href="/en/about" class="hover:text-avorix-white transition-colors">{t("nav.about")}</a></li>
+            <li><a href="/en/cook-app" class="hover:text-avorix-white transition-colors">{t("nav.kochapp")}</a></li>
+            <li><a href="/en/product" class="hover:text-avorix-white transition-colors">{t("nav.produkt")}</a></li>
+            <li><a href="/en/contact" class="hover:text-avorix-white transition-colors">{t("nav.contact")}</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-avorix-white font-semibold text-sm mb-4">Legal</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/en/legal-notice" class="hover:text-avorix-white transition-colors">{t("footer.imprint")}</a></li>
+            <li><a href="/en/privacy" class="hover:text-avorix-white transition-colors">{t("footer.privacy")}</a></li>
+            <li>
+              <button type="button" id="footer-cookie-settings" class="hover:text-avorix-white transition-colors bg-transparent border-0 p-0 text-sm text-avorix-silver cursor-pointer font-normal">
+                Cookie settings
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
+    )}
 
     <div class="border-t border-avorix-gray/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-avorix-silver/50">
-      <p>&copy; {year} Avorix GmbH, Friedrichshafen. {t("footer.rights")}</p>
-      <div class="flex gap-6 items-center">
-        <a href={lang === "de" ? "/impressum" : "/en/legal-notice"} class="hover:text-avorix-silver transition-colors">{t("footer.imprint")}</a>
-        <a href={lang === "de" ? "/datenschutz" : "/en/privacy"} class="hover:text-avorix-silver transition-colors">{t("footer.privacy")}</a>
-        <button type="button" id="footer-cookie-settings" class="hover:text-avorix-silver transition-colors bg-transparent border-0 p-0 text-xs text-avorix-silver/50 cursor-pointer font-normal">
-          {lang === "en" ? "Cookie settings" : "Cookie-Einstellungen"}
-        </button>
-      </div>
+      <p>&copy; {lang === "de" ? "Avorix GmbH, Friedrichshafen" : `${year} Avorix. ${t("footer.rights")}`}</p>
+      {lang === "en" && (
+        <div class="flex gap-6 items-center">
+          <a href="/en/legal-notice" class="hover:text-avorix-silver transition-colors">{t("footer.imprint")}</a>
+          <a href="/en/privacy" class="hover:text-avorix-silver transition-colors">{t("footer.privacy")}</a>
+        </div>
+      )}
     </div>
     <script is:inline>
       (function () {

@@ -1,11 +1,96 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const schemaOrg = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Avorix",
+        "item": "https://avorix.cloud/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Die Schulung",
+        "item": "https://avorix.cloud/schulung"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Küchen-Schulung durch Avorix-Köche",
+    "description": "Ein Avorix-Koch mit Sous-Chef-Erfahrung nimmt Ihre Karte auf und lernt Ihr Team an, direkt am Herd. Als Schulungsblock oder live im Betrieb.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Avorix GmbH",
+      "url": "https://avorix.cloud",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Friedrichshafen",
+        "addressCountry": "DE"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Avorix"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "DE"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wer sind die Avorix-Köche?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen. Wer bei uns schult, hat mindestens Sous-Chef-Erfahrung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist, wenn der Koch nicht zu unserem Team passt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie schnell ist mein Team fit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wer eine Woche mit der App gekocht hat, braucht sie nicht mehr erklärt zu bekommen. Für eine typische Karte rechnen Sie mit zwei Blöcken."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Arbeiten die Köche mit der Koch-App?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Dadurch hinterlässt jeder Einsatz dokumentiertes Wissen in Ihrer Küche."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <BaseLayout
-  title="Die Schulung — Ihr Team lernt unser System"
-  description="Ein Avorix-Koch mit Sous-Chef-Erfahrung nimmt Ihre Karte auf, legt sie in der Koch-App an und lernt Ihr Team an — direkt am Herd, nicht im Seminarraum."
+  title="Küchen-Schulung durch erfahrene Köche | Avorix"
+  description="Ein Avorix-Koch mit Sous-Chef-Erfahrung nimmt Ihre Karte auf und lernt Ihr Team an, direkt am Herd. Als Schulungsblock oder live im Betrieb."
+  schemaOrg={schemaOrg}
 >
+
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
     <div class="max-w-4xl mx-auto text-center">
@@ -26,10 +111,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Demo vereinbaren
       </a>
       <p class="text-sm text-neutral-600 mt-6 inline-flex items-center gap-2 bg-neutral-100 px-4 py-2 rounded-full">
-        <svg class="w-4 h-4 text-brand-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-        Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)
+        ✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)
       </p>
     </div>
   </section>
@@ -48,7 +130,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <h3 class="text-xl font-semibold text-neutral-900 mb-3">Weg 1: Die Block-Schulung</h3>
           <p class="text-neutral-600 leading-relaxed">
-            Fünf Tage mit je sechs Stunden, konzentriert aufs Anlernen. Typisch sind zwei Blöcke: Im ersten Block nimmt der Avorix-Koch Ihre Karte auf und legt die Rezepte in der App an. Im zweiten Block arbeitet Ihr Team die Gerichte durch, bis jeder Handgriff sitzt.
+            Ein Avorix-Koch kommt für einen Block zu Ihnen: fünf Tage mit je sechs Stunden. Er konzentriert sich ganz auf Ihre Küche, nimmt die Karte auf, dokumentiert, fotografiert und lernt Ihr Team an. Er kocht in dieser Zeit nicht im Service mit, seine ganze Aufmerksamkeit gehört dem Anlernen. Für eine typische Karte rechnen Sie mit zwei Blöcken: erst Aufnahme und Dokumentation, dann die reine Schulung mit dem fertigen Material.
           </p>
         </div>
         <!-- Weg 2 -->
@@ -58,12 +140,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <h3 class="text-xl font-semibold text-neutral-900 mb-3">Weg 2: Die Live-Schulung</h3>
           <p class="text-neutral-600 leading-relaxed">
-            Der Avorix-Koch arbeitet ganz normal in Ihrer Küche mit und lernt Ihr Team nebenbei an. Der laufende Betrieb wird nicht unterbrochen, und trotzdem wächst das Know-how Schicht für Schicht. Besonders geeignet, wenn Sie keine Tage für reine Schulung freimachen können.
+            Ein Avorix-Koch arbeitet ganz normal in Ihrer Küche mit, macht Bons fertig und produziert, und lernt Ihr Team nebenbei an, mitten im echten Betrieb. Sie bezahlen einen produktiven Koch und bekommen die Schulung dazu.
           </p>
         </div>
       </div>
       <p class="text-sm text-neutral-600 text-center mt-8 bg-brand-50 rounded-xl px-6 py-3">
-        Für beide Wege gilt: Der Avorix-Koch hat mindestens Sous-Chef-Erfahrung.
+        <strong>Für beide Wege gilt:</strong> Der Avorix-Koch hat mindestens Sous-Chef-Erfahrung. Es schult niemand, der es nicht selbst jeden Tag kann.
       </p>
     </div>
   </section>
@@ -75,10 +157,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Am Herd. Im echten Betrieb. Mit Ihrem eigenen Essen.
       </h2>
       <p class="text-lg text-neutral-600 leading-relaxed mb-6">
-        Unser Koch trainiert nicht mit Beispielrezepten aus einem Handbuch. Er nimmt Ihre Speisekarte, baut daraus die Rezepte in der Koch-App und arbeitet sie mit Ihrem Team durch, mit den Zutaten, die bei Ihnen im Haus sind, auf den Geräten, die in Ihrer Küche stehen. Das Ergebnis: Ihr Team kann nach der Schulung genau die Gerichte kochen, die Ihre Gäste bestellen.
+        Geschult wird nicht mit Beispielrezepten, sondern mit Ihrer Karte. Ihr Team lernt genau die Gerichte, die es ab morgen kocht, mit der App, die ab morgen am Posten hängt. Wer eine Woche so gearbeitet hat, braucht keine Erklärung mehr.
       </p>
       <p class="text-neutral-600 leading-relaxed mb-8">
-        Falls Ihnen während der Schulungsphase Personal fehlt, können wir über unser Personal-Modul zusätzliche Köche stellen, damit der Betrieb weiterläuft, während Ihr Team lernt.
+        <strong>Und wenn während der Schulung Personal fehlt:</strong> Dafür gibt es unser Personal-Modul, festangestellte Köche, rechtssicher verliehen.
       </p>
       <a
         href="/personal"
@@ -119,25 +201,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="space-y-4">
         <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Wer sind die Köche, die bei uns schulen?
+            Wer sind die Avorix-Köche?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 mt-3 leading-relaxed">
-            Alle Avorix-Schulungsköche haben mindestens Sous-Chef-Erfahrung in der gehobenen Hotellerie oder Gastronomie. Sie kennen das Avorix-System, weil sie selbst damit arbeiten, und sie wissen, wie man ein Küchenteam anleitet.
+            Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen. Wer bei uns schult, hat mindestens Sous-Chef-Erfahrung.
           </p>
         </details>
 
         <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Was passiert, wenn der Koch nicht zu unserem Team passt?
+            Was ist, wenn der Koch nicht zu unserem Team passt?
             <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 mt-3 leading-relaxed">
-            Dann tauschen wir ihn aus. Die Chemie zwischen Schulungskoch und Küchenteam muss stimmen, sonst funktioniert das Anlernen nicht. Sagen Sie uns Bescheid, und wir schicken einen anderen Koch.
+            Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.
           </p>
         </details>
 
@@ -149,7 +231,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </svg>
           </summary>
           <p class="text-neutral-600 mt-3 leading-relaxed">
-            Das hängt von der Größe Ihrer Karte und dem Erfahrungslevel Ihres Teams ab. Typisch sind zwei Schulungsblöcke zu je fünf Tagen. Danach kann Ihr Team die Gerichte selbständig mit der App kochen. Bei der Live-Schulung dauert es etwas länger, dafür läuft der Betrieb durchgehend.
+            Wer eine Woche mit der App gekocht hat, braucht sie nicht mehr erklärt zu bekommen. Für eine typische Karte rechnen Sie mit zwei Blöcken.
           </p>
         </details>
 
@@ -161,7 +243,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </svg>
           </summary>
           <p class="text-neutral-600 mt-3 leading-relaxed">
-            Ja. Der Schulungskoch legt Ihre Rezepte in der Avorix Koch-App an und zeigt Ihrem Team, wie sie damit arbeiten. Nach der Schulung hat Ihr Team die App mit allen Rezepten, Fotos und Schritt-für-Schritt-Anleitungen auf dem Tablet in der Küche.
+            Ja. Dadurch hinterlässt jeder Einsatz dokumentiertes Wissen in Ihrer Küche.
           </p>
         </details>
       </div>

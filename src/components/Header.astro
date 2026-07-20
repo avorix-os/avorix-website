@@ -6,16 +6,16 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const systemLinks = [
-  { label: t("nav.system.overview"), href: lang === "de" ? "/system" : "/en/system" },
-  { label: t("nav.system.app"), href: lang === "de" ? "/koch-app" : "/en/cook-app" },
-  { label: t("nav.system.training"), href: lang === "de" ? "/schulung" : "/en/training" },
-  { label: t("nav.system.staff"), href: lang === "de" ? "/personal" : "/en/staff" },
+  { label: "So funktioniert es", href: "/system" },
+  { label: "Die Koch-App", href: "/koch-app" },
+  { label: "Die Schulung", href: "/schulung" },
+  { label: "Das Personal", href: "/personal" },
 ];
 
 const targetLinks = [
-  { label: t("nav.target.hotels"), href: lang === "de" ? "/fuer-hotels" : "/en/for-hotels" },
-  { label: t("nav.target.restaurants"), href: lang === "de" ? "/fuer-restaurants" : "/en/for-restaurants" },
-  { label: t("nav.target.sporthotels"), href: lang === "de" ? "/fuer-sporthotels" : "/en/for-sports-hotels" },
+  { label: "Ferienhotels", href: "/fuer-hotels" },
+  { label: "Restaurants & Gasth\u00f6fe", href: "/fuer-restaurants" },
+  { label: "Sporthotels", href: "/fuer-sporthotels" },
 ];
 ---
 
@@ -26,136 +26,264 @@ const targetLinks = [
       <span class="text-xl font-semibold tracking-tight text-brand-600">AVORIX</span>
     </a>
 
-    <div class="hidden lg:flex items-center gap-6">
-      <!-- Unser System Dropdown -->
-      <div class="nav-dropdown relative">
-        <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1">
-          {t("nav.system")}
-          <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-        </button>
-        <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[200px]">
-          <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
-            {systemLinks.map(link => (
-              <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
-                {link.label}
-              </a>
-            ))}
+    {lang === "de" ? (
+      <div class="hidden lg:flex items-center gap-6">
+        {/* Unser System Dropdown */}
+        <div class="nav-dropdown relative">
+          <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+            Unser System
+            <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[200px]">
+            <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
+              {systemLinks.map(link => (
+                <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Für wen Dropdown -->
-      <div class="nav-dropdown relative">
-        <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1">
-          {t("nav.target")}
-          <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-        </button>
-        <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[220px]">
-          <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
-            {targetLinks.map(link => (
-              <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
-                {link.label}
-              </a>
-            ))}
+        {/* F\u00fcr wen Dropdown */}
+        <div class="nav-dropdown relative">
+          <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
+            F&uuml;r wen
+            <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[220px]">
+            <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
+              {targetLinks.map(link => (
+                <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
+                  {link.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
+
+        <a href="/pilotprogramm" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          Pilotprogramm<sup class="text-brand-500 font-bold text-[0.6rem] ml-0.5">2026</sup>
+        </a>
+
+        <a href="/ueber-uns" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          &Uuml;ber uns
+        </a>
+
+        <a href="/kontakt" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
+          Demo vereinbaren
+        </a>
+
+        <LanguageSwitcher />
       </div>
+    ) : (
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/en" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          {t("nav.home")}
+        </a>
+        <a href="/en/about" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          {t("nav.about")}
+        </a>
+        <a href="/en/cook-app" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          {t("nav.kochapp")}
+        </a>
+        <a href="/en/product" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
+          {t("nav.produkt")}
+        </a>
+        <a href="/en/contact" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
+          {t("nav.contact")}
+        </a>
+        <LanguageSwitcher />
+      </div>
+    )}
 
-      <a href={lang === "de" ? "/pilotprogramm" : "/en/pilot-program"} class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-        {t("nav.pilot")}<sup class="text-brand-500 font-bold text-[0.6rem] ml-0.5">2026</sup>
-      </a>
-
-      <a href={lang === "de" ? "/ueber-uns" : "/en/about"} class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-        {t("nav.about")}
-      </a>
-
-      <a href={lang === "de" ? "/kontakt" : "/en/contact"} data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
-        {t("nav.contact")}
-      </a>
-
-      <LanguageSwitcher />
-    </div>
-
-    <!-- Mobile menu button -->
-    <button id="mobile-menu-btn" class="lg:hidden p-2" aria-label="Menu">
+    {/* Mobile menu button */}
+    <button id="mobile-menu-btn" class={lang === "de" ? "lg:hidden p-2" : "md:hidden p-2"} aria-label="Menu">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
   </nav>
 
-  <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden border-t border-avorix-light bg-white max-h-[80vh] overflow-y-auto">
-    <div class="px-6 py-4 flex flex-col gap-1">
-      <!-- Unser System -->
-      <div class="py-2">
-        <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">{t("nav.system")}</span>
-        <div class="mt-1 flex flex-col gap-1 pl-3">
-          {systemLinks.map(link => (
-            <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-              {link.label}
-            </a>
-          ))}
+  {/* Mobile menu */}
+  {lang === "de" ? (
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-avorix-light bg-white max-h-[80vh] overflow-y-auto">
+      <div class="px-6 py-4 flex flex-col gap-1">
+        {/* Unser System */}
+        <div class="mobile-accordion py-2">
+          <button type="button" class="mobile-accordion-trigger w-full text-left text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center justify-between" aria-expanded="false">
+            Unser System
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="mobile-accordion-content hidden mt-1 flex flex-col gap-1 pl-3">
+            {systemLinks.map(link => (
+              <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <!-- Für wen -->
-      <div class="py-2 border-t border-neutral-100">
-        <span class="text-xs font-bold text-brand-500 uppercase tracking-wider">{t("nav.target")}</span>
-        <div class="mt-1 flex flex-col gap-1 pl-3">
-          {targetLinks.map(link => (
-            <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-              {link.label}
-            </a>
-          ))}
+        {/* F\u00fcr wen */}
+        <div class="mobile-accordion py-2 border-t border-neutral-100">
+          <button type="button" class="mobile-accordion-trigger w-full text-left text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center justify-between" aria-expanded="false">
+            F&uuml;r wen
+            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+          </button>
+          <div class="mobile-accordion-content hidden mt-1 flex flex-col gap-1 pl-3">
+            {targetLinks.map(link => (
+              <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
+                {link.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div class="border-t border-neutral-100 pt-2 flex flex-col gap-2">
-        <a href={lang === "de" ? "/pilotprogramm" : "/en/pilot-program"} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-          {t("nav.pilot")} <sup class="text-brand-500 font-bold text-[0.6rem]">2026</sup>
-        </a>
-        <a href={lang === "de" ? "/ueber-uns" : "/en/about"} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-          {t("nav.about")}
-        </a>
-        <a href={lang === "de" ? "/kontakt" : "/en/contact"} data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors text-center mt-2">
-          {t("nav.contact")}
-        </a>
-        <div class="mt-2">
-          <LanguageSwitcher />
+        <div class="border-t border-neutral-100 pt-2 flex flex-col gap-2">
+          <a href="/pilotprogramm" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
+            Pilotprogramm <sup class="text-brand-500 font-bold text-[0.6rem]">2026</sup>
+          </a>
+          <a href="/ueber-uns" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
+            &Uuml;ber uns
+          </a>
+          <a href="/kontakt" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors text-center mt-2">
+            Demo vereinbaren
+          </a>
+          <div class="mt-2">
+            <LanguageSwitcher />
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  ) : (
+    <div id="mobile-menu" class="hidden md:hidden border-t border-avorix-light bg-white">
+      <div class="px-6 py-4 flex flex-col gap-4">
+        <a href="/en" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.home")}</a>
+        <a href="/en/about" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.about")}</a>
+        <a href="/en/cook-app" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.kochapp")}</a>
+        <a href="/en/product" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.produkt")}</a>
+        <a href="/en/contact" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.contact")}</a>
+        <LanguageSwitcher />
+      </div>
+    </div>
+  )}
 </header>
 
-<script>
-  // Mobile menu toggle
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
-  });
+<script is:inline>
+  (function() {
+    if (document.querySelector('[data-nav-bound]')) return;
+    var header = document.querySelector('header');
+    if (!header) return;
+    header.setAttribute('data-nav-bound', '1');
 
-  // Desktop dropdown hover
-  document.querySelectorAll(".nav-dropdown").forEach((dropdown) => {
-    const trigger = dropdown.querySelector(".nav-dropdown-trigger");
-    const menuEl = dropdown.querySelector(".nav-dropdown-menu");
-    let timeout: ReturnType<typeof setTimeout>;
+    // Mobile menu toggle
+    var btn = document.getElementById('mobile-menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    if (btn && menu) {
+      btn.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+      });
+    }
 
-    dropdown.addEventListener("mouseenter", () => {
-      clearTimeout(timeout);
-      menuEl?.classList.remove("hidden");
+    // Mobile accordion sections
+    document.querySelectorAll('.mobile-accordion-trigger').forEach(function(trigger) {
+      trigger.addEventListener('click', function() {
+        var content = trigger.parentElement.querySelector('.mobile-accordion-content');
+        var expanded = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', String(!expanded));
+        if (content) content.classList.toggle('hidden');
+        var svg = trigger.querySelector('svg');
+        if (svg) svg.style.transform = expanded ? '' : 'rotate(180deg)';
+      });
     });
 
-    dropdown.addEventListener("mouseleave", () => {
-      timeout = setTimeout(() => {
-        menuEl?.classList.add("hidden");
-      }, 150);
+    // Desktop dropdown: click + keyboard + escape
+    document.querySelectorAll('.nav-dropdown').forEach(function(dropdown) {
+      var trigger = dropdown.querySelector('.nav-dropdown-trigger');
+      var menuEl = dropdown.querySelector('.nav-dropdown-menu');
+      if (!trigger || !menuEl) return;
+      var closeTimeout;
+
+      function openMenu() {
+        clearTimeout(closeTimeout);
+        menuEl.classList.remove('hidden');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeMenu() {
+        menuEl.classList.add('hidden');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      // Click toggle
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (menuEl.classList.contains('hidden')) {
+          // Close other open dropdowns
+          document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
+            if (m !== menuEl) {
+              m.classList.add('hidden');
+              var t = m.parentElement.querySelector('.nav-dropdown-trigger');
+              if (t) t.setAttribute('aria-expanded', 'false');
+            }
+          });
+          openMenu();
+        } else {
+          closeMenu();
+        }
+      });
+
+      // Keyboard: Enter/Space on trigger
+      trigger.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          trigger.click();
+        }
+        if (e.key === 'Escape') {
+          closeMenu();
+          trigger.focus();
+        }
+      });
+
+      // Escape from within menu
+      menuEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closeMenu();
+          trigger.focus();
+        }
+      });
+
+      // Mouse hover (with delay)
+      dropdown.addEventListener('mouseenter', function() {
+        clearTimeout(closeTimeout);
+        openMenu();
+      });
+
+      dropdown.addEventListener('mouseleave', function() {
+        closeTimeout = setTimeout(closeMenu, 150);
+      });
     });
 
-    trigger?.addEventListener("click", () => {
-      menuEl?.classList.toggle("hidden");
+    // Close dropdowns on click outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
+          m.classList.add('hidden');
+          var t = m.parentElement.querySelector('.nav-dropdown-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
     });
-  });
+
+    // Global Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
+          m.classList.add('hidden');
+          var t = m.parentElement.querySelector('.nav-dropdown-trigger');
+          if (t) t.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  })();
 </script>

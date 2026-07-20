@@ -5,35 +5,84 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Avorix",
+    "name": "AVORIX GmbH",
     "url": "https://avorix.cloud",
     "logo": "https://avorix.cloud/avorix-logo.svg",
-    "description": "Avorix ermöglicht Hotels und Gastronomiebetrieben, mit Software, standardisierten Prozessen und der Avorix Koch App qualitativ hochwertige Gerichte konsistent anzubieten — auch ohne ausgebildete Köche.",
-    "email": "info@avorix.de",
+    "description": "Avorix f\u00fchrt Ihr K\u00fcchenteam Schritt f\u00fcr Schritt durch jedes Gericht. Mit Koch-App, Schulung durch echte K\u00f6che und rechtssicherem Personal. Auch ohne ausgebildete K\u00f6che.",
+    "founder": {
+      "@type": "Person",
+      "name": "B\u00f6rge Penk"
+    },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Friedrichshafen",
       "addressCountry": "DE"
     },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "info@avorix.de",
-      "contactType": "sales",
-      "availableLanguage": ["German", "English"]
-    }
+    "areaServed": ["DE", "AT"],
+    "url": "https://avorix.cloud"
   },
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Avorix",
-    "url": "https://avorix.cloud"
+    "@type": "BreadcrumbList",
+    "itemListElement": []
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": "#direktantwort"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wer tippt unsere Rezepte ein?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Wir. Ein Avorix-Koch kommt zu Ihnen, kocht mit Ihrem Team und legt jedes Gericht in der App an. Sie m\u00fcssen nichts selbst einpflegen." }
+      },
+      {
+        "@type": "Question",
+        "name": "Merken unsere G\u00e4ste etwas davon?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Ihre G\u00e4ste erleben Ihre K\u00fcche und Ihre Rezepte, nur eben verl\u00e4sslich in gleicher Qualit\u00e4t. Auf Wunsch sichern wir Ihnen vertraglich zu, dass wir Ihren Betrieb nirgends als Referenz nennen." }
+      },
+      {
+        "@type": "Question",
+        "name": "Unser Team ist nicht besonders technikaffin. Klappt das trotzdem?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, daf\u00fcr ist die App gebaut. Wer ein Foto ansehen und einen Haken setzen kann, kann mit ihr arbeiten. Geschult wird direkt am Herd, nicht im Seminarraum." }
+      },
+      {
+        "@type": "Question",
+        "name": "Was passiert mit unseren Rezepten? Wem geh\u00f6ren die?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ihnen. Ihre Rezepte bleiben Ihr Eigentum und werden nicht an andere Betriebe weitergegeben." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie schnell sind wir startklar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vom Erstgespr\u00e4ch bis zum eigenst\u00e4ndigen Arbeiten vergehen je nach Karte typischerweise wenige Wochen. Den genauen Fahrplan bekommen Sie nach dem Erstgespr\u00e4ch." }
+      },
+      {
+        "@type": "Question",
+        "name": "Welche Technik brauchen wir in der K\u00fcche?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ein Tablet oder Smartphone und eine Internetverbindung. Mehr nicht. Die App l\u00e4uft im Browser, es muss nichts installiert werden." }
+      },
+      {
+        "@type": "Question",
+        "name": "Ersetzt das unseren K\u00fcchenchef?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Nein. Ein guter K\u00fcchenchef wird mit Avorix besser, weil sein Wissen endlich festgehalten ist und sein Team selbstst\u00e4ndiger arbeitet. Avorix hilft vor allem dann, wenn der K\u00fcchenchef fehlt, ausf\u00e4llt oder wechselt." }
+      },
+      {
+        "@type": "Question",
+        "name": "Wir sind in \u00d6sterreich. Geht das?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Ja, wir arbeiten in Deutschland und \u00d6sterreich." }
+      }
+    ]
   }
 ];
 ---
 
 <BaseLayout
-  title="Avorix — Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt."
-  description="Avorix führt Ihr Küchenteam Schritt für Schritt durch jedes Gericht. Koch-App, Schulung und Personal aus einer Hand — für konsistente Qualität ohne ausgebildete Köche."
+  title="Koch-App, Schulung & K\u00fcchenpersonal f\u00fcr Hotels und Gastronomie | Avorix"
+  description="Avorix f\u00fchrt Ihr K\u00fcchenteam Schritt f\u00fcr Schritt durch jedes Gericht. Mit Koch-App, Schulung durch echte K\u00f6che und rechtssicherem Personal. Auch ohne ausgebildete K\u00f6che."
   schemaOrg={schema}
 >
   <!-- Hero -->
@@ -41,20 +90,29 @@ const schema = [
     <div class="max-w-4xl mx-auto">
       <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Koch-App + Schulung + Personal</p>
       <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">
-        Ihre Küche hält Ihr Niveau.<br />Auch wenn der Spitzenkoch fehlt.
+        Ihre K&uuml;che h&auml;lt Ihr Niveau.<br />Auch wenn der Spitzenkoch fehlt.
       </h1>
       <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed mb-6">
-        Avorix führt Ihr Küchenteam Schritt für Schritt durch jedes Gericht Ihrer Karte. Mit klaren Anleitungen, erprobten Abläufen und echten Köchen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag. <strong class="text-neutral-900">Auch ohne ausgebildete Köche.</strong>
+        Avorix f&uuml;hrt Ihr K&uuml;chenteam Schritt f&uuml;r Schritt durch jedes Gericht Ihrer Karte. Mit klaren Anleitungen, erprobten Abl&auml;ufen und echten K&ouml;chen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag. <strong class="text-neutral-900">Auch ohne ausgebildete K&ouml;che.</strong>
       </p>
       <div class="flex flex-wrap gap-4 mb-6">
         <a href="/kontakt" data-cta-location="hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors">Demo vereinbaren</a>
-        <a href="/system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors">So funktioniert es</a>
+        <a href="#so-funktioniert-es" data-cta-location="hero" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors">So funktioniert es</a>
       </div>
       <div class="flex flex-wrap gap-3 text-sm">
-        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Behördliche Arbeitnehmerüberlassungserlaubnis</span>
-        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Von Köchen entwickelt</span>
-        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; DE + AT</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis (Agentur f&uuml;r Arbeit)</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Von K&ouml;chen entwickelt, nicht von Software-Leuten</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Friedrichshafen am Bodensee &middot; DE + AT</span>
       </div>
+      <!-- App-Platzhalter -->
+      <div class="mt-6 rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 h-64 flex items-center justify-center" role="img" aria-label="App auf Tablet in einer echten K&uuml;che, ein Rezeptschritt sichtbar"></div>
+    </div>
+  </section>
+
+  <!-- Direkt-Antwort (GEO) -->
+  <section class="px-6">
+    <div class="max-w-4xl mx-auto">
+      <p id="direktantwort" class="text-neutral-600 text-base leading-relaxed py-4">Avorix ist ein K&uuml;chensystem f&uuml;r Hotels und Gastronomie aus Friedrichshafen am Bodensee. Es verbindet eine Koch-App, die K&uuml;chenteams Schritt f&uuml;r Schritt durch jedes Gericht f&uuml;hrt, mit Schulung durch erfahrene K&ouml;che und rechtssicherem K&uuml;chenpersonal-Verleih mit beh&ouml;rdlicher Arbeitnehmer&uuml;berlassungserlaubnis. Avorix arbeitet in Deutschland und &Ouml;sterreich.</p>
     </div>
   </section>
 
@@ -64,19 +122,19 @@ const schema = [
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Kommt Ihnen das bekannt vor?</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Der Küchenchef kündigt. Mitten in der Saison.</h3>
-          <p class="text-neutral-600 text-sm">Mit jeder Schlüsselkraft geht Wissen: die Rezepte, die Mengen, die Abläufe. Der Rest des Teams steht da und improvisiert.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Der K&uuml;chenchef k&uuml;ndigt. Oder der Souschef. Mitten in der Saison.</h3>
+          <p class="text-neutral-600 text-sm">Mit jeder Schl&uuml;sselkraft geht Wissen: die Rezepte, die Mengen, die Abl&auml;ufe. Der Rest des Teams steht da und improvisiert.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Jeder kocht anders.</h3>
-          <p class="text-neutral-600 text-sm">Montag schmeckt das Schnitzel anders als Freitag. Die Portionen schwanken. Stammgäste merken das zuerst.</p>
+          <p class="text-neutral-600 text-sm">Montag schmeckt das Schnitzel anders als Freitag. Die Portionen schwanken. Stammg&auml;ste merken das zuerst.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Sie finden schlicht niemanden.</h3>
           <p class="text-neutral-600 text-sm">Auf Ihre Stellenanzeige meldet sich niemand, der kochen kann. Und wenn doch, ist er nach einer Saison wieder weg.</p>
         </div>
       </div>
-      <p class="text-neutral-600 mt-6">Wenn die Küche wackelt, wackelt alles: erst die Qualität, dann die Bewertungen, dann der Ruf. 82 Prozent der Gastronomiebetriebe melden Fachkräftemangel in der Küche.</p>
+      <p class="text-neutral-600 mt-6">Wenn die K&uuml;che wackelt, wackelt alles: erst die Qualit&auml;t, dann die Bewertungen, dann der Ruf. Und irgendwann steht die Frage im Raum, wie lange es so noch weitergeht. Damit sind Sie nicht allein: 82 Prozent der Gastronomiebetriebe melden Fachkr&auml;ftemangel in der K&uuml;che.</p>
     </div>
   </section>
 
@@ -86,44 +144,44 @@ const schema = [
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Warum Avorix</h2>
       <div class="grid md:grid-cols-3 gap-6 text-left">
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">&#10003; Konsistente Qualität</h3>
-          <p class="text-neutral-600 text-sm">Standardisierte Prozesse und die Avorix Koch App sichern gleichbleibende Speisenqualität, unabhängig vom Erfahrungslevel Ihres Küchenteams.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">&#10003; Konsistente Qualit&auml;t</h3>
+          <p class="text-neutral-600 text-sm">Standardisierte Prozesse und die Avorix Koch App sichern gleichbleibende Speisenqualit&auml;t, unabh&auml;ngig vom Erfahrungslevel Ihres K&uuml;chenteams.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">&#128101; Weniger Personalabhängigkeit</h3>
-          <p class="text-neutral-600 text-sm">Das Wissen steckt im System, nicht mehr nur in einzelnen Köpfen. Neue Kräfte kochen vom ersten Tag an mit.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">&#128101; Weniger Personalabh&auml;ngigkeit</h3>
+          <p class="text-neutral-600 text-sm">Das Wissen steckt im System, nicht mehr nur in einzelnen K&ouml;pfen. Avorix macht Ihren Betrieb unabh&auml;ngiger von einzelnen Schl&uuml;sselkr&auml;ften. Und neue Kr&auml;fte kochen vom ersten Tag an mit.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">&#9638; Volle Kostenkontrolle</h3>
-          <p class="text-neutral-600 text-sm">Rezeptbasierte Kalkulation, Wareneinsatz-Tracking und standardisierte Portionierung bringen Transparenz in Ihre Küchenkosten.</p>
+          <p class="text-neutral-600 text-sm">Rezeptbasierte Kalkulation, Wareneinsatz-Tracking und standardisierte Portionierung bringen Transparenz in Ihre K&uuml;chenkosten.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Erklärung -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <!-- Erkl&auml;rung -->
+  <section id="so-funktioniert-es" class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Was ist Avorix? In einer Minute erklärt.</h2>
-      <p class="text-neutral-600 max-w-3xl mb-8">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer Küche: Es bringt jede Küchenkraft zum fertigen Gericht, auch wenn sie es noch nie gekocht hat.</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Was ist Avorix? In einer Minute erkl&auml;rt.</h2>
+      <p class="text-neutral-600 max-w-3xl mb-8">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer K&uuml;che: Es bringt jede K&uuml;chenkraft zum fertigen Gericht, auch wenn sie es noch nie gekocht hat.</p>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Ihre Gerichte, glasklar aufgeschrieben.</h3>
-          <p class="text-neutral-600 text-sm">Ein erfahrener Avorix-Koch kommt in Ihren Betrieb und schreibt Ihre Karte auf. Jedes Gericht wird in einfache Schritte zerlegt, mit Fotos, genauen Mengen und Zeiten.</p>
+          <p class="text-neutral-600 text-sm">Ein erfahrener Avorix-Koch kommt in Ihren Betrieb und schreibt Ihre Karte auf. Jedes Gericht wird in einfache Schritte zerlegt, mit Fotos, genauen Mengen und Zeiten. Und ehrlich: Viele K&uuml;chen haben Rezepte, gekocht wird trotzdem nach Gef&uuml;hl. Mit der App h&auml;ngt das Rezept direkt am Posten, und der einfachste Weg ist der richtige.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Abläufe, die auch ein kleines Team schafft.</h3>
-          <p class="text-neutral-600 text-sm">Vieles wird ruhig vorbereitet, wenn Zeit ist. Im Service wird nur noch fertiggestellt. So stemmt eine kleine Mannschaft eine anspruchsvolle Karte.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Abl&auml;ufe, die auch ein kleines Team schafft.</h3>
+          <p class="text-neutral-600 text-sm">Vieles wird ruhig vorbereitet, wenn Zeit ist. Vakuumiert und gek&uuml;hlt. Im Service wird nur noch fertiggestellt. So stemmt eine kleine Mannschaft eine anspruchsvolle Karte, ohne dass die Qualit&auml;t leidet. Profik&uuml;chen arbeiten seit Jahren so.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Koch-App am Herd.</h3>
-          <p class="text-neutral-600 text-sm">Am Posten hängt ein Tablet. Die App zeigt der Küchenkraft Schritt für Schritt, was zu tun ist: Foto, Menge, Zeit, fertig.</p>
+          <p class="text-neutral-600 text-sm">Am Posten h&auml;ngt ein Tablet. Die App zeigt der K&uuml;chenkraft Schritt f&uuml;r Schritt, was zu tun ist: Foto, Menge, Zeit, fertig. Die App rechnet Portionen automatisch um und beh&auml;lt den Wareneinsatz im Blick.</p>
         </div>
       </div>
       <div class="mt-8 space-y-3 text-neutral-600">
-        <p><strong class="text-neutral-900">Und Ihre Kosten?</strong> Ausgebildete Köche sind teuer, wenn Sie überhaupt welche finden. Mit Avorix kochen angelernte Kräfte auf Ihrem Niveau.</p>
-        <p><strong class="text-neutral-900">Und wenn Personal fehlt?</strong> Dann stellen wir es. Avorix beschäftigt festangestellte Köche, die wir Ihnen rechtssicher ausleihen.</p>
-        <p><strong class="text-neutral-900">Software, Abläufe und Personal aus einer Hand. Das gibt es so nur bei Avorix.</strong></p>
+        <p><strong class="text-neutral-900">Und Ihre Kosten?</strong> Ausgebildete K&ouml;che sind teuer, wenn Sie &uuml;berhaupt welche finden. Mit Avorix kochen angelernte Kr&auml;fte auf Ihrem Niveau, und Ihre Fachkr&auml;fte machen nur noch das, was wirklich ihr K&ouml;nnen braucht.</p>
+        <p><strong class="text-neutral-900">Und wenn Personal fehlt?</strong> Dann stellen wir es. Avorix besch&auml;ftigt festangestellte K&ouml;che, die wir Ihnen rechtssicher ausleihen. F&uuml;r die Anlernphase, f&uuml;r die Saison oder f&uuml;r den Notfall.</p>
+        <p><strong class="text-neutral-900">Software, Abl&auml;ufe und Personal aus einer Hand. Das gibt es so nur bei Avorix.</strong></p>
       </div>
     </div>
   </section>
@@ -135,18 +193,18 @@ const schema = [
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">&bdquo;Der Notfall ist da.&ldquo;</h3>
-          <p class="text-neutral-600 text-sm mb-4">Der Koch ist weg, die Saison läuft. Wir schicken Ihnen einen Koch. Und sorgen dafür, dass Sie nie wieder einen suchen müssen.</p>
-          <a href="/kontakt" data-cta-location="tuer-notfall" class="text-brand-500 font-bold text-sm hover:text-brand-600">Jetzt Hilfe holen &rarr;</a>
+          <p class="text-neutral-600 text-sm mb-4">Der Koch ist weg, die Saison l&auml;uft. Wir schicken Ihnen einen Koch. Und sorgen daf&uuml;r, dass Sie nie wieder einen suchen m&uuml;ssen.</p>
+          <a href="/personal" data-cta-location="tuer-notfall" class="border-2 border-brand-500 text-brand-500 px-4 py-2 rounded-lg font-bold text-sm hover:bg-brand-50 transition-colors inline-block">Jetzt Hilfe holen</a>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">&bdquo;Noch läuft es. Aber ich mache mir Sorgen.&ldquo;</h3>
-          <p class="text-neutral-600 text-sm mb-4">Alles hängt an einem Kopf. Sichern Sie das Wissen Ihrer Küche, solange es noch im Haus ist.</p>
-          <a href="/kontakt" data-cta-location="tuer-sorge" class="text-brand-500 font-bold text-sm hover:text-brand-600">Wissen sichern &rarr;</a>
+          <h3 class="font-bold text-neutral-900 mb-3">&bdquo;Noch l&auml;uft es. Aber ich mache mir Sorgen.&ldquo;</h3>
+          <p class="text-neutral-600 text-sm mb-4">Alles h&auml;ngt an einem Kopf. Sichern Sie das Wissen Ihrer K&uuml;che, solange es noch im Haus ist.</p>
+          <a href="/system" data-cta-location="tuer-sorge" class="border-2 border-brand-500 text-brand-500 px-4 py-2 rounded-lg font-bold text-sm hover:bg-brand-50 transition-colors inline-block">Wissen sichern</a>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">&bdquo;Die Saison kommt.&ldquo;</h3>
-          <p class="text-neutral-600 text-sm mb-4">Zu wenig Leute für die Spitze. Saisonkräfte, die ab dem ersten Tag kochen wie Ihr Stammteam.</p>
-          <a href="/kontakt" data-cta-location="tuer-saison" class="text-brand-500 font-bold text-sm hover:text-brand-600">Saison planen &rarr;</a>
+          <p class="text-neutral-600 text-sm mb-4">Zu wenig Leute f&uuml;r die Spitze. Saisonkr&auml;fte, die ab dem ersten Tag kochen wie Ihr Stammteam.</p>
+          <a href="/personal" data-cta-location="tuer-saison" class="border-2 border-brand-500 text-brand-500 px-4 py-2 rounded-lg font-bold text-sm hover:bg-brand-50 transition-colors inline-block">Saison planen</a>
         </div>
       </div>
     </div>
@@ -160,29 +218,29 @@ const schema = [
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">1</div>
           <div>
-            <h3 class="font-bold text-neutral-900">Wir schauen uns Ihre Küche an. (Kostenlos)</h3>
-            <p class="text-neutral-600 text-sm mt-1">Ein Gespräch, 30 Minuten, per Video oder vor Ort. Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt.</p>
+            <h3 class="font-bold text-neutral-900">Wir schauen uns Ihre K&uuml;che an. (Kostenlos)</h3>
+            <p class="text-neutral-600 text-sm mt-1">Ein Gespr&auml;ch, 30 Minuten, per Video oder vor Ort. Sie erz&auml;hlen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt. Wenn nicht, sagen wir das auch.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">2</div>
           <div>
             <h3 class="font-bold text-neutral-900">Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
-            <p class="text-neutral-600 text-sm mt-1">Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in der App an.</p>
+            <p class="text-neutral-600 text-sm mt-1">Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in der App an. Typischerweise dauert das eine Woche.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">3</div>
           <div>
             <h3 class="font-bold text-neutral-900">Ihr Team lernt das System.</h3>
-            <p class="text-neutral-600 text-sm mt-1">Kompakte Schulungstage oder ein Avorix-Koch, der während des Betriebs anlernt. Mit mindestens Sous-Chef-Erfahrung.</p>
+            <p class="text-neutral-600 text-sm mt-1">Daf&uuml;r gibt es zwei Wege, je nachdem was zu Ihrem Betrieb passt: kompakte Schulungstage mit einem Avorix-Koch, der sich ganz auf das Anlernen konzentriert. Oder ein Avorix-Koch arbeitet ganz normal in Ihrer K&uuml;che mit und bringt Ihrem Team das System nebenbei bei, w&auml;hrend er produktiv kocht. In beiden F&auml;llen mit mindestens Sous-Chef-Erfahrung.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">4</div>
           <div>
-            <h3 class="font-bold text-neutral-900">Sie arbeiten selbstständig. Wir bleiben erreichbar.</h3>
-            <p class="text-neutral-600 text-sm mt-1">Die App führt Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir übernehmen das.</p>
+            <h3 class="font-bold text-neutral-900">Sie arbeiten selbstst&auml;ndig. Wir bleiben erreichbar.</h3>
+            <p class="text-neutral-600 text-sm mt-1">Ab jetzt f&uuml;hrt die App Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir &uuml;bernehmen das. Und wenn Ihnen ein Koch ausf&auml;llt, rufen Sie uns an.</p>
           </div>
         </div>
       </div>
@@ -192,14 +250,33 @@ const schema = [
     </div>
   </section>
 
-  <!-- Rechtssicherheit -->
+  <!-- So sieht das am Herd aus -->
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">So sieht das am Herd aus.</h2>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 h-48 flex items-center justify-center" role="img" aria-label="Rezeptschritt mit Foto und Menge">
+          <p class="text-neutral-500 text-sm italic text-center px-4">&bdquo;Jeder Schritt mit Foto, Menge und Zeit. Zum Abhaken.&ldquo;</p>
+        </div>
+        <div class="rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 h-48 flex items-center justify-center" role="img" aria-label="Portionsrechner">
+          <p class="text-neutral-500 text-sm italic text-center px-4">&bdquo;Heute 80 G&auml;ste statt 60? Die App rechnet alle Mengen um.&ldquo;</p>
+        </div>
+        <div class="rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 h-48 flex items-center justify-center" role="img" aria-label="Rezeptbibliothek">
+          <p class="text-neutral-500 text-sm italic text-center px-4">&bdquo;Ihre ganze Karte an einem Ort. F&uuml;r das ganze Team.&ldquo;</p>
+        </div>
+      </div>
+      <p class="text-neutral-500 text-sm mt-4">Die App l&auml;uft auf Tablet und Smartphone, direkt im Browser. Es muss nichts installiert werden.</p>
+    </div>
+  </section>
+
+  <!-- Rechtssicherheit -->
+  <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und wenn Personal fehlt: Wir leihen Ihnen unsere Köche. Rechtssicher.</h2>
-      <div class="bg-white border-l-4 border-brand-500 rounded-r-2xl p-6">
-        <p class="text-neutral-600 mb-4">Viele Vermittler schicken Ihnen &bdquo;selbstständige&ldquo; Köche mit Rechnung. Das Problem: Bei einer Prüfung stuft die Rentenversicherung diese Köche oft als scheinselbstständig ein. Nachforderungen schnell im hohen fünfstelligen Bereich.</p>
-        <p class="text-neutral-600 mb-4">Bei Avorix passiert Ihnen das nicht. Unsere Köche sind bei uns fest angestellt und sozialversichert. Wir haben die behördliche Arbeitnehmerüberlassungserlaubnis.</p>
-        <p class="text-neutral-900 font-semibold">Im Gastgewerbe haben nur wenige Anbieter diese Erlaubnis. Fragen Sie danach, bevor Sie irgendwo buchen.</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und wenn Personal fehlt: Wir leihen Ihnen unsere K&ouml;che. Rechtssicher.</h2>
+      <div class="bg-neutral-50 border-l-4 border-brand-500 rounded-r-2xl p-6">
+        <p class="text-neutral-600 mb-4">Viele Vermittler schicken Ihnen &bdquo;selbstst&auml;ndige&ldquo; K&ouml;che mit Rechnung. Das Problem: Bei einer Pr&uuml;fung stuft die Rentenversicherung diese K&ouml;che oft als scheinselbstst&auml;ndig ein. Dann zahlt nicht der Koch, sondern Ihr Haus. Nachforderungen &uuml;ber mehrere Jahre, schnell im hohen f&uuml;nfstelligen Bereich.</p>
+        <p class="text-neutral-600 mb-4">Bei Avorix passiert Ihnen das nicht. Unsere K&ouml;che sind bei uns fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft. Sie bekommen K&ouml;nnen in die K&uuml;che und bleiben zu 100 Prozent auf der sicheren Seite.</p>
+        <p class="text-neutral-900 font-semibold">Im Gastgewerbe haben nur wenige Anbieter diese Erlaubnis. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.</p>
       </div>
       <div class="mt-6">
         <a href="/personal" data-cta-location="rechtssicherheit" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">Mehr zu Schulung und Personal</a>
@@ -207,29 +284,27 @@ const schema = [
     </div>
   </section>
 
-  <!-- Gründer -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <!-- Gr&uuml;nder -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Von einem Küchenchef gebaut. Nicht von Software-Leuten.</h2>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Von einem K&uuml;chenchef gebaut. Nicht von Software-Leuten.</h2>
       <div class="grid md:grid-cols-[150px_1fr] gap-6">
-        <div class="w-full h-44 md:h-auto rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 text-sm text-center p-4">
-          Foto Börge Penk
-        </div>
+        <div class="w-full h-44 md:h-auto rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center" role="img" aria-label="Foto B&ouml;rge Penk, Kochjacke, echte K&uuml;che"></div>
         <div>
-          <p class="text-neutral-600 mb-4">Börge Penk hat 20 Jahre in Profiküchen gearbeitet, als Küchenchef auch mit großen Teams. Den Fachkräftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan.</p>
-          <blockquote class="bg-neutral-50 rounded-xl p-4 italic text-neutral-800 mb-4">&bdquo;Ich habe zu oft erlebt, dass eine Küche steht und fällt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
-          <p class="text-neutral-600 text-sm">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden führen ihre Küche mit unserem System, und was in ihrer Küche passiert, geht niemanden etwas an.</p>
+          <p class="text-neutral-600 mb-4">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
+          <blockquote class="bg-white rounded-xl p-4 italic text-neutral-800 mb-4">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
+          <p class="text-neutral-600 text-sm">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Kosten -->
-  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+  <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-6">Was kostet das?</h2>
-      <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-        <p class="text-neutral-600 mb-4">Das hängt von Ihrer Karte und Ihrem Team ab. Im Erstgespräch rechnen wir es Ihnen transparent vor, auf den Euro genau und ohne Kleingedrucktes. Für die ersten Betriebe gibt es 2026 Pilotkonditionen deutlich unter dem regulären Preis.</p>
+      <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+        <p class="text-neutral-600">Das h&auml;ngt von Ihrer Karte und Ihrem Team ab. Im Erstgespr&auml;ch rechnen wir es Ihnen transparent vor, auf den Euro genau und ohne Kleingedrucktes. F&uuml;r die ersten Betriebe gibt es 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.</p>
       </div>
       <div class="mt-6 flex flex-wrap gap-4">
         <a href="/kontakt" data-cta-location="kosten" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors">Demo vereinbaren</a>
@@ -239,53 +314,53 @@ const schema = [
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Häufige Fragen</h2>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">H&auml;ufige Fragen</h2>
       <div class="space-y-3">
-        <details open class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+        <details open class="bg-white border border-neutral-200 rounded-xl p-4">
           <summary class="font-bold text-neutral-900 cursor-pointer">Wer tippt unsere Rezepte ein?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Wir. Ein Avorix-Koch kommt zu Ihnen, kocht mit Ihrem Team und legt jedes Gericht in der App an. Sie müssen nichts selbst einpflegen.</p>
+          <p class="text-neutral-600 text-sm mt-3">Wir. Ein Avorix-Koch kommt zu Ihnen, kocht mit Ihrem Team und legt jedes Gericht in der App an. Sie m&uuml;ssen nichts selbst einpflegen.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Merken unsere Gäste etwas davon?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Nein. Ihre Gäste erleben Ihre Küche und Ihre Rezepte, nur eben verlässlich in gleicher Qualität. Auf Wunsch sichern wir Ihnen vertraglich zu, dass wir Ihren Betrieb nirgends als Referenz nennen.</p>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Merken unsere G&auml;ste etwas davon?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Nein. Ihre G&auml;ste erleben Ihre K&uuml;che und Ihre Rezepte, nur eben verl&auml;sslich in gleicher Qualit&auml;t. Auf Wunsch sichern wir Ihnen vertraglich zu, dass wir Ihren Betrieb nirgends als Referenz nennen.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
           <summary class="font-bold text-neutral-900 cursor-pointer">Unser Team ist nicht besonders technikaffin. Klappt das trotzdem?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja, dafür ist die App gebaut. Wer ein Foto ansehen und einen Haken setzen kann, kann mit ihr arbeiten. Geschult wird direkt am Herd.</p>
+          <p class="text-neutral-600 text-sm mt-3">Ja, daf&uuml;r ist die App gebaut. Wer ein Foto ansehen und einen Haken setzen kann, kann mit ihr arbeiten. Geschult wird direkt am Herd, nicht im Seminarraum.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Was passiert mit unseren Rezepten? Wem gehören die?</summary>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Was passiert mit unseren Rezepten? Wem geh&ouml;ren die?</summary>
           <p class="text-neutral-600 text-sm mt-3">Ihnen. Ihre Rezepte bleiben Ihr Eigentum und werden nicht an andere Betriebe weitergegeben.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
           <summary class="font-bold text-neutral-900 cursor-pointer">Wie schnell sind wir startklar?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Vom Erstgespräch bis zum eigenständigen Arbeiten vergehen je nach Karte typischerweise wenige Wochen.</p>
+          <p class="text-neutral-600 text-sm mt-3">Vom Erstgespr&auml;ch bis zum eigenst&auml;ndigen Arbeiten vergehen je nach Karte typischerweise wenige Wochen. Den genauen Fahrplan bekommen Sie nach dem Erstgespr&auml;ch.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Welche Technik brauchen wir in der Küche?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ein Tablet oder Smartphone und eine Internetverbindung. Die App läuft im Browser, es muss nichts installiert werden.</p>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Welche Technik brauchen wir in der K&uuml;che?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Ein Tablet oder Smartphone und eine Internetverbindung. Mehr nicht. Die App l&auml;uft im Browser, es muss nichts installiert werden.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Ersetzt das unseren Küchenchef?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Nein. Ein guter Küchenchef wird mit Avorix besser, weil sein Wissen endlich festgehalten ist und sein Team selbstständiger arbeitet.</p>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Ersetzt das unseren K&uuml;chenchef?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Nein. Ein guter K&uuml;chenchef wird mit Avorix besser, weil sein Wissen endlich festgehalten ist und sein Team selbstst&auml;ndiger arbeitet. Avorix hilft vor allem dann, wenn der K&uuml;chenchef fehlt, ausf&auml;llt oder wechselt.</p>
         </details>
-        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wir sind in Österreich. Geht das?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja, wir arbeiten in Deutschland und Österreich.</p>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Wir sind in &Ouml;sterreich. Geht das?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Ja, wir arbeiten in Deutschland und &Ouml;sterreich.</p>
         </details>
       </div>
     </div>
   </section>
 
   <!-- Final CTA -->
-  <section class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
+  <section class="py-20 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Der nächste Schritt ist ein Gespräch. Mehr nicht.</h2>
-      <p class="text-neutral-600 mb-6">30 Minuten, kostenlos, unverbindlich. Sie erzählen uns von Ihrer Küche, wir sagen Ihnen ehrlich, ob Avorix zu Ihnen passt und was es kosten würde.</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Der n&auml;chste Schritt ist ein Gespr&auml;ch. Mehr nicht.</h2>
+      <p class="text-neutral-600 mb-6">30 Minuten, kostenlos, unverbindlich. Sie erz&auml;hlen uns von Ihrer K&uuml;che, wir sagen Ihnen ehrlich, ob Avorix zu Ihnen passt und was es kosten w&uuml;rde.</p>
       <a href="/kontakt" data-cta-location="final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <p class="text-neutral-400 text-sm mt-4">Noch nicht so weit? <a href="/leitfaden" class="text-brand-500 hover:underline">Holen Sie sich unseren kostenlosen Leitfaden.</a></p>
+      <p class="text-neutral-400 text-sm mt-4">Noch nicht so weit? <a href="/leitfaden" data-cta-location="final-leitfaden" class="text-brand-500 hover:underline">Holen Sie sich unseren kostenlosen Leitfaden: 5 Strategien gegen den Fachkr&auml;ftemangel in der K&uuml;che.</a></p>
     </div>
   </section>
 </BaseLayout>

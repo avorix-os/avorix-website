@@ -3,9 +3,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="Die Koch-App — Ihr Küchenwissen. Zum Abhaken."
-  description="Die Avorix Koch-App führt jede Kraft Schritt für Schritt durch Ihre Karte. Rezeptbibliothek, Portionsrechner, Wareneinsatz und Menüplaner."
+  title="Die Avorix Koch-App: Schritt für Schritt kochen | Avorix"
+  description="Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Menüplaner, Einkaufslisten und Kalkulation. Die Koch-App für Hotel- und Restaurantküchen."
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+          { "@type": "ListItem", "position": 2, "name": "Die Koch-App", "item": "https://avorix.cloud/koch-app" }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Avorix Koch-App",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web (Tablet und Smartphone)",
+        "description": "Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Menüplaner, Einkaufslisten und Kalkulation. Die Koch-App für Hotel- und Restaurantküchen.",
+        "publisher": { "@type": "Organization", "name": "Avorix", "url": "https://avorix.cloud" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Auf welchen Geräten läuft die App?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Tablet und Smartphone, direkt in der Küche." } },
+          { "@type": "Question", "name": "Brauchen wir Internet in der Küche?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die App läuft im Browser und braucht eine Internetverbindung in der Küche, WLAN oder Mobilfunk." } },
+          { "@type": "Question", "name": "Kann unser Team neue Gerichte selbst anlegen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Nach der Schulung pflegen Sie neue Gerichte selbst ein, oder wir übernehmen das für Sie." } }
+        ]
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
     <div class="max-w-4xl mx-auto">
@@ -15,6 +44,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Die Avorix Koch-App führt jede Kraft Schritt für Schritt durch Ihre Karte. Foto ansehen, Menge abwiegen, Haken setzen, fertig. So kocht Ihr Team jeden Tag auf Ihrem Niveau. <strong class="text-neutral-900">Auch ohne ausgebildete Köche.</strong>
       </p>
       <a href="/kontakt" data-cta-location="kochapp-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
+      <div class="mt-8 bg-neutral-100 border border-neutral-200 rounded-2xl aspect-video flex items-center justify-center text-neutral-400 text-sm">Rezeptschritt-Ansicht auf Tablet, groß</div>
     </div>
   </section>
 
@@ -29,11 +59,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Automatischer Portionsrechner</h3>
-          <p class="text-neutral-600 text-sm">Heute 80 Gäste statt 60? Die App skaliert alle Mengen automatisch auf die benötigte Portionszahl.</p>
+          <p class="text-neutral-600 text-sm">Heute 80 Gäste statt 60? Die App skaliert alle Mengen automatisch auf die benötigte Portionszahl. Kein Nachrechnen, kein Zettel.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Rezeptbibliothek</h3>
-          <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, für das ganze Team. Saisonkarte, Standards, Beilagen — alles auffindbar in Sekunden.</p>
+          <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, für das ganze Team. Saisonkarte, Standards, Beilagen, alles auffindbar in Sekunden.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">4 &middot; Wareneinsatz im Blick</h3>
@@ -41,7 +71,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">5 &middot; Läuft überall in der Küche</h3>
-          <p class="text-neutral-600 text-sm">Auf Tablet und Smartphone, direkt am Posten. Die App läuft im Browser, es muss nichts installiert werden.</p>
+          <p class="text-neutral-600 text-sm">Auf Tablet und Smartphone, direkt am Posten. Die App läuft im Browser, es muss nichts installiert werden. Sie brauchen nur eine Internetverbindung in der Küche.</p>
         </div>
       </div>
     </div>
@@ -58,7 +88,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Einkaufslisten auf Knopfdruck</h3>
-          <p class="text-neutral-600 text-sm">Aus dem fertigen Menüplan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, geschätzte Preise.</p>
+          <p class="text-neutral-600 text-sm">Aus dem fertigen Menüplan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, geschätzte Preise. Beim Einkaufen haken Sie ab.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Kalkulation bis zum Verkaufspreis</h3>
@@ -96,7 +126,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#127869;</div>
           <div>
             <h3 class="font-bold text-neutral-900">Im Service</h3>
-            <p class="text-neutral-600 text-sm mt-1">Am Posten hängt das Tablet. Bestellung kommt rein, die Kraft öffnet das Gericht, arbeitet die Schritte ab.</p>
+            <p class="text-neutral-600 text-sm mt-1">Am Posten hängt das Tablet. Bestellung kommt rein, die Kraft öffnet das Gericht, arbeitet die Schritte ab. Das Ergebnis sieht aus und schmeckt wie immer.</p>
           </div>
         </div>
         <div class="flex gap-4">
@@ -138,7 +168,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
           <summary class="font-bold text-neutral-900 cursor-pointer">Brauchen wir Internet in der Küche?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Die App läuft im Browser und braucht eine Internetverbindung, WLAN oder Mobilfunk.</p>
+          <p class="text-neutral-600 text-sm mt-3">Ja. Die App läuft im Browser und braucht eine Internetverbindung in der Küche, WLAN oder Mobilfunk.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
           <summary class="font-bold text-neutral-900 cursor-pointer">Kann unser Team neue Gerichte selbst anlegen?</summary>

@@ -3,9 +3,77 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="So funktioniert es — Das Avorix-System"
-  description="Drei Bausteine, ein Ziel: Software, Schulung und Personal greifen bei Avorix ineinander. Erfahren Sie, wie das System Ihre Küche unabhängig von einzelnen Köchen macht."
+  title="Unser System: Koch-App, Schulung und Personal aus einer Hand | Avorix"
+  description="Drei Bausteine, ein Ziel: eine Küche, die Ihr Niveau hält. So greifen Koch-App, Schulung und Personalverleih bei Avorix ineinander."
 >
+  <!-- BreadcrumbList Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Startseite",
+        "item": "https://avorix.cloud/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Unser System",
+        "item": "https://avorix.cloud/system"
+      }
+    ]
+  })} />
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Kann ich nur die App nehmen, ohne Schulung?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein, und das ist Absicht. Eine leere App hilft Ihnen nicht. Die Einrichtung durch einen Avorix-Koch gehört immer dazu, sonst geben wir das System nicht aus der Hand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann ich nur Personal buchen, ohne App?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja, das geht. Wir empfehlen aber die Kombination: Dann hinterlässt jeder Einsatz dokumentiertes Wissen in Ihrer Küche statt nur gearbeitete Stunden."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wir haben unsere Rezepte schon dokumentiert. Bringt das was?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja, das beschleunigt die Aufnahme deutlich. Der Avorix-Koch prüft Ihre Unterlagen, ergänzt Fotos, Mengen und Zeiten und bringt alles in die App."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie lange dauert die Einführung insgesamt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Je nach Karte typischerweise wenige Wochen vom Erstgespräch bis zum eigenständigen Arbeiten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was passiert nach den 12 Monaten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sie entscheiden: verlängern oder beenden. Ihre Rezepte bleiben in jedem Fall Ihr Eigentum."
+        }
+      }
+    ]
+  })} />
+
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
     <div class="max-w-4xl mx-auto text-center">
@@ -26,19 +94,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       >
         Demo vereinbaren
       </a>
-      <p class="text-sm text-avorix-silver mt-4">Behördliche Arbeitnehmerüberlassungserlaubnis</p>
+      <div class="mt-6 flex justify-center">
+        <span class="inline-flex items-center gap-2 bg-white border border-neutral-200 rounded-full px-4 py-2 text-sm text-neutral-600 shadow-sm">
+          ✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)
+        </span>
+      </div>
     </div>
   </section>
 
   <!-- Drei Bausteine -->
   <section class="py-16 px-6 border-t border-neutral-200">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">
         Unser System. Die Schulung. Die Verstärkung.
       </h2>
-      <p class="text-neutral-600 text-center max-w-2xl mx-auto mb-12">
-        Drei Bausteine, die einzeln Wert liefern — und zusammen eine Küche aufbauen, die unabhängig von einzelnen Köchen funktioniert.
-      </p>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Baustein 1 -->
         <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-brand-200 hover:shadow-md transition-all">
@@ -49,9 +118,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Unser System (die Koch-App)</h3>
           <p class="text-neutral-600 text-sm leading-relaxed">
-            Das Gedächtnis Ihrer Küche. Jedes Rezept ist Schritt für Schritt dokumentiert — mit Fotos,
-            Mengenangaben und Zeittakten. Neue Mitarbeiter kochen ab Tag 1 auf dem Niveau, das Ihre Gäste erwarten.
-            Kein Wissen geht verloren, wenn jemand das Haus verlässt.
+            Das Gedächtnis Ihrer Küche. Jedes Gericht Ihrer Karte als Schritt-für-Schritt-Anleitung: mit Fotos,
+            genauen Mengen und Zeiten. Die App rechnet Portionen um und wertet den Wareneinsatz aus. Läuft jeden
+            Tag, auf Tablet und Smartphone, direkt im Browser.
           </p>
         </div>
         <!-- Baustein 2 -->
@@ -63,9 +132,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Die Schulung</h3>
           <p class="text-neutral-600 text-sm leading-relaxed">
-            Der Transfer. Ein Avorix-Koch kommt in Ihre Küche, arbeitet Ihre Rezepte ins System ein und
-            schult Ihr Team — nicht in der Theorie, sondern direkt am Herd. Ihr Team lernt, mit dem System
-            zu arbeiten, und versteht, warum jeder Schritt so ist, wie er ist.
+            Der Transfer. Ein Avorix-Koch mit mindestens Sous-Chef-Erfahrung nimmt Ihre Karte auf, legt sie in der
+            App an und lernt Ihr Team an. Als kompakte Schulungsblöcke oder live im laufenden Betrieb.
           </p>
         </div>
         <!-- Baustein 3 -->
@@ -77,15 +145,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
           </div>
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Die Verstärkung</h3>
           <p class="text-neutral-600 text-sm leading-relaxed">
-            Festangestellte Avorix-Köche, die Sie tage- oder wochenweise buchen können — für Engpässe,
-            Saisonspitzen oder Übergangszeiten. Jeder Avorix-Koch kennt das System und kann Ihre Rezepte
-            sofort umsetzen, ohne Einarbeitung.
+            Festangestellte Avorix-Köche, die wir Ihnen rechtssicher ausleihen. Für den Notfall, für die Saison,
+            für den Übergang. Mit behördlicher Arbeitnehmerüberlassungserlaubnis.
           </p>
         </div>
       </div>
       <p class="text-sm text-neutral-600 text-center mt-10 max-w-2xl mx-auto italic">
-        Denken Sie an Feuerwehr und Brandschutz: Die App ist der Brandschutz — sie verhindert den Ernstfall.
-        Die Verstärkung ist die Feuerwehr — sie kommt, wenn es brennt. Die Schulung bringt beides zusammen.
+        Denken Sie an Feuerwehr und Brandschutz: Die Verstärkung löscht den akuten Brand. System und Schulung
+        sorgen dafür, dass es nie wieder brennt. Avorix ist beides.
       </p>
     </div>
   </section>
@@ -93,12 +160,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Einzeln gut. Zusammen unschlagbar. -->
   <section class="py-16 px-6 bg-neutral-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">
         Einzeln gut. Zusammen unschlagbar.
       </h2>
-      <p class="text-neutral-600 text-center max-w-2xl mx-auto mb-12">
-        Warum reicht ein einzelner Baustein nicht aus?
-      </p>
       <div class="space-y-6">
         <!-- a -->
         <div class="flex gap-4 items-start">
@@ -106,10 +170,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             a
           </div>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Nur App, ohne Schulung?</h3>
+            <h3 class="font-semibold text-neutral-900 mb-1">Eine App allein ist eine leere Hülle.</h3>
             <p class="text-neutral-600 text-sm leading-relaxed">
-              Dann haben Sie ein Werkzeug, das keiner nutzt. Die beste Software bringt nichts, wenn Ihr Team
-              nicht versteht, warum und wie es damit arbeiten soll. Ohne Schulung bleibt die App ein teures Notizbuch.
+              Irgendwer muss Ihre Karte aufnehmen, fotografieren und Ihr Team anlernen. Genau das ist die Schulung.
+              Deshalb richten wir jedes System selbst ein.
             </p>
           </div>
         </div>
@@ -119,10 +183,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             b
           </div>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Nur Schulung, ohne App?</h3>
+            <h3 class="font-semibold text-neutral-900 mb-1">Eine Schulung allein verpufft.</h3>
             <p class="text-neutral-600 text-sm leading-relaxed">
-              Dann funktioniert es — solange sich alle erinnern. Aber Wissen verblasst, Mitarbeiter wechseln,
-              und nach drei Monaten stehen Sie wieder am Anfang. Ohne System, das das Wissen speichert, ist die Schulung ein Strohfeuer.
+              Angelernte Menschen vergessen, wechseln, kündigen. Ohne App wandert das Wissen zurück in Köpfe,
+              und mit den Köpfen aus der Tür. Die App hält fest, was die Schulung aufbaut.
             </p>
           </div>
         </div>
@@ -132,10 +196,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             c
           </div>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Nur Leihköche, ohne System?</h3>
+            <h3 class="font-semibold text-neutral-900 mb-1">Ein Leihkoch allein ist die teuerste Lösung der Welt.</h3>
             <p class="text-neutral-600 text-sm leading-relaxed">
-              Dann bekommen Sie einen guten Koch, der nicht weiß, wie Ihre Küche tickt.
-              Ohne dokumentierte Rezepte braucht jeder Leihkoch eine lange Einarbeitung — und das Ergebnis schwankt.
+              Wenn er geht, ist alles wie vorher, und Sie buchen den nächsten. Das ist das Geschäftsmodell
+              klassischer Zeitarbeit. Genau davon unterscheiden wir uns:
             </p>
           </div>
         </div>
@@ -147,11 +211,10 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </svg>
           </div>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Alle drei zusammen?</h3>
+            <h3 class="font-semibold text-neutral-900 mb-1">Bei uns geht der Leihkoch irgendwann wieder. Sein Wissen bleibt da.</h3>
             <p class="text-neutral-600 text-sm leading-relaxed">
-              Das System speichert Ihr Wissen. Die Schulung verankert es im Team. Die Verstärkung springt ein,
-              wenn es eng wird — und arbeitet sofort auf Ihrem Niveau, weil alles dokumentiert ist. So entsteht eine Küche,
-              die nicht mehr von einzelnen Personen abhängt.
+              Jeder Avorix-Koch arbeitet mit der App und dokumentiert dabei weiter. Sie bezahlen Personal und
+              bauen nebenbei Ihr System auf.
             </p>
           </div>
         </div>
@@ -162,52 +225,62 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Vom ersten Gespräch -->
   <section class="py-16 px-6">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-14">
         Vom ersten Gespräch zur Küche, die immer funktioniert.
       </h2>
-      <p class="text-neutral-600 text-center max-w-2xl mx-auto mb-14">
-        Vier Schritte — transparent und planbar.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-6">
         <!-- Step 1 -->
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-5">
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
             1
           </div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-2">Küche anschauen</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
-            Wir kommen vorbei, lernen Ihr Haus kennen und verstehen, wie Ihre Küche heute läuft — was gut funktioniert und wo es hakt.
-          </p>
+          <div>
+            <h3 class="font-semibold text-neutral-900 mb-1">Wir schauen uns Ihre Küche an. (Kostenlos)</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              30 Minuten, per Video oder vor Ort. Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu
+              Ihnen passt, und was es kosten würde.
+            </p>
+          </div>
         </div>
         <!-- Step 2 -->
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-5">
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
             2
           </div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-2">Karte aufnehmen</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
-            Ein Avorix-Koch arbeitet Ihre Rezepte ins System ein — Schritt für Schritt, mit Fotos, Mengen und Zeittakten. Ihr Küchenwissen wird digital gesichert.
-          </p>
+          <div>
+            <h3 class="font-semibold text-neutral-900 mb-1">Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in
+              der App an. Ein Aufnahme-Block umfasst fünf Tage mit je sechs Stunden. Eine typische Karte mit 12
+              bis 15 Gerichten braucht die Aufnahme plus einen zweiten Block für die reine Schulung.
+            </p>
+          </div>
         </div>
         <!-- Step 3 -->
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-5">
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
             3
           </div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-2">Team lernt System</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
-            Ihr Team wird direkt am Herd geschult — nicht Theorie, sondern Praxis. Jeder lernt, mit der App zu arbeiten und die Standards einzuhalten.
-          </p>
+          <div>
+            <h3 class="font-semibold text-neutral-900 mb-1">Ihr Team lernt das System.</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              Kompakte Schulungstage oder ein Koch, der produktiv mitarbeitet und nebenbei anlernt. Wer eine
+              Woche mit der App gekocht hat, braucht sie nicht mehr erklärt zu bekommen.
+            </p>
+          </div>
         </div>
         <!-- Step 4 -->
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-5">
+        <div class="flex gap-4 items-start">
+          <div class="w-10 h-10 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
             4
           </div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-2">Selbstständig arbeiten</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
-            Ihre Küche läuft. Neue Mitarbeiter finden sich sofort zurecht. Bei Engpässen buchen Sie Avorix-Verstärkung — ohne Einarbeitung.
-          </p>
+          <div>
+            <h3 class="font-semibold text-neutral-900 mb-1">Sie arbeiten selbstständig. Wir bleiben erreichbar.</h3>
+            <p class="text-neutral-600 text-sm leading-relaxed">
+              Die App führt Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir übernehmen
+              das. Fällt Ihnen ein Koch aus, rufen Sie uns an.
+            </p>
+          </div>
         </div>
       </div>
       <div class="text-center mt-12">
@@ -225,69 +298,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Gebaut für Häuser mit fester Karte -->
   <section class="py-16 px-6 bg-neutral-50">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-8">
         Gebaut für Häuser mit fester Karte.
       </h2>
-      <p class="text-neutral-600 text-center max-w-2xl mx-auto mb-10">
-        Avorix funktioniert am besten dort, wo Gerichte wiederkehren und Konsistenz zählt.
+      <p class="text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-6">
+        Avorix passt zu Betrieben, deren Karte wiederkehrt: Ferienhotels mit Halbpension, Gasthöfe und Restaurants
+        mit fester Karte, Sporthotels mit Gruppen und Trainingslagern. Je fester die Karte, desto stärker wirkt
+        das System.
       </p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-        <div class="bg-white rounded-2xl p-8 border border-neutral-200">
-          <h3 class="font-semibold text-neutral-900 mb-3">Ideal für:</h3>
-          <ul class="space-y-2 text-neutral-600 text-sm leading-relaxed">
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Ferienhotels mit Halbpension (3- bis 5-Gang-Menüs)
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Gasthöfe und Restaurants mit saisonaler, aber stabiler Karte
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Betriebe mit hoher Fluktuation oder Saisonpersonal
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-brand-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-              </svg>
-              Häuser, die Qualität sichern wollen, ohne von einem Küchenchef abhängig zu sein
-            </li>
-          </ul>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-neutral-200">
-          <h3 class="font-semibold text-neutral-900 mb-3">Ehrlich gesagt nicht ideal für:</h3>
-          <ul class="space-y-2 text-neutral-600 text-sm leading-relaxed">
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Fine-Dining-Häuser, die ihre Karte täglich neu erfinden
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Küchen, die auf die kreative Handschrift eines einzelnen Kochs setzen
-            </li>
-            <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              Betriebe, die kein Interesse an Standardisierung haben
-            </li>
-          </ul>
-          <p class="text-neutral-500 text-xs mt-4 italic">
-            Wir sagen das lieber vorher — so verschwenden weder Sie noch wir Zeit.
-          </p>
-        </div>
-      </div>
+      <p class="text-neutral-600 leading-relaxed max-w-2xl mx-auto">
+        Und ehrlich gesagt: Für eine täglich wechselnde Spitzengastronomie mit Patron am Herd ist Avorix nicht
+        gebaut. Das sagen wir Ihnen auch im ersten Gespräch.
+      </p>
     </div>
   </section>
 
@@ -297,18 +319,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold text-neutral-900 text-center mb-4">
         Was kostet das?
       </h2>
-      <p class="text-neutral-600 text-center max-w-2xl mx-auto mb-10">
-        Transparent und planbar — keine versteckten Kosten.
-      </p>
       <div class="bg-white rounded-2xl p-8 md:p-10 border border-neutral-200 shadow-sm max-w-3xl mx-auto">
-        <p class="text-neutral-600 leading-relaxed mb-6">
-          Jeder Baustein hat einen klaren Preis, und Sie bekommen ihn im Erstgespräch schwarz auf weiß.
-          Wir nennen die Zahlen nicht auf der Website, weil der Umfang von Ihrer Karte, Ihrer Teamgröße und
-          Ihrem Bedarf an Verstärkung abhängt. Aber wir versprechen: keine Überraschungen, keine versteckten Posten.
-        </p>
         <p class="text-neutral-600 leading-relaxed mb-8">
-          Im Erstgespräch erfahren Sie genau, was jeder Baustein kostet — aufgeschlüsselt, nachvollziehbar und
-          vergleichbar. Sie entscheiden danach, ob und wie Sie starten wollen.
+          Jeder Baustein hat einen klaren Preis, und Sie bekommen ihn im Erstgespräch schwarz auf weiß: App
+          monatlich, Schulung pro Block, Personal pro Stunde. Keine versteckten Posten. Für die ersten Betriebe
+          gelten 2026 Pilotkonditionen deutlich unter dem regulären Preis.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <a
@@ -319,7 +334,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             Demo vereinbaren
           </a>
           <a
-            href="/kontakt"
+            href="/pilotprogramm"
             data-cta-location="system-pilot"
             class="inline-block border border-brand-300 text-brand-600 px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-50 transition-colors text-center"
           >
@@ -339,14 +354,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="space-y-4">
         <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Kann ich nur die App buchen, ohne Schulung und Personal?
+            Kann ich nur die App nehmen, ohne Schulung?
             <svg class="w-5 h-5 text-neutral-400 shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 text-sm leading-relaxed mt-3">
-            Ja, das geht. Wir empfehlen allerdings zumindest die Einführungsschulung, damit Ihr Team das System wirklich nutzt.
-            Erfahrungsgemäß bringt die App allein nur einen Bruchteil des Werts — der Transfer ins Team macht den Unterschied.
+            Nein, und das ist Absicht. Eine leere App hilft Ihnen nicht. Die Einrichtung durch einen Avorix-Koch
+            gehört immer dazu, sonst geben wir das System nicht aus der Hand.
           </p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
@@ -357,47 +372,42 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             </svg>
           </summary>
           <p class="text-neutral-600 text-sm leading-relaxed mt-3">
-            Grundsätzlich ja. Aber: Ohne dokumentierte Rezepte braucht jeder Leihkoch eine Einarbeitung, und das Ergebnis
-            schwankt stärker. Mit dem System arbeiten unsere Köche sofort auf Ihrem Niveau — das ist der ganze Punkt.
+            Ja, das geht. Wir empfehlen aber die Kombination: Dann hinterlässt jeder Einsatz dokumentiertes
+            Wissen in Ihrer Küche statt nur gearbeitete Stunden.
           </p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Unsere Rezepte sind schon dokumentiert. Müssen wir trotzdem die Schulung machen?
+            Wir haben unsere Rezepte schon dokumentiert. Bringt das was?
             <svg class="w-5 h-5 text-neutral-400 shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 text-sm leading-relaxed mt-3">
-            Wenn Ihre Rezepte bereits in einem Format vorliegen, das Ihr Team täglich nutzt — großartig.
-            Dann können wir die Daten übernehmen und die Schulung auf den Systemumgang fokussieren.
-            In der Praxis erleben wir aber oft, dass bestehende Dokumentationen lückenhaft sind oder im Regal verstauben.
-            Das klären wir im Erstgespräch.
+            Ja, das beschleunigt die Aufnahme deutlich. Der Avorix-Koch prüft Ihre Unterlagen, ergänzt Fotos,
+            Mengen und Zeiten und bringt alles in die App.
           </p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Wie lange dauert die Einführung?
+            Wie lange dauert die Einführung insgesamt?
             <svg class="w-5 h-5 text-neutral-400 shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 text-sm leading-relaxed mt-3">
-            Das hängt von der Größe Ihrer Karte ab. Für eine typische Halbpension-Karte mit 40–60 Gerichten
-            rechnen wir mit 2–4 Wochen, bis alles im System ist und Ihr Team geschult wurde. Danach arbeiten Sie selbstständig.
+            Je nach Karte typischerweise wenige Wochen vom Erstgespräch bis zum eigenständigen Arbeiten.
           </p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4 group">
           <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Was passiert nach 12 Monaten?
+            Was passiert nach den 12 Monaten?
             <svg class="w-5 h-5 text-neutral-400 shrink-0 ml-4 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </summary>
           <p class="text-neutral-600 text-sm leading-relaxed mt-3">
-            Ihre Rezepte und Ihr Wissen gehören Ihnen — immer. Nach 12 Monaten können Sie den Vertrag verlängern,
-            einzelne Bausteine anpassen oder pausieren. Es gibt keine Knebelverträge. Wenn das System funktioniert,
-            bleiben Sie freiwillig.
+            Sie entscheiden: verlängern oder beenden. Ihre Rezepte bleiben in jedem Fall Ihr Eigentum.
           </p>
         </details>
       </div>
@@ -407,12 +417,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Final CTA -->
   <section class="py-20 px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">
         Sehen Sie sich das System an. Unverbindlich.
       </h2>
-      <p class="text-neutral-600 leading-relaxed mb-8 max-w-xl mx-auto">
-        30 Minuten, die Klarheit schaffen. Wir zeigen Ihnen, wie das System in Ihrer Küche aussehen würde — konkret, ehrlich, ohne Verkaufsdruck.
-      </p>
       <a
         href="/kontakt"
         data-cta-location="system-final"

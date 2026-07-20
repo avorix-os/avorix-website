@@ -1,10 +1,87 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Startseite",
+        "item": "https://avorix.cloud/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Personal",
+        "item": "https://avorix.cloud/personal"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Arbeitnehmerüberlassung von Köchen",
+    "serviceType": "Arbeitnehmerüberlassung",
+    "description": "Festangestellte Köche, rechtssicher verliehen: für Notfall, Saison und Übergang. Mit behördlicher Arbeitnehmerüberlassungserlaubnis.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Avorix",
+      "url": "https://avorix.cloud/"
+    },
+    "areaServed": ["DE", "AT"],
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": "#direktantwort"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Wer sind die Avorix-Köche?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist, wenn der Koch nicht zu unserem Team passt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie läuft das vertraglich?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Über einen Arbeitnehmerüberlassungsvertrag, wie ihn die Agentur für Arbeit vorsieht. Sie unterschreiben ein paar Seiten mehr als bei einer Vermittler-Rechnung, und genau das schützt Sie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Kann aus dem Einsatz mehr werden (Schulung, unser System)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der nächste Ausfall kein Notfall mehr ist."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <BaseLayout
-  title="Personal — Echte Köche, rechtssicher verliehen"
-  description="Avorix verleiht festangestellte Köche mit behördlicher Arbeitnehmerüberlassungserlaubnis. Für den Notfall, die Saison oder den Übergang — rechtssicher und diskret."
+  title="Köche mieten mit Arbeitnehmerüberlassungserlaubnis | Avorix"
+  description="Festangestellte Köche, rechtssicher verliehen: für Notfall, Saison und Übergang. Mit behördlicher Arbeitnehmerüberlassungserlaubnis."
+  schemaOrg={schema}
 >
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
@@ -16,12 +93,12 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Echte Köche. Fest angestellt. Rechtssicher verliehen.
       </h1>
       <div class="flex justify-center mb-6">
-        <span class="inline-block bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded-full px-5 py-2.5 text-sm">
-          Behördliche Arbeitnehmerüberlassungserlaubnis · Agentur für Arbeit
+        <span class="inline-block bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded-full px-6 py-3 text-base">
+          ✓ Behördliche Arbeitnehmerüberlassungserlaubnis · Agentur für Arbeit
         </span>
       </div>
       <p class="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
-        Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten Köche aus: für den Notfall, für die Saison, für den Übergang. Im Gastgewerbe haben diese Erlaubnis nur wenige.
+        Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten Köche aus: für den Notfall, für die Saison, für den Übergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie zu 100 Prozent auf der rechtlich sicheren Seite.
       </p>
       <a
         href="/kontakt"
@@ -33,6 +110,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     </div>
   </section>
 
+  <!-- Direkt-Antwort (GEO) -->
+  <section class="py-8 px-6 bg-white border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <p id="direktantwort" class="text-neutral-700 leading-relaxed">
+        Avorix verleiht festangestellte, sozialversicherte Köche an Hotels und Restaurants in Deutschland und Österreich. Grundlage ist die behördliche Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Das schützt Betriebe vor dem Scheinselbständigkeits-Risiko, das bei vermittelten „selbstständigen" Köchen entstehen kann.
+      </p>
+    </div>
+  </section>
+
   <!-- Wann Sie uns rufen -->
   <section class="py-16 px-6 border-t border-neutral-200">
     <div class="max-w-5xl mx-auto">
@@ -41,24 +127,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="bg-white rounded-2xl border border-neutral-200 p-7">
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Der Notfall.</h3>
           <p class="text-neutral-600 leading-relaxed">
-            Ihr Küchenchef fällt aus — morgen ist Vollbelegung. Wir schicken Ihnen eine Fachkraft, tageweise oder wochenweise.
+            Der Küchenchef fällt aus, die Saison läuft. Ein Avorix-Koch übernimmt, tageweise oder wochenweise.
           </p>
         </div>
         <div class="bg-white rounded-2xl border border-neutral-200 p-7">
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Die Saison.</h3>
           <p class="text-neutral-600 leading-relaxed">
-            Sie wissen schon im Frühjahr, dass Sie im Sommer zwei Kräfte mehr brauchen. Planbar, für Wochen oder die ganze Saison.
+            Sie brauchen planbar zwei Kräfte mehr. Unsere Köche verstärken Ihr Team für Wochen oder die ganze Saison.
           </p>
         </div>
         <div class="bg-white rounded-2xl border border-neutral-200 p-7">
           <h3 class="text-lg font-semibold text-neutral-900 mb-3">Der Übergang.</h3>
           <p class="text-neutral-600 leading-relaxed">
-            Ihr Souschef hat gekündigt, die Neubesetzung dauert. Wir überbrücken, bis Ihr neuer Mitarbeiter anfängt.
+            Die Neubesetzung dauert länger als geplant. Wir überbrücken, bis Ihre Lösung steht.
           </p>
         </div>
       </div>
-      <p class="text-sm text-neutral-600 text-center mt-8">
-        Kurzfristige Einsätze innerhalb von 24 bis 72 Stunden möglich. 98 Prozent der Anfragen innerhalb von 3 Tagen.
+      <p class="text-neutral-600 text-center mt-8">
+        Kurzfristige Einsätze sind in der Regel innerhalb von 24 bis 72 Stunden möglich, im Notfall sind wir rund um die Uhr erreichbar. 98 Prozent der Anfragen können wir innerhalb von 3 Tagen besetzen.
       </p>
     </div>
   </section>
@@ -70,7 +156,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da.
       </h2>
       <p class="text-lg text-neutral-600 leading-relaxed">
-        Unsere Köche arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer Küche auf.
+        Unsere Köche arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer Küche auf. Bei einer klassischen Zeitarbeitsfirma bleibt nach dem Einsatz nichts zurück. Bei uns bleibt das Wissen.
       </p>
     </div>
   </section>
@@ -83,16 +169,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </h2>
       <div class="bg-white border-l-4 border-brand-500 rounded-r-2xl p-6 shadow-sm">
         <p class="text-neutral-600 leading-relaxed mb-4">
-          In der Gastronomie buchen viele Betriebe „selbstständige" Köche über Vermittler oder Plattformen. Das wirkt flexibel und günstig. In Wahrheit liegt das Risiko der Scheinselbständigkeit vollständig beim Auftraggeber — also bei Ihnen.
+          Viele Vermittler schicken Ihnen „selbstständige" Köche, die eine Rechnung mit Mehrwertsteuer schreiben. Klingt unkompliziert, ist aber in den meisten Fällen Scheinselbständigkeit: Die Köche arbeiten weisungsgebunden in Ihrem Betriebsablauf, wie Angestellte.
         </p>
         <p class="text-neutral-600 leading-relaxed mb-4">
-          Bei einer Sozialversicherungsprüfung wird nachträglich festgestellt, ob ein echtes Beschäftigungsverhältnis vorlag. Wenn ja, zahlen Sie Sozialabgaben, Lohnsteuer und Säumniszuschläge rückwirkend — schnell 50.000 bis 100.000 Euro.
+          Was bei der nächsten Sozialversicherungsprüfung passiert: Die Prüfer stufen diese Köche als scheinselbstständig ein, und zwar in den allermeisten Fällen. Dann zahlt nicht der Koch, sondern Ihr Haus: sämtliche Sozialleistungen, rückwirkend für drei bis vier Jahre. Je nach Umfang schnell 50.000 bis 100.000 Euro. Der Koch selbst ist dann meist nicht mehr greifbar.
         </p>
         <p class="text-neutral-600 leading-relaxed mb-4">
-          Deshalb machen wir es anders: Unsere Köche sind bei Avorix fest angestellt. Wir besitzen die behördliche Erlaubnis zur Arbeitnehmerüberlassung, erteilt von der Agentur für Arbeit. Das ist legal, geprüft und für Sie risikofrei.
+          <strong class="text-neutral-900">Deshalb machen wir es anders:</strong> Unsere Köche sind bei Avorix fest angestellt und sozialversichert. Wir haben die behördliche Arbeitnehmerüberlassungserlaubnis von der Agentur für Arbeit. Unsere Verträge sind von der Agentur für Arbeit geprüft.
         </p>
-        <p class="text-neutral-600 leading-relaxed font-bold">
-          Fragen Sie jeden Anbieter nach dieser Erlaubnis. Wer sie nicht hat, darf Ihnen kein Personal überlassen.
+        <p class="text-neutral-600 leading-relaxed">
+          Größere Häuser und Hotelgruppen buchen inzwischen nur noch Firmen mit dieser Erlaubnis, aus genau diesem Grund. Im Gastgewerbe haben sie nur wenige Anbieter. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.
         </p>
       </div>
     </div>
@@ -105,18 +191,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Ihre Gäste erleben Ihre Küche. Nicht unsere.
       </h2>
       <p class="text-lg text-neutral-600 leading-relaxed">
-        Unsere Köche tragen keine Avorix-Kleidung, treten nicht unter unserem Namen auf und sind für Ihre Gäste nicht von Ihrem Stammpersonal zu unterscheiden. Wir nennen unsere Kunden nicht öffentlich. Diskretion ist Teil unseres Standards.
+        Kein Gast merkt, dass ein Avorix-Koch mitkocht. Wir nennen keinen Kunden öffentlich, und auf Wunsch sichern wir Ihnen das vertraglich zu.
       </p>
     </div>
   </section>
 
-  <!-- Was kostet das -->
+  <!-- Was kostet das (Variante B only) -->
   <section class="py-16 px-6">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Was kostet das?</h2>
       <div class="bg-white rounded-2xl border border-neutral-200 p-7">
         <p class="text-neutral-600 leading-relaxed mb-6">
-          Klare Stundensätze, ohne versteckte Posten. Sie zahlen die gebuchten Stunden. Anfahrt, Sozialabgaben und Versicherung sind enthalten. Keine Vermittlungsprovision, kein Kleingedrucktes.
+          Klare Stundensätze, ohne versteckte Posten. Die Zahlen bekommen Sie im Erstgespräch schwarz auf weiß. Für die ersten Betriebe gelten 2026 Pilotkonditionen deutlich unter dem regulären Preis.
         </p>
         <a
           href="/kontakt"
@@ -135,31 +221,27 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold text-neutral-900 mb-10 text-center">Häufige Fragen</h2>
       <div class="space-y-4">
         <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Wer sind die Köche?</summary>
+          <summary class="font-semibold text-neutral-900 cursor-pointer">Wer sind die Avorix-Köche?</summary>
           <p class="mt-3 text-neutral-600 leading-relaxed">
-            Festangestellte Fachkräfte bei Avorix — mit Berufserfahrung in der gehobenen Hotellerie und Gastronomie. Jeder Koch wird von uns ausgewählt, eingearbeitet und arbeitet mit unserer Koch-App.
+            Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen.
           </p>
         </details>
         <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Was, wenn ein Koch nicht zu unserem Betrieb passt?</summary>
+          <summary class="font-semibold text-neutral-900 cursor-pointer">Was ist, wenn der Koch nicht zu unserem Team passt?</summary>
           <p class="mt-3 text-neutral-600 leading-relaxed">
-            Dann tauschen wir ihn aus. Wir wollen, dass der Einsatz funktioniert — nicht nur, dass jemand da steht.
+            Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.
           </p>
         </details>
         <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Gibt es eine Mindestbuchung?</summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed"></p>
-        </details>
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Wie ist das vertraglich geregelt?</summary>
+          <summary class="font-semibold text-neutral-900 cursor-pointer">Wie läuft das vertraglich?</summary>
           <p class="mt-3 text-neutral-600 leading-relaxed">
-            Über einen Arbeitnehmerüberlassungsvertrag. Das ist die rechtlich korrekte Form, wenn Personal an einen anderen Betrieb überlassen wird. Sie erhalten eine saubere Rechnung, wir kümmern uns um alles Arbeitsrechtliche.
+            Über einen Arbeitnehmerüberlassungsvertrag, wie ihn die Agentur für Arbeit vorsieht. Sie unterschreiben ein paar Seiten mehr als bei einer Vermittler-Rechnung, und genau das schützt Sie.
           </p>
         </details>
         <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Kann aus einem Einsatz mehr werden?</summary>
+          <summary class="font-semibold text-neutral-900 cursor-pointer">Kann aus dem Einsatz mehr werden (Schulung, unser System)?</summary>
           <p class="mt-3 text-neutral-600 leading-relaxed">
-            Ja. Wenn Sie einen unserer Köche übernehmen möchten, sprechen wir darüber. Wir sind kein Personalvermittler — aber wir blockieren auch niemanden.
+            Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der nächste Ausfall kein Notfall mehr ist.
           </p>
         </details>
       </div>

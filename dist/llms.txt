@@ -1,0 +1,23 @@
+# Avorix
+
+> Avorix ist ein Küchensystem für Hotels und Gastronomie aus Friedrichshafen am Bodensee (Deutschland). Es verbindet drei Bausteine: die Avorix Koch-App (Schritt-für-Schritt-Rezeptführung, Menüplaner, Portionsrechner, Einkaufslisten, Kalkulation), Schulung durch erfahrene Köche mit mindestens Sous-Chef-Erfahrung sowie rechtssicheren Küchenpersonal-Verleih mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Zielgruppen sind Ferienhotels mit Halbpension, Restaurants und Gasthöfe mit fester Karte sowie Sporthotels in Deutschland und Österreich.
+
+## Seiten
+
+- [Startseite](https://avorix.cloud/): Überblick über das Avorix-System
+- [Unser System](https://avorix.cloud/system): Wie Koch-App, Schulung und Personal ineinandergreifen
+- [Koch-App](https://avorix.cloud/koch-app): Funktionen der App im Detail
+- [Schulung](https://avorix.cloud/schulung): Anlernen des Küchenteams durch Avorix-Köche
+- [Personal](https://avorix.cloud/personal): Festangestellte Köche, rechtssicher verliehen (Arbeitnehmerüberlassung)
+- [Pilotprogramm](https://avorix.cloud/pilotprogramm): Einstiegsangebot für Pilotbetriebe 2026
+- [Für Ferienhotels](https://avorix.cloud/fuer-hotels)
+- [Für Restaurants und Gasthöfe](https://avorix.cloud/fuer-restaurants)
+- [Für Sporthotels](https://avorix.cloud/fuer-sporthotels)
+- [Über uns](https://avorix.cloud/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
+
+## Fakten
+
+- Firma: AVORIX GmbH, Friedrichshafen am Bodensee
+- Tätig in: Deutschland und Österreich (keine Schweiz)
+- Besonderheit: behördliche Arbeitnehmerüberlassungserlaubnis, Verträge von der Agentur für Arbeit geprüft
+- Kontakt: https://avorix.cloud/kontakt

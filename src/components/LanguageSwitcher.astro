@@ -5,11 +5,12 @@ const lang = getLangFromUrl(Astro.url);
 const otherLang = lang === "de" ? "en" : "de";
 
 // Map current path to equivalent in other language
+// Only pages that exist in BOTH languages are mapped
 const pathname = Astro.url.pathname;
 let otherPath: string;
 
 if (lang === "de") {
-  // DE -> EN
+  // DE -> EN (only old pages that have EN equivalents)
   const deToEn: Record<string, string> = {
     "/": "/en",
     "/ueber-uns": "/en/about",
@@ -18,15 +19,8 @@ if (lang === "de") {
     "/datenschutz": "/en/privacy",
     "/koch-app": "/en/cook-app",
     "/produkt": "/en/product",
-    "/system": "/en/system",
-    "/schulung": "/en/training",
-    "/personal": "/en/staff",
-    "/pilotprogramm": "/en/pilot-program",
-    "/fuer-hotels": "/en/for-hotels",
-    "/fuer-restaurants": "/en/for-restaurants",
-    "/fuer-sporthotels": "/en/for-sports-hotels",
   };
-  otherPath = deToEn[pathname] || `/en${pathname}`;
+  otherPath = deToEn[pathname] || `/en`;
 } else {
   // EN -> DE
   const enToDe: Record<string, string> = {
@@ -38,15 +32,8 @@ if (lang === "de") {
     "/en/privacy": "/datenschutz",
     "/en/cook-app": "/koch-app",
     "/en/product": "/produkt",
-    "/en/system": "/system",
-    "/en/training": "/schulung",
-    "/en/staff": "/personal",
-    "/en/pilot-program": "/pilotprogramm",
-    "/en/for-hotels": "/fuer-hotels",
-    "/en/for-restaurants": "/fuer-restaurants",
-    "/en/for-sports-hotels": "/fuer-sporthotels",
   };
-  otherPath = enToDe[pathname] || pathname.replace(/^\/en/, "");
+  otherPath = enToDe[pathname] || "/";
 }
 ---
 

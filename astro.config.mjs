@@ -4,7 +4,11 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://avorix.cloud",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/produkt"),
+    }),
+  ],
   i18n: {
     locales: ["de", "en"],
     defaultLocale: "de",

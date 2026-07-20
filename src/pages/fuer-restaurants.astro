@@ -1,15 +1,75 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const schemaOrg = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Startseite",
+        "item": "https://avorix.cloud/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Für Restaurants & Gasthöfe",
+        "item": "https://avorix.cloud/fuer-restaurants"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Unsere Karte wechselt saisonal. Passt das trotzdem?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Die Stammkarte wird einmal sauber aufgenommen, Saisongerichte pflegen Sie danach selbst ein oder wir übernehmen das."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wir sind ein Familienbetrieb, keiner von uns ist ein Technik-Mensch.",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dafür ist die App gebaut: Foto ansehen, Haken setzen. Geschult wird am Herd, nicht im Seminarraum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was sagt unser Koch dazu, wenn wir sein Wissen dokumentieren?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Die Erfahrung zeigt: Gute Köche gewinnen dadurch. Ihr Wissen bekommt endlich den Stellenwert, den es verdient, und sie müssen nicht mehr jeden Handgriff selbst machen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Können wir uns das als kleiner Betrieb leisten?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deshalb gibt es das Pilotprogramm. Im Erstgespräch rechnen wir Ihnen die Zahlen transparent vor, und Sie entscheiden danach in Ruhe."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <BaseLayout
-  title="Für Restaurants & Gasthöfe"
-  description="Avorix für Gasthöfe: Rezepte sichern, Team anlernen, Ausfälle überbrücken. Koch-App, Schulung und Personal aus einer Hand."
+  title="Küchensystem für Restaurants und Gasthöfe"
+  description="Ihr Gasthof steht und fällt mit einem Kopf? Avorix sichert Ihre Rezepte, lernt Ihr Team an und überbrückt Ausfälle rechtssicher."
+  schemaOrg={schemaOrg}
 >
   <!-- Hero -->
   <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
     <div class="max-w-4xl mx-auto">
-      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Für Restaurants & Gasthöfe</p>
+      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Für Restaurants &amp; Gasthöfe</p>
       <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">
         Ihr Gasthof steht und fällt mit einem Kopf. Muss er nicht.
       </h1>
@@ -20,7 +80,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <a href="/kontakt" data-cta-location="restaurants-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
       </div>
       <div class="flex flex-wrap gap-3 text-sm">
-        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Behördliche Arbeitnehmerüberlassungserlaubnis</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
       </div>
     </div>
   </section>
@@ -32,18 +92,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Die Kündigung ist keine Personalie. Sie ist eine Existenzfrage.</h3>
-          <p class="text-neutral-600 text-sm">Mit dem Koch gehen die Rezepte, die Abläufe, die Qualität. Was bleibt, ist ein Team, das improvisiert, und Gäste, die es merken.</p>
+          <p class="text-neutral-600 text-sm">Im Gasthof hängt die ganze Küche an einem oder zwei Köpfen. Geht einer, stehen Sie über Nacht ohne das Wissen da, das Ihr Haus ausmacht.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Ihre Stammgäste merken es zuerst.</h3>
-          <p class="text-neutral-600 text-sm">Erst schmeckt es anders, dann kommen die Bewertungen, dann bleiben die Tische leer. Was Jahre aufgebaut wurde, geht in Wochen verloren.</p>
+          <p class="text-neutral-600 text-sm">Der Braten schmeckt anders, die Portionen schwanken, die erste schlechte Bewertung steht online. Der Ruf, den Sie über Jahre aufgebaut haben, wackelt in Wochen.</p>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Auf Ihre Anzeige meldet sich niemand.</h3>
-          <p class="text-neutral-600 text-sm">Der Markt ist leer. Und wenn sich doch jemand meldet, ist er nach einer Saison wieder weg. Das Spiel beginnt von vorne.</p>
+          <p class="text-neutral-600 text-sm">Und wenn doch, können Sie nicht zahlen, was Kettenhotels zahlen. Also improvisieren Sie weiter und hoffen, dass nichts passiert.</p>
         </div>
       </div>
-      <p class="text-neutral-600 mt-6">Die Frage ist nicht, ob es Sie trifft. Die Frage ist, wie lange es noch gut geht.</p>
+      <p class="text-neutral-600 mt-6">Irgendwann steht die Frage im Raum, wie lange es so noch weitergeht. Genau für diesen Punkt gibt es Avorix.</p>
     </div>
   </section>
 
@@ -51,24 +111,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Das Avorix-System: Rezepte sichern, Team anlernen, Ausfälle überbrücken.</h2>
-      <p class="text-neutral-600 max-w-3xl mb-8">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer Küche: Es bringt jede Küchenkraft zum fertigen Gericht, auch wenn sie es noch nie gekocht hat.</p>
+      <p class="text-neutral-600 max-w-3xl mb-8">Stellen Sie sich ein Navi für Ihre Küche vor: Es bringt jede Kraft zum fertigen Gericht, auch wenn sie es noch nie gekocht hat. Dafür kommen drei Bausteine zusammen:</p>
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Das System</h3>
-          <p class="text-neutral-600 text-sm">Ein Avorix-Koch kommt in Ihren Betrieb und schreibt Ihre Karte auf. Jedes Gericht wird in einfache Schritte zerlegt, mit Fotos, genauen Mengen und Zeiten. Alles landet in der Koch-App.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Unser System</h3>
+          <p class="text-neutral-600 text-sm">Ihre Karte als Schritt-für-Schritt-Anleitung in der Koch-App, mit Fotos, Mengen und Zeiten.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Die Schulung</h3>
-          <p class="text-neutral-600 text-sm">Ihr Team wird direkt am Herd angelernt, von einem Koch mit mindestens Sous-Chef-Erfahrung. Bis jede Kraft jedes Gericht selbstständig kochen kann.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Die Schulung</h3>
+          <p class="text-neutral-600 text-sm">Ein Avorix-Koch (mindestens Sous-Chef-Erfahrung) nimmt Ihre Karte auf und lernt Ihr Team an, direkt am Herd.</p>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Verstärkung</h3>
-          <p class="text-neutral-600 text-sm">Wenn Personal fehlt, stellen wir es. Avorix beschäftigt festangestellte Köche, die wir Ihnen rechtssicher ausleihen. Mit behördlicher Arbeitnehmerüberlassungserlaubnis.</p>
+          <h3 class="font-bold text-neutral-900 mb-3">Die Verstärkung</h3>
+          <p class="text-neutral-600 text-sm">Fällt jemand aus, leihen wir Ihnen einen festangestellten Koch. Rechtssicher, mit Arbeitnehmerüberlassungserlaubnis.</p>
         </div>
       </div>
-      <p class="text-neutral-600 mt-6">Ihre Gäste merken nichts. Sie erleben Ihre Küche und Ihre Rezepte, nur eben verlässlich in gleicher Qualität.</p>
+      <p class="text-neutral-600 mt-6">Und Ihre Gäste? Merken nichts. Sie erleben Ihre Küche und Ihre Rezepte, nur eben verlässlich. Wir nennen keinen Kunden öffentlich.</p>
       <div class="mt-6">
-        <a href="/system" data-cta-location="restaurants-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das Avorix-System</a>
+        <a href="/system" data-cta-location="restaurants-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das System</a>
       </div>
     </div>
   </section>
@@ -77,10 +137,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Eine feste Karte ist schneller gesichert, als Sie denken.</h2>
-      <p class="text-neutral-600 mb-6">Ein typischer Gasthof hat 12 Gerichte auf der Karte. Dafür braucht es einen Block Aufnahme und einen Block Schulung. Keine monatelangen Projekte, kein Umbau, kein Aufwand für Sie.</p>
-      <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-        <p class="text-neutral-600"><strong class="text-neutral-900">Beispiel:</strong> 12 Gerichte, ein Block Aufnahme vor Ort, ein zweiter Block Schulung am Herd. Danach arbeitet Ihr Team selbstständig mit der App.</p>
-      </div>
+      <p class="text-neutral-600 mb-6">Ein Beispiel: eine Karte mit rund 12 Gerichten, drei Vorspeisen, drei Hauptgerichte, drei Desserts, ein vegetarisches Gericht, etwas für Kinder. So eine Karte nimmt ein Avorix-Koch in einem Block auf (fünf Tage mit je sechs Stunden), dazu kommt ein zweiter Block für die Schulung Ihres Teams. Danach steckt das Wissen Ihres Hauses im System und nicht mehr nur in einem Kopf.</p>
     </div>
   </section>
 
@@ -92,29 +149,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">1</div>
           <div>
-            <h3 class="font-bold text-neutral-900">Gespräch</h3>
-            <p class="text-neutral-600 text-sm mt-1">30 Minuten, per Video oder vor Ort. Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt.</p>
+            <h3 class="font-bold text-neutral-900">Gespräch (30 Minuten, kostenlos)</h3>
+            <p class="text-neutral-600 text-sm mt-1">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">2</div>
           <div>
             <h3 class="font-bold text-neutral-900">Aufnahme</h3>
-            <p class="text-neutral-600 text-sm mt-1">Ein Avorix-Koch kommt zu Ihnen, kocht mit Ihrem Team und dokumentiert jedes Gericht Ihrer Karte in der App.</p>
+            <p class="text-neutral-600 text-sm mt-1">Ein Avorix-Koch kocht mit, dokumentiert und legt Ihre Karte in der App an.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">3</div>
           <div>
             <h3 class="font-bold text-neutral-900">Schulung</h3>
-            <p class="text-neutral-600 text-sm mt-1">Ihr Team lernt das System direkt am Herd. Angeleitet von einem Koch mit mindestens Sous-Chef-Erfahrung.</p>
+            <p class="text-neutral-600 text-sm mt-1">Ihr Team lernt das System, am Herd, im laufenden Betrieb.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">4</div>
           <div>
-            <h3 class="font-bold text-neutral-900">Selbstständig</h3>
-            <p class="text-neutral-600 text-sm mt-1">Die App führt Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir übernehmen das. Wir bleiben erreichbar.</p>
+            <h3 class="font-bold text-neutral-900">Selbstständig arbeiten</h3>
+            <p class="text-neutral-600 text-sm mt-1">Die App führt Ihr Team durch jeden Tag. Wir bleiben erreichbar.</p>
           </div>
         </div>
       </div>
@@ -125,7 +182,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Als Pilotbetrieb zur halben Rechnung.</h2>
-      <p class="text-neutral-600 mb-6">Wir suchen Betriebe, die unser System als Erste einsetzen und uns ehrliches Feedback geben. Dafür erhalten Pilotbetriebe 2026 deutlich reduzierte Konditionen.</p>
+      <p class="text-neutral-600 mb-6">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. Ihr Name taucht nirgends auf.</p>
       <a href="/pilotprogramm" data-cta-location="restaurants-pilot" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">Zum Pilotprogramm</a>
     </div>
   </section>
@@ -136,20 +193,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Häufige Fragen</h2>
       <div class="space-y-3">
         <details open class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wir wechseln die Karte saisonal. Geht das?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Neue Gerichte pflegen Sie selbst in die App ein oder wir übernehmen das für Sie. Bewährte Gerichte bleiben in Ihrer Rezeptbibliothek und sind sofort wieder abrufbar.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Unsere Karte wechselt saisonal. Passt das trotzdem?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Ja. Die Stammkarte wird einmal sauber aufgenommen, Saisongerichte pflegen Sie danach selbst ein oder wir übernehmen das.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wir sind ein Familienbetrieb und nicht besonders technikaffin. Klappt das trotzdem?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja, genau dafür ist die App gebaut. Wer ein Foto ansehen und einen Haken setzen kann, kann mit ihr arbeiten. Die Schulung findet direkt am Herd statt, nicht am Computer.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Wir sind ein Familienbetrieb, keiner von uns ist ein Technik-Mensch.</summary>
+          <p class="text-neutral-600 text-sm mt-3">Dafür ist die App gebaut: Foto ansehen, Haken setzen. Geschult wird am Herd, nicht im Seminarraum.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Was sagt unser Koch dazu?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ein guter Koch wird mit Avorix besser, nicht ersetzt. Sein Wissen wird endlich festgehalten, sein Team arbeitet selbstständiger und er kann sich auf das konzentrieren, was er am besten kann.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Was sagt unser Koch dazu, wenn wir sein Wissen dokumentieren?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Die Erfahrung zeigt: Gute Köche gewinnen dadurch. Ihr Wissen bekommt endlich den Stellenwert, den es verdient, und sie müssen nicht mehr jeden Handgriff selbst machen.</p>
         </details>
         <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Können wir uns das leisten?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Die Frage ist, ob Sie es sich leisten können, es nicht zu tun. Ein fehlender Koch kostet Sie Umsatz, Qualität und Ruf. Im Erstgespräch rechnen wir Ihnen transparent vor, was Avorix kostet und was es spart.</p>
+          <summary class="font-bold text-neutral-900 cursor-pointer">Können wir uns das als kleiner Betrieb leisten?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Deshalb gibt es das Pilotprogramm. Im Erstgespräch rechnen wir Ihnen die Zahlen transparent vor, und Sie entscheiden danach in Ruhe.</p>
         </details>
       </div>
     </div>
@@ -159,7 +216,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-20 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Sichern Sie das Wissen Ihres Hauses. Solange es noch im Haus ist.</h2>
-      <p class="text-neutral-600 mb-6">30 Minuten, kostenlos, unverbindlich. Sie erzählen uns von Ihrer Küche, wir sagen Ihnen ehrlich, ob Avorix zu Ihnen passt.</p>
       <a href="/kontakt" data-cta-location="restaurants-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
     </div>
   </section>
