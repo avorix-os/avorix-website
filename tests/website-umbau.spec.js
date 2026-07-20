@@ -49,6 +49,8 @@ test.describe('T2: Link-Crawl über alle 10 DE-Seiten', () => {
         els.map((el) => ({ cta: el.dataset.ctaLocation, href: el.getAttribute('href') }))
       );
       for (const { cta, href } of ctaHrefs) {
+        // Buttons (e.g. form submit) have no href — that's fine
+        if (href === null) continue;
         expect(href, `CTA "${cta}" on ${pagePath}`).not.toBe('#');
         expect(href, `CTA "${cta}" on ${pagePath}`).not.toMatch(/^mailto:/);
       }
@@ -57,11 +59,20 @@ test.describe('T2: Link-Crawl über alle 10 DE-Seiten', () => {
 });
 
 test.describe('T3: /produkt Redirect', () => {
-  test('/produkt leitet auf /system weiter (meta-refresh)', async ({ page }) => {
-    await page.goto('/produkt');
-    // In SSG mode, Astro generates a meta-refresh page. The browser follows it.
-    await page.waitForURL('**/system', { timeout: 10000 });
-    expect(page.url()).toContain('/system');
+  test('/produkt ist entfernt (kein HTML generiert, redirect nur über nginx)', async ({ page }) => {
+    // produkt.astro wurde gelöscht — kein meta-refresh HTML mehr.
+    // Der 301 Redirect wird ausschließlich über nginx location block gesteuert.
+    // Im Astro preview-Server gibt es kein /produkt mehr (404).
+    const response = await page.goto('/produkt', { waitUntil: 'domcontentloaded' });
+    // In preview: 404 expected (nginx nicht aktiv). In Produktion: 301 via nginx.
+    expect(response.status()).toBe(404);
+  });
+
+  test('nginx.conf enthält 301 location block für /produkt', async () => {
+    const fs = await import('fs');
+    const nginxConf = fs.readFileSync('nginx.conf', 'utf8');
+    expect(nginxConf).toContain('location = /produkt');
+    expect(nginxConf).toContain('return 301 /system');
   });
 });
 
