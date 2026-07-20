@@ -1,45 +1,78 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
-
-const t = useTranslations("en");
 ---
 
-<BaseLayout title="About" description="Meet Avorix — kitchen management for 4-star resort hotels across the DACH region. We help properties maintain consistent food quality despite staff shortages.">
-  <section class="pt-32 pb-20 px-6">
+<BaseLayout
+  title="About Us — Built by a Head Chef"
+  description="Avorix was born from practice: real kitchens, real rosters, and the daily struggle for good staff. Based in Friedrichshafen on Lake Constance."
+>
+  <!-- Hero -->
+  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">About Us</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">Built by a Head Chef. Not by Software People.</h1>
+      <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed">Avorix was born from practice: real kitchens, real rosters, and the daily struggle for good staff.</p>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">The Man Behind the System.</h2>
+      <div class="grid md:grid-cols-[150px_1fr] gap-6">
+        <div class="w-full h-44 md:h-auto rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 text-sm text-center p-4">
+          Photo Borge Penk
+        </div>
+        <div>
+          <p class="text-neutral-600 mb-4">Borge Penk has worked in professional kitchens for 20 years — from apprentice to head chef leading large teams. He developed menus, managed crews, and didn't learn about the skilled labor shortage from statistics, but from every single roster.</p>
+          <blockquote class="bg-neutral-50 rounded-xl p-4 italic text-neutral-800 border-l-4 border-brand-500">"I've seen too many times how a kitchen stands and falls with a single person. It doesn't have to be that way. Good cooking can be written down, shown, and taught."</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- History -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold text-avorix-dark mb-6">{t("about.title")}</h1>
-      <p class="text-lg text-avorix-gray leading-relaxed mb-8">
-        {t("about.intro")}
-      </p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Chefs First. Then Processes. Then the App.</h2>
+      <p class="text-neutral-600 mb-4">Avorix started as a staffing service for the hospitality industry: permanently employed chefs, leased to houses that were short on staff. The same pattern kept emerging: the deployment helped, but as soon as the chef left, the operation was as vulnerable as before.</p>
+      <p class="text-neutral-600">So we started leaving the knowledge behind: first with standardized processes (prep, vacuum-seal, regenerate), then with documented recipes, and finally with the Avorix Cook App that makes both usable for any kitchen team. Today, it's become a complete system: software, training, and staff — all from one source.</p>
+    </div>
+  </section>
 
-      <!-- Team photo -->
-      <div class="rounded-2xl overflow-hidden shadow-lg mb-12">
-        <img
-          src="/avorix_kitchen_branded.webp"
-          alt="Avorix Koch App in action — chef in Avorix branded jacket"
-          width="1920"
-          height="1080"
-          class="w-full object-cover h-56 sm:h-72"
-          loading="lazy"
-        />
-      </div>
+  <!-- Technology as Support -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Technology as Support. Not as a Replacement.</h2>
+      <p class="text-neutral-600">We don't want kitchens without people. We want kitchens where people can deliver excellent work without years of formal training — and where the house's knowledge doesn't vanish with the next resignation.</p>
+    </div>
+  </section>
 
-      <div class="space-y-12">
-        <div>
-          <h2 class="text-2xl font-semibold text-avorix-dark mb-4">{t("about.mission.title")}</h2>
-          <p class="text-avorix-gray leading-relaxed">
-            {t("about.mission.text")}
-          </p>
-        </div>
+  <!-- Facts -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">What You Have in Black and White.</h2>
+      <ul class="space-y-4">
+        <li class="py-3 border-b border-dashed border-neutral-300 text-neutral-700">Based in Friedrichshafen on Lake Constance (AVORIX GmbH)</li>
+        <li class="py-3 border-b border-dashed border-neutral-300 text-neutral-700">Operating in Germany and Austria</li>
+        <li class="py-3 border-b border-dashed border-neutral-300 text-neutral-700">Official staff leasing permit, contracts reviewed by the Federal Employment Agency</li>
+      </ul>
+    </div>
+  </section>
 
-        <div>
-          <h2 class="text-2xl font-semibold text-avorix-dark mb-4">{t("about.focus.title")}</h2>
-          <p class="text-avorix-gray leading-relaxed">
-            {t("about.focus.text")}
-          </p>
-        </div>
-      </div>
+  <!-- Discretion -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Our Clients Don't Advertise Us. That's by Design.</h2>
+      <p class="text-neutral-600">Our clients run their kitchen with our system, and what happens in their kitchen is nobody else's business. This discretion is part of what we offer.</p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Get to Know Us. In a Conversation, Not a Brochure.</h2>
+      <a href="/en/contact" data-cta-location="ueberuns-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Book a Demo</a>
     </div>
   </section>
 </BaseLayout>

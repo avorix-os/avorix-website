@@ -10,24 +10,43 @@ let otherPath: string;
 
 if (lang === "de") {
   // DE -> EN
-  if (pathname === "/" || pathname === "") otherPath = "/en";
-  else if (pathname === "/ueber-uns") otherPath = "/en/about";
-  else if (pathname === "/kontakt") otherPath = "/en/contact";
-  else if (pathname === "/impressum") otherPath = "/en/legal-notice";
-  else if (pathname === "/datenschutz") otherPath = "/en/privacy";
-  else if (pathname === "/koch-app") otherPath = "/en/cook-app";
-  else if (pathname === "/produkt") otherPath = "/en/product";
-  else otherPath = `/en${pathname}`;
+  const deToEn: Record<string, string> = {
+    "/": "/en",
+    "/ueber-uns": "/en/about",
+    "/kontakt": "/en/contact",
+    "/impressum": "/en/legal-notice",
+    "/datenschutz": "/en/privacy",
+    "/koch-app": "/en/cook-app",
+    "/produkt": "/en/product",
+    "/system": "/en/system",
+    "/schulung": "/en/training",
+    "/personal": "/en/staff",
+    "/pilotprogramm": "/en/pilot-program",
+    "/fuer-hotels": "/en/for-hotels",
+    "/fuer-restaurants": "/en/for-restaurants",
+    "/fuer-sporthotels": "/en/for-sports-hotels",
+  };
+  otherPath = deToEn[pathname] || `/en${pathname}`;
 } else {
   // EN -> DE
-  if (pathname === "/en" || pathname === "/en/") otherPath = "/";
-  else if (pathname === "/en/about") otherPath = "/ueber-uns";
-  else if (pathname === "/en/contact") otherPath = "/kontakt";
-  else if (pathname === "/en/legal-notice") otherPath = "/impressum";
-  else if (pathname === "/en/privacy") otherPath = "/datenschutz";
-  else if (pathname === "/en/cook-app") otherPath = "/koch-app";
-  else if (pathname === "/en/product") otherPath = "/produkt";
-  else otherPath = pathname.replace(/^\/en/, "");
+  const enToDe: Record<string, string> = {
+    "/en": "/",
+    "/en/": "/",
+    "/en/about": "/ueber-uns",
+    "/en/contact": "/kontakt",
+    "/en/legal-notice": "/impressum",
+    "/en/privacy": "/datenschutz",
+    "/en/cook-app": "/koch-app",
+    "/en/product": "/produkt",
+    "/en/system": "/system",
+    "/en/training": "/schulung",
+    "/en/staff": "/personal",
+    "/en/pilot-program": "/pilotprogramm",
+    "/en/for-hotels": "/fuer-hotels",
+    "/en/for-restaurants": "/fuer-restaurants",
+    "/en/for-sports-hotels": "/fuer-sporthotels",
+  };
+  otherPath = enToDe[pathname] || pathname.replace(/^\/en/, "");
 }
 ---
 

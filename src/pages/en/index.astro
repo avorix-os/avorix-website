@@ -1,8 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Hero from "../../components/Hero.astro";
-import Benefits from "../../components/Benefits.astro";
-import CallToAction from "../../components/CallToAction.astro";
 
 const schema = [
   {
@@ -11,8 +8,13 @@ const schema = [
     "name": "Avorix",
     "url": "https://avorix.cloud",
     "logo": "https://avorix.cloud/avorix-logo.svg",
-    "description": "Avorix enables hotels and food service businesses to offer high-quality dishes consistently — even without trained chefs.",
+    "description": "Avorix enables hotels and food service businesses to consistently deliver high-quality dishes with software, standardized processes, and the Avorix Cook App — even without trained chefs.",
     "email": "info@avorix.de",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Friedrichshafen",
+      "addressCountry": "DE"
+    },
     "contactPoint": {
       "@type": "ContactPoint",
       "email": "info@avorix.de",
@@ -30,11 +32,259 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Home"
-  description="Avorix Kitchen App for hotels — consistent food quality despite skilled chef shortages. Recipe management and standardized processes for your kitchen team."
+  title="Avorix — Your Kitchen Keeps Its Standards. Even Without a Top Chef."
+  description="Avorix guides your kitchen team step by step through every dish. Cook App, training, and staff from a single source — for consistent quality without trained chefs."
   schemaOrg={schema}
 >
-  <Hero />
-  <Benefits />
-  <CallToAction />
+  <!-- Hero -->
+  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Cook App + Training + Staff</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">
+        Your Kitchen Keeps Its Standards.<br />Even Without a Top Chef.
+      </h1>
+      <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed mb-6">
+        Avorix guides your kitchen team step by step through every dish on your menu. With clear instructions, proven processes, and real chefs training your team. So every plate goes out the way you want it. Every day. <strong class="text-neutral-900">Even without trained chefs.</strong>
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/en/contact" data-cta-location="hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors">Book a Demo</a>
+        <a href="/en/system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors">How It Works</a>
+      </div>
+      <div class="flex flex-wrap gap-3 text-sm">
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Official staff leasing permit</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Built by chefs</span>
+        <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; DE + AT</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Does This Sound Familiar?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Your head chef quits. Mid-season.</h3>
+          <p class="text-neutral-600 text-sm">Every key person who leaves takes knowledge with them: the recipes, the quantities, the workflows. The rest of the team is left improvising.</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Everyone cooks differently.</h3>
+          <p class="text-neutral-600 text-sm">Monday the schnitzel tastes different than Friday. Portions vary. Regular guests notice first.</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">You simply cannot find anyone.</h3>
+          <p class="text-neutral-600 text-sm">Nobody who can actually cook responds to your job posting. And if they do, they leave after one season.</p>
+        </div>
+      </div>
+      <p class="text-neutral-600 mt-6">When the kitchen falters, everything falters: first the quality, then the reviews, then your reputation. 82 percent of hospitality businesses report a skilled labor shortage in the kitchen.</p>
+    </div>
+  </section>
+
+  <!-- Why Avorix -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Why Avorix</h2>
+      <div class="grid md:grid-cols-3 gap-6 text-left">
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">&#10003; Consistent Quality</h3>
+          <p class="text-neutral-600 text-sm">Standardized processes and the Avorix Cook App ensure consistent food quality, regardless of your kitchen team's experience level.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">&#128101; Less Staff Dependency</h3>
+          <p class="text-neutral-600 text-sm">The knowledge lives in the system, no longer just in individual heads. New hires cook at your standard from day one.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">&#9638; Full Cost Control</h3>
+          <p class="text-neutral-600 text-sm">Recipe-based costing, food cost tracking, and standardized portioning bring transparency to your kitchen costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explanation -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">What Is Avorix? Explained in One Minute.</h2>
+      <p class="text-neutral-600 max-w-3xl mb-8">Think of a GPS. A GPS gets every driver to the destination, even if they don't know the route. Avorix does the same in your kitchen: it guides every kitchen worker to the finished dish, even if they've never cooked it before.</p>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Your dishes, documented crystal clear.</h3>
+          <p class="text-neutral-600 text-sm">An experienced Avorix chef comes to your business and documents your menu. Every dish is broken into simple steps, with photos, exact quantities, and timings.</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Workflows a small team can handle.</h3>
+          <p class="text-neutral-600 text-sm">Much is prepared calmly in advance when there's time. During service, dishes are only finished. This way a small crew manages a demanding menu.</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">3 &middot; The Cook App at the station.</h3>
+          <p class="text-neutral-600 text-sm">A tablet hangs at the station. The app shows the kitchen worker step by step what to do: photo, quantity, time, done.</p>
+        </div>
+      </div>
+      <div class="mt-8 space-y-3 text-neutral-600">
+        <p><strong class="text-neutral-900">And your costs?</strong> Trained chefs are expensive, if you can find them at all. With Avorix, semi-skilled workers cook at your standard.</p>
+        <p><strong class="text-neutral-900">And when staff is missing?</strong> Then we provide them. Avorix employs permanent chefs that we loan to you, fully legally compliant.</p>
+        <p><strong class="text-neutral-900">Software, processes, and staff from a single source. That only exists at Avorix.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Where Do You Stand -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Where Do You Stand Right Now?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">"The emergency is here."</h3>
+          <p class="text-neutral-600 text-sm mb-4">The chef is gone, the season is running. We'll send you a chef. And make sure you never have to search for one again.</p>
+          <a href="/en/contact" data-cta-location="tuer-notfall" class="text-brand-500 font-bold text-sm hover:text-brand-600">Get help now &rarr;</a>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">"Things still work. But I'm worried."</h3>
+          <p class="text-neutral-600 text-sm mb-4">Everything depends on one person. Secure your kitchen knowledge while it's still in the house.</p>
+          <a href="/en/contact" data-cta-location="tuer-sorge" class="text-brand-500 font-bold text-sm hover:text-brand-600">Secure knowledge &rarr;</a>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">"The season is coming."</h3>
+          <p class="text-neutral-600 text-sm mb-4">Not enough people for peak time. Seasonal workers who cook like your regular team from day one.</p>
+          <a href="/en/contact" data-cta-location="tuer-saison" class="text-brand-500 font-bold text-sm hover:text-brand-600">Plan your season &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">How Avorix Comes to Your Business. In Four Steps.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">1</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">We look at your kitchen. (Free)</h3>
+            <p class="text-neutral-600 text-sm mt-1">A conversation, 30 minutes, via video or on-site. You tell us where it's stuck. We'll honestly say whether Avorix is a fit.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">2</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">An Avorix chef documents your menu.</h3>
+            <p class="text-neutral-600 text-sm mt-1">They cook with your team, document every dish, photograph every step, and set everything up in the app.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">3</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">Your team learns the system.</h3>
+            <p class="text-neutral-600 text-sm mt-1">Compact training days or an Avorix chef who trains during operations. With at least sous chef experience.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">4</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">You work independently. We stay available.</h3>
+            <p class="text-neutral-600 text-sm mt-1">The app guides your team through every day. New dishes are added by you or we handle it for you.</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8">
+        <a href="/en/contact" data-cta-location="ablauf" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal Security -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">And When Staff Is Missing: We Loan You Our Chefs. Legally Compliant.</h2>
+      <div class="bg-white border-l-4 border-brand-500 rounded-r-2xl p-6">
+        <p class="text-neutral-600 mb-4">Many agencies send you "self-employed" chefs with an invoice. The problem: during an audit, pension authorities often classify these chefs as bogus self-employed. Back payments quickly reach five figures.</p>
+        <p class="text-neutral-600 mb-4">That won't happen with Avorix. Our chefs are permanently employed with us and fully insured. We hold the official staff leasing permit.</p>
+        <p class="text-neutral-900 font-semibold">In the hospitality industry, only a few providers have this permit. Ask about it before you book anywhere.</p>
+      </div>
+      <div class="mt-6">
+        <a href="/en/staff" data-cta-location="rechtssicherheit" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">More About Training and Staff</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Built by a Head Chef. Not by Software People.</h2>
+      <div class="grid md:grid-cols-[150px_1fr] gap-6">
+        <div class="w-full h-44 md:h-auto rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center text-neutral-400 text-sm text-center p-4">
+          Photo Boerge Penk
+        </div>
+        <div>
+          <p class="text-neutral-600 mb-4">Boerge Penk has worked in professional kitchens for 20 years, including as head chef with large teams. He knows the skilled labor shortage not from statistics, but from every single shift plan.</p>
+          <blockquote class="bg-neutral-50 rounded-xl p-4 italic text-neutral-800 mb-4">"I've seen too many times that a kitchen stands or falls with a single person. That doesn't have to be the case. Good cooking can be written down, demonstrated, and taught."</blockquote>
+          <p class="text-neutral-600 text-sm">You won't find customer logos on this page. That's intentional. Our clients run their kitchens with our system, and what happens in their kitchen is nobody else's business.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cost -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">What Does It Cost?</h2>
+      <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+        <p class="text-neutral-600 mb-4">That depends on your menu and your team. In the first call, we'll calculate it transparently for you, to the euro, without fine print. For the first businesses, there are pilot conditions in 2026 significantly below the regular price.</p>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a href="/en/contact" data-cta-location="kosten" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors">Book a Demo</a>
+        <a href="/en/contact" data-cta-location="kosten-pilot" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors">Pilot Program</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        <details open class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Who enters our recipes?</summary>
+          <p class="text-neutral-600 text-sm mt-3">We do. An Avorix chef comes to you, cooks with your team, and sets up every dish in the app. You don't have to enter anything yourself.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Will our guests notice anything?</summary>
+          <p class="text-neutral-600 text-sm mt-3">No. Your guests experience your kitchen and your recipes, just reliably at the same quality. On request, we contractually guarantee that we won't mention your business as a reference anywhere.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Our team isn't particularly tech-savvy. Will it still work?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Yes, that's what the app is built for. If you can look at a photo and check a box, you can work with it. Training happens directly at the stove.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">What happens with our recipes? Who owns them?</summary>
+          <p class="text-neutral-600 text-sm mt-3">You do. Your recipes remain your property and are not shared with other businesses.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">How quickly are we up and running?</summary>
+          <p class="text-neutral-600 text-sm mt-3">From the first call to independent operation, it typically takes a few weeks depending on your menu.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">What technology do we need in the kitchen?</summary>
+          <p class="text-neutral-600 text-sm mt-3">A tablet or smartphone and an internet connection. The app runs in the browser, nothing needs to be installed.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Does this replace our head chef?</summary>
+          <p class="text-neutral-600 text-sm mt-3">No. A good head chef becomes even better with Avorix, because their knowledge is finally documented and their team works more independently.</p>
+        </details>
+        <details class="bg-neutral-50 border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">We're in Austria. Does it work there?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Yes, we operate in Germany and Austria.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">The Next Step Is a Conversation. Nothing More.</h2>
+      <p class="text-neutral-600 mb-6">30 minutes, free, no obligation. You tell us about your kitchen, we'll honestly tell you whether Avorix is a fit and what it would cost.</p>
+      <a href="/en/contact" data-cta-location="final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Book a Demo</a>
+    </div>
+  </section>
 </BaseLayout>
