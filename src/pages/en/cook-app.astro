@@ -1,112 +1,159 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
-
-const t = useTranslations("en");
-
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Avorix Cook App",
-  "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web, iOS, Android",
-  "description": "The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level.",
-  "url": "https://avorix.cloud/en/cook-app",
-  "inLanguage": "en",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR",
-    "description": "Pilot program — free trial phase"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Avorix",
-    "url": "https://avorix.cloud"
-  }
-};
 ---
 
-<BaseLayout title="Cook App" description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level." schemaOrg={schema}>
+<BaseLayout
+  title="The Cook App — Your Kitchen Knowledge. Step by Step."
+  description="The Avorix Cook App guides every team member step by step through your menu. Recipe library, portion calculator, food cost tracking, and menu planner."
+>
   <!-- Hero -->
-  <section class="pt-32 pb-16 px-6 bg-gradient-to-b from-brand-50 to-white">
-    <div class="max-w-4xl mx-auto text-center">
-      <span class="inline-block text-brand-500 font-semibold text-sm uppercase tracking-widest mb-4">Avorix Cook App</span>
-      <h1 class="text-4xl md:text-5xl font-bold text-avorix-dark mb-6 leading-tight">
-        {t("kochapp.tagline")}
-      </h1>
-      <p class="text-xl text-avorix-gray leading-relaxed max-w-2xl mx-auto mb-10">
-        {t("kochapp.intro")}
+  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+    <div class="max-w-4xl mx-auto">
+      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">The Cook App</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">Your Kitchen Knowledge. Step by Step.</h1>
+      <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed mb-6">
+        The Avorix Cook App guides every team member step by step through your menu. View the photo, weigh the quantity, check the box, done. This way your team cooks at your standard every day. <strong class="text-neutral-900">Even without trained chefs.</strong>
       </p>
-      <a href="/en/contact" class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors">
-        {t("kochapp.cta.button")}
-      </a>
-    </div>
-  </section>
-
-  <!-- How it works -->
-  <section class="py-20 px-6">
-    <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-avorix-dark text-center mb-14">{t("kochapp.how.title")}</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <span class="text-2xl font-bold text-brand-600">1</span>
-          </div>
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.how.step1.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.how.step1.text")}</p>
-        </div>
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <span class="text-2xl font-bold text-brand-600">2</span>
-          </div>
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.how.step2.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.how.step2.text")}</p>
-        </div>
-        <div class="text-center">
-          <div class="w-14 h-14 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <span class="text-2xl font-bold text-brand-600">3</span>
-          </div>
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.how.step3.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.how.step3.text")}</p>
-        </div>
-      </div>
+      <a href="/en/contact" data-cta-location="kochapp-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Book a Demo</a>
     </div>
   </section>
 
   <!-- Features -->
-  <section class="py-20 px-6 bg-neutral-50">
+  <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-avorix-dark text-center mb-14">{t("kochapp.features.title")}</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <div class="bg-white rounded-xl p-7 border border-avorix-light">
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.features.1.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.features.1.text")}</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">What the App Does. Shown, Not Claimed.</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Step-by-Step Guidance</h3>
+          <p class="text-neutral-600 text-sm">Every dish as a clear sequence: photo, quantity, time. No room for interpretation, no mistakes.</p>
         </div>
-        <div class="bg-white rounded-xl p-7 border border-avorix-light">
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.features.2.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.features.2.text")}</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Automatic Portion Calculator</h3>
+          <p class="text-neutral-600 text-sm">80 guests today instead of 60? The app automatically scales all quantities to the required number of portions.</p>
         </div>
-        <div class="bg-white rounded-xl p-7 border border-avorix-light">
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.features.3.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.features.3.text")}</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">3 &middot; The Recipe Library</h3>
+          <p class="text-neutral-600 text-sm">Your entire menu in one place, for the whole team. Seasonal menu, standards, sides — everything findable in seconds.</p>
         </div>
-        <div class="bg-white rounded-xl p-7 border border-avorix-light">
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{t("kochapp.features.4.title")}</h3>
-          <p class="text-avorix-gray leading-relaxed">{t("kochapp.features.4.text")}</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">4 &middot; Food Cost at a Glance</h3>
+          <p class="text-neutral-600 text-sm">Recipe-based costing and food cost analysis. You see what every plate actually costs.</p>
+        </div>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">5 &middot; Runs Anywhere in the Kitchen</h3>
+          <p class="text-neutral-600 text-sm">On tablet and smartphone, right at the station. The app runs in the browser, nothing needs to be installed.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="py-20 px-6">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-avorix-dark mb-5">{t("kochapp.cta.title")}</h2>
-      <p class="text-lg text-avorix-gray mb-8 leading-relaxed">{t("kochapp.cta.text")}</p>
-      <a href="/en/contact" class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors">
-        {t("kochapp.cta.button")}
-      </a>
+  <!-- Kitchen Organization -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">And the App Organizes Your Entire Kitchen.</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Menu Planner</h3>
+          <p class="text-neutral-600 text-sm">Plan dishes for each calendar week, with meals, portions, and notes. Copy proven weeks into the next one with ease.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Shopping Lists at the Push of a Button</h3>
+          <p class="text-neutral-600 text-sm">From the finished menu plan, the app generates the shopping list: items, quantities, units, estimated prices.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Costing to Selling Price</h3>
+          <p class="text-neutral-600 text-sm">Enter raw material costs, overhead, and margin, and the app calculates the price per portion.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Shift Schedule</h3>
+          <p class="text-neutral-600 text-sm">Shifts per employee and day, with custom shift types and weekly view.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Time Tracking</h3>
+          <p class="text-neutral-600 text-sm">Clock in and out directly in the app, with monthly hour reports.</p>
+        </div>
+        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+          <h3 class="font-bold text-neutral-900 mb-3">Clear Roles</h3>
+          <p class="text-neutral-600 text-sm">Your sous chef sees the plan, only the head chef can change it. Everyone sees exactly what they need.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Routine -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">What a Normal Day Looks Like.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#9728;</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">Morning</h3>
+            <p class="text-neutral-600 text-sm mt-1">Prep runs according to the list. Everyone knows what to pre-produce today, in what quantity, for how many guests.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#127869;</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">During Service</h3>
+            <p class="text-neutral-600 text-sm mt-1">The tablet hangs at the station. An order comes in, the cook opens the dish, works through the steps.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#127769;</div>
+          <div>
+            <h3 class="font-bold text-neutral-900">Evening</h3>
+            <p class="text-neutral-600 text-sm mt-1">The day's food cost is documented, without anyone having to write anything down.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ownership -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Who Owns All of This?</h2>
+      <p class="text-neutral-600">You do. Your recipes remain your property and are not shared with other businesses. If you leave Avorix, you take your documentation with you.</p>
+    </div>
+  </section>
+
+  <!-- Setup -->
+  <section class="py-16 px-6 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">You Don't Have to Enter Anything. We Do It.</h2>
+      <p class="text-neutral-600 mb-6">An Avorix chef documents your menu on-site: cook, document, photograph, set up. Then they train your team directly at the stove.</p>
+      <a href="/en/system" data-cta-location="kochapp-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">How the Avorix System Works</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Frequently Asked Questions</h2>
+      <div class="space-y-3">
+        <details open class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">What devices does the app run on?</summary>
+          <p class="text-neutral-600 text-sm mt-3">On tablet and smartphone, right in the kitchen.</p>
+        </details>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Do we need internet in the kitchen?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Yes. The app runs in the browser and needs an internet connection, WiFi or mobile data.</p>
+        </details>
+        <details class="bg-white border border-neutral-200 rounded-xl p-4">
+          <summary class="font-bold text-neutral-900 cursor-pointer">Can our team add new dishes themselves?</summary>
+          <p class="text-neutral-600 text-sm mt-3">Yes. After training, you can add new dishes yourself, or we handle it for you.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 px-6 border-t border-neutral-100">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">See the App Live. With Your Own Dish.</h2>
+      <p class="text-neutral-600 mb-6">In the demo, we'll set up one of your dishes as an example. Then you'll see in 30 minutes what your menu looks like in the app.</p>
+      <a href="/en/contact" data-cta-location="kochapp-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Book a Demo</a>
     </div>
   </section>
 </BaseLayout>
