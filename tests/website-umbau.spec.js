@@ -83,7 +83,7 @@ test.describe('T4: Pilotprogramm-Formular', () => {
     // Accept consent first so dataLayer is active
     const banner = page.locator('#consent-banner');
     if (await banner.isVisible()) {
-      await page.locator('#consent-accept').click();
+      await page.locator('#cb-accept-all').click();
     }
 
     // Try to submit empty form
@@ -103,7 +103,7 @@ test.describe('T4: Pilotprogramm-Formular', () => {
     // Accept consent
     const banner = page.locator('#consent-banner');
     if (await banner.isVisible()) {
-      await page.locator('#consent-accept').click();
+      await page.locator('#cb-accept-all').click();
     }
 
     // Intercept Formspree to prevent actual submission

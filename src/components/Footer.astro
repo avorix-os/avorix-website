@@ -98,7 +98,7 @@ const year = new Date().getFullYear();
         if (el && !el.dataset.bound) {
           el.dataset.bound = '1';
           el.addEventListener('click', function () {
-            if (window.avorixConsent) window.avorixConsent.open();
+            if (window.avorixConsent) window.avorixConsent.openPanel(el);
           });
         }
       })();

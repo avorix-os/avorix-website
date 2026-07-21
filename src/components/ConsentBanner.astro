@@ -3,65 +3,171 @@ interface Props {
   lang: string;
 }
 const { lang } = Astro.props;
+const isEN = lang === "en";
 ---
 
-<div id="consent-banner" hidden role="region" aria-label={lang === "en" ? "Cookie Settings" : "Cookie-Einstellungen"}>
-  <div class="consent-inner">
-    {lang === "en" ? (
-      <p class="consent-text">
-        <strong>Cookies for anonymous statistics</strong><br />
-        We use Google Analytics to understand how our website is used.
-        The data is anonymized. You can decline and the website will work without any restrictions.
-        Details: <a href="/en/privacy">Privacy policy</a>
+<!-- Ebene 1: Consent-Banner -->
+<div id="consent-banner" hidden role="region" aria-label={isEN ? "Cookie consent" : "Cookie-Einwilligung"}>
+  <div class="cb-inner">
+    <div class="cb-text">
+      <strong>{isEN ? "We use cookies and similar technologies" : "Wir verwenden Cookies und \u00e4hnliche Technologien"}</strong>
+      <p>
+        {isEN ? (
+          <>We store your choice in your browser where technically necessary. With your consent, we use Google Analytics 4 to statistically evaluate how our website is used and to improve our services. You can find further information in the settings and in the <a href="/datenschutz">privacy policy</a>.</>
+        ) : (
+          <>Wir speichern Ihre Auswahl technisch notwendig in Ihrem Browser. Mit Ihrer Einwilligung nutzen wir Google Analytics 4, um die Nutzung unserer Website statistisch auszuwerten und unser Angebot zu verbessern. Weitere Informationen finden Sie in den Einstellungen und in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.</>
+        )}
       </p>
-    ) : (
-      <p class="consent-text">
-        <strong>Cookies für anonyme Statistiken</strong><br />
-        Wir nutzen Google Analytics, um zu verstehen, wie unsere Website genutzt wird.
-        Die Daten sind anonymisiert. Sie können ablehnen, die Website funktioniert dann
-        uneingeschränkt. Details: <a href="/datenschutz">Datenschutzerklärung</a>
+    </div>
+    <div class="cb-buttons">
+      <button type="button" id="cb-accept-all">{isEN ? "Accept all" : "Alle akzeptieren"}</button>
+      <button type="button" id="cb-reject-all">{isEN ? "Reject all" : "Alle ablehnen"}</button>
+      <button type="button" id="cb-settings" class="cb-btn-neutral">{isEN ? "Settings" : "Einstellungen"}</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ebene 2: Einstellungs-Panel (Modal) -->
+<div id="consent-panel" hidden role="dialog" aria-modal="true" aria-label={isEN ? "Cookie settings" : "Cookie-Einstellungen"}>
+  <div class="cp-backdrop"></div>
+  <div class="cp-dialog" role="document">
+    <div class="cp-header">
+      <h2 class="cp-title">{isEN ? "Cookie settings" : "Cookie-Einstellungen"}</h2>
+      <button type="button" id="cp-close" aria-label={isEN ? "Close" : "Schlie\u00dfen"} class="cp-close-btn">&times;</button>
+    </div>
+    <div class="cp-body">
+      <p class="cp-intro">
+        {isEN ? (
+          <>Here you can decide whether we may use Google Analytics 4 to statistically evaluate our website. You can change your choice at any time via &ldquo;Cookie settings&rdquo; in the footer. The legal basis for statistical processing is your consent under Art. 6(1)(a) GDPR. Access to or storage of information on your device is based, where required, on your consent under Section 25(1) TDDDG.</>
+        ) : (
+          <>Hier entscheiden Sie, ob wir Google Analytics 4 zur statistischen Auswertung unserer Website verwenden d&uuml;rfen. Ihre Auswahl k&ouml;nnen Sie jederzeit &uuml;ber &bdquo;Cookie-Einstellungen&ldquo; im Footer &auml;ndern. Rechtsgrundlage der statistischen Verarbeitung ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Der Zugriff auf beziehungsweise die Speicherung von Informationen in Ihrem Endger&auml;t erfolgt, soweit erforderlich, auf Grundlage Ihrer Einwilligung nach &sect; 25 Abs. 1 TDDDG.</>
+        )}
       </p>
-    )}
-    <div class="consent-buttons">
-      <button type="button" id="consent-accept">{lang === "en" ? "Accept" : "Akzeptieren"}</button>
-      <button type="button" id="consent-decline">{lang === "en" ? "Decline" : "Ablehnen"}</button>
+
+      <!-- Technisch notwendig -->
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">{isEN ? "Technically necessary" : "Technisch notwendig"}</h3>
+            <span class="cp-always-active">{isEN ? "always active" : "immer aktiv"}</span>
+          </div>
+        </div>
+        <p class="cp-cat-desc">
+          {isEN
+            ? "This storage is required so that we can respect your cookie choice. Your choice is stored locally in your browser. No data is transferred to third parties through this storage entry."
+            : "Diese Speicherung ist erforderlich, damit wir Ihre Cookie-Entscheidung ber\u00fccksichtigen k\u00f6nnen. Die Entscheidung wird ausschlie\u00dflich lokal in Ihrem Browser gespeichert. Durch diesen Speichereintrag werden keine Daten an Dritte \u00fcbertragen."}
+        </p>
+        <details class="cp-details">
+          <summary>{isEN ? "Details" : "Details"}</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>{isEN ? "Entry" : "Eintrag"}</th>
+                  <th>{isEN ? "Purpose" : "Zweck"}</th>
+                  <th>{isEN ? "Storage location" : "Speicherort"}</th>
+                  <th>{isEN ? "Duration" : "Dauer"}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>avorix_consent</code></td>
+                  <td>{isEN ? "Storage of your consent choice" : "Speicherung Ihrer Consent-Entscheidung"}</td>
+                  <td>{isEN ? "your browser\u2019s local storage (localStorage)" : "lokaler Speicher Ihres Browsers (localStorage)"}</td>
+                  <td>{isEN ? "until withdrawal, deletion of browser data or a technical renewal of the consent request" : "bis zum Widerruf, zum L\u00f6schen der Browserdaten oder zu einer technischen Erneuerung der Abfrage"}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      <!-- Statistik -->
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">{isEN ? "Statistics" : "Statistik"}</h3>
+          </div>
+          <label class="cp-toggle" for="cp-statistics-toggle">
+            <input type="checkbox" id="cp-statistics-toggle" />
+            <span class="cp-toggle-slider"></span>
+            <span class="sr-only">{isEN ? "Statistics" : "Statistik"}</span>
+          </label>
+        </div>
+        <p class="cp-cat-desc">
+          {isEN
+            ? "With your consent, we use Google Tag Manager and Google Analytics 4 provided by Google Ireland Limited to understand how our website is used and which content is helpful to visitors. Technical usage data, device information, event data and pseudonymous online identifiers may be processed. According to Google, IP address data from users in the EU is used to derive approximate location information and is then deleted without being logged in Google Analytics. This analysis helps us improve the website."
+            : "Mit Ihrer Einwilligung nutzen wir Google Tag Manager und Google Analytics 4 der Google Ireland Limited, um zu verstehen, wie unsere Website genutzt wird und welche Inhalte f\u00fcr Besucher hilfreich sind. Dabei k\u00f6nnen technische Nutzungsdaten, Ger\u00e4teinformationen, Ereignisdaten und pseudonyme Onlinekennungen verarbeitet werden. Nach Angaben von Google werden IP-Adressdaten bei Zugriffen aus der EU zur Ableitung grober Standortinformationen verwendet und anschlie\u00dfend gel\u00f6scht, ohne in Google Analytics protokolliert zu werden. Die Auswertung hilft uns, die Website zu verbessern."}
+        </p>
+        <details class="cp-details">
+          <summary>{isEN ? "Details" : "Details"}</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>{isEN ? "Entries/data" : "Eintr\u00e4ge/Daten"}</th>
+                  <th>{isEN ? "Provider" : "Anbieter"}</th>
+                  <th>{isEN ? "Purpose" : "Zweck"}</th>
+                  <th>{isEN ? "Duration" : "Dauer"}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>_ga</code>, <code>_ga_*</code>{isEN ? ", technical usage and event data" : ", technische Nutzungs- und Ereignisdaten"}</td>
+                  <td>Google Ireland Limited</td>
+                  <td>{isEN ? "statistical reach and usage analysis" : "statistische Reichweiten- und Nutzungsanalyse"}</td>
+                  <td>{isEN ? "GA4 cookies under the currently used standard configuration for up to 2 years; event data in the Avorix GA4 property for 14 months" : "GA4-Cookies nach der aktuell eingesetzten Standardkonfiguration bis zu 2 Jahre; Ereignisdaten in der Avorix-GA4-Property 14 Monate"}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="cp-footer">
+      <button type="button" id="cp-save">{isEN ? "Save selection" : "Auswahl speichern"}</button>
+      <button type="button" id="cp-accept-all">{isEN ? "Accept all" : "Alle akzeptieren"}</button>
+      <button type="button" id="cp-reject-all">{isEN ? "Reject all" : "Alle ablehnen"}</button>
     </div>
   </div>
 </div>
 
 <style>
+  /* ===== Banner (Ebene 1) ===== */
   #consent-banner {
     position: fixed;
     inset-inline: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 9000;
     background: #ffffff;
     border-top: 1px solid #e8e8e8;
-    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
     padding: 16px;
   }
   #consent-banner[hidden] { display: none; }
-  .consent-inner {
+  .cb-inner {
     max-width: 960px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 16px;
     align-items: center;
     justify-content: space-between;
   }
-  .consent-text {
-    margin: 0;
+  .cb-text {
+    flex: 1 1 500px;
     font-size: 14px;
     line-height: 1.5;
     color: #1a1a1a;
   }
-  .consent-text a {
-    color: #1a1a1a;
-    text-decoration: underline;
+  .cb-text p { margin: 4px 0 0; }
+  .cb-text a { color: #1a1a1a; text-decoration: underline; }
+  .cb-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  .consent-buttons { display: flex; gap: 12px; }
-  .consent-buttons button {
+  .cb-buttons button {
     min-height: 44px;
     padding: 10px 20px;
     font-size: 15px;
@@ -71,56 +177,257 @@ const { lang } = Astro.props;
     font-family: inherit;
     transition: background 0.15s, border-color 0.15s;
   }
-  #consent-accept {
-    background: #6366f1;
-    border: 1px solid #6366f1;
+  #cb-accept-all, #cb-reject-all {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
     color: #ffffff;
   }
-  #consent-accept:hover { background: #4f46e5; border-color: #4f46e5; }
-  #consent-decline {
+  #cb-accept-all:hover, #cb-reject-all:hover {
+    background: #333333;
+    border-color: #333333;
+  }
+  .cb-btn-neutral {
     background: transparent;
+    border: 1px solid #9a9a9a;
+    color: #1a1a1a;
+  }
+  .cb-btn-neutral:hover { background: #f5f5f5; }
+  @media (max-width: 480px) {
+    .cb-inner { flex-direction: column; align-items: stretch; }
+    .cb-buttons { flex-direction: column; }
+    .cb-buttons button { width: 100%; }
+  }
+
+  /* ===== Panel (Ebene 2) ===== */
+  #consent-panel { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+  #consent-panel[hidden] { display: none; }
+  .cp-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+  .cp-dialog {
+    position: relative;
+    background: #ffffff;
+    border-radius: 12px;
+    max-width: 640px;
+    width: calc(100% - 32px);
+    max-height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .cp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 0;
+  }
+  .cp-title { font-size: 20px; font-weight: 700; margin: 0; color: #1a1a1a; }
+  .cp-close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: #4a4a4a;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .cp-close-btn:hover { background: #f5f5f5; }
+  .cp-body {
+    padding: 16px 24px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .cp-intro { font-size: 13px; line-height: 1.6; color: #4a4a4a; margin: 0 0 20px; }
+  .cp-category {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .cp-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .cp-cat-title { font-size: 15px; font-weight: 600; margin: 0; color: #1a1a1a; }
+  .cp-always-active {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .cp-cat-desc { font-size: 13px; line-height: 1.5; color: #4a4a4a; margin: 8px 0 0; }
+  .cp-details { margin-top: 8px; }
+  .cp-details summary {
+    font-size: 13px;
+    color: #4a4a4a;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .cp-table-wrap { overflow-x: auto; margin-top: 8px; }
+  .cp-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+    color: #4a4a4a;
+  }
+  .cp-table th, .cp-table td {
+    text-align: left;
+    padding: 6px 8px;
+    border: 1px solid #e8e8e8;
+    vertical-align: top;
+  }
+  .cp-table th { background: #f9f9f9; font-weight: 600; }
+  .cp-table code { font-size: 11px; background: #f5f5f5; padding: 1px 4px; border-radius: 3px; }
+
+  /* Toggle Switch */
+  .cp-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; flex-shrink: 0; }
+  .cp-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .cp-toggle-slider {
+    width: 44px;
+    height: 24px;
+    background: #d1d5db;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .cp-toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s;
+  }
+  .cp-toggle input:checked + .cp-toggle-slider { background: #1a1a1a; }
+  .cp-toggle input:checked + .cp-toggle-slider::after { transform: translateX(20px); }
+  .cp-toggle input:focus-visible + .cp-toggle-slider { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+
+  /* Panel Footer */
+  .cp-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 24px 20px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .cp-footer button {
+    flex: 1;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  #cp-save {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cp-save:hover { background: #333333; }
+  #cp-accept-all {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cp-accept-all:hover { background: #333333; }
+  #cp-reject-all {
+    background: #ffffff;
     border: 1px solid #1a1a1a;
     color: #1a1a1a;
   }
-  #consent-decline:hover { background: #f5f5f5; }
+  #cp-reject-all:hover { background: #f5f5f5; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Mobile full-screen panel */
   @media (max-width: 480px) {
-    .consent-inner { flex-direction: column; align-items: stretch; }
-    .consent-buttons { flex-wrap: wrap; }
-    .consent-buttons button { flex: 1; }
+    .cp-dialog {
+      width: 100%;
+      height: 100%;
+      max-height: 100vh;
+      border-radius: 0;
+    }
+    .cp-footer { flex-direction: column; }
+    .cp-footer button { width: 100%; }
   }
 </style>
 
 <script is:inline>
 (function () {
   var KEY = 'avorix_consent';
-  var VERSION = 1;
   var GTM_ID = 'GTM-TGC3HD6M';
+
+  /* ---------- Storage helpers ---------- */
 
   function read() {
     try {
       var raw = localStorage.getItem(KEY);
       if (!raw) return null;
       var obj = JSON.parse(raw);
-      if (obj && obj.version === VERSION &&
-          (obj.status === 'granted' || obj.status === 'denied')) return obj.status;
+      if (!obj) return null;
+      // v2 format
+      if (obj.version === 2 && obj.categories && typeof obj.categories.necessary === 'boolean') {
+        return obj;
+      }
+      // v1 migration
+      if (obj.version === 1 && (obj.status === 'granted' || obj.status === 'denied')) {
+        var migrated = {
+          version: 2,
+          categories: {
+            necessary: true,
+            statistics: obj.status === 'granted',
+            marketing: false
+          },
+          timestamp: obj.timestamp || new Date().toISOString()
+        };
+        write(migrated);
+        return migrated;
+      }
       return null;
     } catch (e) { return null; }
   }
 
-  function write(status) {
-    try {
-      localStorage.setItem(KEY, JSON.stringify({
-        status: status, version: VERSION, timestamp: new Date().toISOString()
-      }));
-    } catch (e) { /* Privatmodus: gilt nur für diese Sitzung */ }
+  function write(obj) {
+    try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch (e) { /* private mode */ }
   }
 
-  function consentUpdate(status) {
+  function makeConsent(statistics) {
+    return {
+      version: 2,
+      categories: { necessary: true, statistics: !!statistics, marketing: false },
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /* ---------- Consent Mode v2 ---------- */
+
+  function consentUpdate(analyticsGranted) {
     gtag('consent', 'update', {
-      ad_storage: status,
-      ad_user_data: status,
-      ad_personalization: status,
-      analytics_storage: status
+      analytics_storage: analyticsGranted ? 'granted' : 'denied',
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied'
     });
   }
 
@@ -134,34 +441,157 @@ const { lang } = Astro.props;
     document.head.appendChild(s);
   }
 
+  function deleteGACookies() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      if (name === '_ga' || name.indexOf('_ga_') === 0) {
+        var domains = [window.location.hostname, '.' + window.location.hostname];
+        for (var d = 0; d < domains.length; d++) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + domains[d];
+        }
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      }
+    }
+  }
+
+  /* ---------- Banner / Panel DOM ---------- */
+
   function showBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = false; }
   function hideBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = true; }
 
-  function accept() {
-    write('granted');
-    consentUpdate('granted');
-    loadGTM();
-    hideBanner();
+  var _panelTrigger = null;
+  var _panelOpen = false;
+
+  function openPanel(trigger) {
+    var panel = document.getElementById('consent-panel');
+    if (!panel) return;
+    _panelTrigger = trigger || null;
+    _panelOpen = true;
+    // Populate toggle from stored consent
+    var stored = read();
+    var toggle = document.getElementById('cp-statistics-toggle');
+    if (toggle) toggle.checked = !!(stored && stored.categories && stored.categories.statistics);
+    panel.hidden = false;
+    // Set inert on body content
+    var main = document.querySelector('main');
+    var header = document.querySelector('header');
+    var footer = document.querySelector('footer');
+    var banner = document.getElementById('consent-banner');
+    if (main) main.setAttribute('inert', '');
+    if (header) header.setAttribute('inert', '');
+    if (footer) footer.setAttribute('inert', '');
+    if (banner) banner.setAttribute('inert', '');
+    // Focus the close button
+    var closeBtn = document.getElementById('cp-close');
+    if (closeBtn) closeBtn.focus();
   }
 
-  function decline() {
-    write('denied');
-    consentUpdate('denied');
-    hideBanner();
+  function closePanel() {
+    var panel = document.getElementById('consent-panel');
+    if (!panel) return;
+    _panelOpen = false;
+    panel.hidden = true;
+    // Remove inert
+    var main = document.querySelector('main');
+    var header = document.querySelector('header');
+    var footer = document.querySelector('footer');
+    var banner = document.getElementById('consent-banner');
+    if (main) main.removeAttribute('inert');
+    if (header) header.removeAttribute('inert');
+    if (footer) footer.removeAttribute('inert');
+    if (banner) banner.removeAttribute('inert');
+    // Return focus
+    if (_panelTrigger && typeof _panelTrigger.focus === 'function') {
+      _panelTrigger.focus();
+    }
+    _panelTrigger = null;
   }
 
-  window.avorixConsent = { open: showBanner, get: read };
+  /* ---------- Focus trap ---------- */
+
+  function trapFocus(e) {
+    if (!_panelOpen) return;
+    var dialog = document.querySelector('#consent-panel .cp-dialog');
+    if (!dialog) return;
+    var focusable = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+    if (e.key === 'Escape') { e.preventDefault(); closePanel(); }
+  }
+
+  /* ---------- Apply consent decision ---------- */
+
+  function applyConsent(statistics, source) {
+    var consent = makeConsent(statistics);
+    write(consent);
+    consentUpdate(statistics);
+    if (statistics) {
+      loadGTM();
+    } else {
+      // Revoke: delete GA cookies, disable further measurement
+      deleteGACookies();
+      // Remove GTM script to prevent further tracking on this page
+      if (window.ga) { window.ga('remove'); }
+    }
+    hideBanner();
+    if (_panelOpen) closePanel();
+  }
+
+  /* ---------- Public API ---------- */
+
+  window.avorixConsent = {
+    openPanel: function (trigger) { openPanel(trigger); },
+    open: function () { openPanel(null); },
+    get: read
+  };
+
+  /* ---------- Init ---------- */
 
   function init() {
-    var status = read();
-    if (status === 'granted') { consentUpdate('granted'); loadGTM(); }
-    else if (status === null) { showBanner(); }
+    var stored = read();
+    if (stored) {
+      if (stored.categories.statistics) {
+        consentUpdate(true);
+        loadGTM();
+      }
+      // Don't show banner
+    } else {
+      showBanner();
+    }
 
-    var b = document.getElementById('consent-banner');
-    if (b && !b.dataset.bound) {
-      b.dataset.bound = '1';
-      document.getElementById('consent-accept').addEventListener('click', accept);
-      document.getElementById('consent-decline').addEventListener('click', decline);
+    // Bind Banner buttons
+    var banner = document.getElementById('consent-banner');
+    if (banner && !banner.dataset.bound) {
+      banner.dataset.bound = '1';
+      document.getElementById('cb-accept-all').addEventListener('click', function () { applyConsent(true, 'banner'); });
+      document.getElementById('cb-reject-all').addEventListener('click', function () { applyConsent(false, 'banner'); });
+      document.getElementById('cb-settings').addEventListener('click', function () {
+        openPanel(document.getElementById('cb-settings'));
+      });
+    }
+
+    // Bind Panel buttons
+    var panel = document.getElementById('consent-panel');
+    if (panel && !panel.dataset.bound) {
+      panel.dataset.bound = '1';
+      document.getElementById('cp-close').addEventListener('click', closePanel);
+      document.querySelector('#consent-panel .cp-backdrop').addEventListener('click', closePanel);
+      document.getElementById('cp-accept-all').addEventListener('click', function () { applyConsent(true, 'panel'); });
+      document.getElementById('cp-reject-all').addEventListener('click', function () { applyConsent(false, 'panel'); });
+      document.getElementById('cp-save').addEventListener('click', function () {
+        var toggle = document.getElementById('cp-statistics-toggle');
+        applyConsent(toggle && toggle.checked, 'panel');
+      });
+      document.addEventListener('keydown', trapFocus);
     }
   }
 
