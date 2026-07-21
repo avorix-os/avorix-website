@@ -317,11 +317,15 @@ test.describe('Consent Banner v2', () => {
     expect(stored.categories.statistics).toBe(false);
 
     // After reload: no GTM, no banner
-    const hitsAfterReload = collectGoogleRequests(page);
-    await page.goto('/', { waitUntil: 'load' });
-    await expect(page.locator('#consent-banner')).toBeHidden();
-    await page.waitForTimeout(2000);
+    // Use a fresh page in the same context to avoid capturing events
+    // from the previous page's teardown (GA4 scroll events during navigation)
+    const page2 = await page.context().newPage();
+    const hitsAfterReload = collectGoogleRequests(page2);
+    await page2.goto('/', { waitUntil: 'load' });
+    await expect(page2.locator('#consent-banner')).toBeHidden();
+    await page2.waitForTimeout(2000);
     expect(hitsAfterReload).toHaveLength(0);
+    await page2.close();
   });
 
   // T10 – localStorage blockiert
