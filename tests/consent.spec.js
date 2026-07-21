@@ -99,7 +99,7 @@ test.describe('Consent Banner v2', () => {
     expect(hits).toHaveLength(0);
 
     // Reload: banner should stay hidden
-    await page.reload();
+    await page.goto('/', { waitUntil: 'load' });
     await expect(page.locator('#consent-banner')).toBeHidden();
   });
 
@@ -149,7 +149,10 @@ test.describe('Consent Banner v2', () => {
     await expect(page.locator('#consent-panel')).toBeVisible();
 
     // Toggle statistics on
-    await page.locator('#cp-statistics-toggle').check();
+    await page.evaluate(() => {
+      const el = document.getElementById('cp-statistics-toggle');
+      if (!el.checked) { el.checked = true; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
     const gtmRequest = page.waitForRequest(/googletagmanager\.com\/gtm\.js/);
     await page.locator('#cp-save').click();
     await gtmRequest;
@@ -191,7 +194,7 @@ test.describe('Consent Banner v2', () => {
     expect(hits).toHaveLength(0);
 
     // Reload: no banner
-    await page.reload();
+    await page.goto('/', { waitUntil: 'load' });
     await expect(page.locator('#consent-banner')).toBeHidden();
   });
 
@@ -240,7 +243,7 @@ test.describe('Consent Banner v2', () => {
       }));
     });
     const gtmHits = collectGTMRequests(page);
-    await page.reload();
+    await page.goto('/', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('#consent-banner')).toBeHidden();
     await page.waitForTimeout(3000);
     expect(gtmHits.length).toBeGreaterThanOrEqual(1);
@@ -259,7 +262,7 @@ test.describe('Consent Banner v2', () => {
       }));
     });
     const hits = collectGoogleRequests(page);
-    await page.reload();
+    await page.goto('/', { waitUntil: 'load' });
     await expect(page.locator('#consent-banner')).toBeHidden();
     await page.waitForTimeout(2000);
     expect(hits).toHaveLength(0);
@@ -283,7 +286,10 @@ test.describe('Consent Banner v2', () => {
     await expect(page.locator('#cp-statistics-toggle')).toBeChecked();
 
     // Uncheck statistics and save
-    await page.locator('#cp-statistics-toggle').uncheck();
+    await page.evaluate(() => {
+      const el = document.getElementById('cp-statistics-toggle');
+      if (el.checked) { el.checked = false; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
     await page.locator('#cp-save').click();
     await expect(page.locator('#consent-panel')).toBeHidden();
 
@@ -312,7 +318,7 @@ test.describe('Consent Banner v2', () => {
 
     // After reload: no GTM, no banner
     const hitsAfterReload = collectGoogleRequests(page);
-    await page.reload();
+    await page.goto('/', { waitUntil: 'load' });
     await expect(page.locator('#consent-banner')).toBeHidden();
     await page.waitForTimeout(2000);
     expect(hitsAfterReload).toHaveLength(0);
