@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 const GOOGLE = /googletagmanager\.com|google-analytics\.com|doubleclick\.net/;
+const GOOGLE_FONTS = /fonts\.googleapis\.com|fonts\.gstatic\.com/;
 
 function collectGoogleRequests(page) {
   const hits = [];
@@ -112,6 +113,33 @@ test.describe('Consent und Tracking', () => {
       window.dataLayer.filter((e) => e && e.event === 'cta_demo_click').length
     );
     expect(count).toBe(1);
+  });
+
+  test('T8: Keine Google-Fonts-Requests (self-hosted)', async ({ page }) => {
+    const fontHits = [];
+    page.on('request', (r) => { if (GOOGLE_FONTS.test(r.url())) fontHits.push(r.url()); });
+    await page.goto('/');
+    await page.waitForTimeout(2000);
+    expect(fontHits).toHaveLength(0);
+  });
+
+  test('T9: GTM-Script nicht durch CSP blockiert nach Consent', async ({ page }) => {
+    const cspViolations = [];
+    page.on('console', (msg) => {
+      if (msg.text().includes('Content Security Policy') || msg.text().includes('CSP')) {
+        cspViolations.push(msg.text());
+      }
+    });
+    await page.goto('/');
+    await expect(page.locator('#consent-banner')).toBeVisible();
+    const gtmResponse = page.waitForResponse((r) =>
+      r.url().includes('googletagmanager.com/gtm.js') && r.status() === 200
+    );
+    await page.locator('#consent-accept').click();
+    const resp = await gtmResponse;
+    expect(resp.status()).toBe(200);
+    const gtmCspBlocks = cspViolations.filter((v) => v.includes('googletagmanager'));
+    expect(gtmCspBlocks).toHaveLength(0);
   });
 
   test('T13: blockierter localStorage crasht nicht', async ({ page }) => {
