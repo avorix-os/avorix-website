@@ -13,7 +13,7 @@ const isEN = lang === "en";
       <strong>{isEN ? "We use cookies and similar technologies" : "Wir verwenden Cookies und \u00e4hnliche Technologien"}</strong>
       <p>
         {isEN ? (
-          <>We store your choice in your browser where technically necessary. With your consent, we use Google Analytics 4 to statistically evaluate how our website is used and to improve our services. You can find further information in the settings and in the <a href="/datenschutz">privacy policy</a>.</>
+          <>We store your choice in your browser where technically necessary. With your consent, we use Google Analytics 4 to statistically evaluate how our website is used and to improve our services. You can find further information in the settings and in the <a href="/en/privacy">privacy policy</a>.</>
         ) : (
           <>Wir speichern Ihre Auswahl technisch notwendig in Ihrem Browser. Mit Ihrer Einwilligung nutzen wir Google Analytics 4, um die Nutzung unserer Website statistisch auszuwerten und unser Angebot zu verbessern. Weitere Informationen finden Sie in den Einstellungen und in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.</>
         )}
@@ -342,11 +342,11 @@ const isEN = lang === "en";
   }
   #cp-accept-all:hover { background: #333333; }
   #cp-reject-all {
-    background: #ffffff;
+    background: #1a1a1a;
     border: 1px solid #1a1a1a;
-    color: #1a1a1a;
+    color: #ffffff;
   }
-  #cp-reject-all:hover { background: #f5f5f5; }
+  #cp-reject-all:hover { background: #333333; }
 
   .sr-only {
     position: absolute;
