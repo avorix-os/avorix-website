@@ -144,9 +144,11 @@ test.describe('Consent und Tracking', () => {
 
   test('T13: blockierter localStorage crasht nicht', async ({ page }) => {
     await page.addInitScript(() => {
-      Object.defineProperty(window, 'localStorage', {
-        get() { throw new Error('blocked'); }
-      });
+      const err = new DOMException('The operation is insecure.', 'SecurityError');
+      Storage.prototype.getItem = function() { throw err; };
+      Storage.prototype.setItem = function() { throw err; };
+      Storage.prototype.removeItem = function() { throw err; };
+      Storage.prototype.clear = function() { throw err; };
     });
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
