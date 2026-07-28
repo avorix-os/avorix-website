@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://avorix.cloud/sitemap-index.xml
