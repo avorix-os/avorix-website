@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import { mkdirSync, readdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const SITE = "https://avorix.cloud";
 
@@ -59,8 +60,8 @@ const copyBilderToDist = {
   name: "copy-bilder-to-dist",
   hooks: {
     "astro:build:done": async ({ dir }) => {
-      const srcBilder = new URL("src/assets/bilder/", import.meta.url).pathname;
-      const dstBilder = new URL("bilder/", dir).pathname;
+      const srcBilder = fileURLToPath(new URL("src/assets/bilder/", import.meta.url));
+      const dstBilder = fileURLToPath(new URL("bilder/", dir));
       mkdirSync(dstBilder, { recursive: true });
       for (const file of readdirSync(srcBilder)) {
         copyFileSync(join(srcBilder, file), join(dstBilder, file));
