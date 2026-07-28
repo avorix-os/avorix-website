@@ -1,10 +1,23 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import appKochmodus1 from "../assets/bilder/app-kochmodus-schritt1.png";
+import appKochmodus2Haccp from "../assets/bilder/app-kochmodus-schritt2-haccp.png";
+import appPortionsrechner from "../assets/bilder/app-rezept-detail-portionsrechner.png";
+import appRezepteListe from "../assets/bilder/app-rezepte-liste.png";
+import appDashboard from "../assets/bilder/app-dashboard.png";
+import appMenuplaner from "../assets/bilder/app-menuplaner-woche.png";
+import appEinkaufsliste from "../assets/bilder/app-einkaufsliste.png";
+
+const ogImg = await getImage({ src: appKochmodus1, width: 1200, format: "png" });
+const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer";
 ---
 
 <BaseLayout
   title="Die Avorix Koch-App: Schritt für Schritt kochen | Avorix"
   description="Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Menüplaner, Einkaufslisten und Kalkulation. Die Koch-App für Hotel- und Restaurantküchen."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
 >
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -22,7 +35,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web (Tablet und Smartphone)",
         "description": "Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Menüplaner, Einkaufslisten und Kalkulation. Die Koch-App für Hotel- und Restaurantküchen.",
-        "publisher": { "@type": "Organization", "name": "Avorix", "url": "https://avorix.cloud" }
+        "publisher": { "@type": "Organization", "name": "Avorix", "url": "https://avorix.cloud" },
+        "screenshot": { "@type": "ImageObject", "url": `https://avorix.cloud${ogImg.src}` }
+      },
+      {
+        "@type": "WebPage",
+        "url": "https://avorix.cloud/koch-app",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": `https://avorix.cloud${ogImg.src}`,
+          "description": ogImageAlt
+        }
       },
       {
         "@type": "FAQPage",
@@ -44,7 +67,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Die Avorix Koch-App führt jede Kraft Schritt für Schritt durch Ihre Karte. Foto ansehen, Menge abwiegen, Haken setzen, fertig. So kocht Ihr Team jeden Tag auf Ihrem Niveau. <strong class="text-neutral-900">Auch ohne ausgebildete Köche.</strong>
       </p>
       <a href="/kontakt" data-cta-location="kochapp-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <div class="mt-8 bg-neutral-100 border border-neutral-200 rounded-2xl aspect-video flex items-center justify-center text-neutral-400 text-sm">Rezeptschritt-Ansicht auf Tablet, groß</div>
+      <figure class="mt-8 rounded-2xl overflow-hidden border border-neutral-200">
+        <Image
+          src={appKochmodus1}
+          alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-auto"
+        />
+      </figure>
     </div>
   </section>
 
@@ -53,17 +86,56 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Was die App kann. Gezeigt, nicht behauptet.</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Schritt-für-Schritt-Führung</h3>
-          <p class="text-neutral-600 text-sm">Jedes Gericht als klare Abfolge: Foto, Mengenangabe, Zeit. Kein Interpretationsspielraum, keine Fehler.</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
+          <figure>
+            <Image
+              src={appKochmodus2Haccp}
+              alt="Screenshot der Avorix Koch-App: Arbeitsschritt mit rotem HACCP-Kontrollpunkt und 75 Grad Kerntemperatur"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </figure>
+          <div class="p-6">
+            <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Schritt-für-Schritt-Führung</h3>
+            <p class="text-neutral-600 text-sm">Jedes Gericht als klare Abfolge: Foto, Mengenangabe, Zeit. Kein Interpretationsspielraum, keine Fehler.</p>
+          </div>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Automatischer Portionsrechner</h3>
-          <p class="text-neutral-600 text-sm">Heute 80 Gäste statt 60? Die App skaliert alle Mengen automatisch auf die benötigte Portionszahl. Kein Nachrechnen, kein Zettel.</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
+          <figure>
+            <Image
+              src={appPortionsrechner}
+              alt="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </figure>
+          <div class="p-6">
+            <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Automatischer Portionsrechner</h3>
+            <p class="text-neutral-600 text-sm">Heute 80 Gäste statt 60? Die App skaliert alle Mengen automatisch auf die benötigte Portionszahl. Kein Nachrechnen, kein Zettel.</p>
+          </div>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Rezeptbibliothek</h3>
-          <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, für das ganze Team. Saisonkarte, Standards, Beilagen, alles auffindbar in Sekunden.</p>
+        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
+          <figure>
+            <Image
+              src={appRezepteListe}
+              alt="Screenshot der Avorix Koch-App: Rezeptbibliothek mit Kategorien, Zeiten und Kosten pro Portion"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </figure>
+          <div class="p-6">
+            <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Rezeptbibliothek</h3>
+            <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, für das ganze Team. Saisonkarte, Standards, Beilagen, alles auffindbar in Sekunden.</p>
+          </div>
         </div>
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">4 &middot; Wareneinsatz im Blick</h3>
@@ -80,15 +152,52 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Küchenorganisation -->
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Und die App organisiert gleich die ganze Küche mit.</h2>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und die App organisiert gleich die ganze Küche mit.</h2>
+      <figure class="mb-8 rounded-2xl overflow-hidden border border-neutral-200">
+        <Image
+          src={appDashboard}
+          alt="Screenshot der Avorix Koch-App: Dashboard mit den Modulen der Küchenverwaltung"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 1024px) 100vw, 1024px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-auto"
+        />
+      </figure>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Menüplaner</h3>
-          <p class="text-neutral-600 text-sm">Speisen jeder Kalenderwoche planen, mit Mahlzeiten, Portionen und Notizen. Bewährte Wochen kopieren Sie einfach in die nächste.</p>
+        <div class="bg-white border border-neutral-200 rounded-2xl overflow-hidden">
+          <figure>
+            <Image
+              src={appMenuplaner}
+              alt="Screenshot der Avorix Koch-App: Wochenplan mit Mittagessen und Abendessen inklusive Portionszahlen"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </figure>
+          <div class="p-6">
+            <h3 class="font-bold text-neutral-900 mb-3">Menüplaner</h3>
+            <p class="text-neutral-600 text-sm">Speisen jeder Kalenderwoche planen, mit Mahlzeiten, Portionen und Notizen. Bewährte Wochen kopieren Sie einfach in die nächste.</p>
+          </div>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Einkaufslisten auf Knopfdruck</h3>
-          <p class="text-neutral-600 text-sm">Aus dem fertigen Menüplan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, geschätzte Preise. Beim Einkaufen haken Sie ab.</p>
+        <div class="bg-white border border-neutral-200 rounded-2xl overflow-hidden">
+          <figure>
+            <Image
+              src={appEinkaufsliste}
+              alt="Screenshot der Avorix Koch-App: Einkaufsliste mit Mengen, Einheiten und abgehakten Positionen"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </figure>
+          <div class="p-6">
+            <h3 class="font-bold text-neutral-900 mb-3">Einkaufslisten auf Knopfdruck</h3>
+            <p class="text-neutral-600 text-sm">Aus dem fertigen Menüplan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, geschätzte Preise. Beim Einkaufen haken Sie ab.</p>
+          </div>
         </div>
         <div class="bg-white border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Kalkulation bis zum Verkaufspreis</h3>

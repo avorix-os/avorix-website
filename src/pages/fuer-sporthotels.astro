@@ -1,11 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import sporthotelSpeisesaal from "../assets/bilder/sporthotel-speisesaal.jpg";
+
+const ogImg = await getImage({ src: sporthotelSpeisesaal, width: 1200, format: "jpeg" });
+const ogImageAlt = "Moderner Speisesaal eines Sporthotels mit Bergpanorama";
 ---
 
 <BaseLayout
   title="Küchensystem für Sporthotels | Avorix"
   description="Halbpension, Gruppen und Trainingslager mit halber Mannschaft stemmen: Avorix macht Ihre Sporthotel-Küche verlässlich."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/fuer-sporthotels",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  })} />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -39,6 +56,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <a href="/kontakt" data-cta-location="sporthotels-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
       <div class="mt-4">
         <span class="text-sm text-neutral-600">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
+      <div class="mt-8">
+        <Image
+          src={sporthotelSpeisesaal}
+          alt="Moderner Speisesaal eines Sporthotels mit Bergpanorama"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+        />
       </div>
     </div>
   </section>

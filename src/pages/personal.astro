@@ -1,5 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import dampfTopf from "../assets/bilder/dampf-topf.jpg";
+
+const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
+const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profiküche";
 
 const schema = [
   {
@@ -74,6 +79,16 @@ const schema = [
         }
       }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/personal",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
   }
 ];
 ---
@@ -81,6 +96,8 @@ const schema = [
 <BaseLayout
   title="Köche mieten mit Arbeitnehmerüberlassungserlaubnis | Avorix"
   description="Festangestellte Köche, rechtssicher verliehen: für Notfall, Saison und Übergang. Mit behördlicher Arbeitnehmerüberlassungserlaubnis."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
   schemaOrg={schema}
 >
   <!-- Hero -->
@@ -107,6 +124,17 @@ const schema = [
       >
         Demo vereinbaren
       </a>
+      <div class="mt-8">
+        <Image
+          src={dampfTopf}
+          alt="Dampf über einem Edelstahltopf auf dem Gasherd einer Profiküche"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+        />
+      </div>
     </div>
   </section>
 

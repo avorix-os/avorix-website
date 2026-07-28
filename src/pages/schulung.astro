@@ -1,5 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import schulungVonHinten from "../assets/bilder/schulung-von-hinten.jpg";
+import anrichtenHaende from "../assets/bilder/anrichten-haende.jpg";
+
+const ogImg = await getImage({ src: schulungVonHinten, width: 1200, format: "jpeg" });
+const ogImageAlt = "Zwei Köche von hinten am Herd, einer erklärt einen Arbeitsschritt";
 
 const schemaOrg = [
   {
@@ -81,6 +87,16 @@ const schemaOrg = [
         }
       }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/schulung",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
   }
 ];
 ---
@@ -88,6 +104,8 @@ const schemaOrg = [
 <BaseLayout
   title="Küchen-Schulung durch erfahrene Köche | Avorix"
   description="Ein Avorix-Koch mit Sous-Chef-Erfahrung nimmt Ihre Karte auf und lernt Ihr Team an, direkt am Herd. Als Schulungsblock oder live im Betrieb."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
   schemaOrg={schemaOrg}
 >
 
@@ -113,6 +131,17 @@ const schemaOrg = [
       <p class="text-sm text-neutral-600 mt-6 inline-flex items-center gap-2 bg-neutral-100 px-4 py-2 rounded-full">
         ✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)
       </p>
+      <div class="mt-8">
+        <Image
+          src={schulungVonHinten}
+          alt="Zwei Köche von hinten am Herd, einer erklärt einen Arbeitsschritt"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+        />
+      </div>
     </div>
   </section>
 
@@ -159,6 +188,15 @@ const schemaOrg = [
       <p class="text-lg text-neutral-600 leading-relaxed mb-6">
         Geschult wird nicht mit Beispielrezepten, sondern mit Ihrer Karte. Ihr Team lernt genau die Gerichte, die es ab morgen kocht, mit der App, die ab morgen am Posten hängt. Wer eine Woche so gearbeitet hat, braucht keine Erklärung mehr.
       </p>
+      <Image
+        src={anrichtenHaende}
+        alt="Koch richtet ein Gericht mit einer Anrichtepinzette an, Blick über die Schulter"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 896px) 100vw, 896px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-64 md:h-72 object-cover rounded-2xl mb-8"
+      />
       <p class="text-neutral-600 leading-relaxed mb-8">
         <strong>Und wenn während der Schulung Personal fehlt:</strong> Dafür gibt es unser Personal-Modul, festangestellte Köche, rechtssicher verliehen.
       </p>

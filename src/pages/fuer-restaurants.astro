@@ -1,5 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import gasthofStube from "../assets/bilder/gasthof-stube.jpg";
+import steakNahaufnahme from "../assets/bilder/steak-nahaufnahme.jpg";
+
+const ogImg = await getImage({ src: gasthofStube, width: 1200, format: "jpeg" });
+const ogImageAlt = "Holzvertäfelte Gaststube eines traditionellen Gasthofs mit eingedeckten Tischen";
 
 const schemaOrg = [
   {
@@ -57,6 +63,16 @@ const schemaOrg = [
         }
       }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/fuer-restaurants",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
   }
 ];
 ---
@@ -64,6 +80,8 @@ const schemaOrg = [
 <BaseLayout
   title="Küchensystem für Restaurants und Gasthöfe"
   description="Ihr Gasthof steht und fällt mit einem Kopf? Avorix sichert Ihre Rezepte, lernt Ihr Team an und überbrückt Ausfälle rechtssicher."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
   schemaOrg={schemaOrg}
 >
   <!-- Hero -->
@@ -81,6 +99,17 @@ const schemaOrg = [
       </div>
       <div class="flex flex-wrap gap-3 text-sm">
         <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
+      <div class="mt-8">
+        <Image
+          src={gasthofStube}
+          alt="Holzvertäfelte Gaststube eines traditionellen Gasthofs mit eingedeckten Tischen"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+        />
       </div>
     </div>
   </section>
@@ -137,6 +166,15 @@ const schemaOrg = [
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Eine feste Karte ist schneller gesichert, als Sie denken.</h2>
+      <Image
+        src={steakNahaufnahme}
+        alt="Perfekt gebratenes Steak in Nahaufnahme auf dunklem Teller"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 896px) 100vw, 896px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-64 md:h-72 object-cover rounded-2xl mb-6"
+      />
       <p class="text-neutral-600 mb-6">Ein Beispiel: eine Karte mit rund 12 Gerichten, drei Vorspeisen, drei Hauptgerichte, drei Desserts, ein vegetarisches Gericht, etwas für Kinder. So eine Karte nimmt ein Avorix-Koch in einem Block auf (fünf Tage mit je sechs Stunden), dazu kommt ein zweiter Block für die Schulung Ihres Teams. Danach steckt das Wissen Ihres Hauses im System und nicht mehr nur in einem Kopf.</p>
     </div>
   </section>

@@ -1,5 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getImage } from "astro:assets";
+import kochVonHintenPass from "../assets/bilder/koch-von-hinten-pass.jpg";
+
+const ogImg = await getImage({ src: kochVonHintenPass, width: 1200, format: "jpeg" });
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -71,6 +75,8 @@ const faqSchema = {
 <BaseLayout
   title="Pilotprogramm 2026 für Hotel- und Restaurantküchen | Avorix"
   description="Werden Sie Pilotbetrieb: das komplette Avorix-System zu Pilotkonditionen, gegen ehrliches Feedback und anonyme Auswertung."
+  ogImage={ogImg.src}
+  ogImageAlt="Küchenchef von hinten am Pass einer Hotelküche während des Betriebs"
   schemaOrg={[breadcrumbSchema, faqSchema]}
 >
   <!-- Hero -->

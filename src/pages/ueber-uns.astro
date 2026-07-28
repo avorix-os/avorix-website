@@ -1,5 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import vakuumbeutelKuehlhaus from "../assets/bilder/vakuumbeutel-kuehlhaus.jpg";
+import kochVonHintenPass from "../assets/bilder/koch-von-hinten-pass.jpg";
+
+const ogImg = await getImage({ src: vakuumbeutelKuehlhaus, width: 1200, format: "jpeg" });
+const ogImageAlt = "Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche";
 
 const breadcrumb = {
   "@context": "https://schema.org",
@@ -24,7 +30,21 @@ const breadcrumb = {
 <BaseLayout
   title="Über Avorix: von einem Küchenchef gebaut"
   description="Avorix ist aus der Praxis entstanden: erst Köche, dann Abläufe, dann die App. Das Team und die Geschichte hinter dem System."
-  schemaOrg={breadcrumb}
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={[
+    breadcrumb,
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://avorix.cloud/ueber-uns",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": `https://avorix.cloud${ogImg.src}`,
+        "description": ogImageAlt
+      }
+    }
+  ]}
 >
 
   <!-- Hero -->
@@ -56,6 +76,15 @@ const breadcrumb = {
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-6">Erst Köche. Dann Abläufe. Dann die App.</h2>
+      <Image
+        src={vakuumbeutelKuehlhaus}
+        alt="Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 100vw, 768px"
+        loading="eager"
+        fetchpriority="high"
+        class="w-full h-64 object-cover rounded-2xl mb-6"
+      />
       <p class="text-neutral-600 mb-4">Avorix begann als Personaldienstleister für das Gastgewerbe: festangestellte Köche, verliehen an Häuser, denen Personal fehlte. Dabei zeigte sich immer dasselbe Muster: Der Einsatz half, aber sobald der Koch ging, war der Betrieb so verwundbar wie vorher.</p>
       <p class="text-neutral-600">Also haben wir angefangen, das Wissen dazulassen: erst mit standardisierten Abläufen (vorbereiten, vakuumieren, regenerieren), dann mit dokumentierten Rezepten, schließlich mit der Avorix Koch-App, die beides für jedes Küchenteam nutzbar macht. Heute ist daraus ein komplettes System geworden: Software, Schulung und Personal aus einer Hand.</p>
     </div>
@@ -65,6 +94,15 @@ const breadcrumb = {
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-4">Technologie als Unterstützung. Nicht als Ersatz.</h2>
+      <Image
+        src={kochVonHintenPass}
+        alt="Küchenchef von hinten am Pass einer Hotelküche während des Betriebs"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 100vw, 768px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-64 object-cover rounded-2xl mb-4"
+      />
       <p class="text-neutral-600">Wir wollen keine Küchen ohne Menschen. Wir wollen Küchen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten können, und in denen das Wissen des Hauses nicht mit der nächsten Kündigung verschwindet.</p>
     </div>
   </section>
