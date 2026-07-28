@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import bonLeiste from "../assets/bilder/bon-leiste.jpg";
+import schulungVonHinten from "../assets/bilder/schulung-von-hinten.jpg";
+
+const ogImg = await getImage({ src: bonLeiste, width: 1200, format: "jpeg" });
+const ogImageAlt = "Bon-Leiste mit Bestellzetteln über dem Pass einer Restaurantküche";
 ---
 
 <BaseLayout
   title="Unser System: Koch-App, Schulung und Personal aus einer Hand | Avorix"
   description="Drei Bausteine, ein Ziel: eine Küche, die Ihr Niveau hält. So greifen Koch-App, Schulung und Personalverleih bei Avorix ineinander."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
 >
+  <!-- WebPage Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/system",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  })} />
+
   <!-- BreadcrumbList Schema -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -105,9 +125,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Drei Bausteine -->
   <section class="py-16 px-6 border-t border-neutral-200">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-8">
         Unser System. Die Schulung. Die Verstärkung.
       </h2>
+      <Image
+        src={bonLeiste}
+        alt="Bon-Leiste mit Bestellzetteln über dem Pass einer Restaurantküche"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1024px"
+        loading="eager"
+        fetchpriority="high"
+        class="w-full h-64 md:h-80 object-cover rounded-2xl mb-10"
+      />
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Baustein 1 -->
         <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-brand-200 hover:shadow-md transition-all">
@@ -225,9 +254,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <!-- Vom ersten Gespräch -->
   <section class="py-16 px-6">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-14">
+      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-8">
         Vom ersten Gespräch zur Küche, die immer funktioniert.
       </h2>
+      <Image
+        src={schulungVonHinten}
+        alt="Zwei Köche von hinten am Herd, einer erklärt einen Arbeitsschritt"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1024px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-64 md:h-72 object-cover rounded-2xl mb-10"
+      />
       <div class="space-y-6">
         <!-- Step 1 -->
         <div class="flex gap-4 items-start">

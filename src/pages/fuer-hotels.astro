@@ -1,11 +1,29 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import hotelSpeisesaal from "../assets/bilder/hotel-speisesaal.jpg";
+import tellerStapelReihe from "../assets/bilder/teller-stapel-reihe.jpg";
+
+const ogImg = await getImage({ src: hotelSpeisesaal, width: 1200, format: "jpeg" });
+const ogImageAlt = "Eingedeckter Speisesaal eines Hotels mit Seeblick am Abend";
 ---
 
 <BaseLayout
   title="Küchensystem für Ferienhotels mit Halbpension | Avorix"
   description="Halbpension auf Ihrem Niveau, jeden Abend: Menüs sichern, Team anlernen, Ausfälle überbrücken. Avorix für Ferienhotels."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
 >
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.cloud/fuer-hotels",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  })} />
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@graph": [
@@ -45,6 +63,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div class="flex flex-wrap gap-3 text-sm">
         <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
       </div>
+      <div class="mt-8">
+        <Image
+          src={hotelSpeisesaal}
+          alt="Eingedeckter Speisesaal eines Hotels mit Seeblick am Abend"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 896px) 100vw, 896px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+        />
+      </div>
     </div>
   </section>
 
@@ -52,6 +81,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Halbpension ist ein Versprechen. Jeden Tag aufs Neue.</h2>
+      <Image
+        src={tellerStapelReihe}
+        alt="Viele identisch angerichtete Teller in einer Reihe in einer Großküche"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1024px"
+        loading="lazy"
+        decoding="async"
+        class="w-full h-64 md:h-72 object-cover rounded-2xl mb-8"
+      />
       <div class="grid md:grid-cols-3 gap-6">
         <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
           <h3 class="font-bold text-neutral-900 mb-3">Jeden Abend ein Menü für das ganze Haus.</h3>
