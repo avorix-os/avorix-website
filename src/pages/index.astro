@@ -1,14 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import kochAppTabletPass from "../assets/bilder/koch-app-tablet-am-pass.jpg";
 import leerenPassMorgens from "../assets/bilder/leerer-pass-morgens.jpg";
 import waageZutaten from "../assets/bilder/waage-zutaten.jpg";
 import appKochmodus1 from "../assets/bilder/app-kochmodus-schritt1.png";
 import appPortionsrechner from "../assets/bilder/app-rezept-detail-portionsrechner.png";
 import appRezepteListe from "../assets/bilder/app-rezepte-liste.png";
 
-const ogImg = await getImage({ src: leerenPassMorgens, width: 1200, format: "jpeg" });
-const ogImageAlt = "Leere Hotelküche am Morgen vor dem Service";
+const ogImg = await getImage({ src: kochAppTabletPass, width: 1200, format: "jpeg" });
+const ogImageAlt = "Zwei Köche am Pass einer Profiküche, davor ein Tablet mit der Avorix Koch-App";
 
 const schema = [
   {
@@ -125,8 +126,16 @@ const schema = [
         <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Von K&ouml;chen entwickelt, nicht von Software-Leuten</span>
         <span class="inline-flex items-center gap-2 bg-neutral-50 border border-brand-200 text-neutral-800 rounded-full px-4 py-2 font-semibold">&#10003; Friedrichshafen am Bodensee &middot; DE + AT</span>
       </div>
-      <!-- App-Platzhalter -->
-      <div class="mt-6 rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 h-64 flex items-center justify-center" role="img" aria-label="App auf Tablet in einer echten K&uuml;che, ein Rezeptschritt sichtbar"></div>
+      <!-- Hero-Bild: Koch-App auf Tablet im echten K&uuml;chenbetrieb -->
+      <Image
+        src={kochAppTabletPass}
+        alt="Zwei K&ouml;che am Pass einer Profik&uuml;che, davor ein Tablet mit der Avorix Koch-App im Rezept-Modus"
+        widths={[480, 800, 1200, 1600, 2000]}
+        sizes="(max-width: 896px) 100vw, 896px"
+        loading="eager"
+        fetchpriority="high"
+        class="mt-6 w-full h-auto rounded-2xl"
+      />
     </div>
   </section>
 
@@ -146,8 +155,8 @@ const schema = [
         alt="Leere Hotelküche am Morgen vor dem Service"
         widths={[480, 800, 1200, 1600]}
         sizes="(max-width: 1024px) 100vw, 1024px"
-        loading="eager"
-        fetchpriority="high"
+        loading="lazy"
+        decoding="async"
         class="w-full h-64 md:h-80 object-cover rounded-2xl mb-8"
       />
       <div class="grid md:grid-cols-3 gap-6">
