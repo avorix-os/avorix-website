@@ -1,11 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
-import gasthofStube from "../assets/bilder/gasthof-stube.jpg";
+import speiselokalGastraum from "../assets/bilder/speiselokal-gastraum.jpg";
 import steakNahaufnahme from "../assets/bilder/steak-nahaufnahme.jpg";
 
-const ogImg = await getImage({ src: gasthofStube, width: 1200, format: "jpeg" });
-const ogImageAlt = "Holzvertäfelte Gaststube eines traditionellen Gasthofs mit eingedeckten Tischen";
+const ogImg = await getImage({ src: speiselokalGastraum, width: 1200, format: "jpeg" });
+const ogImageAlt = "Heller, modern eingedeckter Gastraum eines Restaurants mit Holztischen, Weingläsern und Kachelofen";
 
 const schemaOrg = [
   {
@@ -102,8 +102,8 @@ const schemaOrg = [
       </div>
       <div class="mt-8">
         <Image
-          src={gasthofStube}
-          alt="Holzvertäfelte Gaststube eines traditionellen Gasthofs mit eingedeckten Tischen"
+          src={speiselokalGastraum}
+          alt="Heller, modern eingedeckter Gastraum eines Restaurants mit Holztischen, Weingläsern und Kachelofen"
           widths={[480, 800, 1200, 1600]}
           sizes="(max-width: 896px) 100vw, 896px"
           loading="eager"
