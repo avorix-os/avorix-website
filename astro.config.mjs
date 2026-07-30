@@ -46,7 +46,7 @@ const PAGE_IMAGES = {
     "teller-stapel-reihe.jpg",
   ],
   [`${SITE}/fuer-restaurants/`]: [
-    "gasthof-stube.jpg",
+    "speiselokal-gastraum.jpg",
     "steak-nahaufnahme.jpg",
   ],
   [`${SITE}/fuer-sporthotels/`]: [
