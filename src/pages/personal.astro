@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import Stempel from "../components/Stempel.astro";
 import dampfTopf from "../assets/bilder/dampf-topf.jpg";
 
 const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
@@ -101,194 +102,263 @@ const schema = [
   schemaOrg={schema}
 >
   <!-- Hero -->
-  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+  <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
     <div class="max-w-4xl mx-auto text-center">
-      <span class="inline-block text-brand-600 text-sm font-semibold tracking-wide uppercase mb-4">
-        Modul: Die Verstärkung
-      </span>
-      <h1 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 leading-tight">
-        Echte Köche. Fest angestellt. Rechtssicher verliehen.
+      <p class="eyebrow mb-4">Modul: Die Verst&auml;rkung</p>
+      <h1 class="mb-6 text-center">
+        Echte K&ouml;che. Fest angestellt. Rechtssicher verliehen.
       </h1>
       <div class="flex justify-center mb-6">
-        <span class="inline-block bg-brand-50 border border-brand-200 text-brand-700 font-bold rounded-full px-6 py-3 text-base">
-          ✓ Behördliche Arbeitnehmerüberlassungserlaubnis · Agentur für Arbeit
+        <span class="check-badge">
+          <span class="check-badge-mark">&#10003;</span>
+          Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis &middot; Agentur f&uuml;r Arbeit
         </span>
       </div>
-      <p class="text-lg text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
-        Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten Köche aus: für den Notfall, für die Saison, für den Übergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie zu 100 Prozent auf der rechtlich sicheren Seite.
+      <p class="lead mb-10 mx-auto" style="color:var(--grau)">
+        Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie zu 100 Prozent auf der rechtlich sicheren Seite.
       </p>
       <a
         href="/kontakt"
         data-cta-location="personal-hero"
-        class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors"
-      >
-        Demo vereinbaren
-      </a>
+        class="btn btn-primary"
+      >Demo vereinbaren</a>
       <div class="mt-8">
         <Image
           src={dampfTopf}
-          alt="Dampf über einem Edelstahltopf auf dem Gasherd einer Profiküche"
+          alt="Dampf &uuml;ber einem Edelstahltopf auf dem Gasherd einer Profik&uuml;che"
           widths={[480, 800, 1200]}
           sizes="(max-width: 896px) 100vw, 896px"
           loading="eager"
           fetchpriority="high"
-          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+          class="w-full h-64 md:h-80 object-cover"
+          style="border-radius:var(--radius);box-shadow:var(--schatten)"
         />
       </div>
     </div>
   </section>
 
   <!-- Direkt-Antwort (GEO) -->
-  <section class="py-8 px-6 bg-white border-t border-neutral-100">
+  <section class="py-8 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <p id="direktantwort" class="text-neutral-700 leading-relaxed">
-        Avorix verleiht festangestellte, sozialversicherte Köche an Hotels und Restaurants in Deutschland und Österreich. Grundlage ist die behördliche Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Das schützt Betriebe vor dem Scheinselbständigkeits-Risiko, das bei vermittelten „selbstständigen" Köchen entstehen kann.
+      <p id="direktantwort" style="color:var(--grau)">
+        Avorix verleiht festangestellte, sozialversicherte K&ouml;che an Hotels und Restaurants in Deutschland und &Ouml;sterreich. Grundlage ist die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis der Agentur f&uuml;r Arbeit. Das sch&uuml;tzt Betriebe vor dem Scheinselbst&auml;ndigkeits-Risiko, das bei vermittelten &bdquo;selbst&auml;ndigen&ldquo; K&ouml;chen entstehen kann.
       </p>
     </div>
   </section>
 
   <!-- Wann Sie uns rufen -->
-  <section class="py-16 px-6 border-t border-neutral-200">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">Wann Sie uns rufen.</h2>
+      <h2 class="text-center mb-12">Wann Sie uns rufen.</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl border border-neutral-200 p-7">
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">Der Notfall.</h3>
-          <p class="text-neutral-600 leading-relaxed">
-            Der Küchenchef fällt aus, die Saison läuft. Ein Avorix-Koch übernimmt, tageweise oder wochenweise.
+        <div class="card">
+          <h3 class="mb-3">Der Notfall.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Der K&uuml;chenchef f&auml;llt aus, die Saison l&auml;uft. Ein Avorix-Koch &uuml;bernimmt, tageweise oder wochenweise.
           </p>
         </div>
-        <div class="bg-white rounded-2xl border border-neutral-200 p-7">
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">Die Saison.</h3>
-          <p class="text-neutral-600 leading-relaxed">
-            Sie brauchen planbar zwei Kräfte mehr. Unsere Köche verstärken Ihr Team für Wochen oder die ganze Saison.
+        <div class="card">
+          <h3 class="mb-3">Die Saison.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Sie brauchen planbar zwei Kr&auml;fte mehr. Unsere K&ouml;che verst&auml;rken Ihr Team f&uuml;r Wochen oder die ganze Saison.
           </p>
         </div>
-        <div class="bg-white rounded-2xl border border-neutral-200 p-7">
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">Der Übergang.</h3>
-          <p class="text-neutral-600 leading-relaxed">
-            Die Neubesetzung dauert länger als geplant. Wir überbrücken, bis Ihre Lösung steht.
+        <div class="card">
+          <h3 class="mb-3">Der &Uuml;bergang.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Die Neubesetzung dauert l&auml;nger als geplant. Wir &uuml;berbr&uuml;cken, bis Ihre L&ouml;sung steht.
           </p>
         </div>
       </div>
-      <p class="text-neutral-600 text-center mt-8">
-        Kurzfristige Einsätze sind in der Regel innerhalb von 24 bis 72 Stunden möglich, im Notfall sind wir rund um die Uhr erreichbar. 98 Prozent der Anfragen können wir innerhalb von 3 Tagen besetzen.
+      <p class="text-sm text-center mt-8" style="color:var(--grau)">
+        Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich, im Notfall sind wir rund um die Uhr erreichbar. 98 Prozent der Anfragen k&ouml;nnen wir innerhalb von 3 Tagen besetzen.
       </p>
     </div>
   </section>
 
   <!-- Wissen bleibt -->
-  <section class="py-16 px-6 bg-neutral-50">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
+      <h2 class="mb-6">
         Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da.
       </h2>
-      <p class="text-lg text-neutral-600 leading-relaxed">
-        Unsere Köche arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer Küche auf. Bei einer klassischen Zeitarbeitsfirma bleibt nach dem Einsatz nichts zurück. Bei uns bleibt das Wissen.
+      <p class="lead" style="color:var(--grau)">
+        Unsere K&ouml;che arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer K&uuml;che auf. Bei einer klassischen Zeitarbeitsfirma bleibt nach dem Einsatz nichts zur&uuml;ck. Bei uns bleibt das Wissen.
       </p>
     </div>
   </section>
 
-  <!-- Scheinselbständigkeit -->
-  <section class="py-16 px-6">
+  <!-- Scheinselbständigkeit → dunkle Beweis-Sektion (3.10) -->
+  <section class="py-16 px-6" style="background:var(--eisen)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">
-        Warum „günstige Selbstständige" Sie 50.000 Euro kosten können.
+      <h2 class="mb-8" style="color:var(--papier)">
+        Warum &bdquo;g&uuml;nstige Selbst&auml;ndige&ldquo; Sie 50.000 Euro kosten k&ouml;nnen.
       </h2>
-      <div class="bg-white border-l-4 border-brand-500 rounded-r-2xl p-6 shadow-sm">
-        <p class="text-neutral-600 leading-relaxed mb-4">
-          Viele Vermittler schicken Ihnen „selbstständige" Köche, die eine Rechnung mit Mehrwertsteuer schreiben. Klingt unkompliziert, ist aber in den meisten Fällen Scheinselbständigkeit: Die Köche arbeiten weisungsgebunden in Ihrem Betriebsablauf, wie Angestellte.
-        </p>
-        <p class="text-neutral-600 leading-relaxed mb-4">
-          Was bei der nächsten Sozialversicherungsprüfung passiert: Die Prüfer stufen diese Köche als scheinselbstständig ein, und zwar in den allermeisten Fällen. Dann zahlt nicht der Koch, sondern Ihr Haus: sämtliche Sozialleistungen, rückwirkend für drei bis vier Jahre. Je nach Umfang schnell 50.000 bis 100.000 Euro. Der Koch selbst ist dann meist nicht mehr greifbar.
-        </p>
-        <p class="text-neutral-600 leading-relaxed mb-4">
-          <strong class="text-neutral-900">Deshalb machen wir es anders:</strong> Unsere Köche sind bei Avorix fest angestellt und sozialversichert. Wir haben die behördliche Arbeitnehmerüberlassungserlaubnis von der Agentur für Arbeit. Unsere Verträge sind von der Agentur für Arbeit geprüft.
-        </p>
-        <p class="text-neutral-600 leading-relaxed">
-          Größere Häuser und Hotelgruppen buchen inzwischen nur noch Firmen mit dieser Erlaubnis, aus genau diesem Grund. Im Gastgewerbe haben sie nur wenige Anbieter. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.
-        </p>
-      </div>
+      <p class="leading-relaxed mb-4" style="color:var(--papier);opacity:0.85">
+        Viele Vermittler schicken Ihnen &bdquo;selbst&auml;ndige&ldquo; K&ouml;che, die eine Rechnung mit Mehrwertsteuer schreiben. Klingt unkompliziert, ist aber in den meisten F&auml;llen Scheinselbst&auml;ndigkeit: Die K&ouml;che arbeiten weisungsgebunden in Ihrem Betriebsablauf, wie Angestellte.
+      </p>
+      <p class="leading-relaxed mb-4" style="color:var(--papier);opacity:0.85">
+        Was bei der n&auml;chsten Sozialversicherungspr&uuml;fung passiert: Die Pr&uuml;fer stufen diese K&ouml;che als scheinselbst&auml;ndig ein, und zwar in den allermeisten F&auml;llen. Dann zahlt nicht der Koch, sondern Ihr Haus: s&auml;mtliche Sozialleistungen, r&uuml;ckwirkend f&uuml;r <strong style="color:var(--akzent-hell)">drei bis vier Jahre</strong>. Je nach Umfang schnell <strong style="color:var(--akzent-hell)">50.000 bis 100.000 Euro</strong>. Der Koch selbst ist dann meist nicht mehr greifbar.
+      </p>
+      <p class="leading-relaxed mb-4" style="color:var(--papier);opacity:0.85">
+        <strong style="color:var(--papier)">Deshalb machen wir es anders:</strong> Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis von der Agentur f&uuml;r Arbeit. Unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft.
+      </p>
+      <p class="leading-relaxed" style="color:var(--papier);opacity:0.85">
+        Gr&ouml;&szlig;ere H&auml;user und Hotelgruppen buchen inzwischen nur noch Firmen mit dieser Erlaubnis, aus genau diesem Grund. Im Gastgewerbe haben sie nur wenige Anbieter. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.
+      </p>
     </div>
   </section>
 
   <!-- Diskretion -->
-  <section class="py-16 px-6 bg-neutral-50">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
-        Ihre Gäste erleben Ihre Küche. Nicht unsere.
+      <h2 class="mb-6">
+        Ihre G&auml;ste erleben Ihre K&uuml;che. Nicht unsere.
       </h2>
-      <p class="text-lg text-neutral-600 leading-relaxed">
-        Kein Gast merkt, dass ein Avorix-Koch mitkocht. Wir nennen keinen Kunden öffentlich, und auf Wunsch sichern wir Ihnen das vertraglich zu.
+      <p class="lead" style="color:var(--grau)">
+        Kein Gast merkt, dass ein Avorix-Koch mitkocht. Wir nennen keinen Kunden &ouml;ffentlich, und auf Wunsch sichern wir Ihnen das vertraglich zu.
       </p>
     </div>
   </section>
 
-  <!-- Was kostet das (Variante B only) -->
-  <section class="py-16 px-6">
+  <!-- Was kostet das -->
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Was kostet das?</h2>
-      <div class="bg-white rounded-2xl border border-neutral-200 p-7">
-        <p class="text-neutral-600 leading-relaxed mb-6">
+      <h2 class="mb-8">Was kostet das?</h2>
+      <div class="card" style="padding:2rem 2.5rem">
+        <p class="leading-relaxed mb-6" style="color:var(--grau)">
           Klare Stundensätze, ohne versteckte Posten. Die Zahlen bekommen Sie im Erstgespräch schwarz auf weiß. Für die ersten Betriebe gelten 2026 Pilotkonditionen deutlich unter dem regulären Preis.
         </p>
         <a
           href="/kontakt"
           data-cta-location="personal-kosten"
-          class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors"
-        >
-          Demo vereinbaren
-        </a>
+          class="btn btn-primary"
+        >Demo vereinbaren</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 px-6 bg-neutral-50">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-10 text-center">Häufige Fragen</h2>
-      <div class="space-y-4">
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Wer sind die Avorix-Köche?</summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">
-            Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen.
-          </p>
+      <h2 class="text-center mb-10">H&auml;ufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wer sind die Avorix-K&ouml;che?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantk&uuml;chen.</p></div></div>
         </details>
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Was ist, wenn der Koch nicht zu unserem Team passt?</summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">
-            Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist, wenn der Koch nicht zu unserem Team passt?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Dann sprechen Sie mit uns, und wir finden eine L&ouml;sung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.</p></div></div>
         </details>
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Wie läuft das vertraglich?</summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">
-            Über einen Arbeitnehmerüberlassungsvertrag, wie ihn die Agentur für Arbeit vorsieht. Sie unterschreiben ein paar Seiten mehr als bei einer Vermittler-Rechnung, und genau das schützt Sie.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Wie l&auml;uft das vertraglich?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>&Uuml;ber einen Arbeitnehmer&uuml;berlassungsvertrag, wie ihn die Agentur f&uuml;r Arbeit vorsieht. Sie unterschreiben ein paar Seiten mehr als bei einer Vermittler-Rechnung, und genau das sch&uuml;tzt Sie.</p></div></div>
         </details>
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white">
-          <summary class="font-semibold text-neutral-900 cursor-pointer">Kann aus dem Einsatz mehr werden (Schulung, unser System)?</summary>
-          <p class="mt-3 text-neutral-600 leading-relaxed">
-            Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der nächste Ausfall kein Notfall mehr ist.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Kann aus dem Einsatz mehr werden (Schulung, unser System)?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der n&auml;chste Ausfall kein Notfall mehr ist.</p></div></div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- Final CTA -->
-  <section class="py-20 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">
-        Sagen Sie uns, was Ihrer Küche fehlt.
-      </h2>
+  <!-- Final CTA → Peak-End (3.18) -->
+  <section class="py-20 px-6" style="border-top:1px solid var(--linie)">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="mb-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
       <a
         href="/kontakt"
         data-cta-location="personal-final"
-        class="inline-block bg-brand-500 text-white px-10 py-4 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors shadow-lg shadow-brand-200"
-      >
-        Demo vereinbaren
-      </a>
+        class="btn btn-primary"
+      >Demo vereinbaren</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+/* FAQ-Accordion (3.13) */
+.faq-list {
+  border-top: 1px solid var(--linie);
+}
+.faq-item {
+  border-bottom: 1px solid var(--linie);
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-primary, #1C1B16);
+  padding: 18px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  color: var(--akzent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item.faq-closing > summary .faq-chevron {
+  transform: rotate(0deg);
+}
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+.faq-item[open] > .faq-body {
+  grid-template-rows: 1fr;
+}
+.faq-item.faq-closing > .faq-body {
+  grid-template-rows: 0fr;
+}
+.faq-inner {
+  min-height: 0;
+}
+.faq-inner p {
+  font-size: 16px;
+  color: var(--grau);
+  padding-bottom: 18px;
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-body,
+  .faq-chevron {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+/* FAQ-Schlie&szlig;-Animation &mdash; progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
