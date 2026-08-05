@@ -37,9 +37,39 @@ if (lang === "de") {
 }
 ---
 
-<a
-  href={otherPath}
-  class="text-sm font-medium text-avorix-silver hover:text-avorix-dark transition-colors border border-avorix-light rounded-md px-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
->
+<style>
+  .lang-switch {
+    color: rgba(247, 246, 242, 0.82);
+    font-size: 14.5px;
+    text-decoration: none;
+    padding: 6px 2px;
+    position: relative;
+    transition: color 0.18s ease;
+    white-space: nowrap;
+  }
+  .lang-switch::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    height: 2px;
+    background: var(--papier);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .lang-switch:hover {
+    color: var(--papier);
+  }
+  .lang-switch:hover::after {
+    transform: scaleX(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lang-switch::after { transition: none; }
+  }
+</style>
+
+<a href={otherPath} class="lang-switch">
   {languages[otherLang]}
 </a>

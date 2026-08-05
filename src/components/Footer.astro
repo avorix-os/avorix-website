@@ -3,105 +3,113 @@ import { getLangFromUrl, useTranslations } from "../i18n/translations";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const year = new Date().getFullYear();
 ---
 
-<footer class="bg-neutral-950 text-avorix-silver border-t-4 border-brand-500">
-  <div class="max-w-6xl mx-auto px-6 py-12">
-    {lang === "de" ? (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Spalte 1: Alle 10 Seiten-Links */}
-        <div>
-          <h3 class="text-avorix-white font-semibold text-sm mb-4">Seiten</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/" class="hover:text-avorix-white transition-colors">Startseite</a></li>
-            <li><a href="/system" class="hover:text-avorix-white transition-colors">So funktioniert es</a></li>
-            <li><a href="/koch-app" class="hover:text-avorix-white transition-colors">Die Koch-App</a></li>
-            <li><a href="/schulung" class="hover:text-avorix-white transition-colors">Die Schulung</a></li>
-            <li><a href="/personal" class="hover:text-avorix-white transition-colors">Das Personal</a></li>
-            <li><a href="/pilotprogramm" class="hover:text-avorix-white transition-colors">Pilotprogramm</a></li>
-            <li><a href="/ueber-uns" class="hover:text-avorix-white transition-colors">&Uuml;ber uns</a></li>
-            <li><a href="/fuer-hotels" class="hover:text-avorix-white transition-colors">F&uuml;r Ferienhotels</a></li>
-            <li><a href="/fuer-restaurants" class="hover:text-avorix-white transition-colors">F&uuml;r Restaurants &amp; Gasth&ouml;fe</a></li>
-            <li><a href="/fuer-sporthotels" class="hover:text-avorix-white transition-colors">F&uuml;r Sporthotels</a></li>
-          </ul>
-        </div>
+<style>
+  .site-footer {
+    background: var(--eisen);
+    padding: 28px 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-        {/* Spalte 2: Leitfaden + Kontakt */}
-        <div>
-          <h3 class="text-avorix-white font-semibold text-sm mb-4">Service</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/leitfaden" class="hover:text-avorix-white transition-colors">Kostenloser Leitfaden</a></li>
-            <li><a href="/kontakt" class="hover:text-avorix-white transition-colors">Kontakt</a></li>
-          </ul>
-        </div>
+  .footer-logo {
+    display: block;
+    flex-shrink: 0;
+  }
+  .footer-logo img {
+    height: 22px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
 
-        {/* Spalte 3: Impressum, Datenschutz, Cookie */}
-        <div>
-          <h3 class="text-avorix-white font-semibold text-sm mb-4">Rechtliches</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/impressum" class="hover:text-avorix-white transition-colors">Impressum</a></li>
-            <li><a href="/datenschutz" class="hover:text-avorix-white transition-colors">Datenschutz</a></li>
-            <li>
-              <button type="button" id="footer-cookie-settings" class="hover:text-avorix-white transition-colors bg-transparent border-0 p-0 text-sm text-avorix-silver cursor-pointer font-normal">
-                Cookie-Einstellungen
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    ) : (
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div>
-          <img src="/logo.png" alt="Avorix" class="h-8 brightness-200 mb-4" />
-          <p class="text-sm text-avorix-silver/70 max-w-xs">
-            Software and processes for consistent kitchen quality in hospitality.
-          </p>
-        </div>
-        <div>
-          <h3 class="text-avorix-white font-semibold text-sm mb-4">Navigation</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/en" class="hover:text-avorix-white transition-colors">{t("nav.home")}</a></li>
-            <li><a href="/en/about" class="hover:text-avorix-white transition-colors">{t("nav.about")}</a></li>
-            <li><a href="/en/cook-app" class="hover:text-avorix-white transition-colors">{t("nav.kochapp")}</a></li>
-            <li><a href="/en/product" class="hover:text-avorix-white transition-colors">{t("nav.produkt")}</a></li>
-            <li><a href="/en/contact" class="hover:text-avorix-white transition-colors">{t("nav.contact")}</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-avorix-white font-semibold text-sm mb-4">Legal</h3>
-          <ul class="space-y-2 text-sm">
-            <li><a href="/en/legal-notice" class="hover:text-avorix-white transition-colors">{t("footer.imprint")}</a></li>
-            <li><a href="/en/privacy" class="hover:text-avorix-white transition-colors">{t("footer.privacy")}</a></li>
-            <li>
-              <button type="button" id="footer-cookie-settings" class="hover:text-avorix-white transition-colors bg-transparent border-0 p-0 text-sm text-avorix-silver cursor-pointer font-normal">
-                Cookie settings
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-    )}
+  .footer-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-family: var(--f-mono);
+    font-size: 13px;
+  }
 
-    <div class="border-t border-avorix-gray/30 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-avorix-silver/50">
-      <p>&copy; {lang === "de" ? "Avorix GmbH, Friedrichshafen" : `${year} Avorix. ${t("footer.rights")}`}</p>
-      {lang === "en" && (
-        <div class="flex gap-6 items-center">
-          <a href="/en/legal-notice" class="hover:text-avorix-silver transition-colors">{t("footer.imprint")}</a>
-          <a href="/en/privacy" class="hover:text-avorix-silver transition-colors">{t("footer.privacy")}</a>
-        </div>
-      )}
+  /* Paper-white at 55% opacity via rgba – allows children to override on hover */
+  .footer-text,
+  .footer-sep {
+    color: rgba(247, 246, 242, 0.55);
+  }
+
+  .footer-link,
+  .footer-cookie-btn {
+    color: rgba(247, 246, 242, 0.55);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s ease;
+  }
+
+  .footer-link:hover,
+  .footer-cookie-btn:hover {
+    color: var(--papier);
+  }
+
+  .footer-cookie-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  @media (max-width: 640px) {
+    .site-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 24px 20px;
+    }
+  }
+</style>
+
+<footer class="site-footer">
+  <a href={lang === "de" ? "/" : "/en"} class="footer-logo" aria-label="Avorix – Startseite">
+    <img src="/logo.png" alt="Avorix" />
+  </a>
+
+  {lang === "de" ? (
+    <div class="footer-right">
+      <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
+      <span class="footer-sep">·</span>
+      <a href="/impressum" class="footer-link">Impressum</a>
+      <span class="footer-sep">·</span>
+      <a href="/datenschutz" class="footer-link">Datenschutz</a>
+      <span class="footer-sep">·</span>
+      <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie-Einstellungen</button>
     </div>
-    <script is:inline>
-      (function () {
-        var el = document.getElementById('footer-cookie-settings');
-        if (el && !el.dataset.bound) {
-          el.dataset.bound = '1';
-          el.addEventListener('click', function () {
-            if (window.avorixConsent) window.avorixConsent.openPanel(el);
-          });
-        }
-      })();
-    </script>
-  </div>
+  ) : (
+    <div class="footer-right">
+      <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
+      <span class="footer-sep">·</span>
+      <a href="/en/legal-notice" class="footer-link">{t("footer.imprint")}</a>
+      <span class="footer-sep">·</span>
+      <a href="/en/privacy" class="footer-link">{t("footer.privacy")}</a>
+      <span class="footer-sep">·</span>
+      <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie settings</button>
+    </div>
+  )}
 </footer>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('footer-cookie-settings');
+    if (el && !el.dataset.bound) {
+      el.dataset.bound = '1';
+      el.addEventListener('click', function () {
+        if (window.avorixConsent) window.avorixConsent.openPanel(el);
+      });
+    }
+  })();
+</script>

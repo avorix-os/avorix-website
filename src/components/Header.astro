@@ -14,276 +14,603 @@ const systemLinks = [
 
 const targetLinks = [
   { label: "Ferienhotels", href: "/fuer-hotels" },
-  { label: "Restaurants & Gasth\u00f6fe", href: "/fuer-restaurants" },
+  { label: "Restaurants & Gasthöfe", href: "/fuer-restaurants" },
   { label: "Sporthotels", href: "/fuer-sporthotels" },
 ];
 ---
 
-<header class="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-brand-100 z-50">
-  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href={getLocalizedPath("/", lang)} class="flex items-center gap-3">
-      <img src="/logo-dark.jpg" alt="Avorix" class="h-9 rounded" />
-      <span class="text-xl font-semibold tracking-tight text-brand-600">AVORIX</span>
+<style>
+  /* === SITE HEADER === */
+  .site-header {
+    background: var(--eisen);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .nav-logo img {
+    height: 26px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+  }
+
+  /* Desktop nav */
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex: 1;
+  }
+
+  /* Nav links: paper-white, 82% opacity, hover underline */
+  .nav-link {
+    color: var(--papier);
+    opacity: 0.82;
+    font-size: 14.5px;
+    text-decoration: none;
+    position: relative;
+    padding: 6px 2px;
+    transition: opacity 0.18s ease;
+    white-space: nowrap;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    height: 2px;
+    background: var(--papier);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-link:hover { opacity: 1; }
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  /* Dropdown trigger */
+  .nav-dropdown { position: relative; }
+  .nav-dropdown-trigger {
+    color: var(--papier);
+    opacity: 0.82;
+    font-size: 14.5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    transition: opacity 0.18s ease;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+  .nav-dropdown-trigger::after {
+    content: '';
+    position: absolute;
+    left: 2px;
+    right: 18px;
+    bottom: 2px;
+    height: 2px;
+    background: var(--papier);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-dropdown-trigger:hover { opacity: 1; }
+  .nav-dropdown-trigger:hover::after { transform: scaleX(1); }
+
+  /* Dropdown panel */
+  .nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 210px;
+    background: var(--flaeche);
+    border-radius: var(--radius);
+    box-shadow: var(--schatten);
+    padding: 6px 0;
+    opacity: 0;
+    transform: translateY(-4px);
+    pointer-events: none;
+    transition: opacity 0.16s ease, transform 0.16s ease;
+    z-index: 10;
+  }
+  .nav-dropdown-menu.is-open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-dropdown-menu { transition: none; }
+  }
+
+  .nav-dropdown-item {
+    display: block;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: var(--druck);
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .nav-dropdown-item:hover { background: var(--flaeche-hover); }
+  .nav-dropdown-item[aria-current="page"] { color: var(--akzent); }
+
+  /* CTA button */
+  .nav-cta {
+    background: var(--papier);
+    color: var(--eisen);
+    padding: 9px 18px;
+    border-radius: var(--radius);
+    font-size: 14.5px;
+    font-weight: 700;
+    font-family: var(--f-head);
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: filter 0.18s ease;
+  }
+  .nav-cta:hover { filter: brightness(1.06); }
+
+  /* Burger button */
+  .nav-burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    color: var(--papier);
+    margin-left: auto;
+    flex-shrink: 0;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Hide desktop nav, show burger below 900px */
+  @media (max-width: 900px) {
+    .nav-desktop { display: none; }
+    .nav-burger { display: flex; }
+  }
+
+  /* === MOBILE OVERLAY === */
+  .nav-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--eisen);
+    z-index: 49;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .nav-mobile-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-mobile-overlay { transition: none; }
+  }
+  @media (min-width: 901px) {
+    .nav-mobile-overlay { display: none !important; }
+  }
+
+  .nav-mobile-close {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--papier);
+    opacity: 0.7;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.15s ease;
+  }
+  .nav-mobile-close:hover { opacity: 1; }
+
+  .nav-mobile-inner {
+    padding: 80px 28px 48px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Mobile links */
+  .nav-mobile-link {
+    color: var(--papier);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 14px 0;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(247,246,242,.1);
+    transition: opacity 0.15s ease;
+  }
+  .nav-mobile-link:hover { opacity: 0.8; }
+
+  /* Mobile accordion sections */
+  .mobile-section { border-bottom: 1px solid rgba(247,246,242,.1); }
+  .mobile-section-trigger {
+    color: var(--papier);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: inherit;
+    padding: 14px 0;
+    min-height: 48px;
+    width: 100%;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: opacity 0.15s ease;
+  }
+  .mobile-section-trigger:hover { opacity: 0.8; }
+  .mobile-section-trigger svg {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-section-trigger svg { transition: none; }
+  }
+
+  .mobile-section-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 0.25s ease;
+  }
+  .mobile-section-content.is-open { grid-template-rows: 1fr; }
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-section-content { transition: none; }
+  }
+  .mobile-section-inner { min-height: 0; padding-bottom: 8px; }
+
+  .mobile-section-link {
+    color: var(--papier);
+    opacity: 0.78;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 12px 16px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    transition: opacity 0.15s ease;
+  }
+  .mobile-section-link:hover { opacity: 1; }
+
+  .nav-mobile-cta {
+    margin-top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--papier);
+    color: var(--eisen);
+    font-weight: 700;
+    font-size: 16px;
+    font-family: var(--f-head);
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    min-height: 56px;
+    text-decoration: none;
+    text-align: center;
+    transition: filter 0.18s ease;
+  }
+  .nav-mobile-cta:hover { filter: brightness(0.95); }
+
+  .nav-mobile-lang {
+    margin-top: 20px;
+  }
+</style>
+
+<header class="site-header">
+  <div class="nav-inner">
+    <a href={getLocalizedPath("/", lang)} class="nav-logo" aria-label="Avorix – Startseite">
+      <img src="/logo.png" alt="Avorix" />
     </a>
 
     {lang === "de" ? (
-      <div class="hidden lg:flex items-center gap-6">
-        {/* Unser System Dropdown */}
-        <div class="nav-dropdown relative">
-          <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
-            Unser System
-            <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </button>
-          <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[200px]">
-            <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
+      <nav class="nav-desktop" aria-label="Hauptnavigation">
+        <div class="nav-links">
+          <div class="nav-dropdown">
+            <button
+              type="button"
+              class="nav-dropdown-trigger"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              Unser System
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu" role="menu">
               {systemLinks.map(link => (
-                <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
-                  {link.label}
-                </a>
+                <a href={link.href} class="nav-dropdown-item" role="menuitem">{link.label}</a>
               ))}
             </div>
           </div>
-        </div>
 
-        {/* F\u00fcr wen Dropdown */}
-        <div class="nav-dropdown relative">
-          <button type="button" class="nav-dropdown-trigger text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium flex items-center gap-1" aria-expanded="false" aria-haspopup="true">
-            F&uuml;r wen
-            <svg class="w-3.5 h-3.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </button>
-          <div class="nav-dropdown-menu hidden absolute top-full left-0 pt-2 min-w-[220px]">
-            <div class="bg-white rounded-xl shadow-lg border border-neutral-100 py-2">
+          <div class="nav-dropdown">
+            <button
+              type="button"
+              class="nav-dropdown-trigger"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              Für wen
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu" role="menu">
               {targetLinks.map(link => (
-                <a href={link.href} class="block px-4 py-2 text-sm text-avorix-gray hover:text-avorix-dark hover:bg-neutral-50 transition-colors">
-                  {link.label}
-                </a>
+                <a href={link.href} class="nav-dropdown-item" role="menuitem">{link.label}</a>
               ))}
             </div>
           </div>
+
+          <a href="/pilotprogramm" class="nav-link">
+            Pilotprogramm<sup style="font-size:0.58em; font-weight:700; color:var(--akzent-hell); margin-left:1px; vertical-align:super;">2026</sup>
+          </a>
+          <a href="/ueber-uns" class="nav-link">Über uns</a>
         </div>
 
-        <a href="/pilotprogramm" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          Pilotprogramm<sup class="text-brand-500 font-bold text-[0.6rem] ml-0.5">2026</sup>
-        </a>
-
-        <a href="/ueber-uns" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          &Uuml;ber uns
-        </a>
-
-        <a href="/kontakt" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
+        <a href="/kontakt" data-cta-location="header" class="nav-cta">
           Demo vereinbaren
         </a>
-
         <LanguageSwitcher />
-      </div>
+      </nav>
     ) : (
-      <div class="hidden md:flex items-center gap-8">
-        <a href="/en" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          {t("nav.home")}
-        </a>
-        <a href="/en/about" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          {t("nav.about")}
-        </a>
-        <a href="/en/cook-app" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          {t("nav.kochapp")}
-        </a>
-        <a href="/en/product" class="text-avorix-gray hover:text-avorix-dark transition-colors text-sm font-medium">
-          {t("nav.produkt")}
-        </a>
-        <a href="/en/contact" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors">
-          {t("nav.contact")}
-        </a>
+      <nav class="nav-desktop" aria-label="Main navigation">
+        <div class="nav-links">
+          <a href="/en" class="nav-link">{t("nav.home")}</a>
+          <a href="/en/about" class="nav-link">{t("nav.about")}</a>
+          <a href="/en/cook-app" class="nav-link">{t("nav.kochapp")}</a>
+          <a href="/en/product" class="nav-link">{t("nav.produkt")}</a>
+        </div>
+        <a href="/en/contact" data-cta-location="header" class="nav-cta">{t("nav.contact")}</a>
         <LanguageSwitcher />
-      </div>
+      </nav>
     )}
 
-    {/* Mobile menu button */}
-    <button id="mobile-menu-btn" class={lang === "de" ? "lg:hidden p-2" : "md:hidden p-2"} aria-label="Menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <button
+      id="mobile-menu-btn"
+      class="nav-burger"
+      aria-label="Menü öffnen"
+      aria-expanded="false"
+      aria-controls="mobile-nav-overlay"
+    >
+      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
-  </nav>
-
-  {/* Mobile menu */}
-  {lang === "de" ? (
-    <div id="mobile-menu" class="hidden lg:hidden border-t border-avorix-light bg-white max-h-[80vh] overflow-y-auto">
-      <div class="px-6 py-4 flex flex-col gap-1">
-        {/* Unser System */}
-        <div class="mobile-accordion py-2">
-          <button type="button" class="mobile-accordion-trigger w-full text-left text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center justify-between" aria-expanded="false">
-            Unser System
-            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </button>
-          <div class="mobile-accordion-content hidden mt-1 flex flex-col gap-1 pl-3">
-            {systemLinks.map(link => (
-              <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        {/* F\u00fcr wen */}
-        <div class="mobile-accordion py-2 border-t border-neutral-100">
-          <button type="button" class="mobile-accordion-trigger w-full text-left text-xs font-bold text-brand-500 uppercase tracking-wider flex items-center justify-between" aria-expanded="false">
-            F&uuml;r wen
-            <svg class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
-          </button>
-          <div class="mobile-accordion-content hidden mt-1 flex flex-col gap-1 pl-3">
-            {targetLinks.map(link => (
-              <a href={link.href} class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div class="border-t border-neutral-100 pt-2 flex flex-col gap-2">
-          <a href="/pilotprogramm" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-            Pilotprogramm <sup class="text-brand-500 font-bold text-[0.6rem]">2026</sup>
-          </a>
-          <a href="/ueber-uns" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium py-1.5">
-            &Uuml;ber uns
-          </a>
-          <a href="/kontakt" data-cta-location="header" class="bg-brand-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-600 transition-colors text-center mt-2">
-            Demo vereinbaren
-          </a>
-          <div class="mt-2">
-            <LanguageSwitcher />
-          </div>
-        </div>
-      </div>
-    </div>
-  ) : (
-    <div id="mobile-menu" class="hidden md:hidden border-t border-avorix-light bg-white">
-      <div class="px-6 py-4 flex flex-col gap-4">
-        <a href="/en" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.home")}</a>
-        <a href="/en/about" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.about")}</a>
-        <a href="/en/cook-app" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.kochapp")}</a>
-        <a href="/en/product" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.produkt")}</a>
-        <a href="/en/contact" class="text-avorix-gray hover:text-avorix-dark text-sm font-medium">{t("nav.contact")}</a>
-        <LanguageSwitcher />
-      </div>
-    </div>
-  )}
+  </div>
 </header>
 
-<script is:inline>
-  (function() {
-    if (document.querySelector('[data-nav-bound]')) return;
-    var header = document.querySelector('header');
-    if (!header) return;
-    header.setAttribute('data-nav-bound', '1');
+<div
+  id="mobile-nav-overlay"
+  class="nav-mobile-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation"
+>
+  <button id="mobile-close-btn" class="nav-mobile-close" aria-label="Menü schließen">
+    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
 
-    // Mobile menu toggle
-    var btn = document.getElementById('mobile-menu-btn');
-    var menu = document.getElementById('mobile-menu');
-    if (btn && menu) {
-      btn.addEventListener('click', function() {
-        menu.classList.toggle('hidden');
+  <div class="nav-mobile-inner">
+    {lang === "de" ? (
+      <>
+        <div class="mobile-section">
+          <button type="button" class="mobile-section-trigger" aria-expanded="false">
+            Unser System
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="mobile-section-content">
+            <div class="mobile-section-inner">
+              {systemLinks.map(link => (
+                <a href={link.href} class="mobile-section-link">{link.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-section">
+          <button type="button" class="mobile-section-trigger" aria-expanded="false">
+            Für wen
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="mobile-section-content">
+            <div class="mobile-section-inner">
+              {targetLinks.map(link => (
+                <a href={link.href} class="mobile-section-link">{link.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/pilotprogramm" class="nav-mobile-link">
+          Pilotprogramm <sup style="font-size:0.62em; color:var(--akzent-hell);">2026</sup>
+        </a>
+        <a href="/ueber-uns" class="nav-mobile-link">Über uns</a>
+
+        <a href="/kontakt" data-cta-location="header" class="nav-mobile-cta">
+          Demo vereinbaren
+        </a>
+        <div class="nav-mobile-lang">
+          <LanguageSwitcher />
+        </div>
+      </>
+    ) : (
+      <>
+        <a href="/en" class="nav-mobile-link">{t("nav.home")}</a>
+        <a href="/en/about" class="nav-mobile-link">{t("nav.about")}</a>
+        <a href="/en/cook-app" class="nav-mobile-link">{t("nav.kochapp")}</a>
+        <a href="/en/product" class="nav-mobile-link">{t("nav.produkt")}</a>
+        <a href="/en/contact" data-cta-location="header" class="nav-mobile-cta">{t("nav.contact")}</a>
+        <div class="nav-mobile-lang">
+          <LanguageSwitcher />
+        </div>
+      </>
+    )}
+  </div>
+</div>
+
+<script is:inline>
+(function () {
+  if (document.querySelector('[data-nav-v51]')) return;
+  var header = document.querySelector('.site-header');
+  if (header) header.setAttribute('data-nav-v51', '1');
+
+  var btn = document.getElementById('mobile-menu-btn');
+  var overlay = document.getElementById('mobile-nav-overlay');
+  var closeBtn = document.getElementById('mobile-close-btn');
+  var lastFocus = null;
+
+  function openOverlay() {
+    lastFocus = document.activeElement;
+    overlay.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeOverlay() {
+    overlay.classList.remove('is-open');
+    btn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
+
+  if (btn) btn.addEventListener('click', openOverlay);
+  if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+
+  // Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (overlay && overlay.classList.contains('is-open')) {
+        closeOverlay();
+        return;
+      }
+      document.querySelectorAll('.nav-dropdown-menu.is-open').forEach(function (m) {
+        m.classList.remove('is-open');
+        var t = m.closest('.nav-dropdown').querySelector('.nav-dropdown-trigger');
+        if (t) { t.setAttribute('aria-expanded', 'false'); t.focus(); }
       });
     }
+  });
 
-    // Mobile accordion sections
-    document.querySelectorAll('.mobile-accordion-trigger').forEach(function(trigger) {
-      trigger.addEventListener('click', function() {
-        var content = trigger.parentElement.querySelector('.mobile-accordion-content');
-        var expanded = trigger.getAttribute('aria-expanded') === 'true';
-        trigger.setAttribute('aria-expanded', String(!expanded));
-        if (content) content.classList.toggle('hidden');
-        var svg = trigger.querySelector('svg');
-        if (svg) svg.style.transform = expanded ? '' : 'rotate(180deg)';
-      });
-    });
-
-    // Desktop dropdown: click + keyboard + escape
-    document.querySelectorAll('.nav-dropdown').forEach(function(dropdown) {
-      var trigger = dropdown.querySelector('.nav-dropdown-trigger');
-      var menuEl = dropdown.querySelector('.nav-dropdown-menu');
-      if (!trigger || !menuEl) return;
-      var closeTimeout;
-
-      function openMenu() {
-        clearTimeout(closeTimeout);
-        menuEl.classList.remove('hidden');
-        trigger.setAttribute('aria-expanded', 'true');
+  // Mobile accordion
+  document.querySelectorAll('.mobile-section-trigger').forEach(function (trigger) {
+    trigger.addEventListener('click', function () {
+      var expanded = trigger.getAttribute('aria-expanded') === 'true';
+      var content = trigger.nextElementSibling;
+      trigger.setAttribute('aria-expanded', String(!expanded));
+      if (!expanded) {
+        content.classList.add('is-open');
+      } else {
+        content.classList.remove('is-open');
       }
-
-      function closeMenu() {
-        menuEl.classList.add('hidden');
-        trigger.setAttribute('aria-expanded', 'false');
-      }
-
-      // Click toggle
-      trigger.addEventListener('click', function(e) {
-        e.stopPropagation();
-        if (menuEl.classList.contains('hidden')) {
-          // Close other open dropdowns
-          document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
-            if (m !== menuEl) {
-              m.classList.add('hidden');
-              var t = m.parentElement.querySelector('.nav-dropdown-trigger');
-              if (t) t.setAttribute('aria-expanded', 'false');
-            }
-          });
-          openMenu();
-        } else {
-          closeMenu();
-        }
-      });
-
-      // Keyboard: Enter/Space on trigger
-      trigger.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          trigger.click();
-        }
-        if (e.key === 'Escape') {
-          closeMenu();
-          trigger.focus();
-        }
-      });
-
-      // Escape from within menu
-      menuEl.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          closeMenu();
-          trigger.focus();
-        }
-      });
-
-      // Mouse hover (with delay)
-      dropdown.addEventListener('mouseenter', function() {
-        clearTimeout(closeTimeout);
-        openMenu();
-      });
-
-      dropdown.addEventListener('mouseleave', function() {
-        closeTimeout = setTimeout(closeMenu, 150);
-      });
+      var svg = trigger.querySelector('svg');
+      if (svg) svg.style.transform = expanded ? '' : 'rotate(180deg)';
     });
+  });
 
-    // Close dropdowns on click outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.nav-dropdown')) {
-        document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
-          m.classList.add('hidden');
-          var t = m.parentElement.querySelector('.nav-dropdown-trigger');
+  // Desktop dropdowns
+  document.querySelectorAll('.nav-dropdown').forEach(function (dropdown) {
+    var trigger = dropdown.querySelector('.nav-dropdown-trigger');
+    var menuEl = dropdown.querySelector('.nav-dropdown-menu');
+    if (!trigger || !menuEl) return;
+    var closeTimer;
+
+    function openMenu() {
+      clearTimeout(closeTimer);
+      document.querySelectorAll('.nav-dropdown-menu.is-open').forEach(function (m) {
+        if (m !== menuEl) {
+          m.classList.remove('is-open');
+          var t = m.closest('.nav-dropdown').querySelector('.nav-dropdown-trigger');
           if (t) t.setAttribute('aria-expanded', 'false');
-        });
-      }
+        }
+      });
+      menuEl.classList.add('is-open');
+      trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    function closeMenu() {
+      menuEl.classList.remove('is-open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+
+    trigger.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menuEl.classList.contains('is-open') ? closeMenu() : openMenu();
     });
 
-    // Global Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('.nav-dropdown-menu').forEach(function(m) {
-          m.classList.add('hidden');
-          var t = m.parentElement.querySelector('.nav-dropdown-trigger');
-          if (t) t.setAttribute('aria-expanded', 'false');
-        });
-      }
+    trigger.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); trigger.click(); }
+      if (e.key === 'Escape') { closeMenu(); trigger.focus(); }
     });
-  })();
+
+    menuEl.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { closeMenu(); trigger.focus(); }
+    });
+
+    dropdown.addEventListener('mouseenter', function () {
+      clearTimeout(closeTimer); openMenu();
+    });
+    dropdown.addEventListener('mouseleave', function () {
+      closeTimer = setTimeout(closeMenu, 150);
+    });
+  });
+
+  // Click outside closes dropdowns
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-dropdown')) {
+      document.querySelectorAll('.nav-dropdown-menu.is-open').forEach(function (m) {
+        m.classList.remove('is-open');
+        var t = m.closest('.nav-dropdown').querySelector('.nav-dropdown-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+})();
 </script>
