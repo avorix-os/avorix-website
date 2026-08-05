@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Lightbox from "../components/Lightbox.astro";
+import Stempel from "../components/Stempel.astro";
 import kochAppTabletPass from "../assets/bilder/koch-app-tablet-am-pass.jpg";
 import leerenPassMorgens from "../assets/bilder/leerer-pass-morgens.jpg";
 import waageZutaten from "../assets/bilder/waage-zutaten.jpg";
@@ -370,10 +371,10 @@ const schema = [
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-6">Von einem K&uuml;chenchef gebaut. Nicht von Software-Leuten.</h2>
       <div class="grid md:grid-cols-[150px_1fr] gap-6">
-        <div class="w-full h-44 md:h-auto rounded-2xl bg-neutral-100 border-2 border-dashed border-neutral-300 flex items-center justify-center" role="img" aria-label="Foto B&ouml;rge Penk, Kochjacke, echte K&uuml;che"></div>
+        <div class="w-full h-44 md:h-auto flex items-center justify-center" role="img" aria-label="Foto B&ouml;rge Penk, Kochjacke, echte K&uuml;che" style="border-radius:var(--radius); border:1.5px dashed var(--linie); background:var(--flaeche);"></div>
         <div>
           <p class="text-neutral-600 mb-4">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
-          <blockquote class="bg-white rounded-xl p-4 italic text-neutral-800 mb-4">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
+          <blockquote class="italic mb-4" style="color:var(--grau)">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
           <p class="text-neutral-600 text-sm">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
         </div>
       </div>
@@ -435,13 +436,15 @@ const schema = [
     </div>
   </section>
 
-  <!-- Final CTA -->
+  <!-- Peak-End -->
   <section class="py-20 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Der n&auml;chste Schritt ist ein Gespr&auml;ch. Mehr nicht.</h2>
-      <p class="text-neutral-600 mb-6">30 Minuten, kostenlos, unverbindlich. Sie erz&auml;hlen uns von Ihrer K&uuml;che, wir sagen Ihnen ehrlich, ob Avorix zu Ihnen passt und was es kosten w&uuml;rde.</p>
-      <a href="/kontakt" data-cta-location="final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <p class="text-neutral-400 text-sm mt-4">Noch nicht so weit? <a href="/leitfaden" data-cta-location="final-leitfaden" class="text-brand-500 hover:underline">Holen Sie sich unseren kostenlosen Leitfaden: 5 Strategien gegen den Fachkr&auml;ftemangel in der K&uuml;che.</a></p>
+      <div class="mb-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;e-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/kontakt" data-cta-location="final" class="btn btn-primary">Demo vereinbaren</a>
+      <p class="text-sm mt-4">Noch nicht so weit? <a href="/leitfaden" data-cta-location="final-leitfaden" class="hover:underline" style="color:var(--akzent)">Holen Sie sich unseren kostenlosen Leitfaden: 5 Strategien gegen den Fachkr&auml;ftemangel in der K&uuml;che.</a></p>
     </div>
   </section>
 </BaseLayout>
