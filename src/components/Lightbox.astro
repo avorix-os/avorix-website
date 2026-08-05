@@ -1,0 +1,210 @@
+---
+interface Props {
+  label: string;
+  caption: string;
+}
+const { label, caption } = Astro.props;
+---
+
+<figure class="app-screenshot-card">
+  <div class="app-screenshot-card__header">
+    <span class="app-screenshot-card__label">{label}</span>
+  </div>
+  <button
+    class="app-screenshot-trigger"
+    type="button"
+    aria-label={`${label} – vergrößern`}
+    data-lightbox-caption={caption}
+  >
+    <slot />
+  </button>
+  <figcaption class="app-screenshot-caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .app-screenshot-card {
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(110, 106, 96, 0.25);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-screenshot-card__header {
+    background: var(--eisen);
+    padding: 0.5rem 0.875rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .app-screenshot-card__label {
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(247, 246, 242, 0.65);
+  }
+
+  .app-screenshot-trigger {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: none;
+    line-height: 0;
+  }
+
+  .app-screenshot-trigger:focus-visible {
+    outline: 3px solid var(--akzent);
+    outline-offset: -3px;
+  }
+
+  .app-screenshot-caption {
+    font-size: 14px;
+    color: var(--grau);
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-style: italic;
+    background: var(--papier);
+  }
+</style>
+
+<style is:global>
+  #avorix-lb {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 20, 19, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+  #avorix-lb.lb-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  #avorix-lb__img {
+    display: block;
+    max-width: 94vw;
+    max-height: 90vh;
+    object-fit: contain;
+    transform: scale(0.97);
+    opacity: 0;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  }
+  #avorix-lb.lb-open #avorix-lb__img {
+    transform: scale(1);
+    opacity: 1;
+  }
+  #avorix-lb__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 44px;
+    height: 44px;
+    background: none;
+    border: none;
+    color: var(--papier);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  #avorix-lb__close:focus-visible {
+    outline: 3px solid var(--akzent);
+  }
+  #avorix-lb__caption {
+    font-size: 14px;
+    color: rgba(247, 246, 242, 0.7);
+    margin-top: 1rem;
+    text-align: center;
+    max-width: 94vw;
+    font-style: italic;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #avorix-lb,
+    #avorix-lb__img {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  function initLightbox() {
+    if (document.getElementById('avorix-lb')) return;
+
+    const lb = document.createElement('div');
+    lb.id = 'avorix-lb';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Screenshot');
+    lb.setAttribute('aria-hidden', 'true');
+
+    const closeBtn = document.createElement('button');
+    closeBtn.id = 'avorix-lb__close';
+    closeBtn.type = 'button';
+    closeBtn.setAttribute('aria-label', 'Schließen');
+    closeBtn.textContent = '✕';
+
+    const img = document.createElement('img');
+    img.id = 'avorix-lb__img';
+    img.src = '';
+    img.alt = '';
+
+    const captionEl = document.createElement('p');
+    captionEl.id = 'avorix-lb__caption';
+
+    lb.append(closeBtn, img, captionEl);
+    document.body.appendChild(lb);
+
+    let currentTrigger: HTMLElement | null = null;
+
+    function openLightbox(trigger: HTMLElement) {
+      const triggerImg = trigger.querySelector('img');
+      if (!triggerImg) return;
+      currentTrigger = trigger;
+      img.src = triggerImg.currentSrc || triggerImg.src;
+      img.alt = triggerImg.alt;
+      captionEl.textContent = (trigger as HTMLButtonElement).dataset.lightboxCaption ?? '';
+      lb.setAttribute('aria-hidden', 'false');
+      lb.classList.add('lb-open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('lb-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      const t = currentTrigger;
+      currentTrigger = null;
+      t?.focus();
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && lb.classList.contains('lb-open')) closeLightbox();
+    });
+
+    document.querySelectorAll<HTMLElement>('.app-screenshot-trigger').forEach((btn) => {
+      btn.addEventListener('click', () => openLightbox(btn));
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
+</script>

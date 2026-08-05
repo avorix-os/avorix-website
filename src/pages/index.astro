@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import Lightbox from "../components/Lightbox.astro";
 import kochAppTabletPass from "../assets/bilder/koch-app-tablet-am-pass.jpg";
 import leerenPassMorgens from "../assets/bilder/leerer-pass-morgens.jpg";
 import waageZutaten from "../assets/bilder/waage-zutaten.jpg";
@@ -311,7 +312,7 @@ const schema = [
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">So sieht das am Herd aus.</h2>
       <div class="grid md:grid-cols-3 gap-4">
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50">
+        <Lightbox label="REZEPTSCHRITT" caption={`„Jeder Schritt mit Foto, Menge und Zeit. Zum Abhaken.“`}>
           <Image
             src={appKochmodus1}
             alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer"
@@ -321,9 +322,8 @@ const schema = [
             decoding="async"
             class="w-full h-auto"
           />
-          <figcaption class="text-neutral-500 text-sm italic text-center px-4 py-3">&bdquo;Jeder Schritt mit Foto, Menge und Zeit. Zum Abhaken.&ldquo;</figcaption>
-        </figure>
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50">
+        </Lightbox>
+        <Lightbox label="PORTIONSRECHNER" caption={`„Heute 80 Gäste statt 60? Die App rechnet alle Mengen um.“`}>
           <Image
             src={appPortionsrechner}
             alt="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen"
@@ -333,9 +333,8 @@ const schema = [
             decoding="async"
             class="w-full h-auto"
           />
-          <figcaption class="text-neutral-500 text-sm italic text-center px-4 py-3">&bdquo;Heute 80 G&auml;ste statt 60? Die App rechnet alle Mengen um.&ldquo;</figcaption>
-        </figure>
-        <figure class="rounded-2xl overflow-hidden border border-neutral-200 bg-neutral-50">
+        </Lightbox>
+        <Lightbox label="REZEPTBIBLIOTHEK" caption={`„Ihre ganze Karte an einem Ort. Für das ganze Team.“`}>
           <Image
             src={appRezepteListe}
             alt="Screenshot der Avorix Koch-App: Rezeptbibliothek mit Kategorien, Zeiten und Kosten pro Portion"
@@ -345,8 +344,7 @@ const schema = [
             decoding="async"
             class="w-full h-auto"
           />
-          <figcaption class="text-neutral-500 text-sm italic text-center px-4 py-3">&bdquo;Ihre ganze Karte an einem Ort. F&uuml;r das ganze Team.&ldquo;</figcaption>
-        </figure>
+        </Lightbox>
       </div>
       <p class="text-neutral-500 text-sm mt-4">Die App l&auml;uft auf Tablet und Smartphone, direkt im Browser. Es muss nichts installiert werden.</p>
     </div>
