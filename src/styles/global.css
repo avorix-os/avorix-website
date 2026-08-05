@@ -1,38 +1,29 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/inter-variable-latin.woff2") format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 @theme {
-  /* BRAND — Indigo */
-  --color-brand-50:  #EEF2FF;
-  --color-brand-100: #E0E7FF;
-  --color-brand-200: #C7D2FE;
-  --color-brand-300: #A5B4FC;
-  --color-brand-400: #818CF8;
-  --color-brand-500: #6366F1;
-  --color-brand-600: #4F46E5;
-  --color-brand-700: #4338CA;
-  --color-brand-800: #3730A3;
-  --color-brand-900: #312E81;
+  /* BRAND — Kupfer (Bridge: bestehende Utility-Klassen bg-brand-*, text-brand-* lösen jetzt auf Kupfer) */
+  --color-brand-50:  #FDF5EF;
+  --color-brand-100: #FAEADB;
+  --color-brand-200: #F3D0B0;
+  --color-brand-300: #E9A97A;
+  --color-brand-400: #D97D47;
+  --color-brand-500: #A8532B;
+  --color-brand-600: #8A4322;
+  --color-brand-700: #6E3319;
+  --color-brand-800: #562811;
+  --color-brand-900: #3E1D0C;
 
-  /* NEUTRALS */
-  --color-neutral-50:  #FAFAFA;
-  --color-neutral-100: #F5F5F5;
-  --color-neutral-200: #E8E8E8;
-  --color-neutral-300: #D1D5DB;
-  --color-neutral-400: #9A9A9A;
-  --color-neutral-500: #6B7280;
+  /* NEUTRALS — warm, abgestimmt auf Eisen/Papier-Palette */
+  --color-neutral-50:  #FAFAF8;
+  --color-neutral-100: #F7F6F2;
+  --color-neutral-200: #F1EFE9;
+  --color-neutral-300: #E3E2DC;
+  --color-neutral-400: #B0AEA6;
+  --color-neutral-500: #6E6A60;
   --color-neutral-600: #4A4A4A;
-  --color-neutral-700: #374151;
-  --color-neutral-800: #2D2D2D;
-  --color-neutral-900: #1A1A1A;
+  --color-neutral-700: #3A3830;
+  --color-neutral-800: #26251F;
+  --color-neutral-900: #1F1E1A;
   --color-neutral-950: #0C0C0F;
 
   /* SEMANTISCH */
@@ -41,17 +32,18 @@
   --color-warning-100: #FEF3C7;
   --color-warning-500: #F59E0B;
   --color-error-100:   #FEE2E2;
-  --color-error-500:   #EF4444;
+  --color-error-500:   #B3372B;
 
-  /* TYPOGRAPHY */
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+  /* TYPOGRAPHY — System-Schriften, kein Webfont-Download */
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-head: 'Avenir Next', 'Avenir', 'Nunito Sans', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: Menlo, Consolas, monospace;
 
-  /* SHADOWS */
-  --shadow-sm:    0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md:    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg:    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-brand: 0 4px 14px 0 rgb(99 102 241 / 0.3);
+  /* SHADOWS — Kupfer-abgestimmt */
+  --shadow-sm:    0 1px 2px rgba(38,37,31,.05), 0 6px 20px rgba(38,37,31,.06);
+  --shadow-md:    0 4px 10px rgba(38,37,31,.07), 0 16px 36px rgba(38,37,31,.1);
+  --shadow-lg:    0 10px 15px -3px rgba(38,37,31,.1), 0 4px 6px -4px rgba(38,37,31,.1);
+  --shadow-brand: 0 4px 14px 0 rgba(168,83,43,.3);
 
   /* RADIUS */
   --radius-sm:   0.25rem;
@@ -61,26 +53,165 @@
   --radius-2xl:  1rem;
   --radius-full: 9999px;
 
-  /* LEGACY ALIASES (rückwärtskompatibel) */
+  /* LEGACY ALIASES */
   --color-avorix-dark:   var(--color-neutral-900);
   --color-avorix-gray:   var(--color-neutral-600);
-  --color-avorix-silver: var(--color-neutral-400);
+  --color-avorix-silver: var(--color-neutral-500);
   --color-avorix-light:  var(--color-neutral-200);
   --color-avorix-white:  var(--color-neutral-100);
 }
 
 :root {
-  --bg-page:           #FAFAFA;
-  --bg-surface:        #FFFFFF;
-  --bg-surface-raised: #F5F5F5;
-  --bg-inverse:        #1A1A1A;
-  --text-primary:      #1A1A1A;
-  --text-secondary:    #4A4A4A;
+  /* Design-Tokens V5.1 Kupfer */
+  --papier:        #F7F6F2;
+  --flaeche:       #FFFFFF;
+  --eisen:         #26251F;
+  --druck:         #1F1E1A;
+  --grau:          #6E6A60;
+  --linie:         rgba(38,37,31,.14);
+  --akzent:        #A8532B;
+  --akzent-bg:     #A8532B;
+  --akzent-fg:     #FFFFFF;
+  --akzent-hell:   #E09B63;
+  --fehler:        #B3372B;
+  --marker:        #F3D9C8;
+  --flaeche-hover: #F1EFE9;
+
+  --f-head: 'Avenir Next','Avenir','Nunito Sans','Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --f-body: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  --f-mono: Menlo,Consolas,monospace;
+
+  --radius:         6px;
+  --schatten:       0 1px 2px rgba(38,37,31,.05), 0 6px 20px rgba(38,37,31,.06);
+  --schatten-hover: 0 4px 10px rgba(38,37,31,.07), 0 16px 36px rgba(38,37,31,.1);
+
+  /* Semantik-Bridge: bestehende Variablen auf Kupfer-Tokens umleiten */
+  --bg-page:           var(--papier);
+  --bg-surface:        var(--flaeche);
+  --bg-surface-raised: var(--flaeche-hover);
+  --bg-inverse:        var(--eisen);
+  --text-primary:      var(--druck);
+  --text-secondary:    var(--grau);
   --text-tertiary:     #9A9A9A;
-  --text-inverse:      #FAFAFA;
-  --text-brand:        #4F46E5;
-  --border-default:    #E8E8E8;
-  --border-brand:      #6366F1;
-  --brand-primary:     #6366F1;
-  --brand-hover:       #4F46E5;
+  --text-inverse:      var(--papier);
+  --text-brand:        var(--akzent);
+  --border-default:    var(--linie);
+  --border-brand:      var(--akzent);
+  --brand-primary:     var(--akzent);
+  --brand-hover:       #8A4322;
+  --shadow-brand:      0 4px 14px 0 rgba(168,83,43,.3);
+}
+
+/* Body-Basis */
+body {
+  background: var(--papier);
+  color: var(--druck);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Sektionsabstand */
+.section-gap {
+  padding-top: 84px;
+  padding-bottom: 84px;
+}
+@media (max-width: 640px) {
+  .section-gap {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/* Inhaltsbreite */
+.content-width {
+  max-width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Textauswahl */
+::selection {
+  background: var(--marker);
+  color: var(--druck);
+}
+
+/* Fokus: Maus-Klick kein Ring, Tastatur-Tab zeigt ihn */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+*:focus-visible {
+  outline: 3px solid var(--akzent);
+  outline-offset: 2px;
+}
+
+/* Scroll-Verhalten nur bei normaler Bewegungs-Präferenz */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Typografie-Skala */
+h1 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: clamp(30px, 4.4vw, 52px);
+  line-height: 1.14;
+  letter-spacing: -0.008em;
+}
+
+h2 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: clamp(22px, 2.9vw, 32px);
+  line-height: 1.14;
+  letter-spacing: -0.008em;
+}
+
+h3 {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.lead {
+  font-family: var(--f-body);
+  font-size: 18px;
+  max-width: 56ch;
+}
+
+.eyebrow {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--akzent);
+}
+
+/* Betonte Wörter in Headlines: Kupfer ohne Hintergrund */
+h1 mark, h2 mark, h3 mark,
+h1 em,   h2 em,   h3 em {
+  background: none;
+  color: var(--akzent);
+  font-style: normal;
+}
+
+/* Button-Typografie-Basis */
+.btn {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+/* Bildunterschriften */
+figcaption,
+.caption {
+  font-family: var(--f-body);
+  font-size: 14px;
+  color: var(--grau);
 }
