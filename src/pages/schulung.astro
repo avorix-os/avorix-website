@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import Stempel from "../components/Stempel.astro";
 import schulungVonHinten from "../assets/bilder/schulung-von-hinten.jpg";
 import anrichtenHaende from "../assets/bilder/anrichten-haende.jpg";
 
@@ -102,7 +103,7 @@ const schemaOrg = [
 ---
 
 <BaseLayout
-  title="Küchen-Schulung durch erfahrene Köche | Avorix"
+  title="K&uuml;chen-Schulung durch erfahrene K&ouml;che | Avorix"
   description="Ein Avorix-Koch mit Sous-Chef-Erfahrung nimmt Ihre Karte auf und lernt Ihr Team an, direkt am Herd. Als Schulungsblock oder live im Betrieb."
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}
@@ -110,100 +111,102 @@ const schemaOrg = [
 >
 
   <!-- Hero -->
-  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+  <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
     <div class="max-w-4xl mx-auto text-center">
-      <span class="inline-flex items-center gap-2 bg-brand-100 text-brand-700 text-xs font-semibold px-3 py-1 rounded-full mb-6">
-        Modul: Die Schulung
-      </span>
-      <h1 class="text-4xl md:text-6xl font-bold text-neutral-900 mb-6 leading-tight">
-        Ihr Team lernt unser System. Von Köchen, die es selbst können.
+      <p class="eyebrow mb-4">Modul: Die Schulung</p>
+      <h1 class="mb-6 text-center">
+        Ihr Team lernt unser System. Von K&ouml;chen, die es selbst k&ouml;nnen.
       </h1>
-      <p class="text-xl text-neutral-600 leading-relaxed max-w-2xl mx-auto mb-10">
+      <p class="lead mb-10 mx-auto" style="color:var(--grau)">
         Ein Avorix-Koch mit mindestens Sous-Chef-Erfahrung nimmt Ihre Karte auf, legt sie in der Koch-App an und lernt Ihr Team an, direkt am Herd, nicht im Seminarraum.
       </p>
       <a
         href="/kontakt"
         data-cta-location="schulung-hero"
-        class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors"
-      >
-        Demo vereinbaren
-      </a>
-      <p class="text-sm text-neutral-600 mt-6 inline-flex items-center gap-2 bg-neutral-100 px-4 py-2 rounded-full">
-        ✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)
-      </p>
+        class="btn btn-primary"
+      >Demo vereinbaren</a>
+      <div class="mt-6 flex justify-center">
+        <span class="check-badge">
+          <span class="check-badge-mark">&#10003;</span>
+          Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis (Agentur f&uuml;r Arbeit)
+        </span>
+      </div>
       <div class="mt-8">
         <Image
           src={schulungVonHinten}
-          alt="Zwei Köche von hinten am Herd, einer erklärt einen Arbeitsschritt"
+          alt="Zwei K&ouml;che von hinten am Herd, einer erkl&auml;rt einen Arbeitsschritt"
           widths={[480, 800, 1200]}
           sizes="(max-width: 896px) 100vw, 896px"
           loading="eager"
           fetchpriority="high"
-          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+          class="w-full h-64 md:h-80 object-cover"
+          style="border-radius:var(--radius);box-shadow:var(--schatten)"
         />
       </div>
     </div>
   </section>
 
   <!-- Zwei Wege -->
-  <section class="py-16 px-6 border-t border-neutral-200">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 text-center mb-12">
+      <h2 class="text-center mb-12">
         Anlernen, wie es zu Ihrem Betrieb passt.
       </h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Weg 1 -->
-        <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-brand-200 hover:shadow-md transition-all">
-          <div class="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
-            <span class="text-brand-600 font-bold text-sm">1</span>
+        <div class="card">
+          <div class="mb-4">
+            <span class="schritt-chip">1</span>
           </div>
-          <h3 class="text-xl font-semibold text-neutral-900 mb-3">Weg 1: Die Block-Schulung</h3>
-          <p class="text-neutral-600 leading-relaxed">
-            Ein Avorix-Koch kommt für einen Block zu Ihnen: fünf Tage mit je sechs Stunden. Er konzentriert sich ganz auf Ihre Küche, nimmt die Karte auf, dokumentiert, fotografiert und lernt Ihr Team an. Er kocht in dieser Zeit nicht im Service mit, seine ganze Aufmerksamkeit gehört dem Anlernen. Für eine typische Karte rechnen Sie mit zwei Blöcken: erst Aufnahme und Dokumentation, dann die reine Schulung mit dem fertigen Material.
+          <h3 class="mb-3">Weg 1: Die Block-Schulung</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Ein Avorix-Koch kommt f&uuml;r einen Block zu Ihnen: f&uuml;nf Tage mit je sechs Stunden. Er konzentriert sich ganz auf Ihre K&uuml;che, nimmt die Karte auf, dokumentiert, fotografiert und lernt Ihr Team an. Er kocht in dieser Zeit nicht im Service mit, seine ganze Aufmerksamkeit geh&ouml;rt dem Anlernen. F&uuml;r eine typische Karte rechnen Sie mit zwei Bl&ouml;cken: erst Aufnahme und Dokumentation, dann die reine Schulung mit dem fertigen Material.
           </p>
         </div>
         <!-- Weg 2 -->
-        <div class="bg-white rounded-2xl p-8 border border-neutral-200 hover:border-brand-200 hover:shadow-md transition-all">
-          <div class="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center mb-4">
-            <span class="text-brand-600 font-bold text-sm">2</span>
+        <div class="card">
+          <div class="mb-4">
+            <span class="schritt-chip">2</span>
           </div>
-          <h3 class="text-xl font-semibold text-neutral-900 mb-3">Weg 2: Die Live-Schulung</h3>
-          <p class="text-neutral-600 leading-relaxed">
-            Ein Avorix-Koch arbeitet ganz normal in Ihrer Küche mit, macht Bons fertig und produziert, und lernt Ihr Team nebenbei an, mitten im echten Betrieb. Sie bezahlen einen produktiven Koch und bekommen die Schulung dazu.
+          <h3 class="mb-3">Weg 2: Die Live-Schulung</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Ein Avorix-Koch arbeitet ganz normal in Ihrer K&uuml;che mit, macht Bons fertig und produziert, und lernt Ihr Team nebenbei an, mitten im echten Betrieb. Sie bezahlen einen produktiven Koch und bekommen die Schulung dazu.
           </p>
         </div>
       </div>
-      <p class="text-sm text-neutral-600 text-center mt-8 bg-brand-50 rounded-xl px-6 py-3">
-        <strong>Für beide Wege gilt:</strong> Der Avorix-Koch hat mindestens Sous-Chef-Erfahrung. Es schult niemand, der es nicht selbst jeden Tag kann.
+      <p class="text-sm text-center mt-8" style="color:var(--grau)">
+        <strong>F&uuml;r beide Wege gilt:</strong> Der Avorix-Koch hat mindestens Sous-Chef-Erfahrung. Es schult niemand, der es nicht selbst jeden Tag kann.
       </p>
     </div>
   </section>
 
   <!-- Am Herd -->
-  <section class="py-16 px-6 bg-neutral-50">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
+      <h2 class="mb-6">
         Am Herd. Im echten Betrieb. Mit Ihrem eigenen Essen.
       </h2>
-      <p class="text-lg text-neutral-600 leading-relaxed mb-6">
-        Geschult wird nicht mit Beispielrezepten, sondern mit Ihrer Karte. Ihr Team lernt genau die Gerichte, die es ab morgen kocht, mit der App, die ab morgen am Posten hängt. Wer eine Woche so gearbeitet hat, braucht keine Erklärung mehr.
+      <p class="lead mb-6" style="color:var(--grau)">
+        Geschult wird nicht mit Beispielrezepten, sondern mit Ihrer Karte. Ihr Team lernt genau die Gerichte, die es ab morgen kocht, mit der App, die ab morgen am Posten h&auml;ngt. Wer eine Woche so gearbeitet hat, braucht keine Erkl&auml;rung mehr.
       </p>
       <Image
         src={anrichtenHaende}
-        alt="Koch richtet ein Gericht mit einer Anrichtepinzette an, Blick über die Schulter"
+        alt="Koch richtet ein Gericht mit einer Anrichtepinzette an, Blick &uuml;ber die Schulter"
         widths={[480, 800, 1200]}
         sizes="(max-width: 896px) 100vw, 896px"
         loading="lazy"
         decoding="async"
-        class="w-full h-64 md:h-72 object-cover rounded-2xl mb-8"
+        class="w-full h-64 md:h-72 object-cover mb-8"
+        style="border-radius:var(--radius);box-shadow:var(--schatten)"
       />
-      <p class="text-neutral-600 leading-relaxed mb-8">
-        <strong>Und wenn während der Schulung Personal fehlt:</strong> Dafür gibt es unser Personal-Modul, festangestellte Köche, rechtssicher verliehen.
+      <p class="leading-relaxed mb-8" style="color:var(--grau)">
+        <strong>Und wenn w&auml;hrend der Schulung Personal fehlt:</strong> Daf&uuml;r gibt es unser Personal-Modul, festangestellte K&ouml;che, rechtssicher verliehen.
       </p>
       <a
         href="/personal"
         data-cta-location="schulung-personal-link"
-        class="inline-flex items-center gap-2 text-brand-500 font-semibold hover:text-brand-600 transition-colors"
+        class="inline-flex items-center gap-2 font-semibold"
+        style="color:var(--akzent)"
       >
         Zum Personal-Modul
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -214,93 +217,143 @@ const schemaOrg = [
   </section>
 
   <!-- Was kostet das -->
-  <section class="py-16 px-6">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Was kostet das?</h2>
-      <div class="bg-white rounded-2xl p-8 border border-neutral-200">
-        <p class="text-lg text-neutral-600 leading-relaxed mb-6">
-          Klare Stundensätze und Blockpreise, ohne versteckte Posten. Die Zahlen bekommen Sie im Erstgespräch schwarz auf weiß. Für die ersten Betriebe gelten 2026 Pilotkonditionen deutlich unter dem regulären Preis.
+      <h2 class="mb-8">Was kostet das?</h2>
+      <div class="card" style="padding:2rem 2.5rem">
+        <p class="leading-relaxed mb-6" style="color:var(--grau)">
+          Klare Stundens&auml;tze und Blockpreise, ohne versteckte Posten. Die Zahlen bekommen Sie im Erstgespr&auml;ch schwarz auf wei&szlig;. F&uuml;r die ersten Betriebe gelten 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.
         </p>
         <a
           href="/kontakt"
           data-cta-location="schulung-kosten"
-          class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors"
-        >
-          Demo vereinbaren
-        </a>
+          class="btn btn-primary"
+        >Demo vereinbaren</a>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 px-6 bg-neutral-50">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-10 text-center">Häufige Fragen</h2>
-      <div class="space-y-4">
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
-          <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Wer sind die Avorix-Köche?
-            <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">
-            Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantküchen. Wer bei uns schult, hat mindestens Sous-Chef-Erfahrung.
-          </p>
+      <h2 class="text-center mb-10">H&auml;ufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wer sind die Avorix-K&ouml;che?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Fest angestellte Profis mit Berufserfahrung in Hotel- und Restaurantk&uuml;chen. Wer bei uns schult, hat mindestens Sous-Chef-Erfahrung.</p></div></div>
         </details>
-
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
-          <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Was ist, wenn der Koch nicht zu unserem Team passt?
-            <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">
-            Dann sprechen Sie mit uns, und wir finden eine Lösung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist, wenn der Koch nicht zu unserem Team passt?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Dann sprechen Sie mit uns, und wir finden eine L&ouml;sung. Es bringt niemandem etwas, wenn die Chemie nicht stimmt.</p></div></div>
         </details>
-
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
-          <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Wie schnell ist mein Team fit?
-            <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">
-            Wer eine Woche mit der App gekocht hat, braucht sie nicht mehr erklärt zu bekommen. Für eine typische Karte rechnen Sie mit zwei Blöcken.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Wie schnell ist mein Team fit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Wer eine Woche mit der App gekocht hat, braucht sie nicht mehr erkl&auml;rt zu bekommen. F&uuml;r eine typische Karte rechnen Sie mit zwei Bl&ouml;cken.</p></div></div>
         </details>
-
-        <details class="border border-neutral-200 rounded-xl p-4 bg-white group">
-          <summary class="font-semibold text-neutral-900 cursor-pointer list-none flex items-center justify-between">
-            Arbeiten die Köche mit der Koch-App?
-            <svg class="w-5 h-5 text-neutral-400 group-open:rotate-180 transition-transform shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-            </svg>
-          </summary>
-          <p class="text-neutral-600 mt-3 leading-relaxed">
-            Ja. Dadurch hinterlässt jeder Einsatz dokumentiertes Wissen in Ihrer Küche.
-          </p>
+        <details class="faq-item">
+          <summary class="faq-q">Arbeiten die K&ouml;che mit der Koch-App?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Dadurch hinterl&auml;sst jeder Einsatz dokumentiertes Wissen in Ihrer K&uuml;che.</p></div></div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- Final CTA -->
-  <section class="py-20 px-6">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">
-        Sagen Sie uns, was Ihrer Küche fehlt.
-      </h2>
+  <!-- Final CTA → Peak-End (3.18) -->
+  <section class="py-20 px-6" style="border-top:1px solid var(--linie)">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="mb-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
       <a
         href="/kontakt"
         data-cta-location="schulung-final"
-        class="inline-block bg-brand-500 text-white px-10 py-4 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors shadow-lg shadow-brand-200"
-      >
-        Demo vereinbaren
-      </a>
+        class="btn btn-primary"
+      >Demo vereinbaren</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+/* FAQ-Accordion (3.13) */
+.faq-list {
+  border-top: 1px solid var(--linie);
+}
+.faq-item {
+  border-bottom: 1px solid var(--linie);
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-primary, #1C1B16);
+  padding: 18px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  color: var(--akzent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item.faq-closing > summary .faq-chevron {
+  transform: rotate(0deg);
+}
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+.faq-item[open] > .faq-body {
+  grid-template-rows: 1fr;
+}
+.faq-item.faq-closing > .faq-body {
+  grid-template-rows: 0fr;
+}
+.faq-inner {
+  min-height: 0;
+}
+.faq-inner p {
+  font-size: 16px;
+  color: var(--grau);
+  padding-bottom: 18px;
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-body,
+  .faq-chevron {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+/* FAQ-Schlie&szlig;-Animation &mdash; progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
