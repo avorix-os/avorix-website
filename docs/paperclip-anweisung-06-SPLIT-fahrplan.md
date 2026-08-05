@@ -7,7 +7,9 @@ zuverlässig fehlerfrei umgesetzt, große Sammelaufträge nicht.
 
 **Quelle der Wahrheit:** `docs/paperclip-anweisung-06-design-meisterbetrieb-kupfer.md`
 (Tokens = Abschnitt 1, Typo = Abschnitt 2, Komponenten = Abschnitt 3, Effekte = 4, Bilder = 5,
-Responsive = 6, Abnahme = 7). Visuelle Referenz: `docs/avorix-design-v5.1-meisterbetrieb-kupfer.pdf`.
+Responsive = 6, Abnahme = 7). Visuelle Referenzen: `docs/avorix-design-v5.1-meisterbetrieb-kupfer.pdf`
+und `docs/referenz-v5.1-kupfer.html` (dieselben Seiten als HTML zum Nachmessen; die Tokens im
+Anweisungstext bleiben die Wahrheit).
 
 **Harte Rahmenregeln für JEDE Einheit (aus Abschnitt 0):**
 - Nur die visuelle Schicht ändern. Texte, Seitenstruktur, URLs, Tracking (GTM/GA4, dataLayer,
@@ -52,6 +54,5 @@ ist ein separater, bewusster Schritt (Deploy manuell auf VPS 72.61.184.225).
 **Nicht frei gestalten:** Findet der CTO eine Komponente, die in Abschnitt 3 fehlt, wird sie VOR der
 Umsetzung gemeldet (Regel 0.6), nicht erfunden.
 
-**Offener Punkt (gemeldet):** Die in Abschnitt 5/Kopf genannte zweite Referenz
-`referenz-v5.1-kupfer.html` wurde NICHT mitgeliefert (nur das PDF liegt vor). Tokens stehen
-vollständig im Anweisungstext; die HTML ist nur zum Nachmessen. Kein Blocker.
+**Erledigt:** Die zweite Referenz `referenz-v5.1-kupfer.html` wurde nachgeliefert und liegt jetzt
+unter `docs/referenz-v5.1-kupfer.html`. Beide verbindlichen Referenzen (PDF + HTML) sind damit im Repo.
