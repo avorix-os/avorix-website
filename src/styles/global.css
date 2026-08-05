@@ -272,3 +272,86 @@ figcaption,
   font-weight: 700;
   flex-shrink: 0;
 }
+
+/* === Karten-System (V5.1 · 3.5 / 3.6 / 3.7) === */
+
+/* Karte (3.5): weiße Fläche, 1px Linie, Radius, Schatten + Hover-Lift */
+.card {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--schatten);
+  transition: transform .18s, box-shadow .18s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--schatten-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+  .card:hover { transform: none; }
+}
+
+/* Modul-Karte (3.6): wie .card + Kopfzeile mit mono-Label + Speisekarten-Punktlinie */
+.card-modul {
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--schatten);
+  transition: transform .18s, box-shadow .18s;
+}
+.card-modul:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--schatten-hover);
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-modul { transition: none; }
+  .card-modul:hover { transform: none; }
+}
+.card-modul-header {
+  display: flex;
+  align-items: flex-end;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+.card-modul-label {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: var(--akzent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.card-modul-leader {
+  flex: 1;
+  height: 0;
+  border-bottom: 1.5px dotted rgba(38,37,31,.35);
+  margin-bottom: 2px;
+}
+
+/* Nummerierter Schritt (3.7): Kupfer-Mono-Chip, kein Vollfarb-Kreis */
+.schritt {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.schritt-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--f-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--akzent);
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  min-width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
