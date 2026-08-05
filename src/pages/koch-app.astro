@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import Lightbox from "../components/Lightbox.astro";
+import Stempel from "../components/Stempel.astro";
 import appKochmodus1 from "../assets/bilder/app-kochmodus-schritt1.png";
 import appKochmodus2Haccp from "../assets/bilder/app-kochmodus-schritt2-haccp.png";
 import appPortionsrechner from "../assets/bilder/app-rezept-detail-portionsrechner.png";
@@ -14,8 +16,8 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
 ---
 
 <BaseLayout
-  title="Die Avorix Koch-App: Schritt für Schritt kochen | Avorix"
-  description="Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Menüplaner, Einkaufslisten und Kalkulation. Die Koch-App für Hotel- und Restaurantküchen."
+  title="Die Avorix Koch-App: Schritt f&uuml;r Schritt kochen | Avorix"
+  description="Rezepte mit Fotos, Mengen und Zeiten, Portionsrechner, Men&uuml;planer, Einkaufslisten und Kalkulation. Die Koch-App f&uuml;r Hotel- und Restaurantk&uuml;chen."
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}
 >
@@ -59,25 +61,31 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   })} />
 
   <!-- Hero -->
-  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
-    <div class="max-w-4xl mx-auto">
-      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Die Koch-App</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">Ihr Küchenwissen. Zum Abhaken.</h1>
-      <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed mb-6">
-        Die Avorix Koch-App führt jede Kraft Schritt für Schritt durch Ihre Karte. Foto ansehen, Menge abwiegen, Haken setzen, fertig. So kocht Ihr Team jeden Tag auf Ihrem Niveau. <strong class="text-neutral-900">Auch ohne ausgebildete Köche.</strong>
-      </p>
-      <a href="/kontakt" data-cta-location="kochapp-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <figure class="mt-8 rounded-2xl overflow-hidden border border-neutral-200">
-        <Image
-          src={appKochmodus1}
-          alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer"
-          widths={[480, 800, 1200]}
-          sizes="(max-width: 896px) 100vw, 896px"
-          loading="eager"
-          fetchpriority="high"
-          class="w-full h-auto"
-        />
-      </figure>
+  <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
+    <div class="max-w-5xl mx-auto flex flex-col gap-8 md:flex-row md:gap-12 md:items-center">
+      <!-- Screenshot: mobil oben, Desktop rechts -->
+      <div class="w-full md:w-[48%] md:order-2" style="border-radius:var(--radius);box-shadow:var(--schatten);overflow:hidden">
+        <Lightbox label="KOCHMODUS" caption="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer">
+          <Image
+            src={appKochmodus1}
+            alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 896px) 100vw, 528px"
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+      </div>
+      <!-- Text: mobil unten, Desktop links -->
+      <div class="md:w-[52%] md:order-1">
+        <p class="eyebrow mb-4">Die Koch-App</p>
+        <h1 class="mb-6">Ihr K&uuml;chenwissen. Zum Abhaken.</h1>
+        <p class="lead mb-6" style="color:var(--grau)">
+          Die Avorix Koch-App f&uuml;hrt jede Kraft Schritt f&uuml;r Schritt durch Ihre Karte. Foto ansehen, Menge abwiegen, Haken setzen, fertig. So kocht Ihr Team jeden Tag auf Ihrem Niveau. <strong style="color:var(--druck)">Auch ohne ausgebildete K&ouml;che.</strong>
+        </p>
+        <a href="/kontakt" data-cta-location="kochapp-hero" class="btn btn-primary">Demo vereinbaren</a>
+      </div>
     </div>
   </section>
 
@@ -86,8 +94,8 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
     <div class="max-w-5xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">Was die App kann. Gezeigt, nicht behauptet.</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
-          <figure>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="HACCP-KONTROLLE" caption="Screenshot der Avorix Koch-App: Arbeitsschritt mit rotem HACCP-Kontrollpunkt und 75 Grad Kerntemperatur">
             <Image
               src={appKochmodus2Haccp}
               alt="Screenshot der Avorix Koch-App: Arbeitsschritt mit rotem HACCP-Kontrollpunkt und 75 Grad Kerntemperatur"
@@ -97,14 +105,14 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
               decoding="async"
               class="w-full h-auto"
             />
-          </figure>
+          </Lightbox>
           <div class="p-6">
-            <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Schritt-für-Schritt-Führung</h3>
+            <h3 class="font-bold text-neutral-900 mb-3">1 &middot; Schritt-f&uuml;r-Schritt-F&uuml;hrung</h3>
             <p class="text-neutral-600 text-sm">Jedes Gericht als klare Abfolge: Foto, Mengenangabe, Zeit. Kein Interpretationsspielraum, keine Fehler.</p>
           </div>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
-          <figure>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="PORTIONSRECHNER" caption="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen">
             <Image
               src={appPortionsrechner}
               alt="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen"
@@ -114,14 +122,14 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
               decoding="async"
               class="w-full h-auto"
             />
-          </figure>
+          </Lightbox>
           <div class="p-6">
             <h3 class="font-bold text-neutral-900 mb-3">2 &middot; Automatischer Portionsrechner</h3>
-            <p class="text-neutral-600 text-sm">Heute 80 Gäste statt 60? Die App skaliert alle Mengen automatisch auf die benötigte Portionszahl. Kein Nachrechnen, kein Zettel.</p>
+            <p class="text-neutral-600 text-sm">Heute 80 G&auml;ste statt 60? Die App skaliert alle Mengen automatisch auf die ben&ouml;tigte Portionszahl. Kein Nachrechnen, kein Zettel.</p>
           </div>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl overflow-hidden">
-          <figure>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="REZEPTBIBLIOTHEK" caption="Screenshot der Avorix Koch-App: Rezeptbibliothek mit Kategorien, Zeiten und Kosten pro Portion">
             <Image
               src={appRezepteListe}
               alt="Screenshot der Avorix Koch-App: Rezeptbibliothek mit Kategorien, Zeiten und Kosten pro Portion"
@@ -131,19 +139,19 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
               decoding="async"
               class="w-full h-auto"
             />
-          </figure>
+          </Lightbox>
           <div class="p-6">
             <h3 class="font-bold text-neutral-900 mb-3">3 &middot; Die Rezeptbibliothek</h3>
-            <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, für das ganze Team. Saisonkarte, Standards, Beilagen, alles auffindbar in Sekunden.</p>
+            <p class="text-neutral-600 text-sm">Ihre ganze Karte an einem Ort, f&uuml;r das ganze Team. Saisonkarte, Standards, Beilagen, alles auffindbar in Sekunden.</p>
           </div>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
+        <div class="card">
           <h3 class="font-bold text-neutral-900 mb-3">4 &middot; Wareneinsatz im Blick</h3>
           <p class="text-neutral-600 text-sm">Rezeptbasierte Kalkulation und Wareneinsatz-Auswertung. Sie sehen, was jeder Teller wirklich kostet.</p>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">5 &middot; Läuft überall in der Küche</h3>
-          <p class="text-neutral-600 text-sm">Auf Tablet und Smartphone, direkt am Posten. Die App läuft im Browser, es muss nichts installiert werden. Sie brauchen nur eine Internetverbindung in der Küche.</p>
+        <div class="card">
+          <h3 class="font-bold text-neutral-900 mb-3">5 &middot; L&auml;uft &uuml;berall in der K&uuml;che</h3>
+          <p class="text-neutral-600 text-sm">Auf Tablet und Smartphone, direkt am Posten. Die App l&auml;uft im Browser, es muss nichts installiert werden. Sie brauchen nur eine Internetverbindung in der K&uuml;che.</p>
         </div>
       </div>
     </div>
@@ -152,21 +160,23 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   <!-- Küchenorganisation -->
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und die App organisiert gleich die ganze Küche mit.</h2>
-      <figure class="mb-8 rounded-2xl overflow-hidden border border-neutral-200">
-        <Image
-          src={appDashboard}
-          alt="Screenshot der Avorix Koch-App: Dashboard mit den Modulen der Küchenverwaltung"
-          widths={[480, 800, 1200]}
-          sizes="(max-width: 1024px) 100vw, 1024px"
-          loading="lazy"
-          decoding="async"
-          class="w-full h-auto"
-        />
-      </figure>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und die App organisiert gleich die ganze K&uuml;che mit.</h2>
+      <div class="mb-8">
+        <Lightbox label="DASHBOARD" caption="Screenshot der Avorix Koch-App: Dashboard mit den Modulen der K&uuml;chenverwaltung">
+          <Image
+            src={appDashboard}
+            alt="Screenshot der Avorix Koch-App: Dashboard mit den Modulen der K&uuml;chenverwaltung"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+      </div>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white border border-neutral-200 rounded-2xl overflow-hidden">
-          <figure>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="MENUPLANER" caption="Screenshot der Avorix Koch-App: Wochenplan mit Mittagessen und Abendessen inklusive Portionszahlen">
             <Image
               src={appMenuplaner}
               alt="Screenshot der Avorix Koch-App: Wochenplan mit Mittagessen und Abendessen inklusive Portionszahlen"
@@ -176,14 +186,14 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
               decoding="async"
               class="w-full h-auto"
             />
-          </figure>
+          </Lightbox>
           <div class="p-6">
-            <h3 class="font-bold text-neutral-900 mb-3">Menüplaner</h3>
-            <p class="text-neutral-600 text-sm">Speisen jeder Kalenderwoche planen, mit Mahlzeiten, Portionen und Notizen. Bewährte Wochen kopieren Sie einfach in die nächste.</p>
+            <h3 class="font-bold text-neutral-900 mb-3">Men&uuml;planer</h3>
+            <p class="text-neutral-600 text-sm">Speisen jeder Kalenderwoche planen, mit Mahlzeiten, Portionen und Notizen. Bew&auml;hrte Wochen kopieren Sie einfach in die n&auml;chste.</p>
           </div>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl overflow-hidden">
-          <figure>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="EINKAUFSLISTE" caption="Screenshot der Avorix Koch-App: Einkaufsliste mit Mengen, Einheiten und abgehakten Positionen">
             <Image
               src={appEinkaufsliste}
               alt="Screenshot der Avorix Koch-App: Einkaufsliste mit Mengen, Einheiten und abgehakten Positionen"
@@ -193,27 +203,27 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
               decoding="async"
               class="w-full h-auto"
             />
-          </figure>
+          </Lightbox>
           <div class="p-6">
             <h3 class="font-bold text-neutral-900 mb-3">Einkaufslisten auf Knopfdruck</h3>
-            <p class="text-neutral-600 text-sm">Aus dem fertigen Menüplan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, geschätzte Preise. Beim Einkaufen haken Sie ab.</p>
+            <p class="text-neutral-600 text-sm">Aus dem fertigen Men&uuml;plan erzeugt die App die Einkaufsliste: Positionen, Mengen, Einheiten, gesch&auml;tzte Preise. Beim Einkaufen haken Sie ab.</p>
           </div>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+        <div class="card">
           <h3 class="font-bold text-neutral-900 mb-3">Kalkulation bis zum Verkaufspreis</h3>
           <p class="text-neutral-600 text-sm">Rohstoffkosten, Gemeinkosten und Gewinnaufschlag eintragen, und die App rechnet den Preis pro Portion.</p>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+        <div class="card">
           <h3 class="font-bold text-neutral-900 mb-3">Dienstplan</h3>
           <p class="text-neutral-600 text-sm">Schichten pro Mitarbeiter und Tag, mit eigenen Schichttypen und Wochenansicht.</p>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+        <div class="card">
           <h3 class="font-bold text-neutral-900 mb-3">Zeiterfassung</h3>
           <p class="text-neutral-600 text-sm">Ein- und ausstempeln direkt in der App, mit Monatsauswertung der Stunden.</p>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
+        <div class="card">
           <h3 class="font-bold text-neutral-900 mb-3">Klare Rollen</h3>
-          <p class="text-neutral-600 text-sm">Ihr Souschef sieht den Plan, ändern kann ihn nur der Küchenchef. Jeder sieht genau das, was er braucht.</p>
+          <p class="text-neutral-600 text-sm">Ihr Souschef sieht den Plan, &auml;ndern kann ihn nur der K&uuml;chenchef. Jeder sieht genau das, was er braucht.</p>
         </div>
       </div>
     </div>
@@ -225,21 +235,21 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">So sieht ein normaler Tag damit aus.</h2>
       <div class="space-y-6">
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#9728;</div>
+          <div class="schritt-chip shrink-0" style="font-size:18px">&#9728;</div>
           <div>
             <h3 class="font-bold text-neutral-900">Morgens</h3>
-            <p class="text-neutral-600 text-sm mt-1">Die Vorbereitung läuft nach Liste. Jeder weiß, was heute vorproduziert wird, in welcher Menge, für wie viele Gäste.</p>
+            <p class="text-neutral-600 text-sm mt-1">Die Vorbereitung l&auml;uft nach Liste. Jeder wei&szlig;, was heute vorproduziert wird, in welcher Menge, f&uuml;r wie viele G&auml;ste.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#127869;</div>
+          <div class="schritt-chip shrink-0" style="font-size:18px">&#127869;</div>
           <div>
             <h3 class="font-bold text-neutral-900">Im Service</h3>
-            <p class="text-neutral-600 text-sm mt-1">Am Posten hängt das Tablet. Bestellung kommt rein, die Kraft öffnet das Gericht, arbeitet die Schritte ab. Das Ergebnis sieht aus und schmeckt wie immer.</p>
+            <p class="text-neutral-600 text-sm mt-1">Am Posten h&auml;ngt das Tablet. Bestellung kommt rein, die Kraft &ouml;ffnet das Gericht, arbeitet die Schritte ab. Das Ergebnis sieht aus und schmeckt wie immer.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0 text-lg">&#127769;</div>
+          <div class="schritt-chip shrink-0" style="font-size:18px">&#127769;</div>
           <div>
             <h3 class="font-bold text-neutral-900">Abends</h3>
             <p class="text-neutral-600 text-sm mt-1">Der Wareneinsatz des Tages ist dokumentiert, ohne dass jemand etwas aufschreiben musste.</p>
@@ -252,7 +262,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   <!-- Eigentum -->
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Wem gehört das alles?</h2>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Wem geh&ouml;rt das alles?</h2>
       <p class="text-neutral-600">Ihnen. Ihre Rezepte bleiben Ihr Eigentum und werden nicht an andere Betriebe weitergegeben. Wenn Sie Avorix verlassen, nehmen Sie Ihre Dokumentation mit.</p>
     </div>
   </section>
@@ -260,28 +270,28 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   <!-- Einpflegen -->
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Sie müssen nichts einpflegen. Das machen wir.</h2>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Sie m&uuml;ssen nichts einpflegen. Das machen wir.</h2>
       <p class="text-neutral-600 mb-6">Ein Avorix-Koch nimmt Ihre Karte bei Ihnen vor Ort auf: kochen, dokumentieren, fotografieren, anlegen. Danach schult er Ihr Team direkt am Herd.</p>
-      <a href="/system" data-cta-location="kochapp-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das Avorix-System</a>
+      <a href="/system" data-cta-location="kochapp-system" class="btn btn-secondary">So funktioniert das Avorix-System</a>
     </div>
   </section>
 
   <!-- FAQ -->
   <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Häufige Fragen</h2>
-      <div class="space-y-3">
-        <details open class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Auf welchen Geräten läuft die App?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Auf Tablet und Smartphone, direkt in der Küche.</p>
+      <h2 class="text-3xl font-bold text-neutral-900 mb-8">H&auml;ufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Auf welchen Ger&auml;ten l&auml;uft die App?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Auf Tablet und Smartphone, direkt in der K&uuml;che.</p></div></div>
         </details>
-        <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Brauchen wir Internet in der Küche?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Die App läuft im Browser und braucht eine Internetverbindung in der Küche, WLAN oder Mobilfunk.</p>
+        <details class="faq-item">
+          <summary class="faq-q">Brauchen wir Internet in der K&uuml;che?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Die App l&auml;uft im Browser und braucht eine Internetverbindung in der K&uuml;che, WLAN oder Mobilfunk.</p></div></div>
         </details>
-        <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Kann unser Team neue Gerichte selbst anlegen?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Nach der Schulung pflegen Sie neue Gerichte selbst ein, oder wir übernehmen das für Sie.</p>
+        <details class="faq-item">
+          <summary class="faq-q">Kann unser Team neue Gerichte selbst anlegen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Nach der Schulung pflegen Sie neue Gerichte selbst ein, oder wir &uuml;bernehmen das f&uuml;r Sie.</p></div></div>
         </details>
       </div>
     </div>
@@ -290,9 +300,95 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   <!-- Final CTA -->
   <section class="py-20 px-6 border-t border-neutral-100">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Sehen Sie die App live. An Ihrem eigenen Gericht.</h2>
-      <p class="text-neutral-600 mb-6">In der Demo legen wir beispielhaft eines Ihrer Gerichte an. Dann sehen Sie in 30 Minuten, wie Ihre Karte in der App aussieht.</p>
-      <a href="/kontakt" data-cta-location="kochapp-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
+      <div class="mb-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/kontakt" data-cta-location="kochapp-final" class="btn btn-primary">Demo vereinbaren</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+/* FAQ-Accordion (3.13) — Einheit 8 */
+.faq-list {
+  border-top: 1px solid var(--linie);
+}
+.faq-item {
+  border-bottom: 1px solid var(--linie);
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-primary, #1C1B16);
+  padding: 18px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  color: var(--akzent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item.faq-closing > summary .faq-chevron {
+  transform: rotate(0deg);
+}
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+.faq-item[open] > .faq-body {
+  grid-template-rows: 1fr;
+}
+.faq-item.faq-closing > .faq-body {
+  grid-template-rows: 0fr;
+}
+.faq-inner {
+  min-height: 0;
+}
+.faq-inner p {
+  font-size: 16px;
+  color: var(--grau);
+  padding-bottom: 18px;
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-body,
+  .faq-chevron {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+/* FAQ-Schlie&szlig;-Animation &mdash; progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
