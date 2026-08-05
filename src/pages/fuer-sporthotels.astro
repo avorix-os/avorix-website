@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
+import Stempel from "../components/Stempel.astro";
 import sporthotelSpeisesaal from "../assets/bilder/sporthotel-speisesaal.jpg";
 
 const ogImg = await getImage({ src: sporthotelSpeisesaal, width: 1200, format: "jpeg" });
@@ -8,8 +9,8 @@ const ogImageAlt = "Moderner Speisesaal eines Sporthotels mit Bergpanorama";
 ---
 
 <BaseLayout
-  title="Küchensystem für Sporthotels | Avorix"
-  description="Halbpension, Gruppen und Trainingslager mit halber Mannschaft stemmen: Avorix macht Ihre Sporthotel-Küche verlässlich."
+  title="K&uuml;chensystem f&uuml;r Sporthotels | Avorix"
+  description="Halbpension, Gruppen und Trainingslager mit halber Mannschaft stemmen: Avorix macht Ihre Sporthotel-K&uuml;che verl&auml;sslich."
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}
 >
@@ -46,16 +47,20 @@ const ogImageAlt = "Moderner Speisesaal eines Sporthotels mit Bergpanorama";
   })} />
 
   <!-- Hero -->
-  <section class="pt-28 pb-16 px-6 bg-gradient-to-b from-brand-50/50 to-white">
+  <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
     <div class="max-w-4xl mx-auto">
-      <p class="text-sm font-bold tracking-widest uppercase text-brand-500 mb-4">Für Sporthotels</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-neutral-900 leading-tight mb-6">Ihre Gäste bringen Leistung. Ihre Küche auch. Egal wer gerade kocht.</h1>
-      <p class="text-lg text-neutral-600 max-w-3xl leading-relaxed mb-6">
-        Halbpension auf Niveau, Gruppen-Menüs in Stückzahl, Saisonkräfte ab Tag eins produktiv: Avorix macht Ihre Sporthotel-Küche unabhängig davon, wen Sie diese Saison gefunden haben.
+      <p class="eyebrow mb-4">F&uuml;r Sporthotels</p>
+      <h1 class="mb-6">
+        Ihre G&auml;ste bringen Leistung. Ihre K&uuml;che auch. Egal wer gerade kocht.
+      </h1>
+      <p class="lead mb-6" style="color:var(--grau)">
+        Halbpension auf Niveau, Gruppen-Men&uuml;s in St&uuml;ckzahl, Saisonkr&auml;fte ab Tag eins produktiv: Avorix macht Ihre Sporthotel-K&uuml;che unabh&auml;ngig davon, wen Sie diese Saison gefunden haben.
       </p>
-      <a href="/kontakt" data-cta-location="sporthotels-hero" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
-      <div class="mt-4">
-        <span class="text-sm text-neutral-600">✓ Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/kontakt" data-cta-location="sporthotels-hero" class="btn btn-primary">Demo vereinbaren</a>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis (Agentur f&uuml;r Arbeit)</span>
       </div>
       <div class="mt-8">
         <Image
@@ -65,122 +70,210 @@ const ogImageAlt = "Moderner Speisesaal eines Sporthotels mit Bergpanorama";
           sizes="(max-width: 896px) 100vw, 896px"
           loading="eager"
           fetchpriority="high"
-          class="w-full h-64 md:h-80 object-cover rounded-2xl"
+          class="w-full h-64 md:h-80 object-cover"
+          style="border-radius:var(--radius);box-shadow:var(--schatten)"
         />
       </div>
     </div>
   </section>
 
   <!-- Problem -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Halbpension auf Niveau. Mit halber Mannschaft.</h2>
+      <h2 class="mb-8">Halbpension auf Niveau. Mit halber Mannschaft.</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Aktive Gäste verzeihen wenig.</h3>
-          <p class="text-neutral-600 text-sm">Wer tagsüber Leistung bringt, erwartet abends verlässlich gutes Essen. Jeden Abend, die ganze Saison.</p>
+        <div class="card">
+          <h3 class="mb-3">Aktive G&auml;ste verzeihen wenig.</h3>
+          <p class="text-sm" style="color:var(--grau)">Wer tags&uuml;ber Leistung bringt, erwartet abends verl&auml;sslich gutes Essen. Jeden Abend, die ganze Saison.</p>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Gruppen sprengen jede Routine.</h3>
-          <p class="text-neutral-600 text-sm">Trainingslager, Vereine, Camps: 60 Essen auf einmal, zusätzlich zum Haus. Ihr Stammteam federt das nicht ab.</p>
+        <div class="card">
+          <h3 class="mb-3">Gruppen sprengen jede Routine.</h3>
+          <p class="text-sm" style="color:var(--grau)">Trainingslager, Vereine, Camps: 60 Essen auf einmal, zus&auml;tzlich zum Haus. Ihr Stammteam federt das nicht ab.</p>
         </div>
-        <div class="bg-neutral-50 border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Saisonkräfte kommen ohne Einarbeitung.</h3>
-          <p class="text-neutral-600 text-sm">Und gehen nach einer Saison wieder. Jedes Jahr fängt Ihre Küche von vorn an.</p>
+        <div class="card">
+          <h3 class="mb-3">Saisonkr&auml;fte kommen ohne Einarbeitung.</h3>
+          <p class="text-sm" style="color:var(--grau)">Und gehen nach einer Saison wieder. Jedes Jahr f&auml;ngt Ihre K&uuml;che von vorn an.</p>
         </div>
       </div>
-      <p class="text-neutral-600 mt-6">Wenn die Küche wackelt, wackelt der Ruf des Hauses. Und der entscheidet, ob die Gruppe nächstes Jahr wiederkommt.</p>
+      <p class="mt-6" style="color:var(--grau)">Wenn die K&uuml;che wackelt, wackelt der Ruf des Hauses. Und der entscheidet, ob die Gruppe n&auml;chstes Jahr wiederkommt.</p>
     </div>
   </section>
 
   <!-- System -->
-  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-5xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Das Avorix-System: drei Bausteine für eine Küche, die durchhält.</h2>
+      <h2 class="mb-8">Das Avorix-System: drei Bausteine f&uuml;r eine K&uuml;che, die durchh&auml;lt.</h2>
       <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Unser System</h3>
-          <p class="text-neutral-600 text-sm">Ihre Halbpensions-Zyklen und Menüfolgen als Schritt-für-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Der Portionsrechner skaliert jedes Gericht automatisch von 40 auf 100 Essen.</p>
+        <div class="card">
+          <h3 class="mb-3">Unser System</h3>
+          <p class="text-sm" style="color:var(--grau)">Ihre Halbpensions-Zyklen und Men&uuml;folgen als Schritt-f&uuml;r-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Der Portionsrechner skaliert jedes Gericht automatisch von 40 auf 100 Essen.</p>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Die Schulung</h3>
-          <p class="text-neutral-600 text-sm">Ein Avorix-Koch (mindestens Sous-Chef-Erfahrung) nimmt Ihre Karte auf und lernt Ihr Team an.</p>
+        <div class="card">
+          <h3 class="mb-3">Die Schulung</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein Avorix-Koch (mindestens Sous-Chef-Erfahrung) nimmt Ihre Karte auf und lernt Ihr Team an.</p>
         </div>
-        <div class="bg-white border border-neutral-200 rounded-2xl p-6">
-          <h3 class="font-bold text-neutral-900 mb-3">Die Verstärkung</h3>
-          <p class="text-neutral-600 text-sm">Für die Saison leihen wir Ihnen festangestellte Köche aus. Rechtssicher, mit Arbeitnehmerüberlassungserlaubnis.</p>
+        <div class="card">
+          <h3 class="mb-3">Die Verst&auml;rkung</h3>
+          <p class="text-sm" style="color:var(--grau)">F&uuml;r die Saison leihen wir Ihnen festangestellte K&ouml;che aus. Rechtssicher, mit Arbeitnehmer&uuml;berlassungserlaubnis.</p>
         </div>
       </div>
       <div class="mt-8">
-        <a href="/system" data-cta-location="sporthotels-system" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">So funktioniert das System</a>
+        <a href="/system" data-cta-location="sporthotels-system" class="btn btn-secondary">So funktioniert das System</a>
       </div>
     </div>
   </section>
 
   <!-- Gruppen-Menüs -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Gruppen-Menüs in Stückzahl sind der Idealfall für das System.</h2>
-      <p class="text-neutral-600 leading-relaxed">
-        Trainingslager-Menüfolgen und Halbpensions-Zyklen sind planbar: gleiche Gerichte, klare Mengen, feste Termine. Genau das kann das System am besten. Einmal sauber dokumentiert, wird jede Menüfolge reproduzierbar, jeden Abend, von jeder Kraft, in jeder Stückzahl. Ihre Küche weiß am Morgen, was am Abend auf 80 Tellern liegt.
+      <h2 class="mb-4">Gruppen-Men&uuml;s in St&uuml;ckzahl sind der Idealfall f&uuml;r das System.</h2>
+      <p style="color:var(--grau)">
+        Trainingslager-Men&uuml;folgen und Halbpensions-Zyklen sind planbar: gleiche Gerichte, klare Mengen, feste Termine. Genau das kann das System am besten. Einmal sauber dokumentiert, wird jede Men&uuml;folge reproduzierbar, jeden Abend, von jeder Kraft, in jeder St&uuml;ckzahl. Ihre K&uuml;che wei&szlig; am Morgen, was am Abend auf 80 Tellern liegt.
       </p>
     </div>
   </section>
 
   <!-- Köche für die Saison -->
-  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Köche für die Saison. Rechtssicher. Ab Tag eins produktiv.</h2>
-      <p class="text-neutral-600 leading-relaxed mb-4">
-        Wir arbeiten in Deutschland und Österreich, auch in Tirol. Unsere Köche sind bei uns fest angestellt und werden mit behördlicher Arbeitnehmerüberlassungserlaubnis verliehen. Das schützt Sie vor dem Scheinselbständigkeits-Risiko, das bei „selbstständigen" Saisonköchen schnell 50.000 Euro und mehr kosten kann.
+      <h2 class="mb-4">K&ouml;che f&uuml;r die Saison. Rechtssicher. Ab Tag eins produktiv.</h2>
+      <p class="mb-4" style="color:var(--grau)">
+        Wir arbeiten in Deutschland und &Ouml;sterreich, auch in Tirol. Unsere K&ouml;che sind bei uns fest angestellt und werden mit beh&ouml;rdlicher Arbeitnehmer&uuml;berlassungserlaubnis verliehen. Das sch&uuml;tzt Sie vor dem Scheinselbst&auml;ndigkeits-Risiko, das bei &bdquo;selbstst&auml;ndigen&ldquo; Saisonk&ouml;chen schnell 50.000 Euro und mehr kosten kann.
       </p>
-      <p class="text-neutral-600 leading-relaxed">
-        Und weil jeder Avorix-Koch mit der App arbeitet, gilt: Der Saisonkoch geht im Frühjahr. Sein Wissen bleibt bei Ihnen.
+      <p style="color:var(--grau)">
+        Und weil jeder Avorix-Koch mit der App arbeitet, gilt: Der Saisonkoch geht im Fr&uuml;hjahr. Sein Wissen bleibt bei Ihnen.
       </p>
     </div>
   </section>
 
   <!-- Vor der Saison -->
-  <section class="py-16 px-6 border-t border-neutral-100">
+  <section class="py-16 px-6" style="border-top:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-4">Vor der Saison ist der beste Zeitpunkt.</h2>
-      <p class="text-neutral-600 leading-relaxed mb-6">
-        Die ruhigen Wochen vor Saisonstart sind ideal für Aufnahme und Schulung: Wenn die ersten Gruppen anreisen, läuft Ihr System schon. Als einer unserer Pilotbetriebe 2026 starten Sie zu Konditionen von rund der Hälfte des regulären Preises.
+      <h2 class="mb-4">Vor der Saison ist der beste Zeitpunkt.</h2>
+      <p class="mb-6" style="color:var(--grau)">
+        Die ruhigen Wochen vor Saisonstart sind ideal f&uuml;r Aufnahme und Schulung: Wenn die ersten Gruppen anreisen, l&auml;uft Ihr System schon. Als einer unserer Pilotbetriebe 2026 starten Sie zu Konditionen von rund der H&auml;lfte des regul&auml;ren Preises.
       </p>
-      <a href="/pilotprogramm" data-cta-location="sporthotels-pilot" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Zum Pilotprogramm</a>
+      <a href="/pilotprogramm" data-cta-location="sporthotels-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="py-16 px-6 bg-neutral-50 border-t border-neutral-100">
+  <section class="py-16 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-3xl mx-auto">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-8">Häufige Fragen</h2>
-      <div class="space-y-3">
-        <details open class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wir fahren Buffet und Menü gemischt. Geht das?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja. Jede Komponente wird als eigenes Rezept mit Stückzahlen geführt, egal ob sie auf dem Teller oder im Chafing-Dish landet.</p>
+      <h2 class="mb-8">H&auml;ufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wir fahren Buffet und Men&uuml; gemischt. Geht das?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Jede Komponente wird als eigenes Rezept mit St&uuml;ckzahlen gef&uuml;hrt, egal ob sie auf dem Teller oder im Chafing-Dish landet.</p></div></div>
         </details>
-        <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Wie kurz vor Saisonstart können wir noch anfangen?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Je nach Karte typischerweise wenige Wochen für Aufnahme und Schulung. Je früher vor der Saison, desto entspannter.</p>
+        <details class="faq-item">
+          <summary class="faq-q">Wie kurz vor Saisonstart k&ouml;nnen wir noch anfangen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Je nach Karte typischerweise wenige Wochen f&uuml;r Aufnahme und Schulung. Je fr&uuml;her vor der Saison, desto entspannter.</p></div></div>
         </details>
-        <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Können Sonderwünsche von Sportlergruppen abgebildet werden?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Varianten (vegetarisch, kalorienbewusst) werden wie eigene Gerichte dokumentiert und sind damit genauso reproduzierbar.</p>
+        <details class="faq-item">
+          <summary class="faq-q">K&ouml;nnen Sonderw&uuml;nsche von Sportlergruppen abgebildet werden?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Varianten (vegetarisch, kalorienbewusst) werden wie eigene Gerichte dokumentiert und sind damit genauso reproduzierbar.</p></div></div>
         </details>
-        <details class="bg-white border border-neutral-200 rounded-xl p-4">
-          <summary class="font-bold text-neutral-900 cursor-pointer">Bekommen wir für die Saison auch Personal?</summary>
-          <p class="text-neutral-600 text-sm mt-3">Ja, das ist Teil des Systems: festangestellte Köche, rechtssicher verliehen, für Wochen oder die ganze Saison.</p>
+        <details class="faq-item">
+          <summary class="faq-q">Bekommen wir f&uuml;r die Saison auch Personal?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, das ist Teil des Systems: festangestellte K&ouml;che, rechtssicher verliehen, f&uuml;r Wochen oder die ganze Saison.</p></div></div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- Final CTA -->
-  <section class="py-20 px-6 border-t border-neutral-100">
+  <!-- Final CTA → Peak-End (3.18) -->
+  <section class="py-20 px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
     <div class="max-w-3xl mx-auto text-center">
-      <h2 class="text-3xl font-bold text-neutral-900 mb-6">Die nächste Saison kommt bestimmt. Diesmal mit System.</h2>
-      <a href="/kontakt" data-cta-location="sporthotels-final" class="bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
+      <div class="mb-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/kontakt" data-cta-location="sporthotels-final" class="btn btn-primary">Demo vereinbaren</a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+/* FAQ-Accordion (3.13) */
+.faq-list {
+  border-top: 1px solid var(--linie);
+}
+.faq-item {
+  border-bottom: 1px solid var(--linie);
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-primary, #1C1B16);
+  padding: 18px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  color: var(--akzent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item.faq-closing > summary .faq-chevron {
+  transform: rotate(0deg);
+}
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+.faq-item[open] > .faq-body {
+  grid-template-rows: 1fr;
+}
+.faq-item.faq-closing > .faq-body {
+  grid-template-rows: 0fr;
+}
+.faq-inner {
+  min-height: 0;
+}
+.faq-inner p {
+  font-size: 16px;
+  color: var(--grau);
+  padding-bottom: 18px;
+  margin: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-body,
+  .faq-chevron {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+/* FAQ-Schlie&szlig;-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
