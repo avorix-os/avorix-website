@@ -272,28 +272,28 @@ const schema = [
       <h2 class="text-3xl font-bold text-neutral-900 mb-8">So kommt Avorix in Ihren Betrieb. In vier Schritten.</h2>
       <div class="space-y-6">
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">1</div>
+          <div class="schritt-chip shrink-0">1</div>
           <div>
             <h3 class="font-bold text-neutral-900">Wir schauen uns Ihre K&uuml;che an. (Kostenlos)</h3>
             <p class="text-neutral-600 text-sm mt-1">Ein Gespr&auml;ch, 30 Minuten, per Video oder vor Ort. Sie erz&auml;hlen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt. Wenn nicht, sagen wir das auch.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">2</div>
+          <div class="schritt-chip shrink-0">2</div>
           <div>
             <h3 class="font-bold text-neutral-900">Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
             <p class="text-neutral-600 text-sm mt-1">Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in der App an. Typischerweise dauert das eine Woche.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">3</div>
+          <div class="schritt-chip shrink-0">3</div>
           <div>
             <h3 class="font-bold text-neutral-900">Ihr Team lernt das System.</h3>
             <p class="text-neutral-600 text-sm mt-1">Daf&uuml;r gibt es zwei Wege, je nachdem was zu Ihrem Betrieb passt: kompakte Schulungstage mit einem Avorix-Koch, der sich ganz auf das Anlernen konzentriert. Oder ein Avorix-Koch arbeitet ganz normal in Ihrer K&uuml;che mit und bringt Ihrem Team das System nebenbei bei, w&auml;hrend er produktiv kocht. In beiden F&auml;llen mit mindestens Sous-Chef-Erfahrung.</p>
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="w-10 h-10 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold shrink-0">4</div>
+          <div class="schritt-chip shrink-0">4</div>
           <div>
             <h3 class="font-bold text-neutral-900">Sie arbeiten selbstst&auml;ndig. Wir bleiben erreichbar.</h3>
             <p class="text-neutral-600 text-sm mt-1">Ab jetzt f&uuml;hrt die App Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir &uuml;bernehmen das. Und wenn Ihnen ein Koch ausf&auml;llt, rufen Sie uns an.</p>
@@ -301,7 +301,7 @@ const schema = [
         </div>
       </div>
       <div class="mt-8">
-        <a href="/kontakt" data-cta-location="ablauf" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors inline-block">Demo vereinbaren</a>
+        <a href="/kontakt" data-cta-location="ablauf" class="btn btn-primary">Demo vereinbaren</a>
       </div>
     </div>
   </section>
@@ -356,13 +356,13 @@ const schema = [
   <section class="py-16 px-6 border-t border-neutral-100">
     <div class="max-w-4xl mx-auto">
       <h2 class="text-3xl font-bold text-neutral-900 mb-6">Und wenn Personal fehlt: Wir leihen Ihnen unsere K&ouml;che. Rechtssicher.</h2>
-      <div class="bg-neutral-50 border-l-4 border-brand-500 rounded-r-2xl p-6">
+      <div class="bg-neutral-50 border-l-4 rounded-r-2xl p-6" style="border-color:var(--akzent)">
         <p class="text-neutral-600 mb-4">Viele Vermittler schicken Ihnen &bdquo;selbstst&auml;ndige&ldquo; K&ouml;che mit Rechnung. Das Problem: Bei einer Pr&uuml;fung stuft die Rentenversicherung diese K&ouml;che oft als scheinselbstst&auml;ndig ein. Dann zahlt nicht der Koch, sondern Ihr Haus. Nachforderungen &uuml;ber mehrere Jahre, schnell im hohen f&uuml;nfstelligen Bereich.</p>
         <p class="text-neutral-600 mb-4">Bei Avorix passiert Ihnen das nicht. Unsere K&ouml;che sind bei uns fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft. Sie bekommen K&ouml;nnen in die K&uuml;che und bleiben zu 100 Prozent auf der sicheren Seite.</p>
         <p class="text-neutral-900 font-semibold">Im Gastgewerbe haben nur wenige Anbieter diese Erlaubnis. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.</p>
       </div>
       <div class="mt-6">
-        <a href="/personal" data-cta-location="rechtssicherheit" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors inline-block">Mehr zu Schulung und Personal</a>
+        <a href="/personal" data-cta-location="rechtssicherheit" class="btn btn-secondary">Mehr zu Schulung und Personal</a>
       </div>
     </div>
   </section>
@@ -390,8 +390,8 @@ const schema = [
         <p class="text-neutral-600">Das h&auml;ngt von Ihrer Karte und Ihrem Team ab. Im Erstgespr&auml;ch rechnen wir es Ihnen transparent vor, auf den Euro genau und ohne Kleingedrucktes. F&uuml;r die ersten Betriebe gibt es 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.</p>
       </div>
       <div class="mt-6 flex flex-wrap gap-4">
-        <a href="/kontakt" data-cta-location="kosten" class="bg-brand-500 text-white px-6 py-3 rounded-xl font-bold hover:bg-brand-600 transition-colors">Demo vereinbaren</a>
-        <a href="/pilotprogramm" data-cta-location="kosten-pilot" class="border-2 border-brand-500 text-brand-500 px-6 py-3 rounded-xl font-bold hover:bg-brand-50 transition-colors">Zum Pilotprogramm</a>
+        <a href="/kontakt" data-cta-location="kosten" class="btn btn-primary">Demo vereinbaren</a>
+        <a href="/pilotprogramm" data-cta-location="kosten-pilot" class="btn btn-secondary">Zum Pilotprogramm</a>
       </div>
     </div>
   </section>
