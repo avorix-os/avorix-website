@@ -1,0 +1,36 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+<span class={`stempel${className ? ' ' + className : ''}`}>
+  <slot />
+</span>
+
+<style>
+.stempel {
+  display: inline-block;
+  border: 1.5px solid var(--akzent);
+  color: var(--akzent);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  padding: 8px 14px;
+  border-radius: 3px;
+  background: var(--flaeche);
+  transform: rotate(-1deg);
+  transition: transform .18s;
+}
+.stempel:hover {
+  transform: rotate(0deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .stempel {
+    transform: none;
+    transition: none;
+  }
+}
+</style>

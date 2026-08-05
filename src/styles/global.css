@@ -201,12 +201,49 @@ h1 em,   h2 em,   h3 em {
   font-style: normal;
 }
 
-/* Button-Typografie-Basis */
+/* Button-System */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--f-head);
   font-weight: 700;
   font-size: 16px;
+  min-height: 50px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  cursor: pointer;
+  transition: filter .18s, transform .18s, box-shadow .18s, border-color .18s, opacity .18s;
 }
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
+}
+
+.btn-primary {
+  background: var(--akzent-bg);
+  color: var(--akzent-fg);
+  padding: 13px 28px;
+  box-shadow: var(--schatten);
+}
+.btn-primary:hover  { filter: brightness(1.08); }
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  border: 1.5px solid var(--linie);
+  color: var(--druck);
+  background: var(--flaeche);
+  padding: 13px 28px;
+}
+.btn-secondary:hover {
+  border-color: var(--akzent);
+  color: var(--akzent);
+}
+
+.btn-link {
+  color: var(--akzent);
+  min-height: auto;
+}
+.btn-link:hover { text-decoration: underline; }
 
 /* Bildunterschriften */
 figcaption,
