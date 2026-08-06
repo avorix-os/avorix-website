@@ -21,12 +21,12 @@ const schema = {
 
       <!-- Hero -->
       <div class="text-center mb-12">
-        <span class="inline-block bg-brand-50 text-brand-600 text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
+        <span class="eyebrow inline-block mb-4">
           Kostenloser Leitfaden
         </span>
         <h1 class="text-4xl md:text-5xl font-bold text-avorix-dark leading-tight mb-4">
           5 Strategien, mit denen Hotels den<br class="hidden md:block" />
-          <span class="text-brand-600">Fachkräftemangel in der Küche</span> meistern
+          <span style="color:var(--akzent)">Fachkräftemangel in der Küche</span> meistern
         </h1>
         <p class="text-lg text-avorix-gray max-w-2xl mx-auto">
           Ein praxisnaher Leitfaden für Hoteliers und Küchenchefs — kostenlos, sofort verfügbar.
@@ -49,9 +49,7 @@ const schema = {
               { num: "5", title: "Digitalisierung richtig einsetzen", desc: "Praxistipps für den einfachen Einstieg in die digitale Küche." },
             ].map((item) => (
               <li class="flex gap-4">
-                <span class="flex-shrink-0 w-8 h-8 bg-brand-600 text-white text-sm font-bold rounded flex items-center justify-center">
-                  {item.num}
-                </span>
+                <span class="schritt-chip shrink-0">{item.num}</span>
                 <div>
                   <p class="font-semibold text-avorix-dark text-sm">{item.title}</p>
                   <p class="text-avorix-gray text-sm">{item.desc}</p>
@@ -61,30 +59,15 @@ const schema = {
           </ul>
 
           <!-- Trust signals -->
-          <div class="flex flex-wrap gap-4 text-sm text-avorix-gray">
-            <span class="flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              8–10 Seiten, sofort umsetzbar
-            </span>
-            <span class="flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              PDF, kostenlos
-            </span>
-            <span class="flex items-center gap-1.5">
-              <svg class="w-4 h-4 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              Kein Spam, jederzeit abmeldbar
-            </span>
+          <div class="flex flex-wrap gap-3">
+            <span class="check-badge"><span class="check-badge-mark">&#10003;</span> 8&ndash;10 Seiten, sofort umsetzbar</span>
+            <span class="check-badge"><span class="check-badge-mark">&#10003;</span> PDF, kostenlos</span>
+            <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Kein Spam, jederzeit abmeldbar</span>
           </div>
         </div>
 
         <!-- Right: Download gate form -->
-        <div class="bg-brand-50 border border-brand-100 rounded-2xl p-8">
+        <div class="card" style="padding:2rem">
           <!-- Form state: default -->
           <div id="form-container">
             <h3 class="text-xl font-bold text-avorix-dark mb-1">Jetzt kostenlos herunterladen</h3>
@@ -101,8 +84,8 @@ const schema = {
               <input type="hidden" name="_next" value="https://avorix.cloud/leitfaden?download=1" />
 
               <div>
-                <label for="lead-name" class="block text-sm font-medium text-avorix-dark mb-1">
-                  Ihr Name <span class="text-brand-500">*</span>
+                <label for="lead-name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+                  Ihr Name <span style="color:var(--akzent)">*</span>
                 </label>
                 <input
                   type="text"
@@ -110,13 +93,13 @@ const schema = {
                   name="name"
                   required
                   placeholder="z. B. Maria Huber"
-                  class="w-full px-4 py-2.5 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white"
+                  class="leitfaden-field w-full"
                 />
               </div>
 
               <div>
-                <label for="lead-email" class="block text-sm font-medium text-avorix-dark mb-1">
-                  E-Mail-Adresse <span class="text-brand-500">*</span>
+                <label for="lead-email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+                  E-Mail-Adresse <span style="color:var(--akzent)">*</span>
                 </label>
                 <input
                   type="email"
@@ -124,12 +107,12 @@ const schema = {
                   name="email"
                   required
                   placeholder="ihre@email.at"
-                  class="w-full px-4 py-2.5 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white"
+                  class="leitfaden-field w-full"
                 />
               </div>
 
               <div>
-                <label for="lead-hotel" class="block text-sm font-medium text-avorix-dark mb-1">
+                <label for="lead-hotel" class="block text-sm font-medium mb-1" style="color:var(--druck)">
                   Betrieb / Hotel <span class="text-avorix-silver">(optional)</span>
                 </label>
                 <input
@@ -137,14 +120,14 @@ const schema = {
                   id="lead-hotel"
                   name="betrieb"
                   placeholder="z. B. Hotel Alpenhof"
-                  class="w-full px-4 py-2.5 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 bg-white"
+                  class="leitfaden-field w-full"
                 />
               </div>
 
               <button
                 type="submit"
                 id="submit-btn"
-                class="w-full bg-brand-600 text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-brand-700 active:bg-brand-800 transition-colors flex items-center justify-center gap-2"
+                class="btn btn-primary w-full"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -171,7 +154,7 @@ const schema = {
               id="manual-download"
               href="/downloads/leitfaden-fachkraeftemangel.pdf"
               download="Avorix-Leitfaden-Fachkraeftemangel.pdf"
-              class="inline-flex items-center gap-2 bg-brand-600 text-white px-6 py-3 rounded-lg font-semibold text-sm hover:bg-brand-700 transition-colors"
+              class="btn btn-primary"
             >
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -180,7 +163,7 @@ const schema = {
             </a>
             <p class="text-xs text-avorix-silver mt-4">
               Interesse an einer Demo?
-              <a href="/kontakt" class="text-brand-600 hover:underline">Demo vereinbaren →</a>
+              <a href="/kontakt" class="btn-link" style="font-size:inherit">Demo vereinbaren &rarr;</a>
             </p>
           </div>
         </div>
@@ -190,7 +173,7 @@ const schema = {
   </section>
 
   <!-- Stats / Social Proof strip -->
-  <section class="py-10 bg-brand-50 border-y border-brand-100">
+  <section class="py-10" style="background:var(--papier);border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)">
     <div class="max-w-4xl mx-auto px-6">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
         {[
@@ -200,7 +183,7 @@ const schema = {
           { stat: "Tag 1", label: "ab dem neue Mitarbeiter nach Standard arbeiten können" },
         ].map((item) => (
           <div>
-            <p class="text-2xl font-bold text-brand-600">{item.stat}</p>
+            <p style="font-size:1.5rem;font-weight:700;font-family:var(--f-mono);color:var(--akzent)">{item.stat}</p>
             <p class="text-xs text-avorix-gray mt-1">{item.label}</p>
           </div>
         ))}
@@ -211,7 +194,7 @@ const schema = {
   <!-- About Avorix teaser -->
   <section class="py-16 px-6">
     <div class="max-w-3xl mx-auto text-center">
-      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">Über Avorix</p>
+      <p class="eyebrow mb-3">&Uuml;ber Avorix</p>
       <h2 class="text-2xl font-bold text-avorix-dark mb-4">Die Avorix Koch App — die Lösung, die dieser Leitfaden beschreibt</h2>
       <p class="text-avorix-gray mb-6">
         Avorix setzt genau das digital um, was in diesem Leitfaden als bewährte Strategie beschrieben wird: zentrale Rezeptverwaltung, Schritt-für-Schritt-Anleitungen und konsistente Qualität — auch ohne ausgebildete Köche.
@@ -219,13 +202,35 @@ const schema = {
       <a
         href="/kontakt"
         data-cta-location="leitfaden"
-        class="inline-block bg-brand-600 text-white px-8 py-3 rounded-lg font-semibold text-sm hover:bg-brand-700 transition-colors"
+        class="btn btn-primary"
       >
         Demo vereinbaren
       </a>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+.leitfaden-field {
+  display: block;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: var(--f-body);
+  color: var(--druck);
+  outline: none;
+  box-sizing: border-box;
+}
+.leitfaden-field:focus-visible {
+  border-color: var(--akzent);
+  box-shadow: 0 0 0 3px rgba(168, 83, 43, 0.15);
+}
+.leitfaden-field.error {
+  border-color: var(--fehler);
+}
+</style>
 
 <script>
   const form = document.getElementById('lead-form') as HTMLFormElement;
