@@ -29,32 +29,32 @@ const schema = {
 <BaseLayout title="Book a Demo" description="Contact Avorix for a demo or more information about our Kitchen App and kitchen management software for hotels and restaurants." schemaOrg={schema}>
   <section class="pt-32 pb-20 px-6">
     <div class="max-w-3xl mx-auto">
-      <p class="text-sm font-semibold text-brand-600 uppercase tracking-wider mb-3">{t("contact.eyebrow")}</p>
-      <h1 class="text-4xl font-bold text-avorix-dark mb-4">{t("contact.title")}</h1>
-      <p class="text-lg text-avorix-gray mb-10">{t("contact.intro")}</p>
+      <p class="eyebrow mb-4">{t("contact.eyebrow")}</p>
+      <h1 class="mb-4">{t("contact.title")}</h1>
+      <p class="lead mb-10" style="color:var(--grau)">{t("contact.intro")}</p>
 
       <!-- Calendly Booking Widget -->
-      <div class="bg-brand-50 border border-brand-100 rounded-2xl p-8 mb-12 text-center">
-        <h2 class="text-xl font-semibold text-avorix-dark mb-2">{t("contact.booking.heading")}</h2>
-        <p class="text-avorix-gray mb-6">{t("contact.booking.text")}</p>
+      <div class="card mb-12" style="padding:2rem;text-align:center">
+        <h2 class="mb-2">{t("contact.booking.heading")}</h2>
+        <p class="mb-6" style="color:var(--grau)">{t("contact.booking.text")}</p>
         <a
           href="https://calendly.com/avorix/kostenfreies-erstgesprach"
           target="_blank"
           rel="noopener"
-          class="inline-block bg-brand-500 text-white px-8 py-3 rounded-lg font-semibold text-base hover:bg-brand-600 transition-colors"
+          class="btn btn-primary"
         >
           {t("contact.booking.button")}
         </a>
-        <p class="text-sm text-avorix-silver mt-3">{t("contact.booking.note")}</p>
+        <p class="text-sm mt-3" style="color:var(--grau)">{t("contact.booking.note")}</p>
       </div>
 
-      <p class="text-sm font-semibold text-avorix-dark uppercase tracking-wider mb-8">{t("contact.or")}</p>
+      <p class="eyebrow mb-8">{t("contact.or")}</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div class="space-y-6">
           <div>
-            <h3 class="text-sm font-semibold text-avorix-dark mb-1">{t("contact.email")}</h3>
-            <a href="mailto:info@avorix.de" class="text-avorix-gray hover:text-avorix-dark transition-colors">
+            <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
+            <a href="mailto:info@avorix.de" class="kontakt-mailto">
               info@avorix.de
             </a>
           </div>
@@ -63,7 +63,7 @@ const schema = {
         <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Demo request via avorix.cloud" />
           <div>
-            <label for="name" class="block text-sm font-medium text-avorix-dark mb-1">
+            <label for="name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
               {t("contact.form.name")}
             </label>
             <input
@@ -71,11 +71,11 @@ const schema = {
               id="name"
               name="name"
               required
-              class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+              class="kontakt-field w-full"
             />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium text-avorix-dark mb-1">
+            <label for="email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
               {t("contact.form.email")}
             </label>
             <input
@@ -83,11 +83,11 @@ const schema = {
               id="email"
               name="email"
               required
-              class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark"
+              class="kontakt-field w-full"
             />
           </div>
           <div>
-            <label for="message" class="block text-sm font-medium text-avorix-dark mb-1">
+            <label for="message" class="block text-sm font-medium mb-1" style="color:var(--druck)">
               {t("contact.form.message")}
             </label>
             <textarea
@@ -95,12 +95,12 @@ const schema = {
               name="message"
               rows="5"
               required
-              class="w-full px-4 py-2 border border-avorix-light rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-avorix-dark/20 focus:border-avorix-dark resize-none"
+              class="kontakt-field w-full"
             ></textarea>
           </div>
           <button
             type="submit"
-            class="bg-brand-500 text-white px-8 py-3 rounded-lg text-sm font-semibold hover:bg-brand-600 active:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 transition-colors w-full"
+            class="btn btn-primary w-full"
           >
             {t("contact.form.submit")}
           </button>
@@ -109,6 +109,46 @@ const schema = {
     </div>
   </section>
 </BaseLayout>
+
+<style>
+/* E-Mail-Link: Kupfer-Farbe, Unterstrich bei Hover (§3.14) */
+.kontakt-mailto {
+  color: var(--akzent);
+  text-decoration: none;
+}
+.kontakt-mailto:hover {
+  text-decoration: underline;
+}
+
+/* Formularfelder: Token-basiert nach §3.14 */
+.kontakt-field {
+  display: block;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: var(--f-body);
+  color: var(--druck);
+  outline: none;
+  box-sizing: border-box;
+}
+.kontakt-field:focus-visible {
+  border-color: var(--akzent);
+  box-shadow: 0 0 0 3px rgba(168, 83, 43, 0.15);
+}
+.kontakt-field.error {
+  border-color: var(--fehler);
+}
+textarea.kontakt-field {
+  resize: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .kontakt-field {
+    transition: none;
+  }
+}
+</style>
 
 <script>
   const contactForm = document.getElementById('contact-form') as HTMLFormElement;
