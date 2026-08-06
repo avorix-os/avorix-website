@@ -44,9 +44,7 @@ const schema = {
  <section class="pt-32 pb-20 px-6" style="background:var(--papier)">
     <div class="max-w-4xl mx-auto text-center">
       <p class="eyebrow mb-4">{t("produkt.badge")}</p>
-      <h1 class="mb-6">
-        {t("produkt.tagline")}
-      </h1>
+      <h1 class="mb-6" set:html={t("produkt.tagline")}></h1>
       <p class="lead max-w-2xl mx-auto mb-10" style="color:var(--grau)">
         {t("produkt.subtitle")}
       </p>

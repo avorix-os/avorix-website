@@ -20,9 +20,7 @@ const t = useTranslations(lang);
     </div>
     <!-- Text: mobil unten, Desktop links -->
     <div class="md:w-[52%] md:order-1">
-      <h1 class="mb-6">
-        {t("hero.tagline")}
-      </h1>
+      <h1 class="mb-6" set:html={t("hero.tagline")}></h1>
       <p class="lead mb-8" style="color:var(--grau)">
         {t("hero.subtitle")}
       </p>
