@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Lightbox from "../components/Lightbox.astro";
 import Stempel from "../components/Stempel.astro";
-import kochAppTabletPass from "../assets/bilder/koch-app-tablet-am-pass.jpg";
+import kochAppTabletPass from "../assets/bilder/koeche-am-pass-mit-tablet.jpg";
 import leerenPassMorgens from "../assets/bilder/leerer-pass-morgens.jpg";
 import waageZutaten from "../assets/bilder/waage-zutaten.jpg";
 import appKochmodus1 from "../assets/bilder/app-kochmodus-schritt1.png";
@@ -116,7 +116,7 @@ const schema = [
       <div class="w-full md:w-[48%] overflow-hidden md:order-2" style="border-radius:var(--radius);box-shadow:var(--schatten)">
         <Image
           src={kochAppTabletPass}
-          alt="Zwei K&ouml;che am Pass einer Profik&uuml;che, davor ein Tablet mit der Avorix Koch-App im Rezept-Modus"
+          alt="Zwei K&ouml;che von hinten am Pass einer Profik&uuml;che, dazwischen ein Tablet mit der laufenden Avorix Koch-App"
           widths={[480, 800, 1200, 1600, 2000]}
           sizes="(max-width: 900px) 100vw, 528px"
           loading="eager"

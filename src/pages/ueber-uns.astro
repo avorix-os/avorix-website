@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import vakuumbeutelKuehlhaus from "../assets/bilder/vakuumbeutel-kuehlhaus.jpg";
-import kochVonHintenPass from "../assets/bilder/koch-von-hinten-pass.jpg";
+import anrichtenDetail from "../assets/bilder/anrichten-detail.jpg";
 
 const ogImg = await getImage({ src: vakuumbeutelKuehlhaus, width: 1200, format: "jpeg" });
 const ogImageAlt = "Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche";
@@ -94,8 +94,8 @@ const breadcrumb = {
     <div class="max-w-3xl mx-auto">
       <h2 class="mb-4">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
       <Image
-        src={kochVonHintenPass}
-        alt="Küchenchef von hinten am Pass einer Hotelküche während des Betriebs"
+        src={anrichtenDetail}
+        alt="H&auml;nde richten ein Gericht auf einem wei&szlig;en Teller an"
         widths={[480, 800, 1200]}
         sizes="(max-width: 768px) 90vw, (max-width: 1024px) 100vw, 768px"
         loading="lazy"
