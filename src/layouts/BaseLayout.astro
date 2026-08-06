@@ -47,6 +47,12 @@ const fullTitle = `${title} | Avorix`;
         analytics_storage: 'denied'
       });
     </script>
+    <!-- Scroll-Reveal: js-Klasse setzt CSS-Hide, bevor Body gerendert wird (kein FOUC) -->
+    <script is:inline>
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js');
+      }
+    </script>
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -93,6 +99,23 @@ const fullTitle = `${title} | Avorix`;
             cta_location: el.getAttribute('data-cta-location')
           });
         });
+      })();
+    </script>
+    <!-- Scroll-Reveal Observer: einmalig pro Sektion, Hero (erste) ausgenommen -->
+    <script is:inline>
+      (function () {
+        if (!document.documentElement.classList.contains('js')) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('reveal-visible');
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0.15 });
+        Array.prototype.forEach.call(
+          document.querySelectorAll('main > section'),
+          function (s, i) { if (i > 0) io.observe(s); }
+        );
       })();
     </script>
   </body>

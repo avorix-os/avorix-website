@@ -355,3 +355,52 @@ figcaption,
   height: 32px;
   flex-shrink: 0;
 }
+
+/* === Scroll-Reveal (06/4.2) === */
+/* Mit js-Klasse: Sektionen ab der zweiten anfangs versteckt */
+html.js main > section:not(:first-child) {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .5s ease-out, transform .5s ease-out;
+}
+html.js main > section:not(:first-child).reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Sicherheitsnetz: reduced-motion macht alles sofort sichtbar */
+@media (prefers-reduced-motion: reduce) {
+  html.js main > section:not(:first-child) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* === Foto-Zoom (06/4.1) === */
+/* Bilder in Bild-Containern zoomen sanft beim Hover */
+.overflow-hidden > img,
+.img-zoom > img,
+.card img,
+figure img {
+  transition: transform .6s ease;
+}
+.overflow-hidden:hover > img,
+.img-zoom:hover > img,
+.card:hover img,
+figure:hover img {
+  transform: scale(1.025);
+}
+@media (prefers-reduced-motion: reduce) {
+  .overflow-hidden > img,
+  .img-zoom > img,
+  .card img,
+  figure img {
+    transition: none;
+  }
+  .overflow-hidden:hover > img,
+  .img-zoom:hover > img,
+  .card:hover img,
+  figure:hover img {
+    transform: none;
+  }
+}
