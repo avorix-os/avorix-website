@@ -404,3 +404,6 @@ figure:hover img {
     transform: none;
   }
 }
+
+/* I7 (Politur 08): Hero-Balance — keine Einwort-Zeilen */
+h1 { text-wrap: balance; }
