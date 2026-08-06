@@ -8,13 +8,13 @@ const t = useTranslations("en");
 <BaseLayout title="About" description="Meet Avorix — kitchen management for 4-star resort hotels across the DACH region. We help properties maintain consistent food quality despite staff shortages.">
   <section class="pt-32 pb-20 px-6">
     <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold text-avorix-dark mb-6">{t("about.title")}</h1>
-      <p class="text-lg text-avorix-gray leading-relaxed mb-8">
+      <h1 class="mb-6" style="color:var(--druck)">{t("about.title")}</h1>
+      <p class="mb-8" style="color:var(--grau)">
         {t("about.intro")}
       </p>
 
       <!-- Team photo -->
-      <div class="rounded-2xl overflow-hidden shadow-lg mb-12">
+      <div class="overflow-hidden mb-12" style="border-radius:var(--radius);box-shadow:var(--schatten)">
         <img
           src="/avorix_kitchen_branded.webp"
           alt="Avorix Koch App in action — chef in Avorix branded jacket"
@@ -27,15 +27,15 @@ const t = useTranslations("en");
 
       <div class="space-y-12">
         <div>
-          <h2 class="text-2xl font-semibold text-avorix-dark mb-4">{t("about.mission.title")}</h2>
-          <p class="text-avorix-gray leading-relaxed">
+          <h2 class="mb-4" style="color:var(--druck)">{t("about.mission.title")}</h2>
+          <p style="color:var(--grau)">
             {t("about.mission.text")}
           </p>
         </div>
 
         <div>
-          <h2 class="text-2xl font-semibold text-avorix-dark mb-4">{t("about.focus.title")}</h2>
-          <p class="text-avorix-gray leading-relaxed">
+          <h2 class="mb-4" style="color:var(--druck)">{t("about.focus.title")}</h2>
+          <p style="color:var(--grau)">
             {t("about.focus.text")}
           </p>
         </div>

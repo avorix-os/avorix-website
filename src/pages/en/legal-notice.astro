@@ -4,38 +4,38 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 <BaseLayout title="Legal Notice" description="Legal notice of Avorix GmbH — mandatory information pursuant to § 5 TMG and § 55 RStV.">
   <section class="pt-32 pb-20 px-6">
-    <div class="max-w-3xl mx-auto">
-      <h1 class="text-4xl font-bold text-avorix-dark mb-8">Legal Notice</h1>
+    <div class="mx-auto" style="max-width:72ch">
+      <h1 class="mb-8" style="color:var(--druck)">Legal Notice</h1>
 
-      <h2 class="text-xl font-semibold text-avorix-dark mt-8 mb-3">Information according to &sect; 5 TMG</h2>
-      <p class="text-avorix-gray">
+      <h2 class="mt-8 mb-3" style="color:var(--druck)">Information according to &sect; 5 TMG</h2>
+      <p style="color:var(--grau)">
         AVORIX GmbH<br />
         Fallenbrunnen 14<br />
         88045 Friedrichshafen<br />
         Germany
       </p>
 
-      <h2 class="text-xl font-semibold text-avorix-dark mt-8 mb-3">Represented by</h2>
-      <p class="text-avorix-gray">
+      <h2 class="mt-8 mb-3" style="color:var(--druck)">Represented by</h2>
+      <p style="color:var(--grau)">
         Managing Director: B&ouml;rge Penk
       </p>
 
-      <h2 class="text-xl font-semibold text-avorix-dark mt-8 mb-3">Contact</h2>
-      <p class="text-avorix-gray">
-        Email: <a href="mailto:info@avorix.de" class="text-avorix-dark hover:underline">info@avorix.de</a><br />
+      <h2 class="mt-8 mb-3" style="color:var(--druck)">Contact</h2>
+      <p style="color:var(--grau)">
+        Email: <a href="mailto:info@avorix.de" class="typo-link">info@avorix.de</a><br />
         Phone: +49 1575 4123492
       </p>
 
-      <h2 class="text-xl font-semibold text-avorix-dark mt-8 mb-3">VAT ID</h2>
-      <p class="text-avorix-gray">
+      <h2 class="mt-8 mb-3" style="color:var(--druck)">VAT ID</h2>
+      <p style="color:var(--grau)">
         VAT identification number according to &sect; 27a of the German VAT Act:<br />
         DE368762673
       </p>
 
-      <h2 class="text-xl font-semibold text-avorix-dark mt-8 mb-3">Dispute Resolution</h2>
-      <p class="text-avorix-gray">
+      <h2 class="mt-8 mb-3" style="color:var(--druck)">Dispute Resolution</h2>
+      <p style="color:var(--grau)">
         The European Commission provides a platform for online dispute resolution (OS):
-        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="text-avorix-dark hover:underline">
+        <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener" class="typo-link">
           https://ec.europa.eu/consumers/odr/
         </a>.<br />
         We are not willing or obliged to participate in dispute resolution proceedings
@@ -44,3 +44,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     </div>
   </section>
 </BaseLayout>
+
+<style>
+.typo-link {
+  color: var(--akzent);
+  text-decoration: none;
+}
+.typo-link:hover {
+  text-decoration: underline;
+}
+</style>
