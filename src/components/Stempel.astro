@@ -27,6 +27,11 @@ const { class: className = '' } = Astro.props;
 .stempel:hover {
   transform: rotate(0deg);
 }
+.stempel.stempel--hell {
+  border-color: var(--akzent-hell);
+  color: var(--akzent-hell);
+  background: transparent;
+}
 @media (prefers-reduced-motion: reduce) {
   .stempel {
     transform: none;
