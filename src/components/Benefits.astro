@@ -23,29 +23,28 @@ const benefits = [
 ];
 ---
 
-<section id="benefits" class="py-20 px-6 bg-brand-50/40">
+<section id="benefits" class="py-20 px-6 bg-neutral-50 border-t border-neutral-100">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-center text-avorix-dark mb-4">
+    <h2 class="text-3xl font-bold text-center mb-12" style="color:var(--druck)">
       {t("benefits.title")}
     </h2>
-    <div class="w-16 h-1 bg-brand-500 rounded-full mx-auto mb-16"></div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {benefits.map((b) => (
-        <div class="text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-brand-50 text-brand-600 mb-6">
+        <div class="card text-center">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style="background:var(--flaeche); border:1px solid var(--linie); color:var(--akzent)">
             <Fragment set:html={b.icon} />
           </div>
-          <h3 class="text-lg font-semibold text-avorix-dark mb-3">{b.title}</h3>
-          <p class="text-avorix-gray text-sm leading-relaxed">{b.text}</p>
+          <h3 class="text-lg font-semibold mb-3" style="color:var(--druck)">{b.title}</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">{b.text}</p>
         </div>
       ))}
     </div>
 
-    <!-- Visual photo strip  -->
+    <!-- Visual photo strip -->
     <div class="mt-16 rounded-2xl overflow-hidden shadow-lg">
       <img
         src="/avorix_gastro-hotel-60.webp"
-        alt="Mise en place in der Profiküche — Mengenküche mit Avorix"
+        alt="Mise en place in der Profik&uuml;che &mdash; Mengenkůche mit Avorix"
         width="1200"
         height="540"
         class="w-full object-cover h-52 sm:h-64"
