@@ -40,12 +40,12 @@ const schema = {
   description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — with photos, quantities, and timings. For 4-star resort hotels with half-board."
   schemaOrg={schema}
 >
-  <!-- Hero -->
- <section class="pt-32 pb-20 px-6" style="background:var(--papier)">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- Hero (W2: Text-Hero, left-aligned) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
       <p class="eyebrow mb-4">{t("produkt.badge")}</p>
       <h1 class="mb-6" set:html={t("produkt.tagline")}></h1>
-      <p class="lead max-w-2xl mx-auto mb-10" style="color:var(--grau)">
+      <p class="lead max-w-[62ch] mb-10" style="color:var(--grau)">
         {t("produkt.subtitle")}
       </p>
       <a href="/en/contact" class="btn btn-primary">
@@ -55,13 +55,13 @@ const schema = {
     </div>
   </section>
 
-  <!-- Target Audience -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="background:var(--eisen)">
-    <div class="max-w-5xl mx-auto">
+  <!-- Target Audience (dark proof section 3.10) -->
+ <section class="reveal section-gap" style="background:var(--eisen)">
+    <div class="content-width">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 class="text-3xl font-bold mb-6" style="color:var(--papier)">{t("produkt.target.title")}</h2>
-          <p class="leading-relaxed text-lg" style="color:rgba(247,246,242,0.75)">{t("produkt.target.text")}</p>
+          <h2 class="mb-6" style="color:var(--papier)">{t("produkt.target.title")}</h2>
+          <p class="leading-relaxed text-lg max-w-[62ch]" style="color:rgba(247,246,242,0.75)">{t("produkt.target.text")}</p>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-6">
           <div class="rounded-[6px] p-6" style="background:rgba(247,246,242,0.06);border:1px solid rgba(247,246,242,0.12)">
@@ -82,37 +82,40 @@ const schema = {
   </section>
 
   <!-- Photo break -->
-  <div class="max-w-5xl mx-auto px-6 py-8">
-    <div style="border-radius:var(--radius);box-shadow:var(--schatten);overflow:hidden">
-      <img
-        src="/avorix_gastro-hotel-62.webp"
-        alt="Professional plating in a hotel kitchen — Avorix standard"
-        width="1200"
-        height="540"
-        class="w-full object-cover h-56 sm:h-72"
-        loading="lazy"
-      />
+ <section class="reveal" style="padding-top:32px;padding-bottom:32px">
+    <div class="content-width">
+      <div style="border-radius:var(--radius);box-shadow:var(--schatten);overflow:hidden">
+        <img
+          src="/avorix_gastro-hotel-62.webp"
+          alt="Professional plating in a hotel kitchen — Avorix standard"
+          width="1200"
+          height="540"
+          class="w-full object-cover"
+          style="height:360px"
+          loading="lazy"
+        />
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- How it works (visual workflow) -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold mb-16" style="color:var(--druck)">{t("produkt.workflow.title")}</h2>
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-16" style="color:var(--druck)">{t("produkt.workflow.title")}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-6">1</div>
-          <h3 class="text-lg font-semibold mb-3" style="color:var(--druck)">{t("produkt.workflow.step1.title")}</h3>
+        <div>
+          <div class="schritt-chip inline-flex mb-6">1</div>
+          <h3 class="mb-3">{t("produkt.workflow.step1.title")}</h3>
           <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step1.text")}</p>
         </div>
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-6">2</div>
-          <h3 class="text-lg font-semibold mb-3" style="color:var(--druck)">{t("produkt.workflow.step2.title")}</h3>
+        <div>
+          <div class="schritt-chip inline-flex mb-6">2</div>
+          <h3 class="mb-3">{t("produkt.workflow.step2.title")}</h3>
           <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step2.text")}</p>
         </div>
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-6">3</div>
-          <h3 class="text-lg font-semibold mb-3" style="color:var(--druck)">{t("produkt.workflow.step3.title")}</h3>
+        <div>
+          <div class="schritt-chip inline-flex mb-6">3</div>
+          <h3 class="mb-3">{t("produkt.workflow.step3.title")}</h3>
           <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step3.text")}</p>
         </div>
       </div>
@@ -120,71 +123,41 @@ const schema = {
   </section>
 
   <!-- Features Grid -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="background:var(--papier)">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold mb-14" style="color:var(--druck)">{t("produkt.features.title")}</h2>
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-14" style="color:var(--druck)">{t("produkt.features.title")}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.1.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.1.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.1.text")}</p>
         </div>
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.2.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.2.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.2.text")}</p>
         </div>
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.3.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.3.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.3.text")}</p>
         </div>
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.4.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.4.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.4.text")}</p>
         </div>
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636a9 9 0 010 12.728M15.536 8.464a5 5 0 010 7.072M6.343 6.343a9 9 0 000 12.728m2.829-2.829a5 5 0 000-7.07" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.5.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.5.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.5.text")}</p>
         </div>
         <div class="card">
-          <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style="background:var(--flaeche-hover)">
-            <svg class="w-5 h-5" style="color:var(--akzent)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <h3 class="text-base font-semibold mb-2" style="color:var(--druck)">{t("produkt.features.6.title")}</h3>
+          <h3 class="mb-2">{t("produkt.features.6.title")}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.6.text")}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Development status / Pilot CTA -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-3xl mx-auto text-center">
+  <!-- Development status / Pilot CTA → Peak-End (3.18) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Certified &middot; German staffing licence</Stempel>
       </div>

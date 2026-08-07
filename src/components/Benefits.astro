@@ -6,48 +6,43 @@ const t = useTranslations(lang);
 
 const benefits = [
   {
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,
     title: t("benefits.1.title"),
     text: t("benefits.1.text"),
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>`,
     title: t("benefits.2.title"),
     text: t("benefits.2.text"),
   },
   {
-    icon: `<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>`,
     title: t("benefits.3.title"),
     text: t("benefits.3.text"),
   },
 ];
 ---
 
-<section id="benefits" class="py-[56px] md:py-[84px] px-6">
-  <div class="max-w-6xl mx-auto">
- <h2 class="text-3xl font-bold mb-12" style="color:var(--druck)">
+<section id="benefits" class="reveal section-gap">
+  <div class="content-width">
+    <h2 class="mb-12" style="color:var(--druck)">
       {t("benefits.title")}
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {benefits.map((b) => (
-        <div class="card text-center">
-          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full mb-6" style="background:var(--flaeche); border:1px solid var(--linie); color:var(--akzent)">
-            <Fragment set:html={b.icon} />
-          </div>
-          <h3 class="text-lg font-semibold mb-3" style="color:var(--druck)">{b.title}</h3>
+        <div class="card">
+          <h3 class="mb-3">{b.title}</h3>
           <p class="text-sm leading-relaxed" style="color:var(--grau)">{b.text}</p>
         </div>
       ))}
     </div>
 
     <!-- Visual photo strip -->
-    <div class="mt-16 rounded-[6px] overflow-hidden shadow-lg">
+    <div class="mt-16 overflow-hidden" style="border-radius:var(--radius);box-shadow:var(--schatten)">
       <img
         src="/avorix_gastro-hotel-60.webp"
         alt="Mise en place in der Profik&uuml;che &mdash; Mengenkůche mit Avorix"
         width="1200"
         height="540"
-        class="w-full object-cover h-52 sm:h-64"
+        class="w-full object-cover"
+        style="height:360px"
         loading="lazy"
       />
     </div>

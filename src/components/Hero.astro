@@ -1,27 +1,17 @@
 ---
 import { getLangFromUrl, useTranslations, getLocalizedPath } from "../i18n/translations";
+import Stempel from "./Stempel.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="pt-32 pb-20 px-6" style="background:var(--papier)">
-  <div class="max-w-5xl mx-auto flex flex-col gap-8 md:flex-row md:gap-12 md:items-center">
-    <!-- Bild: mobil oben, Desktop rechts (via order) -->
-    <div class="w-full md:w-[48%] overflow-hidden md:order-2" style="border-radius:var(--radius);box-shadow:var(--schatten)">
-      <img
-        src="/avorix_kitchen_ai.webp"
-        alt="Profiküche mit KI-gestütztem Rezeptmanagement"
-        width="1920"
-        height="1080"
-        class="w-full h-auto object-cover"
-        loading="eager"
-      />
-    </div>
-    <!-- Text: mobil unten, Desktop links -->
-    <div class="md:w-[52%] md:order-1">
+<section class="hero-section px-6" style="background:var(--papier)">
+  <div class="content-width hero-grid">
+    <!-- Text: mobile below, desktop left -->
+    <div class="hero-copy">
       <h1 class="mb-6" set:html={t("hero.tagline")}></h1>
-      <p class="lead mb-8" style="color:var(--grau)">
+      <p class="lead mb-8 max-w-[62ch]" style="color:var(--grau)">
         {t("hero.subtitle")}
       </p>
       <div class="flex flex-col sm:flex-row items-start gap-4 mb-4">
@@ -39,7 +29,21 @@ const t = useTranslations(lang);
           {t("hero.secondary_cta")} ↓
         </a>
       </div>
-      <p class="text-sm mt-2" style="color:var(--grau)">{t("hero.cta_note")}</p>
+      <p class="text-sm mb-6" style="color:var(--grau)">{t("hero.cta_note")}</p>
+      <div class="hero-badges">
+        <Stempel>Certified &middot; German staffing licence</Stempel>
+      </div>
+    </div>
+    <!-- Image: mobile above, desktop right -->
+    <div class="hero-media">
+      <img
+        src="/avorix_kitchen_ai.webp"
+        alt="Profiküche mit KI-gestütztem Rezeptmanagement"
+        width="1920"
+        height="1080"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
     </div>
   </div>
 </section>
