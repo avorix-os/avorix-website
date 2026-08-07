@@ -409,3 +409,31 @@ figure:hover img {
 
 /* I7 (Politur 08): Hero-Balance — keine Einwort-Zeilen */
 h1 { text-wrap: balance; }
+
+/* === W5: Navigations-UX === */
+/* Anker-Ziele unter der fixierten Nav (60px) mit Luft */
+[id] { scroll-margin-top: 84px; }
+
+/* Skip-Link: erstes fokussierbares Element, sichtbar nur bei Tastatur-Fokus */
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: 100;
+  background: var(--flaeche);
+  color: var(--akzent);
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  text-decoration: none;
+  transition: top .15s ease;
+}
+.skip-link:focus-visible {
+  top: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skip-link { transition: none; }
+}

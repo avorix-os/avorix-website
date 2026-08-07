@@ -17,6 +17,10 @@ const targetLinks = [
   { label: "Restaurants & Gasthöfe", href: "/fuer-restaurants" },
   { label: "Sporthotels", href: "/fuer-sporthotels" },
 ];
+
+// W5: aktive Seite markieren (aria-current)
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathname;
 ---
 
 <style>
@@ -27,6 +31,14 @@ const targetLinks = [
     top: 0;
     width: 100%;
     z-index: 50;
+    transition: box-shadow 0.2s ease;
+  }
+  /* W5: Schatten ab ~8px Scroll */
+  .site-header.is-scrolled {
+    box-shadow: 0 2px 12px rgba(38,37,31,.25);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .site-header { transition: none; }
   }
 
   .nav-inner {
@@ -91,6 +103,9 @@ const targetLinks = [
   }
   .nav-link:hover { opacity: 1; }
   .nav-link:hover::after { transform: scaleX(1); }
+  /* W5: aktive Seite — dauerhafter Unterstrich */
+  .nav-link[aria-current="page"] { opacity: 1; }
+  .nav-link[aria-current="page"]::after { transform: scaleX(1); }
 
   /* Dropdown trigger */
   .nav-dropdown { position: relative; }
@@ -187,8 +202,8 @@ const targetLinks = [
     color: var(--papier);
     margin-left: auto;
     flex-shrink: 0;
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 48px;
+    min-height: 48px;
     align-items: center;
     justify-content: center;
   }
@@ -230,8 +245,8 @@ const targetLinks = [
     cursor: pointer;
     color: var(--papier);
     opacity: 0.7;
-    min-width: 44px;
-    min-height: 44px;
+    min-width: 48px;
+    min-height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -258,6 +273,7 @@ const targetLinks = [
     transition: opacity 0.15s ease;
   }
   .nav-mobile-link:hover { opacity: 0.8; }
+  .nav-mobile-link[aria-current="page"] { color: var(--akzent-hell); opacity: 1; }
 
   /* Mobile accordion sections */
   .mobile-section { border-bottom: 1px solid rgba(247,246,242,.1); }
@@ -310,6 +326,7 @@ const targetLinks = [
     transition: opacity 0.15s ease;
   }
   .mobile-section-link:hover { opacity: 1; }
+  .mobile-section-link[aria-current="page"] { color: var(--akzent-hell); opacity: 1; }
 
   .nav-mobile-cta {
     margin-top: 24px;
@@ -332,6 +349,14 @@ const targetLinks = [
 
   .nav-mobile-lang {
     margin-top: 20px;
+  }
+  /* W6: "English" im Burger als volles Touch-Ziel (>=48px) */
+  .nav-mobile-lang :global(.lang-switch) {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    font-size: 18px;
+    padding: 12px 0;
   }
 </style>
 
@@ -358,7 +383,7 @@ const targetLinks = [
             </button>
             <div class="nav-dropdown-menu" role="menu">
               {systemLinks.map(link => (
-                <a href={link.href} class="nav-dropdown-item" role="menuitem">{link.label}</a>
+                <a href={link.href} class="nav-dropdown-item" role="menuitem" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
               ))}
             </div>
           </div>
@@ -377,15 +402,15 @@ const targetLinks = [
             </button>
             <div class="nav-dropdown-menu" role="menu">
               {targetLinks.map(link => (
-                <a href={link.href} class="nav-dropdown-item" role="menuitem">{link.label}</a>
+                <a href={link.href} class="nav-dropdown-item" role="menuitem" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
               ))}
             </div>
           </div>
 
-          <a href="/pilotprogramm" class="nav-link">
+          <a href="/pilotprogramm" class="nav-link" aria-current={isCurrent("/pilotprogramm") ? "page" : undefined}>
             Pilotprogramm<sup style="font-size:0.58em; font-weight:700; color:var(--akzent-hell); margin-left:1px; vertical-align:super;">2026</sup>
           </a>
-          <a href="/ueber-uns" class="nav-link">Über uns</a>
+          <a href="/ueber-uns" class="nav-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
         </div>
 
         <a href="/kontakt" data-cta-location="header" class="nav-cta">
@@ -396,10 +421,10 @@ const targetLinks = [
     ) : (
       <nav class="nav-desktop" aria-label="Main navigation">
         <div class="nav-links">
-          <a href="/en" class="nav-link">{t("nav.home")}</a>
-          <a href="/en/about" class="nav-link">{t("nav.about")}</a>
-          <a href="/en/cook-app" class="nav-link">{t("nav.kochapp")}</a>
-          <a href="/en/product" class="nav-link">{t("nav.produkt")}</a>
+          <a href="/en" class="nav-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
+          <a href="/en/about" class="nav-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
+          <a href="/en/cook-app" class="nav-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
+          <a href="/en/product" class="nav-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
         </div>
         <a href="/en/contact" data-cta-location="header" class="nav-cta">{t("nav.contact")}</a>
         <LanguageSwitcher />
@@ -446,7 +471,7 @@ const targetLinks = [
           <div class="mobile-section-content">
             <div class="mobile-section-inner">
               {systemLinks.map(link => (
-                <a href={link.href} class="mobile-section-link">{link.label}</a>
+                <a href={link.href} class="mobile-section-link" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
               ))}
             </div>
           </div>
@@ -462,16 +487,16 @@ const targetLinks = [
           <div class="mobile-section-content">
             <div class="mobile-section-inner">
               {targetLinks.map(link => (
-                <a href={link.href} class="mobile-section-link">{link.label}</a>
+                <a href={link.href} class="mobile-section-link" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
               ))}
             </div>
           </div>
         </div>
 
-        <a href="/pilotprogramm" class="nav-mobile-link">
+        <a href="/pilotprogramm" class="nav-mobile-link" aria-current={isCurrent("/pilotprogramm") ? "page" : undefined}>
           Pilotprogramm <sup style="font-size:0.62em; color:var(--akzent-hell);">2026</sup>
         </a>
-        <a href="/ueber-uns" class="nav-mobile-link">Über uns</a>
+        <a href="/ueber-uns" class="nav-mobile-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
 
         <a href="/kontakt" data-cta-location="header" class="nav-mobile-cta">
           Demo vereinbaren
@@ -482,10 +507,10 @@ const targetLinks = [
       </>
     ) : (
       <>
-        <a href="/en" class="nav-mobile-link">{t("nav.home")}</a>
-        <a href="/en/about" class="nav-mobile-link">{t("nav.about")}</a>
-        <a href="/en/cook-app" class="nav-mobile-link">{t("nav.kochapp")}</a>
-        <a href="/en/product" class="nav-mobile-link">{t("nav.produkt")}</a>
+        <a href="/en" class="nav-mobile-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
+        <a href="/en/about" class="nav-mobile-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
+        <a href="/en/cook-app" class="nav-mobile-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
+        <a href="/en/product" class="nav-mobile-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
         <a href="/en/contact" data-cta-location="header" class="nav-mobile-cta">{t("nav.contact")}</a>
         <div class="nav-mobile-lang">
           <LanguageSwitcher />
@@ -500,6 +525,16 @@ const targetLinks = [
   if (document.querySelector('[data-nav-v51]')) return;
   var header = document.querySelector('.site-header');
   if (header) header.setAttribute('data-nav-v51', '1');
+
+  // W5: Schatten ab ~8px Scroll
+  if (header) {
+    var onScroll = function () {
+      if (window.scrollY > 8) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
 
   var btn = document.getElementById('mobile-menu-btn');
   var overlay = document.getElementById('mobile-nav-overlay');
