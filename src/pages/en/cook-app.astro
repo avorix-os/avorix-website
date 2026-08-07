@@ -29,12 +29,12 @@ const schema = {
 ---
 
 <BaseLayout title="Cook App" description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level." schemaOrg={schema}>
-  <!-- Hero -->
- <section class="pt-32 pb-16 px-6" style="background:var(--papier)">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- Hero (W2: Text-Hero, left-aligned) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
       <p class="eyebrow mb-4">Avorix Cook App</p>
       <h1 class="mb-6" set:html={t("kochapp.tagline")}></h1>
-      <p class="lead max-w-2xl mx-auto mb-10" style="color:var(--grau)">
+      <p class="lead max-w-[62ch] mb-10" style="color:var(--grau)">
         {t("kochapp.intro")}
       </p>
       <a href="/en/contact" class="btn btn-primary">
@@ -44,57 +44,57 @@ const schema = {
   </section>
 
   <!-- How it works -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-14">{t("kochapp.how.title")}</h2>
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-14" style="color:var(--druck)">{t("kochapp.how.title")}</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-5">1</div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">{t("kochapp.how.step1.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.how.step1.text")}</p>
+        <div>
+          <div class="schritt-chip inline-flex mb-5">1</div>
+          <h3 class="mb-3">{t("kochapp.how.step1.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step1.text")}</p>
         </div>
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-5">2</div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">{t("kochapp.how.step2.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.how.step2.text")}</p>
+        <div>
+          <div class="schritt-chip inline-flex mb-5">2</div>
+          <h3 class="mb-3">{t("kochapp.how.step2.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step2.text")}</p>
         </div>
-        <div class="text-center">
-          <div class="schritt-chip inline-block mb-5">3</div>
-          <h3 class="text-lg font-semibold text-neutral-900 mb-3">{t("kochapp.how.step3.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.how.step3.text")}</p>
+        <div>
+          <div class="schritt-chip inline-flex mb-5">3</div>
+          <h3 class="mb-3">{t("kochapp.how.step3.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step3.text")}</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Features -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-14">{t("kochapp.features.title")}</h2>
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-14" style="color:var(--druck)">{t("kochapp.features.title")}</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
         <div class="card">
-          <h3 class="font-bold text-neutral-900 mb-3">{t("kochapp.features.1.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.features.1.text")}</p>
+          <h3 class="mb-3">{t("kochapp.features.1.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.1.text")}</p>
         </div>
         <div class="card">
-          <h3 class="font-bold text-neutral-900 mb-3">{t("kochapp.features.2.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.features.2.text")}</p>
+          <h3 class="mb-3">{t("kochapp.features.2.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.2.text")}</p>
         </div>
         <div class="card">
-          <h3 class="font-bold text-neutral-900 mb-3">{t("kochapp.features.3.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.features.3.text")}</p>
+          <h3 class="mb-3">{t("kochapp.features.3.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.3.text")}</p>
         </div>
         <div class="card">
-          <h3 class="font-bold text-neutral-900 mb-3">{t("kochapp.features.4.title")}</h3>
-          <p class="text-neutral-600 leading-relaxed">{t("kochapp.features.4.text")}</p>
+          <h3 class="mb-3">{t("kochapp.features.4.title")}</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.4.text")}</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-2xl mx-auto text-center">
+  <!-- CTA → Peak-End (3.18) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Certified &middot; German staffing licence</Stempel>
       </div>

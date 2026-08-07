@@ -27,16 +27,16 @@ const schema = {
 ---
 
 <BaseLayout title="Book a Demo" description="Contact Avorix for a demo or more information about our Kitchen App and kitchen management software for hotels and restaurants." schemaOrg={schema}>
- <section class="pt-32 pb-20 px-6">
-    <div class="max-w-3xl mx-auto">
+ <section class="hero-section px-6">
+    <div class="content-width">
       <p class="eyebrow mb-4">{t("contact.eyebrow")}</p>
       <h1 class="mb-4">{t("contact.title")}</h1>
-      <p class="lead mb-10" style="color:var(--grau)">{t("contact.intro")}</p>
+      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">{t("contact.intro")}</p>
 
       <!-- Calendly Booking Widget -->
-      <div class="card mb-12" style="padding:2rem;text-align:center">
-        <h2 class="mb-2">{t("contact.booking.heading")}</h2>
-        <p class="mb-6" style="color:var(--grau)">{t("contact.booking.text")}</p>
+      <div class="card mb-12">
+        <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
+        <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">{t("contact.booking.text")}</p>
         <a
           href="https://calendly.com/avorix/kostenfreies-erstgesprach"
           target="_blank"
@@ -51,13 +51,12 @@ const schema = {
       <p class="eyebrow mb-8">{t("contact.or")}</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="space-y-6">
-          <div>
-            <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
-            <a href="mailto:info@avorix.de" class="kontakt-mailto">
-              info@avorix.de
-            </a>
-          </div>
+        <!-- Contact details (compact card, §3.15) -->
+        <div class="card" style="align-self:start">
+          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
+          <a href="mailto:info@avorix.de" class="kontakt-mailto">
+            info@avorix.de
+          </a>
         </div>
 
         <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
@@ -159,7 +158,7 @@ textarea.kontakt-field {
       const submitBtn = contactForm.querySelector('[type="submit"]') as HTMLButtonElement;
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending\u2026';
+        submitBtn.textContent = 'Sending…';
       }
       try {
         const response = await fetch(contactForm.action, {
@@ -174,7 +173,7 @@ textarea.kontakt-field {
         }
         if (submitBtn) {
           submitBtn.disabled = false;
-          submitBtn.textContent = response.ok ? 'Sent \u2714' : 'Send';
+          submitBtn.textContent = response.ok ? 'Sent ✔' : 'Send';
         }
         if (response.ok) {
           contactForm.reset();
@@ -188,4 +187,3 @@ textarea.kontakt-field {
     });
   }
 </script>
-
