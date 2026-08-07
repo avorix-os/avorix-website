@@ -356,20 +356,22 @@ figcaption,
   flex-shrink: 0;
 }
 
-/* === Scroll-Reveal (06/4.2) === */
-/* Mit js-Klasse: Sektionen ab der zweiten anfangs versteckt */
-html.js main > section:not(:first-child) {
+/* === Scroll-Reveal (W0-Fix) === */
+/* Class-basiert statt strukturell: nur Elemente mit .reveal sind anfangs
+   versteckt. Der Hero traegt NIE .reveal (immer sofort sichtbar) — damit ist
+   der Fix immun gegen Nicht-section-Elemente vor der ersten Sektion. */
+html.js .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity .5s ease-out, transform .5s ease-out;
 }
-html.js main > section:not(:first-child).reveal-visible {
+html.js .reveal.reveal-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 /* Sicherheitsnetz: reduced-motion macht alles sofort sichtbar */
 @media (prefers-reduced-motion: reduce) {
-  html.js main > section:not(:first-child) {
+  html.js .reveal {
     opacity: 1;
     transform: none;
     transition: none;

@@ -101,7 +101,8 @@ const fullTitle = `${title} | Avorix`;
         });
       })();
     </script>
-    <!-- Scroll-Reveal Observer: einmalig pro Sektion, Hero (erste) ausgenommen -->
+    <!-- Scroll-Reveal Observer (W0-Fix): beobachtet .reveal-Elemente.
+         threshold 0 + rootMargin -12% loesen auch bei langen Sektionen sicher aus. -->
     <script is:inline>
       (function () {
         if (!document.documentElement.classList.contains('js')) return;
@@ -111,11 +112,8 @@ const fullTitle = `${title} | Avorix`;
             entry.target.classList.add('reveal-visible');
             io.unobserve(entry.target);
           });
-        }, { threshold: 0.15 });
-        Array.prototype.forEach.call(
-          document.querySelectorAll('main > section'),
-          function (s, i) { if (i > 0) io.observe(s); }
-        );
+        }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
       })();
     </script>
   </body>
