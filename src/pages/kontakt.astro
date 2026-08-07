@@ -27,16 +27,16 @@ const schema = {
 ---
 
 <BaseLayout title="Demo vereinbaren" description="Interesse an Avorix? Wir beraten Hotels und Gastronomiebetriebe zur Küchenmanagement-Software und Avorix Koch App. Jetzt Kontakt aufnehmen." schemaOrg={schema}>
- <section class="pt-32 pb-20 px-6">
-    <div class="max-w-3xl mx-auto">
+ <section class="hero-section px-6">
+    <div class="content-width">
       <p class="eyebrow mb-4">{t("contact.eyebrow")}</p>
       <h1 class="mb-4">{t("contact.title")}</h1>
-      <p class="lead mb-10" style="color:var(--grau)">{t("contact.intro")}</p>
+      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">{t("contact.intro")}</p>
 
       <!-- Calendly Buchungs-Widget -->
-      <div class="card mb-12" style="padding:2rem;text-align:center">
-        <h2 class="mb-2">{t("contact.booking.heading")}</h2>
-        <p class="mb-6" style="color:var(--grau)">{t("contact.booking.text")}</p>
+      <div class="card mb-12">
+        <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
+        <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">{t("contact.booking.text")}</p>
         <a
           href="https://calendly.com/avorix/kostenfreies-erstgesprach"
           target="_blank"
@@ -51,14 +51,12 @@ const schema = {
       <p class="eyebrow mb-8">{t("contact.or")}</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <!-- Kontaktdaten -->
-        <div class="space-y-6">
-          <div>
-            <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
-            <a href="mailto:info@avorix.de" class="kontakt-mailto">
-              info@avorix.de
-            </a>
-          </div>
+        <!-- Kontaktdaten (kompakte Karte, §3.15) -->
+        <div class="card" style="align-self:start">
+          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
+          <a href="mailto:info@avorix.de" class="kontakt-mailto">
+            info@avorix.de
+          </a>
         </div>
 
         <!-- Kontaktformular -->

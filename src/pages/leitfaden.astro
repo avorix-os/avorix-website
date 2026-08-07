@@ -16,29 +16,29 @@ const schema = {
   description="Praxisnaher Leitfaden für Hoteliers und Küchenchefs: 5 bewährte Strategien gegen den Fachkräftemangel in der Küche. Kostenlos herunterladen."
   schemaOrg={schema}
 >
- <section class="pt-28 pb-16 px-6 bg-white">
-    <div class="max-w-4xl mx-auto">
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
 
-      <!-- Hero -->
+      <!-- Hero (Lead-Magnet-Landing, zentriert = finale Konversion) -->
       <div class="text-center mb-12">
         <span class="eyebrow inline-block mb-4">
           Kostenloser Leitfaden
         </span>
-        <h1 class="text-4xl md:text-5xl font-bold text-avorix-dark leading-tight mb-4">
+        <h1 class="mb-4">
           5 Strategien, mit denen Hotels den<br class="hidden md:block" />
           <span style="color:var(--akzent)">Fachkräftemangel in der Küche</span> meistern
         </h1>
-        <p class="text-lg text-avorix-gray max-w-2xl mx-auto">
+        <p class="lead mx-auto" style="color:var(--grau)">
           Ein praxisnaher Leitfaden für Hoteliers und Küchenchefs — kostenlos, sofort verfügbar.
         </p>
       </div>
 
       <!-- Two-column layout: Preview + Form -->
-      <div class="grid md:grid-cols-2 gap-12 items-start">
+      <div class="grid md:grid-cols-2 gap-12 items-start text-left">
 
         <!-- Left: What's inside -->
         <div>
-          <h2 class="text-lg font-semibold text-avorix-dark mb-6">Das erwartet Sie im Leitfaden:</h2>
+          <h2 class="mb-6" style="color:var(--druck)">Das erwartet Sie im Leitfaden:</h2>
 
           <ul class="space-y-4 mb-8">
             {[
@@ -51,8 +51,8 @@ const schema = {
               <li class="flex gap-4">
                 <span class="schritt-chip shrink-0">{item.num}</span>
                 <div>
-                  <p class="font-semibold text-avorix-dark text-sm">{item.title}</p>
-                  <p class="text-avorix-gray text-sm">{item.desc}</p>
+                  <p class="text-sm" style="color:var(--druck);font-weight:600">{item.title}</p>
+                  <p class="text-sm" style="color:var(--grau)">{item.desc}</p>
                 </div>
               </li>
             ))}
@@ -70,8 +70,8 @@ const schema = {
         <div class="card" style="padding:2rem">
           <!-- Form state: default -->
           <div id="form-container">
-            <h3 class="text-xl font-bold text-avorix-dark mb-1">Jetzt kostenlos herunterladen</h3>
-            <p class="text-sm text-avorix-gray mb-6">Tragen Sie sich ein und erhalten Sie den Leitfaden als PDF.</p>
+            <h3 class="mb-1" style="color:var(--druck)">Jetzt kostenlos herunterladen</h3>
+            <p class="text-sm mb-6" style="color:var(--grau)">Tragen Sie sich ein und erhalten Sie den Leitfaden als PDF.</p>
 
             <form
               id="lead-form"
@@ -113,7 +113,7 @@ const schema = {
 
               <div>
                 <label for="lead-hotel" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-                  Betrieb / Hotel <span class="text-avorix-silver">(optional)</span>
+                  Betrieb / Hotel <span style="color:var(--grau)">(optional)</span>
                 </label>
                 <input
                   type="text"
@@ -135,7 +135,7 @@ const schema = {
                 Leitfaden jetzt herunterladen
               </button>
 
-              <p class="text-xs text-avorix-silver text-center">
+              <p class="text-xs text-center" style="color:var(--grau)">
                 Mit dem Absenden stimmen Sie zu, dass wir Sie gelegentlich über Avorix informieren dürfen. Keine Weitergabe an Dritte. Abmeldung jederzeit möglich.
               </p>
             </form>
@@ -148,8 +148,8 @@ const schema = {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 class="text-xl font-bold text-avorix-dark mb-2">Vielen Dank!</h3>
-            <p class="text-avorix-gray text-sm mb-6">Ihr Download startet automatisch. Falls nicht, klicken Sie auf den Button.</p>
+            <h3 class="mb-2" style="color:var(--druck)">Vielen Dank!</h3>
+            <p class="text-sm mb-6" style="color:var(--grau)">Ihr Download startet automatisch. Falls nicht, klicken Sie auf den Button.</p>
             <a
               id="manual-download"
               href="/downloads/leitfaden-fachkraeftemangel.pdf"
@@ -161,7 +161,7 @@ const schema = {
               </svg>
               PDF herunterladen
             </a>
-            <p class="text-xs text-avorix-silver mt-4">
+            <p class="text-xs mt-4" style="color:var(--grau)">
               Interesse an einer Demo?
               <a href="/kontakt" class="btn-link" style="font-size:inherit">Demo vereinbaren &rarr;</a>
             </p>
@@ -173,9 +173,9 @@ const schema = {
   </section>
 
   <!-- Stats / Social Proof strip -->
- <section class="reveal py-10" style="background:var(--papier);border-top:1px solid var(--linie);border-bottom:1px solid var(--linie)">
-    <div class="max-w-4xl mx-auto px-6">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+ <section class="reveal" style="background:var(--papier);padding-top:40px;padding-bottom:40px">
+    <div class="content-width">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         {[
           { stat: "82%", label: "der Betriebe klagen über Fachkräftemangel in der Küche" },
           { stat: "3–6 Wo.", label: "dauert die Einarbeitung in Hotelküchen im Schnitt" },
@@ -183,20 +183,20 @@ const schema = {
           { stat: "Tag 1", label: "ab dem neue Mitarbeiter nach Standard arbeiten können" },
         ].map((item) => (
           <div>
-            <p style="font-size:1.5rem;font-weight:700;font-family:var(--f-mono);color:var(--akzent)">{item.stat}</p>
-            <p class="text-xs text-avorix-gray mt-1">{item.label}</p>
+            <p style="font-size:1.5rem;font-weight:700;font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--akzent)">{item.stat}</p>
+            <p class="text-xs mt-1" style="color:var(--grau)">{item.label}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- About Avorix teaser -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-3xl mx-auto text-center">
+  <!-- About Avorix teaser (finale CTA-Sektion, zentriert erlaubt) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
       <p class="eyebrow mb-3">&Uuml;ber Avorix</p>
-      <h2 class="text-2xl font-bold text-avorix-dark mb-4">Die Avorix Koch App — die Lösung, die dieser Leitfaden beschreibt</h2>
-      <p class="text-avorix-gray mb-6">
+      <h2 class="mb-4" style="color:var(--druck);margin-left:auto;margin-right:auto">Die Avorix Koch App — die Lösung, die dieser Leitfaden beschreibt</h2>
+      <p class="mb-6 mx-auto max-w-[62ch]" style="color:var(--grau)">
         Avorix setzt genau das digital um, was in diesem Leitfaden als bewährte Strategie beschrieben wird: zentrale Rezeptverwaltung, Schritt-für-Schritt-Anleitungen und konsistente Qualität — auch ohne ausgebildete Köche.
       </p>
       <a

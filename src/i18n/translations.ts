@@ -62,7 +62,7 @@ export const ui = {
     "contact.form.message": "Nachricht",
     "contact.form.submit": "Absenden",
     "contact.booking.heading": "Demo-Termin direkt buchen",
-    "contact.booking.text": "Wählen Sie einfach einen freien Termin in unserem Kalender — kein Telefonieren, kein Warten.",
+    "contact.booking.text": "Wählen Sie einfach einen freien Termin in unserem Kalender. Kein Telefonieren, kein Warten.",
     "contact.booking.button": "Termin auswählen",
     "contact.booking.note": "Kostenlos & unverbindlich · 30 Minuten",
     "contact.or": "Oder schreiben Sie uns",

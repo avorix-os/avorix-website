@@ -414,6 +414,88 @@ h1 { text-wrap: balance; }
 /* Anker-Ziele unter der fixierten Nav (60px) mit Luft */
 [id] { scroll-margin-top: 84px; }
 
+/* === Teil II: wiederverwendbare Layout-Klassen (alle Seiten) === */
+
+/* Typo (Teil I/3): H2-Zeilen max. ~34ch, balanciert */
+h2 {
+  max-width: 34ch;
+  text-wrap: balance;
+}
+
+/* Hero (W2): Split 55/45, Bild spannt */
+.hero-section {
+  padding-top: 112px;
+  padding-bottom: 64px;
+}
+.hero-grid {
+  display: grid;
+  gap: 48px;
+  align-items: stretch;
+}
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-media {
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  min-height: 240px;
+  order: -1;
+}
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 55fr 45fr; }
+  .hero-media { order: 0; min-height: 460px; }
+}
+
+/* Split-Sektion (W3): H2+Absatz links, Foto rechts */
+.split-row {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+.split-media {
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--schatten);
+  min-height: 340px;
+}
+@media (min-width: 900px) {
+  .split-row { grid-template-columns: 7fr 5fr; }
+}
+
+/* Gründer-Block (W4): 7/12 Absatz + 5/12 Pull-Quote */
+.gruender-grid {
+  display: grid;
+  gap: 32px;
+}
+.gruender-quote {
+  margin: 0;
+  font-family: Charter, Georgia, serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--grau);
+  border-top: 1px solid var(--linie);
+  padding-top: 20px;
+}
+@media (min-width: 768px) {
+  .gruender-grid { grid-template-columns: 7fr 5fr; align-items: start; }
+  .gruender-quote {
+    border-top: 0;
+    border-left: 1px solid var(--linie);
+    padding-top: 0;
+    padding-left: 24px;
+  }
+}
+
 /* Skip-Link: erstes fokussierbares Element, sichtbar nur bei Tastatur-Fokus */
 .skip-link {
   position: absolute;

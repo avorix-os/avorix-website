@@ -95,12 +95,12 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     ]
   })} />
 
-  <!-- Hero -->
- <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
-    <div class="max-w-4xl mx-auto text-center">
+  <!-- Hero (W2: Text-Hero, linksbündig) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
       <p class="eyebrow mb-4">Das Avorix-System</p>
-      <h1 class="mb-6 text-center">Nicht nur eine App.<br /><mark>Ein komplettes K&uuml;chensystem.</mark></h1>
-      <p class="lead mb-10 mx-auto" style="color:var(--grau)">
+      <h1 class="mb-6">Nicht nur eine App.<br /><mark>Ein komplettes K&uuml;chensystem.</mark></h1>
+      <p class="lead mb-8 max-w-[62ch]" style="color:var(--grau)">
         Drei Bausteine, ein Ziel: eine K&uuml;che, die Ihr Niveau h&auml;lt, egal wer gerade am Herd steht.
         Software, Schulung und Personal greifen bei Avorix ineinander. Deshalb funktioniert es.
       </p>
@@ -109,30 +109,27 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         data-cta-location="system-hero"
         class="btn btn-primary"
       >Demo vereinbaren</a>
-      <div class="mt-6 flex justify-center">
-        <span class="check-badge">
-          <span class="check-badge-mark">&#10003;</span>
-          Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis (Agentur f&uuml;r Arbeit)
-        </span>
+      <div class="hero-badges mt-6">
+        <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
       </div>
     </div>
   </section>
 
   <!-- Drei Bausteine -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-8">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-8" style="color:var(--druck)">
         Unser System. Die Schulung. Die Verst&auml;rkung.
       </h2>
       <Image
         src={bonLeiste}
         alt="Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Restaurantk&uuml;che"
         widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1024px"
+        sizes="(max-width: 1024px) 100vw, 1080px"
         loading="eager"
         fetchpriority="high"
-        class="w-full h-64 md:h-80 object-cover mb-10"
-        style="border-radius:var(--radius);box-shadow:var(--schatten)"
+        class="w-full object-cover mb-10"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
       />
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Baustein 1: Unser System -->
@@ -176,7 +173,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
           </div>
         </div>
       </div>
-      <p class="text-sm text-center mt-10 max-w-2xl mx-auto italic" style="color:var(--grau)">
+      <p class="text-sm mt-10 max-w-[62ch]" style="color:var(--grau)">
         Denken Sie an Feuerwehr und Brandschutz: Die Verst&auml;rkung l&ouml;scht den akuten Brand. System und Schulung
         sorgen daf&uuml;r, dass es nie wieder brennt. Avorix ist beides.
       </p>
@@ -184,17 +181,17 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- Einzeln gut. Zusammen unschlagbar. -->
- <section class="reveal py-[56px] md:py-[84px] px-6">
-    <div class="max-w-4xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-12">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-12" style="color:var(--druck)">
         Einzeln gut. Zusammen unschlagbar.
       </h2>
       <div class="grid md:grid-cols-2 gap-6">
         <!-- a -->
         <div class="card">
           <span class="schritt-chip">a</span>
-          <h3 class="font-semibold text-neutral-900 mt-4 mb-1">Eine App allein ist eine leere H&uuml;lle.</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
+          <h3 class="mt-4 mb-1">Eine App allein ist eine leere H&uuml;lle.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
             Irgendwer muss Ihre Karte aufnehmen, fotografieren und Ihr Team anlernen. Genau das ist die Schulung.
             Deshalb richten wir jedes System selbst ein.
           </p>
@@ -202,8 +199,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <!-- b -->
         <div class="card">
           <span class="schritt-chip">b</span>
-          <h3 class="font-semibold text-neutral-900 mt-4 mb-1">Eine Schulung allein verpufft.</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
+          <h3 class="mt-4 mb-1">Eine Schulung allein verpufft.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
             Angelernte Menschen vergessen, wechseln, k&uuml;ndigen. Ohne App wandert das Wissen zur&uuml;ck in K&ouml;pfe,
             und mit den K&ouml;pfen aus der T&uuml;r. Die App h&auml;lt fest, was die Schulung aufbaut.
           </p>
@@ -211,8 +208,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <!-- c -->
         <div class="card">
           <span class="schritt-chip">c</span>
-          <h3 class="font-semibold text-neutral-900 mt-4 mb-1">Ein Leihkoch allein ist die teuerste L&ouml;sung der Welt.</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
+          <h3 class="mt-4 mb-1">Ein Leihkoch allein ist die teuerste L&ouml;sung der Welt.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
             Wenn er geht, ist alles wie vorher, und Sie buchen den n&auml;chsten. Das ist das Gesch&auml;ftsmodell
             klassischer Zeitarbeit. Genau davon unterscheiden wir uns:
           </p>
@@ -220,8 +217,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <!-- star -->
         <div class="card">
           <span class="schritt-chip">&#9733;</span>
-          <h3 class="font-semibold text-neutral-900 mt-4 mb-1">Bei uns geht der Leihkoch irgendwann wieder. Sein Wissen bleibt da.</h3>
-          <p class="text-neutral-600 text-sm leading-relaxed">
+          <h3 class="mt-4 mb-1">Bei uns geht der Leihkoch irgendwann wieder. Sein Wissen bleibt da.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
             Jeder Avorix-Koch arbeitet mit der App und dokumentiert dabei weiter. Sie bezahlen Personal und
             bauen nebenbei Ihr System auf.
           </p>
@@ -231,28 +228,28 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- Vom ersten Gespräch -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-5xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-8">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-8" style="color:var(--druck)">
         Vom ersten Gespr&auml;ch zur K&uuml;che, die immer funktioniert.
       </h2>
       <Image
         src={schulungVonHinten}
         alt="Zwei K&ouml;che von hinten am Herd, einer erkl&auml;rt einen Arbeitsschritt"
         widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1024px"
+        sizes="(max-width: 1024px) 100vw, 1080px"
         loading="lazy"
         decoding="async"
-        class="w-full h-64 md:h-72 object-cover mb-10"
-        style="border-radius:var(--radius);box-shadow:var(--schatten)"
+        class="w-full object-cover mb-10"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
       />
       <div class="space-y-6">
         <!-- Step 1 -->
         <div class="schritt">
           <span class="schritt-chip shrink-0">1</span>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Wir schauen uns Ihre K&uuml;che an. (Kostenlos)</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+            <h3 class="mb-1">Wir schauen uns Ihre K&uuml;che an. (Kostenlos)</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
               30 Minuten, per Video oder vor Ort. Sie erz&auml;hlen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu
               Ihnen passt, und was es kosten w&uuml;rde.
             </p>
@@ -262,8 +259,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <div class="schritt">
           <span class="schritt-chip shrink-0">2</span>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+            <h3 class="mb-1">Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
               Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in
               der App an. Ein Aufnahme-Block umfasst f&uuml;nf Tage mit je sechs Stunden. Eine typische Karte mit 12
               bis 15 Gerichten braucht die Aufnahme plus einen zweiten Block f&uuml;r die reine Schulung.
@@ -274,8 +271,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <div class="schritt">
           <span class="schritt-chip shrink-0">3</span>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Ihr Team lernt das System.</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+            <h3 class="mb-1">Ihr Team lernt das System.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
               Kompakte Schulungstage oder ein Koch, der produktiv mitarbeitet und nebenbei anlernt. Wer eine
               Woche mit der App gekocht hat, braucht sie nicht mehr erkl&auml;rt zu bekommen.
             </p>
@@ -285,15 +282,15 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         <div class="schritt">
           <span class="schritt-chip shrink-0">4</span>
           <div>
-            <h3 class="font-semibold text-neutral-900 mb-1">Sie arbeiten selbst&auml;ndig. Wir bleiben erreichbar.</h3>
-            <p class="text-neutral-600 text-sm leading-relaxed">
+            <h3 class="mb-1">Sie arbeiten selbst&auml;ndig. Wir bleiben erreichbar.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
               Die App f&uuml;hrt Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir &uuml;bernehmen
               das. F&auml;llt Ihnen ein Koch aus, rufen Sie uns an.
             </p>
           </div>
         </div>
       </div>
-      <div class="text-center mt-12">
+      <div class="mt-12">
         <a
           href="/kontakt"
           data-cta-location="system-ablauf"
@@ -304,17 +301,17 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- Gebaut für Häuser mit fester Karte -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-4xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-8">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-8" style="color:var(--druck)">
         Gebaut f&uuml;r H&auml;user mit fester Karte.
       </h2>
-      <p class="leading-relaxed max-w-2xl mx-auto mb-6" style="color:var(--grau)">
+      <p class="leading-relaxed max-w-[62ch] mb-6" style="color:var(--grau)">
         Avorix passt zu Betrieben, deren Karte wiederkehrt: Ferienhotels mit Halbpension, Gastl&ouml;fe und Restaurants
         mit fester Karte, Sporthotels mit Gruppen und Trainingslagern. Je fester die Karte, desto st&auml;rker wirkt
         das System.
       </p>
-      <p class="leading-relaxed max-w-2xl mx-auto" style="color:var(--grau)">
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
         Und ehrlich gesagt: F&uuml;r eine t&auml;glich wechselnde Spitzengastronomie mit Patron am Herd ist Avorix nicht
         gebaut. Das sagen wir Ihnen auch im ersten Gespr&auml;ch.
       </p>
@@ -322,18 +319,18 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- Was kostet das -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-4xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-4">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-4" style="color:var(--druck)">
         Was kostet das?
       </h2>
-      <div class="card max-w-3xl mx-auto" style="padding:2rem 2.5rem">
-        <p class="leading-relaxed mb-8" style="color:var(--grau)">
+      <div class="card">
+        <p class="leading-relaxed mb-8 max-w-[62ch]" style="color:var(--grau)">
           Jeder Baustein hat einen klaren Preis, und Sie bekommen ihn im Erstgespr&auml;ch schwarz auf wei&szlig;: App
           monatlich, Schulung pro Block, Personal pro Stunde. Keine versteckten Posten. F&uuml;r die ersten Betriebe
           gelten 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div class="flex flex-col sm:flex-row gap-4">
           <a
             href="/kontakt"
             data-cta-location="system-kosten"
@@ -350,9 +347,9 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- FAQ -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-4xl mx-auto">
- <h2 class="text-3xl font-bold text-neutral-900 mb-10">
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10" style="color:var(--druck)">
         H&auml;ufige Fragen
       </h2>
       <div class="faq-list">
@@ -384,8 +381,8 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   </section>
 
   <!-- Final CTA -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto text-center">
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
       </div>
@@ -453,6 +450,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   color: var(--grau);
   padding-bottom: 18px;
   margin: 0;
+  max-width: 62ch;
 }
 @media (prefers-reduced-motion: reduce) {
   .faq-body,

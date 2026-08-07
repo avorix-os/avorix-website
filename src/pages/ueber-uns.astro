@@ -48,88 +48,88 @@ const breadcrumb = {
   ]}
 >
 
-  <!-- Hero -->
- <section class="pt-28 pb-16 px-6" style="background:var(--papier)">
-    <div class="max-w-4xl mx-auto">
+  <!-- Hero (W2: Text-Hero, linksbündig) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
       <p class="eyebrow mb-4">&Uuml;ber uns</p>
       <h1 class="mb-6">Von einem <mark>K&uuml;chenchef</mark> gebaut. Nicht von Software-Leuten.</h1>
-      <p class="lead" style="color:var(--grau)">Avorix ist aus der Praxis entstanden: aus echten K&uuml;chen, echten Dienstpl&auml;nen und dem t&auml;glichen Kampf um gutes Personal.</p>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">Avorix ist aus der Praxis entstanden: aus echten K&uuml;chen, echten Dienstpl&auml;nen und dem t&auml;glichen Kampf um gutes Personal.</p>
     </div>
   </section>
 
-  <!-- Gründer -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="mb-6">Der Mann hinter dem System.</h2>
-      <div class="max-w-[72ch]">
+  <!-- Gründer (W4: 7/12 Absatz + 5/12 Pull-Quote) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Der Mann hinter dem System.</h2>
+      <div class="gruender-grid">
         <div>
-          <p class="mb-4" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, vom Auszubildenden bis zum K&uuml;chenchef mit gro&szlig;en Teams. Er hat Karten entwickelt, Mannschaften gef&uuml;hrt und den Fachkr&auml;ftemangel nicht aus Statistiken kennengelernt, sondern aus jedem einzelnen Dienstplan.</p>
-          <blockquote class="gruender-zitat">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
+          <p class="max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, vom Auszubildenden bis zum K&uuml;chenchef mit gro&szlig;en Teams. Er hat Karten entwickelt, Mannschaften gef&uuml;hrt und den Fachkr&auml;ftemangel nicht aus Statistiken kennengelernt, sondern aus jedem einzelnen Dienstplan.</p>
         </div>
+        <blockquote class="gruender-quote">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
       </div>
     </div>
   </section>
 
   <!-- Geschichte -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="mb-6">Erst K&ouml;che. Dann Abl&auml;ufe. Dann die App.</h2>
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Erst K&ouml;che. Dann Abl&auml;ufe. Dann die App.</h2>
       <Image
         src={vakuumbeutelKuehlhaus}
         alt="Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche"
-        widths={[480, 800, 1200]}
-        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 100vw, 768px"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
         loading="eager"
         fetchpriority="high"
-        class="w-full h-64 object-cover mb-6"
-        style="border-radius:var(--radius);box-shadow:var(--schatten)"
+        class="w-full object-cover mb-6"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
       />
-      <p class="mb-4" style="color:var(--grau)">Avorix begann als Personaldienstleister f&uuml;r das Gastgewerbe: festangestellte K&ouml;che, verliehen an H&auml;user, denen Personal fehlte. Dabei zeigte sich immer dasselbe Muster: Der Einsatz half, aber sobald der Koch ging, war der Betrieb so verwundbar wie vorher.</p>
-      <p style="color:var(--grau)">Also haben wir angefangen, das Wissen dazulassen: erst mit standardisierten Abl&auml;ufen (vorbereiten, vakuumieren, regenerieren), dann mit dokumentierten Rezepten, schlie&szlig;lich mit der Avorix Koch-App, die beides f&uuml;r jedes K&uuml;chenteam nutzbar macht. Heute ist daraus ein komplettes System geworden: Software, Schulung und Personal aus einer Hand.</p>
+      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Avorix begann als Personaldienstleister f&uuml;r das Gastgewerbe: festangestellte K&ouml;che, verliehen an H&auml;user, denen Personal fehlte. Dabei zeigte sich immer dasselbe Muster: Der Einsatz half, aber sobald der Koch ging, war der Betrieb so verwundbar wie vorher.</p>
+      <p class="max-w-[62ch]" style="color:var(--grau)">Also haben wir angefangen, das Wissen dazulassen: erst mit standardisierten Abl&auml;ufen (vorbereiten, vakuumieren, regenerieren), dann mit dokumentierten Rezepten, schlie&szlig;lich mit der Avorix Koch-App, die beides f&uuml;r jedes K&uuml;chenteam nutzbar macht. Heute ist daraus ein komplettes System geworden: Software, Schulung und Personal aus einer Hand.</p>
     </div>
   </section>
 
   <!-- Technologie -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="mb-4">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-4" style="color:var(--druck)">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
       <Image
         src={anrichtenDetail}
         alt="H&auml;nde richten ein Gericht auf einem wei&szlig;en Teller an"
-        widths={[480, 800, 1200]}
-        sizes="(max-width: 768px) 90vw, (max-width: 1024px) 100vw, 768px"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
         loading="lazy"
         decoding="async"
-        class="w-full h-64 object-cover mb-4"
-        style="border-radius:var(--radius);box-shadow:var(--schatten)"
+        class="w-full object-cover mb-4"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
       />
-      <p style="color:var(--grau)">Wir wollen keine K&uuml;chen ohne Menschen. Wir wollen K&uuml;chen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten k&ouml;nnen, und in denen das Wissen des Hauses nicht mit der n&auml;chsten K&uuml;ndigung verschwindet.</p>
+      <p class="max-w-[62ch]" style="color:var(--grau)">Wir wollen keine K&uuml;chen ohne Menschen. Wir wollen K&uuml;chen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten k&ouml;nnen, und in denen das Wissen des Hauses nicht mit der n&auml;chsten K&uuml;ndigung verschwindet.</p>
     </div>
   </section>
 
   <!-- Fakten -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="mb-6">Was Sie schwarz auf wei&szlig; haben.</h2>
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Was Sie schwarz auf wei&szlig; haben.</h2>
       <ul class="space-y-4">
-        <li class="py-3" style="border-bottom:1px dashed var(--linie);color:var(--druck)">Sitz in Friedrichshafen am Bodensee (AVORIX GmbH)</li>
-        <li class="py-3" style="border-bottom:1px dashed var(--linie);color:var(--druck)">T&auml;tig in Deutschland und &Ouml;sterreich</li>
-        <li class="py-3" style="border-bottom:1px dashed var(--linie);color:var(--druck)">Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, Vertr&auml;ge von der Agentur f&uuml;r Arbeit gepr&uuml;ft</li>
+        <li class="py-3" style="border-bottom:1px solid var(--linie);color:var(--druck)">Sitz in Friedrichshafen am Bodensee (AVORIX GmbH)</li>
+        <li class="py-3" style="border-bottom:1px solid var(--linie);color:var(--druck)">T&auml;tig in Deutschland und &Ouml;sterreich</li>
+        <li class="py-3" style="border-bottom:1px solid var(--linie);color:var(--druck)">Beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, Vertr&auml;ge von der Agentur f&uuml;r Arbeit gepr&uuml;ft</li>
       </ul>
     </div>
   </section>
 
   <!-- Diskretion -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto">
-      <h2 class="mb-4">Unsere Kunden schm&uuml;cken sich nicht mit uns. Das ist Absicht.</h2>
-      <p style="color:var(--grau)">Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion ist Teil unseres Angebots.</p>
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-4" style="color:var(--druck)">Unsere Kunden schm&uuml;cken sich nicht mit uns. Das ist Absicht.</h2>
+      <p class="max-w-[62ch]" style="color:var(--grau)">Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion ist Teil unseres Angebots.</p>
     </div>
   </section>
 
   <!-- Final CTA → Peak-End (3.18) -->
- <section class="reveal py-[56px] md:py-[84px] px-6" style="background:var(--papier);border-top:1px solid var(--linie)">
-    <div class="max-w-3xl mx-auto text-center">
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
       </div>
@@ -138,14 +138,3 @@ const breadcrumb = {
     </div>
   </section>
 </BaseLayout>
-
-<style>
-/* Gründer-Zitat (3.12): schlicht kursiv, keine Karten-Box */
-.gruender-zitat {
-  font-style: italic;
-  color: var(--grau);
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-</style>
