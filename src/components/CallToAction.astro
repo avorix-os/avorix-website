@@ -6,8 +6,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="py-[56px] md:py-[84px] px-6">
-  <div class="max-w-3xl mx-auto text-center">
+<!-- Peak-End (3.18): eigene Sektion, zentriert auf die volle Container-Breite
+     (Folgerunde 1 / 3b) — nie Teil einer anderen Sektion oder Spalte. -->
+<section class="section-gap px-6">
+  <div class="content-width text-center">
     <div class="mb-6">
       <Stempel>Certified &middot; German staffing licence</Stempel>
     </div>

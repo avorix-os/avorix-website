@@ -124,6 +124,36 @@ body {
   }
 }
 
+/* Folgerunde 1 / 3c: Der Abstand zwischen zwei Sektionen steht GENAU EINMAL.
+   Zwei benachbarte Sektionen stapelten bisher 84px + 84px = 168px. */
+.section-gap + .section-gap {
+  padding-top: 0;
+}
+/* Schmale Zwischenstreifen (Foto-Break, Zahlen-Leiste) geben den Abstand
+   nach unten selbst vor; die naechste Sektion setzt ohne zweiten auf. */
+.section-streifen {
+  padding-top: 0;
+  padding-bottom: 84px;
+}
+.section-streifen + .section-gap {
+  padding-top: 0;
+}
+@media (max-width: 640px) {
+  .section-streifen { padding-bottom: 56px; }
+}
+/* Dunkle Baender sind eigene Flaechen: sie behalten ihre Innenluft,
+   und die Sektion danach setzt wieder mit vollem Abstand auf. */
+.section-gap.section-dunkel,
+.section-dunkel + .section-gap {
+  padding-top: 84px;
+}
+@media (max-width: 640px) {
+  .section-gap.section-dunkel,
+  .section-dunkel + .section-gap {
+    padding-top: 56px;
+  }
+}
+
 /* Inhaltsbreite */
 .content-width {
   max-width: 1080px;
@@ -192,6 +222,16 @@ h3 {
   letter-spacing: .18em;
   color: var(--akzent);
 }
+
+/* Folgerunde 1 / 6: Headline-Abstaende straffen (Desktop wie Mobil).
+   Zentral gesetzt, damit der Zusammenhang Ueberschrift -> Inhalt ueberall
+   gleich eng ist; die Utility-Klassen mb-* der Seiten laufen dagegen leer. */
+.eyebrow          { margin-bottom: 8px; }   /* Eyebrow -> H1/H2 */
+h1                { margin-bottom: 16px; }  /* H1 -> Lead */
+h2                { margin-bottom: 24px; }  /* H2 -> erster Inhalt */
+h2:has(+ p)       { margin-bottom: 16px; }  /* H2 -> Intro-Absatz */
+h2 + p:not(:last-child) { margin-bottom: 32px; } /* Intro-Absatz -> Karten */
+h3, h4            { margin-bottom: 8px; }   /* Kartentitel -> Kartentext */
 
 /* Betonte Wörter in Headlines: Kupfer ohne Hintergrund */
 h1 mark, h2 mark, h3 mark,
@@ -291,6 +331,20 @@ figcaption,
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
   .card:hover { transform: none; }
+}
+
+/* Folgerunde 1 / 1: Text fuellt die Karte.
+   Die 62ch-Lesebreite gilt nur fuer frei stehende Absaetze auf dem Papier.
+   IN Karten laeuft Text ueber die volle Kartenbreite (minus Padding) — sonst
+   bleibt rechts eine tote Flaeche in der Karte. */
+.card p, .card li, .card h2, .card h3, .card h4,
+.card-modul p, .card-modul li, .card-modul h2, .card-modul h3, .card-modul h4 {
+  max-width: none;
+}
+/* Karten, die nur Text enthalten, werden dafuer selbst begrenzt und stehen
+   linksbuendig an der Raster-Kante: der Text endet dort, wo die Box endet. */
+.card-text {
+  max-width: 760px;
 }
 
 /* Modul-Karte (3.6): wie .card + Kopfzeile mit mono-Label + Speisekarten-Punktlinie */
@@ -425,7 +479,14 @@ h2 {
 /* Hero (W2): Split 55/45, Bild spannt */
 .hero-section {
   padding-top: 112px;
-  padding-bottom: 64px;
+  padding-bottom: 84px;
+}
+@media (max-width: 640px) {
+  .hero-section { padding-bottom: 56px; }
+}
+/* Folgerunde 1 / 3c: auch am Hero steht der Abstand nur einmal */
+.hero-section + .section-gap {
+  padding-top: 0;
 }
 .hero-grid {
   display: grid;

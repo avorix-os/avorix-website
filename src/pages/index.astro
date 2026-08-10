@@ -256,7 +256,7 @@ const schema = [
   </section>
 
   <!-- AÜe-Block: Personal-Beweis (dunkle Sektion 3.10) -->
- <section class="reveal section-gap" style="background:var(--eisen)">
+ <section class="reveal section-gap section-dunkel" style="background:var(--eisen)">
     <div class="content-width">
       <div class="mb-6">
         <Stempel class="stempel--hell">Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
@@ -381,10 +381,10 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Und wenn Personal fehlt: Wir leihen Ihnen unsere K&ouml;che. Rechtssicher.</h2>
-      <div class="card">
-        <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Viele Vermittler schicken Ihnen &bdquo;selbstst&auml;ndige&ldquo; K&ouml;che mit Rechnung. Das Problem: Bei einer Pr&uuml;fung stuft die Rentenversicherung diese K&ouml;che oft als scheinselbstst&auml;ndig ein. Dann zahlt nicht der Koch, sondern Ihr Haus. Nachforderungen &uuml;ber mehrere Jahre, schnell im hohen f&uuml;nfstelligen Bereich.</p>
-        <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Bei Avorix passiert Ihnen das nicht. Unsere K&ouml;che sind bei uns fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft. Sie bekommen K&ouml;nnen in die K&uuml;che und bleiben zu 100 Prozent auf der sicheren Seite.</p>
-        <p class="font-semibold max-w-[62ch]" style="color:var(--druck)">Im Gastgewerbe haben nur wenige Anbieter diese Erlaubnis. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.</p>
+      <div class="card card-text">
+        <p class="mb-4" style="color:var(--grau)">Viele Vermittler schicken Ihnen &bdquo;selbstst&auml;ndige&ldquo; K&ouml;che mit Rechnung. Das Problem: Bei einer Pr&uuml;fung stuft die Rentenversicherung diese K&ouml;che oft als scheinselbstst&auml;ndig ein. Dann zahlt nicht der Koch, sondern Ihr Haus. Nachforderungen &uuml;ber mehrere Jahre, schnell im hohen f&uuml;nfstelligen Bereich.</p>
+        <p class="mb-4" style="color:var(--grau)">Bei Avorix passiert Ihnen das nicht. Unsere K&ouml;che sind bei uns fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis, unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft. Sie bekommen K&ouml;nnen in die K&uuml;che und bleiben zu 100 Prozent auf der sicheren Seite.</p>
+        <p class="font-semibold" style="color:var(--druck)">Im Gastgewerbe haben nur wenige Anbieter diese Erlaubnis. Fragen Sie danach, bevor Sie irgendwo buchen. Auch wenn es nicht bei uns ist.</p>
       </div>
       <div class="mt-6">
         <a href="/personal" data-cta-location="rechtssicherheit" class="btn btn-secondary">Mehr zu Schulung und Personal</a>
@@ -398,11 +398,12 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">Von einem K&uuml;chenchef gebaut. Nicht von Software-Leuten.</h2>
       <div class="gruender-grid">
         <div>
-          <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
+          <p class="max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
         </div>
         <blockquote class="gruender-quote">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
       </div>
+      <!-- Diskretion: einspaltig unter dem Split — keine halbe Spalte mit Leere daneben (Folgerunde 1 / 3a) -->
+      <p class="text-sm max-w-[62ch]" style="color:var(--grau);margin-top:32px">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
     </div>
   </section>
 
@@ -410,8 +411,8 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Was kostet das?</h2>
-      <div class="card">
-        <p class="max-w-[62ch]" style="color:var(--grau)">Das h&auml;ngt von Ihrer Karte und Ihrem Team ab. Im Erstgespr&auml;ch rechnen wir es Ihnen transparent vor, auf den Euro genau und ohne Kleingedrucktes. F&uuml;r die ersten Betriebe gibt es 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.</p>
+      <div class="card card-text">
+        <p style="color:var(--grau)">Das h&auml;ngt von Ihrer Karte und Ihrem Team ab. Im Erstgespr&auml;ch rechnen wir es Ihnen transparent vor, auf den Euro genau und ohne Kleingedrucktes. F&uuml;r die ersten Betriebe gibt es 2026 Pilotkonditionen deutlich unter dem regul&auml;ren Preis.</p>
       </div>
       <div class="mt-6 flex flex-wrap gap-4">
         <a href="/kontakt" data-cta-location="kosten" class="btn btn-primary">Demo vereinbaren</a>
@@ -464,8 +465,8 @@ const schema = [
   <!-- Lead-Magnet (W4: eigene Karte mit Sekund&auml;r-Button vor Peak-End) -->
  <section class="reveal section-gap">
     <div class="content-width">
-      <div class="card">
-        <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Noch nicht so weit?</p>
+      <div class="card card-text">
+        <p class="mb-4" style="color:var(--grau)">Noch nicht so weit?</p>
         <a href="/leitfaden" data-cta-location="final-leitfaden" class="btn btn-secondary" style="white-space:normal;text-align:left;height:auto;min-height:50px">Holen Sie sich unseren kostenlosen Leitfaden: 5 Strategien gegen den Fachkr&auml;ftemangel in der K&uuml;che.</a>
       </div>
     </div>
@@ -484,87 +485,10 @@ const schema = [
 </BaseLayout>
 
 <style>
-/* === Startseite Teil II (W1–W6) === */
-
-/* Typo (Teil I/3): H2-Zeilen max. ~34ch, balanciert */
-h2 {
-  max-width: 34ch;
-  text-wrap: balance;
-}
-
-/* Hero (W2): Split 55/45, Bild spannt */
-.hero-section {
-  padding-top: 112px;
-  padding-bottom: 64px;
-}
-.hero-grid {
-  display: grid;
-  gap: 48px;
-  align-items: stretch;
-}
-.hero-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero-media {
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: var(--schatten);
-  min-height: 240px;
-  order: -1;
-}
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-}
-@media (min-width: 900px) {
-  .hero-grid { grid-template-columns: 55fr 45fr; }
-  .hero-media { order: 0; min-height: 460px; }
-}
-
-/* Split-Sektion (W3): H2+Absatz links, Foto rechts */
-.split-row {
-  display: grid;
-  gap: 32px;
-  align-items: center;
-}
-.split-media {
-  overflow: hidden;
-  border-radius: var(--radius);
-  box-shadow: var(--schatten);
-  min-height: 340px;
-}
-@media (min-width: 900px) {
-  .split-row { grid-template-columns: 7fr 5fr; }
-}
-
-/* Gr&uuml;nder-Block (W4): 7/12 Absatz + 5/12 Pull-Quote */
-.gruender-grid {
-  display: grid;
-  gap: 32px;
-}
-.gruender-quote {
-  margin: 0;
-  font-family: Charter, Georgia, serif;
-  font-style: italic;
-  font-size: 21px;
-  line-height: 1.4;
-  color: var(--grau);
-  border-top: 1px solid var(--linie);
-  padding-top: 20px;
-}
-@media (min-width: 768px) {
-  .gruender-grid { grid-template-columns: 7fr 5fr; align-items: start; }
-  .gruender-quote {
-    border-top: 0;
-    border-left: 1px solid var(--linie);
-    padding-top: 0;
-    padding-left: 24px;
-  }
-}
+/* === Startseite Teil II (W1–W6) ===
+   Hinweis: Typo-, Hero-, Split- und Gruender-Regeln standen hier doppelt und
+   liegen ausschliesslich in src/styles/global.css (Folgerunde 1 / 3c: doppelte
+   Definitionen erzeugten abweichende Abstaende). Hier bleibt nur das FAQ. */
 
 /* FAQ-Accordion (3.13) — Einheit 8 */
 .faq-list {
