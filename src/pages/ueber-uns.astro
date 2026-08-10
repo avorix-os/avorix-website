@@ -73,37 +73,49 @@ const breadcrumb = {
   <!-- Geschichte -->
  <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
-      <h2 class="mb-6" style="color:var(--druck)">Erst K&ouml;che. Dann Abl&auml;ufe. Dann die App.</h2>
-      <Image
-        src={vakuumbeutelKuehlhaus}
-        alt="Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche"
-        widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1080px"
-        loading="eager"
-        fetchpriority="high"
-        class="w-full object-cover mb-6"
-        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
-      />
-      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Avorix begann als Personaldienstleister f&uuml;r das Gastgewerbe: festangestellte K&ouml;che, verliehen an H&auml;user, denen Personal fehlte. Dabei zeigte sich immer dasselbe Muster: Der Einsatz half, aber sobald der Koch ging, war der Betrieb so verwundbar wie vorher.</p>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Also haben wir angefangen, das Wissen dazulassen: erst mit standardisierten Abl&auml;ufen (vorbereiten, vakuumieren, regenerieren), dann mit dokumentierten Rezepten, schlie&szlig;lich mit der Avorix Koch-App, die beides f&uuml;r jedes K&uuml;chenteam nutzbar macht. Heute ist daraus ein komplettes System geworden: Software, Schulung und Personal aus einer Hand.</p>
+      <h2 style="color:var(--druck)">Erst K&ouml;che. Dann Abl&auml;ufe. Dann die App.</h2>
+      <!-- Echter Split: Text links, Bild rechts — keine halbe Spalte mit Leere (Folgerunde 1 / 3a) -->
+      <div class="split-row">
+        <div class="split-copy">
+          <p class="mb-4" style="color:var(--grau)">Avorix begann als Personaldienstleister f&uuml;r das Gastgewerbe: festangestellte K&ouml;che, verliehen an H&auml;user, denen Personal fehlte. Dabei zeigte sich immer dasselbe Muster: Der Einsatz half, aber sobald der Koch ging, war der Betrieb so verwundbar wie vorher.</p>
+          <p style="color:var(--grau)">Also haben wir angefangen, das Wissen dazulassen: erst mit standardisierten Abl&auml;ufen (vorbereiten, vakuumieren, regenerieren), dann mit dokumentierten Rezepten, schlie&szlig;lich mit der Avorix Koch-App, die beides f&uuml;r jedes K&uuml;chenteam nutzbar macht. Heute ist daraus ein komplettes System geworden: Software, Schulung und Personal aus einer Hand.</p>
+        </div>
+        <div class="split-media">
+          <Image
+            src={vakuumbeutelKuehlhaus}
+            alt="Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche"
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 900px) 100vw, 420px"
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Technologie -->
  <section class="reveal section-gap">
     <div class="content-width">
-      <h2 class="mb-4" style="color:var(--druck)">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
-      <Image
-        src={anrichtenDetail}
-        alt="H&auml;nde richten ein Gericht auf einem wei&szlig;en Teller an"
-        widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1080px"
-        loading="lazy"
-        decoding="async"
-        class="w-full object-cover mb-4"
-        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
-      />
-      <p class="max-w-[62ch]" style="color:var(--grau)">Wir wollen keine K&uuml;chen ohne Menschen. Wir wollen K&uuml;chen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten k&ouml;nnen, und in denen das Wissen des Hauses nicht mit der n&auml;chsten K&uuml;ndigung verschwindet.</p>
+      <h2 style="color:var(--druck)">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
+      <!-- Echter Split: Text links, Bild rechts (Folgerunde 1 / 3a) -->
+      <div class="split-row">
+        <div class="split-copy">
+          <p style="color:var(--grau)">Wir wollen keine K&uuml;chen ohne Menschen. Wir wollen K&uuml;chen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten k&ouml;nnen, und in denen das Wissen des Hauses nicht mit der n&auml;chsten K&uuml;ndigung verschwindet.</p>
+        </div>
+        <div class="split-media">
+          <Image
+            src={anrichtenDetail}
+            alt="H&auml;nde richten ein Gericht auf einem wei&szlig;en Teller an"
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 900px) 100vw, 420px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
     </div>
   </section>
 
