@@ -16,6 +16,34 @@ function collectGTMRequests(page) {
   return hits;
 }
 
+/**
+ * Ist googletagmanager.com von hier aus erreichbar?
+ *
+ * Manche Arbeitsplätze blocken die Domain (VPN, Filter). Der GTM-Test läuft
+ * dort unweigerlich in den Timeout und färbt die Suite rot, ohne dass am
+ * Consent-Verhalten etwas kaputt wäre — und ein Dauer-Rot ist kein Signal
+ * mehr. Deshalb wird der Test in so einem Netz übersprungen, mit klarer
+ * Begründung im Bericht. Verbindlich geprüft wird er dort, wo das Netz offen
+ * ist: auf dem Server bzw. in der CI vor dem Deploy.
+ */
+let gtmErreichbarCache = null;
+async function gtmErreichbar() {
+  if (gtmErreichbarCache !== null) return gtmErreichbarCache;
+  const abbruch = new AbortController();
+  const frist = setTimeout(() => abbruch.abort(), 5000);
+  try {
+    const antwort = await fetch('https://www.googletagmanager.com/gtm.js?id=GTM-TGC3HD6M', {
+      signal: abbruch.signal,
+    });
+    gtmErreichbarCache = antwort.ok;
+  } catch {
+    gtmErreichbarCache = false;
+  } finally {
+    clearTimeout(frist);
+  }
+  return gtmErreichbarCache;
+}
+
 test.describe('Consent Banner v2', () => {
 
   test.beforeEach(async ({ context }) => {
@@ -467,6 +495,10 @@ test.describe('Consent Banner v2', () => {
 
   // Existing test: CSP
   test('GTM-Script nicht durch CSP blockiert nach Consent', async ({ page }) => {
+    test.skip(
+      !(await gtmErreichbar()),
+      'übersprungen: googletagmanager.com ist von hier aus nicht erreichbar — dieser Test gehört auf Server/CI'
+    );
     const cspViolations = [];
     page.on('console', (msg) => {
       if (msg.text().includes('Content Security Policy') || msg.text().includes('CSP')) {
