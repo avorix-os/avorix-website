@@ -59,12 +59,19 @@ test.describe('T2: Link-Crawl über alle 10 DE-Seiten', () => {
 });
 
 test.describe('T3: /produkt Redirect', () => {
-  test('/produkt ist entfernt (kein HTML generiert, redirect nur über nginx)', async ({ page }) => {
+  test('/produkt ist entfernt (kein HTML generiert, redirect nur über nginx)', async ({ page, request }) => {
     // produkt.astro wurde gelöscht — kein meta-refresh HTML mehr.
     // Der 301 Redirect wird ausschließlich über nginx location block gesteuert.
-    // Im Astro preview-Server gibt es kein /produkt mehr (404).
+    if (process.env.PW_BASE_URL) {
+      // Deploy-Gate: geprüft wird gegen den ausliefernden nginx, dort greift
+      // der 301. Das ist die schärfere Prüfung — sie sieht die echte Regel.
+      const antwort = await request.get('/produkt', { maxRedirects: 0 });
+      expect(antwort.status()).toBe(301);
+      expect(antwort.headers()['location']).toContain('/system');
+      return;
+    }
+    // Am Arbeitsplatz läuft der Astro-Vorschau-Server ohne nginx: dort 404.
     const response = await page.goto('/produkt', { waitUntil: 'domcontentloaded' });
-    // In preview: 404 expected (nginx nicht aktiv). In Produktion: 301 via nginx.
     expect(response.status()).toBe(404);
   });
 

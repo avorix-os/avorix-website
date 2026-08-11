@@ -71,7 +71,10 @@ else
   # Geprueft wird aus dem Container selbst — kein zusaetzliches Image noetig.
   bereit=0
   for _ in $(seq 1 30); do
-    if docker exec "$TESTCONTAINER" wget -q -O /dev/null --timeout=3 http://localhost/ 2>/dev/null; then
+    # Bewusst 127.0.0.1 statt localhost: Das busybox-wget im Alpine-Image
+    # nimmt sonst ::1, und der Nginx lauscht nur auf IPv4 — das gaebe ein
+    # irrefuehrendes "Connection refused".
+    if docker exec "$TESTCONTAINER" wget -q -O /dev/null -T 3 http://127.0.0.1/ 2>/dev/null; then
       bereit=1
       break
     fi
