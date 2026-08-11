@@ -47,12 +47,37 @@ npm run dev      # Dev-Server auf Port 4321
 npm run build    # Statischen Build erstellen
 ```
 
-### Auf VPS deployen
+### Auf VPS deployen — laeuft automatisch, mit Test-Gate
+
+Ein Cron ruft alle 5 Minuten `scripts/deploy.sh` auf. Das Skript holt neue
+Commits von `master`, baut das Image, startet daraus einen **Testcontainer**,
+laesst die Playwright-Suite dagegen laufen und schaltet **nur bei gruenen
+Tests** live. Faellt ein Test, bleibt der Live-Stand unangetastet und der
+Arbeitsbaum wird zurueckgenommen — der naechste Lauf versucht es erneut.
+
+Ohne neue Commits endet das Skript sofort: Getestet wird nur, was auch
+ausgerollt wird.
+
+**Notausstieg**, falls das Gate selbst klemmt und die Seite trotzdem live muss:
 ```bash
-# Im Projektverzeichnis auf dem VPS:
-docker compose build
-docker compose up -d
+touch /docker/avorix-website/.deploy-gate-aus   # Deploy ohne Tests
+rm /docker/avorix-website/.deploy-gate-aus      # wieder scharf stellen
 ```
+
+Log: `/var/log/avorix-deploy.log`. Von Hand anstossen:
+`bash /docker/avorix-website/scripts/deploy.sh`
+
+### Tests
+```bash
+npx playwright test          # baut selbst und startet den Vorschau-Server
+```
+Gegen eine laufende Instanz (so laeuft das Gate):
+```bash
+PW_BASE_URL=http://<host> npx playwright test
+```
+Der GTM-Test braucht Zugriff auf googletagmanager.com. Wo die Domain geblockt
+ist (manche Arbeitsplaetze), ueberspringt er sich mit klarer Meldung — die
+verbindliche Pruefung passiert im Gate auf dem Server.
 
 ## Wichtige Regeln
 - Keine Änderungen an `docker-compose.yml` oder `Dockerfile` ohne Abstimmung
