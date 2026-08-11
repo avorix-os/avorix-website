@@ -99,7 +99,13 @@ else
        sh -c 'npm ci --no-audit --no-fund --silent && npx playwright test --reporter=line'; then
     log "Tests gruen."
   else
+    # Arbeitsbaum auf den laufenden Stand zuruecknehmen. Sonst zeigt das Repo
+    # auf den ungetesteten Commit, waehrend live noch der alte laeuft — und der
+    # naechste Lauf haette "nichts Neues" gesehen und den Fehler nie wieder
+    # geprueft. So versucht es der Cron alle 5 Minuten erneut, und sobald der
+    # Fehler behoben ist, geht der Stand von selbst live.
     log "FEHLER: Tests rot — Deploy abgebrochen, der Live-Stand bleibt auf ${ALT:0:7}."
+    git reset -q --hard "$ALT"
     exit 1
   fi
 
