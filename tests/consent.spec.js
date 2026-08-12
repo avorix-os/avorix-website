@@ -475,13 +475,39 @@ test.describe('Consent Banner v2', () => {
         el.addEventListener('click', (e) => e.preventDefault(), { capture: true });
       });
     });
-    const cta = page.locator('[data-cta-location]').first();
+    // Gezielt ein Demo-CTA: Seit Anweisung 12a tragen die Personal-Buttons
+    // ein eigenes data-cta-event und feuern bewusst NICHT cta_demo_click.
+    const cta = page.locator('[data-cta-location]:not([data-cta-event])').first();
     await cta.click();
     await page.waitForTimeout(500);
     const count = await page.evaluate(() =>
       window.dataLayer.filter((e) => e && e.event === 'cta_demo_click').length
     );
     expect(count).toBe(1);
+  });
+
+  // Zweiter Weg: eigenes Ereignis, und das alte darf dabei nicht mitfeuern.
+  test('CTA: cta_personal_click feuert genau einmal, ohne cta_demo_click', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#cb-accept-all').click();
+    await page.waitForTimeout(500);
+    await page.evaluate(() => {
+      document.querySelectorAll('[data-cta-location]').forEach(el => {
+        el.addEventListener('click', (e) => e.preventDefault(), { capture: true });
+      });
+    });
+    const personal = page.locator('[data-cta-event="cta_personal_click"]').first();
+    await expect(personal).toHaveAttribute('href', '/personal#anfrage');
+    await personal.click();
+    await page.waitForTimeout(500);
+    const zaehler = await page.evaluate(() => ({
+      personal: window.dataLayer.filter((e) => e && e.event === 'cta_personal_click').length,
+      demo: window.dataLayer.filter((e) => e && e.event === 'cta_demo_click').length,
+      ort: (window.dataLayer.find((e) => e && e.event === 'cta_personal_click') || {}).cta_location,
+    }));
+    expect(zaehler.personal).toBe(1);
+    expect(zaehler.demo).toBe(0);
+    expect(zaehler.ort).toBeTruthy();
   });
 
   // Existing test: No Google Fonts

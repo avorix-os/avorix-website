@@ -119,11 +119,11 @@ const schema = [
           Ihre K&uuml;che <mark style="white-space:nowrap">h&auml;lt Ihr Niveau.</mark><br />Auch wenn der Spitzenkoch fehlt.
         </h1>
         <p class="lead mb-6" style="color:var(--grau)">
-          Avorix f&uuml;hrt Ihr K&uuml;chenteam Schritt f&uuml;r Schritt durch jedes Gericht Ihrer Karte. Mit klaren Anleitungen, erprobten Abl&auml;ufen und echten K&ouml;chen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag. <strong style="color:var(--druck)">Auch ohne ausgebildete K&ouml;che.</strong>
+          Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. <strong style="color:var(--druck)">Auch ohne ausgebildete K&ouml;che.</strong>
         </p>
         <div class="flex flex-wrap gap-4 mb-6">
-          <a href="/kontakt" data-cta-location="hero" class="btn btn-primary">Demo vereinbaren</a>
-          <a href="#so-funktioniert-es" data-cta-location="hero" class="btn btn-secondary">So funktioniert es</a>
+          <a href="/personal#anfrage" data-cta-location="hero" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
+          <a href="/kontakt" data-cta-location="hero" class="btn btn-secondary">App-Demo vereinbaren</a>
         </div>
         <div class="hero-badges">
           <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
@@ -158,6 +158,7 @@ const schema = [
     <div class="content-width split-row">
       <div class="split-copy">
         <h2 class="mb-6" style="color:var(--druck)">Kommt Ihnen das bekannt vor?</h2>
+        <p class="lead max-w-[62ch]" style="color:var(--druck)">Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person.</p>
         <p class="max-w-[62ch]" style="color:var(--grau)">Wenn die K&uuml;che wackelt, wackelt alles: erst die Qualit&auml;t, dann die Bewertungen, dann der Ruf. Und irgendwann steht die Frage im Raum, wie lange es so noch weitergeht. Damit sind Sie nicht allein: 82 Prozent der Gastronomiebetriebe melden Fachkr&auml;ftemangel in der K&uuml;che.</p>
       </div>
       <div class="split-media">
@@ -190,6 +191,30 @@ const schema = [
     </div>
   </section>
 
+  <!-- Wo stehen Sie -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-8" style="color:var(--druck)">Wo stehen Sie gerade?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="card flex flex-col">
+          <h3 class="mb-3">&bdquo;Der Notfall ist da.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Der Koch ist weg, die Saison l&auml;uft. Wir schicken Ihnen einen Koch. Und sorgen daf&uuml;r, dass Sie nie wieder einen suchen m&uuml;ssen.</p>
+          <a href="/personal#anfrage" data-cta-location="tuer-notfall" data-cta-event="cta_personal_click" class="btn btn-primary" style="margin-top:auto">Jetzt Hilfe holen</a>
+        </div>
+        <div class="card flex flex-col">
+          <h3 class="mb-3">&bdquo;Noch l&auml;uft es. Aber ich mache mir Sorgen.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person. Sichern Sie ihr Wissen, solange es noch im Haus ist.</p>
+          <a href="/system" data-cta-location="tuer-sorge" class="btn btn-secondary" style="margin-top:auto">Wissen sichern</a>
+        </div>
+        <div class="card flex flex-col">
+          <h3 class="mb-3">&bdquo;Die Saison kommt.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Zu wenig Leute f&uuml;r die Spitze. Saisonkr&auml;fte, die ab dem ersten Tag kochen wie Ihr Stammteam.</p>
+          <a href="/personal" data-cta-location="tuer-saison" class="btn btn-secondary" style="margin-top:auto">Saison planen</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Warum Avorix (W4: H2 linksb&uuml;ndig) -->
  <section class="reveal section-gap">
     <div class="content-width">
@@ -216,7 +241,7 @@ const schema = [
     <div class="content-width split-row">
       <div class="split-copy">
         <h2 class="mb-4" style="color:var(--druck)">Was ist Avorix? In einer Minute erkl&auml;rt.</h2>
-        <p class="max-w-[62ch]" style="color:var(--grau)">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer K&uuml;che: Es bringt jede K&uuml;chenkraft zum fertigen Gericht, auch wenn sie es noch nie gekocht hat.</p>
+        <p class="max-w-[62ch]" style="color:var(--grau)">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer K&uuml;che: Es f&uuml;hrt Ihr Team Schritt f&uuml;r Schritt durch jedes Gericht Ihrer Karte, mit klaren Anleitungen, erprobten Abl&auml;ufen und echten K&ouml;chen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag.</p>
       </div>
       <div class="split-media">
         <Image
@@ -265,31 +290,10 @@ const schema = [
         Und wenn <span style="color:var(--akzent-hell)">Personal fehlt</span>?
       </h2>
       <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">
-        Dann stellen wir es. Avorix besch&auml;ftigt <span style="color:var(--akzent-hell)">festangestellte K&ouml;che</span>, die wir Ihnen <span style="color:var(--akzent-hell)">rechtssicher</span> ausleihen. F&uuml;r die Anlernphase, f&uuml;r die Saison oder f&uuml;r den Notfall.
+        Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. Unsere K&ouml;che sind bei uns <span style="color:var(--akzent-hell)">fest angestellt</span> und <span style="color:var(--akzent-hell)">rechtssicher</span> verliehen. F&uuml;r die Anlernphase, f&uuml;r die Saison oder f&uuml;r den Notfall.
       </p>
-    </div>
-  </section>
-
-  <!-- Wo stehen Sie -->
- <section class="reveal section-gap">
-    <div class="content-width">
-      <h2 class="mb-8" style="color:var(--druck)">Wo stehen Sie gerade?</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="card flex flex-col">
-          <h3 class="mb-3">&bdquo;Der Notfall ist da.&ldquo;</h3>
-          <p class="text-sm mb-4" style="color:var(--grau)">Der Koch ist weg, die Saison l&auml;uft. Wir schicken Ihnen einen Koch. Und sorgen daf&uuml;r, dass Sie nie wieder einen suchen m&uuml;ssen.</p>
-          <a href="/personal" data-cta-location="tuer-notfall" class="btn btn-primary" style="margin-top:auto">Jetzt Hilfe holen</a>
-        </div>
-        <div class="card flex flex-col">
-          <h3 class="mb-3">&bdquo;Noch l&auml;uft es. Aber ich mache mir Sorgen.&ldquo;</h3>
-          <p class="text-sm mb-4" style="color:var(--grau)">Alles h&auml;ngt an einem Kopf. Sichern Sie das Wissen Ihrer K&uuml;che, solange es noch im Haus ist.</p>
-          <a href="/system" data-cta-location="tuer-sorge" class="btn btn-secondary" style="margin-top:auto">Wissen sichern</a>
-        </div>
-        <div class="card flex flex-col">
-          <h3 class="mb-3">&bdquo;Die Saison kommt.&ldquo;</h3>
-          <p class="text-sm mb-4" style="color:var(--grau)">Zu wenig Leute f&uuml;r die Spitze. Saisonkr&auml;fte, die ab dem ersten Tag kochen wie Ihr Stammteam.</p>
-          <a href="/personal" data-cta-location="tuer-saison" class="btn btn-secondary" style="margin-top:auto">Saison planen</a>
-        </div>
+      <div class="mt-6">
+        <a href="/personal#anfrage" data-cta-location="personal-dunkel" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
       </div>
     </div>
   </section>
@@ -328,7 +332,8 @@ const schema = [
           </div>
         </div>
       </div>
-      <div class="mt-8">
+      <p class="mt-8 font-bold" style="color:var(--druck)">Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.</p>
+      <div class="mt-6">
         <a href="/kontakt" data-cta-location="ablauf" class="btn btn-primary">Demo vereinbaren</a>
       </div>
     </div>
@@ -400,6 +405,7 @@ const schema = [
         <div>
           <p class="max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
         </div>
+        <p class="max-w-[62ch] mb-4" style="color:var(--grau)">Wir kennen das. Wir haben selbst in solchen K&uuml;chen gestanden.</p>
         <blockquote class="gruender-quote">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
       </div>
       <!-- Diskretion: einspaltig unter dem Split — keine halbe Spalte mit Leere daneben (Folgerunde 1 / 3a) -->
