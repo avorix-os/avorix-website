@@ -33,19 +33,37 @@ const schema = {
       <h1 class="mb-4">{t("contact.title")}</h1>
       <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">{t("contact.intro")}</p>
 
-      <!-- Calendly Buchungs-Widget -->
-      <div class="card card-text mb-12">
-        <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
-        <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">{t("contact.booking.text")}</p>
-        <a
-          href="https://calendly.com/avorix/kostenfreies-erstgesprach"
-          target="_blank"
-          rel="noopener"
-          class="btn btn-primary"
-        >
-          {t("contact.booking.button")}
-        </a>
-        <p class="text-sm mt-3" style="color:var(--grau)">{t("contact.booking.note")}</p>
+      <!-- Zwei Wege nebeneinander (Anweisung 12a/9): links die bestehende
+           Kalender-Karte unveraendert, rechts der Personal-Weg. -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 items-stretch">
+        <div class="card flex flex-col">
+          <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
+          <p class="mb-6" style="color:var(--grau)">{t("contact.booking.text")}</p>
+          <a
+            href="https://calendly.com/avorix/kostenfreies-erstgesprach"
+            target="_blank"
+            rel="noopener"
+            class="btn btn-primary"
+            style="margin-top:auto;align-self:flex-start"
+          >
+            {t("contact.booking.button")}
+          </a>
+          <p class="text-sm mt-3" style="color:var(--grau)">{t("contact.booking.note")}</p>
+        </div>
+
+        <div class="card flex flex-col">
+          <h2 class="mb-2" style="color:var(--druck)">Sie brauchen Personal?</h2>
+          <p class="mb-6" style="color:var(--grau)">Sofort ein Koch, wenn Ihrer fehlt. Beschreiben Sie kurz Ihren Bedarf, wir melden uns innerhalb von 24 Stunden.</p>
+          <a
+            href="/personal#anfrage"
+            data-cta-location="kontakt"
+            data-cta-event="cta_personal_click"
+            class="btn btn-primary"
+            style="margin-top:auto;align-self:flex-start"
+          >
+            Personal anfragen
+          </a>
+        </div>
       </div>
 
       <p class="eyebrow mb-8">{t("contact.or")}</p>

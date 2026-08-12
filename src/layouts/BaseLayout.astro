@@ -95,8 +95,10 @@ const fullTitle = `${title} | Avorix`;
           var el = e.target.closest('[data-cta-location]');
           if (!el) return;
           window.dataLayer = window.dataLayer || [];
+          // Ohne data-cta-event bleibt es beim bisherigen Demo-Ereignis —
+          // die bestehenden Buttons feuern also unveraendert weiter.
           window.dataLayer.push({
-            event: 'cta_demo_click',
+            event: el.getAttribute('data-cta-event') || 'cta_demo_click',
             cta_location: el.getAttribute('data-cta-location')
           });
         });

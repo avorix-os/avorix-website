@@ -192,6 +192,19 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   }
   .nav-cta:hover { filter: brightness(1.06); }
 
+  /* Zweiter Weg in der Leiste: heller Rahmen statt gefuellter Flaeche,
+     damit die Rangfolge der beiden CTAs sichtbar bleibt. */
+  .nav-cta-outline {
+    background: transparent;
+    color: var(--papier);
+    border: 1.5px solid rgba(247, 246, 242, 0.45);
+    padding: 7.5px 16.5px;
+  }
+  .nav-cta-outline:hover {
+    border-color: var(--papier);
+    filter: none;
+  }
+
   /* Burger button */
   .nav-burger {
     display: none;
@@ -347,6 +360,20 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   }
   .nav-mobile-cta:hover { filter: brightness(0.95); }
 
+  /* Die beiden CTAs stehen mobil oben: der erste ohne Abstand nach oben,
+     der zweite als Rahmen-Variante direkt darunter. */
+  .nav-mobile-cta-oben { margin-top: 0; }
+  .nav-mobile-cta-outline {
+    margin-top: 10px;
+    background: transparent;
+    color: var(--papier);
+    border: 1.5px solid rgba(247, 246, 242, 0.45);
+  }
+  .nav-mobile-cta-outline:hover {
+    border-color: var(--papier);
+    filter: none;
+  }
+
   .nav-mobile-lang {
     margin-top: 20px;
   }
@@ -413,8 +440,16 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
           <a href="/ueber-uns" class="nav-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
         </div>
 
-        <a href="/kontakt" data-cta-location="header" class="nav-cta">
-          Demo vereinbaren
+        <a
+          href="/personal#anfrage"
+          data-cta-location="header"
+          data-cta-event="cta_personal_click"
+          class="nav-cta"
+        >
+          Personal anfragen
+        </a>
+        <a href="/kontakt" data-cta-location="header" class="nav-cta nav-cta-outline">
+          App-Demo
         </a>
         <LanguageSwitcher />
       </nav>
@@ -461,6 +496,19 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   <div class="nav-mobile-inner">
     {lang === "de" ? (
       <>
+        {/* Beide Wege stehen oben, "Personal anfragen" zuerst (Anweisung 12a). */}
+        <a
+          href="/personal#anfrage"
+          data-cta-location="header"
+          data-cta-event="cta_personal_click"
+          class="nav-mobile-cta nav-mobile-cta-oben"
+        >
+          Personal anfragen
+        </a>
+        <a href="/kontakt" data-cta-location="header" class="nav-mobile-cta nav-mobile-cta-outline">
+          App-Demo
+        </a>
+
         <div class="mobile-section">
           <button type="button" class="mobile-section-trigger" aria-expanded="false">
             Unser System
@@ -498,9 +546,6 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
         </a>
         <a href="/ueber-uns" class="nav-mobile-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
 
-        <a href="/kontakt" data-cta-location="header" class="nav-mobile-cta">
-          Demo vereinbaren
-        </a>
         <div class="nav-mobile-lang">
           <LanguageSwitcher />
         </div>
