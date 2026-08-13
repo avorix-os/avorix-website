@@ -78,6 +78,46 @@ const schema = [
           "@type": "Answer",
           "text": "Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der nächste Ausfall kein Notfall mehr ist."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Was ist Arbeitnehmerüberlassung und warum schützt sie Sie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Arbeitnehmerüberlassung heißt: Der Koch bleibt bei Avorix angestellt. Wir zahlen Lohn, Sozialversicherung und Lohnnebenkosten, Sie zahlen einen vereinbarten Stundensatz. Dafür braucht es eine behördliche Erlaubnis der Agentur für Arbeit, und genau die haben wir. Für Sie bedeutet das: keine Scheinselbständigkeit und keine Nachforderungen der Rentenversicherung wegen des Einsatzes. Sie bekommen Können in die Küche und bleiben auf der sicheren Seite."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wie schnell kann jemand bei uns stehen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In der Regel innerhalb von 24 bis 72 Stunden, je nach Standort und Anforderung."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Gibt es eine Mindest-Einsatzdauer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nein. Ein einzelner Tag ist genauso möglich wie eine ganze Saison."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Bekommen wir auch nur einen Koch, ohne App und System?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Viele Häuser fangen genau so an: Es fehlt jemand, wir schicken einen Koch. Das System kommt erst ins Spiel, wenn Sie wollen, dass mehr bleibt als die überbrückten Wochen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Wer ist der Arbeitgeber unseres Leihkochs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Avorix. Wir tragen Lohn, Sozialversicherung und die Arbeitgeberpflichten. In Ihrer Küche führen Sie ihn fachlich, wie Ihr eigenes Team. Genau diese Aufteilung regelt die Arbeitnehmerüberlassung."
+        }
       }
     ]
   },
@@ -110,14 +150,24 @@ const schema = [
           Echte K&ouml;che. Fest angestellt. <mark style="white-space:nowrap">Rechtssicher verliehen.</mark>
         </h1>
         <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
-          Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie zu 100 Prozent auf der rechtlich sicheren Seite.
+          Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person. Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie zu 100 Prozent auf der rechtlich sicheren Seite.
         </p>
         <div class="flex flex-wrap gap-4 mb-6">
-          <a href="/kontakt" data-cta-location="personal-hero" class="btn btn-primary">Demo vereinbaren</a>
+          <a href="#anfrage" data-cta-location="personal-hero" class="btn btn-primary">Personal anfragen</a>
         </div>
         <div class="hero-badges">
           <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
         </div>
+        <p class="hero-telefon mt-6">
+          Im Notfall direkt anrufen:
+          <a
+            href="tel:+4975413973915"
+            data-cta-location="hero"
+            data-cta-event="personal_anruf_click"
+            class="hero-telefon-link"
+          >07541 3973915</a>
+          <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, au&szlig;erhalb &uuml;ber Band)</span>
+        </p>
       </div>
       <div class="hero-media">
         <Image
@@ -137,7 +187,7 @@ const schema = [
  <section class="reveal">
     <div class="content-width">
       <p id="direktantwort" class="py-4 max-w-[62ch]" style="color:var(--grau)">
-        Avorix verleiht festangestellte, sozialversicherte K&ouml;che an Hotels und Restaurants in Deutschland und &Ouml;sterreich. Grundlage ist die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis der Agentur f&uuml;r Arbeit. Das sch&uuml;tzt Betriebe vor dem Scheinselbst&auml;ndigkeits-Risiko, das bei vermittelten &bdquo;selbst&auml;ndigen&ldquo; K&ouml;chen entstehen kann.
+        Avorix verleiht festangestellte, sozialversicherte K&ouml;che an Hotels und Restaurants in Deutschland und &Ouml;sterreich. Grundlage ist die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis der Agentur f&uuml;r Arbeit. Das sch&uuml;tzt Betriebe vor dem Scheinselbst&auml;ndigkeits-Risiko, das bei vermittelten &bdquo;selbst&auml;ndigen&ldquo; K&ouml;chen entstehen kann. Personal k&ouml;nnen Betriebe telefonisch oder &uuml;ber das Anfrage-Formular auf dieser Seite anfragen.
       </p>
     </div>
   </section>
@@ -167,7 +217,57 @@ const schema = [
         </div>
       </div>
       <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
-        Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich, im Notfall sind wir rund um die Uhr erreichbar. 98 Prozent der Anfragen k&ouml;nnen wir innerhalb von 3 Tagen besetzen.
+        Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich, im Notfall sind wir rund um die Uhr erreichbar.
+      </p>
+    </div>
+  </section>
+
+  <!-- So läuft ein Einsatz (12b, Sektion 3) -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-12" style="color:var(--druck)">So l&auml;uft ein Einsatz. In vier Schritten.</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">1</span></div>
+          <h3 class="mb-3">Sie fragen an oder rufen an.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Wir melden uns innerhalb von 24 Stunden.
+          </p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">2</span></div>
+          <h3 class="mb-3">Wir kl&auml;ren Bedarf, Zeitraum und Anforderung.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Kurz und konkret: Was f&uuml;r ein Betrieb, was f&uuml;r eine Karte, ab wann.
+          </p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">3</span></div>
+          <h3 class="mb-3">B&ouml;rge Penk sucht den passenden Koch aus.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Unser K&uuml;chenchef nimmt jede Anfrage selbst in die Hand. Er kennt die Anforderungen einer K&uuml;che, und er kennt seine Leute.
+          </p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">4</span></div>
+          <h3 class="mb-3">Der Einsatz startet.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Die geleisteten Stunden werden dokumentiert.
+          </p>
+        </div>
+      </div>
+      <p class="mt-8 max-w-[62ch]" style="color:var(--druck);font-weight:700">
+        Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.
+      </p>
+    </div>
+  </section>
+
+  <!-- Wer bei Ihnen am Herd steht (12b, Sektion 4) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Wer bei Ihnen am Herd steht.</h2>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Jeder, den wir schicken, ist Koch mit langj&auml;hriger K&uuml;chenerfahrung. K&uuml;chenhilfen schicken wir nicht. Wir arbeiten in Deutschland und &Ouml;sterreich.
       </p>
     </div>
   </section>
@@ -181,6 +281,9 @@ const schema = [
       <p class="lead max-w-[62ch]" style="color:var(--grau)">
         Unsere K&ouml;che arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer K&uuml;che auf. Bei einer klassischen Zeitarbeitsfirma bleibt nach dem Einsatz nichts zur&uuml;ck. Bei uns bleibt das Wissen.
       </p>
+      <div class="mt-8">
+        <a href="/kontakt" data-cta-location="personal-app" class="btn btn-secondary">App-Demo vereinbaren</a>
+      </div>
     </div>
   </section>
 
@@ -205,8 +308,20 @@ const schema = [
     </div>
   </section>
 
-  <!-- Diskretion -->
+  <!-- Was ist Arbeitnehmerüberlassung (12b, Sektion 7) -->
  <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        Was ist Arbeitnehmer&uuml;berlassung und warum sch&uuml;tzt sie Sie?
+      </h2>
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+        Arbeitnehmer&uuml;berlassung hei&szlig;t: Der Koch bleibt bei Avorix angestellt. Wir zahlen Lohn, Sozialversicherung und Lohnnebenkosten, Sie zahlen einen vereinbarten Stundensatz. Daf&uuml;r braucht es eine beh&ouml;rdliche Erlaubnis der Agentur f&uuml;r Arbeit, und genau die haben wir. F&uuml;r Sie bedeutet das: keine Scheinselbst&auml;ndigkeit und keine Nachforderungen der Rentenversicherung wegen des Einsatzes. Sie bekommen K&ouml;nnen in die K&uuml;che und bleiben auf der sicheren Seite.
+      </p>
+    </div>
+  </section>
+
+  <!-- Diskretion -->
+ <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
         Ihre G&auml;ste erleben Ihre K&uuml;che. Nicht unsere.
@@ -217,8 +332,30 @@ const schema = [
     </div>
   </section>
 
-  <!-- Was kostet das -->
+  <!-- Beweis-Block (12b, Sektion 9) -->
  <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-8" style="color:var(--druck)">Gepr&uuml;ft und im Einsatz.</h2>
+      <ul class="beweis-liste mb-8">
+        <li>&Uuml;ber 1.000 Einsatztage in den K&uuml;chen unserer Kunden.</li>
+        <li>Ein Cateringunternehmen bezieht &uuml;ber uns rund 15.000 Stunden im Jahr.</li>
+        <li>Unsere Vertr&auml;ge sind von der Agentur f&uuml;r Arbeit gepr&uuml;ft.</li>
+      </ul>
+      <figure class="card card-text beweis-zitat">
+        <blockquote>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            &bdquo;[&hellip;] kann ich die Zusammenarbeit mit dem Avorix Team sehr empfehlen. Unter der Leitung von K&uuml;chenchef B&ouml;rge Penk hat Avorix bei uns Spitzenlasten, insbesondere bei starken Messen und gr&ouml;&szlig;eren Kongressen, zuverl&auml;ssig und sehr professionell unterst&uuml;tzt. Das Team f&uuml;gt sich sehr schnell in die Abl&auml;ufe ein, auch mit bis zu 20 K&ouml;chen gleichzeitig, sauber organisiert, ruhig im Ablauf, qualit&auml;tsbewusst, gutes Timing und Hygiene. [&hellip;]&ldquo;
+          </p>
+        </blockquote>
+        <figcaption class="text-sm mt-4" style="color:var(--grau)">
+          K&uuml;chendirektorin eines Cateringunternehmens, Bewertung vom 25. Februar 2026
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Was kostet das -->
+ <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
       <h2 class="mb-8" style="color:var(--druck)">Was kostet das?</h2>
       <div class="card card-text">
@@ -230,6 +367,94 @@ const schema = [
           data-cta-location="personal-kosten"
           class="btn btn-primary"
         >Demo vereinbaren</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anfrage-Strecke (12b, Sektion 11) -->
+ <section id="anfrage" class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10" style="color:var(--druck)">Personal anfragen.</h2>
+      <div class="anfrage-grid">
+        <form id="personal-form" class="card anfrage-form-wrap space-y-5" action="https://formspree.io/f/xqegwngo" method="POST">
+          <input type="hidden" name="_subject" value="Personal-Anfrage" />
+
+          <div>
+            <label for="pa-betrieb" class="anfrage-label">
+              Betrieb <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="text" id="pa-betrieb" name="betrieb" required class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="pa-name" class="anfrage-label">
+              Ihr Name <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="text" id="pa-name" name="name" required class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="pa-telefon" class="anfrage-label">
+              Telefon <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="tel" id="pa-telefon" name="telefon" required class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="pa-email" class="anfrage-label">
+              E-Mail <span class="anfrage-label-opt">(optional)</span>
+            </label>
+            <input type="email" id="pa-email" name="email" class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="pa-ab-wann" class="anfrage-label">
+              Ab wann brauchen Sie jemanden? <span style="color:var(--akzent)">*</span>
+            </label>
+            <input
+              type="text"
+              id="pa-ab-wann"
+              name="ab_wann"
+              required
+              placeholder="z.B. sofort oder ab 15. September"
+              class="anfrage-field"
+            />
+          </div>
+
+          <div>
+            <label for="pa-hinweis" class="anfrage-label">
+              Was sollen wir wissen? <span class="anfrage-label-opt">(optional)</span>
+            </label>
+            <textarea id="pa-hinweis" name="hinweis" rows="4" class="anfrage-field anfrage-textarea"></textarea>
+          </div>
+
+          <div id="personal-success" class="hidden anfrage-success-msg">
+            Ihre Anfrage ist da. Wir melden uns innerhalb von 24 Stunden.
+          </div>
+
+          <button
+            type="submit"
+            data-cta-location="anfrage"
+            class="btn btn-primary anfrage-submit"
+          >
+            Anfrage senden
+          </button>
+        </form>
+
+        <div class="card anfrage-telefon-karte">
+          <h3 class="mb-4">Im Notfall geht es schneller am Telefon.</h3>
+          <p class="mb-4">
+            <a
+              href="tel:+4975413973915"
+              data-cta-location="anfrage"
+              data-cta-event="personal_anruf_click"
+              class="anfrage-telefon-nummer"
+            >07541 3973915</a>
+          </p>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Montag bis Freitag von 8 bis 17 Uhr sind wir pers&ouml;nlich da. Au&szlig;erhalb sprechen Sie aufs Band und wir rufen zur&uuml;ck. Einsatzbereit sind wir rund um die Uhr, auch nachts und am Wochenende.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -255,6 +480,22 @@ const schema = [
           <summary class="faq-q">Kann aus dem Einsatz mehr werden (Schulung, unser System)?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>Ja, jederzeit. Viele Betriebe starten mit einem Personal-Einsatz und bauen danach unser System auf, damit der n&auml;chste Ausfall kein Notfall mehr ist.</p></div></div>
         </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie schnell kann jemand bei uns stehen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel innerhalb von 24 bis 72 Stunden, je nach Standort und Anforderung.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gibt es eine Mindest-Einsatzdauer?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Ein einzelner Tag ist genauso m&ouml;glich wie eine ganze Saison.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Bekommen wir auch nur einen Koch, ohne App und System?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Viele H&auml;user fangen genau so an: Es fehlt jemand, wir schicken einen Koch. Das System kommt erst ins Spiel, wenn Sie wollen, dass mehr bleibt als die &uuml;berbr&uuml;ckten Wochen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wer ist der Arbeitgeber unseres Leihkochs?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Avorix. Wir tragen Lohn, Sozialversicherung und die Arbeitgeberpflichten. In Ihrer K&uuml;che f&uuml;hren Sie ihn fachlich, wie Ihr eigenes Team. Genau diese Aufteilung regelt die Arbeitnehmer&uuml;berlassung.</p></div></div>
+        </details>
       </div>
     </div>
   </section>
@@ -267,10 +508,10 @@ const schema = [
       </div>
       <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
       <a
-        href="/kontakt"
+        href="#anfrage"
         data-cta-location="personal-final"
         class="btn btn-primary"
-      >Demo vereinbaren</a>
+      >Personal anfragen</a>
     </div>
   </section>
 </BaseLayout>
@@ -337,6 +578,123 @@ const schema = [
     transition: none;
   }
 }
+
+/* Telefon-Zeile im Hero (12b) */
+.hero-telefon {
+  font-size: 15px;
+  color: var(--grau);
+}
+.hero-telefon-link {
+  font-weight: 700;
+  color: var(--akzent);
+  text-decoration: none;
+}
+.hero-telefon-link:hover {
+  text-decoration: underline;
+}
+.hero-telefon-zeit {
+  display: inline-block;
+}
+
+/* Beweis-Block (12b, Sektion 9) */
+.beweis-liste {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--linie);
+  max-width: 62ch;
+}
+.beweis-liste li {
+  border-bottom: 1px solid var(--linie);
+  padding: 16px 0;
+  font-size: 17px;
+  color: var(--druck);
+}
+.beweis-zitat {
+  max-width: 760px;
+}
+.beweis-zitat blockquote {
+  margin: 0;
+}
+
+/* Anfrage-Strecke (12b, Sektion 11) */
+.anfrage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .anfrage-grid {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: start;
+  }
+}
+.anfrage-form-wrap {
+  padding: 2rem;
+}
+.anfrage-telefon-karte {
+  padding: 2rem;
+}
+.anfrage-telefon-nummer {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--akzent);
+  text-decoration: none;
+}
+.anfrage-telefon-nummer:hover {
+  text-decoration: underline;
+}
+.anfrage-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--druck);
+  margin-bottom: 4px;
+}
+.anfrage-label-opt {
+  font-weight: 400;
+  color: var(--grau);
+}
+.anfrage-field {
+  width: 100%;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  font-size: 16px;
+  font-family: var(--f-body);
+  color: var(--druck);
+  transition: border-color .15s;
+  appearance: auto;
+  box-sizing: border-box;
+}
+.anfrage-field:focus {
+  outline: none;
+  border-color: var(--akzent);
+}
+.anfrage-field:focus-visible {
+  outline: 3px solid var(--akzent);
+  outline-offset: 2px;
+}
+.anfrage-textarea {
+  resize: none;
+}
+.anfrage-field:invalid:not(:placeholder-shown) {
+  border-color: var(--fehler);
+}
+.anfrage-submit {
+  width: 100%;
+}
+.anfrage-success-msg {
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #F3D9C8;
+  color: var(--akzent);
+  border: 1px solid var(--marker);
+}
 </style>
 
 <script>
@@ -358,4 +716,48 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
     });
   });
 });
+</script>
+
+<script>
+  /* Personal-Anfrage — Mechanik wie Pilot-Formular, Event nur bei Erfolg */
+  const personalForm = document.getElementById('personal-form') as HTMLFormElement;
+  if (personalForm) {
+    let personalSent = false;
+    personalForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = personalForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      const successMsg = document.getElementById('personal-success');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Wird gesendet…';
+      }
+      try {
+        const response = await fetch(personalForm.action, {
+          method: 'POST',
+          body: new FormData(personalForm),
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok && !personalSent) {
+          personalSent = true;
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'personal' });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = response.ok ? 'Gesendet ✔' : 'Anfrage senden';
+        }
+        if (response.ok) {
+          personalForm.reset();
+          if (successMsg) {
+            successMsg.classList.remove('hidden');
+          }
+        }
+      } catch {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Anfrage senden';
+        }
+      }
+    });
+  }
 </script>
