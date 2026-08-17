@@ -580,3 +580,27 @@ h2 {
 @media (prefers-reduced-motion: reduce) {
   .skip-link { transition: none; }
 }
+
+/* Formular-Hinweise (Zwischen-Update B1/B3) */
+.formular-hinweis {
+  font-size: 14px;
+  color: var(--grau);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.formular-hinweis a {
+  color: var(--akzent);
+  text-decoration: underline;
+}
+.formular-pflicht {
+  font-size: 14px;
+  color: var(--grau);
+  margin-bottom: 16px;
+}
+.pilot-zweitwege {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}
