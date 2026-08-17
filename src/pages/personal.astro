@@ -153,7 +153,7 @@ const schema = [
           Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person. Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie auf der rechtlich sicheren Seite.
         </p>
         <div class="flex flex-wrap gap-4 mb-6">
-          <a href="#anfrage" data-cta-location="personal-hero" class="btn btn-primary">Personal anfragen</a>
+          <a href="#anfrage" data-cta-location="personal-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
         </div>
         <div class="hero-badges">
           <Stempel>Gepr&uuml;ft &middot; A&Uuml;-Erlaubnis</Stempel>
@@ -437,7 +437,6 @@ const schema = [
 
           <button
             type="submit"
-            data-cta-location="anfrage"
             class="btn btn-primary anfrage-submit"
           >
             Anfrage senden
@@ -513,6 +512,7 @@ const schema = [
       <a
         href="#anfrage"
         data-cta-location="personal-final"
+        data-cta-event="cta_personal_click"
         class="btn btn-primary"
       >Personal anfragen</a>
     </div>
