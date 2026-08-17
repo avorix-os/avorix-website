@@ -377,7 +377,8 @@ const schema = [
   <!-- Anfrage-Strecke (12b, Sektion 11) -->
  <section id="anfrage" class="reveal section-gap">
     <div class="content-width">
-      <h2 class="mb-10" style="color:var(--druck)">Personal anfragen.</h2>
+      <h2 class="mb-6" style="color:var(--druck)">Personal anfragen.</h2>
+      <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
       <div class="anfrage-grid">
         <form id="personal-form" class="card anfrage-form-wrap space-y-5" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Personal-Anfrage" />
@@ -386,28 +387,28 @@ const schema = [
             <label for="pa-betrieb" class="anfrage-label">
               Betrieb <span style="color:var(--akzent)">*</span>
             </label>
-            <input type="text" id="pa-betrieb" name="betrieb" required class="anfrage-field" />
+            <input type="text" id="pa-betrieb" name="betrieb" required autocomplete="organization" class="anfrage-field" />
           </div>
 
           <div>
             <label for="pa-name" class="anfrage-label">
               Ihr Name <span style="color:var(--akzent)">*</span>
             </label>
-            <input type="text" id="pa-name" name="name" required class="anfrage-field" />
+            <input type="text" id="pa-name" name="name" required autocomplete="name" class="anfrage-field" />
           </div>
 
           <div>
             <label for="pa-telefon" class="anfrage-label">
               Telefon <span style="color:var(--akzent)">*</span>
             </label>
-            <input type="tel" id="pa-telefon" name="telefon" required class="anfrage-field" />
+            <input type="tel" id="pa-telefon" name="telefon" required autocomplete="tel" class="anfrage-field" />
           </div>
 
           <div>
             <label for="pa-email" class="anfrage-label">
               E-Mail <span class="anfrage-label-opt">(optional)</span>
             </label>
-            <input type="email" id="pa-email" name="email" class="anfrage-field" />
+            <input type="email" id="pa-email" name="email" autocomplete="email" class="anfrage-field" />
           </div>
 
           <div>
@@ -441,6 +442,10 @@ const schema = [
           >
             Anfrage senden
           </button>
+          <p class="formular-hinweis">
+            Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
+            Mehr dazu in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.
+          </p>
         </form>
 
         <div class="card anfrage-telefon-karte">

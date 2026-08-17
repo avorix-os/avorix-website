@@ -99,6 +99,7 @@ const schema = {
               id="name"
               name="name"
               required
+              autocomplete="name"
               class="kontakt-field w-full"
             />
           </div>
@@ -111,6 +112,7 @@ const schema = {
               id="email"
               name="email"
               required
+              autocomplete="email"
               class="kontakt-field w-full"
             />
           </div>
@@ -132,6 +134,10 @@ const schema = {
           >
             {t("contact.form.submit")}
           </button>
+          <p class="formular-hinweis">
+            Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
+            Mehr dazu in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.
+          </p>
         </form>
       </div>
     </div>
