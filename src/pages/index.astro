@@ -344,7 +344,7 @@ const schema = [
     <div class="content-width">
       <h2 class="mb-8" style="color:var(--druck)">So sieht das am Herd aus.</h2>
       <div class="grid md:grid-cols-3 gap-4">
-        <Lightbox label="REZEPTSCHRITT" caption={`„Jeder Schritt mit Foto, Menge und Zeit. Zum Abhaken.“`}>
+        <Lightbox label="REZEPTSCHRITT" caption={`„Jeder Schritt mit Menge, Temperatur und Zeit. Zum Abhaken.“`} flach>
           <Image
             src={appKochmodus1}
             alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer"
@@ -355,7 +355,7 @@ const schema = [
             class="w-full h-auto"
           />
         </Lightbox>
-        <Lightbox label="PORTIONSRECHNER" caption={`„Heute 80 Gäste statt 60? Die App rechnet alle Mengen um.“`}>
+        <Lightbox label="PORTIONSRECHNER" caption={`„Heute 80 Gäste statt 60? Die App rechnet alle Mengen um.“`} flach>
           <Image
             src={appPortionsrechner}
             alt="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen"
