@@ -5,7 +5,6 @@ import Stempel from "../../components/Stempel.astro";
 import { Image } from "astro:assets";
 import Lightbox from "../../components/Lightbox.astro";
 import appPreisvergleich from "../../assets/bilder/app-preisvergleich.png";
-import appWirtschaftlichkeit from "../../assets/bilder/app-wirtschaftlichkeit.png";
 
 const t = useTranslations("en");
 
@@ -114,13 +113,13 @@ const schema = {
             Suppliers and offers in one place. You upload your suppliers&rsquo; price lists, the app merges identical products and shows you the best price per item. Buying on gut feeling ends here.
           </p>
           <p class="text-sm" style="color:var(--grau)">
-            One business already compares 802 items from five suppliers.
+            One customer&rsquo;s kitchen now runs 802 items from five suppliers through it.
           </p>
           <div class="mt-6">
-            <Lightbox label="PRICE COMPARISON" caption="Screenshot of the Avorix Cook App: price comparison showing the best price per item across several suppliers" zoomText="enlarge">
+            <Lightbox label="PRICE COMPARISON" caption="Screenshot of the Avorix cook app: price comparison showing the best price per item across several suppliers" zoomText="enlarge">
               <Image
                 src={appPreisvergleich}
-                alt="Screenshot of the Avorix Cook App: price comparison showing the best price per item across several suppliers"
+                alt="Screenshot of the Avorix cook app: price comparison showing the best price per item across several suppliers"
                 widths={[480, 800]}
                 sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
                 loading="lazy"
@@ -139,19 +138,6 @@ const schema = {
           <p class="text-sm" style="color:var(--grau)">
             Food cost, labour cost and gross profit, every month at a glance, with target values and a traffic light. Management sees everything, the head chef sees their share of the costs. Monthly closing and export are included.
           </p>
-          <div class="mt-6">
-            <Lightbox label="MANAGER" caption="Screenshot of the Avorix Cook App: monthly analysis of food cost, labour cost and gross profit" zoomText="enlarge">
-              <Image
-                src={appWirtschaftlichkeit}
-                alt="Screenshot of the Avorix Cook App: monthly analysis of food cost, labour cost and gross profit"
-                widths={[480, 800]}
-                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
-                loading="lazy"
-                decoding="async"
-                class="w-full h-auto"
-              />
-            </Lightbox>
-          </div>
         </div>
       </div>
       <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">

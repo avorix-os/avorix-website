@@ -11,7 +11,6 @@ import appDashboard from "../assets/bilder/app-dashboard.png";
 import appMenuplaner from "../assets/bilder/app-menuplaner-woche.png";
 import appEinkaufsliste from "../assets/bilder/app-einkaufsliste.png";
 import appPreisvergleich from "../assets/bilder/app-preisvergleich.png";
-import appWirtschaftlichkeit from "../assets/bilder/app-wirtschaftlichkeit.png";
 
 const ogImg = await getImage({ src: appKochmodus1, width: 1200, format: "png" });
 const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer";
@@ -266,7 +265,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
             Lieferanten und Angebote an einem Ort. Sie laden die Preislisten Ihrer Lieferanten hoch, die App f&uuml;hrt gleiche Produkte zusammen und zeigt Ihnen den besten Preis je Artikel. Einkaufen nach Bauchgef&uuml;hl h&ouml;rt hier auf.
           </p>
           <p class="text-sm" style="color:var(--grau)">
-            Ein Betrieb vergleicht dar&uuml;ber bereits 802 Artikel von f&uuml;nf Lieferanten.
+            In einem Kundenbetrieb laufen dar&uuml;ber inzwischen 802 Artikel von f&uuml;nf Lieferanten.
           </p>
           <div class="mt-6">
             <Lightbox label="PREISVERGLEICH" caption="Screenshot der Avorix Koch-App: Preisvergleich mit dem besten Preis je Artikel über mehrere Lieferanten">
@@ -291,19 +290,6 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
           <p class="text-sm" style="color:var(--grau)">
             Wareneinsatz, Personalkosten und Rohgewinn, jeden Monat auf einen Blick, mit Zielwerten und Ampel. Die Leitung sieht alles, der K&uuml;chenchef seinen Kostenteil. Monatsabschluss und Export geh&ouml;ren dazu.
           </p>
-          <div class="mt-6">
-            <Lightbox label="MANAGER" caption="Screenshot der Avorix Koch-App: monatliche Auswertung von Wareneinsatz, Personalkosten und Rohgewinn">
-              <Image
-                src={appWirtschaftlichkeit}
-                alt="Screenshot der Avorix Koch-App: monatliche Auswertung von Wareneinsatz, Personalkosten und Rohgewinn"
-                widths={[480, 800]}
-                sizes="(max-width: 768px) 90vw, (max-width: 1280px) 45vw, 520px"
-                loading="lazy"
-                decoding="async"
-                class="w-full h-auto"
-              />
-            </Lightbox>
-          </div>
         </div>
       </div>
       <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
