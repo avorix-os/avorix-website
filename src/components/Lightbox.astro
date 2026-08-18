@@ -2,23 +2,32 @@
 interface Props {
   label: string;
   caption: string;
+  /** Motive mit eigenem Tablet-Rahmen: dunkle Kopfleiste entfaellt, Label wandert in die Bildunterschrift. */
+  flach?: boolean;
+  /** Verb im aria-label des Ausloesers. Auf englischen Seiten "enlarge". */
+  zoomText?: string;
 }
-const { label, caption } = Astro.props;
+const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props;
 ---
 
-<figure class="app-screenshot-card">
-  <div class="app-screenshot-card__header">
-    <span class="app-screenshot-card__label">{label}</span>
-  </div>
+<figure class:list={["app-screenshot-card", flach && "app-screenshot-card--flach"]}>
+  {!flach && (
+    <div class="app-screenshot-card__header">
+      <span class="app-screenshot-card__label">{label}</span>
+    </div>
+  )}
   <button
     class="app-screenshot-trigger"
     type="button"
-    aria-label={`${label} – vergrößern`}
+    aria-label={`${label} – ${zoomText}`}
     data-lightbox-caption={caption}
   >
     <slot />
   </button>
-  <figcaption class="app-screenshot-caption">{caption}</figcaption>
+  <figcaption class="app-screenshot-caption">
+    {flach && <span class="app-screenshot-caption__label">{label}</span>}
+    {caption}
+  </figcaption>
 </figure>
 
 <style>
@@ -60,6 +69,18 @@ const { label, caption } = Astro.props;
   .app-screenshot-trigger:focus-visible {
     outline: 3px solid var(--akzent);
     outline-offset: -3px;
+  }
+
+  .app-screenshot-caption__label {
+    display: block;
+    font-family: var(--f-mono);
+    font-size: 10.5px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-style: normal;
+    color: var(--grau);
+    margin-bottom: 0.25rem;
   }
 
   .app-screenshot-caption {
