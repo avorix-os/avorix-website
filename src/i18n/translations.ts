@@ -34,7 +34,7 @@ export const ui = {
       "Standardisierte Prozesse und die Avorix Koch-App sichern gleichbleibende Speisenqualit\u00e4t \u2014 unabh\u00e4ngig vom Erfahrungslevel Ihres K\u00fcchenteams.",
     "benefits.2.title": "Weniger Personalabh\u00e4ngigkeit",
     "benefits.2.text":
-      "82% der Betriebe melden Fachkr\u00e4ftemangel in der K\u00fcche. Avorix macht Ihren Betrieb unabh\u00e4ngiger von einzelnen Schl\u00fcsselkr\u00e4ften.",
+      "Fachkräftemangel in der Küche ist in fast jedem Betrieb ein Thema. Avorix macht Ihren Betrieb unabhängiger von einzelnen Schlüsselkräften.",
     "benefits.3.title": "Volle Kostenkontrolle",
     "benefits.3.text":
       "Rezeptbasierte Kalkulation, Wareneinsatz-Tracking und standardisierte Portionierung bringen Transparenz in Ihre K\u00fcchenkosten.",
@@ -101,10 +101,6 @@ export const ui = {
     "produkt.cta.note": "Kostenlos & unverbindlich",
     "produkt.target.title": "Gemacht für 4-Sterne-Ferienhotels",
     "produkt.target.text": "Avorix ist speziell entwickelt für Hotels mit Halbpensions-Angebot im DACH-Raum — Betriebe, in denen die Küche täglich unter Druck steht, konstante Qualität für Gäste auf hohem Niveau zu liefern.",
-    "produkt.target.stat1.number": "82%",
-    "produkt.target.stat1.label": "der Betriebe melden Fachkräftemangel in der Küche",
-    "produkt.target.stat2.number": "2–3×",
-    "produkt.target.stat2.label": "höhere Fluktuation im Küchenbereich vs. andere Bereiche",
     "produkt.target.stat3.number": "0",
     "produkt.target.stat3.label": "Kompromisse bei der Speisenqualität für Ihre Gäste",
     "produkt.features.title": "Was die Koch-App kann",
@@ -161,7 +157,7 @@ export const ui = {
       "Standardized processes and the Avorix Kitchen App ensure consistent food quality — regardless of your kitchen team's experience level.",
     "benefits.2.title": "Less Staff Dependency",
     "benefits.2.text":
-      "82% of businesses report a shortage of skilled kitchen staff. Avorix makes your operation less dependent on individual key personnel.",
+      "A shortage of skilled kitchen staff is an issue in almost every kitchen. Avorix makes your operation less dependent on individual key personnel.",
     "benefits.3.title": "Full Cost Control",
     "benefits.3.text":
       "Recipe-based costing, food cost tracking, and standardized portioning bring transparency to your kitchen expenses.",
@@ -226,10 +222,6 @@ export const ui = {
     "produkt.cta.note": "Free & no obligation",
     "produkt.target.title": "Built for 4-Star Resort Hotels",
     "produkt.target.text": "Avorix is specifically designed for hotels with half-board offerings across the DACH region — properties where the kitchen faces daily pressure to deliver consistent quality for discerning guests.",
-    "produkt.target.stat1.number": "82%",
-    "produkt.target.stat1.label": "of operations report a shortage of skilled kitchen staff",
-    "produkt.target.stat2.number": "2–3×",
-    "produkt.target.stat2.label": "higher turnover in kitchen roles vs. other departments",
     "produkt.target.stat3.number": "0",
     "produkt.target.stat3.label": "compromises on food quality for your guests",
     "produkt.features.title": "What the Cook App Does",
