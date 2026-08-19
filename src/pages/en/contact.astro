@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
 
-const t = useTranslations("en");
 
 const schema = {
   "@context": "https://schema.org",
@@ -25,35 +23,34 @@ const schema = {
   }
 };
 ---
-
 <BaseLayout title="Book a Demo" description="Contact Avorix for a demo or more information about the Avorix Cook App and our kitchen management software for hotels and restaurants." schemaOrg={schema}>
  <section class="hero-section px-6">
     <div class="content-width">
-      <p class="eyebrow mb-4">{t("contact.eyebrow")}</p>
-      <h1 class="mb-4">{t("contact.title")}</h1>
-      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">{t("contact.intro")}</p>
+      <p class="eyebrow mb-4">Free Initial Consultation</p>
+      <h1 class="mb-4">Book a Demo</h1>
+      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">Get to know Avorix in a personal demo call. We'll show you exactly how our solution supports your kitchen operations.</p>
 
       <!-- Calendly Booking Widget -->
       <div class="card card-text mb-12">
-        <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
-        <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">{t("contact.booking.text")}</p>
+        <h2 class="mb-2" style="color:var(--druck)">Book Your Demo Directly</h2>
+        <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Pick a free slot in our calendar — no phone calls, no waiting.</p>
         <a
           href="https://calendly.com/avorix/kostenfreies-erstgesprach"
           target="_blank"
           rel="noopener"
           class="btn btn-primary"
         >
-          {t("contact.booking.button")}
+          Select a Time
         </a>
-        <p class="text-sm mt-3" style="color:var(--grau)">{t("contact.booking.note")}</p>
+        <p class="text-sm mt-3" style="color:var(--grau)">Free &amp; no obligation · 30 minutes</p>
       </div>
 
-      <p class="eyebrow mb-8">{t("contact.or")}</p>
+      <p class="eyebrow mb-8">Or send us a message</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <!-- Contact details (compact card, §3.15) -->
         <div class="card" style="align-self:start">
-          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
+          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">Email</h3>
           <a href="mailto:info@avorix.de" class="kontakt-mailto">
             info@avorix.de
           </a>
@@ -63,7 +60,7 @@ const schema = {
           <input type="hidden" name="_subject" value="Demo request via avorix.cloud" />
           <div>
             <label for="name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.name")}
+              Name
             </label>
             <input
               type="text"
@@ -75,7 +72,7 @@ const schema = {
           </div>
           <div>
             <label for="email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.email")}
+              Email
             </label>
             <input
               type="email"
@@ -87,7 +84,7 @@ const schema = {
           </div>
           <div>
             <label for="message" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.message")}
+              Message
             </label>
             <textarea
               id="message"
@@ -101,7 +98,7 @@ const schema = {
             type="submit"
             class="btn btn-primary w-full"
           >
-            {t("contact.form.submit")}
+            Send
           </button>
         </form>
       </div>

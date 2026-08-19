@@ -1,9 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
 import Stempel from "../../components/Stempel.astro";
 
-const t = useTranslations("en");
 
 const schema = {
   "@context": "https://schema.org",
@@ -34,7 +32,6 @@ const schema = {
   ]
 };
 ---
-
 <BaseLayout
   title="Product — Avorix Cook App"
   description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — with photos, quantities, and timings. For resort hotels with half-board."
@@ -43,23 +40,23 @@ const schema = {
   <!-- Hero (W2: Text-Hero, left-aligned) -->
  <section class="hero-section px-6" style="background:var(--papier)">
     <div class="content-width">
-      <p class="eyebrow mb-4">{t("produkt.badge")}</p>
-      <h1 class="mb-6" set:html={t("produkt.tagline")}></h1>
+      <p class="eyebrow mb-4">Avorix Cook App</p>
+      <h1 class="mb-6">The Kitchen That <mark>Always Delivers</mark></h1>
       <p class="lead max-w-[62ch] mb-10" style="color:var(--grau)">
-        {t("produkt.subtitle")}
+        The Avorix Cook App guides your kitchen team step-by-step through every recipe — with photos, quantities, and timings. Consistent quality for half-board operations, regardless of experience level.
       </p>
       <a href="/en/contact" class="btn btn-primary">
-        {t("produkt.cta.primary")}
+        Request a Demo
       </a>
-      <p class="text-sm mt-4" style="color:var(--grau)">{t("produkt.cta.note")}</p>
+      <p class="text-sm mt-4" style="color:var(--grau)">Free &amp; no obligation</p>
     </div>
   </section>
 
   <!-- Target Audience (dark proof section 3.10) -->
  <section class="reveal section-gap section-dunkel" style="background:var(--eisen)">
     <div class="content-width">
-      <h2 class="mb-6" style="color:var(--papier)">{t("produkt.target.title")}</h2>
-      <p class="leading-relaxed text-lg max-w-[62ch]" style="color:rgba(247,246,242,0.75)">{t("produkt.target.text")}</p>
+      <h2 class="mb-6" style="color:var(--papier)">Built for Resort Hotels with Half-Board</h2>
+      <p class="leading-relaxed text-lg max-w-[62ch]" style="color:rgba(247,246,242,0.75)">Avorix is specifically designed for hotels with half-board offerings in Germany and Austria — properties where the kitchen faces daily pressure to deliver consistent quality for discerning guests.</p>
     </div>
   </section>
 
@@ -83,22 +80,22 @@ const schema = {
   <!-- How it works (visual workflow) -->
  <section class="reveal section-gap">
     <div class="content-width">
-      <h2 class="mb-16" style="color:var(--druck)">{t("produkt.workflow.title")}</h2>
+      <h2 class="mb-16" style="color:var(--druck)">What a Typical Day Looks Like</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <div class="schritt-chip inline-flex mb-6">1</div>
-          <h3 class="mb-3">{t("produkt.workflow.step1.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step1.text")}</p>
+          <h3 class="mb-3">Morning Prep</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">The team opens the app, selects today's menu — and immediately knows what needs to be done.</p>
         </div>
         <div>
           <div class="schritt-chip inline-flex mb-6">2</div>
-          <h3 class="mb-3">{t("produkt.workflow.step2.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step2.text")}</p>
+          <h3 class="mb-3">Preparation</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Each cook sees their step, exact quantities, and the reference photo. No asking around, no guessing.</p>
         </div>
         <div>
           <div class="schritt-chip inline-flex mb-6">3</div>
-          <h3 class="mb-3">{t("produkt.workflow.step3.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("produkt.workflow.step3.text")}</p>
+          <h3 class="mb-3">Service-Ready</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Every dish to standard — regardless of who's in the kitchen today. The result is reproducible.</p>
         </div>
       </div>
     </div>
@@ -107,31 +104,31 @@ const schema = {
   <!-- Features Grid -->
  <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
-      <h2 class="mb-14" style="color:var(--druck)">{t("produkt.features.title")}</h2>
+      <h2 class="mb-14" style="color:var(--druck)">What the Cook App Does</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.1.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.1.text")}</p>
+          <h3 class="mb-2">Step-by-Step Recipe Guidance</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">Every dish is broken into clear steps — with photos, quantities, and timings. No room for interpretation, no prior experience required.</p>
         </div>
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.2.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.2.text")}</p>
+          <h3 class="mb-2">Automatic Portion Calculator</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">Quantities are automatically scaled to the required number of portions. No manual calculations, no waste, no errors.</p>
         </div>
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.3.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.3.text")}</p>
+          <h3 class="mb-2">Central Recipe Library</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">All recipes managed centrally for your hotel — always current, accessible by the entire team on any tablet or smartphone.</p>
         </div>
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.4.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.4.text")}</p>
+          <h3 class="mb-2">Food Cost Control</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">Recipe-based costing and food cost analysis bring transparency to your kitchen expenses — with no extra effort.</p>
         </div>
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.5.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.5.text")}</p>
+          <h3 class="mb-2">Offline-Capable</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">The app works without a stable internet connection — reliable in every kitchen situation, including basements and service areas.</p>
         </div>
         <div class="card">
-          <h3 class="mb-2">{t("produkt.features.6.title")}</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">{t("produkt.features.6.text")}</p>
+          <h3 class="mb-2">Easy to Use</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">Designed for real kitchen life: large buttons, plain language, minimal onboarding. New staff can get started immediately.</p>
         </div>
       </div>
     </div>
@@ -148,7 +145,7 @@ const schema = {
         href="/en/contact"
         class="btn btn-primary"
       >
-        {t("produkt.cta.primary")}
+        Request a Demo
       </a>
     </div>
   </section>

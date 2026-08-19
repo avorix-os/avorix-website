@@ -1,16 +1,13 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
 
-const t = useTranslations("en");
 ---
-
 <BaseLayout title="About" description="Meet Avorix — kitchen management for resort hotels in Germany and Austria. We help properties maintain consistent food quality despite staff shortages.">
  <section class="hero-section px-6" style="background:var(--papier)">
     <div class="content-width">
-      <h1 class="mb-6" style="color:var(--druck)">{t("about.title")}</h1>
+      <h1 class="mb-6" style="color:var(--druck)">About Avorix</h1>
       <p class="mb-8 max-w-[62ch]" style="color:var(--grau)">
-        {t("about.intro")}
+        Avorix enables hotels and restaurants to consistently serve high-quality dishes using software, standardized processes, and the Avorix Cook App — even without trained chefs.
       </p>
 
       <!-- Team photo -->
@@ -28,16 +25,16 @@ const t = useTranslations("en");
 
       <div class="space-y-12">
         <div>
-          <h2 class="mb-4" style="color:var(--druck)">{t("about.mission.title")}</h2>
+          <h2 class="mb-4" style="color:var(--druck)">Our Mission</h2>
           <p class="max-w-[62ch]" style="color:var(--grau)">
-            {t("about.mission.text")}
+            The skilled labor shortage in hospitality is structural. We believe technology can bridge the gap — not as a replacement for good chefs, but as a tool that enables every kitchen team to operate at a high level.
           </p>
         </div>
 
         <div>
-          <h2 class="mb-4" style="color:var(--druck)">{t("about.focus.title")}</h2>
+          <h2 class="mb-4" style="color:var(--druck)">Our Focus</h2>
           <p class="max-w-[62ch]" style="color:var(--grau)">
-            {t("about.focus.text")}
+            We start with resort hotels across Germany and Austria — properties where half-board is the core promise and the kitchen faces daily pressure to deliver consistent quality.
           </p>
         </div>
       </div>

@@ -1,12 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { useTranslations } from "../../i18n/translations";
 import Stempel from "../../components/Stempel.astro";
 import { Image } from "astro:assets";
 import Lightbox from "../../components/Lightbox.astro";
 import appPreisvergleich from "../../assets/bilder/app-preisvergleich.png";
 
-const t = useTranslations("en");
 
 const schema = {
   "@context": "https://schema.org",
@@ -30,18 +28,17 @@ const schema = {
   }
 };
 ---
-
 <BaseLayout title="Cook App" description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level." schemaOrg={schema}>
   <!-- Hero (W2: Text-Hero, left-aligned) -->
  <section class="hero-section px-6" style="background:var(--papier)">
     <div class="content-width">
       <p class="eyebrow mb-4">Avorix Cook App</p>
-      <h1 class="mb-6" set:html={t("kochapp.tagline")}></h1>
+      <h1 class="mb-6">Step by Step to a <mark>Perfect Kitchen</mark></h1>
       <p class="lead max-w-[62ch] mb-10" style="color:var(--grau)">
-        {t("kochapp.intro")}
+        The Avorix Cook App guides your kitchen team through every recipe — precisely, visually, and in real time. Consistent quality, no matter who's at the stove.
       </p>
       <a href="/en/contact" class="btn btn-primary">
-        {t("kochapp.cta.button")}
+        Request a Demo
       </a>
     </div>
   </section>
@@ -49,22 +46,22 @@ const schema = {
   <!-- How it works -->
  <section class="reveal section-gap">
     <div class="content-width">
-      <h2 class="mb-14" style="color:var(--druck)">{t("kochapp.how.title")}</h2>
+      <h2 class="mb-14" style="color:var(--druck)">How the Cook App Works</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
           <div class="schritt-chip inline-flex mb-5">1</div>
-          <h3 class="mb-3">{t("kochapp.how.step1.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step1.text")}</p>
+          <h3 class="mb-3">Choose a Recipe</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">The kitchen team selects the desired dish from the digital recipe library — on a tablet or smartphone, directly in the kitchen.</p>
         </div>
         <div>
           <div class="schritt-chip inline-flex mb-5">2</div>
-          <h3 class="mb-3">{t("kochapp.how.step2.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step2.text")}</p>
+          <h3 class="mb-3">Step-by-Step Guidance</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Each step is displayed clearly and intuitively — with quantities, timings, and photos. No room for interpretation, no mistakes.</p>
         </div>
         <div>
           <div class="schritt-chip inline-flex mb-5">3</div>
-          <h3 class="mb-3">{t("kochapp.how.step3.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.how.step3.text")}</p>
+          <h3 class="mb-3">Consistent Results</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">The dish turns out to standard — regardless of the cook's experience level. Quality becomes reproducible.</p>
         </div>
       </div>
     </div>
@@ -73,23 +70,23 @@ const schema = {
   <!-- Features -->
  <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
-      <h2 class="mb-14" style="color:var(--druck)">{t("kochapp.features.title")}</h2>
+      <h2 class="mb-14" style="color:var(--druck)">Feature Overview</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
         <div class="card">
-          <h3 class="mb-3">{t("kochapp.features.1.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.1.text")}</p>
+          <h3 class="mb-3">Digital Recipe Library</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">All recipes managed centrally, always up to date and accessible to the entire team.</p>
         </div>
         <div class="card">
-          <h3 class="mb-3">{t("kochapp.features.2.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.2.text")}</p>
+          <h3 class="mb-3">Portion Calculator</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Automatic scaling to the required number of portions — no manual calculations, no waste.</p>
         </div>
         <div class="card">
-          <h3 class="mb-3">{t("kochapp.features.3.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.3.text")}</p>
+          <h3 class="mb-3">Food Cost Tracking</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Transparent cost control through recipe-based costing and food cost analysis.</p>
         </div>
         <div class="card">
-          <h3 class="mb-3">{t("kochapp.features.4.title")}</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">{t("kochapp.features.4.text")}</p>
+          <h3 class="mb-3">Offline-Capable</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">The app works even without a stable internet connection — reliable in every kitchen situation.</p>
         </div>
       </div>
     </div>
@@ -154,7 +151,7 @@ const schema = {
       </div>
       <p class="mb-8" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
       <a href="/en/contact" class="btn btn-primary">
-        {t("kochapp.cta.button")}
+        Request a Demo
       </a>
     </div>
   </section>
