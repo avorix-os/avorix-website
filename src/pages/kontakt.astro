@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { useTranslations } from "../i18n/translations";
 
-const t = useTranslations("de");
 
 const schema = {
   "@context": "https://schema.org",
@@ -29,16 +27,16 @@ const schema = {
 <BaseLayout title="Demo vereinbaren" description="Interesse an Avorix? Wir beraten Hotels und Gastronomiebetriebe zur Küchenmanagement-Software und Avorix Koch-App. Jetzt Kontakt aufnehmen." schemaOrg={schema}>
  <section class="hero-section px-6">
     <div class="content-width">
-      <p class="eyebrow mb-4">{t("contact.eyebrow")}</p>
-      <h1 class="mb-4">{t("contact.title")}</h1>
-      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">{t("contact.intro")}</p>
+      <p class="eyebrow mb-4">Kostenloses Erstgespräch</p>
+      <h1 class="mb-4">Demo vereinbaren</h1>
+      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">Lernen Sie Avorix in einem persönlichen Demo-Gespräch kennen. Wir zeigen Ihnen, wie unsere Lösung Ihren Küchenbetrieb konkret unterstützt.</p>
 
       <!-- Zwei Wege nebeneinander (Anweisung 12a/9): links die bestehende
            Kalender-Karte unveraendert, rechts der Personal-Weg. -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 items-stretch">
         <div class="card flex flex-col">
-          <h2 class="mb-2" style="color:var(--druck)">{t("contact.booking.heading")}</h2>
-          <p class="mb-6" style="color:var(--grau)">{t("contact.booking.text")}</p>
+          <h2 class="mb-2" style="color:var(--druck)">Demo-Termin direkt buchen</h2>
+          <p class="mb-6" style="color:var(--grau)">Wählen Sie einfach einen freien Termin in unserem Kalender. <strong style="color:var(--druck)">Kein Telefonieren, kein Warten.</strong></p>
           <a
             href="https://calendly.com/avorix/kostenfreies-erstgesprach"
             target="_blank"
@@ -46,9 +44,9 @@ const schema = {
             class="btn btn-primary"
             style="margin-top:auto;align-self:flex-start"
           >
-            {t("contact.booking.button")}
+            Termin auswählen
           </a>
-          <p class="text-sm mt-3" style="color:var(--grau)">{t("contact.booking.note")}</p>
+          <p class="text-sm mt-3" style="color:var(--grau)">Kostenlos &amp; unverbindlich · 30 Minuten</p>
         </div>
 
         <div class="card flex flex-col">
@@ -76,12 +74,12 @@ const schema = {
         </div>
       </div>
 
-      <p class="eyebrow mb-8">{t("contact.or")}</p>
+      <p class="eyebrow mb-8">Oder schreiben Sie uns</p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
         <!-- Kontaktdaten (kompakte Karte, §3.15) -->
         <div class="card" style="align-self:start">
-          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">{t("contact.email")}</h3>
+          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">E-Mail</h3>
           <a href="mailto:info@avorix.de" class="kontakt-mailto">
             info@avorix.de
           </a>
@@ -92,7 +90,7 @@ const schema = {
           <input type="hidden" name="_subject" value="Demo-Anfrage über avorix.cloud" />
           <div>
             <label for="name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.name")}
+              Name
             </label>
             <input
               type="text"
@@ -105,7 +103,7 @@ const schema = {
           </div>
           <div>
             <label for="email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.email")}
+              E-Mail
             </label>
             <input
               type="email"
@@ -118,7 +116,7 @@ const schema = {
           </div>
           <div>
             <label for="message" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              {t("contact.form.message")}
+              Nachricht
             </label>
             <textarea
               id="message"
@@ -132,7 +130,7 @@ const schema = {
             type="submit"
             class="btn btn-primary w-full"
           >
-            {t("contact.form.submit")}
+            Absenden
           </button>
           <p class="formular-hinweis">
             Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
