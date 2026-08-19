@@ -5,8 +5,12 @@ const lang = getLangFromUrl(Astro.url);
 const otherLang = lang === "de" ? "en" : "de";
 
 // Map current path to equivalent in other language
-// Only pages that exist in BOTH languages are mapped
-const pathname = Astro.url.pathname;
+// Only pages that exist in BOTH languages are mapped.
+// Die gebauten Seiten liegen als Verzeichnis mit index.html, Astro.url.pathname
+// endet deshalb auf einen Schraegstrich ("/koch-app/"). Die Tabellen unten stehen
+// ohne. Ohne diese Normalisierung greift keine einzige Zuordnung, und der
+// Umschalter landet immer auf der Startseite der anderen Sprache.
+const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 let otherPath: string;
 
 if (lang === "de") {
@@ -18,20 +22,21 @@ if (lang === "de") {
     "/impressum": "/en/legal-notice",
     "/datenschutz": "/en/privacy",
     "/koch-app": "/en/cook-app",
-    "/produkt": "/en/product",
   };
   otherPath = deToEn[pathname] || `/en`;
 } else {
   // EN -> DE
   const enToDe: Record<string, string> = {
     "/en": "/",
-    "/en/": "/",
     "/en/about": "/ueber-uns",
     "/en/contact": "/kontakt",
     "/en/legal-notice": "/impressum",
     "/en/privacy": "/datenschutz",
     "/en/cook-app": "/koch-app",
-    "/en/product": "/produkt",
+    // /en/product bleibt bewusst ohne Zuordnung: Die deutsche /produkt gibt es
+    // nicht mehr, sie leitet auf /system um -- eine inhaltlich andere Seite.
+    // Bis ueber die Seite entschieden ist, fuehrt der Umschalter auf die
+    // Startseite statt auf eine unpassende Seite.
   };
   otherPath = enToDe[pathname] || "/";
 }
