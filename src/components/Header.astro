@@ -474,7 +474,6 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
           <a href="/en" class="nav-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
           <a href="/en/about" class="nav-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
           <a href="/en/cook-app" class="nav-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
-          <a href="/en/product" class="nav-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
         </div>
         <a href="/en/contact" data-cta-location="header" class="nav-cta">{t("nav.contact")}</a>
         <LanguageSwitcher />
@@ -558,7 +557,6 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
         <a href="/en" class="nav-mobile-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
         <a href="/en/about" class="nav-mobile-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
         <a href="/en/cook-app" class="nav-mobile-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
-        <a href="/en/product" class="nav-mobile-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
         <a href="/en/contact" data-cta-location="header" class="nav-mobile-cta">{t("nav.contact")}</a>
         <div class="nav-mobile-lang">
           <LanguageSwitcher />

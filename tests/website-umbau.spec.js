@@ -83,6 +83,38 @@ test.describe('T3: /produkt Redirect', () => {
   });
 });
 
+test.describe('T6: /en/product Weiterleitung (Anweisung 17, Abschnitt 1)', () => {
+  test('/en/product ist entfernt, die Weiterleitung liegt bei nginx', async ({ page, request }) => {
+    if (process.env.PW_BASE_URL) {
+      // Deploy-Gate: geprueft wird gegen den ausliefernden nginx, dort greift
+      // der 301.
+      const antwort = await request.get('/en/product', { maxRedirects: 0 });
+      expect(antwort.status()).toBe(301);
+      expect(antwort.headers()['location']).toContain('/en/cook-app');
+      return;
+    }
+    // Am Arbeitsplatz laeuft der Astro-Vorschau-Server ohne nginx: dort 404.
+    const antwort = await page.goto('/en/product', { waitUntil: 'domcontentloaded' });
+    expect(antwort.status()).toBe(404);
+  });
+
+  test('nginx.conf enthaelt den 301 auf /en/cook-app', async () => {
+    const fs = await import('fs');
+    const conf = fs.readFileSync('nginx.conf', 'utf8');
+    expect(conf).toContain('location = /en/product {');
+    expect(conf).toContain('location = /en/product/ {');
+    expect(conf).toContain('return 301 /en/cook-app;');
+  });
+
+  test('/en/product steht nicht mehr in der Sitemap', async ({ request }) => {
+    const antwort = await request.get('/sitemap-0.xml');
+    expect(antwort.status()).toBe(200);
+    const xml = await antwort.text();
+    expect(xml).not.toContain('/en/product');
+    expect(xml).toContain('/en/cook-app');
+  });
+});
+
 test.describe('T4: Pilotprogramm-Formular', () => {
   test('kein pilot_bewerbung Event bei leerem Pflichtfeld', async ({ page }) => {
     await page.goto('/pilotprogramm');
