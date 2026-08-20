@@ -73,6 +73,7 @@ const schema = {
             <h3 class="mb-1" style="color:var(--druck)">Jetzt kostenlos herunterladen</h3>
             <p class="text-sm mb-6" style="color:var(--grau)">Tragen Sie sich ein und erhalten Sie den Leitfaden als PDF.</p>
 
+            <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
             <form
               id="lead-form"
               action="https://formspree.io/f/xqegwngo"
@@ -224,6 +225,9 @@ const schema = {
   color: var(--druck);
   outline: none;
   box-sizing: border-box;
+  /* F2 (Anweisung 18): Hoehe fest, damit Auswahlfelder nicht 5px kleiner
+     ausfallen als Eingabefelder. Textfelder ueberschreiben das unten. */
+  min-height: 56px;
 }
 .leitfaden-field:focus {
   border-color: var(--akzent);

@@ -276,7 +276,9 @@ h1 em,   h2 em,   h3 em {
   align-items: center;
   justify-content: center;
   font-family: var(--f-head);
-  font-weight: 700;
+  /* F4 (Anweisung 18): 600 statt 700. Kein Verlust an Deutlichkeit,
+     einer an Lautstaerke. */
+  font-weight: 600;
   font-size: 16px;
   min-height: 50px;
   border-radius: var(--radius);
@@ -308,11 +310,22 @@ h1 em,   h2 em,   h3 em {
   color: var(--akzent);
 }
 
+/* F3 (Anweisung 18): Ein Link im Fliesstext ist unterstrichen UND kupfern.
+   Vorher trugen .typo-link und .btn-link die Unterstreichung erst im Hover.
+   Wer die Maus nicht zufaellig darueberzieht, sah keinen Link -- auf
+   /leitfaden stand einer sogar in der normalen Textfarbe. Beide Klassen
+   sind hier zentral definiert; die vier lokalen Kopien in den Rechtsseiten
+   sind entfallen, damit es nur eine Quelle gibt.
+   Buttons und ganzflaechig klickbare Karten sind davon nicht betroffen,
+   dort traegt die Form die Bedeutung. */
+.typo-link,
 .btn-link {
   color: var(--akzent);
+  text-decoration: underline;
+}
+.btn-link {
   min-height: auto;
 }
-.btn-link:hover { text-decoration: underline; }
 
 /* Bildunterschriften */
 figcaption,

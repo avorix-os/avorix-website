@@ -414,7 +414,7 @@ const faqSchema = {
           </button>
           <p class="formular-hinweis">
             Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
-            Mehr dazu in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.
+            Mehr dazu in der <a href="/datenschutz" class="typo-link">Datenschutzerkl&auml;rung</a>.
           </p>
         </form>
         <div class="pilot-zweitwege">
@@ -516,6 +516,9 @@ const faqSchema = {
   transition: border-color .15s;
   appearance: auto;
   box-sizing: border-box;
+  /* F2 (Anweisung 18): Hoehe fest, damit Auswahlfelder nicht 5px kleiner
+     ausfallen als Eingabefelder. Textfelder ueberschreiben das unten. */
+  min-height: 56px;
 }
 .pilot-field:focus {
   outline: none;

@@ -444,7 +444,7 @@ const schema = [
           </button>
           <p class="formular-hinweis">
             Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
-            Mehr dazu in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.
+            Mehr dazu in der <a href="/datenschutz" class="typo-link">Datenschutzerkl&auml;rung</a>.
           </p>
         </form>
 
@@ -595,7 +595,7 @@ const schema = [
 .hero-telefon-link {
   font-weight: 700;
   color: var(--akzent);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .hero-telefon-link:hover {
   text-decoration: underline;
@@ -648,7 +648,7 @@ const schema = [
   font-weight: 700;
   font-size: 24px;
   color: var(--akzent);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .anfrage-telefon-nummer:hover {
   text-decoration: underline;
@@ -676,6 +676,9 @@ const schema = [
   transition: border-color .15s;
   appearance: auto;
   box-sizing: border-box;
+  /* F2 (Anweisung 18): Hoehe fest, damit Auswahlfelder nicht 5px kleiner
+     ausfallen als Eingabefelder. Textfelder ueberschreiben das unten. */
+  min-height: 56px;
 }
 .anfrage-field:focus {
   outline: none;

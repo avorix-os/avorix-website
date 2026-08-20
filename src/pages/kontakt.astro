@@ -86,11 +86,12 @@ const schema = {
         </div>
 
         <!-- Kontaktformular -->
+        <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
         <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Demo-Anfrage über avorix.cloud" />
           <div>
             <label for="name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              Name
+              Name <span style="color:var(--akzent)">*</span>
             </label>
             <input
               type="text"
@@ -103,7 +104,7 @@ const schema = {
           </div>
           <div>
             <label for="email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              E-Mail
+              E-Mail <span style="color:var(--akzent)">*</span>
             </label>
             <input
               type="email"
@@ -116,7 +117,7 @@ const schema = {
           </div>
           <div>
             <label for="message" class="block text-sm font-medium mb-1" style="color:var(--druck)">
-              Nachricht
+              Nachricht <span style="color:var(--akzent)">*</span>
             </label>
             <textarea
               id="message"
@@ -134,7 +135,7 @@ const schema = {
           </button>
           <p class="formular-hinweis">
             Mit dem Absenden stimmen Sie der Verarbeitung Ihrer Angaben zur Bearbeitung Ihrer Anfrage zu.
-            Mehr dazu in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.
+            Mehr dazu in der <a href="/datenschutz" class="typo-link">Datenschutzerkl&auml;rung</a>.
           </p>
         </form>
       </div>
@@ -146,7 +147,7 @@ const schema = {
 /* E-Mail-Link: Kupfer-Farbe, Unterstrich bei Hover (§3.14 Kontaktdaten) */
 .kontakt-mailto {
   color: var(--akzent);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .kontakt-mailto:hover {
   text-decoration: underline;
@@ -154,7 +155,7 @@ const schema = {
 .kontakt-telefon-link {
   font-weight: 700;
   color: var(--akzent);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .kontakt-telefon-link:hover {
   text-decoration: underline;
@@ -172,6 +173,9 @@ const schema = {
   color: var(--druck);
   outline: none;
   box-sizing: border-box;
+  /* F2 (Anweisung 18): Hoehe fest, damit Auswahlfelder nicht 5px kleiner
+     ausfallen als Eingabefelder. Textfelder ueberschreiben das unten. */
+  min-height: 56px;
 }
 .kontakt-field:focus {
   border-color: var(--akzent);
