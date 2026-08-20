@@ -1,0 +1,268 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import Stempel from "../../components/Stempel.astro";
+import schulungVonHinten from "../../assets/bilder/schulung-von-hinten.jpg";
+import anrichtenHaende from "../../assets/bilder/anrichten-haende.jpg";
+
+const ogImg = await getImage({ src: schulungVonHinten, width: 1200, format: "jpeg" });
+const ogImageAlt = "Two chefs seen from behind at the stove, one explaining a step";
+
+const schemaOrg = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Avorix",
+        "item": "https://avorix.cloud/en"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "The Training",
+        "item": "https://avorix.cloud/en/training"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Kitchen training by Avorix chefs",
+    "description": "An Avorix chef with sous-chef experience or above records your menu, sets it up in the Avorix Cook App and trains your team, at the stove, not in a seminar room.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Avorix GmbH",
+      "url": "https://avorix.cloud",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Friedrichshafen",
+        "addressCountry": "DE"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "DE"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who are the Avorix chefs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Permanently employed professionals with working experience in hotel and restaurant kitchens. Anyone who trains for us has sous-chef experience or above."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the chef does not fit our team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Then talk to us and we will find a solution. It does nobody any good if the chemistry is wrong."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly is my team up to speed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Anyone who has cooked with the app for a week no longer needs it explained. For a typical menu, plan for two blocks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the chefs work with the Avorix Cook App?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. That way every placement leaves documented knowledge behind in your kitchen."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Kitchen training by experienced chefs",
+    "url": "https://avorix.cloud/en/training",
+    "inLanguage": "en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  }
+];
+---
+
+<BaseLayout
+  title="Kitchen training by experienced chefs | Avorix"
+  description="An Avorix chef with sous-chef experience or above records your menu, sets it up in the Avorix Cook App and trains your team, at the stove, not in a seminar room."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={schemaOrg}
+>
+
+  <!-- Hero (W2: Split 55/45, Bild rechts) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mb-4">Module: The Training</p>
+        <h1 class="mb-6">
+          Your team learns <mark style="white-space:nowrap">our system</mark>. From chefs who can do it themselves.
+        </h1>
+        <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+          An Avorix chef with sous-chef experience or above records your menu, sets it up in the Avorix Cook App and trains your team, at the stove, not in a seminar room.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="/en/contact" data-cta-location="training-hero" class="btn btn-primary">Book a Demo</a>
+          <a href="/en/staff#request" data-cta-location="training-hero" data-cta-event="cta_personal_click" class="btn btn-secondary">Request Staff</a>
+        </div>
+        <div class="hero-badges">
+          <Stempel>Certified &middot; German staffing licence</Stempel>
+        </div>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={schulungVonHinten}
+          alt="Two chefs seen from behind at the stove, one explaining a step"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 900px) 100vw, 528px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Zwei Wege -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">
+        Training that fits how you work.
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div class="card">
+          <div class="mb-4">
+            <span class="schritt-chip">1</span>
+          </div>
+          <h3 class="mb-4">The block training</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            An Avorix chef comes to you for a block: five days of six hours each. He concentrates entirely on your kitchen, records the menu, documents, photographs and trains your team. During this time he does not cook service; his full attention goes to the training. For a typical menu, plan for two blocks: first the recording and documentation, then the training itself with the finished material.
+          </p>
+        </div>
+        <div class="card">
+          <div class="mb-4">
+            <span class="schritt-chip">2</span>
+          </div>
+          <h3 class="mb-4">The live training</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            An Avorix chef works in your kitchen as normal, works the tickets and produces, and trains your team alongside, in the middle of real service. You pay for a productive chef and get the training with it.
+          </p>
+        </div>
+      </div>
+      <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
+        <strong>Both ways have this in common:</strong> the Avorix chef has sous-chef experience or above. Nobody trains here who cannot do the job themselves, every day.
+      </p>
+    </div>
+  </section>
+
+  <!-- Am Herd -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        At the stove. In real service. With your own food.
+      </h2>
+      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        The training does not use sample recipes, it uses your menu. Your team learns exactly the dishes it will cook tomorrow, with the app that will be hanging at the station tomorrow. Anyone who has worked like that for a week needs no further explanation.
+      </p>
+      <Image
+        src={anrichtenHaende}
+        alt="A chef plating a dish with tweezers, seen over the shoulder"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover mb-8"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+      <p class="leading-relaxed mb-8 max-w-[62ch]" style="color:var(--grau)">
+        <strong>And if you are short-staffed during the training:</strong> that is what our staffing module is for, permanently employed chefs, legally hired out.
+      </p>
+      <a
+        href="/en/staff"
+        data-cta-location="training-staff-link"
+        class="inline-flex items-center gap-2 font-semibold typo-link"
+        style="min-height:44px;padding-block:10px"
+      >
+        To the staffing module
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Was kostet das -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">What does it cost?</h2>
+      <div class="card card-text">
+        <p class="leading-relaxed mb-6" style="color:var(--grau)">
+          Clear hourly rates and block prices, with nothing hidden. You get the figures in writing at the first call. For the first businesses, 2026 pilot conditions apply, well below the regular price.
+        </p>
+        <a
+          href="/en/contact"
+          data-cta-location="training-costs"
+          class="btn btn-primary"
+        >Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-10" style="color:var(--druck)">Frequently asked questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Who are the Avorix chefs?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Permanently employed professionals with working experience in hotel and restaurant kitchens. Anyone who trains for us has sous-chef experience or above.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What if the chef does not fit our team?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Then talk to us and we will find a solution. It does nobody any good if the chemistry is wrong.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How quickly is my team up to speed?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Anyone who has cooked with the app for a week no longer needs it explained. For a typical menu, plan for two blocks.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do the chefs work with the Avorix Cook App?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. That way every placement leaves documented knowledge behind in your kitchen.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA → Peak-End (3.18) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Certified &middot; German staffing licence</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
+      <a
+        href="/en/contact"
+        data-cta-location="training-final"
+        class="btn btn-primary"
+      >Book a Demo</a>
+    </div>
+  </section>
+</BaseLayout>

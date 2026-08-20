@@ -27,6 +27,30 @@ const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.clo
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = `${siteUrl}${ogImage}`;
 const fullTitle = `${title} | Avorix`;
+
+// hreflang (Anweisung 20, Abschnitt 7): Fuer jedes Paar wechselseitig de und en,
+// dazu x-default auf die deutsche Fassung. Seiten ohne Gegenstueck bekommen
+// keine Angabe -- ein hreflang, das ins Leere zeigt, schadet mehr als keins.
+const SPRACHPAARE: Record<string, string> = {
+  "/": "/en",
+  "/personal": "/en/staff",
+  "/schulung": "/en/training",
+  "/system": "/en/system",
+  "/pilotprogramm": "/en/pilot-program",
+  "/koch-app": "/en/cook-app",
+  "/ueber-uns": "/en/about",
+  "/kontakt": "/en/contact",
+  "/impressum": "/en/legal-notice",
+  "/datenschutz": "/en/privacy",
+};
+const pfad = Astro.url.pathname.replace(/\/+$/, "") || "/";
+let paar: { de: string; en: string } | null = null;
+if (SPRACHPAARE[pfad]) {
+  paar = { de: pfad, en: SPRACHPAARE[pfad] };
+} else {
+  const de = Object.keys(SPRACHPAARE).find(k => SPRACHPAARE[k] === pfad);
+  if (de) paar = { de, en: pfad };
+}
 ---
 
 <!doctype html>
@@ -54,6 +78,13 @@ const fullTitle = `${title} | Avorix`;
       }
     </script>
     <link rel="canonical" href={canonicalUrl} />
+    {paar && (
+      <>
+        <link rel="alternate" hreflang="de" href={`${siteUrl}${paar.de === "/" ? "/" : paar.de}`} />
+        <link rel="alternate" hreflang="en" href={`${siteUrl}${paar.en}`} />
+        <link rel="alternate" hreflang="x-default" href={`${siteUrl}${paar.de === "/" ? "/" : paar.de}`} />
+      </>
+    )}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
     <!-- Open Graph -->

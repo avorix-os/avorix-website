@@ -183,7 +183,7 @@ test.describe('T4: Pilotprogramm-Formular', () => {
  * Zahl allein, sondern dass das Feld mitwaechst — und dass Textfelder gar
  * keine Hoehenvorgabe tragen.
  */
-const FORMULAR_SEITEN = ['/personal', '/pilotprogramm', '/kontakt', '/leitfaden', '/en/contact'];
+const FORMULAR_SEITEN = ['/personal', '/pilotprogramm', '/kontakt', '/leitfaden', '/en/contact', '/en/staff', '/en/pilot-program'];
 
 test.describe('T5: Feldhoehen wachsen mit der Schrift', () => {
   for (const pagePath of FORMULAR_SEITEN) {

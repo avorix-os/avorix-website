@@ -1,0 +1,565 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import Stempel from "../../components/Stempel.astro";
+import dampfTopf from "../../assets/bilder/dampf-topf.jpg";
+
+const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
+const ogImageAlt = "Steam rising from a stainless steel pot on the gas range of a professional kitchen";
+
+const schemaOrg = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Avorix",
+        "item": "https://avorix.cloud/en"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Staff",
+        "item": "https://avorix.cloud/en/staff"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Hiring out permanently employed chefs",
+    "description": "Avorix hires out permanently employed, fully insured chefs to hotels and restaurants in Germany and Austria, on the basis of the official German staffing licence.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Avorix GmbH",
+      "url": "https://avorix.cloud",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Friedrichshafen",
+        "addressCountry": "DE"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "DE"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who are the Avorix chefs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Permanently employed professionals with working experience in hotel and restaurant kitchens."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the chef does not fit our team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Then talk to us and we will find a solution. It does nobody any good if the chemistry is wrong."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does this work contractually?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Through a staffing contract (Arbeitnehmerüberlassungsvertrag) of the kind the Federal Employment Agency provides for. You sign a few more pages than you would for an agency invoice, and that is precisely what protects you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a placement grow into more (training, your system)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, at any time. Many businesses start with a staff placement and build our system afterwards, so that the next absence is no longer an emergency."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly can someone be with us?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually within 24 to 72 hours, depending on location and requirements."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a minimum placement period?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. A single day is just as possible as a whole season."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we book a chef only, without the app and the system?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Many properties start exactly that way: someone is missing, we send a chef. You do not have to book anything else."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is the employer of the chef we hire?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Avorix remains the employer. We take care of the employment contract, wages, social security and the employer's obligations. In your kitchen, the chef is integrated into your routines and you direct his day-to-day work. This clear division of roles is the principle behind Arbeitnehmerüberlassung."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Hire chefs with the official German staffing licence",
+    "url": "https://avorix.cloud/en/staff",
+    "inLanguage": "en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  }
+];
+---
+
+<BaseLayout
+  title="Hire chefs with the official German staffing licence | Avorix"
+  description="Avorix hires out permanently employed, fully insured chefs to hotels and restaurants in Germany and Austria. For emergencies, for the season, for the gap."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={schemaOrg}
+>
+
+  <!-- Hero (W2: Split 55/45, Bild rechts) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mb-4">Module: The Reinforcement</p>
+        <h1 class="mb-6">
+          Real chefs. Permanently employed. <mark style="white-space:nowrap">Legally hired out.</mark>
+        </h1>
+        <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+          Your kitchen stands or falls with a single person. When you are short of staff, we lend you our permanently employed chefs: for emergencies, for the season, for the gap. Few companies in hospitality hold this licence. It puts you on solid legal ground.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="#request" data-cta-location="staff-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Request Staff</a>
+        </div>
+        <div class="hero-badges">
+          <Stempel>Certified &middot; German staffing licence</Stempel>
+        </div>
+        <p class="hero-telefon mt-6">
+          In an emergency, call us directly:
+          <a
+            href="tel:+4975413973915"
+            data-cta-location="hero"
+            data-cta-event="personal_anruf_click"
+            class="hero-telefon-link"
+          >07541 3973915</a>
+          <span class="hero-telefon-zeit">(Mon to Fri, 8 am to 5 pm, answerphone outside these hours)</span>
+        </p>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={dampfTopf}
+          alt="Steam rising from a stainless steel pot on the gas range of a professional kitchen"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 900px) 100vw, 528px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Einleitungsabsatz -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+        Avorix hires out permanently employed, fully insured chefs to hotels and restaurants in Germany and Austria. The basis is the official staffing licence (Arbeitnehmer&uuml;berlassungserlaubnis) issued by the Federal Employment Agency. It protects businesses from the bogus self-employment risk that can arise with brokered &bdquo;self-employed&ldquo; chefs. You can request staff by phone or through the enquiry form on this page.
+      </p>
+    </div>
+  </section>
+
+  <!-- Wann Sie uns rufen -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">When to call us.</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="card">
+          <h3 class="mb-4">The emergency.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            Your head chef is out and the season is running. An Avorix chef steps in, by the day or by the week.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">The season.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            You know you need two extra pairs of hands. Our chefs reinforce your team for weeks or for the whole season.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">The gap.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            The new hire is taking longer than planned. We bridge the gap until your own solution is in place.
+          </p>
+        </div>
+      </div>
+      <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
+        <strong>Short-notice placements are usually possible within 24 to 72 hours.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- So läuft ein Einsatz -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">How a placement works. In four steps.</h2>
+      <div class="space-y-6">
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">1</span>
+          <div>
+            <h3 class="mb-4">You send an enquiry or call us.</h3>
+            <p class="max-w-[62ch]" style="color:var(--grau)">We get back to you within 24 hours.</p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">2</span>
+          <div>
+            <h3 class="mb-4">We clarify what you need, when and for how long.</h3>
+            <p class="max-w-[62ch]" style="color:var(--grau)">Short and specific: what kind of business, what kind of menu, starting when.</p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">3</span>
+          <div>
+            <h3 class="mb-4">B&ouml;rge Penk selects the right chef.</h3>
+            <p class="max-w-[62ch]" style="color:var(--grau)">Our head chef handles every enquiry personally. <strong>He knows what a kitchen demands, and he knows his people.</strong></p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">4</span>
+          <div>
+            <h3 class="mb-4">The placement starts.</h3>
+            <p class="max-w-[62ch]" style="color:var(--grau)">The hours worked are documented.</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">
+        <strong>You run your kitchen. Not the other way round.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Wer bei Ihnen am Herd steht -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Who stands at your stove.</h2>
+      <p class="leading-relaxed max-w-[62ch] mb-8" style="color:var(--grau)">
+        Our chefs are permanently employed by Avorix and fully insured. Everyone we send is a trained chef with years of kitchen experience. <strong>We do not send kitchen assistants.</strong> We work in Germany and Austria.
+      </p>
+      <h3 class="mb-4">The hired chef leaves eventually. What he knows stays.</h3>
+      <p class="leading-relaxed max-w-[62ch] mb-8" style="color:var(--grau)">
+        Our chefs work with the Avorix Cook App and keep documenting as they go. You pay for staff and build our system into your kitchen along the way. With a conventional staffing agency, nothing remains once the placement ends. <strong>With us, the knowledge remains.</strong>
+      </p>
+      <a
+        href="/en/contact"
+        data-cta-location="staff-demo"
+        class="btn btn-primary"
+      >Book a Demo</a>
+    </div>
+  </section>
+
+  <!-- Rechtsteil, dunkler Block (G4: die Aussage, die von dieser Seite haengen bleibt).
+       ACHTUNG: Diese Sektion geht zur anwaltlichen Gegenlese, Wortlaut nicht aendern. -->
+ <section class="reveal section-gap section-dunkel" style="background:var(--eisen)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--papier)">
+        Why &bdquo;cheap self-employed&ldquo; chefs can cost you 50,000 euros.
+      </h2>
+      <p class="leading-relaxed mb-6 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+        Many agencies send you &bdquo;self-employed&ldquo; chefs who invoice you with VAT. It sounds straightforward, but in most cases it is bogus self-employment: the chefs work to instructions, inside your operational routine, exactly like employees.
+      </p>
+      <p class="leading-relaxed mb-6 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+        Here is what happens at the next social security audit. The auditors classify these chefs as bogus self-employed, and they do so in the vast majority of cases. The bill then goes not to the chef but to your business: all social security contributions, backdated three to four years. Depending on the scale, that quickly reaches 50,000 to 100,000 euros. The chef himself is usually nowhere to be found by then.
+      </p>
+      <p class="leading-relaxed mb-6 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+        That is why we do it differently. Our chefs are permanently employed by Avorix and fully insured. We hold the official staffing licence issued by the Federal Employment Agency.
+      </p>
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+        Larger properties and hotel groups now book only companies that hold this licence, for exactly this reason. In hospitality, few providers do. Ask about it before you book anywhere. Even if it is not with us.
+      </p>
+    </div>
+  </section>
+
+  <!-- Was ist Arbeitnehmerueberlassung.
+       ACHTUNG: Diese Sektion geht zur anwaltlichen Gegenlese, Wortlaut nicht aendern.
+       Der zweite Absatz traegt GENAU EINE Hervorhebung (Anweisung 20). -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        What is Arbeitnehmer&uuml;berlassung, and how does it protect you?
+      </h2>
+      <p class="leading-relaxed max-w-[62ch] mb-6" style="color:var(--grau)">
+        Arbeitnehmer&uuml;berlassung, the German framework for hiring out employees, means this: the chef remains an employee of Avorix. We hold the employment contract, pay the wages and remit social security contributions and non-wage labour costs. You deploy the chef temporarily in your business, integrate him into your working routines and give him work-related instructions. For this you pay us the agreed hourly rate.
+      </p>
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+        For this form of staffing, the provider generally requires a licence from the Federal Employment Agency, and Avorix holds one. <strong>The decisive advantage for you: the placement takes place openly and deliberately within the statutory framework for hiring out employees, and not through a legally questionable arrangement.</strong> You get qualified kitchen staff flexibly, and at the same time you reduce the legal risks of using external personnel.
+      </p>
+    </div>
+  </section>
+
+  <!-- Ihre Gaeste -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Your guests experience your kitchen. Not ours.</h2>
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+        <strong>No guest notices that an Avorix chef is cooking alongside your team.</strong> We never name a client publicly, and on request we guarantee that in writing.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10" style="color:var(--druck)">Frequently asked questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Who are the Avorix chefs?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Permanently employed professionals with working experience in hotel and restaurant kitchens.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What if the chef does not fit our team?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Then talk to us and we will find a solution. It does nobody any good if the chemistry is wrong.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How does this work contractually?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Through a staffing contract (Arbeitnehmer&uuml;berlassungsvertrag) of the kind the Federal Employment Agency provides for. You sign a few more pages than you would for an agency invoice, and that is precisely what protects you.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can a placement grow into more (training, your system)?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, at any time. Many businesses start with a staff placement and build our system afterwards, so that the next absence is no longer an emergency.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How quickly can someone be with us?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Usually within 24 to 72 hours, depending on location and requirements.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Is there a minimum placement period?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>No. A single day is just as possible as a whole season.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can we book a chef only, without the app and the system?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. Many properties start exactly that way: someone is missing, we send a chef. You do not have to book anything else.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Who is the employer of the chef we hire?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Avorix remains the employer. We take care of the employment contract, wages, social security and the employer&rsquo;s obligations. In your kitchen, the chef is integrated into your routines and you direct his day-to-day work. This clear division of roles is the principle behind Arbeitnehmer&uuml;berlassung.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formular -->
+ <section id="request" class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Request Staff.</h2>
+      <p class="formular-pflicht">Fields marked * are the ones we need, everything else is optional.</p>
+      <div class="anfrage-grid">
+        <form id="staff-form" class="card anfrage-form-wrap space-y-6" action="https://formspree.io/f/xqegwngo" method="POST">
+          <input type="hidden" name="_subject" value="Staff enquiry via avorix.cloud" />
+
+          <div>
+            <label for="st-business" class="anfrage-label">
+              Business <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="text" id="st-business" name="betrieb" required autocomplete="organization" class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="st-name" class="anfrage-label">
+              Your name <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="text" id="st-name" name="name" required autocomplete="name" class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="st-phone" class="anfrage-label">
+              Phone <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="tel" id="st-phone" name="telefon" required autocomplete="tel" class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="st-email" class="anfrage-label">
+              Email <span class="anfrage-label-opt">(optional)</span>
+            </label>
+            <input type="email" id="st-email" name="email" autocomplete="email" class="anfrage-field" />
+          </div>
+
+          <div>
+            <label for="st-when" class="anfrage-label">
+              When do you need someone? <span style="color:var(--akzent)">*</span>
+            </label>
+            <input
+              type="text"
+              id="st-when"
+              name="ab_wann"
+              required
+              placeholder="e.g. immediately or from 15 September"
+              class="anfrage-field"
+            />
+          </div>
+
+          <div>
+            <label for="st-note" class="anfrage-label">
+              What should we know? <span class="anfrage-label-opt">(optional)</span>
+            </label>
+            <textarea id="st-note" name="hinweis" rows="4" class="anfrage-field anfrage-textarea"></textarea>
+          </div>
+
+          <div id="staff-success" class="hidden anfrage-success-msg">
+            We have your enquiry. We will get back to you within 24 hours.
+          </div>
+
+          <button type="submit" class="btn btn-primary anfrage-submit">
+            Send enquiry
+          </button>
+          <p class="formular-hinweis">
+            By submitting, you consent to your details being processed in order to handle your enquiry.
+            More on this in the <a href="/en/privacy" class="typo-link">privacy policy</a>.
+          </p>
+        </form>
+
+        <div class="card anfrage-telefon-karte">
+          <h3 class="mb-4">In an emergency it is quicker by phone.</h3>
+          <p class="mb-4">
+            <a
+              href="tel:+4975413973915"
+              data-cta-location="request"
+              data-cta-event="personal_anruf_click"
+              class="anfrage-telefon-nummer"
+            >07541 3973915</a>
+          </p>
+          <p class="text-sm" style="color:var(--grau)">Mon to Fri, 8 am to 5 pm, answerphone outside these hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA → Peak-End (3.18) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Certified &middot; German staffing licence</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
+      <a
+        href="#request"
+        data-cta-location="staff-final"
+        data-cta-event="cta_personal_click"
+        class="btn btn-primary"
+      >Request Staff</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* Telefon-Zeile im Hero (12b) */
+.hero-telefon {
+  font-size: 15px;
+  color: var(--grau);
+}
+.hero-telefon-link {
+  font-weight: 700;
+  color: var(--akzent);
+  text-decoration: underline;
+}
+.hero-telefon-zeit {
+  display: inline-block;
+}
+
+/* Anfrage-Strecke (12b, Sektion 11) */
+.anfrage-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 900px) {
+  .anfrage-grid {
+    grid-template-columns: 1.15fr 1fr;
+    align-items: start;
+  }
+}
+.anfrage-form-wrap {
+  padding: 2rem;
+}
+.anfrage-telefon-karte {
+  padding: 2rem;
+}
+.anfrage-telefon-nummer {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--akzent);
+  text-decoration: underline;
+}
+.anfrage-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--druck);
+  margin-bottom: 8px;
+}
+.anfrage-label-opt {
+  font-weight: 400;
+  color: var(--grau);
+}
+.anfrage-field {
+  width: 100%;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 16px;
+  font-family: var(--f-body);
+  color: var(--druck);
+  transition: border-color .15s;
+  appearance: auto;
+  box-sizing: border-box;
+}
+.anfrage-field:focus {
+  outline: none;
+  border-color: var(--akzent);
+}
+.anfrage-field:focus-visible {
+  outline: 3px solid var(--akzent);
+  outline-offset: 2px;
+}
+.anfrage-textarea {
+  resize: none;
+}
+.anfrage-submit {
+  width: 100%;
+}
+.anfrage-success-msg {
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  background: #F3D9C8;
+  color: var(--akzent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .anfrage-field { transition: none; }
+}
+</style>
