@@ -15,7 +15,6 @@ export const ui = {
     "footer.imprint": "Impressum",
     "footer.privacy": "Datenschutz",
     "nav.kochapp": "Koch-App",
-    "nav.produkt": "Produkt",
   },
   en: {
     "nav.home": "Home",
@@ -24,7 +23,6 @@ export const ui = {
     "footer.imprint": "Legal Notice",
     "footer.privacy": "Privacy Policy",
     "nav.kochapp": "Cook App",
-    "nav.produkt": "Product",
   },
 } as const;
 

@@ -83,6 +83,38 @@ test.describe('T3: /produkt Redirect', () => {
   });
 });
 
+test.describe('T6: /en/product Weiterleitung (Anweisung 17, Abschnitt 1)', () => {
+  test('/en/product ist entfernt, die Weiterleitung liegt bei nginx', async ({ page, request }) => {
+    if (process.env.PW_BASE_URL) {
+      // Deploy-Gate: geprueft wird gegen den ausliefernden nginx, dort greift
+      // der 301.
+      const antwort = await request.get('/en/product', { maxRedirects: 0 });
+      expect(antwort.status()).toBe(301);
+      expect(antwort.headers()['location']).toContain('/en/cook-app');
+      return;
+    }
+    // Am Arbeitsplatz laeuft der Astro-Vorschau-Server ohne nginx: dort 404.
+    const antwort = await page.goto('/en/product', { waitUntil: 'domcontentloaded' });
+    expect(antwort.status()).toBe(404);
+  });
+
+  test('nginx.conf enthaelt den 301 auf /en/cook-app', async () => {
+    const fs = await import('fs');
+    const conf = fs.readFileSync('nginx.conf', 'utf8');
+    expect(conf).toContain('location = /en/product {');
+    expect(conf).toContain('location = /en/product/ {');
+    expect(conf).toContain('return 301 /en/cook-app;');
+  });
+
+  test('/en/product steht nicht mehr in der Sitemap', async ({ request }) => {
+    const antwort = await request.get('/sitemap-0.xml');
+    expect(antwort.status()).toBe(200);
+    const xml = await antwort.text();
+    expect(xml).not.toContain('/en/product');
+    expect(xml).toContain('/en/cook-app');
+  });
+});
+
 test.describe('T4: Pilotprogramm-Formular', () => {
   test('kein pilot_bewerbung Event bei leerem Pflichtfeld', async ({ page }) => {
     await page.goto('/pilotprogramm');
@@ -141,4 +173,54 @@ test.describe('T4: Pilotprogramm-Formular', () => {
     );
     expect(eventsAfter).toHaveLength(1);
   });
+});
+
+/**
+ * T5: Formularfelder (Anweisung 18/F2, zurueckgebaut nach Anweisung 21, Abschnitt 4)
+ *
+ * Die Feldhoehe darf nicht festgenagelt sein. Wer die Schrift vergroessert,
+ * bekaeme sonst abgeschnittenen Text im Feld. Geprueft wird deshalb nicht die
+ * Zahl allein, sondern dass das Feld mitwaechst — und dass Textfelder gar
+ * keine Hoehenvorgabe tragen.
+ */
+const FORMULAR_SEITEN = ['/personal', '/pilotprogramm', '/kontakt', '/leitfaden', '/en/contact', '/en/staff', '/en/pilot-program'];
+
+test.describe('T5: Feldhoehen wachsen mit der Schrift', () => {
+  for (const pagePath of FORMULAR_SEITEN) {
+    test(`${pagePath} — Felder ohne feste Hoehe, Textfeld ohne Vorgabe`, async ({ page }) => {
+      await page.goto(pagePath);
+
+      const felder = 'input.anfrage-field, select.anfrage-field, input.pilot-field, select.pilot-field, input.kontakt-field, select.kontakt-field, input.leitfaden-field, select.leitfaden-field';
+
+      const vorher = await page.$$eval(felder, (els) =>
+        els.map((el) => ({
+          minHeight: getComputedStyle(el).minHeight,
+          hoehe: Math.round(el.getBoundingClientRect().height),
+        }))
+      );
+      expect(vorher.length).toBeGreaterThan(0);
+      for (const f of vorher) {
+        expect(f.minHeight).toBe('58px');
+        expect(f.hoehe).toBe(58);
+      }
+
+      // Textfelder duerfen wachsen: keine Mindesthoehe.
+      const textfelder = await page.$$eval('textarea', (els) =>
+        els.map((el) => getComputedStyle(el).minHeight)
+      );
+      for (const min of textfelder) {
+        expect(min).toBe('0px');
+      }
+
+      // Doppelte Schriftgroesse (Text-Zoom): die Felder muessen mitwachsen,
+      // sonst schneidet die feste Hoehe den Text ab.
+      await page.addStyleTag({ content: 'input, select, textarea { font-size: 32px !important; }' });
+      const nachher = await page.$$eval(felder, (els) =>
+        els.map((el) => Math.round(el.getBoundingClientRect().height))
+      );
+      for (const hoehe of nachher) {
+        expect(hoehe).toBeGreaterThan(58);
+      }
+    });
+  }
 });

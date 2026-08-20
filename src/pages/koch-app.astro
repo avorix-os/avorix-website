@@ -320,26 +320,24 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">So sieht ein normaler Tag damit aus.</h2>
-      <div class="space-y-6">
-        <div class="flex gap-4">
-          <div>
-            <h3 class="eyebrow">Morgens</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Die Vorbereitung l&auml;uft nach Liste. Jeder wei&szlig;, was heute vorproduziert wird, in welcher Menge, f&uuml;r wie viele G&auml;ste.</p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div>
-            <h3 class="eyebrow">Im Service</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Am Posten h&auml;ngt das Tablet. Bestellung kommt rein, die Kraft &ouml;ffnet das Gericht, arbeitet die Schritte ab. <strong>Das Ergebnis sieht aus und schmeckt wie immer.</strong></p>
-          </div>
-        </div>
-        <div class="flex gap-4">
-          <div>
-            <h3 class="eyebrow">Abends</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Der Wareneinsatz des Tages ist dokumentiert, ohne dass jemand etwas aufschreiben musste.</p>
-          </div>
-        </div>
-      </div>
+      <!-- C5 (Anweisung 18): Die Sektion ist ein Tagesablauf und bekommt die Form
+           eines Ablaufs. Drei Stationen untereinander, verbunden durch eine duenne
+           Linie am linken Rand. Keine Karten, keine Kaesten, nur die Linie und der
+           Rhythmus. Auf mobil dieselbe Form, nur schmaler. -->
+      <ol class="tagesablauf">
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Morgens</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Die Vorbereitung l&auml;uft nach Liste. Jeder wei&szlig;, was heute vorproduziert wird, in welcher Menge, f&uuml;r wie viele G&auml;ste.</p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Im Service</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Am Posten h&auml;ngt das Tablet. Bestellung kommt rein, die Kraft &ouml;ffnet das Gericht, arbeitet die Schritte ab. <strong>Das Ergebnis sieht aus und schmeckt wie immer.</strong></p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Abends</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Der Wareneinsatz des Tages ist dokumentiert, ohne dass jemand etwas aufschreiben musste.</p>
+        </li>
+      </ol>
     </div>
   </section>
 

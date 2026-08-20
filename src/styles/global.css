@@ -380,17 +380,27 @@ img {
   object-position: center;
 }
 
-/* F2 (Anweisung 18) nach dem B2-Umbau: Der Innenabstand der Felder stammt
-   jetzt aus der Skala und betraegt 16px statt 14. Dadurch waeren die Felder
-   auf 60px gewachsen und haetten die abgenommene Hoehe von 56 gebrochen.
-   Die Hoehe ist deshalb fest gesetzt statt als Mindestwert -- sie ist eine
-   Groesse, kein Abstand, und faellt nicht unter die Skala.
-   Textfelder sind mehrzeilig und bleiben ausgenommen. */
+/* F2 (Anweisung 18, zurueckgebaut nach Anweisung 21, Abschnitt 4):
+   Die Hoehe der Felder kommt nicht aus einer festen Angabe, sondern aus
+   Innenabstand plus Zeilenhoehe: 16 oben, 16 unten, 24 fuer die Zeile.
+   Ohne die Angabe erbt das Feld die 1.6 des Fliesstextes, das waeren 25,6px
+   und damit eine krumme Hoehe.
+   Mindesthoehe statt fester Hoehe, weil eine feste Hoehe bei vergroesserter
+   Schrift den Text im Feld abschneidet: bei doppelter Schriftgroesse braucht
+   die Zeile allein 51px. Die Mindesthoehe faengt zugleich die Auswahlfelder
+   ab, die sonst kleiner ausfallen als Eingabefelder -- sie kennen keine
+   Zeilenhoehe und richten sich allein nach der Schrift.
+   Die Mindesthoehe ist 58 und nicht 56, weil zu Innenabstand und Zeilenhoehe
+   noch der Rahmen kommt: 16 + 24 + 16 + 2 = 58. Der Innenabstand bleibt damit
+   auf der Skala; die Zahl richtet sich nach ihm und nicht umgekehrt
+   (Anweisung 21, Abschnitt 4, letzter Absatz).
+   Textfelder bleiben ausgenommen, sie muessen wachsen duerfen. */
 input.anfrage-field, select.anfrage-field,
 input.pilot-field, select.pilot-field,
 input.kontakt-field, select.kontakt-field,
 input.leitfaden-field, select.leitfaden-field {
-  height: 56px;
+  min-height: 58px;
+  line-height: 24px;
 }
 
 /* FAQ-Aufklapper. Stand bis zum 20.08. auf neun Seiten lokal, inhaltlich
@@ -457,6 +467,40 @@ input.leitfaden-field, select.leitfaden-field {
   .faq-chevron {
     transition: none;
   }
+}
+
+/* C5 (Anweisung 18): Der Tagesablauf bekommt die Form eines Ablaufs.
+   Die drei Stationen stehen untereinander, eine duenne senkrechte Linie am
+   linken Rand verbindet sie. Die Tageszeit bleibt als Label in Menlo, der Text
+   steht daneben. Keine Karten, keine Kaesten.
+   Die Linie laeuft ueber die Liste, nicht ueber die einzelne Station -- damit
+   endet sie an der letzten Station und haengt nicht darueber hinaus.
+   Abstaende aus der Skala in B2. */
+.tagesablauf {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 24px;
+  border-left: 1px solid var(--linie);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.tagesablauf-station {
+  position: relative;
+}
+/* Der Punkt sitzt auf der Linie und markiert die Station. */
+.tagesablauf-station::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--akzent);
+}
+.tagesablauf-zeit {
+  margin-bottom: 8px;
 }
 
 /* Bildunterschriften */
