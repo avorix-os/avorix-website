@@ -31,8 +31,11 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
 </figure>
 
 <style>
+  /* C1 (Anweisung 18): derselbe Eckenradius wie die Karten, nicht 1rem.
+     Das Bild sitzt oben in der Karte, ueber overflow:hidden sind damit
+     genau die oberen beiden Ecken gerundet. */
   .app-screenshot-card {
-    border-radius: 1rem;
+    border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid rgba(110, 106, 96, 0.25);
     display: flex;
@@ -71,6 +74,10 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
     outline-offset: -3px;
   }
 
+  /* C2 (Anweisung 18): Label und Unterschrift stehen als ein kleiner Block
+     unter dem Bild, nicht als zwei zentrierte Zeilen. Das Label bleibt in
+     Menlo, ruecken aber beide an die linke Bildkante.
+     Der Abstand zwischen beiden ist 8px aus der Skala in B2. */
   .app-screenshot-caption__label {
     display: block;
     font-family: var(--f-mono);
@@ -80,15 +87,18 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
     letter-spacing: 0.08em;
     font-style: normal;
     color: var(--grau);
-    margin-bottom: 0.25rem;
+    margin-bottom: 8px;
   }
 
+  /* Aufrecht statt kursiv: Eine schraeg gestellte Groteske ist keine echte
+     Kursive, sondern eine geneigte Version derselben Schrift, und wirkt in
+     langen Zeilen unruhig. */
   .app-screenshot-caption {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--grau);
-    text-align: center;
-    padding: 0.75rem 1rem;
-    font-style: italic;
+    text-align: left;
+    padding: 16px 0 0;
+    font-style: normal;
     background: var(--papier);
   }
 </style>
@@ -145,12 +155,12 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
     outline: 3px solid var(--akzent);
   }
   #avorix-lb__caption {
-    font-size: 14px;
+    font-size: 13px;
     color: rgba(247, 246, 242, 0.7);
-    margin-top: 1rem;
+    margin-top: 16px;
     text-align: center;
     max-width: 94vw;
-    font-style: italic;
+    font-style: normal;
   }
   @media (prefers-reduced-motion: reduce) {
     #avorix-lb,
