@@ -800,7 +800,8 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  /* C6 (Anweisung 23): 10px lagen neben der Skala, der vorgegebene Wert ist 8. */
+  gap: 8px;
 }
 
 /* D2 (Anweisung 18): Die zwei Haekchen-Zeilen aus dem Hero, jetzt unter der

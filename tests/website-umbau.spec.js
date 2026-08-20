@@ -382,3 +382,34 @@ test.describe('T8c: E1 — hoechstens drei Schriftfamilien', () => {
     });
   }
 });
+
+/**
+ * T8d: D1, Abnahme 4 (Anweisung 23) — der aktive Punkt ist erkennbar.
+ *
+ * Auf den Seiten hinter dem Aufklapper trug nur der Untereintrag im Menue die
+ * Markierung. Solange das Menue zu ist, sieht die niemand.
+ */
+const SEITEN_MIT_NAVPUNKT = [
+  '/personal', '/koch-app', '/schulung', '/system', '/pilotprogramm',
+  '/fuer-hotels', '/fuer-restaurants', '/fuer-sporthotels', '/ueber-uns',
+  '/en/staff', '/en/cook-app', '/en/training', '/en/system', '/en/pilot-program', '/en/about',
+];
+
+test.describe('T8d: D1 — der aktive Punkt ist in der geschlossenen Leiste sichtbar', () => {
+  for (const pagePath of SEITEN_MIT_NAVPUNKT) {
+    test(`${pagePath} — genau ein Punkt zeigt die laufende Seite`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      const markiert = await page.evaluate(() => {
+        const raus = [];
+        for (const el of document.querySelectorAll('.nav-desktop .nav-link, .nav-desktop .nav-dropdown-trigger')) {
+          const nach = getComputedStyle(el, '::after');
+          const sichtbar = nach.transform && nach.transform !== 'none' && !nach.transform.startsWith('matrix(0');
+          if (sichtbar) raus.push(el.innerText.trim().split('\n')[0]);
+        }
+        return raus;
+      });
+      expect(markiert.length, `markiert: ${markiert.join(', ')}`).toBe(1);
+    });
+  }
+});

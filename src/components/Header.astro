@@ -33,6 +33,13 @@ const zielgruppenLinks = [
 // W5: aktive Seite markieren (aria-current)
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathname;
+
+// D1, Abnahme 4 (Anweisung 23): Der aktive Punkt muss in der geschlossenen
+// Leiste erkennbar sein. Auf den vier Seiten hinter dem Aufklapper trug nur
+// der Untereintrag die Markierung -- die sieht niemand, solange das Menue zu
+// ist. Traegt eine dieser Seiten die Marke, wird der Aufklapper selbst aktiv.
+const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) : offerLinks)
+  .some((link) => isCurrent(link.href));
 ---
 
 <style>
@@ -144,6 +151,10 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   /* W5: aktive Seite — dauerhafter Unterstrich */
   .nav-link[aria-current="page"] { opacity: 1; }
   .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+  /* D1, Abnahme 4: der Aufklapper zeigt, dass die laufende Seite hinter ihm
+     liegt -- gleiche Auszeichnung wie ein direkter Punkt. */
+  .nav-dropdown-trigger.ist-aktiv { opacity: 1; }
+  .nav-dropdown-trigger.ist-aktiv::after { transform: scaleX(1); }
 
   /* Dropdown trigger */
   .nav-dropdown { position: relative; }
@@ -168,9 +179,9 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   .nav-dropdown-trigger::after {
     content: '';
     position: absolute;
-    left: 2px;
-    right: 18px;
-    bottom: 2px;
+    left: var(--nav-pad-x);
+    right: calc(var(--nav-pad-x) + 19px);
+    bottom: 6px;
     height: 2px;
     background: var(--papier);
     transform: scaleX(0);
@@ -471,7 +482,7 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
           <div class="nav-dropdown">
             <button
               type="button"
-              class="nav-dropdown-trigger"
+              class:list={["nav-dropdown-trigger", { "ist-aktiv": aufklapperAktiv }]}
               aria-expanded="false"
               aria-haspopup="true"
             >
@@ -520,7 +531,7 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
           <div class="nav-dropdown">
             <button
               type="button"
-              class="nav-dropdown-trigger"
+              class:list={["nav-dropdown-trigger", { "ist-aktiv": aufklapperAktiv }]}
               aria-expanded="false"
               aria-haspopup="true"
             >
