@@ -15,6 +15,15 @@ const angebotLinks = [
   { label: "Pilotprogramm 2026", href: "/pilotprogramm" },
 ];
 
+// Englisch: dieselbe Struktur, aber ohne die Spalte WHO IT IS FOR -- die
+// Segmentseiten gibt es auf Englisch nicht (Anweisung 20, Abschnitt 7).
+const offerLinks = [
+  { label: "The Cook App", href: "/en/cook-app" },
+  { label: "The Training", href: "/en/training" },
+  { label: "How It All Works Together", href: "/en/system" },
+  { label: "Pilot Program 2026", href: "/en/pilot-program" },
+];
+
 const zielgruppenLinks = [
   { label: "Ferienhotels", href: "/fuer-hotels" },
   { label: "Restaurants & Gasthöfe", href: "/fuer-restaurants" },
@@ -471,12 +480,44 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
     ) : (
       <nav class="nav-desktop" aria-label="Main navigation">
         <div class="nav-links">
-          <a href="/en" class="nav-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
-          <a href="/en/about" class="nav-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
-          <a href="/en/cook-app" class="nav-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
-          <a href="/en/product" class="nav-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
+          <a href="/en/staff" class="nav-link" aria-current={isCurrent("/en/staff") ? "page" : undefined}>Staff</a>
+
+          <div class="nav-dropdown">
+            <button
+              type="button"
+              class="nav-dropdown-trigger"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              The Cook App
+              <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="nav-dropdown-menu" role="menu">
+              <div class="nav-dropdown-spalte">
+                <p class="nav-dropdown-titel">The offer</p>
+                {offerLinks.map(link => (
+                  <a href={link.href} class="nav-dropdown-item" role="menuitem" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <a href="/en/about" class="nav-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>About Us</a>
         </div>
-        <a href="/en/contact" data-cta-location="header" class="nav-cta">{t("nav.contact")}</a>
+
+        <a
+          href="/en/staff#request"
+          data-cta-location="header"
+          data-cta-event="cta_personal_click"
+          class="nav-cta"
+        >
+          Request Staff
+        </a>
+        <a href="/en/contact" data-cta-location="header" class="nav-cta nav-cta-outline">
+          Book a Demo
+        </a>
         <LanguageSwitcher />
       </nav>
     )}
@@ -555,11 +596,40 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
       </>
     ) : (
       <>
-        <a href="/en" class="nav-mobile-link" aria-current={isCurrent("/en") ? "page" : undefined}>{t("nav.home")}</a>
-        <a href="/en/about" class="nav-mobile-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>{t("nav.about")}</a>
-        <a href="/en/cook-app" class="nav-mobile-link" aria-current={isCurrent("/en/cook-app") ? "page" : undefined}>{t("nav.kochapp")}</a>
-        <a href="/en/product" class="nav-mobile-link" aria-current={isCurrent("/en/product") ? "page" : undefined}>{t("nav.produkt")}</a>
-        <a href="/en/contact" data-cta-location="header" class="nav-mobile-cta">{t("nav.contact")}</a>
+        {/* Beide Wege stehen oben, "Request Staff" zuerst -- wie auf Deutsch. */}
+        <a
+          href="/en/staff#request"
+          data-cta-location="header"
+          data-cta-event="cta_personal_click"
+          class="nav-mobile-cta nav-mobile-cta-oben"
+        >
+          Request Staff
+        </a>
+        <a href="/en/contact" data-cta-location="header" class="nav-mobile-cta nav-mobile-cta-outline">
+          Book a Demo
+        </a>
+
+        <a href="/en/staff" class="nav-mobile-link" aria-current={isCurrent("/en/staff") ? "page" : undefined}>Staff</a>
+
+        <div class="mobile-section">
+          <button type="button" class="mobile-section-trigger" aria-expanded="false">
+            The Cook App
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="mobile-section-content">
+            <div class="mobile-section-inner">
+              <p class="nav-dropdown-titel">The offer</p>
+              {offerLinks.map(link => (
+                <a href={link.href} class="mobile-section-link" aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <a href="/en/about" class="nav-mobile-link" aria-current={isCurrent("/en/about") ? "page" : undefined}>About Us</a>
+
         <div class="nav-mobile-lang">
           <LanguageSwitcher />
         </div>
