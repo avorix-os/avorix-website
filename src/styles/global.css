@@ -141,6 +141,24 @@ body {
 @media (max-width: 640px) {
   .section-streifen { padding-bottom: 56px; }
 }
+/* A1 (Anweisung 18): Hervorhebungen tragen KEINE eigene Farbe mehr.
+   Vorher stand an jedem <strong> ein festes color:var(--druck). Auf dunklem
+   Grund ergab das 1,09 Kontrast, der Satz war unsichtbar. Statt die Farbe je
+   Stelle zu setzen, bestimmt sie jetzt die Flaeche: Wer einen dunklen Block
+   baut, setzt --hervorhebung mit, und jedes <strong> darin stimmt automatisch.
+   So kann der Fehler nicht wiederkommen.
+   Die Hervorhebung bleibt dabei dunkler als der graue Fliesstext, ihre Wirkung
+   aus 12h/2 bleibt also erhalten, nur ohne feste Farbe am Tag. */
+:root {
+  --hervorhebung: var(--druck);
+}
+.section-dunkel {
+  --hervorhebung: var(--papier);
+}
+strong {
+  color: var(--hervorhebung);
+}
+
 /* Dunkle Baender sind eigene Flaechen: sie behalten ihre Innenluft,
    und die Sektion danach setzt wieder mit vollem Abstand auf. */
 .section-gap.section-dunkel,
