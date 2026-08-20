@@ -101,7 +101,24 @@
   --f-body: var(--f-head);
   --f-mono: Menlo,Consolas,monospace;
 
-  /* Korrektur 2: In Sektionen, deren Inhalt bewusst die volle Breite nutzt,
+  /* Korrektur 3 (Anweisung 25/26), die eigentliche Ursache: Nicht das nowrap.
+   Zellen in Rastern und Flex-Reihen tragen von Haus aus `min-width: auto` und
+   schrumpfen damit nicht unter die Breite ihres laengsten Wortes. Steht dort
+   ein Wort wie "Arbeitnehmerueberlassungserlaubnis" -- 33 Zeichen, 272px bei
+   279px Spalte --, waechst die Zelle statt umzubrechen, und die ganze Seite
+   schiebt sich zur Seite. Auf unseren Rechnern passte das Wort um sieben
+   Pixel; auf Geraeten mit etwas breiterer Schrift nicht mehr. Daher die vier
+   Pixel, und daher liess es sich hier nicht nachstellen.
+   Mit min-width: 0 darf die Zelle schmaler werden als ihr Inhalt, und
+   overflow-wrap am Text bricht das Wort im Notfall um. */
+.split-row > *,
+.hero-grid > *,
+.grid > *,
+.gruender-grid > * {
+  min-width: 0;
+}
+
+/* Korrektur 2: In Sektionen, deren Inhalt bewusst die volle Breite nutzt,
    traegt die Ueberschrift keine Begrenzung -- sonst waere sie schmaler als
    das, was unter ihr steht. Betrifft Kartenreihen, Bild neben Text, den
    dunklen Block und die Heros. */
@@ -151,6 +168,16 @@ body {
   font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  /* Korrektur 3 (Anweisung 25/26), zweite Ursache: Auf /personal steht
+     "Arbeitnehmerueberlassungserlaubnis", 33 Zeichen. Bei 375px ist die
+     Textspalte 279px breit, das Wort braucht 272 -- sieben Pixel Reserve.
+     Rendert eine Schrift geringfuegig breiter, passt es nicht mehr und
+     schiebt die ganze Seite zur Seite. Genau die vier Pixel, die gemeldet
+     wurden.
+     break-word bricht ein solches Wort nur dann um, wenn es sonst
+     ueberliefe; im Normalfall aendert sich nichts. Damit haengt der Fehler
+     nicht mehr an der Schrift des Betrachters. */
+  overflow-wrap: break-word;
 }
 
 /* Sektionsabstand nach der Zuordnungstabelle in B2.

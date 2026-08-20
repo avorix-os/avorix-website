@@ -721,3 +721,36 @@ test.describe('T12d: Korrektur 6 — Text in Kaesten hat seitliche Luft', () => 
     for (const w of werte) expect(w).toBe('16px');
   });
 });
+
+/**
+ * T12e: Korrektur 3 (Anweisung 26) — die eigentliche Ursache des Ueberlaufs.
+ *
+ * Nicht das nowrap: Rasterzellen tragen `min-width: auto` und schrumpfen nicht
+ * unter ihr laengstes Wort. "Arbeitnehmerueberlassungserlaubnis" braucht 272px
+ * bei 279px Spalte -- auf Geraeten mit etwas breiterer Schrift passt es nicht
+ * mehr und schiebt die Seite auf.
+ */
+test.describe('T12e: Korrektur 3 — lange Woerter sprengen die Seite nicht', () => {
+  test('ein ueberlanges Wort bricht um, statt die Seite zu verbreitern', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/personal');
+    const mass = await page.evaluate(() => {
+      const abs = document.querySelector('main p');
+      const merker = abs.innerHTML;
+      abs.innerHTML = 'Arbeitnehmerueberlassungserlaubnisbescheinigungsverfahren';
+      const r = { scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth };
+      abs.innerHTML = merker;
+      return r;
+    });
+    expect(mass.scroll).toBeLessThanOrEqual(mass.client);
+  });
+
+  test('Rasterzellen duerfen schmaler werden als ihr Inhalt', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/');
+    const auto = await page.$$eval('.split-row > *, .hero-grid > *, .grid > *', (els) =>
+      els.filter((el) => getComputedStyle(el).minWidth === 'auto').length
+    );
+    expect(auto).toBe(0);
+  });
+});
