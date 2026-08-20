@@ -224,3 +224,59 @@ test.describe('T5: Feldhoehen wachsen mit der Schrift', () => {
     });
   }
 });
+
+/**
+ * T7: Seitentitel (Anweisung 20, Abschnitt 6 und Abnahmepunkt 13)
+ *
+ * Das Suffix "| Avorix" haengt das Layout an. Steht es zusaetzlich im Titel
+ * der Seite, erscheint es im Browser-Tab zweimal. Das betraf am 20.08. zwoelf
+ * Seiten, vier neue und acht aus dem Bestand.
+ */
+const TITEL_SEITEN = [
+  '/', '/koch-app', '/personal', '/schulung', '/system', '/pilotprogramm',
+  '/ueber-uns', '/kontakt', '/leitfaden', '/impressum', '/datenschutz',
+  '/fuer-hotels', '/fuer-restaurants', '/fuer-sporthotels',
+  '/en', '/en/about', '/en/contact', '/en/cook-app', '/en/legal-notice',
+  '/en/privacy', '/en/staff', '/en/training', '/en/system', '/en/pilot-program',
+];
+
+test.describe('T7: Das Suffix steht genau einmal im Titel', () => {
+  for (const pagePath of TITEL_SEITEN) {
+    test(`${pagePath} — "| Avorix" genau einmal`, async ({ page }) => {
+      await page.goto(pagePath);
+      const titel = await page.title();
+      const treffer = titel.split('| Avorix').length - 1;
+      expect(treffer, `Titel: "${titel}"`).toBe(1);
+      expect(titel.endsWith('| Avorix'), `Titel: "${titel}"`).toBe(true);
+    });
+  }
+});
+
+test.describe('T7b: Die vier englischen Seiten tragen die Meta aus Anweisung 20', () => {
+  const META = {
+    '/en/staff': {
+      titel: 'Hire Professional Chefs in Germany & Austria | Avorix',
+      beschreibung: 'Permanently employed chefs, hired out under the official German staffing licence. Usually available within 24 to 72 hours, no minimum placement period.',
+    },
+    '/en/training': {
+      titel: 'Kitchen Team Training at the Stove | Avorix',
+      beschreibung: 'An Avorix chef records your menu, sets it up in the app and trains your team in real service. Block training or live during operation.',
+    },
+    '/en/system': {
+      titel: 'The Avorix Kitchen System: App, Training, Staff | Avorix',
+      beschreibung: 'Three modules that interlock: the Avorix Cook App, training at the stove, and permanently employed chefs. For kitchens that hold their standard.',
+    },
+    '/en/pilot-program': {
+      titel: 'Avorix Pilot Program 2026: 3 Places | Avorix',
+      beschreibung: 'Three hotel kitchens, around half the regular price, a direct line to the founder. Your name stays confidential, guaranteed in writing.',
+    },
+  };
+  for (const [pagePath, soll] of Object.entries(META)) {
+    test(`${pagePath} — Titel und Beschreibung im Wortlaut`, async ({ page }) => {
+      await page.goto(pagePath);
+      expect(await page.title()).toBe(soll.titel);
+      const beschreibung = await page.getAttribute('meta[name="description"]', 'content');
+      expect(beschreibung).toBe(soll.beschreibung);
+    });
+  }
+});
