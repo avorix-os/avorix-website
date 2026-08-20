@@ -714,9 +714,15 @@ figcaption,
    Manager-Karte auf /koch-app 473px Leerraum, weil ihre Nachbarin ein Bild
    traegt. Eine Karte ist so hoch wie ihr Inhalt plus Innenabstand.
    Kuerzer ist besser als leer. */
+/* Korrektur 7 (Anweisung 25) nimmt B1 teilweise zurueck: Karten in derselben
+   Reihe sind wieder gleich hoch, Reihen untereinander duerfen sich
+   unterscheiden. Genau das macht stretch im Raster -- es streckt auf die
+   Hoehe der Rasterzeile, nicht des ganzen Rasters.
+   Die Grenze aus B1 bleibt: hoechstens 40px ungenutzt unter dem Inhalt. Wo
+   mehr entsteht, melden wir die Stelle, statt sie zu verstecken. */
 .grid:has(> .card),
 .grid:has(> .card-modul) {
-  align-items: start;
+  align-items: stretch;
 }
 
 @media (min-width: 640px) {

@@ -8,19 +8,27 @@ const t = useTranslations(lang);
 // Anweisung 13: Die Navigation folgt der Kaufabsicht, nicht dem Aufbau des
 // Angebots. Personal steht deshalb als eigener Punkt und nicht mehr als
 // vierter Eintrag unter "Unser System".
+// Korrektur 14 (Anweisung 25): "Wie alles zusammenspielt" steht vorn -- es ist
+// die Klammer ueber die drei Bausteine; wer das Menue oeffnet, soll zuerst das
+// Ganze sehen. "Das Personal" kommt neu dazu, hinter der Schulung, damit die
+// drei Bausteine dieselbe Reihenfolge haben wie auf /system.
+// Personal steht damit an zwei Stellen: als Hauptpunkt oben und hier. Das ist
+// Absicht und keine Dublette -- zwei Wege zu derselben Seite.
 const angebotLinks = [
+  { label: "Wie alles zusammenspielt", href: "/system" },
   { label: "Die App", href: "/koch-app" },
   { label: "Die Schulung", href: "/schulung" },
-  { label: "Wie alles zusammenspielt", href: "/system" },
+  { label: "Das Personal", href: "/personal" },
   { label: "Pilotprogramm 2026", href: "/pilotprogramm" },
 ];
 
 // Englisch: dieselbe Struktur, aber ohne die Spalte WHO IT IS FOR -- die
 // Segmentseiten gibt es auf Englisch nicht (Anweisung 20, Abschnitt 7).
 const offerLinks = [
+  { label: "How It All Works Together", href: "/en/system" },
   { label: "The Cook App", href: "/en/cook-app" },
   { label: "The Training", href: "/en/training" },
-  { label: "How It All Works Together", href: "/en/system" },
+  { label: "The Staff", href: "/en/staff" },
   { label: "Pilot Program 2026", href: "/en/pilot-program" },
 ];
 
@@ -38,7 +46,12 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
 // Leiste erkennbar sein. Auf den vier Seiten hinter dem Aufklapper trug nur
 // der Untereintrag die Markierung -- die sieht niemand, solange das Menue zu
 // ist. Traegt eine dieser Seiten die Marke, wird der Aufklapper selbst aktiv.
+// Seiten mit eigenem Hauptpunkt: dort markiert der Hauptpunkt, nicht der
+// Aufklapper. Seit Korrektur 14 steht Personal an beiden Stellen, und ohne
+// diese Ausnahme waeren auf /personal zwei Punkte gleichzeitig markiert.
+const eigenerHauptpunkt = lang === "de" ? ["/personal"] : ["/en/staff"];
 const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) : offerLinks)
+  .filter((link) => !eigenerHauptpunkt.includes(link.href))
   .some((link) => isCurrent(link.href));
 ---
 

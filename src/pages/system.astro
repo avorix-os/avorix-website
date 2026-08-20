@@ -121,16 +121,12 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
       <h2 class="mb-6" style="color:var(--druck)">
         Unser System. Die Schulung. Die Verst&auml;rkung.
       </h2>
-      <Image
-        src={bonLeiste}
-        alt="Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Restaurantk&uuml;che"
-        widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1080px"
-        loading="eager"
-        fetchpriority="high"
-        class="w-full object-cover mb-10"
-        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
-      />
+      <!-- Korrektur 9 (Anweisung 25): Der Satz stand unter den Modulen. Er ist
+           zu verstehen, bevor man sie gesehen hat, also gehoert er nach oben. -->
+      <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
+        Denken Sie an Feuerwehr und Brandschutz: Die Verst&auml;rkung l&ouml;scht den akuten Brand. System und Schulung
+        sorgen daf&uuml;r, dass es nie wieder brennt. <strong>Avorix ist beides.</strong>
+      </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         <!-- Baustein 1: Unser System -->
         <div class="card-modul">
@@ -176,10 +172,19 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
           </div>
         </div>
       </div>
-      <p class="text-sm mt-10 max-w-[62ch]" style="color:var(--grau)">
-        Denken Sie an Feuerwehr und Brandschutz: Die Verst&auml;rkung l&ouml;scht den akuten Brand. System und Schulung
-        sorgen daf&uuml;r, dass es nie wieder brennt. <strong>Avorix ist beides.</strong>
-      </p>
+      <!-- Korrektur 21 (Anweisung 25): Das Bild stand zwischen Ueberschrift und
+           Modulen. Die Ueberschrift kuendigt drei Dinge an, der Leser sucht sie;
+           das Bild schob sich dazwischen. Jetzt darunter. -->
+      <Image
+        src={bonLeiste}
+        alt="Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Restaurantk&uuml;che"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover mt-10"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
     </div>
   </section>
 
@@ -236,17 +241,23 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
       <h2 class="mb-6" style="color:var(--druck)">
         Vom ersten Gespr&auml;ch zur K&uuml;che, die immer funktioniert.
       </h2>
-      <Image
-        src={schulungVonHinten}
-        alt="Zwei K&ouml;che von hinten am Herd, einer erkl&auml;rt einen Arbeitsschritt"
-        widths={[480, 800, 1200, 1600]}
-        sizes="(max-width: 1024px) 100vw, 1080px"
-        loading="lazy"
-        decoding="async"
-        class="w-full object-cover mb-10"
-        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
-      />
-      <div class="space-y-6">
+      <!-- Korrektur 21 (Anweisung 25): Bild und Schritte standen untereinander,
+           das Bild ueber die volle Breite. Jetzt nebeneinander: Bild links, die
+           vier Schritte rechts. Auf dem Handy untereinander, Bild zuerst -- das
+           macht .split-row von selbst. -->
+      <div class="split-row" style="align-items:start">
+      <div class="split-media">
+        <Image
+          src={schulungVonHinten}
+          alt="Zwei K&ouml;che von hinten am Herd, einer erkl&auml;rt einen Arbeitsschritt"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 900px) 100vw, 420px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <div class="split-copy space-y-6">
         <!-- Step 1 -->
         <div class="schritt">
           <span class="schritt-chip shrink-0">1</span>
@@ -292,6 +303,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             </p>
           </div>
         </div>
+      </div>
       </div>
       <div class="mt-16">
         <a
