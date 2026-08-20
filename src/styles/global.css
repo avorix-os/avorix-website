@@ -125,16 +125,35 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Sektionsabstand. H1: Grundfassung ist das Handy, ab 640 wird aufgestockt. */
+/* Sektionsabstand nach der Zuordnungstabelle in B2.
+   Zwischen zwei Sektionen: 64 / 96 / 128. Grundfassung ist das Handy. */
 .section-gap {
-  padding-top: 56px;
-  padding-bottom: 56px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 @media (min-width: 640px) {
   .section-gap {
-    padding-top: 84px;
-    padding-bottom: 84px;
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
+}
+@media (min-width: 900px) {
+  .section-gap {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
+}
+
+/* B2: Zwischen der letzten Sektion und der Fusszeile steht weniger,
+   40 / 64 / 96. Die Seite endet damit ruhiger, als sie gegliedert ist. */
+main > section:last-of-type {
+  padding-bottom: 40px;
+}
+@media (min-width: 640px) {
+  main > section:last-of-type { padding-bottom: 64px; }
+}
+@media (min-width: 900px) {
+  main > section:last-of-type { padding-bottom: 96px; }
 }
 
 /* Folgerunde 1 / 3c: Der Abstand zwischen zwei Sektionen steht GENAU EINMAL.
@@ -146,13 +165,16 @@ body {
    nach unten selbst vor; die naechste Sektion setzt ohne zweiten auf. */
 .section-streifen {
   padding-top: 0;
-  padding-bottom: 56px;
+  padding-bottom: 64px;
 }
 .section-streifen + .section-gap {
   padding-top: 0;
 }
 @media (min-width: 640px) {
-  .section-streifen { padding-bottom: 84px; }
+  .section-streifen { padding-bottom: 96px; }
+}
+@media (min-width: 900px) {
+  .section-streifen { padding-bottom: 128px; }
 }
 /* A1 (Anweisung 18): Hervorhebungen tragen KEINE eigene Farbe mehr.
    Vorher stand an jedem <strong> ein festes color:var(--druck). Auf dunklem
@@ -176,12 +198,18 @@ strong {
    und die Sektion danach setzt wieder mit vollem Abstand auf. */
 .section-gap.section-dunkel,
 .section-dunkel + .section-gap {
-  padding-top: 56px;
+  padding-top: 64px;
 }
 @media (min-width: 640px) {
   .section-gap.section-dunkel,
   .section-dunkel + .section-gap {
-    padding-top: 84px;
+    padding-top: 96px;
+  }
+}
+@media (min-width: 900px) {
+  .section-gap.section-dunkel,
+  .section-dunkel + .section-gap {
+    padding-top: 128px;
   }
 }
 
@@ -391,8 +419,9 @@ figcaption,
   border: 1px solid var(--linie);
   border-radius: var(--radius);
   /* 12h/3.1: Aussenabstand muss groesser sein als der Innenabstand, sonst
-     verschmelzen die Karten zu einer Textflaeche. */
-  padding: 32px;
+     verschmelzen die Karten zu einer Textflaeche.
+     B2 (Anweisung 18): auf dem Handy 24, ab Tablet 32. */
+  padding: 24px;
   box-shadow: var(--schatten);
   transition: transform .18s, box-shadow .18s;
 }
@@ -423,6 +452,27 @@ figcaption,
    Nur Desktop — mobil stehen die Karten untereinander, dort ist die Trennung
    schon eindeutig. Ueber :has() statt ueber die gap-Klassen im Markup, damit
    nur echte Kartenraster betroffen sind und keine Struktur angefasst wird. */
+/* B1 (Anweisung 18): Karten in einer Reihe werden oben ausgerichtet, nicht
+   auf die Hoehe der hoechsten gestreckt. Vorher stand unter der
+   Manager-Karte auf /koch-app 473px Leerraum, weil ihre Nachbarin ein Bild
+   traegt. Eine Karte ist so hoch wie ihr Inhalt plus Innenabstand.
+   Kuerzer ist besser als leer. */
+.grid:has(> .card),
+.grid:has(> .card-modul) {
+  align-items: start;
+}
+
+@media (min-width: 640px) {
+  .card,
+  .card-modul { padding: 32px; }
+}
+
+/* B2: Zwischen Karten in einer Reihe 24 / 24 / 40. Der Aussenabstand bleibt
+   damit auf dem Desktop groesser als der Innenabstand. */
+.grid:has(> .card),
+.grid:has(> .card-modul) {
+  gap: 24px;
+}
 @media (min-width: 900px) {
   .grid:has(> .card),
   .grid:has(> .card-modul) {
@@ -576,12 +626,23 @@ h2 {
 }
 
 /* Hero (W2): Split 55/45, Bild spannt */
+/* B2: 112 und 84 lagen ausserhalb der Skala. Der Hero traegt oben die
+   groesste Stufe, nach unten den Sektionsabstand wie alle anderen. */
 .hero-section {
-  padding-top: 112px;
-  padding-bottom: 56px;
+  padding-top: 64px;
+  padding-bottom: 64px;
 }
 @media (min-width: 640px) {
-  .hero-section { padding-bottom: 84px; }
+  .hero-section {
+    padding-top: 96px;
+    padding-bottom: 96px;
+  }
+}
+@media (min-width: 900px) {
+  .hero-section {
+    padding-top: 128px;
+    padding-bottom: 128px;
+  }
 }
 /* Folgerunde 1 / 3c: auch am Hero steht der Abstand nur einmal */
 .hero-section + .section-gap {
@@ -681,10 +742,11 @@ h2 {
 }
 
 /* Formular-Hinweise (Zwischen-Update B1/B3) */
+/* B2: 12px lag ausserhalb der Skala, naechste Stufe ist 16. */
 .formular-hinweis {
   font-size: 14px;
   color: var(--grau);
-  margin-top: 12px;
+  margin-top: 16px;
   line-height: 1.5;
 }
 .formular-hinweis a {

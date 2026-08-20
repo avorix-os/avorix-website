@@ -20,7 +20,7 @@ const schema = {
     <div class="content-width">
 
       <!-- Hero (Lead-Magnet-Landing, zentriert = finale Konversion) -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-16">
         <span class="eyebrow inline-block mb-4">
           Kostenloser Leitfaden
         </span>
@@ -34,7 +34,7 @@ const schema = {
       </div>
 
       <!-- Two-column layout: Preview + Form -->
-      <div class="grid sm:grid-cols-2 gap-12 items-start text-left">
+      <div class="grid sm:grid-cols-2 gap-16 items-start text-left">
 
         <!-- Left: What's inside -->
         <div>
@@ -59,7 +59,7 @@ const schema = {
           </ul>
 
           <!-- Trust signals -->
-          <div class="flex flex-wrap gap-3">
+          <div class="flex flex-wrap gap-4">
             <span class="check-badge"><span class="check-badge-mark">&#10003;</span> 8&ndash;10 Seiten, sofort umsetzbar</span>
             <span class="check-badge"><span class="check-badge-mark">&#10003;</span> PDF, kostenlos</span>
             <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Kein Spam, jederzeit abmeldbar</span>
@@ -70,7 +70,7 @@ const schema = {
         <div class="card" style="padding:2rem">
           <!-- Form state: default -->
           <div id="form-container">
-            <h3 class="mb-1" style="color:var(--druck)">Jetzt kostenlos herunterladen</h3>
+            <h3 class="mb-4" style="color:var(--druck)">Jetzt kostenlos herunterladen</h3>
             <p class="text-sm mb-6" style="color:var(--grau)">Tragen Sie sich ein und erhalten Sie den Leitfaden als PDF.</p>
 
             <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
@@ -85,7 +85,7 @@ const schema = {
               <input type="hidden" name="_next" value="https://avorix.cloud/leitfaden?download=1" />
 
               <div>
-                <label for="lead-name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+                <label for="lead-name" class="block text-sm font-medium mb-2" style="color:var(--druck)">
                   Ihr Name <span style="color:var(--akzent)">*</span>
                 </label>
                 <input
@@ -99,7 +99,7 @@ const schema = {
               </div>
 
               <div>
-                <label for="lead-email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+                <label for="lead-email" class="block text-sm font-medium mb-2" style="color:var(--druck)">
                   E-Mail-Adresse <span style="color:var(--akzent)">*</span>
                 </label>
                 <input
@@ -113,7 +113,7 @@ const schema = {
               </div>
 
               <div>
-                <label for="lead-hotel" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+                <label for="lead-hotel" class="block text-sm font-medium mb-2" style="color:var(--druck)">
                   Betrieb / Hotel <span style="color:var(--grau)">(optional)</span>
                 </label>
                 <input
@@ -149,7 +149,7 @@ const schema = {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 class="mb-2" style="color:var(--druck)">Vielen Dank!</h3>
+            <h3 class="mb-4" style="color:var(--druck)">Vielen Dank!</h3>
             <p class="text-sm mb-6" style="color:var(--grau)">Ihr Download startet automatisch. Falls nicht, klicken Sie auf den Button.</p>
             <a
               id="manual-download"
@@ -184,7 +184,7 @@ const schema = {
         ].map((item) => (
           <div>
             <p style="font-size:1.5rem;font-weight:700;font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--akzent)">{item.stat}</p>
-            <p class="text-xs mt-1" style="color:var(--grau)">{item.label}</p>
+            <p class="text-xs mt-6" style="color:var(--grau)">{item.label}</p>
           </div>
         ))}
       </div>
@@ -194,8 +194,8 @@ const schema = {
   <!-- About Avorix teaser (finale CTA-Sektion, zentriert erlaubt) -->
  <section class="reveal section-gap">
     <div class="content-width text-center">
-      <p class="eyebrow mb-3">&Uuml;ber Avorix</p>
-      <h2 class="mb-4" style="color:var(--druck);margin-left:auto;margin-right:auto">Die Avorix Koch-App: die Lösung, die dieser Leitfaden beschreibt</h2>
+      <p class="eyebrow mb-6">&Uuml;ber Avorix</p>
+      <h2 class="mb-6" style="color:var(--druck);margin-left:auto;margin-right:auto">Die Avorix Koch-App: die Lösung, die dieser Leitfaden beschreibt</h2>
       <p class="mb-6 mx-auto max-w-[62ch]" style="color:var(--grau)">
         Avorix setzt genau das digital um, was in diesem Leitfaden als bewährte Strategie beschrieben wird: zentrale Rezeptverwaltung, Schritt-für-Schritt-Anleitungen und konsistente Qualität, <strong>auch ohne ausgebildete Köche</strong>.
       </p>
