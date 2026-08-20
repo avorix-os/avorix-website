@@ -112,7 +112,7 @@ if (SPRACHPAARE[pfad]) {
   <body>
     <a href="#main" class="skip-link">Zum Inhalt springen</a>
     <Header />
-    <main id="main">
+    <main id="main" class="inhalt">
       <slot />
     </main>
     <Footer />
@@ -150,5 +150,5 @@ if (SPRACHPAARE[pfad]) {
         document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
       })();
     </script>
-  </body>
+</body>
 </html>

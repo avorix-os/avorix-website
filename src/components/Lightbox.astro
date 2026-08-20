@@ -113,7 +113,9 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
     font-size: 13px;
     color: var(--grau);
     text-align: left;
-    padding: 16px 0 0;
+    /* Korrektur 6 (Anweisung 25): seitlich stand null, der Text lief bis an
+       den Rand des Kastens. */
+    padding: 16px;
     font-style: normal;
     background: var(--papier);
   }

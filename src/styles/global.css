@@ -101,6 +101,27 @@
   --f-body: var(--f-head);
   --f-mono: Menlo,Consolas,monospace;
 
+  /* Korrektur 2: In Sektionen, deren Inhalt bewusst die volle Breite nutzt,
+   traegt die Ueberschrift keine Begrenzung -- sonst waere sie schmaler als
+   das, was unter ihr steht. Betrifft Kartenreihen, Bild neben Text, den
+   dunklen Block und die Heros. */
+.hero-section h1,
+.hero-section h2,
+.split-row h2,
+.section-dunkel h2,
+section:has(> .content-width > .grid) h2,
+section:has(> .content-width > .split-row) h2,
+section:has(.card) h2,
+section:has(.faq-list) h2 {
+  max-width: none;
+}
+
+/* Korrektur 4 (Anweisung 25): Die Kopfleiste steht fest oben und nimmt dem
+     Inhalt Platz weg, ohne ihn zu verschieben. Bei 60px blieben unter ihr 4px
+     sichtbar; seit die Leiste 72px hoch ist, lag der Anfang ganz darunter.
+     Eine Variable speist beide Seiten, damit das nicht wieder auseinanderlaeuft. */
+  --header-hoehe: 72px;
+
   --radius:         6px;
   --schatten:       0 1px 2px rgba(38,37,31,.05), 0 6px 20px rgba(38,37,31,.06);
   --schatten-hover: 0 4px 10px rgba(38,37,31,.07), 0 16px 36px rgba(38,37,31,.1);
@@ -241,6 +262,14 @@ strong {
   .section-dunkel + .section-gap {
     padding-top: 128px;
   }
+}
+
+/* Korrektur 4 (Anweisung 25): Die Kopfleiste steht fest oben und nimmt dem
+   Inhalt keinen Platz weg. Ohne diesen Innenabstand beginnt die erste Sektion
+   unter ihr -- bei 60px Leiste blieben 4px sichtbar, seit 72px gar nichts.
+   Beide Seiten haengen an derselben Variable. */
+.inhalt {
+  padding-top: var(--header-hoehe);
 }
 
 /* Inhaltsbreite */
@@ -820,9 +849,19 @@ h1 { text-wrap: balance; }
 
 /* === Teil II: wiederverwendbare Layout-Klassen (alle Seiten) === */
 
-/* Typo (Teil I/3): H2-Zeilen max. ~34ch, balanciert */
+/* Typo (Teil I/3): H2-Zeilen balanciert.
+   Korrektur 2 (Anweisung 25): Die 34ch ergaben 626px, waehrend die Absaetze
+   darunter bis 1032px liefen -- die Ueberschrift brach frueher um als ihr
+   eigener Fliesstext. Die Breite regelt jetzt die Spalte, nicht die
+   Ueberschrift: in der schmalen Spalte 640, sonst so breit wie der Text
+   daneben. text-wrap: balance haelt die Zeilen trotzdem im Gleichgewicht. */
 h2 {
-  max-width: 34ch;
+  /* Korrektur 2 (Anweisung 25): dieselbe Maximalbreite wie der Text darunter.
+     Die alten 34ch ergaben 626px, waehrend die Absaetze bis 1032 liefen.
+     Wo der Text daneben breiter ist -- Kartenreihen, Bild neben Text --,
+     hebt die Regel darunter die Begrenzung wieder auf, damit keine
+     Ueberschrift schmaler bricht als ihr eigener Fliesstext. */
+  max-width: 640px;
   text-wrap: balance;
 }
 
