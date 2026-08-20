@@ -380,6 +380,85 @@ img {
   object-position: center;
 }
 
+/* F2 (Anweisung 18) nach dem B2-Umbau: Der Innenabstand der Felder stammt
+   jetzt aus der Skala und betraegt 16px statt 14. Dadurch waeren die Felder
+   auf 60px gewachsen und haetten die abgenommene Hoehe von 56 gebrochen.
+   Die Hoehe ist deshalb fest gesetzt statt als Mindestwert -- sie ist eine
+   Groesse, kein Abstand, und faellt nicht unter die Skala.
+   Textfelder sind mehrzeilig und bleiben ausgenommen. */
+input.anfrage-field, select.anfrage-field,
+input.pilot-field, select.pilot-field,
+input.kontakt-field, select.kontakt-field,
+input.leitfaden-field, select.leitfaden-field {
+  height: 56px;
+}
+
+/* FAQ-Aufklapper. Stand bis zum 20.08. auf neun Seiten lokal, inhaltlich
+   identisch bis auf zwei Kommentarzeilen. Zentral, damit die vier englischen
+   Seiten ihn nicht ein zehntes Mal mitbringen und eine Aenderung kuenftig an
+   einer Stelle reicht. Die Abstaende stammen aus der Skala in B2. */
+/* FAQ-Accordion (3.13) */
+.faq-list {
+  border-top: 1px solid var(--linie);
+}
+.faq-item {
+  border-bottom: 1px solid var(--linie);
+}
+.faq-item summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--text-primary, #1C1B16);
+  padding: 24px 0;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-chevron {
+  color: var(--akzent);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+.faq-item[open] > summary .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-item.faq-closing > summary .faq-chevron {
+  transform: rotate(0deg);
+}
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.25s ease;
+}
+.faq-item[open] > .faq-body {
+  grid-template-rows: 1fr;
+}
+.faq-item.faq-closing > .faq-body {
+  grid-template-rows: 0fr;
+}
+.faq-inner {
+  min-height: 0;
+}
+.faq-inner p {
+  font-size: 16px;
+  color: var(--grau);
+  padding-bottom: 24px;
+  margin: 0;
+  max-width: 62ch;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-body,
+  .faq-chevron {
+    transition: none;
+  }
+}
+
 /* Bildunterschriften */
 /* C2 (Anweisung 18): 13px, aufrecht, linksbuendig. */
 figcaption,

@@ -427,67 +427,7 @@ const faqSchema = {
 </BaseLayout>
 
 <style>
-/* FAQ-Accordion (3.13) */
-.faq-list {
-  border-top: 1px solid var(--linie);
-}
-.faq-item {
-  border-bottom: 1px solid var(--linie);
-}
-.faq-item summary {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 1.35;
-  color: var(--text-primary, #1C1B16);
-  padding: 18px 0;
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-chevron {
-  color: var(--akzent);
-  flex-shrink: 0;
-  transition: transform 0.2s ease;
-}
-.faq-item[open] > summary .faq-chevron {
-  transform: rotate(180deg);
-}
-.faq-item.faq-closing > summary .faq-chevron {
-  transform: rotate(0deg);
-}
-.faq-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  overflow: hidden;
-  transition: grid-template-rows 0.25s ease;
-}
-.faq-item[open] > .faq-body {
-  grid-template-rows: 1fr;
-}
-.faq-item.faq-closing > .faq-body {
-  grid-template-rows: 0fr;
-}
-.faq-inner {
-  min-height: 0;
-}
-.faq-inner p {
-  font-size: 16px;
-  color: var(--grau);
-  padding-bottom: 18px;
-  margin: 0;
-  max-width: 62ch;
-}
-@media (prefers-reduced-motion: reduce) {
-  .faq-body,
-  .faq-chevron {
-    transition: none;
-  }
-}
+
 
 /* Formular (3.14) */
 .pilot-form-wrap {
@@ -498,7 +438,7 @@ const faqSchema = {
   font-size: 14px;
   font-weight: 600;
   color: var(--druck);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 .pilot-label-opt {
   font-weight: 400;
@@ -509,7 +449,7 @@ const faqSchema = {
   background: var(--flaeche);
   border: 1px solid var(--linie);
   border-radius: var(--radius);
-  padding: 14px 16px;
+  padding: 16px;
   font-size: 16px;
   font-family: var(--f-body);
   color: var(--druck);
@@ -539,7 +479,7 @@ const faqSchema = {
 }
 .pilot-success-msg {
   border-radius: var(--radius);
-  padding: 12px 16px;
+  padding: 16px;
   font-size: 14px;
   font-weight: 600;
   background: #F3D9C8;
