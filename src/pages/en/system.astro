@@ -1,0 +1,392 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import Stempel from "../../components/Stempel.astro";
+import bonLeiste from "../../assets/bilder/bon-leiste.jpg";
+import schulungVonHinten from "../../assets/bilder/schulung-von-hinten.jpg";
+
+const ogImg = await getImage({ src: bonLeiste, width: 1200, format: "jpeg" });
+const ogImageAlt = "Ticket rail with order slips above the pass of a restaurant kitchen";
+
+const schemaOrg = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Avorix",
+        "item": "https://avorix.cloud/en"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "How It All Works Together",
+        "item": "https://avorix.cloud/en/system"
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "The Avorix system: app, training and staff",
+    "description": "Three modules, one goal: a kitchen that holds your standard, whoever is at the stove. Software, training and staff interlock at Avorix.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Avorix GmbH",
+      "url": "https://avorix.cloud",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Friedrichshafen",
+        "addressCountry": "DE"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "DE"
+      }
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can we take just the app, without the training?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, and that is deliberate. An empty app does not help you. Setup by an Avorix chef is always part of it, otherwise we do not let the system out of our hands."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we book staff only, without the app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, that works. We do recommend the combination though: then every placement leaves documented knowledge in your kitchen instead of just hours worked."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "We have already documented our recipes. Is that worth anything?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it speeds the recording up considerably. The Avorix chef reviews your material, adds photos, quantities and timings, and brings it all into the app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the whole introduction take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Depending on the menu, typically a few weeks from the first call to working independently."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens after the 12 months?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You decide: extend or end it. Your recipes remain your property either way."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "How it all works together",
+    "url": "https://avorix.cloud/en/system",
+    "inLanguage": "en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.cloud${ogImg.src}`,
+      "description": ogImageAlt
+    }
+  }
+];
+---
+
+<BaseLayout
+  title="How it all works together: app, training and staff | Avorix"
+  description="Three modules, one goal: a kitchen that holds your standard, whoever is at the stove. Software, training and staff interlock at Avorix."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={schemaOrg}
+>
+
+  <!-- Hero (W2: Text-Hero, linksbündig) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4">The Avorix system</p>
+      <h1 class="mb-6">
+        Not just an app.<br />A complete <mark style="white-space:nowrap">kitchen system</mark>.
+      </h1>
+      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        Three modules, one goal: a kitchen that holds your standard, whoever is at the stove.
+      </p>
+      <p class="lead mb-8 max-w-[62ch]" style="color:var(--grau)">
+        <strong>Software, training and staff interlock at Avorix.</strong> That is why it works.
+      </p>
+      <a
+        href="/en/contact"
+        data-cta-location="system-hero"
+        class="btn btn-primary"
+      >Book a Demo</a>
+      <div class="hero-badges mt-6">
+        <Stempel>Certified &middot; German staffing licence</Stempel>
+      </div>
+    </div>
+  </section>
+
+  <!-- Drei Bausteine -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        Our system. The training. The reinforcement.
+      </h2>
+      <Image
+        src={bonLeiste}
+        alt="Ticket rail with order slips above the pass of a restaurant kitchen"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="eager"
+        fetchpriority="high"
+        class="w-full object-cover mb-10"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Module 1</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Our system (the Avorix Cook App)</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            <strong>The memory of your kitchen.</strong> Every dish on your menu as step-by-step guidance: with photos, exact quantities and timings. The app scales portions and analyses food cost. It runs every day, on tablet and smartphone, straight in the browser.
+          </p>
+        </div>
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Module 2</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">The training</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            The transfer. An Avorix chef with sous-chef experience or above records your menu, sets it up in the app and trains your team. As compact training blocks or live during service.
+          </p>
+        </div>
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Module 3</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">The reinforcement</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Permanently employed Avorix chefs, hired out to you on solid legal ground. For emergencies, for the season, for the gap. With the official German staffing licence.
+          </p>
+          <div class="mt-4">
+            <Stempel>Certified &middot; German staffing licence</Stempel>
+          </div>
+          <div class="mt-4">
+            <a href="/en/staff#request" data-cta-location="system-reinforcement" data-cta-event="cta_personal_click" class="btn btn-secondary">Request Staff</a>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm mt-10 max-w-[62ch]" style="color:var(--grau)">
+        Think of the fire brigade and fire prevention: the reinforcement puts out the fire that is burning now. System and training make sure it never catches again. <strong>Avorix is both.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Einzeln gut. Zusammen unschlagbar. -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">
+        Good on their own. Unbeatable together.
+      </h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="card">
+          <span class="schritt-chip">a</span>
+          <h3 class="mt-4 mb-4">An app on its own is an empty shell.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Somebody has to record your menu, photograph it and train your team. That is exactly what the training is. Which is why we set up every system ourselves.
+          </p>
+        </div>
+        <div class="card">
+          <span class="schritt-chip">b</span>
+          <h3 class="mt-4 mb-4">Training on its own evaporates.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            People who have been trained forget, move on, resign. Without the app, the knowledge goes back into people&rsquo;s heads, and out of the door with them. <strong>The app holds on to what the training builds.</strong>
+          </p>
+        </div>
+        <div class="card">
+          <span class="schritt-chip">c</span>
+          <h3 class="mt-4 mb-4">A hired chef on his own is the most expensive solution there is.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            When he leaves, everything is as it was, and you book the next one. That is the business model of conventional staffing agencies. It is exactly what sets us apart:
+          </p>
+        </div>
+        <div class="card">
+          <span class="schritt-chip">&#9733;</span>
+          <h3 class="mt-4 mb-4">With us, the hired chef leaves eventually. What he knows stays.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Every Avorix chef works with the app and keeps documenting as he goes. <strong>You pay for staff and build your system along the way.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vom ersten Gespräch -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        From the first call to a kitchen that always works.
+      </h2>
+      <Image
+        src={schulungVonHinten}
+        alt="Two chefs seen from behind at the stove, one explaining a step"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover mb-10"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+      <div class="space-y-6">
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">1</span>
+          <div>
+            <h3 class="mb-4">We take a look at your kitchen. (Free of charge)</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+              30 minutes, by video or on site. You tell us where it hurts. We tell you honestly whether Avorix suits you, and what it would cost.
+            </p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">2</span>
+          <div>
+            <h3 class="mb-4">An Avorix chef records your menu.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+              He cooks with your team, documents every dish, photographs every step and sets it all up in the app. A recording block covers five days of six hours each. A typical menu of 12 to 15 dishes needs the recording plus a second block for the training itself.
+            </p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">3</span>
+          <div>
+            <h3 class="mb-4">Your team learns the system.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+              Compact training days, or a chef who works productively and trains alongside. <strong>Anyone who has cooked with the app for a week no longer needs it explained.</strong>
+            </p>
+          </div>
+        </div>
+        <div class="schritt">
+          <span class="schritt-chip shrink-0">4</span>
+          <div>
+            <h3 class="mb-4">You work independently. We stay reachable.</h3>
+            <p class="text-sm leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+              The app guides your team through every day. You add new dishes yourself, or we do it for you. If a chef drops out, you call us.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-16">
+        <a
+          href="/en/contact"
+          data-cta-location="system-process"
+          class="btn btn-primary"
+        >Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gebaut für Häuser mit fester Karte -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        Built for properties with a fixed menu.
+      </h2>
+      <p class="leading-relaxed max-w-[62ch] mb-6" style="color:var(--grau)">
+        Avorix suits businesses whose menu recurs: resort hotels with half-board, inns and restaurants with a fixed menu, sports hotels with groups and training camps. <strong>The more fixed the menu, the stronger the effect.</strong>
+      </p>
+      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+        And to be honest: for daily-changing fine dining with the patron at the stove, <strong>Avorix is not built</strong>. We will tell you that in the first call, too.
+      </p>
+    </div>
+  </section>
+
+  <!-- Was kostet das -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">
+        What does it cost?
+      </h2>
+      <div class="card card-text">
+        <p class="leading-relaxed mb-8" style="color:var(--grau)">
+          Every module has a clear price, and you get it in writing at the first call: the app monthly, the training per block, staff per hour. Nothing hidden. For the first businesses, 2026 pilot conditions apply, well below the regular price.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/en/contact"
+            data-cta-location="system-costs"
+            class="btn btn-primary"
+          >Book a Demo</a>
+          <a
+            href="/en/pilot-program"
+            data-cta-location="system-pilot"
+            class="btn btn-secondary"
+          >To the Pilot Program</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10" style="color:var(--druck)">
+        Frequently asked questions
+      </h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Can we take just the app, without the training?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>No, and that is deliberate. An empty app does not help you. Setup by an Avorix chef is always part of it, otherwise we do not let the system out of our hands.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can we book staff only, without the app?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, that works. We do recommend the combination though: then every placement leaves documented knowledge in your kitchen instead of just hours worked.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">We have already documented our recipes. Is that worth anything?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, it speeds the recording up considerably. The Avorix chef reviews your material, adds photos, quantities and timings, and brings it all into the app.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How long does the whole introduction take?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Depending on the menu, typically a few weeks from the first call to working independently.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What happens after the 12 months?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>You decide: extend or end it. Your recipes remain your property either way.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA → Peak-End (3.18) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Certified &middot; German staffing licence</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
+      <a
+        href="/en/contact"
+        data-cta-location="system-final"
+        class="btn btn-primary"
+      >Book a Demo</a>
+    </div>
+  </section>
+</BaseLayout>
