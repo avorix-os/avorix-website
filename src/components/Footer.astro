@@ -6,13 +6,15 @@ const t = useTranslations(lang);
 ---
 
 <style>
+  /* H1 (Anweisung 18): Grundfassung ist das Handy. Ab 640 wird daraus die Zeile. */
   .site-footer {
     background: var(--eisen);
-    padding: 28px 34px;
+    padding: 24px 20px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
   }
 
@@ -64,12 +66,12 @@ const t = useTranslations(lang);
     cursor: pointer;
   }
 
-  @media (max-width: 640px) {
+  @media (min-width: 640px) {
     .site-footer {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      padding: 24px 20px;
+      flex-direction: row;
+      align-items: center;
+      gap: 20px;
+      padding: 28px 34px;
     }
   }
 </style>

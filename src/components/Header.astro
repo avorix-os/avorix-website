@@ -66,9 +66,10 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
     filter: brightness(0) invert(1);
   }
 
-  /* Desktop nav */
+  /* Desktop nav. H1 (Anweisung 18): Grundfassung ist das Handy, also aus.
+     Ab 900 tritt sie an die Stelle des Burgers. */
   .nav-desktop {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 20px;
     flex: 1;
@@ -230,7 +231,7 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
 
   /* Burger button */
   .nav-burger {
-    display: none;
+    display: flex;
     background: none;
     border: none;
     cursor: pointer;
@@ -244,10 +245,10 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
     justify-content: center;
   }
 
-  /* Hide desktop nav, show burger below 900px */
-  @media (max-width: 900px) {
-    .nav-desktop { display: none; }
-    .nav-burger { display: flex; }
+  /* Ab 900 die Desktop-Navigation, darunter der Burger. */
+  @media (min-width: 900px) {
+    .nav-desktop { display: flex; }
+    .nav-burger { display: none; }
   }
 
   /* === MOBILE OVERLAY === */
@@ -268,7 +269,7 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   @media (prefers-reduced-motion: reduce) {
     .nav-mobile-overlay { transition: none; }
   }
-  @media (min-width: 901px) {
+  @media (min-width: 900px) {
     .nav-mobile-overlay { display: none !important; }
   }
 

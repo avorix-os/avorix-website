@@ -34,6 +34,19 @@
   --color-error-100:   #FEE2E2;
   --color-error-500:   #B3372B;
 
+  /* H1 (Anweisung 18): drei Grenzen, eine Schreibweise, eine Richtung.
+     Tailwind bringt von Haus aus 40rem/48rem/64rem mit, also 640/768/1024 in
+     rem-Schreibweise. Zusammen mit unseren eigenen Grenzen ergab das neun
+     Umbruchstellen, drei davon doppelt. Hier werden Tailwinds Grenzen auf
+     unsere drei gesetzt, in Pixeln.
+     Damit greift auch H3: sm = Tablet ab 640 (zwei Spalten),
+     md = Desktop ab 900 (drei Spalten). */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1200px;
+  --breakpoint-xl: 1200px;
+  --breakpoint-2xl: 1200px;
+
   /* TYPOGRAPHY — System-Schriften, kein Webfont-Download */
   --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-head: 'Avenir Next', 'Avenir', 'Nunito Sans', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -112,15 +125,15 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Sektionsabstand */
+/* Sektionsabstand. H1: Grundfassung ist das Handy, ab 640 wird aufgestockt. */
 .section-gap {
-  padding-top: 84px;
-  padding-bottom: 84px;
+  padding-top: 56px;
+  padding-bottom: 56px;
 }
-@media (max-width: 640px) {
+@media (min-width: 640px) {
   .section-gap {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    padding-top: 84px;
+    padding-bottom: 84px;
   }
 }
 
@@ -133,13 +146,13 @@ body {
    nach unten selbst vor; die naechste Sektion setzt ohne zweiten auf. */
 .section-streifen {
   padding-top: 0;
-  padding-bottom: 84px;
+  padding-bottom: 56px;
 }
 .section-streifen + .section-gap {
   padding-top: 0;
 }
-@media (max-width: 640px) {
-  .section-streifen { padding-bottom: 56px; }
+@media (min-width: 640px) {
+  .section-streifen { padding-bottom: 84px; }
 }
 /* A1 (Anweisung 18): Hervorhebungen tragen KEINE eigene Farbe mehr.
    Vorher stand an jedem <strong> ein festes color:var(--druck). Auf dunklem
@@ -163,12 +176,12 @@ strong {
    und die Sektion danach setzt wieder mit vollem Abstand auf. */
 .section-gap.section-dunkel,
 .section-dunkel + .section-gap {
-  padding-top: 84px;
+  padding-top: 56px;
 }
-@media (max-width: 640px) {
+@media (min-width: 640px) {
   .section-gap.section-dunkel,
   .section-dunkel + .section-gap {
-    padding-top: 56px;
+    padding-top: 84px;
   }
 }
 
@@ -232,7 +245,7 @@ h3 {
 /* 12h/1: Je groesser die Schrift, desto enger der Zeilenabstand. Ab der Breite,
    ab der auch die Kartenraster nebeneinander stehen (768px), gelten die
    Desktop-Faktoren. */
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   h1 { line-height: 1.05; }
   h2 { line-height: 1.10; }
 }
@@ -410,7 +423,7 @@ figcaption,
    Nur Desktop — mobil stehen die Karten untereinander, dort ist die Trennung
    schon eindeutig. Ueber :has() statt ueber die gap-Klassen im Markup, damit
    nur echte Kartenraster betroffen sind und keine Struktur angefasst wird. */
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .grid:has(> .card),
   .grid:has(> .card-modul) {
     gap: 40px;
@@ -565,10 +578,10 @@ h2 {
 /* Hero (W2): Split 55/45, Bild spannt */
 .hero-section {
   padding-top: 112px;
-  padding-bottom: 84px;
+  padding-bottom: 56px;
 }
-@media (max-width: 640px) {
-  .hero-section { padding-bottom: 56px; }
+@media (min-width: 640px) {
+  .hero-section { padding-bottom: 84px; }
 }
 /* Folgerunde 1 / 3c: auch am Hero steht der Abstand nur einmal */
 .hero-section + .section-gap {
@@ -633,7 +646,7 @@ h2 {
   border-top: 1px solid var(--linie);
   padding-top: 20px;
 }
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .gruender-grid { grid-template-columns: 7fr 5fr; align-items: start; }
   .gruender-quote {
     border-top: 0;
