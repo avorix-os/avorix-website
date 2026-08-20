@@ -828,7 +828,8 @@ h2 {
 }
 .hero-grid {
   display: grid;
-  gap: 48px;
+  /* C6 (Anweisung 23): 48px lag neben der Skala, naechster Wert ist 40. */
+  gap: 40px;
   align-items: stretch;
 }
 .hero-copy {

@@ -18,7 +18,9 @@ const { class: className = '' } = Astro.props;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .14em;
-  padding: 8px 14px;
+  /* C6 (Anweisung 23): 14px lag neben der Skala. 16 sprengt die Komponente
+     nicht, der Stempel wird nur 4px breiter -- also 16. */
+  padding: 8px 16px;
   border-radius: 3px;
   background: var(--flaeche);
   transform: rotate(-1deg);

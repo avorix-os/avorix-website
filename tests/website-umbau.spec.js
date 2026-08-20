@@ -486,3 +486,92 @@ test.describe('T9b: B3 — die schmale Spalte', () => {
     });
   }
 });
+
+/**
+ * T10: Etappe 2 aus Anweisung 23 — C4, C6 und C7.
+ * Abnahmepunkte 2, 12 und 13.
+ */
+test.describe('T10: C6 — Komponenten-Innenabstaende auf der Skala', () => {
+  test('die vier gap-Werte stimmen, die Button-Werte bleiben', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/');
+    const werte = await page.evaluate(() => {
+      const w = (sel, eig) => {
+        const el = document.querySelector(sel);
+        return el ? getComputedStyle(el)[eig] : null;
+      };
+      return {
+        footerRight: w('.footer-right', 'columnGap'),
+        heroBadges: w('.hero-badges', 'columnGap'),
+        heroGrid: w('.hero-grid', 'rowGap'),
+        navInner: w('.nav-inner', 'paddingLeft'),
+        btnX: w('.btn', 'paddingLeft'),
+        btnY: w('.btn', 'paddingTop'),
+        stempelX: w('.stempel', 'paddingLeft'),
+      };
+    });
+    expect(werte.footerRight).toBe('16px');
+    expect(werte.heroBadges).toBe('8px');
+    expect(werte.heroGrid).toBe('40px');
+    expect(werte.navInner).toBe('24px');
+    // Ausnahmeliste aus Abschnitt 2: die Buttonwerte erzeugen die Buttonhoehe
+    expect(werte.btnX).toBe('28px');
+    expect(werte.btnY).toBe('13px');
+    // selbst entschieden: 16 sprengt den Stempel nicht
+    expect(werte.stempelX).toBe('16px');
+  });
+});
+
+test.describe('T10b: C7 — die Fusszeilen-Links sind erreichbar', () => {
+  for (const pagePath of ['/', '/en', '/personal']) {
+    test(`${pagePath} — Zielhoehe 44px bei unveraenderter Schrift`, async ({ page }) => {
+      await page.goto(pagePath);
+      const links = await page.$$eval('.footer-link, .footer-cookie-btn', (els) =>
+        els.map((el) => ({
+          text: el.innerText.trim(),
+          hoehe: Math.round(el.getBoundingClientRect().height),
+          schrift: getComputedStyle(el).fontSize,
+        }))
+      );
+      expect(links.length).toBeGreaterThanOrEqual(3);
+      for (const l of links) {
+        expect(l.hoehe, l.text).toBeGreaterThanOrEqual(44);
+        expect(l.schrift, l.text).toBe('13px');
+      }
+    });
+  }
+});
+
+test.describe('T10c: C4 — die Screenshot-Karten haben eine Linie', () => {
+  for (const pagePath of ['/koch-app', '/', '/en/cook-app']) {
+    test(`${pagePath} — gleicher Bildkasten, gleiche Reihenfolge`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      // Regel 5: Bilder laden lassen, bevor Hoehen gemessen werden
+      await page.evaluate(async () => {
+        window.scrollTo(0, document.body.scrollHeight);
+        await new Promise((r) => setTimeout(r, 700));
+        window.scrollTo(0, 0);
+      });
+      const karten = await page.$$eval('.app-screenshot-card', (els) =>
+        els.map((el) => {
+          const bild = el.querySelector('img');
+          const r = bild ? bild.getBoundingClientRect() : null;
+          return {
+            flach: el.classList.contains('app-screenshot-card--flach'),
+            kopfleiste: !!el.querySelector('.app-screenshot-card__header'),
+            verhaeltnis: r && r.height ? Math.round((r.width / r.height) * 100) / 100 : null,
+          };
+        })
+      );
+      expect(karten.length).toBeGreaterThan(0);
+      for (const k of karten) {
+        // eine Reihenfolge: Bild oben, Label darunter, keine dunkle Kopfleiste
+        expect(k.flach).toBe(true);
+        expect(k.kopfleiste).toBe(false);
+        expect(k.verhaeltnis).toBeGreaterThan(1.3);
+        expect(k.verhaeltnis).toBeLessThan(1.37);
+      }
+    });
+  }
+});

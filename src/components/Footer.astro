@@ -32,7 +32,8 @@ const t = useTranslations(lang);
   .footer-right {
     display: flex;
     align-items: center;
-    gap: 12px;
+    /* C6 (Anweisung 23): 12px lag neben der Skala. */
+    gap: 16px;
     flex-wrap: wrap;
     font-family: var(--f-mono);
     font-size: 13px;
@@ -44,12 +45,19 @@ const t = useTranslations(lang);
     color: rgba(247, 246, 242, 0.55);
   }
 
+  /* C7 (Anweisung 23): Impressum, Datenschutz und Cookie-Einstellungen sind
+     eigenstaendige Ziele und waren 21px hoch. Die Zielhoehe kommt aus der
+     Mindesthoehe, nicht aus einer groesseren Schrift -- die bleibt bei 13px.
+     Links im Fliesstext sind ausdruecklich nicht betroffen. */
   .footer-link,
   .footer-cookie-btn {
     color: rgba(247, 246, 242, 0.55);
     text-decoration: none;
     white-space: nowrap;
     transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   .footer-link:hover,
