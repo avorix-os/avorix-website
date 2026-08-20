@@ -754,3 +754,149 @@ test.describe('T12e: Korrektur 3 — lange Woerter sprengen die Seite nicht', ()
     expect(auto).toBe(0);
   });
 });
+
+/**
+ * T13: Anweisung 25, Korrekturen 7, 9, 14 und 21.
+ * Abnahmepunkte 8, 10, 15 und 22.
+ */
+test.describe('T13: Korrektur 14 — Personal steht an zwei Stellen', () => {
+  const SOLL_DE = ['Wie alles zusammenspielt', 'Die App', 'Die Schulung', 'Das Personal', 'Pilotprogramm 2026'];
+  const SOLL_EN = ['How It All Works Together', 'The Cook App', 'The Training', 'The Staff', 'Pilot Program 2026'];
+
+  for (const [pagePath, soll] of [['/', SOLL_DE], ['/en', SOLL_EN]]) {
+    for (const breite of [375, 1280]) {
+      test(`${pagePath} @${breite}px — fuenf Eintraege in der richtigen Folge`, async ({ page }) => {
+        await page.setViewportSize({ width: breite, height: 900 });
+        await page.goto(pagePath);
+        const wahl = breite >= 900 ? '.nav-dropdown-menu .nav-dropdown-item' : '.mobile-section-link';
+        const eintraege = await page.$$eval(wahl, (els) => els.map((el) => el.innerText.trim()));
+        expect(eintraege.slice(0, 5)).toEqual(soll);
+      });
+    }
+  }
+
+  test('Personal steht oben UND in der Spalte, beide auf dieselbe Seite', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/');
+    const oben = await page.$$eval('.nav-desktop .nav-link', (els) =>
+      els.filter((el) => el.getAttribute('href') === '/personal').length
+    );
+    const spalte = await page.$$eval('.nav-dropdown-item', (els) =>
+      els.filter((el) => el.getAttribute('href') === '/personal').length
+    );
+    expect(oben).toBe(1);
+    expect(spalte).toBe(1);
+  });
+});
+
+test.describe('T13b: Korrektur 9 — die Saetze stehen unter ihrer Ueberschrift', () => {
+  const SUBLINES = [
+    ['/', 'Software, Abl', 'Was ist Avorix'],
+    ['/koch-app', 'Die App tr', 'Gemessen in einem Kundenbetrieb'],
+    ['/personal', 'Kurzfristige Eins', 'Wann Sie uns rufen'],
+    ['/system', 'Denken Sie an Feuerwehr', 'Unser System. Die Schulung'],
+    ['/fuer-restaurants', 'Irgendwann steht die Frage', 'Wenn der Koch geht'],
+    ['/fuer-sporthotels', 'Wenn die K', 'Halbpension auf Niveau'],
+  ];
+  for (const [pagePath, satz, ueberschrift] of SUBLINES) {
+    test(`${pagePath} — der Satz steht oben`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      const lage = await page.evaluate(([satz, ueberschrift]) => {
+        const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes(ueberschrift));
+        if (!h2) return { fehler: 'Ueberschrift nicht gefunden' };
+        const sek = h2.closest('section');
+        const p = [...sek.querySelectorAll('p')].find((el) => el.innerText.trim().startsWith(satz));
+        if (!p) return { fehler: 'Satz nicht in der Sektion' };
+        const gruppe = sek.querySelector('.grid, .card, .card-modul');
+        return {
+          satzOben: Math.round(p.getBoundingClientRect().top),
+          h2Oben: Math.round(h2.getBoundingClientRect().top),
+          gruppeOben: gruppe ? Math.round(gruppe.getBoundingClientRect().top) : null,
+        };
+      }, [satz, ueberschrift]);
+      expect(lage.fehler).toBeUndefined();
+      expect(lage.satzOben).toBeGreaterThan(lage.h2Oben);
+      if (lage.gruppeOben !== null) expect(lage.satzOben).toBeLessThan(lage.gruppeOben);
+    });
+  }
+
+  test('/koch-app traegt den neuen Wortlaut', async ({ page }) => {
+    await page.goto('/koch-app');
+    const text = await page.evaluate(() => document.body.innerText);
+    expect(text).toContain('Die App trägt sich dort schon selbst.');
+    expect(text).not.toContain('Damit trägt sich die App');
+  });
+});
+
+test.describe('T13c: Korrektur 7 — Karten einer Reihe sind gleich hoch', () => {
+  for (const pagePath of ['/personal', '/system', '/koch-app', '/en/system']) {
+    test(`${pagePath} — gleiche Hoehe je Reihe`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      await page.evaluate(async () => {
+        window.scrollTo(0, document.body.scrollHeight);
+        await new Promise((r) => setTimeout(r, 700));
+        window.scrollTo(0, 0);
+      });
+      const ungleich = await page.evaluate(() => {
+        const raus = [];
+        for (const raster of document.querySelectorAll('.grid')) {
+          const karten = [...raster.children].filter((k) => k.classList.contains('card') || k.classList.contains('card-modul'));
+          if (karten.length < 2) continue;
+          const reihen = new Map();
+          for (const k of karten) {
+            const oben = Math.round(k.getBoundingClientRect().top);
+            const schluessel = [...reihen.keys()].find((x) => Math.abs(x - oben) < 8) ?? oben;
+            if (!reihen.has(schluessel)) reihen.set(schluessel, []);
+            reihen.get(schluessel).push(k);
+          }
+          for (const [, gruppe] of reihen) {
+            if (gruppe.length < 2) continue;
+            const hoehen = gruppe.map((k) => Math.round(k.getBoundingClientRect().height));
+            if (Math.max(...hoehen) - Math.min(...hoehen) > 1) raus.push(hoehen.join('/'));
+          }
+        }
+        return raus;
+      });
+      expect(ungleich).toEqual([]);
+    });
+  }
+});
+
+test.describe('T13d: Korrektur 21 — die zwei Umstellungen auf /system', () => {
+  test('die Bon-Leiste steht unter den Modulen', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/system');
+    const lage = await page.evaluate(() => {
+      const modul = document.querySelector('.card-modul');
+      const sek = modul.closest('section');
+      const bild = sek.querySelector('img');
+      return { bildOben: Math.round(bild.getBoundingClientRect().top), modulOben: Math.round(modul.getBoundingClientRect().top) };
+    });
+    expect(lage.bildOben).toBeGreaterThan(lage.modulOben);
+  });
+
+  test('Bild und Schritte stehen nebeneinander, mobil untereinander', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/system');
+    const desktop = await page.evaluate(() => {
+      const schritt = document.querySelector('.schritt');
+      const sek = schritt.closest('section');
+      const bild = sek.querySelector('.split-media img');
+      return bild ? { bildLinks: Math.round(bild.getBoundingClientRect().left), schrittLinks: Math.round(schritt.getBoundingClientRect().left) } : null;
+    });
+    expect(desktop).not.toBeNull();
+    expect(desktop.bildLinks).toBeLessThan(desktop.schrittLinks);
+
+    await page.setViewportSize({ width: 375, height: 900 });
+    await page.goto('/system');
+    const mobil = await page.evaluate(() => {
+      const schritt = document.querySelector('.schritt');
+      const sek = schritt.closest('section');
+      const bild = sek.querySelector('.split-media img');
+      return { bildOben: Math.round(bild.getBoundingClientRect().top), schrittOben: Math.round(schritt.getBoundingClientRect().top) };
+    });
+    expect(mobil.bildOben).toBeLessThan(mobil.schrittOben);
+  });
+});
