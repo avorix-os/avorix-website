@@ -141,6 +141,24 @@ body {
 @media (max-width: 640px) {
   .section-streifen { padding-bottom: 56px; }
 }
+/* A1 (Anweisung 18): Hervorhebungen tragen KEINE eigene Farbe mehr.
+   Vorher stand an jedem <strong> ein festes color:var(--druck). Auf dunklem
+   Grund ergab das 1,09 Kontrast, der Satz war unsichtbar. Statt die Farbe je
+   Stelle zu setzen, bestimmt sie jetzt die Flaeche: Wer einen dunklen Block
+   baut, setzt --hervorhebung mit, und jedes <strong> darin stimmt automatisch.
+   So kann der Fehler nicht wiederkommen.
+   Die Hervorhebung bleibt dabei dunkler als der graue Fliesstext, ihre Wirkung
+   aus 12h/2 bleibt also erhalten, nur ohne feste Farbe am Tag. */
+:root {
+  --hervorhebung: var(--druck);
+}
+.section-dunkel {
+  --hervorhebung: var(--papier);
+}
+strong {
+  color: var(--hervorhebung);
+}
+
 /* Dunkle Baender sind eigene Flaechen: sie behalten ihre Innenluft,
    und die Sektion danach setzt wieder mit vollem Abstand auf. */
 .section-gap.section-dunkel,
@@ -258,7 +276,9 @@ h1 em,   h2 em,   h3 em {
   align-items: center;
   justify-content: center;
   font-family: var(--f-head);
-  font-weight: 700;
+  /* F4 (Anweisung 18): 600 statt 700. Kein Verlust an Deutlichkeit,
+     einer an Lautstaerke. */
+  font-weight: 600;
   font-size: 16px;
   min-height: 50px;
   border-radius: var(--radius);
@@ -290,11 +310,22 @@ h1 em,   h2 em,   h3 em {
   color: var(--akzent);
 }
 
+/* F3 (Anweisung 18): Ein Link im Fliesstext ist unterstrichen UND kupfern.
+   Vorher trugen .typo-link und .btn-link die Unterstreichung erst im Hover.
+   Wer die Maus nicht zufaellig darueberzieht, sah keinen Link -- auf
+   /leitfaden stand einer sogar in der normalen Textfarbe. Beide Klassen
+   sind hier zentral definiert; die vier lokalen Kopien in den Rechtsseiten
+   sind entfallen, damit es nur eine Quelle gibt.
+   Buttons und ganzflaechig klickbare Karten sind davon nicht betroffen,
+   dort traegt die Form die Bedeutung. */
+.typo-link,
 .btn-link {
   color: var(--akzent);
+  text-decoration: underline;
+}
+.btn-link {
   min-height: auto;
 }
-.btn-link:hover { text-decoration: underline; }
 
 /* Bildunterschriften */
 figcaption,

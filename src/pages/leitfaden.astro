@@ -73,6 +73,7 @@ const schema = {
             <h3 class="mb-1" style="color:var(--druck)">Jetzt kostenlos herunterladen</h3>
             <p class="text-sm mb-6" style="color:var(--grau)">Tragen Sie sich ein und erhalten Sie den Leitfaden als PDF.</p>
 
+            <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
             <form
               id="lead-form"
               action="https://formspree.io/f/xqegwngo"
@@ -196,7 +197,7 @@ const schema = {
       <p class="eyebrow mb-3">&Uuml;ber Avorix</p>
       <h2 class="mb-4" style="color:var(--druck);margin-left:auto;margin-right:auto">Die Avorix Koch-App: die Lösung, die dieser Leitfaden beschreibt</h2>
       <p class="mb-6 mx-auto max-w-[62ch]" style="color:var(--grau)">
-        Avorix setzt genau das digital um, was in diesem Leitfaden als bewährte Strategie beschrieben wird: zentrale Rezeptverwaltung, Schritt-für-Schritt-Anleitungen und konsistente Qualität, <strong style="color:var(--druck)">auch ohne ausgebildete Köche</strong>.
+        Avorix setzt genau das digital um, was in diesem Leitfaden als bewährte Strategie beschrieben wird: zentrale Rezeptverwaltung, Schritt-für-Schritt-Anleitungen und konsistente Qualität, <strong>auch ohne ausgebildete Köche</strong>.
       </p>
       <a
         href="/kontakt"
@@ -224,6 +225,9 @@ const schema = {
   color: var(--druck);
   outline: none;
   box-sizing: border-box;
+  /* F2 (Anweisung 18): Hoehe fest, damit Auswahlfelder nicht 5px kleiner
+     ausfallen als Eingabefelder. Textfelder ueberschreiben das unten. */
+  min-height: 56px;
 }
 .leitfaden-field:focus {
   border-color: var(--akzent);
