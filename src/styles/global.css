@@ -194,8 +194,31 @@ main > section:last-of-type {
 :root {
   --hervorhebung: var(--druck);
 }
+/* G4 (Anweisung 23): Der dunkle Block traegt die Aussage, die von einer Seite
+   haengen bleiben soll -- einer je Seite. Damit das eine Zuweisung bleibt und
+   keine Bauarbeit, bringt die Klasse ihre Farben selbst mit: Flaeche, Schrift,
+   Ueberschriften und Labels. Vorher musste jede Farbe einzeln am Element
+   stehen, und genau daran ist es auf sechs Seiten unterblieben. */
 .section-dunkel {
   --hervorhebung: var(--papier);
+  background: var(--eisen);
+  color: rgba(247, 246, 242, 0.8);
+}
+.section-dunkel h1,
+.section-dunkel h2,
+.section-dunkel h3 {
+  color: var(--papier);
+}
+.section-dunkel p {
+  color: rgba(247, 246, 242, 0.8);
+}
+.section-dunkel .eyebrow,
+.section-dunkel mark {
+  color: var(--akzent-hell);
+}
+.section-dunkel .card {
+  background: rgba(247, 246, 242, 0.06);
+  border-color: rgba(247, 246, 242, 0.18);
 }
 strong {
   color: var(--hervorhebung);

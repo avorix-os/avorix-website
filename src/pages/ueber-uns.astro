@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import vakuumbeutelKuehlhaus from "../assets/bilder/vakuumbeutel-kuehlhaus.jpg";
-import anrichtenDetail from "../assets/bilder/anrichten-detail.jpg";
 
 const ogImg = await getImage({ src: vakuumbeutelKuehlhaus, width: 1200, format: "jpeg" });
 const ogImageAlt = "Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche";
@@ -97,23 +96,11 @@ const breadcrumb = {
 
   <!-- Technologie -->
  <section class="reveal section-gap">
-    <div class="content-width">
+    <div class="content-width text-spalte">
       <h2 style="color:var(--druck)">Technologie als Unterst&uuml;tzung. Nicht als Ersatz.</h2>
-      <!-- Echter Split: Text links, Bild rechts (Folgerunde 1 / 3a) -->
-      <div class="split-row">
-        <div class="split-copy">
+      <div>
+        <div>
           <p style="color:var(--grau)">Wir wollen keine K&uuml;chen ohne Menschen. Wir wollen K&uuml;chen, in denen Menschen ohne jahrelange Ausbildung gute Arbeit leisten k&ouml;nnen, und <strong>in denen das Wissen des Hauses nicht mit der n&auml;chsten K&uuml;ndigung verschwindet</strong>.</p>
-        </div>
-        <div class="split-media">
-          <Image
-            src={anrichtenDetail}
-            alt="H&auml;nde richten ein Gericht auf einem wei&szlig;en Teller an"
-            widths={[480, 800, 1200, 1600]}
-            sizes="(max-width: 900px) 100vw, 420px"
-            loading="lazy"
-            decoding="async"
-            class="w-full h-full object-cover"
-          />
         </div>
       </div>
     </div>
@@ -132,10 +119,10 @@ const breadcrumb = {
   </section>
 
   <!-- Diskretion -->
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-dunkel">
     <div class="content-width text-spalte">
-      <h2 class="mb-6" style="color:var(--druck)">Unsere Kunden schm&uuml;cken sich nicht mit uns. Das ist Absicht.</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. <strong>Diese Diskretion ist Teil unseres Angebots.</strong></p>
+      <h2 class="mb-6">Unsere Kunden schm&uuml;cken sich nicht mit uns. Das ist Absicht.</h2>
+      <p class="max-w-[62ch]">Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. <strong>Diese Diskretion ist Teil unseres Angebots.</strong></p>
     </div>
   </section>
 
