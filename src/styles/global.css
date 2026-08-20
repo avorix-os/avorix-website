@@ -469,6 +469,40 @@ input.leitfaden-field, select.leitfaden-field {
   }
 }
 
+/* C5 (Anweisung 18): Der Tagesablauf bekommt die Form eines Ablaufs.
+   Die drei Stationen stehen untereinander, eine duenne senkrechte Linie am
+   linken Rand verbindet sie. Die Tageszeit bleibt als Label in Menlo, der Text
+   steht daneben. Keine Karten, keine Kaesten.
+   Die Linie laeuft ueber die Liste, nicht ueber die einzelne Station -- damit
+   endet sie an der letzten Station und haengt nicht darueber hinaus.
+   Abstaende aus der Skala in B2. */
+.tagesablauf {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 24px;
+  border-left: 1px solid var(--linie);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.tagesablauf-station {
+  position: relative;
+}
+/* Der Punkt sitzt auf der Linie und markiert die Station. */
+.tagesablauf-station::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 8px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--akzent);
+}
+.tagesablauf-zeit {
+  margin-bottom: 8px;
+}
+
 /* Bildunterschriften */
 /* C2 (Anweisung 18): 13px, aufrecht, linksbuendig. */
 figcaption,
