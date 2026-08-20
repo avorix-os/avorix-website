@@ -575,3 +575,81 @@ test.describe('T10c: C4 — die Screenshot-Karten haben eine Linie', () => {
     });
   }
 });
+
+/**
+ * T11: Etappe 5 aus Anweisung 23 — G3, G4 und G5.
+ * Abnahmepunkte 8, 9, 10, 15 und 16.
+ */
+const ELF_SEITEN = ['/', '/koch-app', '/personal', '/schulung', '/system', '/pilotprogramm',
+  '/ueber-uns', '/leitfaden', '/fuer-hotels', '/fuer-restaurants', '/fuer-sporthotels'];
+
+test.describe('T11: G4 — ein dunkler Block je Seite', () => {
+  for (const pagePath of ELF_SEITEN.filter((s) => s !== '/leitfaden')) {
+    test(`${pagePath} — genau einer`, async ({ page }) => {
+      await page.goto(pagePath);
+      const anzahl = await page.$$eval('section.section-dunkel', (els) => els.length);
+      expect(anzahl).toBe(1);
+    });
+  }
+
+  test('/leitfaden traegt keinen — drei Sektionen, davon eine der Hero mit Formular', async ({ page }) => {
+    await page.goto('/leitfaden');
+    const anzahl = await page.$$eval('section.section-dunkel', (els) => els.length);
+    expect(anzahl).toBe(0);
+  });
+});
+
+test.describe('T11b: G3 — nie mehr als zwei gleiche Formen hintereinander', () => {
+  for (const pagePath of ELF_SEITEN) {
+    test(`${pagePath} — kein Dreier`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      const formen = await page.$$eval('section', (sekt) =>
+        sekt.map((sek) => {
+          if ((sek.className || '').includes('section-dunkel')) return 'DUNKEL';
+          if (sek.querySelector('h1')) return 'Hero';
+          if (sek.querySelector('form, input, textarea')) return 'Formular';
+          if (sek.querySelector('.faq-list, details')) return 'FAQ';
+          if (sek.querySelector('.tagesablauf')) return 'Ablauf';
+          if (sek.querySelector('blockquote, .gruender-quote')) return 'Zitat';
+          if (sek.querySelector('img, picture')) return 'Bild+Text';
+          if (sek.querySelectorAll('.card, .card-modul').length >= 2) return 'Karten';
+          if (sek.querySelector('.text-spalte')) return 'Schmal';
+          return 'Text';
+        })
+      );
+      const dreier = [];
+      for (let i = 2; i < formen.length; i++) {
+        if (formen[i] === formen[i - 1] && formen[i] === formen[i - 2]) {
+          dreier.push(`${i - 1}-${i + 1}: ${formen[i]}`);
+        }
+      }
+      expect(dreier, formen.join(' > ')).toEqual([]);
+    });
+  }
+});
+
+test.describe('T11c: G5 — Bilder belegen, was daneben steht', () => {
+  test('die zwei benannten Bilder sind entfernt', async ({ page }) => {
+    await page.goto('/fuer-restaurants');
+    let bilder = await page.$$eval('img', (els) => els.map((el) => el.src).join(' '));
+    expect(bilder).not.toContain('steak-nahaufnahme');
+
+    await page.goto('/ueber-uns');
+    bilder = await page.$$eval('img', (els) => els.map((el) => el.src).join(' '));
+    expect(bilder).not.toContain('anrichten-detail');
+  });
+
+  test('die vier benannten Bilder stehen unveraendert', async ({ page }) => {
+    const soll = {
+      '/fuer-hotels': ['teller-stapel-reihe'],
+      '/schulung': ['schulung-von-hinten', 'anrichten-haende'],
+      '/ueber-uns': ['vakuumbeutel-kuehlhaus'],
+    };
+    for (const [pagePath, namen] of Object.entries(soll)) {
+      await page.goto(pagePath);
+      const bilder = await page.$$eval('img', (els) => els.map((el) => el.src).join(' '));
+      for (const n of namen) expect(bilder, `${pagePath}: ${n}`).toContain(n);
+    }
+  });
+});

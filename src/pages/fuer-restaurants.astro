@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import speiselokalGastraum from "../assets/bilder/gasthof-stube.jpg";
-import steakNahaufnahme from "../assets/bilder/steak-nahaufnahme.jpg";
 
 const ogImg = await getImage({ src: speiselokalGastraum, width: 1200, format: "jpeg" });
 const ogImageAlt = "Heller, modern eingedeckter Gastraum eines Restaurants mit Holztischen, Weingläsern und Kachelofen";
@@ -181,21 +180,10 @@ const schemaOrg = [
 
   <!-- Feste Karte (W3: Split) -->
  <section class="reveal section-gap">
-    <div class="content-width split-row">
-      <div class="split-copy">
+    <div class="content-width text-spalte">
+      <div>
         <h2 class="mb-6" style="color:var(--druck)">Eine feste Karte ist schneller gesichert, als Sie denken.</h2>
         <p class="max-w-[62ch]" style="color:var(--grau)">Ein Beispiel: eine Karte mit rund 12 Gerichten, drei Vorspeisen, drei Hauptgerichte, drei Desserts, ein vegetarisches Gericht, etwas f&uuml;r Kinder. So eine Karte nimmt ein Avorix-Koch in einem Block auf (f&uuml;nf Tage mit je sechs Stunden), dazu kommt ein zweiter Block f&uuml;r die Schulung Ihres Teams. <strong>Danach steckt das Wissen Ihres Hauses im System und nicht mehr nur in einer einzigen Person.</strong></p>
-      </div>
-      <div class="split-media">
-        <Image
-          src={steakNahaufnahme}
-          alt="Perfekt gebratenes Steak in Nahaufnahme auf dunklem Teller"
-          widths={[480, 800, 1200]}
-          sizes="(max-width: 900px) 100vw, 420px"
-          loading="lazy"
-          decoding="async"
-          class="w-full h-full object-cover"
-        />
       </div>
     </div>
   </section>
@@ -238,10 +226,10 @@ const schemaOrg = [
   </section>
 
   <!-- Pilotbetrieb -->
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-dunkel">
     <div class="content-width text-spalte">
-      <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
-      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die H&auml;lfte des regul&auml;ren Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong></p>
+      <h2 class="mb-6">Als Pilotbetrieb zur halben Rechnung.</h2>
+      <p class="mb-6 max-w-[62ch]">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die H&auml;lfte des regul&auml;ren Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong></p>
       <a href="/pilotprogramm" data-cta-location="restaurants-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
     </div>
   </section>
