@@ -229,6 +229,21 @@ strong {
   padding-right: 1.5rem;
 }
 
+/* B3 und G3 (Anweisung 23): die schmale Spalte, der einzige Neubau dieser
+   Runde. Ein schmaler Text, der linksbuendig in einem 1080px-Container steht
+   und rechts daneben nichts hat, sieht nach Versehen aus. Zentriert auf 640
+   sieht er nach Absicht aus.
+   Wird zusammen mit .content-width gesetzt, damit der seitliche Innenabstand
+   erhalten bleibt -- sonst klebt der Text auf dem Handy am Rand. Steht hier
+   nach .content-width, deshalb gewinnt die 640.
+   Die Textbreite betraegt damit 592px, das sind rund 79 Zeichen und liegt
+   unter der 90-Zeichen-Grenze aus B3. */
+.text-spalte {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Textauswahl */
 ::selection {
   background: var(--marker);
@@ -248,6 +263,28 @@ strong {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* B4 (Anweisung 23): Hervorhebungen in Ueberschriften sollen nicht mitten im
+   Begriff umbrechen -- aber nur, wenn dafuer Platz ist. Auf 375px braucht
+   "Rechtssicher verliehen." in der H1 von /personal 331px, verfuegbar sind
+   327; weil es nicht umbrechen durfte, schob es die ganze Seite um 4px auf
+   und erzeugte einen waagerechten Scrollbalken.
+   Der Umbruch innerhalb der Hervorhebung ist auf dem Handy kein
+   Schoenheitsfehler, ein Scrollbalken schon. Ab 640px gilt nowrap wieder.
+   Zentral statt an zehn Stellen inline, damit derselbe Fehler nicht mit der
+   naechsten Ueberschrift zurueckkommt. */
+h1 mark,
+h2 mark,
+h3 mark {
+  white-space: normal;
+}
+@media (min-width: 640px) {
+  h1 mark,
+  h2 mark,
+  h3 mark {
+    white-space: nowrap;
   }
 }
 
@@ -494,6 +531,9 @@ input.leitfaden-field, select.leitfaden-field {
 }
 .tagesablauf-station {
   position: relative;
+  /* B3: die Stationen trugen 118 Zeichen je Zeile. Die Linienform bleibt, wo
+     sie ist, nur der Text darin bekommt die Breite der schmalen Spalte. */
+  max-width: 640px;
 }
 /* Der Punkt sitzt auf der Linie und markiert die Station. */
 .tagesablauf-station::before {
@@ -576,7 +616,14 @@ figcaption,
 /* Karten, die nur Text enthalten, werden dafuer selbst begrenzt und stehen
    linksbuendig an der Raster-Kante: der Text endet dort, wo die Box endet. */
 .card-text {
-  max-width: 760px;
+  /* B3 (Anweisung 23): 760px ergaben 93 Zeichen je Zeile und lagen damit ueber
+     der 90-Zeichen-Grenze -- es sind genau die Absaetze, die Simon als die drei
+     breitesten gemessen hat. Jetzt dieselbe Breite wie die schmale Spalte.
+     Zentriert, weil ein schmaler Text linksbuendig in einem 1032px-Container
+     nach Versehen aussieht und nicht nach Absicht. */
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* 12h/3.1: Abstand ZWISCHEN den Karten deutlich groesser als IN ihnen.
