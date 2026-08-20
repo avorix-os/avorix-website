@@ -80,7 +80,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
     max-width: 1080px;
     margin: 0 auto;
     padding: 0 24px;
-    height: 72px;
+    height: var(--header-hoehe);
     display: flex;
     align-items: center;
     gap: 24px;
@@ -403,7 +403,12 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
   @media (prefers-reduced-motion: reduce) {
     .mobile-section-content { transition: none; }
   }
-  .mobile-section-inner { min-height: 0; padding-bottom: 8px; }
+  /* Korrektur 5 (Anweisung 25): Geschlossen war die Liste 8px hoch, und
+     "DAS ANGEBOT" schimmerte darunter durch. Die Rasterzeile stand auf 0,
+     der Innenabstand des Inhalts blieb aber stehen. Er gilt jetzt erst im
+     geoeffneten Zustand. */
+  .mobile-section-inner { min-height: 0; padding-bottom: 0; }
+  .mobile-section-content.is-open .mobile-section-inner { padding-bottom: 8px; }
 
   .mobile-section-link {
     color: var(--papier);

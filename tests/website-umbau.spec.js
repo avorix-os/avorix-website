@@ -653,3 +653,104 @@ test.describe('T11c: G5 — Bilder belegen, was daneben steht', () => {
     }
   });
 });
+
+/**
+ * T12: Anweisung 25, Rest von Etappe 1 — Korrekturen 2, 4, 5 und 6.
+ * Abnahmepunkte 3, 5, 6 und 7.
+ */
+test.describe('T12: Korrektur 4 — der Inhalt klebt nicht mehr am Header', () => {
+  for (const breite of [375, 768, 1280]) {
+    test(`bei ${breite}px beginnt der Inhalt unter der Kopfleiste`, async ({ page }) => {
+      await page.setViewportSize({ width: breite, height: 800 });
+      await page.goto('/personal');
+      const mass = await page.evaluate(() => {
+        const kopf = document.querySelector('header').getBoundingClientRect();
+        const sek = document.querySelector('main section').getBoundingClientRect();
+        const variable = getComputedStyle(document.documentElement).getPropertyValue('--header-hoehe').trim();
+        return { kopfUnten: Math.round(kopf.bottom), sektionOben: Math.round(sek.top), variable };
+      });
+      // die Sektion beginnt genau an der Unterkante der Leiste, nicht darunter
+      expect(mass.sektionOben).toBeGreaterThanOrEqual(mass.kopfUnten - 1);
+      // die Hoehe steht als Variable, damit beide Seiten nicht auseinanderlaufen
+      expect(mass.variable).toBe('72px');
+    });
+  }
+});
+
+test.describe('T12b: Korrektur 5 — das geschlossene Menue zeigt nichts', () => {
+  test('die Aufklappliste ist geschlossen 0px hoch', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/');
+    const hoehen = await page.$$eval('.mobile-section-content:not(.is-open)', (els) =>
+      els.map((el) => Math.round(el.getBoundingClientRect().height))
+    );
+    expect(hoehen.length).toBeGreaterThan(0);
+    for (const h of hoehen) expect(h).toBe(0);
+  });
+});
+
+test.describe('T12c: Korrektur 2 — keine Ueberschrift bricht enger als ihr Text', () => {
+  for (const pagePath of ['/', '/koch-app', '/personal', '/system', '/fuer-hotels']) {
+    test(`${pagePath} — Ueberschrift nie schmaler als ihr Absatz`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      const enger = await page.evaluate(() => {
+        const raus = [];
+        for (const h of document.querySelectorAll('h2, h3')) {
+          const hw = h.getBoundingClientRect().width;
+          const n = h.nextElementSibling;
+          if (n && n.tagName === 'P') {
+            const nw = n.getBoundingClientRect().width;
+            if (nw > hw + 2) raus.push(`${Math.round(hw)} vs ${Math.round(nw)}: ${h.innerText.slice(0, 30)}`);
+          }
+        }
+        return raus;
+      });
+      expect(enger).toEqual([]);
+    });
+  }
+});
+
+test.describe('T12d: Korrektur 6 — Text in Kaesten hat seitliche Luft', () => {
+  test('die Bildunterschriften tragen 16px', async ({ page }) => {
+    await page.goto('/koch-app');
+    const werte = await page.$$eval('.app-screenshot-caption', (els) =>
+      els.map((el) => getComputedStyle(el).paddingLeft)
+    );
+    expect(werte.length).toBeGreaterThan(0);
+    for (const w of werte) expect(w).toBe('16px');
+  });
+});
+
+/**
+ * T12e: Korrektur 3 (Anweisung 26) — die eigentliche Ursache des Ueberlaufs.
+ *
+ * Nicht das nowrap: Rasterzellen tragen `min-width: auto` und schrumpfen nicht
+ * unter ihr laengstes Wort. "Arbeitnehmerueberlassungserlaubnis" braucht 272px
+ * bei 279px Spalte -- auf Geraeten mit etwas breiterer Schrift passt es nicht
+ * mehr und schiebt die Seite auf.
+ */
+test.describe('T12e: Korrektur 3 — lange Woerter sprengen die Seite nicht', () => {
+  test('ein ueberlanges Wort bricht um, statt die Seite zu verbreitern', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/personal');
+    const mass = await page.evaluate(() => {
+      const abs = document.querySelector('main p');
+      const merker = abs.innerHTML;
+      abs.innerHTML = 'Arbeitnehmerueberlassungserlaubnisbescheinigungsverfahren';
+      const r = { scroll: document.documentElement.scrollWidth, client: document.documentElement.clientWidth };
+      abs.innerHTML = merker;
+      return r;
+    });
+    expect(mass.scroll).toBeLessThanOrEqual(mass.client);
+  });
+
+  test('Rasterzellen duerfen schmaler werden als ihr Inhalt', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/');
+    const auto = await page.$$eval('.split-row > *, .hero-grid > *, .grid > *', (els) =>
+      els.filter((el) => getComputedStyle(el).minWidth === 'auto').length
+    );
+    expect(auto).toBe(0);
+  });
+});

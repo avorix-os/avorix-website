@@ -560,10 +560,13 @@ const schema = [
 }
 .beweis-zitat {
   /* B3 (Anweisung 23): dieselbe Breite wie die schmale Spalte. Die lokale
-     Angabe stand auf 760 und hat die zentrale Regel ueberstimmt. */
+     Angabe stand auf 760 und hat die zentrale Regel ueberstimmt.
+     Korrektur 8 (Anweisung 25/27): Die Box sass direkt auf der Trennlinie der
+     Liste darueber. 40px Abstand, damit sie sie nicht mehr beruehrt. */
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 40px;
 }
 .beweis-zitat blockquote {
   margin: 0;
