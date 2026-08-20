@@ -42,9 +42,25 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
     flex-direction: column;
   }
 
+  /* C4 (Anweisung 23): Alle Screenshot-Karten bekommen denselben Bildkasten,
+     damit die Karten einer Reihe eine gemeinsame Linie haben. Gemessen lagen
+     die Verhaeltnisse zwischen 1,25 und 1,60.
+     contain statt cover, weil es Anwendungsoberflaechen sind: bei cover
+     verlaere der breiteste Screenshot rund 17 Prozent seiner Breite, und damit
+     ganze Spalten. So bleibt jeder Screenshot vollstaendig, der Kasten ist
+     trotzdem ueberall gleich hoch. */
+  .app-screenshot-trigger :global(img) {
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: var(--flaeche);
+    width: 100%;
+    height: auto;
+  }
+
   .app-screenshot-card__header {
     background: var(--eisen);
-    padding: 0.5rem 0.875rem;
+    /* C6 (Anweisung 23): 0.875rem sind 14px und lagen neben der Skala. */
+    padding: 8px 16px;
     display: flex;
     align-items: center;
   }
