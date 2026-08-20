@@ -413,3 +413,76 @@ test.describe('T8d: D1 — der aktive Punkt ist in der geschlossenen Leiste sich
     });
   }
 });
+
+/**
+ * T9: Etappe 1 aus Anweisung 23 — Textbreite (B3) und Seitwaerts-Scrollen (B4).
+ * Abnahmepunkte 1, 11 und 17.
+ */
+test.describe('T9: B4 — keine Seite scrollt seitwaerts', () => {
+  for (const pagePath of TITEL_SEITEN) {
+    test(`${pagePath} — bei 375px kein waagerechter Scrollbalken`, async ({ page }) => {
+      await page.setViewportSize({ width: 375, height: 800 });
+      await page.goto(pagePath);
+      const mass = await page.evaluate(() => ({
+        scroll: document.documentElement.scrollWidth,
+        client: document.documentElement.clientWidth,
+      }));
+      expect(mass.scroll, `scrollWidth ${mass.scroll} > clientWidth ${mass.client}`).toBeLessThanOrEqual(mass.client);
+    });
+  }
+
+  test('kein mark erzwingt auf dem Handy nowrap', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    for (const pagePath of ['/personal', '/', '/koch-app', '/schulung', '/fuer-hotels', '/fuer-restaurants', '/fuer-sporthotels', '/en/staff', '/en/system', '/en/training']) {
+      await page.goto(pagePath);
+      const nowrap = await page.$$eval('h1 mark, h2 mark, h3 mark', (els) =>
+        els.filter((el) => getComputedStyle(el).whiteSpace === 'nowrap').length
+      );
+      expect(nowrap, pagePath).toBe(0);
+    }
+  });
+
+  test('ab 640px darf die Hervorhebung wieder zusammenbleiben', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/personal');
+    const nowrap = await page.$eval('h1 mark', (el) => getComputedStyle(el).whiteSpace);
+    expect(nowrap).toBe('nowrap');
+  });
+});
+
+test.describe('T9b: B3 — die schmale Spalte', () => {
+  test('die Klasse existiert und misst 640px, .content-width bleibt bei 1080', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/fuer-hotels');
+    const masse = await page.evaluate(() => {
+      const schmal = document.querySelector('.text-spalte');
+      const breit = document.querySelector('.content-width:not(.text-spalte)');
+      return {
+        schmal: schmal ? getComputedStyle(schmal).maxWidth : null,
+        breit: breit ? getComputedStyle(breit).maxWidth : null,
+      };
+    });
+    expect(masse.schmal).toBe('640px');
+    expect(masse.breit).toBe('1080px');
+  });
+
+  for (const pagePath of ['/fuer-hotels', '/fuer-restaurants', '/fuer-sporthotels', '/pilotprogramm', '/ueber-uns', '/leitfaden']) {
+    test(`${pagePath} — in der schmalen Spalte laeuft kein Text breiter`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+      const zuBreit = await page.evaluate(() => {
+        const raus = [];
+        for (const spalte of document.querySelectorAll('.text-spalte')) {
+          for (const el of spalte.querySelectorAll('p, li')) {
+            const w = el.getBoundingClientRect().width;
+            if (w > 641) raus.push(Math.round(w) + 'px: ' + (el.innerText || '').slice(0, 40));
+          }
+        }
+        return raus;
+      });
+      expect(zuBreit).toEqual([]);
+      const anzahl = await page.$$eval('.text-spalte', (els) => els.length);
+      expect(anzahl).toBeGreaterThan(0);
+    });
+  }
+});

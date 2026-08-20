@@ -147,7 +147,7 @@ const schema = [
       <div class="hero-copy">
         <p class="eyebrow mb-4">Modul: Die Verst&auml;rkung</p>
         <h1 class="mb-6">
-          Echte K&ouml;che. Fest angestellt. <mark style="white-space:nowrap">Rechtssicher verliehen.</mark>
+          Echte K&ouml;che. Fest angestellt. <mark>Rechtssicher verliehen.</mark>
         </h1>
         <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
           Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person. Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie auf der rechtlich sicheren Seite.
@@ -559,7 +559,11 @@ const schema = [
   color: var(--druck);
 }
 .beweis-zitat {
-  max-width: 760px;
+  /* B3 (Anweisung 23): dieselbe Breite wie die schmale Spalte. Die lokale
+     Angabe stand auf 760 und hat die zentrale Regel ueberstimmt. */
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .beweis-zitat blockquote {
   margin: 0;
