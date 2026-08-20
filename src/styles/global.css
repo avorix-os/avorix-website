@@ -327,11 +327,26 @@ h1 em,   h2 em,   h3 em {
   min-height: auto;
 }
 
+/* C1 (Anweisung 18): Bilder sitzen sauber in ihren Rahmen.
+   Ohne Angabe gilt der CSS-Standard object-fit: fill, der das Bild auf die
+   Boxmasse zieht, egal welches Seitenverhaeltnis es hat. Auf /koch-app traf
+   das alle acht Screenshots. Sichtbar war es dort nicht, weil die Boxmasse
+   zufaellig passen -- beim naechsten Bild mit anderem Verhaeltnis waere es
+   verzerrt worden, ohne dass es jemand sofort bemerkt.
+   cover schneidet stattdessen zu, center haelt dabei die Bildmitte. */
+img {
+  object-fit: cover;
+  object-position: center;
+}
+
 /* Bildunterschriften */
+/* C2 (Anweisung 18): 13px, aufrecht, linksbuendig. */
 figcaption,
 .caption {
   font-family: var(--f-body);
-  font-size: 14px;
+  font-size: 13px;
+  font-style: normal;
+  text-align: left;
   color: var(--grau);
 }
 
