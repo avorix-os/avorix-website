@@ -380,6 +380,19 @@ img {
   object-position: center;
 }
 
+/* F2 (Anweisung 18) nach dem B2-Umbau: Der Innenabstand der Felder stammt
+   jetzt aus der Skala und betraegt 16px statt 14. Dadurch waeren die Felder
+   auf 60px gewachsen und haetten die abgenommene Hoehe von 56 gebrochen.
+   Die Hoehe ist deshalb fest gesetzt statt als Mindestwert -- sie ist eine
+   Groesse, kein Abstand, und faellt nicht unter die Skala.
+   Textfelder sind mehrzeilig und bleiben ausgenommen. */
+input.anfrage-field, select.anfrage-field,
+input.pilot-field, select.pilot-field,
+input.kontakt-field, select.kontakt-field,
+input.leitfaden-field, select.leitfaden-field {
+  height: 56px;
+}
+
 /* Bildunterschriften */
 /* C2 (Anweisung 18): 13px, aufrecht, linksbuendig. */
 figcaption,
