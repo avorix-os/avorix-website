@@ -33,9 +33,9 @@ const schema = {
 
       <!-- Zwei Wege nebeneinander (Anweisung 12a/9): links die bestehende
            Kalender-Karte unveraendert, rechts der Personal-Weg. -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12 items-stretch">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-16 items-stretch">
         <div class="card flex flex-col">
-          <h2 class="mb-2" style="color:var(--druck)">Demo-Termin direkt buchen</h2>
+          <h2 class="mb-6" style="color:var(--druck)">Demo-Termin direkt buchen</h2>
           <p class="mb-6" style="color:var(--grau)">Wählen Sie einfach einen freien Termin in unserem Kalender. <strong>Kein Telefonieren, kein Warten.</strong></p>
           <a
             href="https://calendly.com/avorix/kostenfreies-erstgesprach"
@@ -46,11 +46,11 @@ const schema = {
           >
             Termin auswählen
           </a>
-          <p class="text-sm mt-3" style="color:var(--grau)">Kostenlos &amp; unverbindlich · 30 Minuten</p>
+          <p class="text-sm mt-6" style="color:var(--grau)">Kostenlos &amp; unverbindlich · 30 Minuten</p>
         </div>
 
         <div class="card flex flex-col">
-          <h2 class="mb-2" style="color:var(--druck)">Sie brauchen Personal?</h2>
+          <h2 class="mb-6" style="color:var(--druck)">Sie brauchen Personal?</h2>
           <p class="mb-4" style="color:var(--grau)"><strong>Sofort ein Koch, wenn Ihrer fehlt.</strong> Beschreiben Sie kurz Ihren Bedarf, wir melden uns innerhalb von 24 Stunden.</p>
           <p class="mb-6" style="color:var(--grau);font-size:15px">
             Im Notfall direkt anrufen:
@@ -76,10 +76,10 @@ const schema = {
 
       <p class="eyebrow mb-8">Oder schreiben Sie uns</p>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-16">
         <!-- Kontaktdaten (kompakte Karte, §3.15) -->
         <div class="card" style="align-self:start">
-          <h3 class="mb-1" style="font-size:14px;font-weight:600;color:var(--druck)">E-Mail</h3>
+          <h3 class="mb-4" style="font-size:14px;font-weight:600;color:var(--druck)">E-Mail</h3>
           <a href="mailto:info@avorix.de" class="kontakt-mailto">
             info@avorix.de
           </a>
@@ -90,7 +90,7 @@ const schema = {
         <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Demo-Anfrage über avorix.cloud" />
           <div>
-            <label for="name" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+            <label for="name" class="block text-sm font-medium mb-2" style="color:var(--druck)">
               Name <span style="color:var(--akzent)">*</span>
             </label>
             <input
@@ -103,7 +103,7 @@ const schema = {
             />
           </div>
           <div>
-            <label for="email" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+            <label for="email" class="block text-sm font-medium mb-2" style="color:var(--druck)">
               E-Mail <span style="color:var(--akzent)">*</span>
             </label>
             <input
@@ -116,7 +116,7 @@ const schema = {
             />
           </div>
           <div>
-            <label for="message" class="block text-sm font-medium mb-1" style="color:var(--druck)">
+            <label for="message" class="block text-sm font-medium mb-2" style="color:var(--druck)">
               Nachricht <span style="color:var(--akzent)">*</span>
             </label>
             <textarea
