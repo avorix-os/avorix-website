@@ -47,8 +47,14 @@
   --breakpoint-xl: 1200px;
   --breakpoint-2xl: 1200px;
 
-  /* TYPOGRAPHY — System-Schriften, kein Webfont-Download */
-  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* TYPOGRAPHY — System-Schriften, kein Webfont-Download.
+     E1 (Anweisung 18): Es liefen zwei Grotesken nebeneinander, Avenir Next in
+     den Ueberschriften und Helvetica Neue im Fliesstext. Beide tun dasselbe,
+     und niemand sieht den Unterschied bewusst -- die Seite wirkt nur unruhig.
+     Geblieben ist Avenir Next, weil sie die Schrift der Design-Vorgabe ist
+     ("Meisterbetrieb", Abschnitt 1); Helvetica Neue war der neutrale
+     Fliesstext-Fallback und steht in der Kette ohnehin weiter hinten. */
+  --font-sans: 'Avenir Next', 'Avenir', 'Nunito Sans', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-head: 'Avenir Next', 'Avenir', 'Nunito Sans', 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-mono: Menlo, Consolas, monospace;
 
@@ -91,7 +97,8 @@
   --flaeche-hover: #F1EFE9;
 
   --f-head: 'Avenir Next','Avenir','Nunito Sans','Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
-  --f-body: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  /* E1: eine Groteske fuer Ueberschriften und Fliesstext. */
+  --f-body: var(--f-head);
   --f-mono: Menlo,Consolas,monospace;
 
   --radius:         6px;
@@ -518,11 +525,12 @@ figcaption,
 .check-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 8px;
   background: var(--flaeche);
   border: 1px solid var(--linie);
   border-radius: 999px;
-  padding: 5px 14px;
+  /* B2-Nachtrag: 5px und 14px stehen nicht auf der Skala. */
+  padding: 8px 16px;
   font-size: 14px;
   font-weight: 600;
   color: var(--druck);
@@ -792,7 +800,17 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
+  gap: 16px;
+}
+
+/* D2 (Anweisung 18): Die zwei Haekchen-Zeilen aus dem Hero, jetzt unter der
+   Direktantwort. Dieselbe Form wie im Hero, nur an der richtigen Stelle. */
+.beleg-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
 }
 @media (min-width: 900px) {
   .hero-grid { grid-template-columns: 55fr 45fr; }

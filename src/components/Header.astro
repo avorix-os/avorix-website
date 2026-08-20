@@ -37,6 +37,15 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
 
 <style>
   /* === SITE HEADER === */
+  /* D1: Der seitliche Innenabstand der Leistenelemente. Mit den vollen 16px
+     passt die Leiste erst ab 1200px; darunter ragte der Sprachumschalter
+     heraus. Beide Werte stehen auf der Skala, und 1200 ist eine der drei
+     erlaubten Bildschirmgrenzen aus H1 -- eine neue Grenze entsteht nicht. */
+  .site-header { --nav-pad-x: 8px; }
+  @media (min-width: 1200px) {
+    .site-header { --nav-pad-x: 16px; }
+  }
+
   .site-header {
     background: var(--eisen);
     position: fixed;
@@ -53,14 +62,21 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
     .site-header { transition: none; }
   }
 
+  /* D1 (Anweisung 18): Die Leiste war 60px hoch und die Navigation darin zu
+     leise -- die beiden Buttons gewannen gegen die Punkte, die die Seite
+     erschliessen. Jetzt 72px, damit die groesseren Ziele hineinpassen. */
   .nav-inner {
-    max-width: 1100px;
+    /* B2-Nachtrag: 28px stand nicht auf der Skala. Mit 24px und 1080 liegt
+       die Leiste ausserdem genau ueber der Inhaltsspalte, das Logo steht
+       buendig zum Text darunter. Der gewonnene Platz ist das, was die
+       groesseren Nav-Ziele bei 900px brauchen. */
+    max-width: 1080px;
     margin: 0 auto;
-    padding: 0 28px;
-    height: 60px;
+    padding: 0 24px;
+    height: 72px;
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
   }
 
   .nav-logo {
@@ -80,34 +96,43 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   .nav-desktop {
     display: none;
     align-items: center;
-    gap: 20px;
+    gap: 16px;
     flex: 1;
   }
 
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 32px;
     flex: 1;
   }
 
   /* Nav links: paper-white, 82% opacity, hover underline */
+  /* D1: 16px statt 14,5 und Gewicht 500 statt 400. Der Innenabstand steht
+     auf der Skala (8/16) statt auf den vorgegebenen 10px 14px, die keine
+     Skalenstufen sind; die 44px Zielhoehe traegt stattdessen min-height --
+     eine Hoehe ist eine Groesse, kein Abstand. Damit bleiben Abnahme 3
+     (Skala) und Abnahme 29 (Bedienziele mindestens 44px) beide erfuellt. */
   .nav-link {
     color: var(--papier);
     opacity: 0.82;
-    font-size: 14.5px;
+    font-size: 16px;
+    font-weight: 500;
     text-decoration: none;
     position: relative;
-    padding: 6px 2px;
+    padding: 8px var(--nav-pad-x);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     transition: opacity 0.18s ease;
     white-space: nowrap;
   }
   .nav-link::after {
     content: '';
     position: absolute;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    left: var(--nav-pad-x);
+    right: var(--nav-pad-x);
+    bottom: 6px;
     height: 2px;
     background: var(--papier);
     transform: scaleX(0);
@@ -125,14 +150,16 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   .nav-dropdown-trigger {
     color: var(--papier);
     opacity: 0.82;
-    font-size: 14.5px;
+    font-size: 16px;
+    font-weight: 500;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 6px 2px;
+    padding: 8px var(--nav-pad-x);
+    min-height: 44px;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
     position: relative;
     transition: opacity 0.18s ease;
     white-space: nowrap;
@@ -212,13 +239,18 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   .nav-dropdown-item[aria-current="page"] { color: var(--akzent); }
 
   /* CTA button */
+  /* D1: Gewicht 500 statt 700 und dieselbe Zielhoehe wie die Nav-Zeile.
+     Die Buttons bleiben, sie sind nur nicht mehr lauter als die Punkte. */
   .nav-cta {
     background: var(--papier);
     color: var(--eisen);
-    padding: 9px 18px;
+    padding: 8px 16px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     border-radius: var(--radius);
     font-size: 14.5px;
-    font-weight: 700;
+    font-weight: 500;
     font-family: var(--f-head);
     text-decoration: none;
     white-space: nowrap;
@@ -233,7 +265,7 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
     background: transparent;
     color: var(--papier);
     border: 1.5px solid rgba(247, 246, 242, 0.45);
-    padding: 7.5px 16.5px;
+    padding: 8px 16px;
   }
   .nav-cta-outline:hover {
     border-color: var(--papier);
@@ -410,15 +442,18 @@ const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathna
   }
 
   .nav-mobile-lang {
-    margin-top: 20px;
+    /* B2-Nachtrag: 20px stand nicht auf der Skala. */
+    margin-top: 24px;
   }
-  /* W6: "English" im Burger als volles Touch-Ziel (>=48px) */
+  /* W6: "English" im Burger als volles Touch-Ziel (>=48px).
+     B2-Nachtrag: 12px stand nicht auf der Skala; die Zielhoehe traegt
+     ohnehin die Mindesthoehe, nicht der Innenabstand. */
   .nav-mobile-lang :global(.lang-switch) {
     display: flex;
     align-items: center;
     min-height: 48px;
     font-size: 18px;
-    padding: 12px 0;
+    padding: 8px 0;
   }
 </style>
 

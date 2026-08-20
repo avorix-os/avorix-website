@@ -280,3 +280,105 @@ test.describe('T7b: Die vier englischen Seiten tragen die Meta aus Anweisung 20'
     });
   }
 });
+
+/**
+ * T8: Kopf und Typografie (Anweisung 18, Teil D und E)
+ * Abnahmepunkte 11 (Navigation), 12 (Hero), 13 (Schriften).
+ */
+test.describe('T8: D1 — die Navigation traegt die Seite', () => {
+  for (const pagePath of ['/', '/en']) {
+    test(`${pagePath} — Leistenwerte`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pagePath);
+
+      const kopf = await page.locator('header').boundingBox();
+      expect(Math.round(kopf.height)).toBe(72);
+
+      const punkte = await page.$$eval('.nav-desktop .nav-link', (els) =>
+        els.map((el) => {
+          const s = getComputedStyle(el);
+          return { size: s.fontSize, weight: s.fontWeight, hoehe: Math.round(el.getBoundingClientRect().height) };
+        })
+      );
+      expect(punkte.length).toBeGreaterThan(0);
+      for (const p of punkte) {
+        expect(p.size).toBe('16px');
+        expect(p.weight).toBe('500');
+        // Abnahme 29: Bedienziele mindestens 44px
+        expect(p.hoehe).toBeGreaterThanOrEqual(44);
+      }
+
+      const luecke = await page.$eval('.nav-links', (el) => getComputedStyle(el).columnGap);
+      expect(luecke).toBe('32px');
+
+      const ctas = await page.$$eval('.nav-desktop .nav-cta', (els) =>
+        els.map((el) => ({ weight: getComputedStyle(el).fontWeight, hoehe: Math.round(el.getBoundingClientRect().height) }))
+      );
+      for (const c of ctas) {
+        expect(c.weight).toBe('500');
+        expect(c.hoehe).toBeGreaterThanOrEqual(44);
+      }
+    });
+
+    test(`${pagePath} — nichts ragt aus der Leiste`, async ({ page }) => {
+      for (const breite of [900, 1024, 1280]) {
+        await page.setViewportSize({ width: breite, height: 900 });
+        await page.goto(pagePath);
+        const raus = await page.evaluate(() => {
+          const kopf = document.querySelector('header').getBoundingClientRect();
+          const desktop = document.querySelector('.nav-desktop');
+          if (!desktop || getComputedStyle(desktop).display === 'none') return [];
+          return [...desktop.querySelectorAll('a, button')]
+            .filter((el) => el.getBoundingClientRect().width > 0)
+            .filter((el) => el.getBoundingClientRect().right > kopf.right + 0.5)
+            .map((el) => el.innerText.trim());
+        });
+        expect(raus, `Breite ${breite}px`).toEqual([]);
+      }
+    });
+  }
+});
+
+test.describe('T8b: D2 — der Hero traegt fuenf Dinge', () => {
+  test('Startseite — Satz gestrichen, Haekchen-Zeilen eine Sektion tiefer', async ({ page }) => {
+    await page.goto('/');
+    const text = await page.evaluate(() => document.body.innerText);
+
+    // Anweisung 19: der ganze Satz verschwindet, nicht nur die Fettung
+    expect(text).not.toContain('Auch ohne ausgebildete');
+
+    // Im Hero steht keine Haekchen-Zeile mehr
+    const imHero = await page.$$eval('.hero-badges .check-badge', (els) => els.length);
+    expect(imHero).toBe(0);
+
+    // Sie sind aber nicht geloescht, sondern stehen weiter unten
+    const belege = await page.$$eval('.beleg-badges .check-badge', (els) => els.map((el) => el.innerText.trim()));
+    expect(belege.length).toBe(2);
+    expect(belege.join(' ')).toContain('Von K');
+    expect(belege.join(' ')).toContain('Friedrichshafen');
+
+    const [heroY, belegY] = await page.evaluate(() => [
+      document.querySelector('.hero-badges').getBoundingClientRect().top,
+      document.querySelector('.beleg-badges').getBoundingClientRect().top,
+    ]);
+    expect(belegY).toBeGreaterThan(heroY);
+  });
+});
+
+test.describe('T8c: E1 — hoechstens drei Schriftfamilien', () => {
+  for (const pagePath of TITEL_SEITEN) {
+    test(`${pagePath} — drei Familien`, async ({ page }) => {
+      await page.goto(pagePath);
+      const familien = await page.evaluate(() => {
+        const menge = new Set();
+        for (const el of document.querySelectorAll('body *')) {
+          if (!el.innerText || !el.innerText.trim()) continue;
+          if (el.children.length > 0 && el.tagName !== 'BUTTON' && el.tagName !== 'A') continue;
+          menge.add(getComputedStyle(el).fontFamily.split(',')[0].replace(/["']/g, '').trim());
+        }
+        return [...menge];
+      });
+      expect(familien.length, familien.join(', ')).toBeLessThanOrEqual(3);
+    });
+  }
+});
