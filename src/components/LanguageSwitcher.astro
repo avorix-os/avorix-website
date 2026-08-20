@@ -51,9 +51,13 @@ if (lang === "de") {
 <style>
   .lang-switch {
     color: rgba(247, 246, 242, 0.82);
-    font-size: 14.5px;
+    font-size: 16px;
+    font-weight: 500;
     text-decoration: none;
-    padding: 6px 2px;
+    padding: 8px var(--nav-pad-x, 8px);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
     position: relative;
     transition: color 0.18s ease;
     white-space: nowrap;
@@ -61,9 +65,9 @@ if (lang === "de") {
   .lang-switch::after {
     content: '';
     position: absolute;
-    left: 2px;
-    right: 2px;
-    bottom: 2px;
+    left: var(--nav-pad-x, 8px);
+    right: var(--nav-pad-x, 8px);
+    bottom: 6px;
     height: 2px;
     background: var(--papier);
     transform: scaleX(0);
