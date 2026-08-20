@@ -142,3 +142,53 @@ test.describe('T4: Pilotprogramm-Formular', () => {
     expect(eventsAfter).toHaveLength(1);
   });
 });
+
+/**
+ * T5: Formularfelder (Anweisung 18/F2, zurueckgebaut nach Anweisung 21, Abschnitt 4)
+ *
+ * Die Feldhoehe darf nicht festgenagelt sein. Wer die Schrift vergroessert,
+ * bekaeme sonst abgeschnittenen Text im Feld. Geprueft wird deshalb nicht die
+ * Zahl allein, sondern dass das Feld mitwaechst — und dass Textfelder gar
+ * keine Hoehenvorgabe tragen.
+ */
+const FORMULAR_SEITEN = ['/personal', '/pilotprogramm', '/kontakt', '/leitfaden', '/en/contact'];
+
+test.describe('T5: Feldhoehen wachsen mit der Schrift', () => {
+  for (const pagePath of FORMULAR_SEITEN) {
+    test(`${pagePath} — Felder ohne feste Hoehe, Textfeld ohne Vorgabe`, async ({ page }) => {
+      await page.goto(pagePath);
+
+      const felder = 'input.anfrage-field, select.anfrage-field, input.pilot-field, select.pilot-field, input.kontakt-field, select.kontakt-field, input.leitfaden-field, select.leitfaden-field';
+
+      const vorher = await page.$$eval(felder, (els) =>
+        els.map((el) => ({
+          minHeight: getComputedStyle(el).minHeight,
+          hoehe: Math.round(el.getBoundingClientRect().height),
+        }))
+      );
+      expect(vorher.length).toBeGreaterThan(0);
+      for (const f of vorher) {
+        expect(f.minHeight).toBe('58px');
+        expect(f.hoehe).toBe(58);
+      }
+
+      // Textfelder duerfen wachsen: keine Mindesthoehe.
+      const textfelder = await page.$$eval('textarea', (els) =>
+        els.map((el) => getComputedStyle(el).minHeight)
+      );
+      for (const min of textfelder) {
+        expect(min).toBe('0px');
+      }
+
+      // Doppelte Schriftgroesse (Text-Zoom): die Felder muessen mitwachsen,
+      // sonst schneidet die feste Hoehe den Text ab.
+      await page.addStyleTag({ content: 'input, select, textarea { font-size: 32px !important; }' });
+      const nachher = await page.$$eval(felder, (els) =>
+        els.map((el) => Math.round(el.getBoundingClientRect().height))
+      );
+      for (const hoehe of nachher) {
+        expect(hoehe).toBeGreaterThan(58);
+      }
+    });
+  }
+});
