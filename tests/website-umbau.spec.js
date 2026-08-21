@@ -900,3 +900,123 @@ test.describe('T13d: Korrektur 21 — die zwei Umstellungen auf /system', () => 
     expect(mobil.bildOben).toBeLessThan(mobil.schrittOben);
   });
 });
+
+/**
+ * T14: Anweisung 29, Abschnitt 2.3 und 6.1 bis 6.6.
+ */
+test.describe('T14: Anweisung 29 — die Durchsicht', () => {
+  test('6.1 — die llms.txt kennt den englischen Bereich', async ({ request }) => {
+    const antwort = await request.get('/llms.txt');
+    expect(antwort.status()).toBe(200);
+    const text = await antwort.text();
+    expect(text).toContain('## English pages');
+    for (const pfad of ['/en/staff', '/en/cook-app', '/en/training', '/en/system', '/en/pilot-program', '/en/about', '/en/contact']) {
+      expect(text, pfad).toContain('https://avorix.cloud' + pfad + ')');
+    }
+    expect(text).toContain('An English section covers the same offering');
+  });
+
+  test('6.2 — der gestrichene Satz steht in keinem Metafeld der Startseite', async ({ page }) => {
+    await page.goto('/');
+    const felder = await page.evaluate(() => {
+      const inhalt = (wahl) => document.querySelector(wahl)?.getAttribute('content') || '';
+      const schema = [...document.querySelectorAll('script[type="application/ld+json"]')]
+        .map((s) => s.textContent).join(' ');
+      return {
+        meta: inhalt('meta[name="description"]'),
+        og: inhalt('meta[property="og:description"]'),
+        twitter: inhalt('meta[name="twitter:description"]'),
+        schema,
+      };
+    });
+    for (const [name, wert] of Object.entries(felder)) {
+      expect(wert, name).not.toContain('Auch ohne ausgebildete');
+    }
+    expect(felder.meta.length).toBeGreaterThan(120);
+    expect(felder.meta.length).toBeLessThan(150);
+  });
+
+  test('6.3 — Sektion 5 ist die schmale Spalte, Sektion 6 die Linienform', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto('/');
+    const warum = await page.evaluate(() => {
+      const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Warum Avorix'));
+      const sek = h2.closest('section');
+      return {
+        schmal: !!sek.querySelector('.text-spalte'),
+        karten: sek.querySelectorAll('.card').length,
+      };
+    });
+    expect(warum.schmal).toBe(true);
+    expect(warum.karten).toBe(0);
+
+    const ablauf = await page.evaluate(() => {
+      const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Was ist Avorix'));
+      const sek = h2.closest('section');
+      const ol = sek.querySelector('.tagesablauf');
+      return {
+        linienform: !!ol,
+        stationen: ol ? ol.querySelectorAll('.tagesablauf-station').length : 0,
+        labels: ol ? [...ol.querySelectorAll('.tagesablauf-zeit')].map((e) => e.innerText.trim()) : [],
+      };
+    });
+    expect(ablauf.linienform).toBe(true);
+    expect(ablauf.stationen).toBe(3);
+    expect(ablauf.labels.join(' ')).toContain('SCHRITT 1');
+  });
+
+  test('6.4 — das Zahlen-Banner steht auf /en/cook-app', async ({ page }) => {
+    await page.goto('/en/cook-app');
+    const text = await page.evaluate(() => document.body.innerText);
+    expect(text).toContain("Measured in one customer");
+    expect(text).toContain('The app already pays for itself there.');
+    expect(text).toContain('around 15');
+    expect(text).toContain('around 20');
+    // Subline oben, nicht unter den Karten
+    const lage = await page.evaluate(() => {
+      const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Measured in one'));
+      const sek = h2.closest('section');
+      const p = [...sek.querySelectorAll('p')].find((el) => el.innerText.includes('already pays for itself'));
+      const karte = sek.querySelector('.card');
+      return { satz: p.getBoundingClientRect().top, karte: karte.getBoundingClientRect().top };
+    });
+    expect(lage.satz).toBeLessThan(lage.karte);
+  });
+
+  test('6.5 — /en/staff hat neun Fragen im Schema, wie /personal', async ({ page }) => {
+    const zaehle = async (pfad) => {
+      await page.goto(pfad);
+      return page.evaluate(() => {
+        for (const s of document.querySelectorAll('script[type="application/ld+json"]')) {
+          const daten = JSON.parse(s.textContent);
+          const liste = Array.isArray(daten) ? daten : [daten];
+          for (const eintrag of liste) {
+            if (eintrag['@type'] === 'FAQPage') return eintrag.mainEntity.length;
+          }
+        }
+        return 0;
+      });
+    };
+    expect(await zaehle('/en/staff')).toBe(9);
+    expect(await zaehle('/personal')).toBe(9);
+  });
+
+  test('6.6 — /en/contact hat Pflichtfeld-Zeile und Sternchen', async ({ page }) => {
+    await page.goto('/en/contact');
+    const zeile = await page.textContent('.formular-pflicht');
+    expect(zeile.trim()).toBe('Fields marked * are the ones we need, everything else is optional.');
+    const labels = await page.$$eval('form label', (els) => els.map((el) => el.innerText.trim()));
+    const mitStern = labels.filter((l) => l.includes('*'));
+    expect(mitStern.length).toBe(3);
+  });
+
+  test('2.3 — beide Manager-Karten tragen den Schlusssatz', async ({ page }) => {
+    await page.goto('/koch-app');
+    let text = await page.evaluate(() => document.body.innerText);
+    expect(text).toContain('Sie sehen es im Monat, nicht erst im Jahresabschluss.');
+
+    await page.goto('/en/cook-app');
+    text = await page.evaluate(() => document.body.innerText);
+    expect(text).toContain('You see it during the month, not in the annual accounts.');
+  });
+});
