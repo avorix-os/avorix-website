@@ -1,6 +1,6 @@
 # Avorix
 
-> Avorix ist ein Küchensystem für Hotels und Gastronomie aus Friedrichshafen am Bodensee (Deutschland). Es verbindet drei Bausteine: die Avorix Koch-App (Schritt-für-Schritt-Rezeptführung, Menüplaner, Portionsrechner, Einkaufslisten, Kalkulation), Schulung durch erfahrene Köche mit mindestens Sous-Chef-Erfahrung sowie rechtssicheren Küchenpersonal-Verleih mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Zielgruppen sind Ferienhotels mit Halbpension, Restaurants und Gasthöfe mit fester Karte sowie Sporthotels in Deutschland und Österreich.
+> Avorix ist ein Küchensystem für Hotels und Gastronomie aus Friedrichshafen am Bodensee (Deutschland). Es verbindet drei Bausteine: die Avorix Koch-App (Schritt-für-Schritt-Rezeptführung, Menüplaner, Portionsrechner, Einkaufslisten, Kalkulation), Schulung durch erfahrene Köche mit mindestens Sous-Chef-Erfahrung sowie rechtssicheren Küchenpersonal-Verleih mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Zielgruppen sind Ferienhotels mit Halbpension, Restaurants und Gasthöfe mit fester Karte sowie Sporthotels in Deutschland und Österreich. An English section covers the same offering for kitchen managers in Germany and Austria who do not speak German.
 
 ## Seiten
 
@@ -14,6 +14,16 @@
 - [Für Restaurants und Gasthöfe](https://avorix.cloud/fuer-restaurants)
 - [Für Sporthotels](https://avorix.cloud/fuer-sporthotels)
 - [Über uns](https://avorix.cloud/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
+
+## English pages
+
+- [Staff](https://avorix.cloud/en/staff): Permanently employed chefs hired out to hotels and restaurants in Germany and Austria, under the official German staffing licence.
+- [The Cook App](https://avorix.cloud/en/cook-app): Step-by-step recipe guidance, menu planner, portion calculator, shopping lists and food cost analysis.
+- [The Training](https://avorix.cloud/en/training): An Avorix chef records your menu and trains your kitchen team at the stove, as a block or live during service.
+- [How It All Works Together](https://avorix.cloud/en/system): How the Avorix Cook App, the training and the staffing module work together as one kitchen system.
+- [Pilot Program](https://avorix.cloud/en/pilot-program): The 2026 Pilot Program, three hotel kitchens at around half the regular price, results evaluated anonymously.
+- [About Us](https://avorix.cloud/en/about): Founder Börge Penk, head chef with 20 years of practice.
+- [Contact](https://avorix.cloud/en/contact): Request a demo or ask about staff.
 
 ## Fakten
 

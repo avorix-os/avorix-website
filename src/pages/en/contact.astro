@@ -56,11 +56,12 @@ const schema = {
           </a>
         </div>
 
+        <p class="formular-pflicht">Fields marked * are the ones we need, everything else is optional.</p>
         <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
           <input type="hidden" name="_subject" value="Demo request via avorix.cloud" />
           <div>
             <label for="name" class="block text-sm font-medium mb-2" style="color:var(--druck)">
-              Name
+              Name *
             </label>
             <input
               type="text"
@@ -72,7 +73,7 @@ const schema = {
           </div>
           <div>
             <label for="email" class="block text-sm font-medium mb-2" style="color:var(--druck)">
-              Email
+              Email *
             </label>
             <input
               type="email"
@@ -84,7 +85,7 @@ const schema = {
           </div>
           <div>
             <label for="message" class="block text-sm font-medium mb-2" style="color:var(--druck)">
-              Message
+              Message *
             </label>
             <textarea
               id="message"
