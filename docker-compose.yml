@@ -17,9 +17,12 @@ services:
       - "traefik.http.routers.website-http.entrypoints=web"
       - "traefik.http.routers.website-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      # Anweisung 30, Schritt 7.8: dauerhaft heisst 301, nicht 302 (Traefik-Standard).
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
       # www -> non-www Redirect
       - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.avorix\\.cloud/(.*)"
       - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://avorix.cloud/$${1}"
+      - "traefik.http.middlewares.www-redirect.redirectregex.permanent=true"
 
 networks:
   traefik-proxy:

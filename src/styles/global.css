@@ -333,6 +333,19 @@ strong {
 *:focus:not(:focus-visible) {
   outline: none;
 }
+/* Anweisung 30, Schritt 7.4: nimmt Mobilgeraeten die Tipp-Verzoegerung, die
+   entsteht, weil der Browser auf einen moeglichen Doppeltipp zum Zoomen wartet. */
+a,
+button,
+summary,
+label,
+input,
+select,
+textarea,
+[role="button"] {
+  touch-action: manipulation;
+}
+
 *:focus-visible {
   outline: 3px solid var(--akzent);
   outline-offset: 2px;

@@ -215,15 +215,20 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
     box-shadow: var(--schatten);
     padding: 6px 0;
     opacity: 0;
+    /* Anweisung 30, Schritt 7.6: wie beim Mobil-Overlay -- das geschlossene
+       Dropdown blieb fokussierbar. */
+    visibility: hidden;
     transform: translateY(-4px);
     pointer-events: none;
-    transition: opacity 0.16s ease, transform 0.16s ease;
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0.16s;
     z-index: 10;
   }
   .nav-dropdown-menu.is-open {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0s linear 0s;
   }
   @media (prefers-reduced-motion: reduce) {
     .nav-dropdown-menu { transition: none; }
@@ -273,7 +278,9 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
     display: inline-flex;
     align-items: center;
     border-radius: var(--radius);
-    font-size: 14.5px;
+    /* Anweisung 30, Schritt 7.2: 14.5px war der einzige Wert ausserhalb
+       der Typo-Skala. 15px wie die Nav-Punkte. */
+    font-size: 15px;
     font-weight: 500;
     font-family: var(--f-head);
     text-decoration: none;
@@ -326,12 +333,20 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
     z-index: 49;
     overflow-y: auto;
     opacity: 0;
+    /* Anweisung 30, Schritt 7.6: opacity + pointer-events nehmen dem
+       geschlossenen Menue nur Sichtbarkeit und Maus, nicht den Fokus --
+       mit der Tab-Taste lief man durch 12 unsichtbare Links. visibility
+       nimmt es aus der Fokusfolge; die Verzoegerung laesst das Ausblenden
+       zu Ende laufen, bevor es verschwindet. */
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.2s ease;
+    transition: opacity 0.2s ease, visibility 0s linear 0.2s;
   }
   .nav-mobile-overlay.is-open {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.2s ease, visibility 0s linear 0s;
   }
   @media (prefers-reduced-motion: reduce) {
     .nav-mobile-overlay { transition: none; }
@@ -489,7 +504,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
 <header class="site-header">
   <div class="nav-inner">
     <a href={getLocalizedPath("/", lang)} class="nav-logo" aria-label="Avorix – Startseite">
-      <img src="/logo.png" alt="Avorix" />
+      <img src="/logo.png" alt="Avorix" width="1743" height="445" />
     </a>
 
     {lang === "de" ? (

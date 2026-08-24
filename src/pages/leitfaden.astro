@@ -92,6 +92,7 @@ const schema = {
                   type="text"
                   id="lead-name"
                   name="name"
+                  autocomplete="name"
                   required
                   placeholder="z. B. Maria Huber"
                   class="leitfaden-field w-full"
@@ -106,6 +107,7 @@ const schema = {
                   type="email"
                   id="lead-email"
                   name="email"
+                  autocomplete="email"
                   required
                   placeholder="ihre@email.at"
                   class="leitfaden-field w-full"
@@ -120,6 +122,7 @@ const schema = {
                   type="text"
                   id="lead-hotel"
                   name="betrieb"
+                  autocomplete="organization"
                   placeholder="z. B. Hotel Alpenhof"
                   class="leitfaden-field w-full"
                 />
@@ -164,7 +167,7 @@ const schema = {
             </a>
             <p class="text-xs mt-4" style="color:var(--grau)">
               Interesse an einer Demo?
-              <a href="/kontakt" class="btn-link" style="font-size:inherit">Demo vereinbaren &rarr;</a>
+              <a href="/kontakt" class="btn-link" style="font-size:inherit">App-Demo vereinbaren &rarr;</a>
             </p>
           </div>
         </div>
@@ -204,7 +207,7 @@ const schema = {
         data-cta-location="leitfaden"
         class="btn btn-primary"
       >
-        Demo vereinbaren
+        App-Demo vereinbaren
       </a>
       <p class="mt-6">
         <a href="/personal#anfrage" data-cta-location="leitfaden-zweitweg" data-cta-event="cta_personal_click" class="btn btn-secondary">Sie brauchen jetzt jemanden?</a>
