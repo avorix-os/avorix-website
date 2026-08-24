@@ -338,9 +338,16 @@ strong {
   outline-offset: 2px;
 }
 
-/* Scroll-Verhalten nur bei normaler Bewegungs-Präferenz */
+/* Scroll-Verhalten nur bei normaler Bewegungs-Präferenz.
+   Anweisung 30, Schritt 1: Die Regel sass auf blankem `html` und hat damit auch
+   den Anker-Sprung BEIM SEITENAUFRUF animiert. Diese Animation bricht der
+   Browser ab, sobald beim Laden Skripte oder Reflows dazwischenkommen -- der
+   Sprung auf /personal#anfrage endete bei 207px statt 5.723px.
+   `:focus-within` greift nur, wenn im Dokument etwas fokussiert ist, also beim
+   Klick auf einen Anker innerhalb der Seite. Beim Seitenaufruf ist nichts
+   fokussiert -> der Sprung erfolgt sofort und ungebremst. */
 @media (prefers-reduced-motion: no-preference) {
-  html {
+  html:focus-within {
     scroll-behavior: smooth;
   }
 }

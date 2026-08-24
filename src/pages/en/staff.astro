@@ -336,6 +336,30 @@ const schemaOrg = [
     </div>
   </section>
 
+  <!-- Beweis-Block (Anweisung 30, Schritt 3): englische Fassung der deutschen
+       Sektion "Aus dem laufenden Betrieb." auf /personal. Stelle wie dort --
+       nach "Your guests experience your kitchen. Not ours.". Der Hinweis auf die
+       Uebersetzung ist Pflicht, es ist eine echte Bewertung. -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">From day-to-day operations.</h2>
+      <ul class="beweis-liste mb-8">
+        <li>Over 1,000 placement days in our clients&rsquo; kitchens.</li>
+        <li>One catering company sources around 15,000 hours a year through us.</li>
+      </ul>
+      <figure class="card card-text beweis-zitat">
+        <blockquote>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            &ldquo;[&hellip;] I can highly recommend working with the Avorix team. Under the direction of head chef B&ouml;rge Penk, Avorix has supported us reliably and very professionally during peak loads, especially at busy trade fairs and larger congresses. The team fits into our routines very quickly, even with up to 20 cooks at once: well organised, calm under pressure, quality-conscious, with good timing and hygiene. [&hellip;]&rdquo;
+          </p>
+        </blockquote>
+        <figcaption class="text-sm mt-4" style="color:var(--grau)">
+          Kitchen director of a catering company, review from 25 February 2026. Translated from the German original.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
   <!-- FAQ -->
  <section class="reveal section-gap">
     <div class="content-width">
@@ -569,5 +593,30 @@ const schemaOrg = [
 }
 @media (prefers-reduced-motion: reduce) {
   .anfrage-field { transition: none; }
+}
+/* Beweis-Block (Anweisung 30, Schritt 3).
+   Wortgleich uebernommen aus /personal, damit die Zitat-Box hier genauso
+   zentriert und genauso breit steht wie in der deutschen Fassung. */
+.beweis-liste {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid var(--linie);
+  max-width: 62ch;
+}
+.beweis-liste li {
+  border-bottom: 1px solid var(--linie);
+  padding: 16px 0;
+  font-size: 17px;
+  color: var(--druck);
+}
+.beweis-zitat {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+.beweis-zitat blockquote {
+  margin: 0;
 }
 </style>

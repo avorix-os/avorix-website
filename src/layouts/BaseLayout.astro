@@ -150,5 +150,45 @@ if (SPRACHPAARE[pfad]) {
         document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
       })();
     </script>
+    <!-- Anker-Sprung beim Seitenaufruf (Anweisung 30, Schritt 1).
+         Zwei Dinge gingen schief, wenn man von aussen auf /personal#anfrage kam:
+         1. Der Sprung war durch scroll-behavior animiert und brach beim Laden ab.
+            Das ist in der CSS geloest (html:focus-within), hier steht die Absicherung.
+         2. Die Ziel-Sektion traegt .reveal und ist bis zum Beobachter-Treffer
+            unsichtbar -- man stuende an der richtigen Stelle vor einem leeren Bild.
+         Deshalb: Ziel einblenden, dann ohne Animation anspringen. Einmal sofort und
+         einmal nach 'load', weil nachladende Bilder das Layout noch verschieben.
+         Hat der Nutzer inzwischen selbst gescrollt, unterbleibt der zweite Sprung. -->
+    <script is:inline>
+      (function () {
+        if (!window.location.hash) return;
+        var id;
+        try { id = decodeURIComponent(window.location.hash.slice(1)); }
+        catch (e) { id = window.location.hash.slice(1); }
+        if (!id) return;
+
+        var selbstGescrollt = false;
+        ['wheel', 'touchstart', 'keydown'].forEach(function (ev) {
+          window.addEventListener(ev, function () { selbstGescrollt = true; },
+            { passive: true, once: true });
+        });
+
+        function sprung() {
+          var ziel = document.getElementById(id);
+          if (!ziel) return;
+          // Die Sektion sofort sichtbar machen -- scroll-margin-top sorgt
+          // dafuer, dass die Ueberschrift unter dem Header frei steht.
+          var sektion = ziel.closest ? ziel.closest('.reveal') : null;
+          if (sektion) sektion.classList.add('reveal-visible');
+          ziel.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }
+
+        sprung();
+        window.addEventListener('load', function () {
+          if (selbstGescrollt) return;
+          sprung();
+        });
+      })();
+    </script>
 </body>
 </html>
