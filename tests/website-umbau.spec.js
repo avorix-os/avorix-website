@@ -769,7 +769,12 @@ test.describe('T13: Korrektur 14 — Personal steht an zwei Stellen', () => {
         await page.setViewportSize({ width: breite, height: 900 });
         await page.goto(pagePath);
         const wahl = breite >= 900 ? '.nav-dropdown-menu .nav-dropdown-item' : '.mobile-section-link';
-        const eintraege = await page.$$eval(wahl, (els) => els.map((el) => el.innerText.trim()));
+        // Anweisung 30, Schritt 7.6: Das geschlossene Menue traegt jetzt
+        // visibility:hidden, damit die Tastatur nicht durch unsichtbare Links
+        // laeuft. Damit liefert innerText hier korrekt nichts mehr -- der Test
+        // liest aus einem GESCHLOSSENEN Menue. textContent prueft unveraendert
+        // dieselbe Zusage: fuenf Eintraege in dieser Reihenfolge.
+        const eintraege = await page.$$eval(wahl, (els) => els.map((el) => el.textContent.trim()));
         expect(eintraege.slice(0, 5)).toEqual(soll);
       });
     }
@@ -1018,5 +1023,39 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     await page.goto('/en/cook-app');
     text = await page.evaluate(() => document.body.innerText);
     expect(text).toContain('You see it during the month, not in the annual accounts.');
+  });
+});
+
+/**
+ * T15: Anweisung 30, Schritt 7.7 -- gehashte Assets duerfen dauerhaft cachen.
+ * Die Bilder gingen mit `no-cache, must-revalidate` raus, obwohl ihre Namen
+ * einen Inhalts-Hash tragen. Ursache: die Asset-Regel in nginx.conf kannte
+ * kein `webp`, und genau das liefert Astro aus.
+ * Wie bei T3 gilt: die scharfe Pruefung laeuft im Deploy-Gate gegen den
+ * ausliefernden nginx. Am Arbeitsplatz gibt es keinen.
+ */
+test.describe('T15: Anweisung 30 -- Cache-Kopf der gehashten Assets', () => {
+  test('ein Bild unter /_astro/ antwortet mit public, max-age=31536000, immutable', async ({ page, request }) => {
+    test.skip(!process.env.PW_BASE_URL,
+      'Ohne PW_BASE_URL laeuft der Astro-Vorschau-Server ohne nginx; geprueft wird im Deploy-Gate.');
+    await page.goto('/');
+    const bild = await page.evaluate(() =>
+      [...document.querySelectorAll('img')]
+        .map((i) => i.currentSrc || i.src)
+        .find((s) => s && s.includes('/_astro/')) || null);
+    expect(bild, 'kein Bild unter /_astro/ auf der Startseite gefunden').toBeTruthy();
+    const antwort = await request.get(bild);
+    expect(antwort.status()).toBe(200);
+    expect(antwort.headers()['cache-control']).toBe('public, max-age=31536000, immutable');
+  });
+
+  test('nginx.conf liefert /_astro/ dauerhaft cachebar aus', async () => {
+    const fs = await import('fs');
+    const conf = fs.readFileSync('nginx.conf', 'utf8');
+    expect(conf).toContain('location ^~ /_astro/');
+    expect(conf).toContain('public, max-age=31536000, immutable');
+    // webp und avif gehoeren auch in die allgemeine Asset-Regel -- sonst faellt
+    // Astros Bildformat ausserhalb von /_astro/ weiter in den no-cache-Zweig.
+    expect(conf).toContain('|svg|webp|avif|');
   });
 });
