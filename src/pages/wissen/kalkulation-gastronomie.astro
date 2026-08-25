@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Kalkulation in der Gastronomie: vom Einkaufspreis zum Verkaufspreis", "item": "https://avorix.cloud/wissen/kalkulation-gastronomie/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Kalkulation in der Gastronomie: vom Einkaufspreis zum Verkaufspreis",
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Welcher Aufschlagsfaktor ist richtig?", "acceptedAnswer": { "@type": "Answer", "text": "Als Startpunkt hat sich der Faktor 3 bis 4 auf die Warenkosten etabliert (auch Kalkulationsfaktor genannt). Der richtige Faktor für Ihr Haus hängt an Ihren Gemeinkosten und Ihrem Konzept; prüfen Sie ihn über den Deckungsbeitrag, nicht übers Bauchgefühl." } },
+      { "@type": "Question", "name": "Was ist der Unterschied zwischen Kalkulation und Wareneinsatzquote?", "acceptedAnswer": { "@type": "Answer", "text": "Die Kalkulation setzt den Preis eines einzelnen Gerichts, die Wareneinsatzquote kontrolliert hinterher den ganzen Betrieb. Beides gehört zusammen: Ohne Kalkulation je Gericht können Sie eine schlechte Quote nicht erklären." } },
+      { "@type": "Question", "name": "Muss jedes Gericht Gewinn machen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein, aber Sie sollten wissen, welches nicht. Ein bewusster Frequenzbringer ist Strategie, ein unbemerkter Verlustbringer ist ein Loch in der Kasse." } },
+      { "@type": "Question", "name": "Wie oft sollte ich nachkalkulieren?", "acceptedAnswer": { "@type": "Answer", "text": "Bei jeder Kartenänderung und zusätzlich, sobald sich wichtige Einkaufspreise spürbar bewegen. Wer Einstandspreise laufend pflegt, hat die Nachkalkulation nebenbei erledigt." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Kalkulation in der Gastronomie: Schritt für Schritt"
+  description="Speisen kalkulieren vom Einkaufspreis zum Verkaufspreis: Aufschlagsfaktor, Gemeinkosten, Deckungsbeitrag und Mischkalkulation. Mit Beispielrechnung."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Kalkulation in der Gastronomie: vom Einkaufspreis zum Verkaufspreis</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p id="direktantwort" class="lead max-w-[62ch]" style="color:var(--grau)">
+        Die Kalkulation in der Gastronomie beantwortet eine Frage: Was muss ein Gericht kosten, damit es Warenkosten, Gemeinkosten, Personal und Gewinn trägt? Der einfachste Einstieg ist die Aufschlagskalkulation: Warenkosten je Portion mal Faktor 3 bis 4 ergeben den Netto-Verkaufspreis. Genauer wird es mit dem Deckungsbeitrag.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum Kalkulation nach Gefühl teuer ist</h2>
+        <p>Die meisten Karten sind historisch gewachsen: Der Preis vom Vorgänger, plus ein Euro, weil alles teurer wurde. Das Problem daran ist nicht, dass diese Preise falsch sein müssen. Das Problem ist, dass niemand weiß, ob sie stimmen. Steigt der Einkaufspreis einer Zutat, wandert die Erhöhung unbemerkt in die Marge, und die Jahresauswertung zeigt Monate später ein Ergebnis, das sich niemand erklären kann. Kalkulieren heißt: pro Gericht wissen, was drinsteckt.</p>
+
+        <h2>Schritt 1: Warenkosten je Portion ermitteln</h2>
+        <p>Ohne Rezeptur keine Kalkulation. Für jedes Gericht brauchen Sie die Zutaten mit Mengen je Portion, bewertet zu Einstandspreisen. Ein fiktives Beispiel:</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Zutat</th><th>Menge je Portion</th><th>Einstandspreis</th><th>Kosten</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Hähnchenbrust</td><td>180 g</td><td>9,50 €/kg</td><td>1,71 €</td></tr>
+              <tr><td>Kartoffeln</td><td>250 g</td><td>1,20 €/kg</td><td>0,30 €</td></tr>
+              <tr><td>Gemüse, Butter, Kräuter</td><td></td><td></td><td>0,84 €</td></tr>
+              <tr><td>Öl, Gewürze, Garnitur (Pauschale)</td><td></td><td></td><td>0,35 €</td></tr>
+              <tr><td><strong>Warenkosten je Portion</strong></td><td></td><td></td><td><strong>3,20 €</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die kleine Pauschale am Ende ist wichtig: Öl, Gewürze und Garnituren summieren sich, und wer sie weglässt, kalkuliert jedes Gericht schön.</p>
+
+        <h2>Schritt 2: Die einfache Aufschlagskalkulation</h2>
+        <p>Die Daumenregel der Branche: Warenkosten mal Aufschlagsfaktor 3 bis 4 ergeben den Netto-Verkaufspreis. Im Beispiel: 3,20 € × 3,5 = <strong>11,20 € netto</strong>. Darauf kommt die Umsatzsteuer, dann wird auf einen glatten Kartenpreis gerundet.</p>
+        <p>Der Faktor ist kein Naturgesetz, sondern eine Abkürzung: Er unterstellt, dass rund zwei Drittel bis drei Viertel des Preises für alles außer Ware reichen müssen (Personal, Miete, Energie, Gewinn). Ob das in Ihrem Haus stimmt, weiß der Faktor nicht. Deshalb taugt er als erster Anhaltspunkt, nicht als Endergebnis.</p>
+
+        <h2>Schritt 3: Den Deckungsbeitrag ansehen, nicht nur die Quote</h2>
+        <p>Der Deckungsbeitrag ist der Betrag, den ein Gericht nach Abzug der Warenkosten zum Betriebsergebnis beisteuert: Netto-Verkaufspreis minus Warenkosten. Und er erzählt oft eine andere Geschichte als die Quote:</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th></th><th>Gericht A</th><th>Gericht B</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Netto-Verkaufspreis</td><td>11,20 €</td><td>21,00 €</td></tr>
+              <tr><td>Warenkosten</td><td>3,20 €</td><td>7,90 €</td></tr>
+              <tr><td>Wareneinsatzquote</td><td>28,6 %</td><td>37,6 %</td></tr>
+              <tr><td><strong>Deckungsbeitrag</strong></td><td><strong>8,00 €</strong></td><td><strong>13,10 €</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Nach Quote ist Gericht B das „schlechtere". Pro verkauftem Teller lässt es aber 5,10 € mehr im Haus. Wer nur auf Quoten schaut, streicht am Ende die Gerichte, die das Ergebnis tragen. Die gesunde Reihenfolge: erst Deckungsbeitrag je Gericht, dann die Quote als Gesamtkontrolle. Wie Sie die Gesamtquote berechnen, steht hier: <a href="/wissen/wareneinsatz-berechnen/" class="typo-link">Wareneinsatz berechnen: Formel, Rechner und Zielwerte</a></p>
+
+        <h2>Schritt 4: Mischkalkulation, die Karte als Ganzes</h2>
+        <p>Kein Gast bestellt eine Durchschnittskarte, aber Ihre Auswertung isst nichts anderes. In der Praxis gleichen sich Gerichte aus: Der Klassiker mit hoher Quote hält die Stammgäste, das margenstarke Gericht daneben verdient das Geld, und die Getränke stützen das Gesamtergebnis. Genau dafür brauchen Sie die Kalkulation je Gericht: Ausgleichen kann nur, wer weiß, wer wen ausgleicht.</p>
+
+        <h2>Die häufigsten Kalkulationsfehler</h2>
+        <ol>
+          <li><strong>Brutto und Netto gemischt:</strong> Kalkuliert wird netto, auf der Karte steht brutto. Wer die Umsatzsteuer vergisst, verschenkt sie.</li>
+          <li><strong>Rezeptur ohne Pauschalen:</strong> Öl, Gewürze, Garnitur und Bruch fehlen, jede Portion ist teurer als gerechnet.</li>
+          <li><strong>Einstandspreise veraltet:</strong> Lieferantenpreise ändern sich, die Kalkulation von Januar stimmt im August nicht mehr.</li>
+          <li><strong>Keine Nachkalkulation:</strong> Einmal rechnen reicht nicht. Preisänderungen im Einkauf müssen regelmäßig gegen die Karte laufen.</li>
+          <li><strong>Nur Quote, kein Deckungsbeitrag:</strong> Siehe oben, das teuerste Missverständnis der Speisekarte.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Welcher Aufschlagsfaktor ist richtig?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Als Startpunkt hat sich der Faktor 3 bis 4 auf die Warenkosten etabliert (auch Kalkulationsfaktor genannt). Der richtige Faktor für Ihr Haus hängt an Ihren Gemeinkosten und Ihrem Konzept; prüfen Sie ihn über den Deckungsbeitrag, nicht übers Bauchgefühl.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist der Unterschied zwischen Kalkulation und Wareneinsatzquote?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Die Kalkulation setzt den Preis eines einzelnen Gerichts, die Wareneinsatzquote kontrolliert hinterher den ganzen Betrieb. Beides gehört zusammen: Ohne Kalkulation je Gericht können Sie eine schlechte Quote nicht erklären.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Muss jedes Gericht Gewinn machen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein, aber Sie sollten wissen, welches nicht. Ein bewusster Frequenzbringer ist Strategie, ein unbemerkter Verlustbringer ist ein Loch in der Kasse.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie oft sollte ich nachkalkulieren?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei jeder Kartenänderung und zusätzlich, sobald sich wichtige Einkaufspreise spürbar bewegen. Wer Einstandspreise laufend pflegt, hat die Nachkalkulation nebenbei erledigt.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">
+        Wenn Rezepturen, Einstandspreise und Portionsmengen in einem System liegen, rechnet sich der Verkaufspreis je Portion, statt geschätzt zu werden. Genau das macht die <a href="/koch-app/" class="typo-link">Avorix Koch-App</a>.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/koch-app/" data-cta-location="wissen-kalkulation-ende" class="btn btn-primary">Koch-App ansehen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
