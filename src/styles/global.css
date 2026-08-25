@@ -1070,3 +1070,80 @@ h2 {
   margin-top: 24px;
   justify-content: center;
 }
+
+/* === Wissen-Bereich (SEO-Paket Phase 1) ===================================
+   Geteilte Optik fuer die Ratgeber-Artikel: Prosa-Spalte, Tabellen im
+   Bestand-Stil, Datums- und Rechtshinweis-Zeile. Nutzt ausschliesslich die
+   bestehenden Farb- und Schrift-Tokens, keine neuen Werte. */
+
+/* Datumszeile "Aktualisiert am" unter der H1 */
+.artikel-datum {
+  font-family: var(--f-mono);
+  font-size: 13px;
+  color: var(--grau);
+}
+
+/* Prosa-Spalte: Rhythmus fuer Absaetze, Listen und Zwischenueberschriften */
+.artikel-prosa { max-width: 68ch; }
+.artikel-prosa > p {
+  color: var(--grau);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  max-width: 62ch;
+}
+.artikel-prosa h2 { color: var(--druck); margin-top: 40px; }
+.artikel-prosa h2:first-child { margin-top: 0; }
+.artikel-prosa ul,
+.artikel-prosa ol {
+  color: var(--grau);
+  line-height: 1.7;
+  margin: 0 0 20px 0;
+  padding-left: 24px;
+  max-width: 62ch;
+}
+.artikel-prosa ul { list-style: disc; }
+.artikel-prosa ol { list-style: decimal; }
+.artikel-prosa li { margin-bottom: 10px; padding-left: 4px; }
+.artikel-prosa li::marker { color: var(--grau); }
+
+/* Rechtshinweis-Zeile am Ende der Rechtsartikel */
+.artikel-rechtshinweis {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--grau);
+  max-width: 62ch;
+  margin-top: 32px;
+}
+
+/* Tabellen im Bestand-Stil. Der Wrapper scrollt auf schmalen Schirmen in
+   sich (Pflicht-Test T13/R-mobil), nie die ganze Seite. */
+.tabelle-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 24px 0;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+}
+.tabelle-scroll table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.tabelle-scroll th,
+.tabelle-scroll td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--linie);
+}
+.tabelle-scroll thead th {
+  color: var(--druck);
+  font-weight: 700;
+  background: var(--papier);
+  border-bottom: 2px solid var(--linie);
+}
+.tabelle-scroll tbody td { color: var(--grau); }
+.tabelle-scroll tbody tr:last-child td { border-bottom: none; }
+.tabelle-scroll td:first-child { color: var(--druck); font-weight: 600; }

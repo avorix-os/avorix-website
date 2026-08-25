@@ -15,6 +15,14 @@
 - [Für Sporthotels](https://avorix.cloud/fuer-sporthotels)
 - [Über uns](https://avorix.cloud/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
 
+## Wissen
+
+- [Wissen für Küche und Gastgewerbe](https://avorix.cloud/wissen): Praxiswissen aus der Küche: Personal-Engpässe lösen, Fremdpersonal rechtssicher einsetzen, Wareneinsatz und Kalkulation im Griff.
+- [Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage](https://avorix.cloud/wissen/kuechenchef-kuendigt-notfallplan): Was Sie sofort tun können, damit der Betrieb weiterläuft. Schritt für Schritt.
+- [Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt](https://avorix.cloud/wissen/mietkoch-scheinselbstaendigkeit): Woran Prüfer eine Scheinselbständigkeit erkennen, was Nachzahlungen kosten und wie Sie sich als Betrieb absichern.
+- [Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt](https://avorix.cloud/wissen/arbeitnehmerueberlassung-gastronomie): AÜ-Erlaubnis, Equal Pay, Höchstüberlassungsdauer: wie der geregelte Weg zum Leihkoch funktioniert.
+- [Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler](https://avorix.cloud/wissen/wareneinsatz-berechnen): Mit Rechner: Wareneinsatz und Quote in zwei Minuten ermitteln.
+
 ## English pages
 
 - [Staff](https://avorix.cloud/en/staff): Permanently employed chefs hired out to hotels and restaurants in Germany and Austria, under the official German staffing licence.

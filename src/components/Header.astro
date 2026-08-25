@@ -319,8 +319,11 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
     justify-content: center;
   }
 
-  /* Ab 900 die Desktop-Navigation, darunter der Burger. */
-  @media (min-width: 900px) {
+  /* SEO-Paket Phase 1: Grenze von 900 auf 1040 angehoben. Mit dem vierten
+     Nav-Punkt "Wissen" braucht die volle DE-Leiste (vier Punkte + zwei CTAs +
+     Sprachumschalter) bei unveraendertem 32px-Abstand rund 1027px; erst ab 1040
+     passt sie sicher. Darunter traegt der Burger, in dem "Wissen" gelistet ist. */
+  @media (min-width: 1040px) {
     .nav-desktop { display: flex; }
     .nav-burger { display: none; }
   }
@@ -351,7 +354,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
   @media (prefers-reduced-motion: reduce) {
     .nav-mobile-overlay { transition: none; }
   }
-  @media (min-width: 900px) {
+  @media (min-width: 1040px) {
     .nav-mobile-overlay { display: none !important; }
   }
 
@@ -540,6 +543,8 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
             </div>
           </div>
 
+          <a href="/wissen/" class="nav-link" aria-current={isCurrent("/wissen") ? "page" : undefined}>Wissen</a>
+
           <a href="/ueber-uns" class="nav-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
         </div>
 
@@ -666,6 +671,8 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
             </div>
           </div>
         </div>
+
+        <a href="/wissen/" class="nav-mobile-link" aria-current={isCurrent("/wissen") ? "page" : undefined}>Wissen</a>
 
         <a href="/ueber-uns" class="nav-mobile-link" aria-current={isCurrent("/ueber-uns") ? "page" : undefined}>Über uns</a>
 

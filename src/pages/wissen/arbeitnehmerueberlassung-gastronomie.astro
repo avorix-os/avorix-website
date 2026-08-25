@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt", "item": "https://avorix.cloud/wissen/arbeitnehmerueberlassung-gastronomie/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt",
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Ist Arbeitnehmerüberlassung nicht Zeitarbeit? Das klingt nach Fließband.", "acceptedAnswer": { "@type": "Answer", "text": "Rechtlich ist es dasselbe Modell. In der Küche heißt es meist Leihkoch oder Mietkoch. Entscheidend ist nicht das Wort, sondern ob der Anbieter eine Erlaubnis hat und wen er schickt." } },
+      { "@type": "Question", "name": "Wer haftet, wenn der Koch krank wird?", "acceptedAnswer": { "@type": "Answer", "text": "Der Verleiher bleibt Arbeitgeber, zahlt die Entgeltfortzahlung und kümmert sich um Ersatz. Das Ausfallrisiko liegt nicht bei Ihnen." } },
+      { "@type": "Question", "name": "Wie lange darf derselbe Koch bei uns bleiben?", "acceptedAnswer": { "@type": "Answer", "text": "Grundsätzlich bis zu 18 aufeinanderfolgende Monate. Nach einer Unterbrechung von mehr als drei Monaten beginnt die Zählung von vorn. Ein guter Verleiher behält diese Frist für Sie im Blick." } },
+      { "@type": "Question", "name": "Was bedeutet Equal Pay für meinen Betrieb?", "acceptedAnswer": { "@type": "Answer", "text": "Spätestens nach neun Monaten ununterbrochenen Einsatzes muss der Leihkoch wie eine vergleichbare eigene Kraft bezahlt werden. Das organisiert der Verleiher, es kann sich aber im Verrechnungssatz bemerkbar machen. Bei Einsätzen für Notfall, Saison und Übergang spielt die Grenze selten eine Rolle." } },
+      { "@type": "Question", "name": "Geht das auch in Österreich?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, mit den dort geltenden Melde- und Anzeigepflichten: Grenzüberschreitende Überlassungen werden vor Arbeitsbeginn den österreichischen Behörden gemeldet, kontrolliert wird durch die Finanzpolizei. Wir arbeiten in Deutschland und Österreich, in die Schweiz verleihen wir nicht." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Arbeitnehmerüberlassung in der Gastronomie erklärt"
+  description="Wie der Leihkoch per Arbeitnehmerüberlassung funktioniert: AÜ-Erlaubnis, Equal Pay, Höchstüberlassungsdauer, Kosten und Anbieterwahl. Einfach erklärt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p id="direktantwort" class="lead max-w-[62ch]" style="color:var(--grau)">
+        Arbeitnehmerüberlassung heißt: Ein Koch ist bei einem Personaldienstleister fest angestellt und arbeitet auf Zeit in Ihrem Betrieb. Sie führen ihn im Alltag wie Ihr eigenes Teammitglied, der Dienstleister bleibt Arbeitgeber und trägt Lohn, Sozialversicherung und Ausfallrisiko. Erlaubt ist das nur mit einer behördlichen Arbeitnehmerüberlassungserlaubnis der Bundesagentur für Arbeit.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Wie funktioniert das Dreiecksverhältnis?</h2>
+        <p>Drei Parteien, klare Rollen, geregelt im Arbeitnehmerüberlassungsgesetz (<a href="https://www.gesetze-im-internet.de/a_g/__1.html" target="_blank" rel="noopener" class="typo-link">§ 1 AÜG</a>):</p>
+        <ul>
+          <li><strong>Der Verleiher</strong> (der Personaldienstleister) ist der Arbeitgeber. Er stellt den Koch fest an, zahlt Lohn und Sozialabgaben und bleibt auch bei Krankheit oder zwischen zwei Einsätzen in der Pflicht.</li>
+          <li><strong>Der Entleiher</strong> (Ihr Betrieb) setzt den Koch bei sich ein. Sie integrieren ihn in Ihre Abläufe und erteilen arbeitsbezogene Weisungen: was gekocht wird, wann, an welchem Posten. Genau diese Eingliederung samt Weisungsrecht ist bei der Arbeitnehmerüberlassung gesetzlich vorausgesetzt.</li>
+          <li><strong>Der Koch</strong> arbeitet bei Ihnen in der Küche, angestellt und sozialversichert beim Verleiher.</li>
+        </ul>
+        <p>Der Unterschied zum selbständigen Mietkoch auf Rechnung liegt genau in diesem Punkt: Beim Selbständigen ist Ihre Weisung ein Problem, bei der Arbeitnehmerüberlassung ist sie der vorgesehene Normalfall. Warum das rechtlich so einen Unterschied macht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+
+        <h2>Die wichtigsten AÜG-Regeln im Überblick</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Regel</th><th>Was sie bedeutet</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Erlaubnispflicht</td><td>Verleihen darf nur, wer eine Erlaubnis der Bundesagentur für Arbeit hat. Sie wird in den ersten drei Jahren jährlich geprüft und verlängert, danach kann sie unbefristet erteilt werden.</td></tr>
+              <tr><td>Offenlegung</td><td>Der Vertrag zwischen Verleiher und Betrieb muss die Überlassung ausdrücklich als Arbeitnehmerüberlassung bezeichnen und die überlassene Person benennen. Versteckte Konstruktionen über Schein-Werkverträge sind unzulässig.</td></tr>
+              <tr><td>Höchstüberlassungsdauer</td><td>Derselbe Koch darf grundsätzlich höchstens 18 aufeinanderfolgende Monate am Stück in demselben Betrieb eingesetzt werden. Eine Unterbrechung von mehr als drei Monaten setzt die Zählung zurück.</td></tr>
+              <tr><td>Equal Pay</td><td>Spätestens nach neun Monaten ununterbrochenen Einsatzes hat der Leihkoch Anspruch auf das Entgelt vergleichbarer eigener Mitarbeiter.</td></tr>
+              <tr><td>Verleihfreie Zeiten</td><td>Lohn und Entgeltfortzahlung bei Krankheit trägt der Verleiher, auch zwischen zwei Einsätzen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Für Sie als Betrieb heißt das: Ein seriöser Verleiher organisiert diese Pflichten für Sie mit, vom korrekten Vertrag bis zur Fristenkontrolle.</p>
+
+        <h2>Was passiert bei Verleih ohne Erlaubnis?</h2>
+        <p>Verleih ohne Erlaubnis ist kein Kavaliersdelikt, und die Folgen treffen ausdrücklich beide Seiten (<a href="https://www.gesetze-im-internet.de/a_g/__9.html" target="_blank" rel="noopener" class="typo-link">§ 9</a>, <a href="https://www.gesetze-im-internet.de/a_g/__10.html" target="_blank" rel="noopener" class="typo-link">§ 10 AÜG</a>):</p>
+        <ul>
+          <li>Arbeitsvertrag und Überlassungsvertrag sind unwirksam. Stattdessen entsteht kraft Gesetzes ein Arbeitsverhältnis zwischen dem Koch und Ihrem Betrieb, ob Sie das wollen oder nicht.</li>
+          <li>Beiden Seiten drohen Bußgelder bis 30.000 Euro, dem Betrieb zusätzlich die Haftung für Sozialversicherungsbeiträge.</li>
+          <li>Dieselben Folgen drohen, wenn eine Überlassung als Werk- oder Dienstvertrag getarnt wird.</li>
+        </ul>
+        <p>Deshalb ist die Erlaubnis keine Formalie, sondern Ihr erstes Prüfkriterium. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz.</p>
+
+        <h2>Was kostet ein Leihkoch?</h2>
+        <p>Selbständige Mietköche rufen am Markt häufig 60 bis 100 Euro pro Stunde auf. Bei der Arbeitnehmerüberlassung zahlen Sie einen Stundenverrechnungssatz an den Verleiher. Darin stecken der Lohn des Kochs, sämtliche Sozialabgaben, Entgeltfortzahlung bei Krankheit und Urlaub sowie das Risiko verleihfreier Zeiten, also alles, was bei einer eigenen Anstellung sonst auf Sie entfiele. Ein direkter Stundensatz-Vergleich mit einer Rechnung ohne Sozialabgaben führt deshalb in die Irre: Dort fehlt genau das, was im Prüffall teuer nachgefordert wird.</p>
+        <p>Unsere Konditionen besprechen wir im Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+
+        <h2>Wann lohnt sich Arbeitnehmerüberlassung in der Küche?</h2>
+        <ul>
+          <li><strong>Im Notfall:</strong> Der Koch fällt aus, das Wochenende ist ausgebucht. Ein Leihkoch überbrückt, bis Ruhe einkehrt.</li>
+          <li><strong>In der Saison:</strong> Planbare Spitzen, ohne das Stammteam dauerhaft zu vergrößern.</li>
+          <li><strong>Im Übergang:</strong> Die Stelle ist unbesetzt, die Suche läuft. Die Überlassung trägt, bis die richtige Person gefunden ist, nicht die erstbeste.</li>
+        </ul>
+        <p>Für eine dauerhaft unbesetzte Stelle ist die Überlassung dagegen keine Dauerlösung, allein schon wegen der 18-Monats-Grenze. Dann ist sie die Brücke zur Festanstellung, nicht ihr Ersatz.</p>
+        <p>Für Veranstaltungs-Spitzen im Catering und für Betriebsrestaurants gibt es eigene Seiten: <a href="/fuer-catering/" class="typo-link">Für Catering</a> und <a href="/fuer-kantinen/" class="typo-link">Für Kantinen</a>.</p>
+
+        <h2>Worauf Sie beim Anbieter achten sollten</h2>
+        <ul>
+          <li><strong>Erlaubnis zeigen lassen.</strong> Ohne Arbeitnehmerüberlassungserlaubnis keine Zusammenarbeit.</li>
+          <li><strong>Vertrag prüfen.</strong> Er muss die Arbeitnehmerüberlassung ausdrücklich benennen. Wer Ihnen einen „Dienstleistungsvertrag" für einen Koch in Ihrer Küche anbietet, verschiebt das Risiko zu Ihnen.</li>
+          <li><strong>Festanstellung erfragen.</strong> Sind die Köche beim Anbieter angestellt und sozialversichert oder vermittelt er nur Selbständige weiter?</li>
+          <li><strong>Küchenerfahrung prüfen.</strong> Ein Koch, der Ihr Niveau halten soll, braucht Berufsjahre am Herd, nicht nur einen Lebenslauf.</li>
+          <li><strong>Erreichbarkeit und Vorlauf klären.</strong> Wie schnell steht im Ernstfall jemand bei Ihnen in der Küche, und wen erreichen Sie, wenn etwas klemmt?</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Ist Arbeitnehmerüberlassung nicht Zeitarbeit? Das klingt nach Fließband.<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Rechtlich ist es dasselbe Modell. In der Küche heißt es meist Leihkoch oder Mietkoch. Entscheidend ist nicht das Wort, sondern ob der Anbieter eine Erlaubnis hat und wen er schickt.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wer haftet, wenn der Koch krank wird?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Der Verleiher bleibt Arbeitgeber, zahlt die Entgeltfortzahlung und kümmert sich um Ersatz. Das Ausfallrisiko liegt nicht bei Ihnen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie lange darf derselbe Koch bei uns bleiben?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Grundsätzlich bis zu 18 aufeinanderfolgende Monate. Nach einer Unterbrechung von mehr als drei Monaten beginnt die Zählung von vorn. Ein guter Verleiher behält diese Frist für Sie im Blick.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was bedeutet Equal Pay für meinen Betrieb?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Spätestens nach neun Monaten ununterbrochenen Einsatzes muss der Leihkoch wie eine vergleichbare eigene Kraft bezahlt werden. Das organisiert der Verleiher, es kann sich aber im Verrechnungssatz bemerkbar machen. Bei Einsätzen für Notfall, Saison und Übergang spielt die Grenze selten eine Rolle.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Geht das auch in Österreich?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, mit den dort geltenden Melde- und Anzeigepflichten: Grenzüberschreitende Überlassungen werden vor Arbeitsbeginn den österreichischen Behörden gemeldet, kontrolliert wird durch die Finanzpolizei. Wir arbeiten in Deutschland und Österreich, in die Schweiz verleihen wir nicht.</p></div></div>
+        </details>
+      </div>
+      <p class="artikel-rechtshinweis">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechtsberatung. Wie Ihr Einzelfall zu bewerten ist, klären Sie mit Ihrer Steuer- oder Rechtsberatung.</p>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">
+        Avorix verleiht festangestellte Köche mit behördlicher Arbeitnehmerüberlassungserlaubnis.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal/" data-cta-location="wissen-aue-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

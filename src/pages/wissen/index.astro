@@ -1,0 +1,115 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" }
+    ]
+  }
+];
+
+const artikel = [
+  {
+    rubrik: "Wenn gerade jemand fehlt",
+    karten: [
+      {
+        titel: "Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage",
+        text: "Was Sie sofort tun können, damit der Betrieb weiterläuft. Schritt für Schritt.",
+        href: "/wissen/kuechenchef-kuendigt-notfallplan/"
+      }
+    ]
+  },
+  {
+    rubrik: "Fremdpersonal rechtssicher einsetzen",
+    karten: [
+      {
+        titel: "Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt",
+        text: "Woran Prüfer eine Scheinselbständigkeit erkennen, was Nachzahlungen kosten und wie Sie sich als Betrieb absichern.",
+        href: "/wissen/mietkoch-scheinselbstaendigkeit/"
+      },
+      {
+        titel: "Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt",
+        text: "AÜ-Erlaubnis, Equal Pay, Höchstüberlassungsdauer: wie der geregelte Weg zum Leihkoch funktioniert.",
+        href: "/wissen/arbeitnehmerueberlassung-gastronomie/"
+      }
+    ]
+  },
+  {
+    rubrik: "Küche rechnen und organisieren",
+    karten: [
+      {
+        titel: "Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler",
+        text: "Mit Rechner: Wareneinsatz und Quote in zwei Minuten ermitteln.",
+        href: "/wissen/wareneinsatz-berechnen/"
+      }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Wissen für Küche und Gastgewerbe"
+  description="Praxiswissen aus der Küche: Personal-Engpässe lösen, Fremdpersonal rechtssicher einsetzen, Wareneinsatz und Kalkulation im Griff."
+  schemaOrg={schema}
+>
+  <!-- Hub-Intro -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4">Wissen</p>
+      <h1 class="mb-6">Wissen für Küche und Gastgewerbe</h1>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        Praxiswissen ohne Umwege: geschrieben von Leuten, die selbst am Herd gestanden haben. Drei Themen, die in fast jedem Betrieb irgendwann auf dem Tisch liegen.
+      </p>
+    </div>
+  </section>
+
+  <!-- Rubriken -->
+  {artikel.map((gruppe) => (
+   <section class="reveal section-gap">
+      <div class="content-width">
+        <h2 class="mb-6" style="color:var(--druck)">{gruppe.rubrik}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {gruppe.karten.map((karte) => (
+            <a href={karte.href} class="card wissen-karte">
+              <h3 class="mb-4">{karte.titel}</h3>
+              <p class="text-sm" style="color:var(--grau)">{karte.text}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Abschluss (Stempel-Baustein) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Eine Frage, die hier fehlt? Fragen Sie uns direkt.</p>
+      <a href="/kontakt/" data-cta-location="wissen-hub-ende" class="btn btn-primary">Erstgespräch vereinbaren</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wissen-karte {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .wissen-karte h3 { color: var(--druck); }
+  .wissen-karte:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--schatten);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wissen-karte { transition: none; }
+    .wissen-karte:hover { transform: none; }
+  }
+</style>

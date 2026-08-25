@@ -1,0 +1,172 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage", "item": "https://avorix.cloud/wissen/kuechenchef-kuendigt-notfallplan/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage",
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie schnell bekomme ich einen Koch von Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel innerhalb von 24 bis 72 Stunden. Im Notfall rufen Sie am besten direkt an: 07541 3973915 (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)." } },
+      { "@type": "Question", "name": "Lohnt sich ein Leihkoch für nur zwei oder drei Wochen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, es gibt keine Mindest-Einsatzdauer. Viele Einsätze überbrücken genau solche Lücken." } },
+      { "@type": "Question", "name": "Was, wenn der neue Küchenchef das Niveau nicht halten kann?", "acceptedAnswer": { "@type": "Answer", "text": "Dann fehlt meist nicht Talent, sondern Dokumentation. Wenn Rezepte, Mengen und Standards festgehalten sind, kann ein guter Koch das Niveau des Hauses kochen, statt sein eigenes erfinden zu müssen." } },
+      { "@type": "Question", "name": "Der Koch fällt kurzfristig aus, gilt der Plan auch dann?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, in verkürzter Form: Karte verkleinern, Verantwortung benennen, Lücke besetzen. Die Phase Wissen sichern entfällt, wenn niemand geht, sondern jemand krank ist." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Küchenchef kündigt: Notfallplan für 14 Tage"
+  description="Schritt für Schritt durch die ersten zwei Wochen: Karte sichern, Wissen retten, Verstärkung organisieren. Ein Notfallplan aus der Küchenpraxis."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p id="direktantwort" class="lead max-w-[62ch]" style="color:var(--grau)">
+        Ihre Küche steht und fällt mit einer einzigen Person. Wenn diese Person kündigt, entscheiden die ersten 14 Tage darüber, ob Gäste und Team etwas davon merken. Der Plan in Kurzform: erst die Karte sichern, dann das Wissen sichern, dann die Lücke besetzen. In dieser Reihenfolge.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Tag 1 bis 3: Die Karte sichern</h2>
+        <p>Widerstehen Sie dem Reflex, sofort eine Stellenanzeige zu schreiben. Zuerst muss der laufende Betrieb stehen:</p>
+        <ul>
+          <li><strong>Karte verkleinern.</strong> Streichen Sie alles, was nur der Küchenchef sicher kann. Eine kleine Karte, die jeden Abend gelingt, schützt Ihren Ruf besser als eine große, die wackelt.</li>
+          <li><strong>Verantwortung benennen.</strong> Wer führt ab sofort den Pass, wer bestellt, wer macht die Dienstpläne? Ein Name pro Aufgabe, sichtbar für alle.</li>
+          <li><strong>Team informieren, bevor es der Flurfunk tut.</strong> Kurz, ehrlich, mit Plan. Unsicherheit im Team kostet mehr als die Kündigung selbst.</li>
+        </ul>
+
+        <h2>Tag 3 bis 7: Das Wissen sichern</h2>
+        <p>Das Teuerste an einer Kündigung ist selten die fehlende Arbeitskraft. Es ist das Wissen, das mitgeht: Rezepturen, Mengen, Lieferanten, Handgriffe. Solange die Person noch da ist, gilt: aufschreiben, aufschreiben, aufschreiben.</p>
+        <ul>
+          <li>Die 20 wichtigsten Gerichte mit Zutaten, Mengen und Zubereitungsschritten dokumentieren, so, dass jemand anderes danach kochen kann.</li>
+          <li>Lieferanten, Bestellrhythmen und Konditionen festhalten.</li>
+          <li>Wenn es schnell gehen muss: erst die Verkaufsschlager, dann der Rest.</li>
+        </ul>
+        <p>Betriebe, die ihre Gerichte dauerhaft dokumentiert haben, trifft eine Kündigung deutlich weniger hart. Genau dafür haben wir die <a href="/koch-app/" class="typo-link">Avorix Koch-App</a> gebaut: Rezepte hängen am Posten, nicht am Kopf einer einzelnen Person.</p>
+
+        <h2>Tag 7 bis 14: Die Lücke besetzen</h2>
+        <p>Eine gute Neubesetzung braucht Monate, Ihr Betrieb hat Tage. So unterscheiden sich die Wege für die Zwischenzeit:</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Übergangslösung</th><th>Verfügbarkeit</th><th>Das Risiko</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Selbständiger Mietkoch auf Rechnung</td>
+                <td>oft kurzfristig</td>
+                <td>Rechtlich heikel, sobald er weisungsgebunden in Ihrer Küche mitarbeitet: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Scheinselbständigkeit</a> mit Nachzahlungsrisiko für Ihren Betrieb</td>
+              </tr>
+              <tr>
+                <td>Leihkoch per Arbeitnehmerüberlassung</td>
+                <td>in der Regel innerhalb von 24 bis 72 Stunden</td>
+                <td>Beim Verleiher fest angestellt und sozialversichert, Sie dürfen ganz normal anweisen. Auf die <a href="/wissen/arbeitnehmerueberlassung-gastronomie/" class="typo-link">AÜ-Erlaubnis</a> achten</td>
+              </tr>
+              <tr>
+                <td>Schnelle Festanstellung der erstbesten Person</td>
+                <td>Wochen bis Monate</td>
+                <td>Eine Fehlbesetzung auf der wichtigsten Position kostet mehr als jede Übergangslösung</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Rechnen Sie in Wochen, nicht in Tagen: Die Übergangslösung muss so lange tragen, bis die richtige Person gefunden ist.</p>
+
+        <h2>Und danach: dafür sorgen, dass es nie wieder so weit kommt</h2>
+        <p>Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da, wenn Ihre Rezepte, Mengen und Abläufe dokumentiert sind und jeder danach arbeiten kann.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie schnell bekomme ich einen Koch von Avorix?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel innerhalb von 24 bis 72 Stunden. Im Notfall rufen Sie am besten direkt an: 07541 3973915 (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band).</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Lohnt sich ein Leihkoch für nur zwei oder drei Wochen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, es gibt keine Mindest-Einsatzdauer. Viele Einsätze überbrücken genau solche Lücken.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was, wenn der neue Küchenchef das Niveau nicht halten kann?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Dann fehlt meist nicht Talent, sondern Dokumentation. Wenn Rezepte, Mengen und Standards festgehalten sind, kann ein guter Koch das Niveau des Hauses kochen, statt sein eigenes erfinden zu müssen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Der Koch fällt kurzfristig aus, gilt der Plan auch dann?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, in verkürzter Form: Karte verkleinern, Verantwortung benennen, Lücke besetzen. Die Phase Wissen sichern entfällt, wenn niemand geht, sondern jemand krank ist.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">
+        Es fehlt jemand, und zwar jetzt? Rufen Sie an: <a href="tel:+4975413973915" data-cta-location="wissen-notfallplan-ende" data-cta-event="personal_anruf_click" class="typo-link">07541 3973915</a> (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band).
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal/" data-cta-location="wissen-notfallplan-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

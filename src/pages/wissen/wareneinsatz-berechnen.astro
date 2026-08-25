@@ -1,0 +1,398 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler", "item": "https://avorix.cloud/wissen/wareneinsatz-berechnen/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler",
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie hoch sollte der Wareneinsatz in der Gastronomie sein?", "acceptedAnswer": { "@type": "Answer", "text": "Als grobe Orientierung liegen viele Restaurantküchen zwischen 25 und 35 Prozent vom Nettoumsatz, Getränke deutlich darunter. Entscheidend ist Ihr Konzept: Wichtiger als jeder Branchenwert ist eine stabile eigene Quote, die nicht schleichend steigt." } },
+      { "@type": "Question", "name": "Was ist der Unterschied zwischen Wareneinsatz und Food Cost?", "acceptedAnswer": { "@type": "Answer", "text": "Es ist dasselbe: Food Cost (Percentage) ist der englische Begriff für den Wareneinsatz beziehungsweise die Wareneinsatzquote." } },
+      { "@type": "Question", "name": "Was ist der Unterschied zwischen Wareneinsatz und Wareneinkauf?", "acceptedAnswer": { "@type": "Answer", "text": "Der Einkauf ist, was geliefert wurde. Der Einsatz ist, was verbraucht wurde. Die Differenz liegt im Lager, deshalb braucht die Berechnung Anfangs- und Endbestand aus der Inventur." } },
+      { "@type": "Question", "name": "Zählt Mitarbeiterverpflegung zum Wareneinsatz?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, zunächst schon: Sie steckt im Warenverbrauch. Wer es genau wissen will, zieht sie als eigene Position ab. Dann zeigt die Quote nur noch, was wirklich an den Gast geht." } },
+      { "@type": "Question", "name": "Wo steht der Wareneinsatz in der BWA oder GuV?", "acceptedAnswer": { "@type": "Answer", "text": "Im Materialaufwand beziehungsweise Wareneinsatz-Posten. Für die Betriebssteuerung reicht das nicht: Die Auswertung kommt Wochen später und kennt weder Ihre Karte noch Ihre Portionen. Steuern können Sie nur mit eigenen, monatlichen Zahlen." } },
+      { "@type": "Question", "name": "Wie oft sollte ich den Wareneinsatz berechnen?", "acceptedAnswer": { "@type": "Answer", "text": "Monatlich mit Inventur, bei hohem Frischeanteil die kritischen Warengruppen zusätzlich wöchentlich." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Wareneinsatz berechnen: Formel, Rechner & Zielwerte"
+  description="Wareneinsatz und Wareneinsatzquote in zwei Minuten berechnen: Formel, kostenloser Rechner, Zielwerte nach Betriebstyp und die häufigsten Fehler."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p id="direktantwort" class="lead max-w-[62ch]" style="color:var(--grau)">
+        Der Wareneinsatz ist der Wert der Waren, die Sie in einem Zeitraum tatsächlich verbraucht haben. Die Formel: <strong>Anfangsbestand + Wareneinkäufe − Endbestand</strong>. Die Wareneinsatzquote setzt diesen Wert ins Verhältnis zum Umsatz: <strong>Wareneinsatz ÷ Nettoumsatz × 100</strong>.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <p>Beispiel: 4.000 € Anfangsbestand, 9.000 € Einkäufe, 3.500 € Endbestand ergeben 9.500 € Wareneinsatz; bei 30.000 € Nettoumsatz sind das 31,7 Prozent. Beide Werte können Sie unten direkt ausrechnen.</p>
+
+        <h2>Rechner: Wareneinsatz und Quote ermitteln</h2>
+      </div>
+
+      <!-- Rechner (Abschnitt 9b): rein clientseitig, keine Datenübertragung -->
+      <div class="rechner" role="group" aria-label="Wareneinsatz-Rechner">
+        <div class="rechner-grid">
+          <div class="rechner-feld">
+            <label for="we-anfang">Anfangsbestand (zu Einkaufspreisen)</label>
+            <div class="rechner-input-wrap">
+              <input type="number" id="we-anfang" inputmode="decimal" min="0" step="any" placeholder="0" />
+              <span class="rechner-einheit" aria-hidden="true">€</span>
+            </div>
+          </div>
+          <div class="rechner-feld">
+            <label for="we-einkauf">Wareneinkäufe im Zeitraum</label>
+            <div class="rechner-input-wrap">
+              <input type="number" id="we-einkauf" inputmode="decimal" min="0" step="any" placeholder="0" />
+              <span class="rechner-einheit" aria-hidden="true">€</span>
+            </div>
+          </div>
+          <div class="rechner-feld">
+            <label for="we-ende">Endbestand (zu Einkaufspreisen)</label>
+            <div class="rechner-input-wrap">
+              <input type="number" id="we-ende" inputmode="decimal" min="0" step="any" placeholder="0" />
+              <span class="rechner-einheit" aria-hidden="true">€</span>
+            </div>
+          </div>
+          <div class="rechner-feld">
+            <label for="we-umsatz">Nettoumsatz im Zeitraum</label>
+            <div class="rechner-input-wrap">
+              <input type="number" id="we-umsatz" inputmode="decimal" min="0" step="any" placeholder="0" />
+              <span class="rechner-einheit" aria-hidden="true">€</span>
+            </div>
+          </div>
+        </div>
+        <div id="we-ausgabe" class="rechner-ausgabe" aria-live="polite">
+          <p class="rechner-zeile"><span>Ihr Wareneinsatz:</span> <strong id="we-out-einsatz">0 €</strong></p>
+          <p class="rechner-zeile" id="we-zeile-quote" hidden><span>Ihre Wareneinsatzquote:</span> <strong id="we-out-quote"></strong></p>
+          <p class="rechner-zeile" id="we-zeile-rohertrag" hidden><span>Ihr Rohertrag:</span> <strong id="we-out-rohertrag"></strong></p>
+          <p class="rechner-hinweis-fehler" id="we-fehler" hidden>Ihr Endbestand ist größer als Anfangsbestand plus Einkäufe. Bitte prüfen Sie die Werte und den Zeitraum.</p>
+        </div>
+        <p class="rechner-datenschutz">Ihre Eingaben bleiben in Ihrem Browser und werden nicht übertragen.</p>
+      </div>
+
+      <div class="artikel-prosa" style="margin-top:40px">
+        <h2>Was zählt zum Wareneinsatz und was nicht?</h2>
+        <p>Zum Wareneinsatz zählt alles, was Sie für Speisen und Getränke verbrauchen: Lebensmittel, Getränke, auch Bruch und Verderb. Bewertet wird immer zu Einkaufspreisen (dem Einstandspreis).</p>
+        <p>Betriebskosten wie Personal, Energie, Miete oder Reinigung gehören nicht in den Wareneinsatz. Zwei Posten verdienen besondere Aufmerksamkeit:</p>
+        <ul>
+          <li><strong>Personalverpflegung und Eigenverbrauch:</strong> Was Ihr Team isst, steckt zunächst unsichtbar im Warenverbrauch. Wer sauber rechnen will, zieht diesen Anteil als eigene Position ab, sonst wirkt die Karte schlechter kalkuliert, als sie ist.</li>
+          <li><strong>Schwund:</strong> Verderb, Bruch, Fehlproduktionen und unerklärliche Differenzen bleiben im Wareneinsatz und gehören auch dorthin. Aber sie sollten sichtbar gemacht werden, denn sie sind der Teil der Quote, den Sie ohne eine einzige Preisänderung senken können.</li>
+        </ul>
+        <p>Der Wareneinsatz ist übrigens nicht dasselbe wie der Wareneinkauf: Gekaufte Ware, die noch im Lager liegt, ist kein Einsatz. Genau deshalb braucht die Rechnung Anfangs- und Endbestand aus einer Inventur.</p>
+
+        <h2>Die Wareneinsatz-Formel Schritt für Schritt am Beispiel</h2>
+        <p>Angenommen, Ihr Lager war am Monatsanfang 4.000 Euro wert (zu Einkaufspreisen). Im Monat haben Sie für 9.000 Euro eingekauft, am Monatsende liegt noch Ware für 3.500 Euro im Lager.</p>
+        <ol>
+          <li><strong>Wareneinsatz:</strong> 4.000 + 9.000 − 3.500 = <strong>9.500 Euro</strong></li>
+          <li><strong>Wareneinsatzquote</strong> bei 30.000 Euro Nettoumsatz im selben Monat: 9.500 ÷ 30.000 × 100 = <strong>31,7 Prozent</strong></li>
+          <li><strong>Rohertrag</strong> (auch Rohgewinn genannt): 30.000 − 9.500 = <strong>20.500 Euro</strong>. Aus diesem Betrag müssen Personal, Miete, Energie und Ihr Gewinn bezahlt werden.</li>
+        </ol>
+        <p>Alle drei Werte gehören zum selben Zeitraum und zur selben Bewertung (Einkaufspreise, netto). Sobald Zeiträume oder Bewertungen gemischt werden, ist die Quote wertlos.</p>
+
+        <h2>Welche Wareneinsatzquote ist gut?</h2>
+        <p>Eine allgemeingültige Zielzahl gibt es nicht, die Quote hängt an Konzept, Karte und Preislage. Als Orientierung dienen die Branchenrichtsätze der Finanzverwaltung und gängige Praxiswerte:</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Betriebstyp</th><th>Übliche Wareneinsatzquote</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Gaststätte, Restaurant</td><td>rund 28 Prozent, je nach Konzept 25 bis 35</td></tr>
+              <tr><td>Pizzeria</td><td>rund 26 Prozent</td></tr>
+              <tr><td>Café</td><td>25 bis 26 Prozent</td></tr>
+              <tr><td>Imbiss</td><td>rund 32 Prozent</td></tr>
+              <tr><td>Bäckerei, Konditorei</td><td>26 bis 30 Prozent</td></tr>
+              <tr><td>Eisdiele</td><td>rund 22 Prozent</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Orientierungswerte auf Basis der Richtsatzsammlung des Bundesministeriums der Finanzen (Werte gerundet). Wichtiger als der Vergleich mit anderen ist der Vergleich mit sich selbst: Rechnen Sie jeden Monat gleich und beobachten Sie die Entwicklung. Eine Quote, die schleichend steigt, ist ein Frühwarnsignal, lange bevor es die Jahresauswertung zeigt.</p>
+
+        <h2>Speisen und Getränke getrennt berechnen</h2>
+        <p>Eine Gesamtquote kann Probleme verstecken, denn Getränke haben in der Praxis deutlich niedrigere Einsatzquoten als Speisen. Ein Beispiel mit denselben 30.000 Euro Umsatz:</p>
+        <ul>
+          <li><strong>Speisen:</strong> 7.800 Euro Wareneinsatz bei 22.000 Euro Umsatz = <strong>35,5 Prozent</strong></li>
+          <li><strong>Getränke:</strong> 1.700 Euro Wareneinsatz bei 8.000 Euro Umsatz = <strong>21,3 Prozent</strong></li>
+          <li><strong>Gesamt:</strong> 9.500 Euro bei 30.000 Euro = <strong>31,7 Prozent</strong></li>
+        </ul>
+        <p>Die Gesamtquote sieht unauffällig aus, die Speisenquote allein wäre ein Alarmsignal. Wer Kassensystem und Einkauf nach Warengruppen trennt, sieht solche Verschiebungen sofort.</p>
+
+        <h2>Vom Wareneinsatz zur Kalkulation des Verkaufspreises</h2>
+        <p>Der Wareneinsatz ist auch die Basis der Preiskalkulation. Die einfachste Daumenregel der Gastronomie ist die Aufschlagskalkulation mit dem Aufschlagsfaktor (auch Rohaufschlag genannt): Warenkosten eines Gerichts mal Faktor 3 bis 4 als erster Anhaltspunkt für den Netto-Verkaufspreis. Das entspricht einer Ziel-Einsatzquote von rund 25 bis 33 Prozent pro Gericht.</p>
+        <p>Eine Daumenregel ersetzt aber keine Kalkulation: Ein Gericht mit hohem Wareneinsatz und schnellem Ausstoß kann mehr zum Ergebnis beitragen als ein scheinbar gut kalkuliertes, das aufwendig ist und selten bestellt wird. Entscheidend ist der Deckungsbeitrag, also was ein Gericht nach Abzug der Warenkosten tatsächlich zum Betriebsergebnis beisteuert. Dafür müssen die Warenkosten je Portion bekannt sein, und das führt zur Rezept- und Speisenkalkulation.</p>
+
+        <h2>Wareneinsatz zu hoch? Die 8 häufigsten Ursachen</h2>
+        <ol>
+          <li><strong>Portionen nach Gefühl:</strong> Ohne Waage und verbindliche Mengen schwankt jede Portion, und mit ihr die Quote.</li>
+          <li><strong>Rezepturen nicht verbindlich:</strong> Jeder kocht „sein" Gericht, kalkuliert ist ein anderes.</li>
+          <li><strong>Einkaufspreise unbeobachtet:</strong> Preiserhöhungen der Lieferanten wandern unbemerkt in die Quote, weil niemand Angebote vergleicht.</li>
+          <li><strong>Karte zu groß:</strong> Viele Gerichte bedeuten viele Zutaten, mehr Anbruch, mehr Verderb.</li>
+          <li><strong>Lager ohne Ordnung:</strong> Ohne feste Lagerorte und First-in-first-out verdirbt Ware, bevor sie eingesetzt wird.</li>
+          <li><strong>Falsche Bestellmengen:</strong> Wer ohne Bedarfsrechnung bestellt, kauft das Lager voll statt den Menüplan ein.</li>
+          <li><strong>Personalverpflegung unbereinigt:</strong> Der Teamverbrauch steckt in der Quote und wird als Kalkulationsproblem fehlgedeutet.</li>
+          <li><strong>Keine ehrliche Inventur:</strong> Ohne gezählten Endbestand ist jede Quote eine Schätzung, und Schwund bleibt unsichtbar.</li>
+        </ol>
+
+        <h2>Wie oft berechnen? Inventur und Rhythmus</h2>
+        <p>Monatlich ist für die meisten Betriebe der richtige Rhythmus: genau genug, um Trends zu sehen, und mit einer sauberen Monatsinventur gut machbar. Dafür gilt:</p>
+        <ul>
+          <li>Immer zum selben Stichtag zählen, immer zu Einkaufspreisen bewerten.</li>
+          <li>Angebrochene Gebinde anteilig schätzen, aber immer nach derselben Methode.</li>
+          <li>Feste Lagerorte vergeben, dann lässt sich in Stunden statt Tagen zählen.</li>
+        </ul>
+        <p>Betriebe mit hohem Frischeanteil rechnen die kritischen Warengruppen zusätzlich wöchentlich.</p>
+
+        <h2>Vom Messen zum Steuern</h2>
+        <p>Die Quote sagt Ihnen, dass etwas wegläuft. Sie sagt Ihnen nicht, wo. Dafür müssen Rezepturen, Portionsgrößen und Einkauf zusammenpassen: kalkulierte Mengen statt Gefühl, gezählte Bestände statt Schätzung. Genau das organisiert die <a href="/koch-app/" class="typo-link">Avorix Koch-App</a>: Rezepte mit Mengen je Portion, Kalkulation bis zum Verkaufspreis, Bruttobedarf aus dem Menüplan und Inventur je Lagerort.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie hoch sollte der Wareneinsatz in der Gastronomie sein?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Als grobe Orientierung liegen viele Restaurantküchen zwischen 25 und 35 Prozent vom Nettoumsatz, Getränke deutlich darunter. Entscheidend ist Ihr Konzept: Wichtiger als jeder Branchenwert ist eine stabile eigene Quote, die nicht schleichend steigt.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist der Unterschied zwischen Wareneinsatz und Food Cost?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Es ist dasselbe: Food Cost (Percentage) ist der englische Begriff für den Wareneinsatz beziehungsweise die Wareneinsatzquote.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist der Unterschied zwischen Wareneinsatz und Wareneinkauf?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Der Einkauf ist, was geliefert wurde. Der Einsatz ist, was verbraucht wurde. Die Differenz liegt im Lager, deshalb braucht die Berechnung Anfangs- und Endbestand aus der Inventur.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Zählt Mitarbeiterverpflegung zum Wareneinsatz?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, zunächst schon: Sie steckt im Warenverbrauch. Wer es genau wissen will, zieht sie als eigene Position ab. Dann zeigt die Quote nur noch, was wirklich an den Gast geht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wo steht der Wareneinsatz in der BWA oder GuV?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Im Materialaufwand beziehungsweise Wareneinsatz-Posten. Für die Betriebssteuerung reicht das nicht: Die Auswertung kommt Wochen später und kennt weder Ihre Karte noch Ihre Portionen. Steuern können Sie nur mit eigenen, monatlichen Zahlen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie oft sollte ich den Wareneinsatz berechnen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Monatlich mit Inventur, bei hohem Frischeanteil die kritischen Warengruppen zusätzlich wöchentlich.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">
+        Wenn Rezepte, Mengen und Bestände in einem System liegen, ist der Wareneinsatz keine Detektivarbeit mehr.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/koch-app/" data-cta-location="wissen-wareneinsatz-ende" class="btn btn-primary">Koch-App ansehen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+
+  .rechner {
+    max-width: 640px;
+    background: var(--flaeche);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .rechner-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 600px) {
+    .rechner-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .rechner-feld label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--druck);
+    margin-bottom: 8px;
+  }
+  .rechner-input-wrap { position: relative; }
+  .rechner-input-wrap input {
+    width: 100%;
+    min-height: 60px;
+    background: var(--papier);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius);
+    padding: 0 40px 0 16px;
+    font-size: 16px;
+    font-family: var(--f-body);
+    color: var(--druck);
+    box-sizing: border-box;
+    transition: border-color .15s;
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+  .rechner-input-wrap input:focus { outline: none; border-color: var(--akzent); }
+  .rechner-input-wrap input:focus-visible { outline: 3px solid var(--akzent); outline-offset: 2px; }
+  .rechner-einheit {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--grau);
+    font-size: 16px;
+    pointer-events: none;
+  }
+  .rechner-ausgabe {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--linie);
+  }
+  .rechner-zeile {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    font-size: 16px;
+    color: var(--grau);
+    padding: 6px 0;
+  }
+  .rechner-zeile strong {
+    font-family: var(--f-head);
+    font-size: 20px;
+    color: var(--druck);
+    white-space: nowrap;
+  }
+  .rechner-hinweis-fehler {
+    color: var(--akzent);
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 8px 0 0;
+  }
+  .rechner-datenschutz {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--grau);
+  }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
+
+<script>
+/* Wareneinsatz-Rechner — rein clientseitig, keine Datenübertragung */
+(function () {
+  var elAnfang = document.getElementById('we-anfang');
+  var elEinkauf = document.getElementById('we-einkauf');
+  var elEnde = document.getElementById('we-ende');
+  var elUmsatz = document.getElementById('we-umsatz');
+  if (!elAnfang || !elEinkauf || !elEnde || !elUmsatz) return;
+
+  var outEinsatz = document.getElementById('we-out-einsatz');
+  var zeileQuote = document.getElementById('we-zeile-quote');
+  var outQuote = document.getElementById('we-out-quote');
+  var zeileRohertrag = document.getElementById('we-zeile-rohertrag');
+  var outRohertrag = document.getElementById('we-out-rohertrag');
+  var fehler = document.getElementById('we-fehler');
+
+  var eur = new Intl.NumberFormat('de-DE', { maximumFractionDigits: 0 });
+  var proz = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+  function wert(el) {
+    var n = parseFloat(el.value);
+    if (isNaN(n)) return 0;
+    if (n < 0) { el.value = '0'; return 0; }
+    return n;
+  }
+
+  function rechne() {
+    var ab = wert(elAnfang);
+    var ek = wert(elEinkauf);
+    var eb = wert(elEnde);
+    var umsatz = wert(elUmsatz);
+    var einsatz = ab + ek - eb;
+
+    if (einsatz < 0) {
+      fehler.hidden = false;
+      outEinsatz.parentElement.hidden = true;
+      zeileQuote.hidden = true;
+      zeileRohertrag.hidden = true;
+      return;
+    }
+    fehler.hidden = true;
+    outEinsatz.parentElement.hidden = false;
+    outEinsatz.textContent = eur.format(Math.round(einsatz)) + ' €';
+
+    if (umsatz > 0) {
+      outQuote.textContent = proz.format(einsatz / umsatz * 100) + ' %';
+      zeileQuote.hidden = false;
+      outRohertrag.textContent = eur.format(Math.round(umsatz - einsatz)) + ' €';
+      zeileRohertrag.hidden = false;
+    } else {
+      zeileQuote.hidden = true;
+      zeileRohertrag.hidden = true;
+    }
+  }
+
+  [elAnfang, elEinkauf, elEnde, elUmsatz].forEach(function (el) {
+    el.addEventListener('input', rechne);
+  });
+  rechne();
+})();
+</script>

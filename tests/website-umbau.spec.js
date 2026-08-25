@@ -1003,7 +1003,10 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
       });
     };
     expect(await zaehle('/en/staff')).toBe(9);
-    expect(await zaehle('/personal')).toBe(9);
+    // SEO-Paket Phase 1 (Abschnitt 2.2 B): /personal hat eine zusaetzliche FAQ
+    // zur Mietkoch-Abgrenzung bekommen -> 10. Die EN-Seite bleibt unberuehrt (9),
+    // die fruehere Parity 9/9 ist damit bewusst aufgehoben.
+    expect(await zaehle('/personal')).toBe(10);
   });
 
   test('6.6 — /en/contact hat Pflichtfeld-Zeile und Sternchen', async ({ page }) => {
