@@ -1,67 +1,86 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Stempel from "../../components/Stempel.astro";
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 import Lightbox from "../../components/Lightbox.astro";
+import Stempel from "../../components/Stempel.astro";
+import appKochmodus1 from "../../assets/bilder/app-kochmodus-schritt1.png";
+import appKochmodus2Haccp from "../../assets/bilder/app-kochmodus-schritt2-haccp.png";
+import appPortionsrechner from "../../assets/bilder/app-rezept-detail-portionsrechner.png";
+import appRezepteListe from "../../assets/bilder/app-rezepte-liste.png";
+import appDashboard from "../../assets/bilder/app-dashboard.png";
+import appMenuplaner from "../../assets/bilder/app-menuplaner-woche.png";
+import appEinkaufsliste from "../../assets/bilder/app-einkaufsliste.png";
 import appPreisvergleich from "../../assets/bilder/app-preisvergleich.png";
 
+const ogImg = await getImage({ src: appKochmodus1, width: 1200, format: "png" });
+const ogImageAlt = "Screenshot of the Avorix cook app: recipe step in cooking mode with temperature and timer";
 
 const schema = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   "name": "Avorix Cook App",
   "applicationCategory": "BusinessApplication",
-  "operatingSystem": "Web, iOS, Android",
-  "description": "The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level.",
+  "operatingSystem": "Web (tablet and smartphone)",
+  "description": "The Avorix Cook App guides every member of your team step by step through your menu. Recipes with photos, quantities and times, portion calculator, menu planner, shopping lists and costing.",
   "url": "https://avorix.cloud/en/cook-app",
   "inLanguage": "en",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR",
-    "description": "Pilot program — free trial phase"
-  },
   "publisher": {
     "@type": "Organization",
     "name": "Avorix",
     "url": "https://avorix.cloud"
-  }
+  },
+  "screenshot": { "@type": "ImageObject", "url": `https://avorix.cloud${ogImg.src}` }
 };
 
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Will my team actually go along with this?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "This objection comes up almost every time, and it almost always disappears within the first week. For two reasons: training happens at the stove, led by a chef with sous-chef experience or above who knows your team’s daily reality. And the app takes work off the team instead of monitoring them: no hunting for notes, no asking around, no debates about quantities. Anyone who has cooked with it for a week does not want to give it back."
-      }
-    }
+    { "@type": "Question", "name": "Which devices does the app run on?", "acceptedAnswer": { "@type": "Answer", "text": "On tablet and smartphone, right in the kitchen." } },
+    { "@type": "Question", "name": "Do we need internet in the kitchen?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. The app runs in the browser and needs an internet connection in the kitchen, wi-fi or mobile." } },
+    { "@type": "Question", "name": "Can our team add new dishes themselves?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. After the training you add new dishes yourselves, or we do it for you." } },
+    { "@type": "Question", "name": "What do the add-on modules cost?", "acceptedAnswer": { "@type": "Answer", "text": "We will work that out with you in the first call, depending on which packages your business uses. Early adopters also get the 2026 pilot conditions." } },
+    { "@type": "Question", "name": "Will my team actually go along with this?", "acceptedAnswer": { "@type": "Answer", "text": "This objection comes up almost every time, and it almost always disappears within the first week. For two reasons: training happens at the stove, led by a chef with sous-chef experience or above who knows your team’s daily reality. And the app takes work off the team instead of monitoring them: no hunting for notes, no asking around, no debates about quantities. Anyone who has cooked with it for a week does not want to give it back." } }
   ]
 };
 ---
-<BaseLayout title="Cook App" description="The Avorix Cook App guides your kitchen team step-by-step through every recipe — for consistent food quality, regardless of experience level." schemaOrg={[schema, faqSchema]}>
-  <!-- Hero (W2: Text-Hero, left-aligned) -->
+<BaseLayout
+  title="The Avorix Cook App: cook step by step"
+  description="Recipes with photos, quantities and times, portion calculator, menu planner, shopping lists and costing. The cook app for hotel and restaurant kitchens."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={[schema, faqSchema]}
+>
+  <!-- Hero (W2: Split 55/45) — mirror of /koch-app -->
  <section class="hero-section px-6" style="background:var(--papier)">
-    <div class="content-width">
-      <p class="eyebrow mb-4">Avorix Cook App</p>
-      <h1 class="mb-6">Step by Step to a <mark>Perfect Kitchen</mark></h1>
-      <p class="lead max-w-[62ch] mb-10" style="color:var(--grau)">
-        The Avorix Cook App guides your kitchen team through every recipe — precisely, visually, and in real time. Consistent quality, <strong>no matter who's at the stove</strong>.
-      </p>
-      <a href="/en/contact" class="btn btn-primary">
-        Book a Demo
-      </a>
+    <div class="content-width hero-grid" style="align-items:center">
+      <!-- Text: mobile bottom, desktop left -->
+      <div class="hero-copy">
+        <p class="eyebrow mb-4">The Cook App</p>
+        <h1 class="mb-6">Your kitchen knowledge. <mark>One tick at a time.</mark></h1>
+        <p class="lead mb-6" style="color:var(--grau)">
+          The Avorix Cook App guides every member of your team step by step through your menu. Look at the photo, weigh the amount, tick the box, done. That is how your team cooks to your standard, every day. <strong>Even without trained chefs.</strong>
+        </p>
+        <a href="/en/contact" data-cta-location="en-cookapp-hero" class="btn btn-primary">Book a Demo</a>
+      </div>
+      <!-- Screenshot: mobile top, desktop right -->
+      <div class="hero-media">
+        <Lightbox label="COOKING MODE" caption="Screenshot of the Avorix cook app: recipe step in cooking mode with temperature and timer" zoomText="enlarge" flach>
+          <Image
+            src={appKochmodus1}
+            alt="Screenshot of the Avorix cook app: recipe step in cooking mode with temperature and timer"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 896px) 100vw, 528px"
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+      </div>
     </div>
   </section>
 
-  <!-- How it works -->
-  <!-- Korrektur 6.4 (Anweisung 29): Das Zahlen-Banner stand nur auf der
-       deutschen Seite. Dieselbe Stelle, dieselbe Komponente, Subline oben
-       wie in Korrektur 9. -->
+  <!-- Numbers banner -->
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Measured in one customer&rsquo;s business.</h2>
@@ -79,33 +98,169 @@ const faqSchema = {
     </div>
   </section>
 
+  <!-- What the app can do (section 2) -->
  <section class="reveal section-gap">
     <div class="content-width">
-      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">How the Cook App Works</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-        <div>
-          <div class="schritt-chip inline-flex mb-6">1</div>
-          <h3 class="mb-4">Choose a Recipe</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">The kitchen team selects the desired dish from the digital recipe library — on a tablet or smartphone, directly in the kitchen.</p>
+      <h2 class="mb-6" style="color:var(--druck)">What the app can do. Shown, not claimed.</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">1 &middot; Step-by-step guidance</h3>
+          <p class="text-sm" style="color:var(--grau)">Every dish as a clear sequence: photo, quantity, time. <strong>No room for interpretation</strong>, no mistakes.</p>
         </div>
-        <div>
-          <div class="schritt-chip inline-flex mb-6">2</div>
-          <h3 class="mb-4">Step-by-Step Guidance</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">Each step is displayed clearly and intuitively — with quantities, timings, and photos. <strong>No room for interpretation</strong>, no mistakes.</p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="PORTION CALCULATOR" caption="Screenshot of the Avorix cook app: portion calculator scaling a recipe to 80 portions" zoomText="enlarge" flach>
+            <Image
+              src={appPortionsrechner}
+              alt="Screenshot of the Avorix cook app: portion calculator scaling a recipe to 80 portions"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </Lightbox>
+          <div class="p-8">
+            <h3 class="mb-4">2 &middot; Automatic portion calculator</h3>
+            <p class="text-sm" style="color:var(--grau)">80 guests today instead of 60? The app scales every quantity to the number of portions you need. <strong>No recalculating, no scrap of paper.</strong></p>
+          </div>
         </div>
-        <div>
-          <div class="schritt-chip inline-flex mb-6">3</div>
-          <h3 class="mb-4">Consistent Results</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">The dish turns out to standard — regardless of the cook's experience level. <strong>Quality becomes reproducible.</strong></p>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="RECIPE LIBRARY" caption="Screenshot of the Avorix cook app: recipe library with categories, timings and cost per portion" zoomText="enlarge" flach>
+            <Image
+              src={appRezepteListe}
+              alt="Screenshot of the Avorix cook app: recipe library with categories, timings and cost per portion"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </Lightbox>
+          <div class="p-8">
+            <h3 class="mb-4">3 &middot; The recipe library</h3>
+            <p class="text-sm" style="color:var(--grau)">Your whole menu in one place, for the whole team. Seasonal menu, standards, sides, all findable in seconds.</p>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">4 &middot; Food cost in view</h3>
+          <p class="text-sm" style="color:var(--grau)">Recipe-based costing and food cost analysis. <strong>You see what every plate really costs.</strong></p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">5 &middot; Runs anywhere in the kitchen</h3>
+          <p class="text-sm" style="color:var(--grau)">On tablet and smartphone, right at the station. The app runs in the browser, <strong>nothing needs installing</strong>. All you need is an internet connection in the kitchen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Food cost in view (section 3, dark) -->
+ <section class="reveal section-gap section-dunkel" style="background:var(--eisen)">
+    <div class="content-width">
+      <div class="split-row" style="align-items:center">
+        <div class="split-copy">
+          <p class="eyebrow mb-4" style="color:var(--akzent-hell)">HACCP &middot; Documentation</p>
+          <h2 class="mb-6" style="color:var(--papier)">
+            <span style="color:var(--akzent-hell)">Food cost</span> in view.
+          </h2>
+          <p class="mb-4 max-w-[62ch]" style="color:rgba(247,246,242,0.8)">Recipe-based costing and <span style="color:var(--akzent-hell)">food cost</span> analysis. <strong>You see what every plate really costs.</strong></p>
+          <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">The day&rsquo;s food cost is <span style="color:var(--akzent-hell)">documented</span>, without anyone having to write anything down.</p>
+        </div>
+        <div class="split-media" style="box-shadow:none">
+          <Lightbox label="HACCP CHECK" caption="Screenshot of the Avorix cook app: work step with a red HACCP control point and 75 degrees core temperature" zoomText="enlarge" flach>
+            <Image
+              src={appKochmodus2Haccp}
+              alt="Screenshot of the Avorix cook app: work step with a red HACCP control point and 75 degrees core temperature"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 48vw, 560px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </Lightbox>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kitchen organisation (section 4) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">And the app organises your whole kitchen along the way.</h2>
+      <div class="mb-8">
+        <Lightbox label="DASHBOARD" caption="Screenshot of the Avorix cook app: dashboard with the kitchen management modules" zoomText="enlarge" flach>
+          <Image
+            src={appDashboard}
+            alt="Screenshot of the Avorix cook app: dashboard with the kitchen management modules"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+      </div>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="MENU PLANNER" caption="Screenshot of the Avorix cook app: weekly plan with lunch and dinner including portion numbers" zoomText="enlarge" flach>
+            <Image
+              src={appMenuplaner}
+              alt="Screenshot of the Avorix cook app: weekly plan with lunch and dinner including portion numbers"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </Lightbox>
+          <div class="p-8">
+            <h3 class="mb-4">Menu planner</h3>
+            <p class="text-sm" style="color:var(--grau)">Plan the dishes for every calendar week, with meals, portions and notes. <strong>Copy a week that worked into the next one.</strong></p>
+          </div>
+        </div>
+        <div class="card" style="padding:0;overflow:hidden">
+          <Lightbox label="SHOPPING LIST" caption="Screenshot of the Avorix cook app: shopping list with quantities, units and total costs" zoomText="enlarge" flach>
+            <Image
+              src={appEinkaufsliste}
+              alt="Screenshot of the Avorix cook app: shopping list with quantities, units and total costs"
+              widths={[480, 800]}
+              sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-auto"
+            />
+          </Lightbox>
+          <div class="p-8">
+            <h3 class="mb-4">Shopping lists at the press of a button</h3>
+            <p class="text-sm" style="color:var(--grau)">From the finished menu plan, the app generates the shopping list: items, quantities, units, estimated prices. <strong>You tick things off as you shop.</strong></p>
+          </div>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Costing right up to the menu price</h3>
+          <p class="text-sm" style="color:var(--grau)">Enter raw material costs, overheads and margin, and the app works out the price per portion.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Duty rota</h3>
+          <p class="text-sm" style="color:var(--grau)">Shifts per employee and day, with your own shift types and a weekly view.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Time tracking</h3>
+          <p class="text-sm" style="color:var(--grau)">Clock in and out directly in the app, with a monthly summary of hours.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Clear roles</h3>
+          <p class="text-sm" style="color:var(--grau)">Your sous chef sees the plan; only the head chef can change it. <strong>Everyone sees exactly what they need.</strong></p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Add-on modules (12c) -->
- <section class="reveal section-gap">
+ <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">If you want more: two add-on modules.</h2>
+      <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
+        What the modules cost, we will work out with you in the first call, to the euro. Early adopters also get the 2026 pilot conditions.
+      </p>
       <p class="max-w-[62ch] mb-8" style="color:var(--grau)">
         Both build on what your kitchen already uses. Avorix Preisvergleich requires the Warenwirtschaft package, Avorix Manager additionally the Organisation package.
       </p>
@@ -147,38 +302,109 @@ const faqSchema = {
           </p>
         </div>
       </div>
-      <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
-        What the modules cost, we will work out with you in the first call, to the euro. Early adopters also get the 2026 pilot conditions.
-      </p>
     </div>
   </section>
 
-  <!-- FAQ (Anweisung 30, Schritt 5): Die Seite hatte noch keine FAQ-Liste und
-       keine FAQ-Auszeichnung. Stelle wie auf der deutschen /koch-app: letzte
-       Inhaltssektion vor dem Schlussbaustein. -->
+  <!-- What a normal day looks like (section 5) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">What a normal day looks like.</h2>
+      <ol class="tagesablauf">
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">In the morning</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Prep runs off the list. Everyone knows what is being pre-produced today, in what quantity, for how many guests.</p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">During service</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">The tablet hangs at the station. An order comes in, the cook opens the dish and works through the steps. <strong>The result looks and tastes the way it always does.</strong></p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">In the evening</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">The day&rsquo;s food cost is documented, without anyone having to write anything down.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Ownership (section 6) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Who owns all of this?</h2>
+      <p class="max-w-[62ch]" style="color:var(--grau)">You do. Your recipes remain your property and are never passed on to other businesses. <strong>If you leave Avorix, you take your documentation with you.</strong></p>
+    </div>
+  </section>
+
+  <!-- You enter nothing (section 7) -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">You do not have to enter anything. We do that.</h2>
+      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">An Avorix chef records your menu on site at your business: cooking, documenting, photographing, setting up. <strong>Afterwards he trains your team right at the stove.</strong></p>
+      <a href="/en/system" data-cta-location="en-cookapp-system" class="btn btn-secondary">How the Avorix system works</a>
+      <a href="/en/pilot-program" data-cta-location="en-cookapp-pilot" class="btn btn-secondary">To the Pilot Program</a>
+    </div>
+  </section>
+
+  <!-- FAQ (section 8, completed) -->
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Frequently asked questions</h2>
       <div class="faq-list">
-        <!-- Team-Einwand (Anweisung 30, Schritt 5) -->
-        <details class="faq-item open">
+        <details class="faq-item" open>
+          <summary class="faq-q">Which devices does the app run on?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>On tablet and smartphone, right in the kitchen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do we need internet in the kitchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. The app runs in the browser and needs an internet connection in the kitchen, wi-fi or mobile.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can our team add new dishes themselves?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. After the training you add new dishes yourselves, or we do it for you.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What do the add-on modules cost?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>We will work that out with you in the first call, depending on which packages your business uses. Early adopters also get the 2026 pilot conditions.</p></div></div>
+        </details>
+        <!-- Team objection (Anweisung 30, Schritt 5) -->
+        <details class="faq-item">
           <summary class="faq-q">Will my team actually go along with this?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>This objection comes up almost every time, and it almost always disappears within the first week. For two reasons: training happens at the stove, led by a chef with sous-chef experience or above who knows your team&rsquo;s daily reality. And the app takes work off the team instead of monitoring them: no hunting for notes, no asking around, no debates about quantities. Anyone who has cooked with it for a week does not want to give it back.</p></div></div>
         </details>
       </div>
+      <!-- Kernsatz (verbindlicher englischer Ergebnis-Satz, Anweisung 31) -->
+      <p class="mt-8 max-w-[62ch]" style="color:var(--druck);font-weight:700">Your kitchen holds your standard. Even when your best chef is missing.</p>
     </div>
   </section>
 
-  <!-- CTA → Peak-End (3.18) -->
+  <!-- Final CTA → Peak-End (3.18) -->
  <section class="reveal section-gap" style="background:var(--papier)">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Certified &middot; German staffing licence</Stempel>
       </div>
-      <p class="mb-8" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
-      <a href="/en/contact" class="btn btn-primary">
-        Book a Demo
-      </a>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&rsquo;s sorted.</p>
+      <a href="/en/contact" data-cta-location="en-cookapp-final" class="btn btn-primary">Book a Demo</a>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+/* FAQ close animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
