@@ -1,0 +1,219 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Stempel from "../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Für Catering", "item": "https://avorix.cloud/fuer-catering" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wir haben keine feste Karte, jede Veranstaltung ist anders. Bringt das System dann etwas?", "acceptedAnswer": { "@type": "Answer", "text": "Gerade dann. Die einzelnen Gerichte wiederholen sich, auch wenn die Zusammenstellung wechselt. Dokumentiert wird das Gericht, kombiniert wird frei." } },
+      { "@type": "Question", "name": "Können wir Köche auch nur für einzelne Tage buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindestdauer gibt es nicht." } },
+      { "@type": "Question", "name": "Wie kurzfristig geht das?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel innerhalb von 24 bis 72 Stunden. Im Notfall sind wir rund um die Uhr einsatzbereit." } },
+      { "@type": "Question", "name": "Unsere Einsätze sind an wechselnden Orten. Läuft die App dort?", "acceptedAnswer": { "@type": "Answer", "text": "Auf Tablet und Smartphone, es muss nichts installiert werden." } },
+      { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Häuser fangen mit einem Personal-Einsatz an und bauen das System später auf." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Koch für Catering & Veranstaltungen mieten"
+  description="Festangestellte Köche und ganze Teams für Catering und Veranstaltungen, in der Regel innerhalb von 24 bis 72 Stunden. Plus das System für Ihre Abläufe am Einsatzort."
+  schemaOrg={schema}
+>
+  <!-- Hero (Text-Hero; Hero-Bild von Simon noch offen, Anweisung 14/33) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4">Für Catering und Veranstaltungsgastronomie</p>
+      <h1 class="mb-6 max-w-[20ch]">Jede Veranstaltung auf Ihrem Niveau. Auch die dritte an einem Wochenende.</h1>
+      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        Avorix stellt Ihnen Köche für die Spitzen und sichert Ihre Menüs als System, das jede Kraft durch den Ablauf führt. Damit der Gast am fremden Ort dasselbe bekommt wie in Ihrer Produktion.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/kontakt" data-cta-location="catering-hero" class="btn btn-primary">App-Demo vereinbaren</a>
+        <a href="/personal#anfrage" data-cta-location="catering-hero" data-cta-event="cta_personal_click" class="btn btn-secondary">Personal anfragen</a>
+      </div>
+      <div class="hero-badges">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+    </div>
+  </section>
+
+  <!-- Das Problem -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Im Catering entscheidet sich alles an einem einzigen Abend.</h2>
+      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Ein Hotel hat morgen wieder eine Chance. Eine Hochzeit hat sie nicht. Genau dafür gibt es Avorix.</p>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Die Spitzen kommen geballt.</h3>
+          <p class="text-sm" style="color:var(--grau)">Drei Veranstaltungen an einem Wochenende, und dazwischen zwei ruhige Wochen. Für diese Spitzen ein festes Team vorzuhalten, rechnet sich nicht. Ohne Team gehen sie verloren.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Am Einsatzort zählt nur der Ablauf.</h3>
+          <p class="text-sm" style="color:var(--grau)">In Ihrer Produktion weiß jeder, wo alles steht. In einer fremden Küche oder im Zelt weiß es niemand. Wer dort improvisiert, liefert nicht Ihr Niveau, sondern sein eigenes.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Jede Veranstaltung ist eine eigene Rechnung.</h3>
+          <p class="text-sm" style="color:var(--grau)">Andere Personenzahl, anderes Menü, andere Marge. Wer erst hinterher weiß, was der Teller gekostet hat, kalkuliert das nächste Angebot wieder nach Gefühl.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Die zwei Wege -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</h2>
+      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Das eine hilft am nächsten Wochenende, das andere ab der nächsten Saison. Die meisten Betriebe fangen mit dem ersten an.</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Personal</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Köche für die Spitze</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Wir schicken Ihnen festangestellte Köche, rechtssicher über unsere Arbeitnehmerüberlassungserlaubnis. In der Regel innerhalb von 24 bis 72 Stunden, im Notfall auch nachts und am Wochenende. Eine Mindestdauer gibt es nicht, Sie buchen genau die Tage, die Sie brauchen.</p>
+          <p class="text-sm mb-4" style="color:var(--grau)"><strong>Für eine Veranstaltung stellen wir Ihnen ein ganzes Team, nicht nur einen Koch.</strong></p>
+          <p class="text-sm" style="color:var(--grau)">Ein Cateringunternehmen bezieht über uns rund 15.000 Stunden im Jahr.</p>
+        </div>
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">System</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Ihre Abläufe in der App</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Ihre Menüs liegen als Schritt-für-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Am Einsatzort führt sie jede Kraft durch den Ablauf, auch wenn sie das Gericht noch nie gekocht hat. Dazu lernt ein Avorix-Koch Ihr Team direkt an, in Ihrer Produktion.</p>
+          <p class="text-sm" style="color:var(--grau)">Die App läuft heute unter anderem bei einem Cateringunternehmen.</p>
+        </div>
+      </div>
+      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Und Ihre Kunden? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden öffentlich.</p>
+    </div>
+  </section>
+
+  <!-- Warum das Segment passt (schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Eine Veranstaltung ist eine Kalkulation mit bekannter Personenzahl. Dafür ist die App gebaut.</h2>
+      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Jede Buchung hat ein Datum, eine Personenzahl und ein Menü. Genau daraus rechnet die App: Sie legen Menüvorlagen an, weisen sie einer Veranstaltung zu, und der Portionsrechner skaliert jedes Rezept auf die tatsächliche Gästezahl. Aus mehreren Veranstaltungen in einem Zeitraum entsteht auf Knopfdruck der Gesamtbedarf an Zutaten, und daraus die Einkaufsliste.</p>
+      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Die Kalkulation läuft im selben Zug mit: Sie sehen vor der Veranstaltung, was der Teller kostet, nicht erst danach. Bewährte Menüs kopieren Sie in die nächste Anfrage, statt sie neu zusammenzustellen.</p>
+      <p class="max-w-[62ch]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+    </div>
+  </section>
+
+  <!-- Vier Schritte (dunkler Block) -->
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Vier Schritte, am besten in der ruhigen Zeit.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">1</div>
+          <div>
+            <h3 class="mb-4">Gespräch (30 Minuten, kostenlos)</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">2</div>
+          <div>
+            <h3 class="mb-4">Aufnahme</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">3</div>
+          <div>
+            <h3 class="mb-4">Schulung</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">4</div>
+          <div>
+            <h3 class="mb-4">Selbstständig arbeiten</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Die App führt Ihr Team durch jede Veranstaltung. Wir bleiben erreichbar.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm mt-8 max-w-[62ch]">Zwischen zwei Saisons ist der ideale Zeitpunkt. Wenn die Anfragen wieder kommen, läuft Ihr System schon.</p>
+    </div>
+  </section>
+
+  <!-- Pilotangebot (schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
+      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
+      <a href="/pilotprogramm" data-cta-location="catering-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wir haben keine feste Karte, jede Veranstaltung ist anders. Bringt das System dann etwas?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Gerade dann. Die einzelnen Gerichte wiederholen sich, auch wenn die Zusammenstellung wechselt. Dokumentiert wird das Gericht, kombiniert wird frei.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Können wir Köche auch nur für einzelne Tage buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Eine Mindestdauer gibt es nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie kurzfristig geht das?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel innerhalb von 24 bis 72 Stunden. Im Notfall sind wir rund um die Uhr einsatzbereit.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Unsere Einsätze sind an wechselnden Orten. Läuft die App dort?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Auf Tablet und Smartphone, es muss nichts installiert werden.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Müssen wir beides nehmen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Viele Häuser fangen mit einem Personal-Einsatz an und bauen das System später auf.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/kontakt" data-cta-location="catering-final" class="btn btn-primary">App-Demo vereinbaren</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
