@@ -1,0 +1,161 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Personal", "item": "https://avorix.cloud/personal" },
+      { "@type": "ListItem", "position": 3, "name": "Mietkoch in Tirol", "item": "https://avorix.cloud/personal/tirol/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Arbeitnehmerüberlassung von Köchen in Tirol",
+    "serviceType": "Arbeitnehmerüberlassung",
+    "provider": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud/" },
+    "areaServed": "Tirol",
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Braucht mein Betrieb für den Einsatz eine eigene Genehmigung?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel nicht: Die Meldepflichten für die grenzüberschreitende Überlassung liegen beim Verleiher, also bei uns. Was auf Ihrer Seite zu beachten ist, klären wir im Erstgespräch: 30 Minuten, kostenlos, unverbindlich." } },
+      { "@type": "Question", "name": "Übernehmt ihr auch nur die Wintersaison?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindest-Einsatzdauer gibt es nicht, viele Einsätze laufen genau eine Saison." } },
+      { "@type": "Question", "name": "Arbeitet ihr auch in der Schweiz oder in Südtirol?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Wir arbeiten in Deutschland und Österreich, in die Schweiz verleihen wir nicht, und Italien gehört nicht zu unserem Gebiet." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Mietkoch Tirol: Koch für die Saison mieten"
+  description="Koch mieten in Tirol: festangestellte Köche für Hotellerie und Gastronomie, Winter- und Sommersaison. Grenzüberschreitend ordnungsgemäß gemeldet."
+  schemaOrg={schema}
+>
+  <!-- Hero -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/personal/" class="eyebrow-link">Personal</a></p>
+      <h1 class="mb-6 max-w-[24ch]">Mietkoch in Tirol: Köche mieten für die Saison</h1>
+      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        Wenn die Saison beginnt und die Küche nicht voll besetzt ist, leihen wir Ihnen unsere festangestellten Köche aus: für die Wintersaison, für den Sommer, für den Engpass dazwischen.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/personal#anfrage" data-cta-location="personal-tirol-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
+      </div>
+      <div class="hero-badges mb-6">
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
+      <p class="hero-telefon">
+        Im Notfall direkt anrufen:
+        <a href="tel:+4975413973915" data-cta-location="personal-tirol-hero" data-cta-event="personal_anruf_click" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Direktantwort (GEO) -->
+ <section class="reveal">
+    <div class="content-width">
+      <p id="direktantwort" class="lead py-4 max-w-[62ch]" style="color:var(--grau)">
+        Avorix verleiht festangestellte, sozialversicherte Köche an Hotellerie und Gastronomie in Tirol, mit behördlicher Arbeitnehmerüberlassungserlaubnis. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche.
+      </p>
+    </div>
+  </section>
+
+  <!-- Unser Einsatzgebiet (schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Unser Einsatzgebiet</h2>
+      <p class="max-w-[62ch]" style="color:var(--grau)">Tirols Küchen leben im Saisonrhythmus: Wintersaison, Sommersaison, dazwischen Umbau und Pause. Wer im Dezember eine volle Halbpension fahren muss, kann nicht bis Januar auf eine Neueinstellung warten. Wir verleihen Köche in ganz Tirol, vom Außerfern bis ins Zillertal.</p>
+    </div>
+  </section>
+
+  <!-- Typische Einsätze -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Typische Einsätze in Tirol</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Die Wintersaison beginnt in drei Wochen, zwei Posten sind noch unbesetzt.</p></div>
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Der Küchenchef verlässt das Haus im November, die Nachfolge startet erst im Frühjahr.</p></div>
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Das Sommerhaus verlängert die Saison und braucht die Küche vier Wochen länger als das Stammteam.</p></div>
+      </div>
+      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Grenzüberschreitende Einsätze aus Deutschland melden wir vor Arbeitsbeginn ordnungsgemäß bei den österreichischen Behörden (ZKO-Meldung) und halten die österreichischen Entlohnungs- und Meldevorschriften ein. Sie müssen sich um nichts davon kümmern.</p>
+    </div>
+  </section>
+
+  <!-- So läuft ein Einsatz (wortgleich, schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">So läuft ein Einsatz</h2>
+      <p class="max-w-[62ch]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+    </div>
+  </section>
+
+  <!-- Fest angestellt statt auf Rechnung (wortgleich, dunkler Block) -->
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Fest angestellt statt auf Rechnung</h2>
+      <p class="max-w-[62ch]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Braucht mein Betrieb für den Einsatz eine eigene Genehmigung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel nicht: Die Meldepflichten für die grenzüberschreitende Überlassung liegen beim Verleiher, also bei uns. Was auf Ihrer Seite zu beachten ist, klären wir im Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Übernehmt ihr auch nur die Wintersaison?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Eine Mindest-Einsatzdauer gibt es nicht, viele Einsätze laufen genau eine Saison.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Arbeitet ihr auch in der Schweiz oder in Südtirol?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Wir arbeiten in Deutschland und Österreich, in die Schweiz verleihen wir nicht, und Italien gehört nicht zu unserem Gebiet.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">Die Saison wartet nicht.</p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal" data-cta-location="personal-tirol-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

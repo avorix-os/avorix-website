@@ -9,6 +9,10 @@
 - [Koch-App](https://avorix.cloud/koch-app): Funktionen der App im Detail
 - [Schulung](https://avorix.cloud/schulung): Anlernen des Küchenteams durch Avorix-Köche
 - [Personal](https://avorix.cloud/personal): Festangestellte Köche, rechtssicher verliehen (Arbeitnehmerüberlassung)
+- [Mietkoch am Bodensee](https://avorix.cloud/personal/bodensee): Festangestellte Köche mieten am Bodensee, mit Sitz in Friedrichshafen, in der Regel innerhalb von 24 bis 72 Stunden.
+- [Mietkoch in München](https://avorix.cloud/personal/muenchen): Festangestellte Köche mieten im Großraum München, auch für Bankette und Messewochen.
+- [Mietkoch in Frankfurt](https://avorix.cloud/personal/frankfurt): Festangestellte Köche mieten in Frankfurt und Rhein-Main, in der Regel innerhalb von 24 bis 72 Stunden.
+- [Mietkoch in Tirol](https://avorix.cloud/personal/tirol): Festangestellte Köche mieten in Tirol für die Saison, grenzüberschreitend ordnungsgemäß gemeldet.
 - [Pilotprogramm](https://avorix.cloud/pilotprogramm): Einstiegsangebot für Pilotbetriebe 2026
 - [Für Ferienhotels](https://avorix.cloud/fuer-hotels)
 - [Für Restaurants und Gasthöfe](https://avorix.cloud/fuer-restaurants)

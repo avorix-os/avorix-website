@@ -1147,3 +1147,13 @@ h2 {
 .tabelle-scroll tbody td { color: var(--grau); }
 .tabelle-scroll tbody tr:last-child td { border-bottom: none; }
 .tabelle-scroll td:first-child { color: var(--druck); font-weight: 600; }
+
+/* === Regionale Personal-Seiten (SEO-Paket Phase 2) ======================== */
+/* Eyebrow als Rückverweis-Link (Wissen- und Personal-Regionalseiten) */
+.eyebrow-link { color: inherit; text-decoration: none; }
+.eyebrow-link:hover { text-decoration: underline; }
+
+/* Telefon-Zeile im Hero (geteilt mit /personal) */
+.hero-telefon { font-size: 15px; color: var(--grau); }
+.hero-telefon-link { font-weight: 700; color: var(--akzent); text-decoration: underline; }
+.hero-telefon-zeit { display: inline-block; }
