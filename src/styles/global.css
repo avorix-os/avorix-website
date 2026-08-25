@@ -1157,3 +1157,18 @@ h2 {
 .hero-telefon { font-size: 15px; color: var(--grau); }
 .hero-telefon-link { font-weight: 700; color: var(--akzent); text-decoration: underline; }
 .hero-telefon-zeit { display: inline-block; }
+
+/* Bildkarten-Fix (Anweisung 34): Fotos füllen ihren Wrapper vollständig.
+   Die Wrapper haben feste Mindesthöhen (460/340px); ohne diese Regel bezog das
+   Bild seine Höhe aus dem eigenen Seitenverhältnis und ließ darunter ein Loch.
+   .hero-media füllt bereits, weil .hero-grid align-items:stretch nutzt. .split-row
+   zentriert dagegen (align-items:center), wodurch .split-media keine definite Höhe
+   hat und height:100% am Bild verpufft -- deshalb wird NUR die Media-Spalte
+   gestreckt (die Text-Spalte bleibt zentriert). */
+.split-media { align-self: stretch; }
+.hero-media img,
+.split-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
