@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Stempel from "../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Für Kantinen", "item": "https://avorix.cloud/fuer-kantinen" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wir kochen für mehrere Linien gleichzeitig. Bildet die App das ab?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Menüvarianten liegen als eigene Vorlagen vor, jede mit eigener Portionslogik." } },
+      { "@type": "Question", "name": "Unsere Essenszahlen schwanken täglich.", "acceptedAnswer": { "@type": "Answer", "text": "Der Portionsrechner skaliert jedes Rezept auf die Zahl, die Sie eintragen. Der Bedarf rechnet sich daraus neu." } },
+      { "@type": "Question", "name": "Können wir Köche auch nur für einzelne Tage buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindestdauer gibt es nicht." } },
+      { "@type": "Question", "name": "Führt die App die Allergenkennzeichnung?", "acceptedAnswer": { "@type": "Answer", "text": "Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht." } },
+      { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Koch für Kantine & Betriebsgastronomie mieten"
+  description="Koch für Ihre Kantine gesucht? Festangestellte Köche für Betriebsgastronomie, in der Regel innerhalb von 24 bis 72 Stunden. Und ein System für gleichbleibende Qualität."
+  schemaOrg={schema}
+>
+  <!-- Hero (Text-Hero; Hero-Bild von Simon noch offen, Anweisung 15/33) -->
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4">Für Kantinen und Betriebsgastronomie</p>
+      <h1 class="mb-6 max-w-[20ch]">Jeden Mittag dieselbe Qualität. Bei festen Zahlen und festem Rahmen.</h1>
+      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        Avorix sichert Ihre Menüzyklen als System, das jede Kraft durch den Ablauf führt, und stellt Ihnen Köche, wenn jemand ausfällt. Damit die Ausgabe läuft, ob das Team komplett ist oder nicht.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/kontakt" data-cta-location="kantinen-hero" class="btn btn-primary">App-Demo vereinbaren</a>
+        <a href="/personal#anfrage" data-cta-location="kantinen-hero" data-cta-event="cta_personal_click" class="btn btn-secondary">Personal anfragen</a>
+      </div>
+      <div class="hero-badges">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+    </div>
+  </section>
+
+  <!-- Das Problem -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">In der Gemeinschaftsverpflegung ist alles vorgegeben. Außer, wer heute kocht.</h2>
+      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Die Essenszahl steht, der Preis steht, die Ausgabezeit steht. Nur die Küche muss jeden Tag neu funktionieren. Genau dafür gibt es Avorix.</p>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Der Rahmen ist fest, die Kosten sind es nicht.</h3>
+          <p class="text-sm" style="color:var(--grau)">Der Preis je Essen ist gesetzt, oft über Jahre. Steigt der Wareneinsatz, lässt sich das nicht über die Karte auffangen. Wer nicht weiß, was jede Portion kostet, merkt es erst im Jahresabschluss.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Mehrere Linien, jeden Tag.</h3>
+          <p class="text-sm" style="color:var(--grau)">Menü eins, Menü zwei, vegetarisch, dazu Sonderkost. Vier Abläufe parallel, und jeder muss pünktlich fertig sein. Fällt eine Kraft aus, wackelt nicht ein Gericht, sondern die ganze Ausgabe.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Köche sind schwer zu finden, auch hier.</h3>
+          <p class="text-sm" style="color:var(--grau)">Sie konkurrieren um dieselben Leute wie jedes Restaurant. Dabei haben Sie das bessere Angebot, es weiß nur niemand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Die zwei Wege -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</h2>
+      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Das eine hilft nächste Woche, das andere ab dem nächsten Zyklus. Die meisten Betriebe fangen mit dem ersten an.</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Personal</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Köche, wenn jemand ausfällt</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Wir schicken Ihnen festangestellte Köche, rechtssicher über unsere Arbeitnehmerüberlassungserlaubnis. In der Regel innerhalb von 24 bis 72 Stunden. Eine Mindestdauer gibt es nicht, Sie buchen genau die Tage, die Sie brauchen.</p>
+          <p class="text-sm" style="color:var(--grau)"><strong>Und ein Argument, das Ihnen gehört: Bei Ihnen ist um sechs Feierabend, keine Abende, keine Wochenenden.</strong> Für viele Köche ist das der Grund zu wechseln. Wir kennen unsere Leute und wissen, wen das anspricht.</p>
+        </div>
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">System</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Ihre Zyklen in der App</h3>
+          <p class="text-sm" style="color:var(--grau)">Ihre Menüs liegen als Schritt-für-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Jede Kraft folgt dem Ablauf, auch am ersten Tag. Der Menüplaner legt Wochenpläne an, bewährte Wochen kopieren Sie in die nächste. Dazu lernt ein Avorix-Koch Ihr Team direkt an, an Ihrer Ausgabe.</p>
+        </div>
+      </div>
+      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Und Ihre Gäste? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden öffentlich.</p>
+    </div>
+  </section>
+
+  <!-- Warum das Segment passt (schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Feste Essenszahlen und ein fester Kostenrahmen sind der Idealfall für das System.</h2>
+      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Was in der à-la-carte-Küche schwierig ist, ist bei Ihnen einfach: Sie wissen vorher, wie viele Essen ausgegeben werden. Genau daraus rechnet die App. Der Portionsrechner skaliert jedes Rezept auf die tatsächliche Zahl, aus dem Wochenplan entsteht der Gesamtbedarf und daraus die Einkaufsliste. Mehrere Linien bilden Sie als Menüvarianten ab, jede mit eigener Portionslogik.</p>
+      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Die Kalkulation läuft mit: Sie sehen je Gericht, was die Portion kostet, und in der Monatsauswertung, wie sich Wareneinsatz und Personalkosten zu Ihren Zielwerten verhalten. Bei einem Preis, den Sie nicht anheben können, ist das der einzige Hebel, den Sie haben.</p>
+      <p class="max-w-[62ch]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+    </div>
+  </section>
+
+  <!-- Vier Schritte (dunkler Block) -->
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Vier Schritte, am besten in der Ferienzeit.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">1</div>
+          <div>
+            <h3 class="mb-4">Gespräch (30 Minuten, kostenlos)</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">2</div>
+          <div>
+            <h3 class="mb-4">Aufnahme</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">3</div>
+          <div>
+            <h3 class="mb-4">Schulung</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">4</div>
+          <div>
+            <h3 class="mb-4">Selbstständig arbeiten</h3>
+            <p class="text-sm mt-6 max-w-[62ch]">Die App führt Ihr Team durch jeden Zyklus. Wir bleiben erreichbar.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm mt-8 max-w-[62ch]">In der ruhigeren Ferienzeit sind Aufnahme und Schulung am einfachsten. Wenn der Betrieb wieder anläuft, steht Ihr System.</p>
+    </div>
+  </section>
+
+  <!-- Pilotangebot (schmale Spalte) -->
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
+      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
+      <a href="/pilotprogramm" data-cta-location="kantinen-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wir kochen für mehrere Linien gleichzeitig. Bildet die App das ab?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Menüvarianten liegen als eigene Vorlagen vor, jede mit eigener Portionslogik.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Unsere Essenszahlen schwanken täglich.<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Der Portionsrechner skaliert jedes Rezept auf die Zahl, die Sie eintragen. Der Bedarf rechnet sich daraus neu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Können wir Köche auch nur für einzelne Tage buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Eine Mindestdauer gibt es nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Führt die App die Allergenkennzeichnung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Müssen wir beides nehmen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/kontakt" data-cta-location="kantinen-final" class="btn btn-primary">App-Demo vereinbaren</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

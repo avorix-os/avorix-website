@@ -1,0 +1,202 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.cloud/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.cloud/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt und was sie den Betrieb kostet", "item": "https://avorix.cloud/wissen/mietkoch-scheinselbstaendigkeit/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt und was sie den Betrieb kostet",
+    "datePublished": "2026-08-25",
+    "dateModified": "2026-08-25",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.cloud" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Der Koch will selbst als Koch auf Rechnung arbeiten. Bin ich dann raus?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Beitragsschuld liegt beim Auftraggeber, also bei Ihrem Betrieb. Ob der Koch die Selbständigkeit selbst gewählt hat, spielt für die Bewertung keine Rolle, und zurückholen können Sie von ihm fast nichts." } },
+      { "@type": "Question", "name": "Gilt das auch für kurze Einsätze, etwa zwei Wochen Krankheitsvertretung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Dauer ist nur eines von mehreren Kriterien: Auch ein kurzer Einsatz kann als abhängige Beschäftigung bewertet werden, wenn Weisungsgebundenheit und Eingliederung gegeben sind." } },
+      { "@type": "Question", "name": "Hilft ein wasserdichter Vertrag?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Prüfer bewerten die tatsächliche Durchführung, nicht den Vertragstext. Ein Vertrag, der Selbständigkeit behauptet, während der Alltag wie ein Arbeitsverhältnis aussieht, schützt nicht." } },
+      { "@type": "Question", "name": "Gilt das alles auch für Servicekräfte und Küchenhilfen auf Rechnung?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Kriterien sind dieselben, und Service-Einsätze im laufenden Betrieb sind genauso regelmäßig als abhängige Beschäftigung eingestuft worden." } },
+      { "@type": "Question", "name": "Woran erkenne ich, ob ein Anbieter verleihen darf?", "acceptedAnswer": { "@type": "Answer", "text": "An der behördlichen Arbeitnehmerüberlassungserlaubnis. Lassen Sie sich die Erlaubnis zeigen, seriöse Anbieter tun das ohne Zögern." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Mietkoch auf Rechnung: Risiko Scheinselbständigkeit"
+  description="Woran die Rentenversicherung Scheinselbständigkeit beim Mietkoch erkennt, was Nachzahlungen kosten und wie sich Betriebe absichern. Mit Checkliste und FAQ."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6" style="background:var(--papier)">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt und was sie den Betrieb kostet</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p id="direktantwort" class="lead max-w-[62ch]" style="color:var(--grau)">
+        Ein selbständiger Mietkoch, der in Ihrer Küche nach Ihren Anweisungen, zu Ihren Zeiten und mit Ihrer Ware arbeitet, ist aus Sicht der Prüfbehörden in aller Regel kein Selbständiger, sondern ein nicht angemeldeter Arbeitnehmer. Das nennt sich Scheinselbständigkeit.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <p>Die Folgen tragen vor allem Sie als Betrieb: Nachzahlung der kompletten Sozialversicherungsbeiträge für rund vier Jahre, bei Vorsatz bis zu 30 Jahre, dazu Säumniszuschläge und im Ernstfall ein Strafverfahren.</p>
+
+        <h2>Woran erkennen Prüfer eine Scheinselbständigkeit?</h2>
+        <p>Maßstab ist § 7 des Vierten Sozialgesetzbuchs: Eine abhängige Beschäftigung liegt vor, wenn jemand weisungsgebunden und eingegliedert in eine fremde Arbeitsorganisation tätig ist. Entschieden wird nach dem Gesamtbild der tatsächlich gelebten Verhältnisse, kein Kriterium allein gibt den Ausschlag. Diese Punkte wiegen schwer:</p>
+        <ul>
+          <li><strong>Weisungsgebundenheit:</strong> Der Koch arbeitet nach Ihren Vorgaben zu Zeit, Ort und Art der Tätigkeit. Sie sagen, was wann gekocht wird.</li>
+          <li><strong>Eingliederung in den Betrieb:</strong> Er steht im Dienstplan, nutzt Ihre Küche, Ihre Ware, Ihre Geräte und arbeitet Hand in Hand mit Ihrem Team.</li>
+          <li><strong>Kein Unternehmerrisiko:</strong> Er bekommt einen festen Stundensatz, egal wie der Abend läuft. Er hat kein eigenes Konzept, keine eigene Kalkulation, kein eigenes Material.</li>
+        </ul>
+        <p>Dazu kommen Indizien wie Dauer und Ausschließlichkeit des Einsatzes. In der Prüfpraxis der Deutschen Rentenversicherung gilt: Wer als Koch in der Küche eines Betriebs mitarbeitet, wird regelmäßig als abhängig beschäftigt eingestuft. Als selbständig anerkannt wird üblicherweise nur, wer als Event- oder Privatkoch mit eigenem Konzept, eigener Kalkulation und ständig wechselnden Auftraggebern arbeitet. Die jüngere Rechtsprechung des Bundessozialgerichts gewichtet die Eingliederung in die fremde Organisation dabei besonders stark.</p>
+        <p>Wichtig: Eine Rechnung mit ausgewiesener Umsatzsteuer ändert daran nichts, und auch der beste Vertrag schützt nicht. Entscheidend ist nicht, was auf dem Papier steht, sondern wie tatsächlich gearbeitet wird.</p>
+
+        <h2>Was droht dem Betrieb im Prüffall?</h2>
+        <p>Wird eine Scheinselbständigkeit festgestellt, gilt der Koch rückwirkend als Ihr Arbeitnehmer. Die Konsequenzen im Einzelnen:</p>
+        <ul>
+          <li><strong>Beitragsnachzahlung:</strong> Der Betrieb schuldet den kompletten Sozialversicherungsbeitrag nach, also Arbeitgeber- und Arbeitnehmeranteil (<a href="https://www.gesetze-im-internet.de/sgb_4/__28e.html" target="_blank" rel="noopener" class="typo-link">§ 28e SGB IV</a>). Den Arbeitnehmeranteil dürfen Sie nur über die nächsten drei Lohnzahlungen vom Koch zurückholen; ist der Einsatz vorbei, bleiben Sie praktisch auf der gesamten Summe sitzen.</li>
+          <li><strong>Rückwirkung:</strong> In der Regel vier Jahre, bei Vorsatz bis zu 30 Jahre (<a href="https://www.gesetze-im-internet.de/sgb_4/__25.html" target="_blank" rel="noopener" class="typo-link">§ 25 SGB IV</a>). Für Vorsatz kann es schon genügen, dass Sie die Beitragspflicht für möglich gehalten und billigend in Kauf genommen haben, also trotzdem weitergemacht haben.</li>
+          <li><strong>Säumniszuschläge:</strong> 1 Prozent des Rückstands je angefangenem Monat (<a href="https://www.gesetze-im-internet.de/sgb_4/__24.html" target="_blank" rel="noopener" class="typo-link">§ 24 SGB IV</a>), das sind bis zu 12 Prozent pro Jahr zusätzlich.</li>
+          <li><strong>Strafrecht:</strong> Das Vorenthalten von Sozialversicherungsbeiträgen ist eine Straftat (<a href="https://www.gesetze-im-internet.de/stgb/__266a.html" target="_blank" rel="noopener" class="typo-link">§ 266a StGB</a>), sie trifft die Inhaber oder Geschäftsführer persönlich.</li>
+          <li><strong>Kontrolldruck:</strong> Die Finanzkontrolle Schwarzarbeit des Zolls prüft die Gastronomie als Risikobranche regelmäßig, auch ohne konkreten Verdacht.</li>
+        </ul>
+        <p>Wie teuer das wird, zeigt ein realer Prüffall aus unserer Region: Nachforderungen von 50.000 bis 100.000 Euro. Für viele Häuser ist das existenzbedrohend. Auch deshalb nehmen größere Hotelgruppen inzwischen nur noch Personal von Firmen mit Arbeitnehmerüberlassungserlaubnis.</p>
+
+        <h2>Vor der Beauftragung absichern: das Statusfeststellungsverfahren</h2>
+        <p>Wenn Sie ernsthaft mit einem selbständigen Koch arbeiten wollen, gibt es einen offiziellen Weg, die Frage vorab zu klären: das Statusfeststellungsverfahren bei der Clearingstelle der Deutschen Rentenversicherung Bund (<a href="https://www.gesetze-im-internet.de/sgb_4/__7a.html" target="_blank" rel="noopener" class="typo-link">§ 7a SGB IV</a>). Beantragen können es beide Seiten, also auch Sie als Auftraggeber, seit der Reform von 2022 sogar schon vor Beginn der Tätigkeit. Das Ergebnis ist eine verbindliche Einstufung, auf die Sie sich später berufen können.</p>
+        <p>Der Umkehrschluss aus der Prüfpraxis: Wer trotz erkennbarer Zweifel gar nicht erst fragt, dem kann das im Prüffall als Vorsatz-Indiz ausgelegt werden. Und damit verlängert sich die Rückwirkung von vier auf bis zu 30 Jahre.</p>
+
+        <h2>Checkliste: 8 Warnsignale vor der Beauftragung</h2>
+        <p>Je mehr dieser Punkte zutreffen, desto größer das Risiko, dass aus dem „Selbständigen" vor dem Prüfer ein Arbeitnehmer wird:</p>
+        <ol>
+          <li>Er rechnet nach Stunden ab, nicht nach Angebot oder Pauschale für ein eigenes Gewerk.</li>
+          <li>Er steht in Ihrem Dienstplan.</li>
+          <li>Er kocht Ihre Karte, nicht sein eigenes Konzept.</li>
+          <li>Er nutzt ausschließlich Ihre Ware, Ihre Geräte, Ihre Küche.</li>
+          <li>Sie weisen ihn an wie eigenes Personal.</li>
+          <li>Er arbeitet über Wochen überwiegend oder nur für Ihren Betrieb.</li>
+          <li>Er hat keine eigenen Mitarbeiter und tritt am Markt nicht erkennbar als Unternehmen auf.</li>
+          <li>Es gibt keine Statusfeststellung und niemand hat je danach gefragt.</li>
+        </ol>
+
+        <h2>Die legalen Wege im Vergleich</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Weg</th><th>Wofür geeignet</th><th>Worauf es ankommt</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Echter selbständiger Koch</td>
+                <td>Abgegrenzte eigene Gewerke: Event- oder Privatkoch mit eigenem Konzept und wechselnden Auftraggebern</td>
+                <td>Eigenes Angebot statt Stundensatz, keine Eingliederung in Ihren Betrieb, im Zweifel Statusfeststellung</td>
+              </tr>
+              <tr>
+                <td>Arbeitnehmerüberlassung (Leihkoch)</td>
+                <td>Notfall, Saison, Übergang: ein Koch arbeitet auf Zeit in Ihrer Küche</td>
+                <td>Der Koch ist beim Verleiher fest angestellt und sozialversichert, Sie dürfen ihn ganz normal anweisen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Voraussetzung: der Verleiher hat eine Arbeitnehmerüberlassungserlaubnis</td>
+              </tr>
+              <tr>
+                <td>Kurzfristige Beschäftigung</td>
+                <td>Zeitlich klar begrenzte Aushilfe, etwa in der Saisonspitze</td>
+                <td>Enge gesetzliche Grenzen bei Dauer und Berufsmäßigkeit, vorab mit dem Steuerbüro klären</td>
+              </tr>
+              <tr>
+                <td>Festanstellung</td>
+                <td>Die dauerhafte Lösung für eine dauerhafte Stelle</td>
+                <td>Braucht Vorlauf; für die Übergangszeit bleibt die Arbeitnehmerüberlassung</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wie der zweite Weg im Detail funktioniert, steht hier: <a href="/wissen/arbeitnehmerueberlassung-gastronomie/" class="typo-link">Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Der Koch will selbst als Koch auf Rechnung arbeiten. Bin ich dann raus?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Die Beitragsschuld liegt beim Auftraggeber, also bei Ihrem Betrieb. Ob der Koch die Selbständigkeit selbst gewählt hat, spielt für die Bewertung keine Rolle, und zurückholen können Sie von ihm fast nichts.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gilt das auch für kurze Einsätze, etwa zwei Wochen Krankheitsvertretung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Die Dauer ist nur eines von mehreren Kriterien: Auch ein kurzer Einsatz kann als abhängige Beschäftigung bewertet werden, wenn Weisungsgebundenheit und Eingliederung gegeben sind.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Hilft ein wasserdichter Vertrag?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Prüfer bewerten die tatsächliche Durchführung, nicht den Vertragstext. Ein Vertrag, der Selbständigkeit behauptet, während der Alltag wie ein Arbeitsverhältnis aussieht, schützt nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gilt das alles auch für Servicekräfte und Küchenhilfen auf Rechnung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Die Kriterien sind dieselben, und Service-Einsätze im laufenden Betrieb sind genauso regelmäßig als abhängige Beschäftigung eingestuft worden.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Woran erkenne ich, ob ein Anbieter verleihen darf?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>An der behördlichen Arbeitnehmerüberlassungserlaubnis. Lassen Sie sich die Erlaubnis zeigen, seriöse Anbieter tun das ohne Zögern.</p></div></div>
+        </details>
+      </div>
+      <p class="artikel-rechtshinweis">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechtsberatung. Wie Ihr Einzelfall zu bewerten ist, klären Sie mit Ihrer Steuer- oder Rechtsberatung.</p>
+    </div>
+  </section>
+
+  <!-- CTA-Abschluss -->
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">
+        Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten Köche aus.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal/" data-cta-location="wissen-scheinselbstaendigkeit-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
