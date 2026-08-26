@@ -7,22 +7,45 @@ services:
       - traefik-proxy
     labels:
       - "traefik.enable=true"
-      # HTTPS Router
-      - "traefik.http.routers.website.rule=Host(`avorix.cloud`) || Host(`www.avorix.cloud`)"
+
+      # ------------------------------------------------------------------
+      # Anweisung 36 (Domain-Livegang): avorix.de ist ab jetzt die Hauptdomain.
+      # avorix.cloud + www.avorix.cloud leiten dauerhaft (301) auf avorix.de.
+      # app.avorix.cloud liegt in einem anderen Service und bleibt unberuehrt.
+      # Voraussetzung: avorix.cloud muss weiter auf dieses Hosting zeigen (DNS),
+      # sonst kann der 301 nicht greifen.
+      # ------------------------------------------------------------------
+
+      # HTTPS Router (Hauptseite auf avorix.de)
+      - "traefik.http.routers.website.rule=Host(`avorix.de`) || Host(`www.avorix.de`)"
       - "traefik.http.routers.website.entrypoints=websecure"
       - "traefik.http.routers.website.tls.certresolver=le"
       - "traefik.http.routers.website.middlewares=www-redirect"
-      # HTTP -> HTTPS Redirect
-      - "traefik.http.routers.website-http.rule=Host(`avorix.cloud`) || Host(`www.avorix.cloud`)"
+      # HTTP -> HTTPS Redirect (avorix.de)
+      - "traefik.http.routers.website-http.rule=Host(`avorix.de`) || Host(`www.avorix.de`)"
       - "traefik.http.routers.website-http.entrypoints=web"
       - "traefik.http.routers.website-http.middlewares=redirect-to-https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       # Anweisung 30, Schritt 7.8: dauerhaft heisst 301, nicht 302 (Traefik-Standard).
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-      # www -> non-www Redirect
-      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.avorix\\.cloud/(.*)"
-      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://avorix.cloud/$${1}"
+      # www.avorix.de -> avorix.de
+      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.avorix\\.de/(.*)"
+      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://avorix.de/$${1}"
       - "traefik.http.middlewares.www-redirect.redirectregex.permanent=true"
+
+      # avorix.cloud (+ www) -> avorix.de, jede URL auf ihre Entsprechung, 301.
+      # HTTPS-Zweig (Zertifikat fuer .cloud existiert bereits ueber le).
+      - "traefik.http.routers.cloud-redirect.rule=Host(`avorix.cloud`) || Host(`www.avorix.cloud`)"
+      - "traefik.http.routers.cloud-redirect.entrypoints=websecure"
+      - "traefik.http.routers.cloud-redirect.tls.certresolver=le"
+      - "traefik.http.routers.cloud-redirect.middlewares=cloud-to-de"
+      # HTTP-Zweig (direkt auf https://avorix.de, ein Sprung statt zwei).
+      - "traefik.http.routers.cloud-redirect-http.rule=Host(`avorix.cloud`) || Host(`www.avorix.cloud`)"
+      - "traefik.http.routers.cloud-redirect-http.entrypoints=web"
+      - "traefik.http.routers.cloud-redirect-http.middlewares=cloud-to-de"
+      - "traefik.http.middlewares.cloud-to-de.redirectregex.regex=^https?://(www\\.)?avorix\\.cloud/(.*)"
+      - "traefik.http.middlewares.cloud-to-de.redirectregex.replacement=https://avorix.de/$${2}"
+      - "traefik.http.middlewares.cloud-to-de.redirectregex.permanent=true"
 
 networks:
   traefik-proxy:

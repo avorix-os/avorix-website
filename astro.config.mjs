@@ -5,7 +5,7 @@ import { mkdirSync, readdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const SITE = "https://avorix.cloud";
+const SITE = "https://avorix.de";
 
 // Slot-Tabellen aus Anweisung 05, Abschnitt 3 — Seite → Bilddateien
 // /pilotprogramm bewusst ausgelassen (§3.6: keine Bilder)

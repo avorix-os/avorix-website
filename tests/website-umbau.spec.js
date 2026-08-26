@@ -916,7 +916,7 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     const text = await antwort.text();
     expect(text).toContain('## English pages');
     for (const pfad of ['/en/staff', '/en/cook-app', '/en/training', '/en/system', '/en/pilot-program', '/en/about', '/en/contact']) {
-      expect(text, pfad).toContain('https://avorix.cloud' + pfad + ')');
+      expect(text, pfad).toContain('https://avorix.de' + pfad + ')');
     }
     expect(text).toContain('An English section covers the same offering');
   });
