@@ -4,48 +4,48 @@
 
 ## Seiten
 
-- [Startseite](https://avorix.cloud/): Überblick über das Avorix-System
-- [Unser System](https://avorix.cloud/system): Wie Koch-App, Schulung und Personal ineinandergreifen
-- [Koch-App](https://avorix.cloud/koch-app): Funktionen der App im Detail
-- [Schulung](https://avorix.cloud/schulung): Anlernen des Küchenteams durch Avorix-Köche
-- [Personal](https://avorix.cloud/personal): Festangestellte Köche, rechtssicher verliehen (Arbeitnehmerüberlassung)
-- [Mietkoch am Bodensee](https://avorix.cloud/personal/bodensee): Festangestellte Köche mieten am Bodensee, mit Sitz in Friedrichshafen, in der Regel innerhalb von 24 bis 72 Stunden.
-- [Mietkoch in München](https://avorix.cloud/personal/muenchen): Festangestellte Köche mieten im Großraum München, auch für Bankette und Messewochen.
-- [Mietkoch in Frankfurt](https://avorix.cloud/personal/frankfurt): Festangestellte Köche mieten in Frankfurt und Rhein-Main, in der Regel innerhalb von 24 bis 72 Stunden.
-- [Mietkoch in Tirol](https://avorix.cloud/personal/tirol): Festangestellte Köche mieten in Tirol für die Saison, grenzüberschreitend ordnungsgemäß gemeldet.
-- [Pilotprogramm](https://avorix.cloud/pilotprogramm): Einstiegsangebot für Pilotbetriebe 2026
-- [Für Ferienhotels](https://avorix.cloud/fuer-hotels)
-- [Für Restaurants und Gasthöfe](https://avorix.cloud/fuer-restaurants)
-- [Für Sporthotels](https://avorix.cloud/fuer-sporthotels)
-- [Für Catering](https://avorix.cloud/fuer-catering): Köche und ganze Teams für Catering und Veranstaltungen, dazu die Koch-App für Abläufe am Einsatzort.
-- [Für Kantinen](https://avorix.cloud/fuer-kantinen): Festangestellte Köche für Kantinen und Betriebsgastronomie, dazu die Koch-App für gleichbleibende Abläufe.
-- [Über uns](https://avorix.cloud/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
+- [Startseite](https://avorix.de/): Überblick über das Avorix-System
+- [Unser System](https://avorix.de/system): Wie Koch-App, Schulung und Personal ineinandergreifen
+- [Koch-App](https://avorix.de/koch-app): Funktionen der App im Detail
+- [Schulung](https://avorix.de/schulung): Anlernen des Küchenteams durch Avorix-Köche
+- [Personal](https://avorix.de/personal): Festangestellte Köche, rechtssicher verliehen (Arbeitnehmerüberlassung)
+- [Mietkoch am Bodensee](https://avorix.de/personal/bodensee): Festangestellte Köche mieten am Bodensee, mit Sitz in Friedrichshafen, in der Regel innerhalb von 24 bis 72 Stunden.
+- [Mietkoch in München](https://avorix.de/personal/muenchen): Festangestellte Köche mieten im Großraum München, auch für Bankette und Messewochen.
+- [Mietkoch in Frankfurt](https://avorix.de/personal/frankfurt): Festangestellte Köche mieten in Frankfurt und Rhein-Main, in der Regel innerhalb von 24 bis 72 Stunden.
+- [Mietkoch in Tirol](https://avorix.de/personal/tirol): Festangestellte Köche mieten in Tirol für die Saison, grenzüberschreitend ordnungsgemäß gemeldet.
+- [Pilotprogramm](https://avorix.de/pilotprogramm): Einstiegsangebot für Pilotbetriebe 2026
+- [Für Ferienhotels](https://avorix.de/fuer-hotels)
+- [Für Restaurants und Gasthöfe](https://avorix.de/fuer-restaurants)
+- [Für Sporthotels](https://avorix.de/fuer-sporthotels)
+- [Für Catering](https://avorix.de/fuer-catering): Köche und ganze Teams für Catering und Veranstaltungen, dazu die Koch-App für Abläufe am Einsatzort.
+- [Für Kantinen](https://avorix.de/fuer-kantinen): Festangestellte Köche für Kantinen und Betriebsgastronomie, dazu die Koch-App für gleichbleibende Abläufe.
+- [Über uns](https://avorix.de/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
 
 ## Wissen
 
-- [Wissen für Küche und Gastgewerbe](https://avorix.cloud/wissen): Praxiswissen aus der Küche: Personal-Engpässe lösen, Fremdpersonal rechtssicher einsetzen, Wareneinsatz und Kalkulation im Griff.
-- [Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage](https://avorix.cloud/wissen/kuechenchef-kuendigt-notfallplan): Was Sie sofort tun können, damit der Betrieb weiterläuft. Schritt für Schritt.
-- [Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt](https://avorix.cloud/wissen/mietkoch-scheinselbstaendigkeit): Woran Prüfer eine Scheinselbständigkeit erkennen, was Nachzahlungen kosten und wie Sie sich als Betrieb absichern.
-- [Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt](https://avorix.cloud/wissen/arbeitnehmerueberlassung-gastronomie): AÜ-Erlaubnis, Equal Pay, Höchstüberlassungsdauer: wie der geregelte Weg zum Leihkoch funktioniert.
-- [Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler](https://avorix.cloud/wissen/wareneinsatz-berechnen): Mit Rechner: Wareneinsatz und Quote in zwei Minuten ermitteln.
-- [Kalkulation in der Gastronomie: vom Einkaufspreis zum Verkaufspreis](https://avorix.cloud/wissen/kalkulation-gastronomie): Schritt für Schritt vom Wareneinsatz je Portion zum Preis, der trägt. Mit Beispielrechnung.
+- [Wissen für Küche und Gastgewerbe](https://avorix.de/wissen): Praxiswissen aus der Küche: Personal-Engpässe lösen, Fremdpersonal rechtssicher einsetzen, Wareneinsatz und Kalkulation im Griff.
+- [Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage](https://avorix.de/wissen/kuechenchef-kuendigt-notfallplan): Was Sie sofort tun können, damit der Betrieb weiterläuft. Schritt für Schritt.
+- [Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt](https://avorix.de/wissen/mietkoch-scheinselbstaendigkeit): Woran Prüfer eine Scheinselbständigkeit erkennen, was Nachzahlungen kosten und wie Sie sich als Betrieb absichern.
+- [Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt](https://avorix.de/wissen/arbeitnehmerueberlassung-gastronomie): AÜ-Erlaubnis, Equal Pay, Höchstüberlassungsdauer: wie der geregelte Weg zum Leihkoch funktioniert.
+- [Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler](https://avorix.de/wissen/wareneinsatz-berechnen): Mit Rechner: Wareneinsatz und Quote in zwei Minuten ermitteln.
+- [Kalkulation in der Gastronomie: vom Einkaufspreis zum Verkaufspreis](https://avorix.de/wissen/kalkulation-gastronomie): Schritt für Schritt vom Wareneinsatz je Portion zum Preis, der trägt. Mit Beispielrechnung.
 
 ## English pages
 
-- [Staff](https://avorix.cloud/en/staff): Permanently employed chefs hired out to hotels and restaurants in Germany and Austria, under the official German staffing licence.
-- [The Cook App](https://avorix.cloud/en/cook-app): Step-by-step recipe guidance, menu planner, portion calculator, shopping lists and food cost analysis.
-- [The Training](https://avorix.cloud/en/training): An Avorix chef records your menu and trains your kitchen team at the stove, as a block or live during service.
-- [How It All Works Together](https://avorix.cloud/en/system): How the Avorix Cook App, the training and the staffing module work together as one kitchen system.
-- [Pilot Program](https://avorix.cloud/en/pilot-program): The 2026 Pilot Program, three hotel kitchens at around half the regular price, results evaluated anonymously.
-- [About Us](https://avorix.cloud/en/about): Founder Börge Penk, head chef with 20 years of practice.
-- [Contact](https://avorix.cloud/en/contact): Request a demo or ask about staff.
+- [Staff](https://avorix.de/en/staff): Permanently employed chefs hired out to hotels and restaurants in Germany and Austria, under the official German staffing licence.
+- [The Cook App](https://avorix.de/en/cook-app): Step-by-step recipe guidance, menu planner, portion calculator, shopping lists and food cost analysis.
+- [The Training](https://avorix.de/en/training): An Avorix chef records your menu and trains your kitchen team at the stove, as a block or live during service.
+- [How It All Works Together](https://avorix.de/en/system): How the Avorix Cook App, the training and the staffing module work together as one kitchen system.
+- [Pilot Program](https://avorix.de/en/pilot-program): The 2026 Pilot Program, three hotel kitchens at around half the regular price, results evaluated anonymously.
+- [About Us](https://avorix.de/en/about): Founder Börge Penk, head chef with 20 years of practice.
+- [Contact](https://avorix.de/en/contact): Request a demo or ask about staff.
 
 ## Fakten
 
 - Firma: AVORIX GmbH, Friedrichshafen am Bodensee
 - Tätig in: Deutschland und Österreich (keine Schweiz)
 - Besonderheit: behördliche Arbeitnehmerüberlassungserlaubnis der Bundesagentur für Arbeit
-- Küchenpersonal (Arbeitnehmerüberlassung mit behördlicher Erlaubnis) kann über avorix.cloud/personal angefragt werden.
-- Kontakt: https://avorix.cloud/kontakt
+- Küchenpersonal (Arbeitnehmerüberlassung mit behördlicher Erlaubnis) kann über avorix.de/personal angefragt werden.
+- Kontakt: https://avorix.de/kontakt
 
 Die Produktseiten enthalten echte Screenshots der Avorix Koch-App (Koch-Modus mit HACCP-Kontrollpunkten, Portionsrechner, Rezeptbibliothek, Menüplaner, Einkaufslisten).

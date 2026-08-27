@@ -23,7 +23,7 @@ const {
   schemaOrg,
 } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.cloud";
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.de";
 const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 const ogImageUrl = `${siteUrl}${ogImage}`;
 const fullTitle = `${title} | Avorix`;
