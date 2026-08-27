@@ -108,6 +108,14 @@ const schemaOrg = [
       },
       {
         "@type": "Question",
+        "name": "I do not need a full-time chef. Is there a smaller option?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Several houses can share the expertise of one Avorix head chef: he develops your menu, visits your business regularly and coaches your team, at a fixed monthly price. Mention it in the first call."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Who is the employer of the chef we hire?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -331,7 +339,7 @@ const schemaOrg = [
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Your guests experience your kitchen. Not ours.</h2>
       <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
-        <strong>No guest notices that an Avorix chef is cooking alongside your team.</strong> We never name a client publicly, and on request we guarantee that in writing.
+        <strong>No guest notices that an Avorix chef is cooking alongside your team.</strong> We never name a client without their explicit consent, and on request we guarantee that in writing.
       </p>
     </div>
   </section>
@@ -347,6 +355,17 @@ const schemaOrg = [
         <li>Over 1,000 placement days in our clients&rsquo; kitchens.</li>
         <li>One catering company sources around 15,000 hours a year through us.</li>
       </ul>
+      <figure class="card card-text beweis-zitat mb-6">
+        <p class="mb-3" style="color:var(--druck);font-weight:700">Proven in practice: the Seehotel Friedrichshafen.</p>
+        <blockquote>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            &ldquo;The Avorix system has stabilised our daily kitchen routine. We have raised the quality and at the same time massively reduced our dependence on the labour market.&rdquo;
+          </p>
+        </blockquote>
+        <figcaption class="text-sm mt-4" style="color:var(--grau)">
+          Translated from the German original.
+        </figcaption>
+      </figure>
       <figure class="card card-text beweis-zitat">
         <blockquote>
           <p class="leading-relaxed" style="color:var(--grau)">
@@ -357,6 +376,66 @@ const schemaOrg = [
           Kitchen director of a catering company, review from 25 February 2026. Translated from the German original.
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Position 1 (Anweisung 37): A permanent head chef is a fixed cost -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">A permanent head chef is a fixed cost. Our chef is not.</h2>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        A permanent head chef costs you the full salary every month, no matter how busy your house is. Add employer contributions, holiday entitlement and sick days. With an Avorix chef, you turn that fixed cost into a cost you control: you book what you need and end the assignment when things calm down.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+        <div class="card">
+          <h3 class="mb-4">Predictable.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            The hourly rate is fixed before the assignment starts. No hidden charges.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">No surprises.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            You pay for the assignment, not for the absences: sick days, holiday entitlements and employer contributions of a permanent hire do not apply.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">No long-term commitment.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            We convince through performance, not through contracts that lock you in.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Position 2 (Anweisung 37): One head chef for several houses -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">One head chef for several houses.</h2>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        Not every house needs a top head chef full time. That is why several houses in a region share the expertise of one Avorix professional: he develops your menu, keeps the quality up and coaches your team. You get the kitchen of a big house without the payroll of a big house.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+        <div class="card">
+          <h3 class="mb-4">Fixed monthly price.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Full planning certainty for your calculation.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Seasonal menus.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Four times a year, the head chef develops new, regional menus for your house.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Quality checks on site.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            The head chef visits your business regularly, reviews your processes and coaches your team.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -392,6 +471,10 @@ const schemaOrg = [
         <details class="faq-item">
           <summary class="faq-q">Can we book a chef only, without the app and the system?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>Yes. Many properties start exactly that way: someone is missing, we send a chef. You do not have to book anything else.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">I do not need a full-time chef. Is there a smaller option?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. Several houses can share the expertise of one Avorix head chef: he develops your menu, visits your business regularly and coaches your team, at a fixed monthly price. Mention it in the first call.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Who is the employer of the chef we hire?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>

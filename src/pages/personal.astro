@@ -113,6 +113,14 @@ const schema = [
       },
       {
         "@type": "Question",
+        "name": "Ich brauche keinen Koch in Vollzeit. Geht auch weniger?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ja. Mehrere Häuser können sich die Expertise eines Avorix-Küchenchefs teilen: Er entwickelt Ihre Karte, kommt regelmäßig in Ihren Betrieb und coacht Ihr Team, zum monatlichen Festpreis. Sprechen Sie uns im Erstgespräch darauf an."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Wer ist der Arbeitgeber unseres Leihkochs?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -340,7 +348,7 @@ const schema = [
         Ihre G&auml;ste erleben Ihre K&uuml;che. Nicht unsere.
       </h2>
       <p class="lead max-w-[62ch]" style="color:var(--grau)">
-        <strong>Kein Gast merkt, dass ein Avorix-Koch mitkocht.</strong> Wir nennen keinen Kunden &ouml;ffentlich, und auf Wunsch sichern wir Ihnen das vertraglich zu.
+        <strong>Kein Gast merkt, dass ein Avorix-Koch mitkocht.</strong> Wir nennen keinen Kunden ohne sein ausdr&uuml;ckliches Einverst&auml;ndnis, und auf Wunsch sichern wir Ihnen das vertraglich zu.
       </p>
     </div>
   </section>
@@ -353,6 +361,14 @@ const schema = [
         <li>&Uuml;ber 1.000 Einsatztage in den K&uuml;chen unserer Kunden.</li>
         <li>Ein Cateringunternehmen bezieht &uuml;ber uns rund 15.000 Stunden im Jahr.</li>
       </ul>
+      <figure class="card card-text beweis-zitat mb-6">
+        <p class="mb-3" style="color:var(--druck);font-weight:700">Erprobt in der Praxis: das Seehotel Friedrichshafen.</p>
+        <blockquote>
+          <p class="leading-relaxed" style="color:var(--grau)">
+            &bdquo;Das AVORIX System hat unseren K&uuml;chenalltag stabilisiert. Wir haben die Qualit&auml;t gesteigert und gleichzeitig die Abh&auml;ngigkeit vom Arbeitsmarkt massiv gesenkt.&ldquo;
+          </p>
+        </blockquote>
+      </figure>
       <figure class="card card-text beweis-zitat">
         <blockquote>
           <p class="leading-relaxed" style="color:var(--grau)">
@@ -363,6 +379,66 @@ const schema = [
           K&uuml;chendirektorin eines Cateringunternehmens, Bewertung vom 25. Februar 2026
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Position 1 (Anweisung 37): Fixkosten werden variabel -->
+ <section class="reveal section-gap" style="background:var(--papier)">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Ein fester K&uuml;chenchef ist ein Fixkostenblock. Unser Koch nicht.</h2>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        Ein festangestellter K&uuml;chenchef kostet Sie jeden Monat das volle Gehalt, egal wie voll Ihr Haus ist. Dazu kommen Sozialabgaben, Urlaubsanspruch und Krankheitstage. Mit einem Avorix-Koch machen Sie aus diesem Fixkostenblock steuerbare Kosten: Sie buchen, was Sie brauchen, und beenden den Einsatz, wenn sich die Lage entspannt.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+        <div class="card">
+          <h3 class="mb-4">Planbar.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Der Stundensatz steht fest, bevor der Einsatz beginnt. Keine versteckten Posten.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Keine &Uuml;berraschungen.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Sie zahlen den Einsatz, nicht die Ausf&auml;lle: Krankheitstage, Urlaubsanspr&uuml;che und Arbeitgeberabgaben eines Festangestellten entfallen f&uuml;r Sie.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Keine Langzeitbindung.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Wir &uuml;berzeugen durch Leistung, nicht durch Knebelvertr&auml;ge.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Position 2 (Anweisung 37): Ein Küchenchef für mehrere Häuser -->
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Ein K&uuml;chenchef f&uuml;r mehrere H&auml;user.</h2>
+      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+        Nicht jedes Haus braucht einen Spitzen-K&uuml;chenchef in Vollzeit. Deshalb teilen sich bei Avorix mehrere H&auml;user einer Region die Expertise eines Profis: Er entwickelt Ihre Karte, h&auml;lt die Qualit&auml;t und coacht Ihr Team. Sie bekommen die K&uuml;chenleistung eines gro&szlig;en Hauses, ohne die Personalkosten eines gro&szlig;en Hauses.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
+        <div class="card">
+          <h3 class="mb-4">Monatlicher Festpreis.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Volle Planungssicherheit f&uuml;r Ihre Kalkulation.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Saisonale Karten.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Viermal im Jahr entwickelt der K&uuml;chenchef neue, regionale Men&uuml;s f&uuml;r Ihr Haus.
+          </p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Qualit&auml;tskontrolle vor Ort.</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--grau)">
+            Der K&uuml;chenchef besucht Ihren Betrieb regelm&auml;&szlig;ig, schaut sich die Abl&auml;ufe an und coacht Ihr Team.
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -516,6 +592,10 @@ const schema = [
         <details class="faq-item">
           <summary class="faq-q">Bekommen wir auch nur einen Koch, ohne App und System?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>Ja. Viele H&auml;user fangen genau so an: Es fehlt jemand, wir schicken einen Koch. Mehr m&uuml;ssen Sie nicht buchen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ich brauche keinen Koch in Vollzeit. Geht auch weniger?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Mehrere H&auml;user k&ouml;nnen sich die Expertise eines Avorix-K&uuml;chenchefs teilen: Er entwickelt Ihre Karte, kommt regelm&auml;&szlig;ig in Ihren Betrieb und coacht Ihr Team, zum monatlichen Festpreis. Sprechen Sie uns im Erstgespr&auml;ch darauf an.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Wer ist der Arbeitgeber unseres Leihkochs?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
