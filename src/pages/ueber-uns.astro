@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import vakuumbeutelKuehlhaus from "../assets/bilder/vakuumbeutel-kuehlhaus.jpg";
+import boergeKueche from "../assets/bilder/boerge-kueche.jpg";
 
 const ogImg = await getImage({ src: vakuumbeutelKuehlhaus, width: 1200, format: "jpeg" });
 const ogImageAlt = "Beschriftete Vakuumbeutel mit vorbereiteten Zutaten im Kühlraum einer Profiküche";
@@ -66,6 +67,22 @@ const breadcrumb = {
           <p class="max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, vom Auszubildenden bis zum K&uuml;chenchef mit gro&szlig;en Teams. Er hat Karten entwickelt, Mannschaften gef&uuml;hrt und den Fachkr&auml;ftemangel <strong>nicht aus Statistiken kennengelernt, sondern aus jedem einzelnen Dienstplan</strong>.</p>
         </div>
         <blockquote class="gruender-quote">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
+      </div>
+      <!-- Position 3 (Anweisung 37): Börge-Geschichte nach dem Zitat, mit echtem Foto (Betriebskueche). -->
+      <div class="split-row mt-12">
+        <div class="split-copy">
+          <p style="color:var(--grau)">Angefangen hat er ganz unten: als Jugendlicher Gem&uuml;se geschnitten, Geschirr gesp&uuml;lt, dann hochgearbeitet bis zum K&uuml;chenleiter. &Uuml;ber all die Jahre fiel ihm immer dasselbe auf: Es fehlte an qualifizierten Leuten, und die guten brannten aus. Statt zu resignieren, begann er, Menschen ohne klassische Kochausbildung f&uuml;r die K&uuml;che zu begeistern, und entdeckte, wie viel Talent in ihnen steckt. 2023 gr&uuml;ndete er daf&uuml;r sein erstes Unternehmen, die BP Gastroberatung in Berlin. Innerhalb kurzer Zeit waren 15 festangestellte K&ouml;che im Einsatz. Daraus ist die AVORIX GmbH geworden.</p>
+        </div>
+        <div class="split-media">
+          <Image
+            src={boergeKueche}
+            alt="Börge Penk in Kochjacke in einer Betriebsküche"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 900px) 100vw, 420px"
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
+        </div>
       </div>
     </div>
   </section>

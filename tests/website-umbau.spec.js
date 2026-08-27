@@ -988,7 +988,7 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     expect(lage.satz).toBeLessThan(lage.karte);
   });
 
-  test('6.5 — /en/staff hat neun Fragen im Schema, wie /personal', async ({ page }) => {
+  test('6.5 — /en/staff und /personal tragen ihre FAQ im Schema', async ({ page }) => {
     const zaehle = async (pfad) => {
       await page.goto(pfad);
       return page.evaluate(() => {
@@ -1002,11 +1002,11 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
         return 0;
       });
     };
-    expect(await zaehle('/en/staff')).toBe(9);
-    // SEO-Paket Phase 1 (Abschnitt 2.2 B): /personal hat eine zusaetzliche FAQ
-    // zur Mietkoch-Abgrenzung bekommen -> 10. Die EN-Seite bleibt unberuehrt (9),
-    // die fruehere Parity 9/9 ist damit bewusst aufgehoben.
-    expect(await zaehle('/personal')).toBe(10);
+    // Anweisung 37 (Alt-Content): beide Seiten haben die "Kuechenchef fuer mehrere
+    // Haeuser"-FAQ bekommen -> +1. Zusammen mit der Mietkoch-FAQ auf /personal
+    // (SEO-Paket Phase 1) steht /personal bei 11, /en/staff bei 10.
+    expect(await zaehle('/en/staff')).toBe(10);
+    expect(await zaehle('/personal')).toBe(11);
   });
 
   test('6.6 — /en/contact hat Pflichtfeld-Zeile und Sternchen', async ({ page }) => {
