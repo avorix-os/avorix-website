@@ -15,7 +15,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}
 >
-  <!-- WebPage Schema -->
+  {/* WebPage Schema */}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -27,7 +27,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     }
   })} />
 
-  <!-- BreadcrumbList Schema -->
+  {/* BreadcrumbList Schema */}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -47,7 +47,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     ]
   })} />
 
-  <!-- FAQPage Schema -->
+  {/* FAQPage Schema */}
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -119,7 +119,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     ]
   })} />
 
-  <!-- Hero (W2: Text-Hero, linksbündig) -->
+  {/* Hero (W2: Text-Hero, linksbündig) */}
  <section class="hero-section px-6" style="background:var(--papier)">
     <div class="content-width">
       <p class="eyebrow mb-4">Das Avorix-System</p>
@@ -139,20 +139,20 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- Drei Bausteine -->
+  {/* Drei Bausteine */}
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
         Unser System. Die Schulung. Die Verst&auml;rkung.
       </h2>
-      <!-- Korrektur 9 (Anweisung 25): Der Satz stand unter den Modulen. Er ist
-           zu verstehen, bevor man sie gesehen hat, also gehoert er nach oben. -->
+      {/* Korrektur 9 (Anweisung 25): Der Satz stand unter den Modulen. Er ist
+           zu verstehen, bevor man sie gesehen hat, also gehoert er nach oben. */}
       <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
         Denken Sie an Feuerwehr und Brandschutz: Die Verst&auml;rkung l&ouml;scht den akuten Brand. System und Schulung
         sorgen daf&uuml;r, dass es nie wieder brennt. <strong>Avorix ist beides.</strong>
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Baustein 1: Unser System -->
+        {/* Baustein 1: Unser System */}
         <div class="card-modul">
           <div class="card-modul-header">
             <span class="card-modul-label">Modul 1</span>
@@ -165,7 +165,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             Tag, auf Tablet und Smartphone, direkt im Browser.
           </p>
         </div>
-        <!-- Baustein 2: Die Schulung -->
+        {/* Baustein 2: Die Schulung */}
         <div class="card-modul">
           <div class="card-modul-header">
             <span class="card-modul-label">Modul 2</span>
@@ -177,7 +177,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             App an und lernt Ihr Team an. Als kompakte Schulungsbl&ouml;cke oder live im laufenden Betrieb.
           </p>
         </div>
-        <!-- Baustein 3: Die Verstärkung -->
+        {/* Baustein 3: Die Verstärkung */}
         <div class="card-modul">
           <div class="card-modul-header">
             <span class="card-modul-label">Modul 3</span>
@@ -196,9 +196,9 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
           </div>
         </div>
       </div>
-      <!-- Korrektur 21 (Anweisung 25): Das Bild stand zwischen Ueberschrift und
+      {/* Korrektur 21 (Anweisung 25): Das Bild stand zwischen Ueberschrift und
            Modulen. Die Ueberschrift kuendigt drei Dinge an, der Leser sucht sie;
-           das Bild schob sich dazwischen. Jetzt darunter. -->
+           das Bild schob sich dazwischen. Jetzt darunter. */}
       <Image
         src={bonLeiste}
         alt="Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Restaurantk&uuml;che"
@@ -212,14 +212,14 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- Einzeln gut. Zusammen unschlagbar. -->
+  {/* Einzeln gut. Zusammen unschlagbar. */}
  <section class="reveal section-gap section-dunkel">
     <div class="content-width">
       <h2 class="mb-10 md:mb-16">
         Einzeln gut. Zusammen unschlagbar.
       </h2>
       <div class="grid sm:grid-cols-2 gap-6">
-        <!-- a -->
+        {/* a */}
         <div class="card">
           <span class="schritt-chip">a</span>
           <h3 class="mt-4 mb-4">Eine App allein ist eine leere H&uuml;lle.</h3>
@@ -228,7 +228,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             Deshalb richten wir jedes System selbst ein.
           </p>
         </div>
-        <!-- b -->
+        {/* b */}
         <div class="card">
           <span class="schritt-chip">b</span>
           <h3 class="mt-4 mb-4">Eine Schulung allein verpufft.</h3>
@@ -237,7 +237,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             und mit den K&ouml;pfen aus der T&uuml;r. <strong>Die App h&auml;lt fest, was die Schulung aufbaut.</strong>
           </p>
         </div>
-        <!-- c -->
+        {/* c */}
         <div class="card">
           <span class="schritt-chip">c</span>
           <h3 class="mt-4 mb-4">Ein Leihkoch allein ist die teuerste L&ouml;sung der Welt.</h3>
@@ -246,7 +246,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             klassischer Zeitarbeit. Genau davon unterscheiden wir uns:
           </p>
         </div>
-        <!-- star -->
+        {/* star */}
         <div class="card">
           <span class="schritt-chip">&#9733;</span>
           <h3 class="mt-4 mb-4">Bei uns geht der Leihkoch irgendwann wieder. Sein Wissen bleibt da.</h3>
@@ -256,21 +256,21 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
           </p>
         </div>
       </div>
-      <!-- Kernsatz (Anweisung 30, Schritt 4) -->
+      {/* Kernsatz (Anweisung 30, Schritt 4) */}
       <p class="mt-8 max-w-[62ch]" style="color:var(--papier);font-weight:700">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</p>
     </div>
   </section>
 
-  <!-- Vom ersten Gespräch -->
+  {/* Vom ersten Gespräch */}
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
         Vom ersten Gespr&auml;ch zur K&uuml;che, die immer funktioniert.
       </h2>
-      <!-- Korrektur 21 (Anweisung 25): Bild und Schritte standen untereinander,
+      {/* Korrektur 21 (Anweisung 25): Bild und Schritte standen untereinander,
            das Bild ueber die volle Breite. Jetzt nebeneinander: Bild links, die
            vier Schritte rechts. Auf dem Handy untereinander, Bild zuerst -- das
-           macht .split-row von selbst. -->
+           macht .split-row von selbst. */}
       <div class="split-row" style="align-items:start">
       <div class="split-media">
         <Image
@@ -284,7 +284,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
         />
       </div>
       <div class="split-copy space-y-6">
-        <!-- Step 1 -->
+        {/* Step 1 */}
         <div class="schritt">
           <span class="schritt-chip shrink-0">1</span>
           <div>
@@ -295,7 +295,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             </p>
           </div>
         </div>
-        <!-- Step 2 -->
+        {/* Step 2 */}
         <div class="schritt">
           <span class="schritt-chip shrink-0">2</span>
           <div>
@@ -307,7 +307,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             </p>
           </div>
         </div>
-        <!-- Step 3 -->
+        {/* Step 3 */}
         <div class="schritt">
           <span class="schritt-chip shrink-0">3</span>
           <div>
@@ -318,7 +318,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
             </p>
           </div>
         </div>
-        <!-- Step 4 -->
+        {/* Step 4 */}
         <div class="schritt">
           <span class="schritt-chip shrink-0">4</span>
           <div>
@@ -341,7 +341,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- Gebaut für Häuser mit fester Karte -->
+  {/* Gebaut für Häuser mit fester Karte */}
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
@@ -359,7 +359,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- Was kostet das -->
+  {/* Was kostet das */}
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
@@ -387,7 +387,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- FAQ -->
+  {/* FAQ */}
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-10" style="color:var(--druck)">
@@ -433,7 +433,7 @@ const ogImageAlt = "Bon-Leiste mit Bestellzetteln &uuml;ber dem Pass einer Resta
     </div>
   </section>
 
-  <!-- Final CTA -->
+  {/* Final CTA */}
  <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">

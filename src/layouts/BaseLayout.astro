@@ -58,12 +58,12 @@ if (SPRACHPAARE[pfad]) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Anweisung 30, Schritt 7.9: faerbt die Browserleiste auf
-         Mobilgeraeten in die Papier-Hintergrundfarbe. -->
+    {/* Anweisung 30, Schritt 7.9: faerbt die Browserleiste auf
+         Mobilgeraeten in die Papier-Hintergrundfarbe. */}
     <meta name="theme-color" content="#F7F6F2" />
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="WuMVUFKkYclVOtZyiyU_PZwYn-Zhk4kdLf3ws9I26eM" />
-    <!-- Google Consent Mode v2: Default-Deny vor allen anderen Skripten -->
+    {/* Google Consent Mode v2: Default-Deny vor allen anderen Skripten */}
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -74,7 +74,7 @@ if (SPRACHPAARE[pfad]) {
         analytics_storage: 'denied'
       });
     </script>
-    <!-- Scroll-Reveal: js-Klasse setzt CSS-Hide, bevor Body gerendert wird (kein FOUC) -->
+    {/* Scroll-Reveal: js-Klasse setzt CSS-Hide, bevor Body gerendert wird (kein FOUC) */}
     <script is:inline>
       if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         document.documentElement.classList.add('js');
@@ -90,7 +90,7 @@ if (SPRACHPAARE[pfad]) {
     )}
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-    <!-- Open Graph -->
+    {/* Open Graph */}
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={fullTitle} />
@@ -102,7 +102,7 @@ if (SPRACHPAARE[pfad]) {
     <meta property="og:site_name" content="Avorix" />
     <meta property="og:locale" content={lang === "en" ? "en_US" : "de_DE"} />
 
-    <!-- Twitter Card -->
+    {/* Twitter Card */}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
@@ -120,7 +120,7 @@ if (SPRACHPAARE[pfad]) {
     </main>
     <Footer />
     <ConsentBanner lang={lang} />
-    <!-- CTA-Klick-Tracking: delegierter Listener, idempotent -->
+    {/* CTA-Klick-Tracking: delegierter Listener, idempotent */}
     <script is:inline>
       (function () {
         if (window.__ctaBound) return;
@@ -138,8 +138,8 @@ if (SPRACHPAARE[pfad]) {
         });
       })();
     </script>
-    <!-- Scroll-Reveal Observer (W0-Fix): beobachtet .reveal-Elemente.
-         threshold 0 + rootMargin -12% loesen auch bei langen Sektionen sicher aus. -->
+    {/* Scroll-Reveal Observer (W0-Fix): beobachtet .reveal-Elemente.
+         threshold 0 + rootMargin -12% loesen auch bei langen Sektionen sicher aus. */}
     <script is:inline>
       (function () {
         if (!document.documentElement.classList.contains('js')) return;
@@ -153,7 +153,7 @@ if (SPRACHPAARE[pfad]) {
         document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
       })();
     </script>
-    <!-- Anker-Sprung beim Seitenaufruf (Anweisung 30, Schritt 1).
+    {/* Anker-Sprung beim Seitenaufruf (Anweisung 30, Schritt 1).
          Zwei Dinge gingen schief, wenn man von aussen auf /personal#anfrage kam:
          1. Der Sprung war durch scroll-behavior animiert und brach beim Laden ab.
             Das ist in der CSS geloest (html:focus-within), hier steht die Absicherung.
@@ -161,7 +161,7 @@ if (SPRACHPAARE[pfad]) {
             unsichtbar -- man stuende an der richtigen Stelle vor einem leeren Bild.
          Deshalb: Ziel einblenden, dann ohne Animation anspringen. Einmal sofort und
          einmal nach 'load', weil nachladende Bilder das Layout noch verschieben.
-         Hat der Nutzer inzwischen selbst gescrollt, unterbleibt der zweite Sprung. -->
+         Hat der Nutzer inzwischen selbst gescrollt, unterbleibt der zweite Sprung. */}
     <script is:inline>
       (function () {
         if (!window.location.hash) return;
