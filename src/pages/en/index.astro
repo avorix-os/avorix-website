@@ -1,6 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import Lightbox from "../../components/Lightbox.astro";
 import Stempel from "../../components/Stempel.astro";
+import kochAppTabletPass from "../../assets/bilder/koeche-am-pass-mit-tablet.jpg";
+import leerenPassMorgens from "../../assets/bilder/leerer-pass-morgens.jpg";
+import waageZutaten from "../../assets/bilder/waage-zutaten.jpg";
+import appKochmodus1 from "../../assets/bilder/app-kochmodus-schritt1.png";
+import appPortionsrechner from "../../assets/bilder/app-rezept-detail-portionsrechner.png";
+import appRezepteListe from "../../assets/bilder/app-rezepte-liste.png";
+
+const ogImg = await getImage({ src: kochAppTabletPass, width: 1200, format: "jpeg" });
+const ogImageAlt = "Two chefs at the pass of a professional kitchen with a tablet showing the Avorix Cook App";
 
 const schema = [
   {
@@ -9,124 +20,505 @@ const schema = [
     "name": "Avorix",
     "url": "https://avorix.de",
     "logo": "https://avorix.de/avorix-logo.svg",
-    "description": "Avorix enables hotels and food service businesses to offer high-quality dishes consistently — even without trained chefs.",
-    "email": "info@avorix.de",
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "email": "info@avorix.de",
-      "contactType": "sales",
-      "availableLanguage": ["German", "English"]
-    }
+    "description": "Avorix guides your kitchen team step by step through every dish. With the Cook App, training by real chefs and legally compliant staffing.",
+    "founder": {
+      "@type": "Person",
+      "name": "Börge Penk"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Friedrichshafen",
+      "addressCountry": "DE"
+    },
+    "areaServed": ["DE", "AT"]
   },
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Avorix",
-    "url": "https://avorix.de"
+    "@type": "SpeakableSpecification",
+    "cssSelector": "#direktantwort"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who types in our recipes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "We do. An Avorix chef comes to you, cooks with your team and sets up every dish in the app. You do not have to enter anything yourselves." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will our guests notice anything?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Your guests experience your kitchen and your recipes, just reliably at the same quality. On request we guarantee in writing that we never name your business as a reference." }
+      },
+      {
+        "@type": "Question",
+        "name": "Our team is not very tech-minded. Will this still work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, that is what the app is built for. Anyone who can look at a photo and tick a box can work with it. Training happens right at the stove, not in a seminar room." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens to our recipes? Who owns them?",
+        "acceptedAnswer": { "@type": "Answer", "text": "You do. Your recipes remain your property and are never passed on to other businesses." }
+      },
+      {
+        "@type": "Question",
+        "name": "How quickly are we up and running?",
+        "acceptedAnswer": { "@type": "Answer", "text": "From the first call to working independently typically takes a few weeks, depending on the menu. You get the exact plan after the first call." }
+      },
+      {
+        "@type": "Question",
+        "name": "What technology do we need in the kitchen?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A tablet or smartphone and an internet connection. Nothing more. The app runs in the browser." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it replace our head chef?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. A good head chef gets better with Avorix, because his knowledge is finally captured and his team works more independently. Avorix helps most when the head chef is missing, off sick or moving on." }
+      },
+      {
+        "@type": "Question",
+        "name": "We are in Austria. Does that work?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes, we work in Germany and Austria." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it taste freshly cooked?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Vacuum sealing preserves flavour, texture and nutrients. Dishes are regenerated only when the guest orders, precisely and within minutes." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we need new equipment?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Usually not. In most kitchens the existing equipment is enough. What you genuinely lack we clarify in the free first call." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you also offer standalone F&B consulting?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. If for now you only want an outside look at your menu, processes and costing, we do that too. Just raise it in the first call." }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.de/en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.de${ogImg.src}`,
+      "description": ogImageAlt
+    }
   }
 ];
 ---
 
 <BaseLayout
-  title="Home"
-  description="Avorix Cook App for hotels — consistent food quality despite skilled chef shortages. Recipe management and standardized processes for your kitchen team."
+  title="Cook App, Training & Kitchen Staff for Hotels and Hospitality"
+  description="Avorix guides your kitchen team step by step through every dish. With the Cook App, training by real chefs and legally compliant staffing."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
   schemaOrg={schema}
 >
-  <!-- Hero -->
-  <section class="hero-section px-6" style="background:var(--papier)">
+  {/* Hero (W2: Split 55/45, image spans, badge first) — mirror of / */}
+ <section class="hero-section px-6" style="background:var(--papier)">
     <div class="content-width hero-grid">
-      <!-- Text: mobile below, desktop left -->
+      {/* Text: mobile below, desktop left */}
       <div class="hero-copy">
         <p class="eyebrow mb-4">Kitchen Staff &amp; Cook App</p>
-        <h1 class="mb-6"><mark>Quality</mark> Without Staff Dependency</h1>
-        <p class="lead mb-8 max-w-[62ch]" style="color:var(--grau)">
-          The Avorix Cook App guides your kitchen team step-by-step through every recipe — delivering consistent food quality, <strong>regardless of experience level</strong>.
+        <h1 class="mb-6">
+          Your kitchen <mark>holds your standard.</mark><br />Even when your best chef is missing.
+        </h1>
+        <p class="lead mb-6" style="color:var(--grau)">
+          Avorix helps twice: a chef straight away when yours is missing. And a system so it never comes to that again.
         </p>
-        <div class="flex flex-col sm:flex-row items-start gap-4 mb-4">
-          <a
-            href="/en/contact"
-            data-cta-location="hero"
-            class="btn btn-primary"
-          >
-            Book a Demo
-          </a>
-          <a
-            href="#benefits"
-            class="btn btn-secondary"
-          >
-            Learn more &darr;
-          </a>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="/en/staff#request" data-cta-location="hero" data-cta-event="cta_personal_click" class="btn btn-primary">Request Staff</a>
+          <a href="/en/contact" data-cta-location="hero" class="btn btn-secondary">Book a Demo</a>
         </div>
-        <p class="text-sm mb-6" style="color:var(--grau)">Free &amp; no obligation</p>
         <div class="hero-badges">
           <Stempel>Certified &middot; German staffing licence</Stempel>
         </div>
       </div>
-      <!-- Image: mobile above, desktop right -->
+      {/* Image: mobile above, desktop right */}
       <div class="hero-media">
-        <img
-          src="/avorix_kitchen_ai.webp"
-          alt="Professional kitchen with AI-assisted recipe management"
-          width="1920"
-          height="1080"
-          class="w-full h-full object-cover"
+        <Image
+          src={kochAppTabletPass}
+          alt="Two chefs at the pass of a professional kitchen with a tablet showing the Avorix Cook App"
+          widths={[480, 800, 1200, 1600, 2000]}
+          sizes="(max-width: 900px) 100vw, 528px"
           loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
         />
       </div>
     </div>
   </section>
 
-  <!-- Benefits -->
-  <section id="benefits" class="reveal section-gap">
+  {/* Direct answer (GEO) */}
+ <section class="reveal">
     <div class="content-width">
-      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">
-        Why Avorix
-      </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <div class="card">
-          <h3 class="mb-4">Consistent Quality</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">Standardized processes and the Avorix Cook App ensure <strong>consistent food quality — regardless of your kitchen team's experience level</strong>.</p>
-        </div>
-        <div class="card">
-          <h3 class="mb-4">Less Staff Dependency</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">A shortage of skilled kitchen staff is an issue in almost every kitchen. Avorix makes your operation <strong>less dependent on individual key personnel</strong>.</p>
-        </div>
-        <div class="card">
-          <h3 class="mb-4">Full Cost Control</h3>
-          <p class="text-sm leading-relaxed" style="color:var(--grau)">Recipe-based costing, food cost tracking, and standardized portioning bring <strong>transparency to your kitchen expenses</strong>.</p>
-        </div>
-      </div>
-
-      <!-- Visual photo strip -->
-      <div class="mt-16 overflow-hidden" style="border-radius:var(--radius);box-shadow:var(--schatten)">
-        <img
-          src="/avorix_gastro-hotel-60.webp"
-          alt="Mise en place in a professional kitchen — volume cooking with Avorix"
-          width="1200"
-          height="540"
-          class="w-full object-cover"
-          style="height:360px"
-          loading="lazy"
-        />
+      <p id="direktantwort" class="text-base leading-relaxed py-4 max-w-[62ch]" style="color:var(--grau)">Avorix is a kitchen system for hotels and hospitality from Friedrichshafen on Lake Constance. It combines legally compliant kitchen staffing under the official German staffing licence, the Avorix Cook App that guides kitchen teams step by step through every dish, and training by experienced chefs. Avorix works in Germany and Austria.</p>
+      <div class="beleg-badges">
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Built by chefs, not by software people</span>
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Friedrichshafen on Lake Constance &middot; DE + AT</span>
       </div>
     </div>
   </section>
 
-  <!-- Peak-End (3.18): eigene Sektion, zentriert auf die volle Container-Breite
-       (Folgerunde 1 / 3b) — nie Teil einer anderen Sektion oder Spalte. -->
-  <section class="section-gap px-6">
+  {/* Problem (W3: Split H2+paragraph left, photo right) */}
+ <section class="reveal section-gap">
+    <div class="content-width split-row">
+      <div class="split-copy">
+        <h2 class="mb-6" style="color:var(--druck)">Does this sound familiar?</h2>
+        <p class="lead max-w-[62ch]" style="color:var(--druck)">Your kitchen stands or falls with a single person.</p>
+        <p class="max-w-[62ch]" style="color:var(--grau)">When the kitchen wobbles, everything wobbles: first the quality, then the reviews, then the reputation. And at some point the question is in the room how much longer this can go on. You are not alone in this: a shortage of skilled kitchen staff is an issue in almost every kitchen.</p>
+      </div>
+      <div class="split-media">
+        <Image
+          src={leerenPassMorgens}
+          alt="The empty pass of a professional kitchen in the morning light"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 900px) 100vw, 420px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    <div class="content-width" style="margin-top:32px">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">The head chef resigns. Or the sous chef. Mid-season.</h3>
+          <p class="text-sm" style="color:var(--grau)">With every key person, knowledge walks out: the recipes, the quantities, the routines. The rest of the team stands there and improvises.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Everyone cooks differently.</h3>
+          <p class="text-sm" style="color:var(--grau)">On Monday the schnitzel tastes different than on Friday. Portions fluctuate. Regulars notice first.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">You simply cannot find anyone.</h3>
+          <p class="text-sm" style="color:var(--grau)">Nobody who can cook replies to your job ad. And if someone does, they are gone again after one season.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Where do you stand */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Where do you stand right now?</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card flex flex-col">
+          <h3 class="mb-4">&bdquo;The emergency is here.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">The chef is gone, the season is running. We send you a chef. And make sure you never have to search again.</p>
+          <a href="/en/staff#request" data-cta-location="tuer-notfall" data-cta-event="cta_personal_click" class="btn btn-primary" style="margin-top:auto">Get help now</a>
+        </div>
+        <div class="card flex flex-col">
+          <h3 class="mb-4">&bdquo;It still works. But I am getting worried.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Your kitchen stands or falls with a single person. Secure their knowledge while it is still in the house.</p>
+          <a href="/en/system" data-cta-location="tuer-sorge" class="btn btn-secondary" style="margin-top:auto">Secure the knowledge</a>
+        </div>
+        <div class="card flex flex-col">
+          <h3 class="mb-4">&bdquo;The season is coming.&ldquo;</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Not enough people for the peak. Seasonal staff who cook like your core team from day one.</p>
+          <a href="/en/staff#request" data-cta-location="tuer-saison" data-cta-event="cta_personal_click" class="btn btn-secondary" style="margin-top:auto">Plan the season</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Why Avorix (W4: H2 left-aligned) */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Why Avorix</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="mb-4">Consistent quality</h3>
+          <p class="text-sm" style="color:var(--grau)">Standardised processes and the Avorix Cook App keep the quality of your food consistent, whatever the experience level of your kitchen team.</p>
+        </div>
+        <div>
+          <h3 class="mb-4">Less dependence on individuals</h3>
+          <p class="text-sm" style="color:var(--grau)">The knowledge lives in the system, not only in a few heads. Avorix makes your business less dependent on single key people. And new staff cook along from day one.</p>
+        </div>
+        <div>
+          <h3 class="mb-4">Full cost control</h3>
+          <p class="text-sm" style="color:var(--grau)">Recipe-based costing, food cost tracking and standardised portioning bring transparency into your kitchen costs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* What is Avorix (W3: Split H2+paragraph left, photo right) */}
+ <section id="how-it-works" class="reveal section-gap">
+    <div class="content-width split-row">
+      <div class="split-copy">
+        <h2 class="mb-6" style="color:var(--druck)">What is Avorix? Explained in one minute.</h2>
+        <p class="max-w-[62ch]"><strong>Software, routines and staff from one provider.</strong> Nowhere else in this combination.</p>
+        <p class="max-w-[62ch]" style="color:var(--grau)">Think of a sat nav. A sat nav gets every driver to the destination, even if they do not know the route. Avorix does the same in your kitchen: it guides your team step by step through every dish on your menu, with clear instructions, proven routines and real chefs who train your team. So that every plate goes out the way you want it. Every day.</p>
+      </div>
+      <div class="split-media">
+        <Image
+          src={waageZutaten}
+          alt="Ingredients being weighed on a digital scale in a professional kitchen"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 900px) 100vw, 420px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    <div class="content-width" style="margin-top:32px">
+      <ol class="tagesablauf">
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Step 1</h3>
+          <h3 class="mb-4">Your dishes, written down crystal clear.</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">An experienced Avorix chef comes to your business and writes down your menu. Every dish is broken into simple steps, with photos, exact quantities and timings. And honestly: many kitchens have recipes, yet everyone cooks by feel. With the app, the recipe hangs right at the station, and the easiest way is the right one.</p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Step 2</h3>
+          <h3 class="mb-4">Routines that even a small team can manage.</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">A lot is prepared calmly when there is time. Vacuum-sealed and chilled. During service you only finish. That is how a small crew handles an ambitious menu without the quality suffering. Professional kitchens have worked this way for years.</p>
+        </li>
+        <li class="tagesablauf-station">
+          <h3 class="eyebrow tagesablauf-zeit">Step 3</h3>
+          <h3 class="mb-4">The Cook App at the stove.</h3>
+          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">A tablet hangs at the station. The app shows the cook step by step what to do: photo, quantity, time, done. The app scales portions automatically and keeps an eye on food cost.</p>
+        </li>
+      </ol>
+      <div class="mt-8 space-y-4" style="color:var(--grau)">
+        <p class="max-w-[62ch]">And your costs? Trained chefs are expensive, if you can find any at all. With Avorix, semi-skilled staff cook to your standard, and your skilled people only do what genuinely needs their skill.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* Staffing proof (dark section 3.10) */}
+ <section class="reveal section-gap section-dunkel" style="background:var(--eisen)">
+    <div class="content-width">
+      <div class="mb-6">
+        <Stempel class="stempel--hell">Certified &middot; German staffing licence</Stempel>
+      </div>
+      <h2 class="mb-6" style="color:var(--papier)">
+        And when you are <span style="color:var(--akzent-hell)">short of staff</span>?
+      </h2>
+      <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">
+        Avorix helps twice: a chef straight away when yours is missing. And a system so it never comes to that again. Our chefs are <span style="color:var(--akzent-hell)">permanently employed</span> with us and hired out on <span style="color:var(--akzent-hell)">solid legal ground</span>. For the training phase, for the season or for the emergency.
+      </p>
+      <div class="mt-6">
+        <a href="/en/staff#request" data-cta-location="personal-dunkel" data-cta-event="cta_personal_click" class="btn btn-primary">Request Staff</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Four steps */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">How Avorix comes into your business. In four steps.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">1</div>
+          <div>
+            <h3>We take a look at your kitchen. (Free of charge)</h3>
+            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">One conversation, 30 minutes, by video or on site. You tell us where it hurts. We tell you honestly whether Avorix suits you. If not, we say that too.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">2</div>
+          <div>
+            <h3>An Avorix chef records your menu.</h3>
+            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">He cooks with your team, documents every dish, photographs every step and sets it all up in the app. Typically that takes a week.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">3</div>
+          <div>
+            <h3>Your team learns the system.</h3>
+            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">There are two ways, depending on what suits your business: compact training days with an Avorix chef who concentrates fully on the training. Or an Avorix chef works in your kitchen as normal and teaches your team the system alongside, while cooking productively. In both cases with sous-chef experience or above.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">4</div>
+          <div>
+            <h3>You work independently. We stay reachable.</h3>
+            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">From now on the app guides your team through every day. You add new dishes yourselves, or we do it for you. And if a chef drops out, you call us.</p>
+          </div>
+        </div>
+      </div>
+      <p class="mt-8 font-bold" style="color:var(--druck)">You run your kitchen. Not the other way round.</p>
+      <div class="mt-6">
+        <a href="/en/contact" data-cta-location="ablauf" class="btn btn-primary">Book a Demo</a>
+      </div>
+    </div>
+  </section>
+
+  {/* This is what it looks like at the stove */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">This is what it looks like at the stove.</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <Lightbox label="RECIPE STEP" caption={`„Every step with quantity, temperature and time. Tick it off.“`} flach>
+          <Image
+            src={appKochmodus1}
+            alt="Screenshot of the Avorix Cook App: recipe step in cooking mode with temperature and timer"
+            widths={[480, 800]}
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+        <Lightbox label="PORTION CALCULATOR" caption={`„80 guests today instead of 60? The app rescales every quantity.“`} flach>
+          <Image
+            src={appPortionsrechner}
+            alt="Screenshot of the Avorix Cook App: portion calculator scaling a recipe to 80 portions"
+            widths={[480, 800]}
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+        <Lightbox label="RECIPE LIBRARY" caption={`„Your whole menu in one place. For the whole team.“`} flach>
+          <Image
+            src={appRezepteListe}
+            alt="Screenshot of the Avorix Cook App: recipe library with categories, times and cost per portion"
+            widths={[480, 800]}
+            sizes="(max-width: 768px) 90vw, (max-width: 1280px) 30vw, 360px"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-auto"
+          />
+        </Lightbox>
+      </div>
+      <p class="text-sm mt-4 max-w-[62ch]" style="color:var(--grau)">The app runs on tablet and smartphone, straight in the browser. Nothing needs installing.</p>
+    </div>
+  </section>
+
+  {/* Legal certainty (W4: normal card) */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">And when you are short of staff: we hire out our chefs to you. On solid legal ground.</h2>
+      <div class="card card-text">
+        <p class="mb-4" style="color:var(--grau)">Many agencies send you &bdquo;self-employed&ldquo; chefs with an invoice. The problem: in an audit, the pension insurance often classifies these chefs as bogus self-employed. Then it is not the chef who pays, but your business. Back payments over several years, quickly well into five figures.</p>
+        <p class="mb-4" style="color:var(--grau)">That does not happen to you with Avorix. Our chefs are permanently employed and fully insured with us. We hold the official German staffing licence. You get skill into your kitchen and stay on the safe side.</p>
+        <p class="font-semibold" style="color:var(--druck)">In hospitality, few providers hold this licence. Ask for it before you book anywhere. Even if it is not with us.</p>
+      </div>
+      <div class="mt-6">
+        <a href="/en/staff" data-cta-location="rechtssicherheit" class="btn btn-secondary">More on training and staff</a>
+      </div>
+    </div>
+  </section>
+
+  {/* Founder (W4: 7/12 paragraph + 5/12 pull-quote) */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Built by a head chef. Not by software people.</h2>
+      <div class="gruender-grid">
+        <div>
+          <p class="max-w-[62ch]" style="color:var(--grau)">Börge Penk worked in professional kitchens for 20 years, as head chef also with large teams. He knows the staff shortage not from statistics but from every single duty rota. Avorix is the system he wishes he had had as a head chef.</p>
+        </div>
+        <p class="max-w-[62ch] mb-4" style="color:var(--grau)">We know the feeling. We have stood in kitchens like that ourselves.</p>
+        <blockquote class="gruender-quote">&bdquo;I have seen too often that a kitchen stands or falls with a single person. It does not have to be that way. Good cooking can be written down, shown and taught.&ldquo;</blockquote>
+      </div>
+      <p class="text-sm max-w-[62ch]" style="color:var(--grau);margin-top:32px">You will not find client logos on this page. That is deliberate. Our clients run their kitchens with our system, and what happens in their kitchens is nobody&#8217;s business. On request we guarantee this discretion in writing.</p>
+    </div>
+  </section>
+
+  {/* Costs */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">What does it cost?</h2>
+      <div class="card card-text">
+        <p style="color:var(--grau)">That depends on your menu and your team. In the first call we work it out for you transparently, to the euro and with no small print. For the first businesses, 2026 pilot conditions apply, well below the regular price.</p>
+      </div>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a href="/en/contact" data-cta-location="kosten" class="btn btn-primary">Book a Demo</a>
+        <a href="/en/pilot-program" data-cta-location="kosten-pilot" class="btn btn-secondary">To the Pilot Program</a>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Frequently asked questions</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Who types in our recipes?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>We do. An Avorix chef comes to you, cooks with your team and sets up every dish in the app. You do not have to enter anything yourselves.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Will our guests notice anything?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>No. Your guests experience your kitchen and your recipes, just reliably at the same quality. On request we guarantee in writing that we never name your business as a reference.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Our team is not very tech-minded. Will this still work?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, that is what the app is built for. Anyone who can look at a photo and tick a box can work with it. Training happens right at the stove, not in a seminar room.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What happens to our recipes? Who owns them?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>You do. Your recipes remain your property and are never passed on to other businesses.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How quickly are we up and running?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>From the first call to working independently typically takes a few weeks, depending on the menu. You get the exact plan after the first call.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What technology do we need in the kitchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>A tablet or smartphone and an internet connection. Nothing more. The app runs in the browser.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Does it replace our head chef?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>No. A good head chef gets better with Avorix, because his knowledge is finally captured and his team works more independently. Avorix helps most when the head chef is missing, off sick or moving on.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">We are in Austria. Does that work?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, we work in Germany and Austria.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Does it taste freshly cooked?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. Vacuum sealing preserves flavour, texture and nutrients. Dishes are regenerated only when the guest orders, precisely and within minutes.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do we need new equipment?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Usually not. In most kitchens the existing equipment is enough. What you genuinely lack we clarify in the free first call.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Do you also offer standalone F&amp;B consulting?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes. If for now you only want an outside look at your menu, processes and costing, we do that too. Just raise it in the first call.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* Peak-End */}
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Certified &middot; German staffing licence</Stempel>
       </div>
       <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">It&#8217;s sorted.</p>
-      <a
-        href="/en/contact"
-        data-cta-location="cta"
-        class="btn btn-primary"
-      >
-        Get in touch
-      </a>
+      <a href="/en/contact" data-cta-location="final" class="btn btn-primary">Book a Demo</a>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+/* FAQ close animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

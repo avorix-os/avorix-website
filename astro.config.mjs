@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
+import compress from "astro-compress";
 import { mkdirSync, readdirSync, copyFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -86,6 +87,34 @@ export default defineConfig({
       },
     }),
     copyBilderToDist,
+    // Dauerschutz (Anweisung 38, Teil C): entfernt HTML-Kommentare aus dem
+    // ausgelieferten Markup. Bewusst KEINE CSS/JS/Bild/SVG-Kompression — Bilder
+    // laufen ueber die Astro-Pipeline bzw. copyBilderToDist, und JS/CSS-Minify
+    // koennte Inline-Skripte/JSON-LD anfassen. Reiner Kommentar-Entferner.
+    compress({
+      CSS: false,
+      Image: false,
+      JavaScript: false,
+      SVG: false,
+      HTML: {
+        "html-minifier-terser": {
+          // Nur Kommentare entfernen. Alle uebrigen (aggressiven) Transforms
+          // ausdruecklich AUS, damit sich das ausgelieferte Markup sonst nicht
+          // aendert (keine entfernten Attribut-Quotes, kein Whitespace-Collapse).
+          removeComments: true,
+          collapseWhitespace: false,
+          removeAttributeQuotes: false,
+          collapseBooleanAttributes: false,
+          removeRedundantAttributes: false,
+          removeEmptyAttributes: false,
+          minifyCSS: false,
+          minifyJS: false,
+          sortAttributes: false,
+          sortClassName: false,
+          caseSensitive: true,
+        },
+      },
+    }),
   ],
   i18n: {
     locales: ["de", "en"],

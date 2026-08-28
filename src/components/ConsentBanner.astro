@@ -6,7 +6,7 @@ const { lang } = Astro.props;
 const isEN = lang === "en";
 ---
 
-<!-- Ebene 1: Consent-Banner -->
+{/* Ebene 1: Consent-Banner */}
 <div id="consent-banner" hidden role="region" aria-label={isEN ? "Cookie consent" : "Cookie-Einwilligung"}>
   <div class="cb-inner">
     <div class="cb-text">
@@ -27,7 +27,7 @@ const isEN = lang === "en";
   </div>
 </div>
 
-<!-- Ebene 2: Einstellungs-Panel (Modal) -->
+{/* Ebene 2: Einstellungs-Panel (Modal) */}
 <div id="consent-panel" hidden role="dialog" aria-modal="true" aria-label={isEN ? "Cookie settings" : "Cookie-Einstellungen"}>
   <div class="cp-backdrop"></div>
   <div class="cp-dialog" role="document">
@@ -44,7 +44,7 @@ const isEN = lang === "en";
         )}
       </p>
 
-      <!-- Technisch notwendig -->
+      {/* Technisch notwendig */}
       <div class="cp-category">
         <div class="cp-cat-header">
           <div>
@@ -82,7 +82,7 @@ const isEN = lang === "en";
         </details>
       </div>
 
-      <!-- Statistik -->
+      {/* Statistik */}
       <div class="cp-category">
         <div class="cp-cat-header">
           <div>
