@@ -24,7 +24,9 @@ const schema = [
       { "@type": "Question", "name": "Unsere Essenszahlen schwanken täglich.", "acceptedAnswer": { "@type": "Answer", "text": "Der Portionsrechner skaliert jedes Rezept auf die Zahl, die Sie eintragen. Der Bedarf rechnet sich daraus neu." } },
       { "@type": "Question", "name": "Können wir Köche auch nur für einzelne Tage buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindestdauer gibt es nicht." } },
       { "@type": "Question", "name": "Führt die App die Allergenkennzeichnung?", "acceptedAnswer": { "@type": "Answer", "text": "Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht." } },
-      { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf." } }
+      { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf." } },
+      { "@type": "Question", "name": "Übernehmt ihr unsere Kantine komplett?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert." } },
+      { "@type": "Question", "name": "Was ist günstiger: outsourcen oder Personal mieten?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos)." } }
     ]
   }
 ];
@@ -128,6 +130,28 @@ const schema = [
     </div>
   </section>
 
+  {/* Küche outsourcen oder Personal mieten? (Anweisung 39, A7) */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Küche outsourcen oder Personal mieten?</h2>
+      <p class="mb-8 max-w-[62ch]" style="color:var(--grau)">„Die Küche outsourcen" kann drei verschiedene Dinge bedeuten: den Betrieb komplett an einen Caterer abgeben, sich die Küchenleitung mit anderen Häusern teilen, oder Personal für begrenzte Zeit holen. Avorix macht die letzten beiden. Den Betrieb selbst geben Sie nicht aus der Hand.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Fremdvergabe an einen Caterer</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein externer Betreiber übernimmt Küche, Personal und Einkauf. Planbar in den Kosten, aber Sie geben Karte, Qualität und Kontakt zu Ihren Gästen ab, meist für mehrere Jahre. <strong>Das machen wir nicht.</strong></p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Ein Küchenchef für mehrere Häuser</h3>
+          <p class="text-sm" style="color:var(--grau)">Mehrere Betriebe einer Region teilen sich einen erfahrenen Küchenchef zum monatlichen Festpreis. Er entwickelt Ihre Speisenpläne, hält die Qualität und coacht Ihr Team. Ihre Küche bleibt Ihre Küche. <strong>Das machen wir.</strong></p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Personal auf Zeit</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein festangestellter Avorix-Koch kommt für Wochen oder eine Saison, in der Regel innerhalb von 24 bis 72 Stunden. Sie zahlen geleistete Stunden statt eines Fixkostenblocks. <strong>Das machen wir.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   {/* Vier Schritte (dunkler Block) */}
  <section class="reveal section-gap section-dunkel">
     <div class="content-width text-spalte">
@@ -199,6 +223,14 @@ const schema = [
         <details class="faq-item">
           <summary class="faq-q">Müssen wir beides nehmen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Übernehmt ihr unsere Kantine komplett?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist günstiger: outsourcen oder Personal mieten?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos).</p></div></div>
         </details>
       </div>
     </div>
