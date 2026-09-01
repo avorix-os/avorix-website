@@ -12,6 +12,7 @@ interface Props {
   ogImageAlt?: string;
   ogType?: string;
   schemaOrg?: object | object[];
+  noindex?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   ogImageAlt,
   ogType = "website",
   schemaOrg,
+  noindex = false,
 } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.de";
@@ -62,6 +64,7 @@ if (SPRACHPAARE[pfad]) {
          Mobilgeraeten in die Papier-Hintergrundfarbe. */}
     <meta name="theme-color" content="#F7F6F2" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta name="google-site-verification" content="WuMVUFKkYclVOtZyiyU_PZwYn-Zhk4kdLf3ws9I26eM" />
     {/* Google Consent Mode v2: Default-Deny vor allen anderen Skripten */}
     <script is:inline>

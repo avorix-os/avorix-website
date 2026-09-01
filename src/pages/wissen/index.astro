@@ -16,6 +16,7 @@ const schema = [
 const artikel = [
   {
     rubrik: "Wenn gerade jemand fehlt",
+    einordnung: "Für die Tage, an denen der Dienstplan nicht mehr aufgeht und schnell entschieden werden muss.",
     karten: [
       {
         titel: "Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage",
@@ -26,6 +27,7 @@ const artikel = [
   },
   {
     rubrik: "Fremdpersonal rechtssicher einsetzen",
+    einordnung: "Für alle, die Köche von außen holen und wissen wollen, welcher Weg sie im Prüffall schützt.",
     karten: [
       {
         titel: "Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt",
@@ -41,6 +43,7 @@ const artikel = [
   },
   {
     rubrik: "Küche rechnen und organisieren",
+    einordnung: "Für den Blick auf die Zahlen: was ein Teller kostet, was hängen bleibt und wo es verloren geht.",
     karten: [
       {
         titel: "Wareneinsatz berechnen: Formel, Zielwerte, typische Fehler",
@@ -76,7 +79,8 @@ const artikel = [
   {artikel.map((gruppe) => (
    <section class="reveal section-gap">
       <div class="content-width">
-        <h2 class="mb-6" style="color:var(--druck)">{gruppe.rubrik}</h2>
+        <h2 class="mb-3" style="color:var(--druck)">{gruppe.rubrik}</h2>
+        <p class="text-sm mb-6 max-w-[62ch]" style="color:var(--grau)">{gruppe.einordnung}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {gruppe.karten.map((karte) => (
             <a href={karte.href} class="card wissen-karte">
