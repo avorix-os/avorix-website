@@ -65,7 +65,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   })} />
 
   {/* Hero (W2: Split 55/45) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid" style="align-items:center">
       {/* Text: mobil unten, Desktop links */}
       <div class="hero-copy">
@@ -99,7 +99,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
       <h2 class="mb-6" style="color:var(--druck)">Gemessen in einem Kundenbetrieb.</h2>
       {/* Korrektur 9 (Anweisung 25): Der Satz stand unter der Gruppe. Er ist zu
            verstehen, bevor man sie gesehen hat, also gehoert er nach oben. */}
-      <p class="mb-10 max-w-[62ch]" style="color:var(--grau)">Die App tr&auml;gt sich dort schon selbst.</p>
+      <p class="mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die App tr&auml;gt sich dort schon selbst.</p>
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="card">
           <p class="mb-6" style="font-family:var(--f-head);font-weight:700;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.008em;color:var(--druck)">rund 15&nbsp;%</p>
@@ -114,7 +114,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   </section>
 
   {/* Features */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Was die App kann. Gezeigt, nicht behauptet.</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -177,8 +177,8 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
           <h2 class="mb-6" style="color:var(--papier)">
             <span style="color:var(--akzent-hell)">Wareneinsatz</span> im Blick.
           </h2>
-          <p class="mb-4 max-w-[62ch]" style="color:rgba(247,246,242,0.8)">Rezeptbasierte Kalkulation und <span style="color:var(--akzent-hell)">Wareneinsatz</span>-Auswertung. <strong>Sie sehen, was jeder Teller wirklich kostet.</strong></p>
-          <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">Der Wareneinsatz des Tages ist <span style="color:var(--akzent-hell)">dokumentiert</span>, ohne dass jemand etwas aufschreiben musste.</p>
+          <p class="mb-4 max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">Rezeptbasierte Kalkulation und <span style="color:var(--akzent-hell)">Wareneinsatz</span>-Auswertung. <strong>Sie sehen, was jeder Teller wirklich kostet.</strong></p>
+          <p class="max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">Der Wareneinsatz des Tages ist <span style="color:var(--akzent-hell)">dokumentiert</span>, ohne dass jemand etwas aufschreiben musste.</p>
         </div>
         <div class="split-media" style="box-shadow:none">
           <Lightbox label="HACCP-KONTROLLE" caption="Screenshot der Avorix Koch-App: Arbeitsschritt mit rotem HACCP-Kontrollpunkt und 75 Grad Kerntemperatur" flach>
@@ -270,15 +270,15 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
   </section>
 
   {/* Zusatzmodule (12c) */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Wenn Sie mehr wollen: zwei Zusatzmodule.</h2>
       {/* Korrektur 9 (Anweisung 25): Der Satz stand unter der Gruppe. Er ist zu
            verstehen, bevor man sie gesehen hat, also gehoert er nach oben. */}
-      <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
+      <p class="text-sm mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Was die Module kosten, rechnen wir Ihnen im Erstgespr&auml;ch vor, auf den Euro genau. F&uuml;r die ersten Betriebe gelten auch hier die Pilotkonditionen 2026.
       </p>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">
         Beide bauen auf dem auf, was Ihre K&uuml;che schon nutzt. Avorix Preisvergleich setzt das Paket Warenwirtschaft voraus, Avorix Manager zus&auml;tzlich das Paket Organisation.
       </p>
       <div class="grid sm:grid-cols-2 gap-6">
@@ -333,15 +333,15 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
       <ol class="tagesablauf">
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Morgens</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Die Vorbereitung l&auml;uft nach Liste. Jeder wei&szlig;, was heute vorproduziert wird, in welcher Menge, f&uuml;r wie viele G&auml;ste.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Die Vorbereitung l&auml;uft nach Liste. Jeder wei&szlig;, was heute vorproduziert wird, in welcher Menge, f&uuml;r wie viele G&auml;ste.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Im Service</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Am Posten h&auml;ngt das Tablet. Bestellung kommt rein, die Kraft &ouml;ffnet das Gericht, arbeitet die Schritte ab. <strong>Das Ergebnis sieht aus und schmeckt wie immer.</strong></p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Am Posten h&auml;ngt das Tablet. Bestellung kommt rein, die Kraft &ouml;ffnet das Gericht, arbeitet die Schritte ab. <strong>Das Ergebnis sieht aus und schmeckt wie immer.</strong></p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Abends</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Der Wareneinsatz des Tages ist dokumentiert, ohne dass jemand etwas aufschreiben musste.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Der Wareneinsatz des Tages ist dokumentiert, ohne dass jemand etwas aufschreiben musste.</p>
         </li>
       </ol>
     </div>
@@ -351,7 +351,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Wem geh&ouml;rt das alles?</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Ihnen. Ihre Rezepte bleiben Ihr Eigentum und werden nicht an andere Betriebe weitergegeben. <strong>Wenn Sie Avorix verlassen, nehmen Sie Ihre Dokumentation mit.</strong></p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Ihnen. Ihre Rezepte bleiben Ihr Eigentum und werden nicht an andere Betriebe weitergegeben. <strong>Wenn Sie Avorix verlassen, nehmen Sie Ihre Dokumentation mit.</strong></p>
     </div>
   </section>
 
@@ -359,7 +359,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Sie m&uuml;ssen nichts einpflegen. Das machen wir.</h2>
-      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Ein Avorix-Koch nimmt Ihre Karte bei Ihnen vor Ort auf: kochen, dokumentieren, fotografieren, anlegen. <strong>Danach schult er Ihr Team direkt am Herd.</strong></p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Ein Avorix-Koch nimmt Ihre Karte bei Ihnen vor Ort auf: kochen, dokumentieren, fotografieren, anlegen. <strong>Danach schult er Ihr Team direkt am Herd.</strong></p>
       <a href="/system" data-cta-location="kochapp-system" class="btn btn-secondary">So funktioniert das Avorix-System</a>
       <a href="/pilotprogramm" data-cta-location="kochapp-pilot" class="btn btn-secondary">Zum Pilotprogramm</a>
     </div>
@@ -397,7 +397,7 @@ const ogImageAlt = "Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus 
         </details>
       </div>
       {/* Kernsatz (Anweisung 30, Schritt 4) */}
-      <p class="mt-8 max-w-[62ch]" style="color:var(--druck);font-weight:700">Ihre K&uuml;che h&auml;lt Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">Ihre K&uuml;che h&auml;lt Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
     </div>
   </section>
 

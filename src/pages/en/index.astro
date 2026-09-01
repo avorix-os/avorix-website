@@ -119,7 +119,7 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero (W2: Split 55/45, image spans, badge first) — mirror of / */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       {/* Text: mobile below, desktop left */}
       <div class="hero-copy">
@@ -156,7 +156,7 @@ const schema = [
   {/* Direct answer (GEO) */}
  <section class="reveal">
     <div class="content-width">
-      <p id="direktantwort" class="text-base leading-relaxed py-4 max-w-[62ch]" style="color:var(--grau)">Avorix is a kitchen system for hotels and hospitality from Friedrichshafen on Lake Constance. It combines legally compliant kitchen staffing under the official German staffing licence, the Avorix Cook App that guides kitchen teams step by step through every dish, and training by experienced chefs. Avorix works in Germany and Austria.</p>
+      <p id="direktantwort" class="text-base leading-relaxed py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Avorix is a kitchen system for hotels and hospitality from Friedrichshafen on Lake Constance. It combines legally compliant kitchen staffing under the official German staffing licence, the Avorix Cook App that guides kitchen teams step by step through every dish, and training by experienced chefs. Avorix works in Germany and Austria.</p>
       <div class="beleg-badges">
         <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Built by chefs, not by software people</span>
         <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Friedrichshafen on Lake Constance &middot; DE + AT</span>
@@ -169,8 +169,8 @@ const schema = [
     <div class="content-width split-row">
       <div class="split-copy">
         <h2 class="mb-6" style="color:var(--druck)">Does this sound familiar?</h2>
-        <p class="lead max-w-[62ch]" style="color:var(--druck)">Your kitchen stands or falls with a single person.</p>
-        <p class="max-w-[62ch]" style="color:var(--grau)">When the kitchen wobbles, everything wobbles: first the quality, then the reviews, then the reputation. And at some point the question is in the room how much longer this can go on. You are not alone in this: a shortage of skilled kitchen staff is an issue in almost every kitchen.</p>
+        <p class="lead max-w-[var(--spalte-text)]" style="color:var(--druck)">Your kitchen stands or falls with a single person.</p>
+        <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">When the kitchen wobbles, everything wobbles: first the quality, then the reviews, then the reputation. And at some point the question is in the room how much longer this can go on. You are not alone in this: a shortage of skilled kitchen staff is an issue in almost every kitchen.</p>
       </div>
       <div class="split-media">
         <Image
@@ -252,8 +252,8 @@ const schema = [
     <div class="content-width split-row">
       <div class="split-copy">
         <h2 class="mb-6" style="color:var(--druck)">What is Avorix? Explained in one minute.</h2>
-        <p class="max-w-[62ch]"><strong>Software, routines and staff from one provider.</strong> Nowhere else in this combination.</p>
-        <p class="max-w-[62ch]" style="color:var(--grau)">Think of a sat nav. A sat nav gets every driver to the destination, even if they do not know the route. Avorix does the same in your kitchen: it guides your team step by step through every dish on your menu, with clear instructions, proven routines and real chefs who train your team. So that every plate goes out the way you want it. Every day.</p>
+        <p class="max-w-[var(--spalte-text)]"><strong>Software, routines and staff from one provider.</strong> Nowhere else in this combination.</p>
+        <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Think of a sat nav. A sat nav gets every driver to the destination, even if they do not know the route. Avorix does the same in your kitchen: it guides your team step by step through every dish on your menu, with clear instructions, proven routines and real chefs who train your team. So that every plate goes out the way you want it. Every day.</p>
       </div>
       <div class="split-media">
         <Image
@@ -272,21 +272,21 @@ const schema = [
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Step 1</h3>
           <h3 class="mb-4">Your dishes, written down crystal clear.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">An experienced Avorix chef comes to your business and writes down your menu. Every dish is broken into simple steps, with photos, exact quantities and timings. And honestly: many kitchens have recipes, yet everyone cooks by feel. With the app, the recipe hangs right at the station, and the easiest way is the right one.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">An experienced Avorix chef comes to your business and writes down your menu. Every dish is broken into simple steps, with photos, exact quantities and timings. And honestly: many kitchens have recipes, yet everyone cooks by feel. With the app, the recipe hangs right at the station, and the easiest way is the right one.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Step 2</h3>
           <h3 class="mb-4">Routines that even a small team can manage.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">A lot is prepared calmly when there is time. Vacuum-sealed and chilled. During service you only finish. That is how a small crew handles an ambitious menu without the quality suffering. Professional kitchens have worked this way for years.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">A lot is prepared calmly when there is time. Vacuum-sealed and chilled. During service you only finish. That is how a small crew handles an ambitious menu without the quality suffering. Professional kitchens have worked this way for years.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Step 3</h3>
           <h3 class="mb-4">The Cook App at the stove.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">A tablet hangs at the station. The app shows the cook step by step what to do: photo, quantity, time, done. The app scales portions automatically and keeps an eye on food cost.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">A tablet hangs at the station. The app shows the cook step by step what to do: photo, quantity, time, done. The app scales portions automatically and keeps an eye on food cost.</p>
         </li>
       </ol>
       <div class="mt-8 space-y-4" style="color:var(--grau)">
-        <p class="max-w-[62ch]">And your costs? Trained chefs are expensive, if you can find any at all. With Avorix, semi-skilled staff cook to your standard, and your skilled people only do what genuinely needs their skill.</p>
+        <p class="max-w-[var(--spalte-text)]">And your costs? Trained chefs are expensive, if you can find any at all. With Avorix, semi-skilled staff cook to your standard, and your skilled people only do what genuinely needs their skill.</p>
       </div>
     </div>
   </section>
@@ -300,7 +300,7 @@ const schema = [
       <h2 class="mb-6" style="color:var(--papier)">
         And when you are <span style="color:var(--akzent-hell)">short of staff</span>?
       </h2>
-      <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">
+      <p class="max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">
         Avorix helps twice: a chef straight away when yours is missing. And a system so it never comes to that again. Our chefs are <span style="color:var(--akzent-hell)">permanently employed</span> with us and hired out on <span style="color:var(--akzent-hell)">solid legal ground</span>. For the training phase, for the season or for the emergency.
       </p>
       <div class="mt-6">
@@ -318,28 +318,28 @@ const schema = [
           <div class="schritt-chip shrink-0">1</div>
           <div>
             <h3>We take a look at your kitchen. (Free of charge)</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">One conversation, 30 minutes, by video or on site. You tell us where it hurts. We tell you honestly whether Avorix suits you. If not, we say that too.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">One conversation, 30 minutes, by video or on site. You tell us where it hurts. We tell you honestly whether Avorix suits you. If not, we say that too.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">2</div>
           <div>
             <h3>An Avorix chef records your menu.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">He cooks with your team, documents every dish, photographs every step and sets it all up in the app. Typically that takes a week.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">He cooks with your team, documents every dish, photographs every step and sets it all up in the app. Typically that takes a week.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">3</div>
           <div>
             <h3>Your team learns the system.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">There are two ways, depending on what suits your business: compact training days with an Avorix chef who concentrates fully on the training. Or an Avorix chef works in your kitchen as normal and teaches your team the system alongside, while cooking productively. In both cases with sous-chef experience or above.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">There are two ways, depending on what suits your business: compact training days with an Avorix chef who concentrates fully on the training. Or an Avorix chef works in your kitchen as normal and teaches your team the system alongside, while cooking productively. In both cases with sous-chef experience or above.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">4</div>
           <div>
             <h3>You work independently. We stay reachable.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">From now on the app guides your team through every day. You add new dishes yourselves, or we do it for you. And if a chef drops out, you call us.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">From now on the app guides your team through every day. You add new dishes yourselves, or we do it for you. And if a chef drops out, you call us.</p>
           </div>
         </div>
       </div>
@@ -389,7 +389,7 @@ const schema = [
           />
         </Lightbox>
       </div>
-      <p class="text-sm mt-4 max-w-[62ch]" style="color:var(--grau)">The app runs on tablet and smartphone, straight in the browser. Nothing needs installing.</p>
+      <p class="text-sm mt-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">The app runs on tablet and smartphone, straight in the browser. Nothing needs installing.</p>
     </div>
   </section>
 
@@ -414,12 +414,12 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">Built by a head chef. Not by software people.</h2>
       <div class="gruender-grid">
         <div>
-          <p class="max-w-[62ch]" style="color:var(--grau)">Börge Penk worked in professional kitchens for 20 years, as head chef also with large teams. He knows the staff shortage not from statistics but from every single duty rota. Avorix is the system he wishes he had had as a head chef.</p>
+          <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Börge Penk worked in professional kitchens for 20 years, as head chef also with large teams. He knows the staff shortage not from statistics but from every single duty rota. Avorix is the system he wishes he had had as a head chef.</p>
         </div>
-        <p class="max-w-[62ch] mb-4" style="color:var(--grau)">We know the feeling. We have stood in kitchens like that ourselves.</p>
+        <p class="max-w-[var(--spalte-text)] mb-4" style="color:var(--grau)">We know the feeling. We have stood in kitchens like that ourselves.</p>
         <blockquote class="gruender-quote">&bdquo;I have seen too often that a kitchen stands or falls with a single person. It does not have to be that way. Good cooking can be written down, shown and taught.&ldquo;</blockquote>
       </div>
-      <p class="text-sm max-w-[62ch]" style="color:var(--grau);margin-top:32px">You will not find client logos on this page. That is deliberate. Our clients run their kitchens with our system, and what happens in their kitchens is nobody&#8217;s business. On request we guarantee this discretion in writing.</p>
+      <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau);margin-top:32px">You will not find client logos on this page. That is deliberate. Our clients run their kitchens with our system, and what happens in their kitchens is nobody&#8217;s business. On request we guarantee this discretion in writing.</p>
     </div>
   </section>
 

@@ -38,11 +38,11 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width">
       <p class="eyebrow mb-4"><a href="/personal/" class="eyebrow-link">Personal</a></p>
-      <h1 class="mb-6 max-w-[24ch]">Mietkoch in München: Köche mieten für Restaurant, Hotel und Catering</h1>
-      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+      <h1 class="mb-6 max-w-[var(--spalte-schmal)]">Mietkoch in München: Köche mieten für Restaurant, Hotel und Catering</h1>
+      <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Der Küchenchef kündigt, das Bankett ist verkauft, die Messewoche steht vor der Tür? Wir leihen Ihnen unsere festangestellten Köche aus: für das Bankett, für die Messewoche, für den Übergang.
       </p>
       <div class="flex flex-wrap gap-4 mb-6">
@@ -62,7 +62,7 @@ const schema = [
   {/* Direktantwort (GEO) */}
  <section class="reveal">
     <div class="content-width">
-      <p id="direktantwort" class="lead py-4 max-w-[62ch]" style="color:var(--grau)">
+      <p id="direktantwort" class="lead py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Avorix verleiht festangestellte, sozialversicherte Köche an Betriebe im Großraum München, mit behördlicher Arbeitnehmerüberlassungserlaubnis. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, auch für einzelne Veranstaltungen und Spitzenzeiten.
       </p>
     </div>
@@ -72,13 +72,13 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Unser Einsatzgebiet</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">München ist ein dichter Gastronomie-Markt: Messen und Kongresse, Veranstaltungs-Catering, Betriebsrestaurants, dazu die klassische Hotellerie und Gastronomie der Stadt. Das heißt auch: Personalspitzen, die sich nicht in Festanstellungen abbilden lassen. Ein Bankett für 200 Gäste, zwei Messewochen im Herbst, ein Betriebsrestaurant, dessen Koch drei Monate ausfällt. Für solche Lagen verleihen wir Köche im gesamten Großraum München und ins Umland.</p>
-      <p class="max-w-[62ch] mt-4" style="color:var(--grau)">Dazu kommt der Münchner Arbeitsmarkt: Die Schweiz und die Tourismusregionen in Österreich werben um dieselben Köche wie Sie, und in der Stadt konkurrieren die vielen Häuser untereinander. Wer gut ist, hat Angebote. Wir sind da, wenn wieder einer geht.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">München ist ein dichter Gastronomie-Markt: Messen und Kongresse, Veranstaltungs-Catering, Betriebsrestaurants, dazu die klassische Hotellerie und Gastronomie der Stadt. Das heißt auch: Personalspitzen, die sich nicht in Festanstellungen abbilden lassen. Ein Bankett für 200 Gäste, zwei Messewochen im Herbst, ein Betriebsrestaurant, dessen Koch drei Monate ausfällt. Für solche Lagen verleihen wir Köche im gesamten Großraum München und ins Umland.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Dazu kommt der Münchner Arbeitsmarkt: Die Schweiz und die Tourismusregionen in Österreich werben um dieselben Köche wie Sie, und in der Stadt konkurrieren die vielen Häuser untereinander. Wer gut ist, hat Angebote. Wir sind da, wenn wieder einer geht.</p>
     </div>
   </section>
 
   {/* Typische Einsätze */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Typische Einsätze in München</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -93,7 +93,7 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">So läuft ein Einsatz</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
     </div>
   </section>
 
@@ -101,7 +101,7 @@ const schema = [
  <section class="reveal section-gap section-dunkel">
     <div class="content-width text-spalte">
       <h2 class="mb-6">Fest angestellt statt auf Rechnung</h2>
-      <p class="max-w-[62ch]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+      <p class="max-w-[var(--spalte-text)]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
     </div>
   </section>
 
@@ -127,12 +127,12 @@ const schema = [
   </section>
 
   {/* CTA-Abschluss */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
       </div>
-      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">Wenn die Küche Verstärkung braucht, ist der Vertrag das Letzte, worüber Sie sich Sorgen machen sollten.</p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">Wenn die Küche Verstärkung braucht, ist der Vertrag das Letzte, worüber Sie sich Sorgen machen sollten.</p>
       <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
       <a href="/personal" data-cta-location="personal-muenchen-ende" class="btn btn-primary">Personal anfragen</a>
     </div>

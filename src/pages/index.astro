@@ -105,7 +105,7 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero (W2: Split 55/45, Bild spannt, Stempel zuerst) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       {/* Text: mobil unten, Desktop links */}
       <div class="hero-copy">
@@ -142,7 +142,7 @@ const schema = [
   {/* Direkt-Antwort (GEO) */}
  <section class="reveal">
     <div class="content-width">
-      <p id="direktantwort" class="text-base leading-relaxed py-4 max-w-[62ch]" style="color:var(--grau)">Avorix ist ein K&uuml;chensystem f&uuml;r Hotels und Gastronomie aus Friedrichshafen am Bodensee. Es verbindet eine Koch-App, die K&uuml;chenteams Schritt f&uuml;r Schritt durch jedes Gericht f&uuml;hrt, mit Schulung durch erfahrene K&ouml;che und rechtssicherem K&uuml;chenpersonal-Verleih mit beh&ouml;rdlicher Arbeitnehmer&uuml;berlassungserlaubnis. Avorix arbeitet in Deutschland und &Ouml;sterreich.</p>
+      <p id="direktantwort" class="text-base leading-relaxed py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Avorix ist ein K&uuml;chensystem f&uuml;r Hotels und Gastronomie aus Friedrichshafen am Bodensee. Es verbindet eine Koch-App, die K&uuml;chenteams Schritt f&uuml;r Schritt durch jedes Gericht f&uuml;hrt, mit Schulung durch erfahrene K&ouml;che und rechtssicherem K&uuml;chenpersonal-Verleih mit beh&ouml;rdlicher Arbeitnehmer&uuml;berlassungserlaubnis. Avorix arbeitet in Deutschland und &Ouml;sterreich.</p>
       {/* D2 (Anweisung 18): Die beiden Haekchen-Zeilen standen im Hero, wo sie
            wie Rechtfertigung wirkten. Hier belegen sie, was der Absatz darueber
            behauptet. */}
@@ -158,8 +158,8 @@ const schema = [
     <div class="content-width split-row">
       <div class="split-copy">
         <h2 class="mb-6" style="color:var(--druck)">Kommt Ihnen das bekannt vor?</h2>
-        <p class="lead max-w-[62ch]" style="color:var(--druck)">Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person.</p>
-        <p class="max-w-[62ch]" style="color:var(--grau)">Wenn die K&uuml;che wackelt, wackelt alles: <strong>erst die Qualit&auml;t, dann die Bewertungen, dann der Ruf.</strong> Und irgendwann steht die Frage im Raum, wie lange es so noch weitergeht. Damit sind Sie nicht allein: Fachkr&auml;ftemangel in der K&uuml;che ist in fast jedem Betrieb ein Thema.</p>
+        <p class="lead max-w-[var(--spalte-text)]" style="color:var(--druck)">Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person.</p>
+        <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Wenn die K&uuml;che wackelt, wackelt alles: <strong>erst die Qualit&auml;t, dann die Bewertungen, dann der Ruf.</strong> Und irgendwann steht die Frage im Raum, wie lange es so noch weitergeht. Damit sind Sie nicht allein: Fachkr&auml;ftemangel in der K&uuml;che ist in fast jedem Betrieb ein Thema.</p>
       </div>
       <div class="split-media">
         <Image
@@ -247,8 +247,8 @@ const schema = [
         <h2 class="mb-6" style="color:var(--druck)">Was ist Avorix? In einer Minute erkl&auml;rt.</h2>
       {/* Korrektur 9 (Anweisung 25): Der Satz stand unter der Gruppe. Er ist zu
            verstehen, bevor man sie gesehen hat, also gehoert er nach oben. */}
-        <p class="max-w-[62ch]"><strong>Software, Abl&auml;ufe und Personal aus einer Hand.</strong> Das gibt es so nur bei Avorix.</p>
-        <p class="max-w-[62ch]" style="color:var(--grau)">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer K&uuml;che: Es f&uuml;hrt Ihr Team Schritt f&uuml;r Schritt durch jedes Gericht Ihrer Karte, mit klaren Anleitungen, erprobten Abl&auml;ufen und echten K&ouml;chen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag.</p>
+        <p class="max-w-[var(--spalte-text)]"><strong>Software, Abl&auml;ufe und Personal aus einer Hand.</strong> Das gibt es so nur bei Avorix.</p>
+        <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Stellen Sie sich ein Navi vor. Ein Navi bringt jeden Fahrer ans Ziel, auch wenn er die Strecke nicht kennt. Avorix macht dasselbe in Ihrer K&uuml;che: Es f&uuml;hrt Ihr Team Schritt f&uuml;r Schritt durch jedes Gericht Ihrer Karte, mit klaren Anleitungen, erprobten Abl&auml;ufen und echten K&ouml;chen, die Ihr Team anlernen. Damit jeder Teller so rausgeht, wie Sie es wollen. Jeden Tag.</p>
       </div>
       <div class="split-media">
         <Image
@@ -271,21 +271,21 @@ const schema = [
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Schritt 1</h3>
           <h3 class="mb-4">Ihre Gerichte, glasklar aufgeschrieben.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Ein erfahrener Avorix-Koch kommt in Ihren Betrieb und schreibt Ihre Karte auf. Jedes Gericht wird in einfache Schritte zerlegt, mit Fotos, genauen Mengen und Zeiten. Und ehrlich: Viele K&uuml;chen haben Rezepte, gekocht wird trotzdem nach Gef&uuml;hl. Mit der App h&auml;ngt das Rezept direkt am Posten, und der einfachste Weg ist der richtige.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Ein erfahrener Avorix-Koch kommt in Ihren Betrieb und schreibt Ihre Karte auf. Jedes Gericht wird in einfache Schritte zerlegt, mit Fotos, genauen Mengen und Zeiten. Und ehrlich: Viele K&uuml;chen haben Rezepte, gekocht wird trotzdem nach Gef&uuml;hl. Mit der App h&auml;ngt das Rezept direkt am Posten, und der einfachste Weg ist der richtige.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Schritt 2</h3>
           <h3 class="mb-4">Abl&auml;ufe, die auch ein kleines Team schafft.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Vieles wird ruhig vorbereitet, wenn Zeit ist. Vakuumiert und gek&uuml;hlt. Im Service wird nur noch fertiggestellt. <strong>So stemmt eine kleine Mannschaft eine anspruchsvolle Karte</strong>, ohne dass die Qualit&auml;t leidet. Profik&uuml;chen arbeiten seit Jahren so.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Vieles wird ruhig vorbereitet, wenn Zeit ist. Vakuumiert und gek&uuml;hlt. Im Service wird nur noch fertiggestellt. <strong>So stemmt eine kleine Mannschaft eine anspruchsvolle Karte</strong>, ohne dass die Qualit&auml;t leidet. Profik&uuml;chen arbeiten seit Jahren so.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">Schritt 3</h3>
           <h3 class="mb-4">Die Koch-App am Herd.</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Am Posten h&auml;ngt ein Tablet. Die App zeigt der K&uuml;chenkraft Schritt f&uuml;r Schritt, was zu tun ist: <strong>Foto, Menge, Zeit, fertig.</strong> Die App rechnet Portionen automatisch um und beh&auml;lt den Wareneinsatz im Blick.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Am Posten h&auml;ngt ein Tablet. Die App zeigt der K&uuml;chenkraft Schritt f&uuml;r Schritt, was zu tun ist: <strong>Foto, Menge, Zeit, fertig.</strong> Die App rechnet Portionen automatisch um und beh&auml;lt den Wareneinsatz im Blick.</p>
         </li>
       </ol>
       <div class="mt-8 space-y-4" style="color:var(--grau)">
-        <p class="max-w-[62ch]"><strong>Und Ihre Kosten?</strong> Ausgebildete K&ouml;che sind teuer, wenn Sie &uuml;berhaupt welche finden. Mit Avorix kochen angelernte Kr&auml;fte auf Ihrem Niveau, und Ihre Fachkr&auml;fte machen nur noch das, was wirklich ihr K&ouml;nnen braucht.</p>
+        <p class="max-w-[var(--spalte-text)]"><strong>Und Ihre Kosten?</strong> Ausgebildete K&ouml;che sind teuer, wenn Sie &uuml;berhaupt welche finden. Mit Avorix kochen angelernte Kr&auml;fte auf Ihrem Niveau, und Ihre Fachkr&auml;fte machen nur noch das, was wirklich ihr K&ouml;nnen braucht.</p>
       </div>
     </div>
   </section>
@@ -299,7 +299,7 @@ const schema = [
       <h2 class="mb-6" style="color:var(--papier)">
         Und wenn <span style="color:var(--akzent-hell)">Personal fehlt</span>?
       </h2>
-      <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">
+      <p class="max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">
         Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. Unsere K&ouml;che sind bei uns <span style="color:var(--akzent-hell)">fest angestellt</span> und <span style="color:var(--akzent-hell)">rechtssicher</span> verliehen. F&uuml;r die Anlernphase, f&uuml;r die Saison oder f&uuml;r den Notfall.
       </p>
       <div class="mt-6">
@@ -317,28 +317,28 @@ const schema = [
           <div class="schritt-chip shrink-0">1</div>
           <div>
             <h3>Wir schauen uns Ihre K&uuml;che an. (Kostenlos)</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Ein Gespr&auml;ch, 30 Minuten, per Video oder vor Ort. Sie erz&auml;hlen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt. Wenn nicht, sagen wir das auch.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Ein Gespr&auml;ch, 30 Minuten, per Video oder vor Ort. Sie erz&auml;hlen, wo es klemmt. Wir sagen ehrlich, ob Avorix zu Ihnen passt. Wenn nicht, sagen wir das auch.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">2</div>
           <div>
             <h3>Ein Avorix-Koch nimmt Ihre Karte auf.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in der App an. Typischerweise dauert das eine Woche.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Er kocht mit Ihrem Team, dokumentiert jedes Gericht, fotografiert jeden Schritt und legt alles in der App an. Typischerweise dauert das eine Woche.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">3</div>
           <div>
             <h3>Ihr Team lernt das System.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Daf&uuml;r gibt es zwei Wege, je nachdem was zu Ihrem Betrieb passt: kompakte Schulungstage mit einem Avorix-Koch, der sich ganz auf das Anlernen konzentriert. Oder ein Avorix-Koch arbeitet ganz normal in Ihrer K&uuml;che mit und bringt Ihrem Team das System nebenbei bei, w&auml;hrend er produktiv kocht. In beiden F&auml;llen mit mindestens Sous-Chef-Erfahrung.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Daf&uuml;r gibt es zwei Wege, je nachdem was zu Ihrem Betrieb passt: kompakte Schulungstage mit einem Avorix-Koch, der sich ganz auf das Anlernen konzentriert. Oder ein Avorix-Koch arbeitet ganz normal in Ihrer K&uuml;che mit und bringt Ihrem Team das System nebenbei bei, w&auml;hrend er produktiv kocht. In beiden F&auml;llen mit mindestens Sous-Chef-Erfahrung.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">4</div>
           <div>
             <h3>Sie arbeiten selbstst&auml;ndig. Wir bleiben erreichbar.</h3>
-            <p class="text-sm mt-6 max-w-[62ch]" style="color:var(--grau)">Ab jetzt f&uuml;hrt die App Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir &uuml;bernehmen das. Und wenn Ihnen ein Koch ausf&auml;llt, rufen Sie uns an.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Ab jetzt f&uuml;hrt die App Ihr Team durch jeden Tag. Neue Gerichte pflegen Sie selbst ein oder wir &uuml;bernehmen das. Und wenn Ihnen ein Koch ausf&auml;llt, rufen Sie uns an.</p>
           </div>
         </div>
       </div>
@@ -388,7 +388,7 @@ const schema = [
           />
         </Lightbox>
       </div>
-      <p class="text-sm mt-4 max-w-[62ch]" style="color:var(--grau)">Die App l&auml;uft auf Tablet und Smartphone, direkt im Browser. Es muss nichts installiert werden.</p>
+      <p class="text-sm mt-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die App l&auml;uft auf Tablet und Smartphone, direkt im Browser. Es muss nichts installiert werden.</p>
     </div>
   </section>
 
@@ -413,13 +413,13 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">Von einem K&uuml;chenchef gebaut. Nicht von Software-Leuten.</h2>
       <div class="gruender-grid">
         <div>
-          <p class="max-w-[62ch]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
+          <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">B&ouml;rge Penk hat 20 Jahre in Profik&uuml;chen gearbeitet, als K&uuml;chenchef auch mit gro&szlig;en Teams. Den Fachkr&auml;ftemangel kennt er nicht aus Statistiken, sondern aus jedem einzelnen Dienstplan. Avorix ist das System, das er sich als K&uuml;chenchef selbst gew&uuml;nscht h&auml;tte.</p>
         </div>
-        <p class="max-w-[62ch] mb-4" style="color:var(--grau)">Wir kennen das. Wir haben selbst in solchen K&uuml;chen gestanden.</p>
+        <p class="max-w-[var(--spalte-text)] mb-4" style="color:var(--grau)">Wir kennen das. Wir haben selbst in solchen K&uuml;chen gestanden.</p>
         <blockquote class="gruender-quote">&bdquo;Ich habe zu oft erlebt, dass eine K&uuml;che steht und f&auml;llt mit einer einzigen Person. Das muss nicht sein. Gutes Kochen kann man aufschreiben, zeigen und beibringen.&ldquo;</blockquote>
       </div>
       {/* Diskretion: einspaltig unter dem Split — keine halbe Spalte mit Leere daneben (Folgerunde 1 / 3a) */}
-      <p class="text-sm max-w-[62ch]" style="color:var(--grau);margin-top:32px">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
+      <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau);margin-top:32px">Sie finden auf dieser Seite keine Kundenlogos. Das ist Absicht. Unsere Kunden f&uuml;hren ihre K&uuml;che mit unserem System, und was in ihrer K&uuml;che passiert, geht niemanden etwas an. Diese Diskretion sichern wir auf Wunsch vertraglich zu.</p>
     </div>
   </section>
 

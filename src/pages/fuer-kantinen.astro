@@ -37,7 +37,7 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero (Split 55/45, Bild rechts) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       <div class="hero-copy">
         <p class="eyebrow mb-4">Für Kantinen und Betriebsgastronomie</p>
@@ -71,7 +71,7 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">In der Gemeinschaftsverpflegung ist alles vorgegeben. Außer, wer heute kocht.</h2>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Die Essenszahl steht, der Preis steht, die Ausgabezeit steht. Nur die Küche muss jeden Tag neu funktionieren. Genau dafür gibt es Avorix.</p>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Die Essenszahl steht, der Preis steht, die Ausgabezeit steht. Nur die Küche muss jeden Tag neu funktionieren. Genau dafür gibt es Avorix.</p>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div class="card">
           <h3 class="mb-4">Der Rahmen ist fest, die Kosten sind es nicht.</h3>
@@ -90,10 +90,10 @@ const schema = [
   </section>
 
   {/* Die zwei Wege */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</h2>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Das eine hilft nächste Woche, das andere ab dem nächsten Zyklus. Die meisten Betriebe fangen mit dem ersten an.</p>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Das eine hilft nächste Woche, das andere ab dem nächsten Zyklus. Die meisten Betriebe fangen mit dem ersten an.</p>
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="card-modul">
           <div class="card-modul-header">
@@ -113,7 +113,7 @@ const schema = [
           <p class="text-sm" style="color:var(--grau)">Ihre Menüs liegen als Schritt-für-Schritt-Anleitungen in der Koch-App, mit Fotos, Mengen und Zeiten. Jede Kraft folgt dem Ablauf, auch am ersten Tag. Der Menüplaner legt Wochenpläne an, bewährte Wochen kopieren Sie in die nächste. Dazu lernt ein Avorix-Koch Ihr Team direkt an, an Ihrer Ausgabe.</p>
         </div>
       </div>
-      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Und Ihre Gäste? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden ohne sein ausdrückliches Einverständnis.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">Und Ihre Gäste? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden ohne sein ausdrückliches Einverständnis.</p>
     </div>
   </section>
 
@@ -121,9 +121,9 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Feste Essenszahlen und ein fester Kostenrahmen sind der Idealfall für das System.</h2>
-      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Was in der à-la-carte-Küche schwierig ist, ist bei Ihnen einfach: Sie wissen vorher, wie viele Essen ausgegeben werden. Genau daraus rechnet die App. Der Portionsrechner skaliert jedes Rezept auf die tatsächliche Zahl, aus dem Wochenplan entsteht der Gesamtbedarf und daraus die Einkaufsliste. Mehrere Linien bilden Sie als Menüvarianten ab, jede mit eigener Portionslogik.</p>
-      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Die Kalkulation läuft mit: Sie sehen je Gericht, was die Portion kostet, und in der Monatsauswertung, wie sich Wareneinsatz und Personalkosten zu Ihren Zielwerten verhalten. Bei einem Preis, den Sie nicht anheben können, ist das der einzige Hebel, den Sie haben.</p>
-      <p class="max-w-[62ch]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Was in der à-la-carte-Küche schwierig ist, ist bei Ihnen einfach: Sie wissen vorher, wie viele Essen ausgegeben werden. Genau daraus rechnet die App. Der Portionsrechner skaliert jedes Rezept auf die tatsächliche Zahl, aus dem Wochenplan entsteht der Gesamtbedarf und daraus die Einkaufsliste. Mehrere Linien bilden Sie als Menüvarianten ab, jede mit eigener Portionslogik.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die Kalkulation läuft mit: Sie sehen je Gericht, was die Portion kostet, und in der Monatsauswertung, wie sich Wareneinsatz und Personalkosten zu Ihren Zielwerten verhalten. Bei einem Preis, den Sie nicht anheben können, ist das der einzige Hebel, den Sie haben.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
     </div>
   </section>
 
@@ -136,32 +136,32 @@ const schema = [
           <div class="schritt-chip shrink-0">1</div>
           <div>
             <h3 class="mb-4">Gespräch (30 Minuten, kostenlos)</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">2</div>
           <div>
             <h3 class="mb-4">Aufnahme</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">3</div>
           <div>
             <h3 class="mb-4">Schulung</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">4</div>
           <div>
             <h3 class="mb-4">Selbstständig arbeiten</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Die App führt Ihr Team durch jeden Zyklus. Wir bleiben erreichbar.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Die App führt Ihr Team durch jeden Zyklus. Wir bleiben erreichbar.</p>
           </div>
         </div>
       </div>
-      <p class="text-sm mt-8 max-w-[62ch]">In der ruhigeren Ferienzeit sind Aufnahme und Schulung am einfachsten. Wenn der Betrieb wieder anläuft, steht Ihr System.</p>
+      <p class="text-sm mt-8 max-w-[var(--spalte-text)]">In der ruhigeren Ferienzeit sind Aufnahme und Schulung am einfachsten. Wenn der Betrieb wieder anläuft, steht Ihr System.</p>
     </div>
   </section>
 
@@ -169,13 +169,13 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
-      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
       <a href="/pilotprogramm" data-cta-location="kantinen-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
     </div>
   </section>
 
   {/* FAQ */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
       <div class="faq-list">
@@ -204,7 +204,7 @@ const schema = [
   </section>
 
   {/* Final CTA */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>

@@ -29,7 +29,7 @@ const schema = {
     <div class="content-width">
       <p class="eyebrow mb-4">Kostenloses Erstgespräch</p>
       <h1 class="mb-4">App-Demo vereinbaren</h1>
-      <p class="lead mb-10 max-w-[62ch]" style="color:var(--grau)">Lernen Sie Avorix in einem persönlichen Demo-Gespräch kennen. Wir zeigen Ihnen, wie unsere Lösung Ihren Küchenbetrieb konkret unterstützt.</p>
+      <p class="lead mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">Lernen Sie Avorix in einem persönlichen Demo-Gespräch kennen. Wir zeigen Ihnen, wie unsere Lösung Ihren Küchenbetrieb konkret unterstützt.</p>
 
       {/* Zwei Wege nebeneinander (Anweisung 12a/9): links die bestehende
            Kalender-Karte unveraendert, rechts der Personal-Weg. */}
@@ -58,7 +58,7 @@ const schema = {
               href="tel:+4975413973915"
               data-cta-location="kontakt"
               data-cta-event="personal_anruf_click"
-              class="kontakt-telefon-link"
+              class="telefon-link"
             >07541 3973915</a>
             (Mo bis Fr 8 bis 17 Uhr, au&szlig;erhalb &uuml;ber Band)
           </p>
@@ -152,14 +152,8 @@ const schema = {
 .kontakt-mailto:hover {
   text-decoration: underline;
 }
-.kontakt-telefon-link {
-  font-weight: 700;
-  color: var(--akzent);
-  text-decoration: underline;
-}
-.kontakt-telefon-link:hover {
-  text-decoration: underline;
-}
+/* Anweisung 40 (C1): Telefonlink vereinheitlicht -> globale .telefon-link
+   (>=44px). Die frueheren lokalen .kontakt-telefon-link-Regeln entfallen. */
 
 /* Formularfelder: Token-basiert nach §3.14 */
 .kontakt-field {
