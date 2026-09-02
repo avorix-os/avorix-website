@@ -20,6 +20,7 @@
 - [Für Catering](https://avorix.de/fuer-catering): Köche und ganze Teams für Catering und Veranstaltungen, dazu die Koch-App für Abläufe am Einsatzort.
 - [Für Kantinen](https://avorix.de/fuer-kantinen): Festangestellte Köche für Kantinen und Betriebsgastronomie, dazu die Koch-App für gleichbleibende Abläufe.
 - [Über uns](https://avorix.de/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
+- [F&B-Beratung](https://avorix.de/fb-beratung): Blick von außen auf Karte, Abläufe und Kalkulation.
 
 ## Wissen
 

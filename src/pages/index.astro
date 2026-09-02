@@ -17,16 +17,21 @@ const schema = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": "https://avorix.de/#organization",
     "name": "AVORIX GmbH",
     "url": "https://avorix.de",
     "logo": "https://avorix.de/avorix-logo.svg",
     "description": "Avorix führt Ihr Küchenteam Schritt für Schritt durch jedes Gericht. Mit Koch-App, Schulung durch echte Köche und rechtssicherem Personal.",
+    "telephone": "+49 7541 3973915",
+    "email": "info@avorix.de",
     "founder": {
       "@type": "Person",
       "name": "Börge Penk"
     },
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Fallenbrunnen 14",
+      "postalCode": "88045",
       "addressLocality": "Friedrichshafen",
       "addressCountry": "DE"
     },
@@ -98,7 +103,7 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Koch-App, Schulung & Küchenpersonal für Hotels und Gastronomie"
+  title="Küchenpersonal, Koch-App und Schulung für Hotels"
   description="Avorix führt Ihr Küchenteam Schritt für Schritt durch jedes Gericht. Mit Koch-App, Schulung durch echte Köche und rechtssicherem Personal."
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}

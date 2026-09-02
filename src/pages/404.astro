@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout
+  title="Diese Seite gibt es nicht"
+  description="Der Link ist vermutlich veraltet oder hat sich verschrieben."
+  noindex={true}
+>
+  <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4">Fehler 404</p>
+      <h1 class="mb-6">Diese Seite gibt es nicht.</h1>
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Der Link ist vermutlich veraltet oder hat sich verschrieben. Diese Wege führen weiter:
+      </p>
+      <ul class="mt-6 flex flex-col gap-2" style="color:var(--grau)">
+        <li><a href="/">Startseite</a></li>
+        <li><a href="/personal/">Personal</a></li>
+        <li><a href="/wissen/">Wissen</a></li>
+        <li><a href="/kontakt/">Kontakt</a></li>
+      </ul>
+      <p class="mt-8" style="color:var(--grau);font-size:15px">
+        Im Notfall direkt anrufen:
+        <a href="tel:+4975413973915" class="kontakt-telefon-link">07541 3973915</a>
+        (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)
+      </p>
+    </div>
+  </section>
+</BaseLayout>

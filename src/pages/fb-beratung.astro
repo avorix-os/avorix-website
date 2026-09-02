@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import boergeKueche from "../assets/bilder/boerge-kueche.jpg";
+
+const ogImg = await getImage({ src: boergeKueche, width: 1200, format: "jpeg" });
+const ogImageAlt = "Küchenchef Börge Penk bei der Arbeit am Pass einer Profiküche";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.de/fb-beratung",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `https://avorix.de${ogImg.src}`,
+      "description": ogImageAlt,
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": "#direktantwort",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Was kostet eine F&B-Beratung?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt vom Umfang ab. Wir legen den Rahmen im kostenlosen Erstgespräch fest, bevor irgendetwas beginnt. Überraschungen auf der Rechnung gibt es bei uns nicht." } },
+      { "@type": "Question", "name": "Müssen wir danach die Koch-App oder Personal buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die Beratung steht für sich. Wenn Sie danach nur die Erkenntnisse mitnehmen und selbst umsetzen, ist das ein gutes Ergebnis." } },
+      { "@type": "Question", "name": "Wie lange dauert es, bis sich etwas ändert?", "acceptedAnswer": { "@type": "Answer", "text": "Die kleinen Dinge ändern sich sofort, oft schon während wir da sind. Alles, was an der Karte oder an Abläufen hängt, braucht einen Zyklus, also einige Wochen." } },
+      { "@type": "Question", "name": "Wir sind kein Hotel, sondern ein Gasthof mit fester Karte. Passt das?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, das passt sogar besonders gut. Je fester die Karte, desto mehr bringt es, sie einmal gründlich durchzurechnen." } },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="F&B-Beratung für Hotels und Restaurants"
+  description="Ein Blick von außen auf Karte, Abläufe und Kalkulation: F&B-Beratung von einem Küchenchef mit 20 Jahren Praxis, am Bodensee und darüber hinaus."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={schema}
+>
+  {/* Hero */}
+ <section class="hero-section px-6">
+    <div class="content-width hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mb-4"><a href="/system/">Das Angebot</a></p>
+        <h1 class="mb-6">F&B-Beratung: der Blick von außen auf Karte, Abläufe und Kalkulation</h1>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="/kontakt/" data-cta-location="fb-beratung-hero" class="btn btn-primary">Erstgespräch vereinbaren</a>
+        </div>
+        <p class="hero-telefon mt-6">
+          Im Notfall direkt anrufen:
+          <a href="tel:+4975413973915" data-cta-location="hero" class="hero-telefon-link">07541 3973915</a>
+          <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+        </p>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={boergeKueche}
+          alt={ogImageAlt}
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 900px) 100vw, 528px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* Direkt-Antwort (GEO) */}
+ <section class="reveal">
+    <div class="content-width">
+      <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        F&B-Beratung heißt bei Avorix: Ein Küchenchef sieht sich Ihre Karte, Ihre Abläufe und Ihre Kalkulation an und sagt Ihnen, wo Zeit und Geld liegen bleiben. Ohne dass Sie dafür eine Software einführen oder Personal buchen müssen. Was Sie danach damit machen, entscheiden Sie.
+      </p>
+    </div>
+  </section>
+
+  {/* Worauf wir schauen */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Worauf wir schauen</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Die Karte</h3>
+          <p class="text-sm" style="color:var(--grau)">Welche Gerichte tragen sich, welche kosten Sie Geld und Zeit? Wo steht zu viel Verschiedenes auf der Karte, das dieselbe Ware doppelt bindet? Wo fehlt ein Gericht, das Ihre Küche mit dem vorhandenen Warenkorb leicht schaffen würde?</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Die Abläufe</h3>
+          <p class="text-sm" style="color:var(--grau)">Wer macht was, und wann bricht es? Die meisten Küchen verlieren Zeit nicht am Herd, sondern in der Vorbereitung, in der Absprache und in Wegen, die niemand je aufgeschrieben hat.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Die Kalkulation</h3>
+          <p class="text-sm" style="color:var(--grau)">Was kostet ein Teller wirklich, und was bleibt davon? Wir rechnen mit Ihnen an Ihren eigenen Zahlen nach, nicht an Branchendurchschnitten. Zur Einordnung dient uns die Richtsatzsammlung des Bundesfinanzministeriums, die für Gaststätten einen Wareneinsatz von rund 28 Prozent ansetzt. Wo Ihr Betrieb steht, können Sie mit unserem <a href="/wissen/wareneinsatz-berechnen/">Wareneinsatz-Rechner</a> selbst nachrechnen, und wie daraus ein tragfähiger Verkaufspreis wird, steht in unserem Beitrag zur <a href="/wissen/kalkulation-gastronomie/">Kalkulation in der Gastronomie</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Wie das abläuft */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Wie das abläuft</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Erstgespräch (30 Minuten, kostenlos)</h3>
+          <p class="text-sm" style="color:var(--grau)">Sie schildern die Lage, wir sagen offen, ob wir hier etwas beitragen können.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Ein Tag in Ihrem Haus</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein Avorix-Küchenchef ist im laufenden Betrieb dabei, in der Vorbereitung und im Service.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Die Einschätzung</h3>
+          <p class="text-sm" style="color:var(--grau)">Sie bekommen von uns benannt, was wir gesehen haben, und in welcher Reihenfolge wir es angehen würden.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Sie entscheiden</h3>
+          <p class="text-sm" style="color:var(--grau)">Sie setzen es selbst um, oder wir machen weiter. Beides ist in Ordnung, und wir sagen Ihnen vorher, was welcher Weg kostet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Wer sich das ansieht */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Wer sich das ansieht</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Börge Penk, Gründer von Avorix. Zwanzig Jahre Profiküche, vom Auszubildenden bis zum Küchenchef mit großen Teams: Karten entwickelt, Mannschaften geführt, den Fachkräftemangel aus jedem einzelnen Dienstplan kennengelernt. 2023 hat er daraus sein erstes Unternehmen gemacht, die BP Gastroberatung, aus der die AVORIX GmbH geworden ist. Das ist der Blick, den Sie hier bekommen: einer aus der Küche, nicht einer aus der Präsentation.</p>
+      <div class="mt-8">
+        <a href="/kontakt/" data-cta-location="fb-beratung-bio" class="btn btn-primary">Erstgespräch vereinbaren</a>
+      </div>
+      <p class="hero-telefon mt-6">
+        Im Notfall direkt anrufen:
+        <a href="tel:+4975413973915" data-cta-location="fb-beratung" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+    </div>
+  </section>
+
+  {/* Häufige Fragen */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Was kostet eine F&amp;B-Beratung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt vom Umfang ab. Wir legen den Rahmen im kostenlosen Erstgespräch fest, bevor irgendetwas beginnt. Überraschungen auf der Rechnung gibt es bei uns nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Müssen wir danach die Koch-App oder Personal buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Die Beratung steht für sich. Wenn Sie danach nur die Erkenntnisse mitnehmen und selbst umsetzen, ist das ein gutes Ergebnis.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie lange dauert es, bis sich etwas ändert?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Die kleinen Dinge ändern sich sofort, oft schon während wir da sind. Alles, was an der Karte oder an Abläufen hängt, braucht einen Zyklus, also einige Wochen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wir sind kein Hotel, sondern ein Gasthof mit fester Karte. Passt das?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, das passt sogar besonders gut. Je fester die Karte, desto mehr bringt es, sie einmal gründlich durchzurechnen.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
