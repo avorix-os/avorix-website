@@ -1,36 +1,23 @@
-# Anweisung 40 · Teil B.4 — Band-Zuordnung: Vorschlag für die übrigen Seiten
+# Anweisung 40 · Teil B.4 — Band-Zuordnung (freigegeben & umgesetzt)
 
-Stand: 2026-09-01 · An: Simon / FORMM · Von: Paperclip/Claude Code
+Stand: 2026-09-02 · Von Simon / FORMM freigegeben (Mail 02.09.2026), umgesetzt in PR #62.
 
-`/personal` und `/koch-app` sind bereits nach den Tabellen in Teil B gesetzt (im
-Code umgesetzt). Für alle anderen Seiten wurden – wie in B2.4 verlangt – alle
-unsichtbaren `style="background: var(--papier)"` entfernt; **Bänder sind dort noch
-nicht gesetzt**, bis ihr diese Zuordnung freigebt.
+Alle Bänder sind gesetzt. Regeln aus B2.3: höchstens zwei Bänder je Seite plus
+der eine dunkle Block; ein Band klammert zusammengehörige Sektionen; zwischen
+zwei Bändern liegt mindestens eine farblose Sektion; erstes Band ab Sektion 2
+(Ausnahmen unten von Simon ausdrücklich gewünscht); Hero nie ein Band.
 
-Regeln aus B2.3, hier angewandt:
-- Höchstens zwei Bänder je Seite, zusätzlich zum einen dunklen Block.
-- Ein Band klammert zusammengehörige Sektionen, nie eine isolierte.
-- Zwischen zwei Bändern liegt mindestens eine **farblose** Sektion (der dunkle
-  Block zählt nicht als Trenner, weil er selbst eine Fläche ist).
-- Erstes Band frühestens ab Sektion 2. Der Hero (0) trägt nie ein Band.
+Sektionsnummern sind 0-basiert (0 = Hero).
 
-Der Vorschlag ist bewusst **konservativ** (meist ein Band je Seite). Dünne Seiten
-bleiben ganz ohne Band – das ist laut B2.4 unkritisch.
+## Deutsche Seiten
 
-## Bereits gesetzt (Referenz)
-
-| Seite | Bänder (Sektions-Nr.) | Begründung |
+| Seite | Bänder | Begründung |
 |---|---|---|
+| `/` | 4–5 | Avorix vorgestellt |
 | `/personal` | 3–5; 12–13 | Ablauf-Kapitel; Entscheidungsstelle |
 | `/koch-app` | 2; 5 | Funktionsübersicht; Zusatzangebot |
-
-## Vorschlag – deutsche Seiten
-
-| Seite | Band(er) | Begründung (3 Worte) |
-|---|---|---|
-| `/` (Startseite) | 4–5 | Avorix vorgestellt |
-| `/system` | — | Inhalte prüfen* |
-| `/schulung` | — | zu dünn |
+| `/system` | 3 | Ablauf. **„Einzeln gut. Zusammen unschlagbar." (Sektion 2) bleibt der dunkle Block** — ein Band kann nicht dunkel sein; dunkles Argument + Band-Ablauf stehen als ein Kapitel zusammen. |
+| `/schulung` | 1 | „Anlernen, wie es zu Ihrem Betrieb passt." (Simons Ergänzung) |
 | `/pilotprogramm` | 2–3 | Angebot & Ablauf |
 | `/ueber-uns` | 2–3 | Haltung/Ansatz |
 | `/fuer-hotels` | 2–3 | System & Idealfall |
@@ -42,29 +29,27 @@ bleiben ganz ohne Band – das ist laut B2.4 unkritisch.
 | `/personal/frankfurt` | 3–4 | Einsatz-Kapitel |
 | `/personal/muenchen` | 3–4 | Einsatz-Kapitel |
 | `/personal/tirol` | 3–4 | Einsatz-Kapitel |
-| `/leitfaden` | — | zu dünn |
-| `/kontakt` | — | reine Formularseite |
-| `/wissen` (Index) | — | reine Liste |
-| `/wissen/*` (5 Artikel) | — | Prosa, ein Kapitel |
-| `/datenschutz`, `/impressum` | — | Rechtstext |
+| `/leitfaden`, `/kontakt`, `/wissen` + 5 Artikel, `/datenschutz`, `/impressum` | — | zu dünn / Rechtstext |
 
-\* `/system`: Die mittleren Sektionen tragen keine sichtbare H2 (Modulkarten).
-Vorschlag zurückgestellt, bis der Aufbau geklärt ist.
+## Englische Seiten (spiegeln die deutschen)
 
-## Vorschlag – englische Seiten (spiegeln die deutschen)
-
-| Seite | Band(er) | Begründung |
+| Seite | Bänder | Begründung |
 |---|---|---|
-| `/en` | 4–5 | Avorix vorgestellt (wie `/`) |
+| `/en` | 4–5 | wie `/` |
 | `/en/cook-app` | 2; 5 | wie `/koch-app` |
-| `/en/staff` | 3–4; 12 | wie `/personal` (Struktur leicht anders) |
+| `/en/staff` | 3–4; 12 | wie `/personal` |
+| `/en/system` | 3 | „From the first call…" (Ablauf). Diese Seite hat **keinen** dunklen Block, daher nur das eine Band. |
+| `/en/training` | 1 | „Training that fits how you work." (spiegelt `/schulung`) |
 | `/en/pilot-program` | 2–3 | wie `/pilotprogramm` |
-| `/en/system` | — | Inhalte prüfen* |
-| `/en/training` | — | zu dünn |
-| `/en/about` | — | einseitig |
-| `/en/contact` | — | Formularseite |
-| `/en/privacy`, `/en/legal-notice` | — | Rechtstext |
+| `/en/about`, `/en/contact`, `/en/privacy`, `/en/legal-notice` | — | einseitig / Formular / Rechtstext |
 
-Sobald ihr die Zuordnung freigebt (oder korrigiert), setzen wir die
-`class="section-band"` an den benannten Sektionen – genau wie auf `/personal`
-und `/koch-app` bereits geschehen.
+## Offener Bestätigungspunkt für Simon
+
+Simon schrieb, das `/system`-Band solle **beide** Sektionen „Einzeln gut.
+Zusammen unschlagbar." und „Vom ersten Gespräch zur Küche…" klammern. Die erste
+davon ist der **dunkle Block** (Anweisung 40 behält genau einen je Seite), und
+ein Band kann nicht dunkel sein. Umgesetzt: dunkler Block bleibt, das Band liegt
+auf der Ablauf-Sektion direkt darunter, sodass Argument (dunkel) + Ablauf (Band)
+optisch ein Kapitel bilden. Bitte bestätigen — falls stattdessen der dunkle
+Block hier weichen und beide Sektionen ein helles Band werden sollen, ziehen wir
+das nach.
