@@ -689,24 +689,31 @@ test.describe('T12b: Korrektur 5 — das geschlossene Menue zeigt nichts', () =>
   });
 });
 
-test.describe('T12c: Korrektur 2 — keine Ueberschrift bricht enger als ihr Text', () => {
+/**
+ * T12c: Anweisung 40 (A3) loest die fruehere Korrektur 2 ab.
+ *
+ * Korrektur 2 (Anweisung 25) verlangte, dass keine Ueberschrift schmaler bricht
+ * als ihr eigener Text -- umgesetzt ueber einen :has()-Block, der die H2-Breite
+ * freigab, sobald in der Sektion eine Karte/ein Raster/eine FAQ-Liste stand.
+ * A3 kehrt das um: die H2-Breite ist eine Entscheidung, kein Nebeneffekt. Jede
+ * H2 traegt 640px; nur Hero und Karte bleiben ausgenommen. Langueberschriften
+ * brechen dadurch bewusst auf zwei Zeilen.
+ */
+test.describe('T12c: Anweisung 40 A3 — jede H2 traegt 640px (ausser Hero und Karte)', () => {
   for (const pagePath of ['/', '/koch-app', '/personal', '/system', '/fuer-hotels']) {
-    test(`${pagePath} — Ueberschrift nie schmaler als ihr Absatz`, async ({ page }) => {
+    test(`${pagePath} — H2 = 640px, Hero/Karte ausgenommen`, async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 900 });
       await page.goto(pagePath);
-      const enger = await page.evaluate(() => {
+      const abweichend = await page.evaluate(() => {
         const raus = [];
-        for (const h of document.querySelectorAll('h2, h3')) {
-          const hw = h.getBoundingClientRect().width;
-          const n = h.nextElementSibling;
-          if (n && n.tagName === 'P') {
-            const nw = n.getBoundingClientRect().width;
-            if (nw > hw + 2) raus.push(`${Math.round(hw)} vs ${Math.round(nw)}: ${h.innerText.slice(0, 30)}`);
-          }
+        for (const h of document.querySelectorAll('h2')) {
+          if (h.closest('.hero-section') || h.closest('.card') || h.closest('.card-modul')) continue;
+          const mw = getComputedStyle(h).maxWidth;
+          if (mw !== '640px') raus.push(`${mw}: ${h.innerText.slice(0, 30)}`);
         }
         return raus;
       });
-      expect(enger).toEqual([]);
+      expect(abweichend).toEqual([]);
     });
   }
 });
@@ -834,37 +841,31 @@ test.describe('T13b: Korrektur 9 — die Saetze stehen unter ihrer Ueberschrift'
   });
 });
 
-test.describe('T13c: Korrektur 7 — Karten einer Reihe sind gleich hoch', () => {
+/**
+ * T13c: Anweisung 40 (A4) loest die fruehere Korrektur 7 ab.
+ *
+ * Korrektur 7 (Anweisung 25) zog Karten einer Reihe per align-items: stretch auf
+ * gleiche Hoehe. A4 kehrt das um: Karten stehen oben (align-items: start) und
+ * sind so hoch wie ihr Inhalt -- sonst entsteht Leerraam am Kartenende (auf
+ * /koch-app bis 494px). Der Test prueft die Mechanik: Kartenraster sind oben
+ * ausgerichtet, nicht gestreckt.
+ */
+test.describe('T13c: Anweisung 40 A4 — Kartenraster oben ausgerichtet, nicht gestreckt', () => {
   for (const pagePath of ['/personal', '/system', '/koch-app', '/en/system']) {
-    test(`${pagePath} — gleiche Hoehe je Reihe`, async ({ page }) => {
+    test(`${pagePath} — align-items: start je Kartenraster`, async ({ page }) => {
       await page.setViewportSize({ width: 1280, height: 900 });
       await page.goto(pagePath);
-      await page.evaluate(async () => {
-        window.scrollTo(0, document.body.scrollHeight);
-        await new Promise((r) => setTimeout(r, 700));
-        window.scrollTo(0, 0);
-      });
-      const ungleich = await page.evaluate(() => {
+      const nichtOben = await page.evaluate(() => {
         const raus = [];
         for (const raster of document.querySelectorAll('.grid')) {
           const karten = [...raster.children].filter((k) => k.classList.contains('card') || k.classList.contains('card-modul'));
           if (karten.length < 2) continue;
-          const reihen = new Map();
-          for (const k of karten) {
-            const oben = Math.round(k.getBoundingClientRect().top);
-            const schluessel = [...reihen.keys()].find((x) => Math.abs(x - oben) < 8) ?? oben;
-            if (!reihen.has(schluessel)) reihen.set(schluessel, []);
-            reihen.get(schluessel).push(k);
-          }
-          for (const [, gruppe] of reihen) {
-            if (gruppe.length < 2) continue;
-            const hoehen = gruppe.map((k) => Math.round(k.getBoundingClientRect().height));
-            if (Math.max(...hoehen) - Math.min(...hoehen) > 1) raus.push(hoehen.join('/'));
-          }
+          const ai = getComputedStyle(raster).alignItems;
+          if (ai !== 'start' && ai !== 'flex-start') raus.push(ai);
         }
         return raus;
       });
-      expect(ungleich).toEqual([]);
+      expect(nichtOben).toEqual([]);
     });
   }
 });
