@@ -52,7 +52,10 @@ const { label, caption, flach = false, zoomText = "vergrößern" } = Astro.props
   .app-screenshot-trigger :global(img) {
     aspect-ratio: 4 / 3;
     object-fit: contain;
-    background: var(--flaeche);
+    /* Anweisung 40 (C3): Hintergrund hinter den App-Screenshots auf die Band-
+       Flaeche (#f1efe9) statt Weiss, damit die Randstreifen wie Flaeche
+       aussehen und nicht wie ein Fehler. */
+    background: var(--color-neutral-200);
     width: 100%;
     height: auto;
   }
