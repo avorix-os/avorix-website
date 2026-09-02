@@ -53,7 +53,7 @@ const faqSchema = {
   schemaOrg={[schema, faqSchema]}
 >
   {/* Hero (W2: Split 55/45) — mirror of /koch-app */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid" style="align-items:center">
       {/* Text: mobile bottom, desktop left */}
       <div class="hero-copy">
@@ -85,7 +85,7 @@ const faqSchema = {
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Measured in one customer&rsquo;s business.</h2>
-      <p class="mb-10 max-w-[62ch]" style="color:var(--grau)">The app already pays for itself there.</p>
+      <p class="mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">The app already pays for itself there.</p>
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="card">
           <p class="mb-6" style="font-family:var(--f-head);font-weight:700;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.008em;color:var(--druck)">around 15&nbsp;%</p>
@@ -100,7 +100,7 @@ const faqSchema = {
   </section>
 
   {/* What the app can do (section 2) */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">What the app can do. Shown, not claimed.</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -163,8 +163,8 @@ const faqSchema = {
           <h2 class="mb-6" style="color:var(--papier)">
             <span style="color:var(--akzent-hell)">Food cost</span> in view.
           </h2>
-          <p class="mb-4 max-w-[62ch]" style="color:rgba(247,246,242,0.8)">Recipe-based costing and <span style="color:var(--akzent-hell)">food cost</span> analysis. <strong>You see what every plate really costs.</strong></p>
-          <p class="max-w-[62ch]" style="color:rgba(247,246,242,0.8)">The day&rsquo;s food cost is <span style="color:var(--akzent-hell)">documented</span>, without anyone having to write anything down.</p>
+          <p class="mb-4 max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">Recipe-based costing and <span style="color:var(--akzent-hell)">food cost</span> analysis. <strong>You see what every plate really costs.</strong></p>
+          <p class="max-w-[var(--spalte-text)]" style="color:rgba(247,246,242,0.8)">The day&rsquo;s food cost is <span style="color:var(--akzent-hell)">documented</span>, without anyone having to write anything down.</p>
         </div>
         <div class="split-media" style="box-shadow:none">
           <Lightbox label="HACCP CHECK" caption="Screenshot of the Avorix cook app: work step with a red HACCP control point and 75 degrees core temperature" zoomText="enlarge" flach>
@@ -256,13 +256,13 @@ const faqSchema = {
   </section>
 
   {/* Add-on modules (12c) */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">If you want more: two add-on modules.</h2>
-      <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
+      <p class="text-sm mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         What the modules cost, we will work out with you in the first call, to the euro. Early adopters also get the 2026 pilot conditions.
       </p>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">
         Both build on what your kitchen already uses. Avorix Preisvergleich requires the Warenwirtschaft package, Avorix Manager additionally the Organisation package.
       </p>
       <div class="grid sm:grid-cols-2 gap-6">
@@ -313,15 +313,15 @@ const faqSchema = {
       <ol class="tagesablauf">
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">In the morning</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">Prep runs off the list. Everyone knows what is being pre-produced today, in what quantity, for how many guests.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">Prep runs off the list. Everyone knows what is being pre-produced today, in what quantity, for how many guests.</p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">During service</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">The tablet hangs at the station. An order comes in, the cook opens the dish and works through the steps. <strong>The result looks and tastes the way it always does.</strong></p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">The tablet hangs at the station. An order comes in, the cook opens the dish and works through the steps. <strong>The result looks and tastes the way it always does.</strong></p>
         </li>
         <li class="tagesablauf-station">
           <h3 class="eyebrow tagesablauf-zeit">In the evening</h3>
-          <p class="text-sm max-w-[62ch]" style="color:var(--grau)">The day&rsquo;s food cost is documented, without anyone having to write anything down.</p>
+          <p class="text-sm max-w-[var(--spalte-text)]" style="color:var(--grau)">The day&rsquo;s food cost is documented, without anyone having to write anything down.</p>
         </li>
       </ol>
     </div>
@@ -331,7 +331,7 @@ const faqSchema = {
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Who owns all of this?</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">You do. Your recipes remain your property and are never passed on to other businesses. <strong>If you leave Avorix, you take your documentation with you.</strong></p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">You do. Your recipes remain your property and are never passed on to other businesses. <strong>If you leave Avorix, you take your documentation with you.</strong></p>
     </div>
   </section>
 
@@ -339,7 +339,7 @@ const faqSchema = {
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">You do not have to enter anything. We do that.</h2>
-      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">An Avorix chef records your menu on site at your business: cooking, documenting, photographing, setting up. <strong>Afterwards he trains your team right at the stove.</strong></p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">An Avorix chef records your menu on site at your business: cooking, documenting, photographing, setting up. <strong>Afterwards he trains your team right at the stove.</strong></p>
       <a href="/en/system" data-cta-location="en-cookapp-system" class="btn btn-secondary">How the Avorix system works</a>
       <a href="/en/pilot-program" data-cta-location="en-cookapp-pilot" class="btn btn-secondary">To the Pilot Program</a>
     </div>
@@ -377,12 +377,12 @@ const faqSchema = {
         </details>
       </div>
       {/* Kernsatz (verbindlicher englischer Ergebnis-Satz, Anweisung 31) */}
-      <p class="mt-8 max-w-[62ch]" style="color:var(--druck);font-weight:700">Your kitchen holds your standard. Even when your best chef is missing.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">Your kitchen holds your standard. Even when your best chef is missing.</p>
     </div>
   </section>
 
   {/* Final CTA → Peak-End (3.18) */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Certified &middot; German staffing licence</Stempel>

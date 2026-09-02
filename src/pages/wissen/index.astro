@@ -65,11 +65,11 @@ const artikel = [
   schemaOrg={schema}
 >
   {/* Hub-Intro */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width">
       <p class="eyebrow mb-4">Wissen</p>
       <h1 class="mb-6">Wissen für Küche und Gastgewerbe</h1>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Praxiswissen ohne Umwege: geschrieben von Leuten, die selbst am Herd gestanden haben. Drei Themen, die in fast jedem Betrieb irgendwann auf dem Tisch liegen.
       </p>
     </div>
@@ -80,7 +80,7 @@ const artikel = [
    <section class="reveal section-gap">
       <div class="content-width">
         <h2 class="mb-3" style="color:var(--druck)">{gruppe.rubrik}</h2>
-        <p class="text-sm mb-6 max-w-[62ch]" style="color:var(--grau)">{gruppe.einordnung}</p>
+        <p class="text-sm mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">{gruppe.einordnung}</p>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {gruppe.karten.map((karte) => (
             <a href={karte.href} class="card wissen-karte">
@@ -96,7 +96,7 @@ const artikel = [
   {/* Leitfaden-Verweis (Anweisung 39, A3) */}
   <section class="reveal">
     <div class="content-width">
-      <p class="max-w-[62ch]" style="color:var(--grau)">Zum Mitnehmen: unser <a href="/leitfaden/">Leitfaden gegen den Fachkräftemangel in der Küche</a>, fünf Strategien auf wenigen Seiten.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Zum Mitnehmen: unser <a href="/leitfaden/">Leitfaden gegen den Fachkräftemangel in der Küche</a>, fünf Strategien auf wenigen Seiten.</p>
     </div>
   </section>
 

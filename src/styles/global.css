@@ -96,6 +96,14 @@
   --marker:        #F3D9C8;
   --flaeche-hover: #F1EFE9;
 
+  /* Anweisung 40 (A2): drei Textspaltenmasse statt neun ch-Werten.
+     ch rechnet die Breite aus der jeweiligen Schriftgroesse und macht aus zwei
+     gewollten Massen fuenf Pixelwerte. Diese drei Variablen ersetzen alle
+     ch-Werte, damit die rechten Kanten wieder auf einer Linie stehen. */
+  --spalte-schmal: 480px;   /* Randnotiz, Bildunterschrift, Rechtshinweis */
+  --spalte-text:   640px;   /* alles Fliessende: Absatz, Liste, Zitat, FAQ-Antwort, H2 */
+  --spalte-breit: 1080px;   /* Raster, Karten, Bild-neben-Text, Formular */
+
   --f-head: 'Avenir Next','Avenir','Nunito Sans','Segoe UI','Helvetica Neue',Helvetica,Arial,sans-serif;
   /* E1: eine Groteske fuer Ueberschriften und Fliesstext. */
   --f-body: var(--f-head);
@@ -118,20 +126,19 @@
   min-width: 0;
 }
 
-/* Korrektur 2: In Sektionen, deren Inhalt bewusst die volle Breite nutzt,
-   traegt die Ueberschrift keine Begrenzung -- sonst waere sie schmaler als
-   das, was unter ihr steht. Betrifft Kartenreihen, Bild neben Text, den
-   dunklen Block und die Heros. */
+/* Anweisung 40 (A3): Die Ueberschriftenbreite ist eine Entscheidung, kein
+   Nebeneffekt. Der fruehere :has()-Block hob die H2-Begrenzung immer dann auf,
+   wenn irgendwo in derselben Sektion eine Karte, ein Raster oder eine FAQ-Liste
+   stand -- damit entschied der Inhalt weiter unten ueber die Zeilenlaenge der
+   Ueberschrift weiter oben. Er ist ersatzlos entfernt: jede H2 traegt 640px
+   (siehe h2-Regel unten). Nur zwei Ausnahmen bleiben.
+   1) Der Hero hat sein eigenes Raster. */
 .hero-section h1,
-.hero-section h2,
-.split-row h2,
-.section-dunkel h2,
-section:has(> .content-width > .grid) h2,
-section:has(> .content-width > .split-row) h2,
-section:has(.card) h2,
-section:has(.faq-list) h2 {
+.hero-section h2 {
   max-width: none;
 }
+/* 2) In einer Karte gibt die Karte die Breite vor -- das regelt die Regel
+   `.card h2, .card h3, .card h4 { max-width: none }` weiter unten. */
 
 /* Korrektur 4 (Anweisung 25): Die Kopfleiste steht fest oben und nimmt dem
      Inhalt Platz weg, ohne ihn zu verschieben. Bei 60px blieben unter ihr 4px
@@ -216,20 +223,52 @@ main > section:last-of-type {
 .section-gap + .section-gap {
   padding-top: 0;
 }
-/* Schmale Zwischenstreifen (Foto-Break, Zahlen-Leiste) geben den Abstand
-   nach unten selbst vor; die naechste Sektion setzt ohne zweiten auf. */
-.section-streifen {
-  padding-top: 0;
-  padding-bottom: 64px;
+
+/* Anweisung 40 (B): Baender sichtbar machen. Bisher trugen 48 Sektionen ein
+   unsichtbares style="background: var(--papier)" -- dieselbe Farbe wie der
+   body. Die zweite Flaeche ist jetzt eine echte, hellere Flaeche (das bereits
+   vorhandene, unbenutzte Token --color-neutral-200 = #f1efe9) und kommt ueber
+   die Klasse .section-band ins Markup.
+   Wichtig: farbige Sektionen bekommen dieselbe Abstands-Ausnahme wie der dunkle
+   Block -- oben UND unten derselbe Abstand. Ohne sie naehme die Regel
+   `.section-gap + .section-gap { padding-top: 0 }` dem Band den oberen
+   Innenabstand, und der farbige Kasten begaenne exakt an der Ueberschrift.
+   Die farblose Grundregel bleibt unangetastet. */
+.section-band {
+  background: var(--color-neutral-200);
 }
-.section-streifen + .section-gap {
+/* Die Selektoren tragen bewusst zwei Klassen (.section-gap.section-band), damit
+   sie -- wie beim dunklen Block -- die Kollaps-Regel `.section-gap +
+   .section-gap { padding-top: 0 }` ueberstimmen. Eine Ein-Klassen-Regel
+   .section-band verloere gegen sie, und das Band begaenne exakt an der
+   Ueberschrift. */
+.section-gap.section-band,
+.section-band + .section-gap {
+  padding-top: 64px;
+}
+/* Innerhalb eines mehrteiligen Bandes (mehrere .section-band hintereinander)
+   traegt nur die erste Sektion den oberen Abstand; die folgenden setzen im
+   normalen Rhythmus auf, sonst stapelten sich zwei volle Abstaende. */
+.section-band + .section-band {
   padding-top: 0;
 }
 @media (min-width: 640px) {
-  .section-streifen { padding-bottom: 96px; }
+  .section-gap.section-band,
+  .section-band + .section-gap {
+    padding-top: 96px;
+  }
+  .section-band + .section-band {
+    padding-top: 0;
+  }
 }
 @media (min-width: 900px) {
-  .section-streifen { padding-bottom: 128px; }
+  .section-gap.section-band,
+  .section-band + .section-gap {
+    padding-top: 128px;
+  }
+  .section-band + .section-band {
+    padding-top: 0;
+  }
 }
 /* A1 (Anweisung 18): Hervorhebungen tragen KEINE eigene Farbe mehr.
    Vorher stand an jedem <strong> ein festes color:var(--druck). Auf dunklem
@@ -317,10 +356,10 @@ strong {
    nach .content-width, deshalb gewinnt die 640.
    Die Textbreite betraegt damit 592px, das sind rund 79 Zeichen und liegt
    unter der 90-Zeichen-Grenze aus B3. */
+/* Anweisung 40 (A1): Innerhalb einer Sektion wird nichts mehr horizontal
+   zentriert. Die schmale Textspalte steht linksbuendig an der einen Kante. */
 .text-spalte {
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: var(--spalte-text);
 }
 
 /* Textauswahl */
@@ -424,7 +463,7 @@ h3 {
 .lead {
   font-family: var(--f-body);
   font-size: 18px;
-  max-width: 56ch;
+  max-width: var(--spalte-text);
 }
 
 .eyebrow {
@@ -603,7 +642,7 @@ input.leitfaden-field, select.leitfaden-field {
   color: var(--grau);
   padding-bottom: 24px;
   margin: 0;
-  max-width: 62ch;
+  max-width: var(--spalte-text);
 }
 @media (prefers-reduced-motion: reduce) {
   .faq-body,
@@ -631,8 +670,8 @@ input.leitfaden-field, select.leitfaden-field {
 .tagesablauf-station {
   position: relative;
   /* B3: die Stationen trugen 118 Zeichen je Zeile. Die Linienform bleibt, wo
-     sie ist, nur der Text darin bekommt die Breite der schmalen Spalte. */
-  max-width: 640px;
+     sie ist, nur der Text darin bekommt die Breite der Textspalte. */
+  max-width: var(--spalte-text);
 }
 /* Der Punkt sitzt auf der Linie und markiert die Station. */
 .tagesablauf-station::before {
@@ -715,14 +754,10 @@ figcaption,
 /* Karten, die nur Text enthalten, werden dafuer selbst begrenzt und stehen
    linksbuendig an der Raster-Kante: der Text endet dort, wo die Box endet. */
 .card-text {
-  /* B3 (Anweisung 23): 760px ergaben 93 Zeichen je Zeile und lagen damit ueber
-     der 90-Zeichen-Grenze -- es sind genau die Absaetze, die Simon als die drei
-     breitesten gemessen hat. Jetzt dieselbe Breite wie die schmale Spalte.
-     Zentriert, weil ein schmaler Text linksbuendig in einem 1032px-Container
-     nach Versehen aussieht und nicht nach Absicht. */
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  /* Anweisung 40 (A1/A2): dieselbe Textspalte wie ueberall, linksbuendig an der
+     Rasterkante. Die fruehere Zentrierung (margin: auto) entfaellt -- innerhalb
+     einer Sektion steht nur noch eine Kante links. */
+  max-width: var(--spalte-text);
 }
 
 /* 12h/3.1: Abstand ZWISCHEN den Karten deutlich groesser als IN ihnen.
@@ -734,15 +769,13 @@ figcaption,
    Manager-Karte auf /koch-app 473px Leerraum, weil ihre Nachbarin ein Bild
    traegt. Eine Karte ist so hoch wie ihr Inhalt plus Innenabstand.
    Kuerzer ist besser als leer. */
-/* Korrektur 7 (Anweisung 25) nimmt B1 teilweise zurueck: Karten in derselben
-   Reihe sind wieder gleich hoch, Reihen untereinander duerfen sich
-   unterscheiden. Genau das macht stretch im Raster -- es streckt auf die
-   Hoehe der Rasterzeile, nicht des ganzen Rasters.
-   Die Grenze aus B1 bleibt: hoechstens 40px ungenutzt unter dem Inhalt. Wo
-   mehr entsteht, melden wir die Stelle, statt sie zu verstecken. */
+/* Anweisung 40 (A4): Karten stehen oben, sie werden nicht gestreckt. stretch
+   zog jede Karte auf die Hoehe der hoechsten ihrer Reihe -- auf /koch-app
+   entstanden so bis zu 494px Leerraum am Kartenende. Mit start ist eine Karte
+   so hoch wie ihr Inhalt. Dasselbe Muster nutzt bereits .gruender-grid. */
 .grid:has(> .card),
 .grid:has(> .card-modul) {
-  align-items: stretch;
+  align-items: start;
 }
 
 @media (min-width: 640px) {
@@ -909,12 +942,11 @@ h1 { text-wrap: balance; }
    Ueberschrift: in der schmalen Spalte 640, sonst so breit wie der Text
    daneben. text-wrap: balance haelt die Zeilen trotzdem im Gleichgewicht. */
 h2 {
-  /* Korrektur 2 (Anweisung 25): dieselbe Maximalbreite wie der Text darunter.
-     Die alten 34ch ergaben 626px, waehrend die Absaetze bis 1032 liefen.
-     Wo der Text daneben breiter ist -- Kartenreihen, Bild neben Text --,
-     hebt die Regel darunter die Begrenzung wieder auf, damit keine
-     Ueberschrift schmaler bricht als ihr eigener Fliesstext. */
-  max-width: 640px;
+  /* Anweisung 40 (A2/A3): eine Textspalte, ueberall. Langueberschriften
+     brechen dadurch auf zwei Zeilen um -- das ist beabsichtigt, text-wrap:
+     balance verteilt sie gleichmaessig. Ausnahmen: Hero und Karte (siehe
+     Regeln oben bzw. .card h2). */
+  max-width: var(--spalte-text);
   text-wrap: balance;
 }
 
@@ -1083,13 +1115,15 @@ h2 {
   color: var(--grau);
 }
 
-/* Prosa-Spalte: Rhythmus fuer Absaetze, Listen und Zwischenueberschriften */
-.artikel-prosa { max-width: 68ch; }
+/* Prosa-Spalte: Rhythmus fuer Absaetze, Listen und Zwischenueberschriften.
+   Anweisung 40 (A2): dieselbe Textspalte wie der Rest der Seite; die
+   frueheren 68ch/62ch (670/611px) entfallen. */
+.artikel-prosa { max-width: var(--spalte-text); }
 .artikel-prosa > p {
   color: var(--grau);
   line-height: 1.7;
   margin-bottom: 20px;
-  max-width: 62ch;
+  max-width: var(--spalte-text);
 }
 .artikel-prosa h2 { color: var(--druck); margin-top: 40px; }
 .artikel-prosa h2:first-child { margin-top: 0; }
@@ -1099,19 +1133,20 @@ h2 {
   line-height: 1.7;
   margin: 0 0 20px 0;
   padding-left: 24px;
-  max-width: 62ch;
+  max-width: var(--spalte-text);
 }
 .artikel-prosa ul { list-style: disc; }
 .artikel-prosa ol { list-style: decimal; }
 .artikel-prosa li { margin-bottom: 10px; padding-left: 4px; }
 .artikel-prosa li::marker { color: var(--grau); }
 
-/* Rechtshinweis-Zeile am Ende der Rechtsartikel */
+/* Rechtshinweis-Zeile am Ende der Rechtsartikel.
+   Anweisung 40 (A2): ein Rechtshinweis ist eine Randnotiz -> schmale Spalte. */
 .artikel-rechtshinweis {
   font-size: 13px;
   line-height: 1.6;
   color: var(--grau);
-  max-width: 62ch;
+  max-width: var(--spalte-schmal);
   margin-top: 32px;
 }
 
@@ -1149,14 +1184,38 @@ h2 {
 .tabelle-scroll td:first-child { color: var(--druck); font-weight: 600; }
 
 /* === Regionale Personal-Seiten (SEO-Paket Phase 2) ======================== */
-/* Eyebrow als Rückverweis-Link (Wissen- und Personal-Regionalseiten) */
-.eyebrow-link { color: inherit; text-decoration: none; }
+/* Eyebrow als Rueckverweis-Link (Wissen- und Personal-Regionalseiten).
+   Anweisung 40 (C2): eigenstaendiges Navigationselement -> Trefferflaeche
+   mindestens 44px hoch. Die Schriftgroesse bleibt; der Klickbereich waechst
+   ueber padding und ein gleich grosses negatives margin, damit sich am
+   Umbruch nichts verschiebt. */
+.eyebrow-link {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-block: 14px;
+  margin-block: -14px;
+}
 .eyebrow-link:hover { text-decoration: underline; }
 
 /* Telefon-Zeile im Hero (geteilt mit /personal) */
 .hero-telefon { font-size: 15px; color: var(--grau); }
 .hero-telefon-link { font-weight: 700; color: var(--akzent); text-decoration: underline; }
 .hero-telefon-zeit { display: inline-block; }
+
+/* Anweisung 40 (C1): ein Telefonlink, eine Trefferflaeche >=44px. Ersetzt die
+   frueheren zwei Klassen .kontakt-telefon-link (44px) und
+   .anfrage-telefon-nummer (33px) mit ihren zwei Groessen durch eine Klasse. */
+.telefon-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+  color: var(--akzent);
+  text-decoration: underline;
+}
 
 /* Bildkarten-Fix (Anweisung 34): Fotos füllen ihren Wrapper vollständig.
    Die Wrapper haben feste Mindesthöhen (460/340px); ohne diese Regel bezog das
