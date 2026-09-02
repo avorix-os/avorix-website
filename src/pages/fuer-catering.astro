@@ -31,13 +31,13 @@ const schema = [
 ---
 <BaseLayout
   title="Koch für Catering & Veranstaltungen mieten"
-  description="Festangestellte Köche und ganze Teams für Catering und Veranstaltungen, in der Regel innerhalb von 24 bis 72 Stunden. Plus das System für Ihre Abläufe am Einsatzort."
+  description="Festangestellte Köche und ganze Teams für Catering und Veranstaltungen, in der Regel innerhalb von 24 bis 72 Stunden. Plus das System für Ihre Abläufe."
   ogImage={ogImg.src}
   ogImageAlt={ogImageAlt}
   schemaOrg={schema}
 >
   {/* Hero (Split 55/45, Bild rechts) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       <div class="hero-copy">
         <p class="eyebrow mb-4">Für Catering und Veranstaltungsgastronomie</p>
@@ -71,7 +71,7 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Im Catering entscheidet sich alles an einem einzigen Abend.</h2>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Ein Hotel hat morgen wieder eine Chance. Eine Hochzeit hat sie nicht. Genau dafür gibt es Avorix.</p>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Ein Hotel hat morgen wieder eine Chance. Eine Hochzeit hat sie nicht. Genau dafür gibt es Avorix.</p>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         <div class="card">
           <h3 class="mb-4">Die Spitzen kommen geballt.</h3>
@@ -90,10 +90,10 @@ const schema = [
   </section>
 
   {/* Die zwei Wege */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</h2>
-      <p class="max-w-[62ch] mb-8" style="color:var(--grau)">Das eine hilft am nächsten Wochenende, das andere ab der nächsten Saison. Die meisten Betriebe fangen mit dem ersten an.</p>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Das eine hilft am nächsten Wochenende, das andere ab der nächsten Saison. Die meisten Betriebe fangen mit dem ersten an.</p>
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="card-modul">
           <div class="card-modul-header">
@@ -115,17 +115,18 @@ const schema = [
           <p class="text-sm" style="color:var(--grau)">Die App läuft heute unter anderem bei einem Cateringunternehmen.</p>
         </div>
       </div>
-      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Und Ihre Kunden? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden ohne sein ausdrückliches Einverständnis.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">Und Ihre Kunden? Merken nichts. Sie erleben Ihre Küche, nur eben verlässlich. Wir nennen keinen Kunden ohne sein ausdrückliches Einverständnis.</p>
     </div>
   </section>
 
   {/* Warum das Segment passt (schmale Spalte) */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Eine Veranstaltung ist eine Kalkulation mit bekannter Personenzahl. Dafür ist die App gebaut.</h2>
-      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Jede Buchung hat ein Datum, eine Personenzahl und ein Menü. Genau daraus rechnet die App: Sie legen Menüvorlagen an, weisen sie einer Veranstaltung zu, und der Portionsrechner skaliert jedes Rezept auf die tatsächliche Gästezahl. Aus mehreren Veranstaltungen in einem Zeitraum entsteht auf Knopfdruck der Gesamtbedarf an Zutaten, und daraus die Einkaufsliste.</p>
-      <p class="mb-4 max-w-[62ch]" style="color:var(--grau)">Die Kalkulation läuft im selben Zug mit: Sie sehen vor der Veranstaltung, was der Teller kostet, nicht erst danach. Bewährte Menüs kopieren Sie in die nächste Anfrage, statt sie neu zusammenzustellen.</p>
-      <p class="max-w-[62ch]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Jede Buchung hat ein Datum, eine Personenzahl und ein Menü. Genau daraus rechnet die App: Sie legen Menüvorlagen an, weisen sie einer Veranstaltung zu, und der Portionsrechner skaliert jedes Rezept auf die tatsächliche Gästezahl. Aus mehreren Veranstaltungen in einem Zeitraum entsteht auf Knopfdruck der Gesamtbedarf an Zutaten, und daraus die Einkaufsliste.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die Kalkulation läuft im selben Zug mit: Sie sehen vor der Veranstaltung, was der Teller kostet, nicht erst danach. Bewährte Menüs kopieren Sie in die nächste Anfrage, statt sie neu zusammenzustellen.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Wie Sie Wareneinsatz und Verkaufspreis selbst nachrechnen, steht in unseren Beiträgen zu <a href="/wissen/wareneinsatz-berechnen/">Wareneinsatz berechnen</a> und <a href="/wissen/kalkulation-gastronomie/">Kalkulation in der Gastronomie</a>.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
     </div>
   </section>
 
@@ -138,32 +139,32 @@ const schema = [
           <div class="schritt-chip shrink-0">1</div>
           <div>
             <h3 class="mb-4">Gespräch (30 Minuten, kostenlos)</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">2</div>
           <div>
             <h3 class="mb-4">Aufnahme</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">3</div>
           <div>
             <h3 class="mb-4">Schulung</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
           </div>
         </div>
         <div class="flex gap-4">
           <div class="schritt-chip shrink-0">4</div>
           <div>
             <h3 class="mb-4">Selbstständig arbeiten</h3>
-            <p class="text-sm mt-6 max-w-[62ch]">Die App führt Ihr Team durch jede Veranstaltung. Wir bleiben erreichbar.</p>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Die App führt Ihr Team durch jede Veranstaltung. Wir bleiben erreichbar.</p>
           </div>
         </div>
       </div>
-      <p class="text-sm mt-8 max-w-[62ch]">Zwischen zwei Saisons ist der ideale Zeitpunkt. Wenn die Anfragen wieder kommen, läuft Ihr System schon.</p>
+      <p class="text-sm mt-8 max-w-[var(--spalte-text)]">Zwischen zwei Saisons ist der ideale Zeitpunkt. Wenn die Anfragen wieder kommen, läuft Ihr System schon.</p>
     </div>
   </section>
 
@@ -171,13 +172,13 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
-      <p class="mb-6 max-w-[62ch]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
       <a href="/pilotprogramm" data-cta-location="catering-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
     </div>
   </section>
 
   {/* FAQ */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
       <div class="faq-list">
@@ -206,7 +207,7 @@ const schema = [
   </section>
 
   {/* Final CTA */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>

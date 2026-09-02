@@ -75,7 +75,7 @@ export default defineConfig({
   site: SITE,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/produkt"),
+      filter: (page) => !page.includes("/produkt") && !page.includes("/404"),
       serialize(item) {
         const images = PAGE_IMAGES[item.url];
         if (images) {

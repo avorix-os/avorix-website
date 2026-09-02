@@ -119,14 +119,14 @@ const schemaOrg = [
 >
 
   {/* Hero (W2: Split 55/45, Bild rechts) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       <div class="hero-copy">
         <p class="eyebrow mb-4">Modul: Die Schulung</p>
         <h1 class="mb-6">
           Ihr Team lernt <mark>das Avorix-System</mark>. Von K&ouml;chen, die es selbst k&ouml;nnen.
         </h1>
-        <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
           Ein Avorix-Koch mit mindestens Sous-Chef-Erfahrung nimmt Ihre Karte auf, legt sie in der Koch-App an und lernt Ihr Team an, direkt am Herd, nicht im Seminarraum.
         </p>
         <div class="flex flex-wrap gap-4 mb-6">
@@ -152,7 +152,7 @@ const schemaOrg = [
   </section>
 
   {/* Zwei Wege */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">
         Anlernen, wie es zu Ihrem Betrieb passt.
@@ -179,7 +179,7 @@ const schemaOrg = [
           </p>
         </div>
       </div>
-      <p class="text-sm mt-8 max-w-[62ch]" style="color:var(--grau)">
+      <p class="text-sm mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         <strong>F&uuml;r beide Wege gilt:</strong> Der Avorix-Koch hat mindestens Sous-Chef-Erfahrung. Es schult niemand, der es nicht selbst jeden Tag kann.
       </p>
     </div>
@@ -191,7 +191,7 @@ const schemaOrg = [
       <h2 class="mb-6">
         Am Herd. Im echten Betrieb. Mit Ihrem eigenen Essen.
       </h2>
-      <p class="lead mb-6 max-w-[62ch]">
+      <p class="lead mb-6 max-w-[var(--spalte-text)]">
         Geschult wird nicht mit Beispielrezepten, sondern mit Ihrer Karte. Ihr Team lernt genau die Gerichte, die es ab morgen kocht, mit der App, die ab morgen am Posten h&auml;ngt. Wer eine Woche so gearbeitet hat, braucht keine Erkl&auml;rung mehr.
       </p>
       <Image
@@ -204,11 +204,11 @@ const schemaOrg = [
         class="w-full object-cover mb-8"
         style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
       />
-      <p class="leading-relaxed mb-8 max-w-[62ch]">
+      <p class="leading-relaxed mb-8 max-w-[var(--spalte-text)]">
         <strong>Und wenn w&auml;hrend der Schulung Personal fehlt:</strong> Daf&uuml;r gibt es unser Personal-Modul, festangestellte K&ouml;che, rechtssicher verliehen.
       </p>
       {/* Kernsatz (Anweisung 30, Schritt 4) */}
-      <p class="mt-8 max-w-[62ch]" style="color:var(--papier);font-weight:700">Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--papier);font-weight:700">Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.</p>
       <a
         href="/personal"
         data-cta-location="schulung-personal-link"
@@ -241,7 +241,7 @@ const schemaOrg = [
   </section>
 
   {/* FAQ */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-10" style="color:var(--druck)">H&auml;ufige Fragen</h2>
       <div class="faq-list">

@@ -158,14 +158,14 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero (W2: Split 55/45, Bild rechts) */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width hero-grid">
       <div class="hero-copy">
         <p class="eyebrow mb-4">Modul: Die Verst&auml;rkung</p>
         <h1 class="mb-6">
           Echte K&ouml;che. Fest angestellt. <mark>Rechtssicher verliehen.</mark>
         </h1>
-        <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+        <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
           Ihre K&uuml;che steht und f&auml;llt mit einer einzigen Person. Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten K&ouml;che aus: f&uuml;r den Notfall, f&uuml;r die Saison, f&uuml;r den &Uuml;bergang. Viele nennen das Mietkoch oder Leihkoch. Wir nennen es Verst&auml;rkung. Im Gastgewerbe haben diese Erlaubnis nur wenige. Damit sind Sie auf der rechtlich sicheren Seite.
         </p>
         <div class="flex flex-wrap gap-4 mb-6">
@@ -202,7 +202,7 @@ const schema = [
   {/* Direkt-Antwort (GEO) */}
  <section class="reveal">
     <div class="content-width">
-      <p id="direktantwort" class="py-4 max-w-[62ch]" style="color:var(--grau)">
+      <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Avorix verleiht festangestellte, sozialversicherte K&ouml;che an Hotels und Restaurants in Deutschland und &Ouml;sterreich. Grundlage ist die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis der Agentur f&uuml;r Arbeit. Das sch&uuml;tzt Betriebe vor dem Scheinselbst&auml;ndigkeits-Risiko, das bei vermittelten &bdquo;selbst&auml;ndigen&ldquo; K&ouml;chen entstehen kann. Personal k&ouml;nnen Betriebe telefonisch oder &uuml;ber das Anfrage-Formular auf dieser Seite anfragen.
       </p>
     </div>
@@ -214,7 +214,7 @@ const schema = [
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">Wann Sie uns rufen.</h2>
       {/* Korrektur 9 (Anweisung 25): Der Satz stand unter der Gruppe. Er ist zu
            verstehen, bevor man sie gesehen hat, also gehoert er nach oben. */}
-      <p class="text-sm mb-10 max-w-[62ch]" style="color:var(--grau)">
+      <p class="text-sm mb-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -237,11 +237,12 @@ const schema = [
           </p>
         </div>
       </div>
+      <p class="mt-10 max-w-[var(--spalte-text)]" style="color:var(--grau)">Zum Mitnehmen: unser <a href="/leitfaden/">Leitfaden gegen den Fachkräftemangel in der Küche</a>, fünf Strategien auf wenigen Seiten.</p>
     </div>
   </section>
 
   {/* So läuft ein Einsatz (12b, Sektion 3) */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">So l&auml;uft ein Einsatz. In vier Schritten.</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -274,29 +275,29 @@ const schema = [
           </p>
         </div>
       </div>
-      <p class="mt-8 max-w-[62ch]" style="color:var(--druck);font-weight:700">
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">
         Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.
       </p>
     </div>
   </section>
 
   {/* Wer bei Ihnen am Herd steht (12b, Sektion 4) */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Wer bei Ihnen am Herd steht.</h2>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Jeder, den wir schicken, ist Koch mit langj&auml;hriger K&uuml;chenerfahrung. <strong>K&uuml;chenhilfen schicken wir nicht.</strong> Wir arbeiten in Deutschland und &Ouml;sterreich.
       </p>
     </div>
   </section>
 
   {/* Wissen bleibt */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
         Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da.
       </h2>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Unsere K&ouml;che arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Sie bezahlen Personal und bauen nebenbei unser System in Ihrer K&uuml;che auf. Bei einer klassischen Zeitarbeitsfirma bleibt nach dem Einsatz nichts zur&uuml;ck. <strong>Bei uns bleibt das Wissen.</strong>
       </p>
       <div class="mt-8">
@@ -311,16 +312,16 @@ const schema = [
       <h2 class="mb-6" style="color:var(--papier)">
         Warum &bdquo;g&uuml;nstige Selbst&auml;ndige&ldquo; Sie 50.000 Euro kosten k&ouml;nnen.
       </h2>
-      <p class="leading-relaxed mb-4 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+      <p class="leading-relaxed mb-4 max-w-[var(--spalte-text)]" style="color:var(--papier);opacity:0.85">
         Viele Vermittler schicken Ihnen &bdquo;selbst&auml;ndige&ldquo; K&ouml;che, die eine Rechnung mit Mehrwertsteuer schreiben. Klingt unkompliziert, ist aber in den meisten F&auml;llen Scheinselbst&auml;ndigkeit: Die K&ouml;che arbeiten weisungsgebunden in Ihrem Betriebsablauf, wie Angestellte.
       </p>
-      <p class="leading-relaxed mb-4 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+      <p class="leading-relaxed mb-4 max-w-[var(--spalte-text)]" style="color:var(--papier);opacity:0.85">
         Was bei der n&auml;chsten Sozialversicherungspr&uuml;fung passiert: Die Pr&uuml;fer stufen diese K&ouml;che als scheinselbst&auml;ndig ein, und zwar in den allermeisten F&auml;llen. Dann zahlt nicht der Koch, sondern Ihr Haus: s&auml;mtliche Sozialleistungen, r&uuml;ckwirkend f&uuml;r <strong style="color:var(--akzent-hell)">drei bis vier Jahre</strong>. Je nach Umfang schnell <strong style="color:var(--akzent-hell)">50.000 bis 100.000 Euro</strong>. Der Koch selbst ist dann meist nicht mehr greifbar.
       </p>
-      <p class="leading-relaxed mb-4 max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+      <p class="leading-relaxed mb-4 max-w-[var(--spalte-text)]" style="color:var(--papier);opacity:0.85">
         <strong>Deshalb machen wir es anders:</strong> Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Wir haben die beh&ouml;rdliche Arbeitnehmer&uuml;berlassungserlaubnis von der Agentur f&uuml;r Arbeit.
       </p>
-      <p class="leading-relaxed max-w-[62ch]" style="color:var(--papier);opacity:0.85">
+      <p class="leading-relaxed max-w-[var(--spalte-text)]" style="color:var(--papier);opacity:0.85">
         Gr&ouml;&szlig;ere H&auml;user und Hotelgruppen buchen inzwischen nur noch Firmen mit dieser Erlaubnis, aus genau diesem Grund. Im Gastgewerbe haben sie nur wenige Anbieter. <strong>Fragen Sie danach, bevor Sie irgendwo buchen.</strong> Auch wenn es nicht bei uns ist.
       </p>
     </div>
@@ -332,22 +333,22 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">
         Was ist Arbeitnehmer&uuml;berlassung und warum sch&uuml;tzt sie Sie?
       </h2>
-      <p class="leading-relaxed mb-4 max-w-[62ch]" style="color:var(--grau)">
+      <p class="leading-relaxed mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Arbeitnehmer&uuml;berlassung bedeutet: Der Koch bleibt Arbeitnehmer von Avorix. Wir schlie&szlig;en mit ihm den Arbeitsvertrag, zahlen seinen Lohn und f&uuml;hren Sozialversicherungsbeitr&auml;ge und Lohnnebenkosten ab. Sie setzen ihn vor&uuml;bergehend in Ihrem Betrieb ein und k&ouml;nnen ihn dort in Ihre Arbeitsabl&auml;ufe integrieren und ihm arbeitsbezogene Weisungen erteilen. Daf&uuml;r zahlen Sie uns den vereinbarten Stundensatz.
       </p>
-      <p class="leading-relaxed max-w-[62ch]" style="color:var(--grau)">
+      <p class="leading-relaxed max-w-[var(--spalte-text)]" style="color:var(--grau)">
         F&uuml;r diese Form des Personaleinsatzes ben&ouml;tigt der Verleiher grunds&auml;tzlich eine Erlaubnis der Bundesagentur f&uuml;r Arbeit, und &uuml;ber diese verf&uuml;gt Avorix. Der entscheidende Vorteil f&uuml;r Sie: Der Einsatz erfolgt offen und bewusst im Rahmen der gesetzlich geregelten Arbeitnehmer&uuml;berlassung und nicht &uuml;ber eine rechtlich zweifelhafte Konstruktion. Sie erhalten flexibel qualifiziertes Personal f&uuml;r Ihre K&uuml;che und reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz.
       </p>
     </div>
   </section>
 
   {/* Diskretion */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">
         Ihre G&auml;ste erleben Ihre K&uuml;che. Nicht unsere.
       </h2>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         <strong>Kein Gast merkt, dass ein Avorix-Koch mitkocht.</strong> Wir nennen keinen Kunden ohne sein ausdr&uuml;ckliches Einverst&auml;ndnis, und auf Wunsch sichern wir Ihnen das vertraglich zu.
       </p>
     </div>
@@ -383,10 +384,10 @@ const schema = [
   </section>
 
   {/* Position 1 (Anweisung 37): Fixkosten werden variabel */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Ein fester K&uuml;chenchef ist ein Fixkostenblock. Unser Koch nicht.</h2>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Ein festangestellter K&uuml;chenchef kostet Sie jeden Monat das volle Gehalt, egal wie voll Ihr Haus ist. Dazu kommen Sozialabgaben, Urlaubsanspruch und Krankheitstage. Mit einem Avorix-Koch machen Sie aus diesem Fixkostenblock steuerbare Kosten: Sie buchen, was Sie brauchen, und beenden den Einsatz, wenn sich die Lage entspannt.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
@@ -416,7 +417,7 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Ein K&uuml;chenchef f&uuml;r mehrere H&auml;user.</h2>
-      <p class="lead max-w-[62ch]" style="color:var(--grau)">
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Nicht jedes Haus braucht einen Spitzen-K&uuml;chenchef in Vollzeit. Deshalb teilen sich bei Avorix mehrere H&auml;user einer Region die Expertise eines Profis: Er entwickelt Ihre Karte, h&auml;lt die Qualit&auml;t und coacht Ihr Team. Sie bekommen die K&uuml;chenleistung eines gro&szlig;en Hauses, ohne die Personalkosten eines gro&szlig;en Hauses.
       </p>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-10">
@@ -443,7 +444,7 @@ const schema = [
   </section>
 
   {/* Was kostet das */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Was kostet das?</h2>
       <div class="card card-text">
@@ -461,7 +462,7 @@ const schema = [
   </section>
 
   {/* Anfrage-Strecke (12b, Sektion 11) */}
- <section id="anfrage" class="reveal section-gap">
+ <section id="anfrage" class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Personal anfragen.</h2>
       <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
@@ -541,7 +542,7 @@ const schema = [
               href="tel:+4975413973915"
               data-cta-location="anfrage"
               data-cta-event="personal_anruf_click"
-              class="anfrage-telefon-nummer"
+              class="telefon-link"
             >07541 3973915</a>
           </p>
           <p class="leading-relaxed" style="color:var(--grau)">
@@ -556,12 +557,12 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Vor Ort f&uuml;r Sie</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Wir arbeiten in Deutschland und &Ouml;sterreich, mit Schwerpunkten dort, wo die K&uuml;chen uns am h&auml;ufigsten rufen: <a href="/personal/bodensee/" class="typo-link">Mietkoch am Bodensee</a>, <a href="/personal/muenchen/" class="typo-link">Mietkoch in M&uuml;nchen</a>, <a href="/personal/frankfurt/" class="typo-link">Mietkoch in Frankfurt</a>, <a href="/personal/tirol/" class="typo-link">Mietkoch in Tirol</a>.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Wir arbeiten in Deutschland und &Ouml;sterreich, mit Schwerpunkten dort, wo die K&uuml;chen uns am h&auml;ufigsten rufen: <a href="/personal/bodensee/" class="typo-link">Mietkoch am Bodensee</a>, <a href="/personal/muenchen/" class="typo-link">Mietkoch in M&uuml;nchen</a>, <a href="/personal/frankfurt/" class="typo-link">Mietkoch in Frankfurt</a>, <a href="/personal/tirol/" class="typo-link">Mietkoch in Tirol</a>.</p>
     </div>
   </section>
 
   {/* FAQ */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width">
       <h2 class="mb-10" style="color:var(--druck)">H&auml;ufige Fragen</h2>
       <div class="faq-list">
@@ -653,7 +654,7 @@ const schema = [
   padding: 0;
   margin: 0;
   border-top: 1px solid var(--linie);
-  max-width: 62ch;
+  max-width: var(--spalte-text);
 }
 .beweis-liste li {
   border-bottom: 1px solid var(--linie);
@@ -662,13 +663,11 @@ const schema = [
   color: var(--druck);
 }
 .beweis-zitat {
-  /* B3 (Anweisung 23): dieselbe Breite wie die schmale Spalte. Die lokale
-     Angabe stand auf 760 und hat die zentrale Regel ueberstimmt.
-     Korrektur 8 (Anweisung 25/27): Die Box sass direkt auf der Trennlinie der
-     Liste darueber. 40px Abstand, damit sie sie nicht mehr beruehrt. */
-  max-width: 640px;
-  margin-left: auto;
-  margin-right: auto;
+  /* Anweisung 40 (A1/A2): dieselbe Textspalte wie Liste und Ueberschrift
+     darueber, linksbuendig an derselben Kante. Die fruehere Zentrierung
+     (margin: auto) entfaellt. Der 40px-Abstand nach oben bleibt, damit die Box
+     die Trennlinie der Liste nicht beruehrt. */
+  max-width: var(--spalte-text);
   margin-top: 40px;
 }
 .beweis-zitat blockquote {
@@ -693,15 +692,11 @@ const schema = [
 .anfrage-telefon-karte {
   padding: 2rem;
 }
-.anfrage-telefon-nummer {
+/* Anweisung 40 (C1): grosse Telefonnummer nutzt jetzt die geteilte
+   .telefon-link-Klasse (>=44px). Hier nur noch die Kartengroesse. */
+.anfrage-telefon-karte .telefon-link {
   font-family: var(--f-head);
-  font-weight: 700;
   font-size: 24px;
-  color: var(--akzent);
-  text-decoration: underline;
-}
-.anfrage-telefon-nummer:hover {
-  text-decoration: underline;
 }
 .anfrage-label {
   display: block;

@@ -38,11 +38,11 @@ const schema = [
   schemaOrg={schema}
 >
   {/* Hero */}
- <section class="hero-section px-6" style="background:var(--papier)">
+ <section class="hero-section px-6">
     <div class="content-width">
       <p class="eyebrow mb-4"><a href="/personal/" class="eyebrow-link">Personal</a></p>
-      <h1 class="mb-6 max-w-[24ch]">Mietkoch in Tirol: Köche mieten für die Saison</h1>
-      <p class="lead mb-6 max-w-[62ch]" style="color:var(--grau)">
+      <h1 class="mb-6 max-w-[var(--spalte-schmal)]">Mietkoch in Tirol: Köche mieten für die Saison</h1>
+      <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Wenn die Saison beginnt und die Küche nicht voll besetzt ist, leihen wir Ihnen unsere festangestellten Köche aus: für die Wintersaison, für den Sommer, für den Engpass dazwischen.
       </p>
       <div class="flex flex-wrap gap-4 mb-6">
@@ -62,7 +62,7 @@ const schema = [
   {/* Direktantwort (GEO) */}
  <section class="reveal">
     <div class="content-width">
-      <p id="direktantwort" class="lead py-4 max-w-[62ch]" style="color:var(--grau)">
+      <p id="direktantwort" class="lead py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Avorix verleiht festangestellte, sozialversicherte Köche an Hotellerie und Gastronomie in Tirol, mit behördlicher Arbeitnehmerüberlassungserlaubnis. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche.
       </p>
     </div>
@@ -72,13 +72,14 @@ const schema = [
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Unser Einsatzgebiet</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Tirols Küchen leben im Saisonrhythmus: Wintersaison, Sommersaison, dazwischen Umbau und Pause. Wer im Dezember eine volle Halbpension fahren muss, kann nicht bis Januar auf eine Neueinstellung warten. Wir verleihen Köche in ganz Tirol, vom Außerfern bis ins Zillertal.</p>
-      <p class="max-w-[62ch] mt-4" style="color:var(--grau)">Und wer in Tirol gut kocht, hat oft ein Angebot aus der Schweiz in der Tasche. Auch dafür sind wir da.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Tirols Küchen leben im Saisonrhythmus: Wintersaison, Sommersaison, dazwischen Umbau und Pause. Wer im Dezember eine volle Halbpension fahren muss, kann nicht bis Januar auf eine Neueinstellung warten. Wir verleihen Köche in ganz Tirol, vom Außerfern bis ins Zillertal.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Und wer in Tirol gut kocht, hat oft ein Angebot aus der Schweiz in der Tasche. Auch dafür sind wir da.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Wir sind außerdem <a href="/personal/bodensee/">am Bodensee</a>, im Großraum <a href="/personal/muenchen/">München</a> und in <a href="/personal/frankfurt/">Frankfurt und Rhein-Main</a> im Einsatz.</p>
     </div>
   </section>
 
   {/* Typische Einsätze */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-6" style="color:var(--druck)">Typische Einsätze in Tirol</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -86,15 +87,15 @@ const schema = [
         <div class="card"><p class="text-sm" style="color:var(--grau)">Der Küchenchef verlässt das Haus im November, die Nachfolge startet erst im Frühjahr.</p></div>
         <div class="card"><p class="text-sm" style="color:var(--grau)">Das Sommerhaus verlängert die Saison und braucht die Küche vier Wochen länger als das Stammteam.</p></div>
       </div>
-      <p class="mt-8 max-w-[62ch]" style="color:var(--grau)">Grenzüberschreitende Einsätze aus Deutschland melden wir vor Arbeitsbeginn ordnungsgemäß bei den österreichischen Behörden (ZKO-Meldung) und halten die österreichischen Entlohnungs- und Meldevorschriften ein. Sie müssen sich um nichts davon kümmern.</p>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">Grenzüberschreitende Einsätze aus Deutschland melden wir vor Arbeitsbeginn ordnungsgemäß bei den österreichischen Behörden (ZKO-Meldung) und halten die österreichischen Entlohnungs- und Meldevorschriften ein. Sie müssen sich um nichts davon kümmern.</p>
     </div>
   </section>
 
   {/* So läuft ein Einsatz (wortgleich, schmale Spalte) */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">So läuft ein Einsatz</h2>
-      <p class="max-w-[62ch]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
     </div>
   </section>
 
@@ -102,7 +103,7 @@ const schema = [
  <section class="reveal section-gap section-dunkel">
     <div class="content-width text-spalte">
       <h2 class="mb-6">Fest angestellt statt auf Rechnung</h2>
-      <p class="max-w-[62ch]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+      <p class="max-w-[var(--spalte-text)]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
     </div>
   </section>
 
@@ -128,12 +129,12 @@ const schema = [
   </section>
 
   {/* CTA-Abschluss */}
- <section class="reveal section-gap" style="background:var(--papier)">
+ <section class="reveal section-gap">
     <div class="content-width text-center">
       <div class="mb-6">
         <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
       </div>
-      <p class="mb-6 max-w-[62ch]" style="margin-inline:auto;color:var(--grau)">Die Saison wartet nicht.</p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">Die Saison wartet nicht.</p>
       <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
       <a href="/personal" data-cta-location="personal-tirol-ende" class="btn btn-primary">Personal anfragen</a>
     </div>
