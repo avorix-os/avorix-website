@@ -13,17 +13,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 // JobPosting-Beschreibung: enthaelt den sichtbaren Stellentext (Was der Job
 // ist, Was du bei uns hast, Wen wir suchen), damit Schema und Seite sich decken.
 const jobDescriptionHtml = `
-<p>Du kochst nicht in einem Haus, sondern in mehreren. Wir schicken dich dorthin, wo gerade jemand fehlt: in ein Ferienhotel fuer die Saison, in ein Restaurant, dessen Kuechenchef ausgefallen ist, auf ein Bankett, das ohne Verstaerkung nicht laeuft. Ein Einsatz dauert ein paar Tage, ein paar Wochen oder eine ganze Saison.</p>
-<p>Zwischen den Einsaetzen endet nichts. Dein Vertrag laeuft weiter, dein Gehalt kommt weiter. Das ist der Unterschied zum Saisonvertrag, bei dem du im November wieder auf der Strasse stehst.</p>
+<p>Du kochst nicht in einem Haus, sondern in mehreren. Wir schicken dich dorthin, wo gerade jemand fehlt: in ein Ferienhotel für die Saison, in ein Restaurant, dessen Küchenchef ausgefallen ist, auf ein Bankett, das ohne Verstärkung nicht läuft. Ein Einsatz dauert ein paar Tage, ein paar Wochen oder eine ganze Saison.</p>
+<p>Zwischen den Einsätzen endet nichts. Dein Vertrag läuft weiter, dein Gehalt kommt weiter. Das ist der Unterschied zum Saisonvertrag, bei dem du im November wieder auf der Straße stehst.</p>
 <h3>Was du bei uns hast</h3>
 <ul>
-<li><strong>Fest angestellt, nicht auf Rechnung.</strong> Du bekommst einen Arbeitsvertrag, Lohnfortzahlung im Krankheitsfall, bezahlten Urlaub und volle Sozialversicherung. Wir arbeiten mit behoerdlicher Arbeitnehmerueberlassungserlaubnis der Agentur fuer Arbeit.</li>
-<li><strong>Abwechslung statt Trott.</strong> Andere Kuechen, andere Karten, andere Teams. Wer nach fuenf Jahren an derselben Station das Gefuehl hat, alles schon gekocht zu haben, findet hier wieder etwas Neues.</li>
-<li><strong>Du kochst nicht ins Blaue.</strong> In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Kueche und weisst trotzdem, wie das Haus seine Sachen macht.</li>
-<li><strong>Dein Chef ist Koch.</strong> Boerge Penk hat zwanzig Jahre in Profikuechen gearbeitet, vom Auszubildenden bis zum Kuechenchef mit grossen Teams. Er sucht die Einsaetze selbst aus.</li>
+<li><strong>Fest angestellt, nicht auf Rechnung.</strong> Du bekommst einen Arbeitsvertrag, Lohnfortzahlung im Krankheitsfall, bezahlten Urlaub und volle Sozialversicherung. Wir arbeiten mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Was du bei uns nicht machst: als Scheinselbständiger Rechnungen schreiben.</li>
+<li><strong>Abwechslung statt Trott.</strong> Andere Küchen, andere Karten, andere Teams. Wer nach fünf Jahren an derselben Station das Gefühl hat, alles schon gekocht zu haben, findet hier wieder etwas Neues.</li>
+<li><strong>Du kochst nicht ins Blaue.</strong> In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Küche und weißt trotzdem, wie das Haus seine Sachen macht.</li>
+<li><strong>Dein Chef ist Koch.</strong> Börge Penk hat zwanzig Jahre in Profiküchen gearbeitet, vom Auszubildenden bis zum Küchenchef mit großen Teams. Er sucht die Einsätze selbst aus. Du redest bei uns nicht mit einem Disponenten, der noch nie an einem Pass gestanden hat.</li>
 </ul>
 <h3>Wen wir suchen</h3>
-<p>Koeche mit Berufserfahrung in Hotel- oder Restaurantkuechen, in Vollzeit oder Teilzeit. Du solltest selbstaendig arbeiten koennen, weil du oft in fremde Ablaeufe kommst, und du solltest bereit sein, fuer einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Kueche hast. Ohne jede Kuechenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Koeche zaehlen.</p>
+<p>Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Küche hast. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p>
 `.trim();
 
 const schema = [
@@ -94,11 +94,15 @@ const schema = [
     </div>
   </section>
 
-  {/* Direktantwort (GEO/Speakable) */}
+  {/* Direktantwort (GEO/Speakable).
+     FORMULAR-REVERT: Der letzte Satz nennt vorerst Telefon/E-Mail, weil das
+     Formular noch nicht freigeschaltet ist. Mit der Formular-Freischaltung
+     zurueck auf "Bewerben kannst du dich mit dem Formular auf dieser Seite oder
+     telefonisch." (Anweisung 42, Simon-Review). */}
  <section class="reveal">
     <div class="content-width">
       <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Avorix stellt Köche fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag in derselben Küche. Bewerben kannst du dich mit dem Formular auf dieser Seite oder telefonisch.
+        Avorix stellt Köche fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag in derselben Küche. Bewerben kannst du dich telefonisch oder per E-Mail.
       </p>
     </div>
   </section>
@@ -117,7 +121,7 @@ const schema = [
   </section>
 
   {/* Was du bei uns hast */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">Was du bei uns hast</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -184,14 +188,17 @@ const schema = [
   </section>
 
   {/* So läuft deine Bewerbung */}
- <section class="reveal section-gap">
+ <section class="reveal section-gap section-band">
     <div class="content-width">
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">So läuft deine Bewerbung</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {/* FORMULAR-REVERT: Schritt 1 nennt vorerst Anruf/E-Mail. Mit der
+           Formular-Freischaltung zurueck auf "Du schickst das Formular ab." /
+           "Fuenf Felder, zwei Minuten, kein Anschreiben noetig." */}
         <div class="card">
           <div class="mb-4"><span class="schritt-chip">1</span></div>
-          <h3 class="mb-4">Du schickst das Formular ab.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">Fünf Felder, zwei Minuten, kein Anschreiben nötig.</p>
+          <h3 class="mb-4">Du meldest dich bei uns.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Ein Anruf oder eine kurze E-Mail, kein Anschreiben nötig.</p>
         </div>
         <div class="card">
           <div class="mb-4"><span class="schritt-chip">2</span></div>
@@ -213,7 +220,7 @@ const schema = [
   </section>
 
   {/* Jetzt bewerben (Formular folgt; interim Telefon + E-Mail) */}
- <section id="bewerben" class="reveal section-gap">
+ <section id="bewerben" class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Jetzt bewerben</h2>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
