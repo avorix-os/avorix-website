@@ -1,0 +1,290 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// Anweisung 42: Jobs-Seite. Duzt durchgehend (Zielgruppe Koeche), waehrend der
+// Rest von avorix.de siezt. Kein hreflang (bewusst keine englische Fassung).
+//
+// Formular ist zum Start NICHT freigeschaltet: Der Datenschutz-Absatz zu
+// Bewerbungen liegt noch in der anwaltlichen Gegenlese, und ein eigener
+// Formular-Endpoint steht noch aus. Bis dahin laeuft die Bewerbung ueber
+// Telefon und E-Mail. Entsprechend steht directApply im JobPosting auf false,
+// bis das Formular live ist.
+
+// JobPosting-Beschreibung: enthaelt den sichtbaren Stellentext (Was der Job
+// ist, Was du bei uns hast, Wen wir suchen), damit Schema und Seite sich decken.
+const jobDescriptionHtml = `
+<p>Du kochst nicht in einem Haus, sondern in mehreren. Wir schicken dich dorthin, wo gerade jemand fehlt: in ein Ferienhotel fuer die Saison, in ein Restaurant, dessen Kuechenchef ausgefallen ist, auf ein Bankett, das ohne Verstaerkung nicht laeuft. Ein Einsatz dauert ein paar Tage, ein paar Wochen oder eine ganze Saison.</p>
+<p>Zwischen den Einsaetzen endet nichts. Dein Vertrag laeuft weiter, dein Gehalt kommt weiter. Das ist der Unterschied zum Saisonvertrag, bei dem du im November wieder auf der Strasse stehst.</p>
+<h3>Was du bei uns hast</h3>
+<ul>
+<li><strong>Fest angestellt, nicht auf Rechnung.</strong> Du bekommst einen Arbeitsvertrag, Lohnfortzahlung im Krankheitsfall, bezahlten Urlaub und volle Sozialversicherung. Wir arbeiten mit behoerdlicher Arbeitnehmerueberlassungserlaubnis der Agentur fuer Arbeit.</li>
+<li><strong>Abwechslung statt Trott.</strong> Andere Kuechen, andere Karten, andere Teams. Wer nach fuenf Jahren an derselben Station das Gefuehl hat, alles schon gekocht zu haben, findet hier wieder etwas Neues.</li>
+<li><strong>Du kochst nicht ins Blaue.</strong> In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Kueche und weisst trotzdem, wie das Haus seine Sachen macht.</li>
+<li><strong>Dein Chef ist Koch.</strong> Boerge Penk hat zwanzig Jahre in Profikuechen gearbeitet, vom Auszubildenden bis zum Kuechenchef mit grossen Teams. Er sucht die Einsaetze selbst aus.</li>
+</ul>
+<h3>Wen wir suchen</h3>
+<p>Koeche mit Berufserfahrung in Hotel- oder Restaurantkuechen, in Vollzeit oder Teilzeit. Du solltest selbstaendig arbeiten koennen, weil du oft in fremde Ablaeufe kommst, und du solltest bereit sein, fuer einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Kueche hast. Ohne jede Kuechenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Koeche zaehlen.</p>
+`.trim();
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": "#direktantwort",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": "Koch (m/w/d)",
+    "description": jobDescriptionHtml,
+    "datePosted": "2026-09-02",
+    "validThrough": "2027-03-02",
+    "employmentType": ["FULL_TIME", "PART_TIME"],
+    "hiringOrganization": {
+      "@type": "Organization",
+      "@id": "https://avorix.de/#organization",
+      "name": "AVORIX GmbH",
+      "sameAs": "https://avorix.de",
+      "logo": "https://avorix.de/avorix-logo.svg",
+    },
+    "directApply": false,
+    "jobLocation": [
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Friedrichshafen", "addressRegion": "BW", "postalCode": "88045", "streetAddress": "Fallenbrunnen 14", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "München", "addressRegion": "BY", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Frankfurt am Main", "addressRegion": "HE", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Innsbruck", "addressRegion": "Tirol", "addressCountry": "AT" } },
+    ],
+    "industry": "Gastronomie",
+    "qualifications": "Berufserfahrung in einer Hotel- oder Restaurantküche. Eine abgeschlossene Ausbildung ist erwünscht, aber keine Bedingung.",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Was verdiene ich als Koch bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "Das besprechen wir offen im ersten Telefonat. Wir zahlen nach Erfahrung und Qualifikation, und du weißt, was du bekommst, bevor du unterschreibst." } },
+      { "@type": "Question", "name": "Ist das Zeitarbeit?", "acceptedAnswer": { "@type": "Answer", "text": "Rechtlich ja, es ist Arbeitnehmerüberlassung mit behördlicher Erlaubnis. Praktisch unterscheidet es sich von dem, was viele darunter verstehen: Wir verleihen ausschließlich Köche, keine Aushilfen in beliebige Branchen, unser Chef ist selbst Küchenchef, und dein Vertrag läuft zwischen den Einsätzen weiter." } },
+      { "@type": "Question", "name": "Kann ich mich ohne abgeschlossene Ausbildung bewerben?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wenn du Erfahrung in einer Profiküche hast. Wir entscheiden danach, was du am Posten kannst, nicht nach deinem Zeugnis. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen." } },
+      { "@type": "Question", "name": "Brauche ich einen Führerschein und ein Auto?", "acceptedAnswer": { "@type": "Answer", "text": "Für die meisten Einsätze ist es sehr hilfreich, weil du zu wechselnden Häusern fährst. Ohne geht es auch, dann suchen wir Einsätze, die du mit Bus und Bahn erreichst." } },
+      { "@type": "Question", "name": "Bekomme ich eine Unterkunft?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft." } },
+      { "@type": "Question", "name": "Wie lange dauert ein Einsatz?", "acceptedAnswer": { "@type": "Answer", "text": "Von wenigen Tagen bis zu einer ganzen Saison. Kurze Einsätze sind die Ausnahme, die meisten laufen über mehrere Wochen." } },
+      { "@type": "Question", "name": "Muss ich Rechnungen schreiben?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Du bist bei uns fest angestellt und sozialversichert. Genau das ist der Unterschied zu den Vermittlern, die dir eine Selbständigkeit anbieten." } },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="Koch Jobs am Bodensee, in München, Frankfurt und Tirol"
+  description="Als Koch bei Avorix fest angestellt, in wechselnden Küchen im Einsatz. Feste Anstellung auch zwischen den Einsätzen, keine Arbeit auf Rechnung. Jetzt bewerben."
+  schemaOrg={schema}
+>
+  {/* Hero (ohne Foto: kommt separat, Anweisung 42) */}
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4">Arbeiten bei Avorix</p>
+      <h1 class="mb-6">Koch werden bei Avorix: fest angestellt, in wechselnden Küchen</h1>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="#bewerben" data-cta-location="jobs-hero" class="btn btn-primary">Jetzt bewerben</a>
+      </div>
+      <p class="hero-telefon mt-6">
+        Lieber direkt anrufen:
+        <a href="tel:+4975413973915" data-cta-location="jobs-hero" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+    </div>
+  </section>
+
+  {/* Direktantwort (GEO/Speakable) */}
+ <section class="reveal">
+    <div class="content-width">
+      <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Avorix stellt Köche fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag in derselben Küche. Bewerben kannst du dich mit dem Formular auf dieser Seite oder telefonisch.
+      </p>
+    </div>
+  </section>
+
+  {/* Was der Job ist */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Was der Job ist</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Du kochst nicht in einem Haus, sondern in mehreren. Wir schicken dich dorthin, wo gerade jemand fehlt: in ein Ferienhotel für die Saison, in ein Restaurant, dessen Küchenchef ausgefallen ist, auf ein Bankett, das ohne Verstärkung nicht läuft. Ein Einsatz dauert ein paar Tage, ein paar Wochen oder eine ganze Saison.
+      </p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Zwischen den Einsätzen endet nichts. Dein Vertrag läuft weiter, dein Gehalt kommt weiter. Das ist der Unterschied zum Saisonvertrag, bei dem du im November wieder auf der Straße stehst.
+      </p>
+    </div>
+  </section>
+
+  {/* Was du bei uns hast */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">Was du bei uns hast</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Fest angestellt, nicht auf Rechnung.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Du bekommst einen Arbeitsvertrag, Lohnfortzahlung im Krankheitsfall, bezahlten Urlaub und volle Sozialversicherung. Wir arbeiten mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Was du bei uns nicht machst: als Scheinselbständiger Rechnungen schreiben.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Abwechslung statt Trott.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Andere Küchen, andere Karten, andere Teams. Wer nach fünf Jahren an derselben Station das Gefühl hat, alles schon gekocht zu haben, findet hier wieder etwas Neues.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Du kochst nicht ins Blaue.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Küche und weißt trotzdem, wie das Haus seine Sachen macht.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Dein Chef ist Koch.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Börge Penk hat zwanzig Jahre in Profiküchen gearbeitet, vom Auszubildenden bis zum Küchenchef mit großen Teams. Er sucht die Einsätze selbst aus. Du redest bei uns nicht mit einem Disponenten, der noch nie an einem Pass gestanden hat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Wen wir suchen */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Wen wir suchen</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren.
+      </p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <strong>Und wenn du keinen Abschluss hast?</strong> Dann bewirb dich trotzdem, wenn du die Jahre in der Küche hast. Börge hat seine Laufbahn damit begonnen, Menschen ohne klassische Kochausbildung an die Küche heranzuführen, und einige von ihnen kochen heute besser als mancher mit Brief. Uns interessiert, was du am Posten kannst, nicht welches Papier du darüber hast. Was wir nicht suchen, sind Küchenhilfen ohne Erfahrung: Unsere Kunden bekommen zugesagt, dass jeder, den wir schicken, eine Küche kennt. Daran halten wir uns.
+      </p>
+    </div>
+  </section>
+
+  {/* Wo du arbeitest */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Wo du arbeitest</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Unser Sitz ist in Friedrichshafen am Bodensee, gearbeitet wird in Deutschland und Österreich. Unsere Schwerpunkte:
+      </p>
+      <ul class="max-w-[var(--spalte-text)]" style="color:var(--grau);list-style:disc;padding-left:24px;line-height:1.7">
+        <li class="mb-2"><strong>Bodensee und Oberschwaben:</strong> Friedrichshafen, Konstanz, Lindau, Überlingen, Meersburg, Ravensburg bis ins Allgäu. Mehr dazu: <a href="/personal/bodensee/" class="typo-link">Mietkoch am Bodensee</a></li>
+        <li class="mb-2"><strong>München und Oberbayern:</strong> Hotellerie, Messe- und Veranstaltungscatering, Betriebsrestaurants. Mehr dazu: <a href="/personal/muenchen/" class="typo-link">Mietkoch in München</a></li>
+        <li class="mb-2"><strong>Frankfurt und Rhein-Main:</strong> Messewochen, Kongresse, Bankette, von Mainz und Wiesbaden bis Darmstadt. Mehr dazu: <a href="/personal/frankfurt/" class="typo-link">Mietkoch in Frankfurt</a></li>
+        <li><strong>Tirol:</strong> Winter- und Sommersaison, vom Außerfern bis ins Zillertal. Mehr dazu: <a href="/personal/tirol/" class="typo-link">Mietkoch in Tirol</a></li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Was du verdienst */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Was du verdienst</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Was du bei uns verdienst, besprechen wir offen im ersten Telefonat, bevor du irgendetwas unterschreibst. Wir zahlen nach Erfahrung und Qualifikation.
+      </p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft.
+      </p>
+    </div>
+  </section>
+
+  {/* So läuft deine Bewerbung */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">So läuft deine Bewerbung</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">1</span></div>
+          <h3 class="mb-4">Du schickst das Formular ab.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Fünf Felder, zwei Minuten, kein Anschreiben nötig.</p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">2</span></div>
+          <h3 class="mb-4">Wir melden uns innerhalb von zwei Werktagen.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Meistens telefonisch, weil das schneller geht.</p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">3</span></div>
+          <h3 class="mb-4">Wir sprechen über deine Erfahrung und deine Wünsche.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Wo du arbeiten willst, wie weit du fährst, was du verdienen möchtest.</p>
+        </div>
+        <div class="card">
+          <div class="mb-4"><span class="schritt-chip">4</span></div>
+          <h3 class="mb-4">Probekochen und Vertrag.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">Du zeigst, was du kannst, wir zeigen dir, wie wir arbeiten. Passt es für beide Seiten, unterschreiben wir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Jetzt bewerben (Formular folgt; interim Telefon + E-Mail) */}
+ <section id="bewerben" class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Jetzt bewerben</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Das Online-Formular schalten wir in Kürze frei. Am schnellsten geht deine Bewerbung solange telefonisch, oder du schreibst uns kurz per E-Mail: wer du bist, was du bisher gekocht hast und wo du arbeiten möchtest. Wir melden uns.
+      </p>
+      <p class="hero-telefon mb-4">
+        Ruf uns an:
+        <a href="tel:+4975413973915" data-cta-location="jobs-bewerben" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Oder per E-Mail an <a href="mailto:info@avorix.de?subject=Bewerbung%20als%20Koch" class="typo-link">info@avorix.de</a>.
+      </p>
+    </div>
+  </section>
+
+  {/* Häufige Fragen (FAQ-Schema) */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Was verdiene ich als Koch bei Avorix?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das besprechen wir offen im ersten Telefonat. Wir zahlen nach Erfahrung und Qualifikation, und du weißt, was du bekommst, bevor du unterschreibst.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ist das Zeitarbeit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Rechtlich ja, es ist Arbeitnehmerüberlassung mit behördlicher Erlaubnis. Praktisch unterscheidet es sich von dem, was viele darunter verstehen: Wir verleihen ausschließlich Köche, keine Aushilfen in beliebige Branchen, unser Chef ist selbst Küchenchef, und dein Vertrag läuft zwischen den Einsätzen weiter.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kann ich mich ohne abgeschlossene Ausbildung bewerben?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, wenn du Erfahrung in einer Profiküche hast. Wir entscheiden danach, was du am Posten kannst, nicht nach deinem Zeugnis. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Brauche ich einen Führerschein und ein Auto?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Für die meisten Einsätze ist es sehr hilfreich, weil du zu wechselnden Häusern fährst. Ohne geht es auch, dann suchen wir Einsätze, die du mit Bus und Bahn erreichst.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Bekomme ich eine Unterkunft?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie lange dauert ein Einsatz?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Von wenigen Tagen bis zu einer ganzen Saison. Kurze Einsätze sind die Ausnahme, die meisten laufen über mehrere Wochen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Muss ich Rechnungen schreiben?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Du bist bei uns fest angestellt und sozialversichert. Genau das ist der Unterschied zu den Vermittlern, die dir eine Selbständigkeit anbieten.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation, progressive enhancement (wortgleich zu den anderen Seiten) */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
