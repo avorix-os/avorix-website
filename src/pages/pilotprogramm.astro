@@ -318,8 +318,12 @@ const faqSchema = {
         <p class="text-lg mb-10" style="color:var(--grau)">Drei Minuten. Danach melden wir uns innerhalb von zwei Werktagen.</p>
 
         <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
-        <form id="pilot-form" class="card pilot-form-wrap space-y-6" action="https://formspree.io/f/xqegwngo" method="POST">
-          <input type="hidden" name="_subject" value="Pilot-Anfrage über avorix.de" />
+        <form id="pilot-form" class="card pilot-form-wrap space-y-6" action="/api/formular" method="POST">
+          {/* Anweisung 45: eigener Formular-Dienst statt Formspree. Betreff setzt der Dienst. */}
+          <input type="hidden" name="formular" value="pilot" />
+          {/* Spamabwehr: Honigtopf (unsichtbar) + Zeitstempel */}
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="form_ts" id="pilot-ts" value="" />
 
           <div>
             <label for="pilot-name" class="pilot-label">
@@ -430,6 +434,15 @@ const faqSchema = {
 
 <style>
 
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
 
 /* Formular (3.14) */
 .pilot-form-wrap {
@@ -512,6 +525,9 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   const pilotForm = document.getElementById('pilot-form') as HTMLFormElement;
   if (pilotForm) {
     let pilotSent = false;
+    // Zeitfalle: Zeitpunkt des Seitenaufrufs setzen (Anweisung 45, Spamabwehr).
+    const pilotTs = document.getElementById('pilot-ts') as HTMLInputElement | null;
+    if (pilotTs) pilotTs.value = String(Date.now());
     pilotForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = pilotForm.querySelector('[type="submit"]') as HTMLButtonElement;
