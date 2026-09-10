@@ -145,7 +145,12 @@ test.describe('T4: Pilotprogramm-Formular', () => {
       await page.locator('#cb-accept-all').click();
     }
 
-    // Intercept Formspree to prevent actual submission
+    // Anweisung 45: /pilotprogramm postet jetzt an den eigenen Dienst
+    // (/api/formular) statt an Formspree. Beide abfangen, damit kein echter
+    // Versand passiert und der Erfolgsfall (response.ok) eintritt.
+    await page.route('**/api/formular', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
+    );
     await page.route('**/formspree.io/**', (route) =>
       route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
     );
