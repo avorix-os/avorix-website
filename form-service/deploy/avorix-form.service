@@ -1,0 +1,27 @@
+[Unit]
+Description=Avorix Formular-Dienst (loest Formspree ab, Anweisung 45)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Pfade an die Server-Installation anpassen:
+WorkingDirectory=/opt/avorix-form
+ExecStart=/usr/bin/node /opt/avorix-form/server.js
+EnvironmentFile=/opt/avorix-form/.env
+Restart=on-failure
+RestartSec=5
+User=avorix-form
+Group=avorix-form
+# Haertung
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+# Nur das Datenverzeichnis ist beschreibbar (an DATA_DIR anpassen):
+ReadWritePaths=/var/lib/avorix-form
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
