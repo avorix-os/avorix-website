@@ -62,7 +62,7 @@ const schema = {
           <div class="flex flex-wrap gap-4">
             <span class="check-badge"><span class="check-badge-mark">&#10003;</span> 8&ndash;10 Seiten, sofort umsetzbar</span>
             <span class="check-badge"><span class="check-badge-mark">&#10003;</span> PDF, kostenlos</span>
-            <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Kein Spam, jederzeit abmeldbar</span>
+            <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Newsletter freiwillig, jederzeit abmeldbar</span>
           </div>
         </div>
 
@@ -80,9 +80,13 @@ const schema = {
               method="POST"
               class="space-y-4"
             >
-              <input type="hidden" name="_subject" value="Lead-Magnet: Leitfaden-Download" />
+              {/* Anweisung 45: eigener Formular-Dienst. Betreff setzt der Dienst,
+                  Redirect (ohne JS) auf /leitfaden/?download=1 macht der Dienst. */}
+              <input type="hidden" name="formular" value="leitfaden" />
               <input type="hidden" name="source" value="leitfaden-landing-page" />
-              <input type="hidden" name="_next" value="https://avorix.de/leitfaden?download=1" />
+              {/* Spamabwehr: Honigtopf (unsichtbar) + Zeitstempel */}
+              <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <input type="hidden" name="form_ts" id="lead-ts" value="" />
 
               <div>
                 <label for="lead-name" class="block text-sm font-medium mb-2" style="color:var(--druck)">
@@ -128,6 +132,13 @@ const schema = {
                 />
               </div>
 
+              {/* Getrennte, NICHT vorausgewaehlte Werbe-Einwilligung (Anweisung 45, 2.1).
+                  Der Download haengt NICHT davon ab. */}
+              <label class="newsletter-consent">
+                <input type="checkbox" name="newsletter" value="on" />
+                <span>Sie d&uuml;rfen mir gelegentlich Neuigkeiten von Avorix per E-Mail schicken. Ich kann das jederzeit widerrufen.</span>
+              </label>
+
               <button
                 type="submit"
                 id="submit-btn"
@@ -139,8 +150,9 @@ const schema = {
                 Leitfaden jetzt herunterladen
               </button>
 
-              <p class="text-xs text-center" style="color:var(--grau)">
-                Mit dem Absenden stimmen Sie zu, dass wir Sie gelegentlich über Avorix informieren dürfen. Keine Weitergabe an Dritte. Abmeldung jederzeit möglich.
+              <p class="formular-hinweis">
+                Wir verarbeiten Ihre Angaben, um Ihnen den Leitfaden zuzusenden.
+                Weitere Informationen finden Sie in unserer <a href="/datenschutz" class="typo-link">Datenschutzerkl&auml;rung</a>.
               </p>
             </form>
           </div>
@@ -236,6 +248,28 @@ const schema = {
 .leitfaden-field.error {
   border-color: var(--fehler);
 }
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+}
+/* Getrennte Werbe-Einwilligung */
+.newsletter-consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--grau);
+}
+.newsletter-consent input {
+  margin-top: 3px;
+  flex-shrink: 0;
+}
 </style>
 
 <script>
@@ -244,7 +278,11 @@ const schema = {
   const successContainer = document.getElementById('success-container');
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
 
-  // Check if redirected back with ?download=1 (Formspree success redirect)
+  // Zeitfalle: Zeitpunkt des Seitenaufrufs setzen (Anweisung 45, Spamabwehr).
+  const tsInput = document.getElementById('lead-ts') as HTMLInputElement | null;
+  if (tsInput) tsInput.value = String(Date.now());
+
+  // Check if redirected back with ?download=1 (Dienst-Success-Redirect)
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('download') === '1') {
     showSuccess();
