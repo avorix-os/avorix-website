@@ -1,0 +1,59 @@
+# Avorix-Formular-Dienst als eigener Container hinter Traefik.
+#
+# Dieser Server laeuft ueber Docker + Traefik (nicht nginx/systemd), daher wird
+# der Dienst so ausgeliefert und NICHT ueber deploy/avorix-form.service +
+# deploy/nginx-formular.conf (die sind fuer einen klassischen Host gedacht).
+#
+# Start auf dem Server:
+#   cd /docker/avorix-website/form-service
+#   cp .env.example .env   # SMTP-Daten eintragen (Secret, nie ins Repo)
+#   docker compose up -d --build
+#
+# Traefik faengt nur avorix.de/api/formular ab (hoehere Prioritaet als die
+# Website), alles andere bleibt beim avorix-website-Container.
+
+services:
+  form:
+    build: .
+    image: avorix-form
+    container_name: avorix-form
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - DATA_DIR=/data
+    volumes:
+      - avorix-form-data:/data
+    networks:
+      - traefik-proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-proxy"
+
+      # Router: nur /api/formular auf avorix.de (+ www), hoehere Prioritaet als
+      # der Website-Router, damit dieser Pfad hier landet.
+      - "traefik.http.routers.formular.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && PathPrefix(`/api/formular`)"
+      - "traefik.http.routers.formular.entrypoints=websecure"
+      - "traefik.http.routers.formular.tls.certresolver=le"
+      - "traefik.http.routers.formular.priority=100"
+      - "traefik.http.routers.formular.middlewares=formular-ratelimit"
+      - "traefik.http.services.formular.loadbalancer.server.port=8081"
+
+      # HTTP -> HTTPS (damit ein Nicht-JS-POST ueber http nicht ins Leere laeuft)
+      - "traefik.http.routers.formular-http.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && PathPrefix(`/api/formular`)"
+      - "traefik.http.routers.formular-http.entrypoints=web"
+      - "traefik.http.routers.formular-http.priority=100"
+      - "traefik.http.routers.formular-http.middlewares=formular-to-https"
+      - "traefik.http.middlewares.formular-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.formular-to-https.redirectscheme.permanent=true"
+
+      # Ratenbegrenzung statt nginx limit_req: ~5 Anfragen/Minute je IP, kleiner Burst.
+      - "traefik.http.middlewares.formular-ratelimit.ratelimit.average=5"
+      - "traefik.http.middlewares.formular-ratelimit.ratelimit.period=1m"
+      - "traefik.http.middlewares.formular-ratelimit.ratelimit.burst=3"
+
+networks:
+  traefik-proxy:
+    external: true
+
+volumes:
+  avorix-form-data:

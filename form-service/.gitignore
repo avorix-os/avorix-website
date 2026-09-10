@@ -1,0 +1,5 @@
+# Secrets und lokale Daten – nie ins Repo
+.env
+node_modules/
+data/
+*.log

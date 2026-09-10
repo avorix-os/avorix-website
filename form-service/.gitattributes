@@ -1,0 +1,2 @@
+# Dieser Dienst laeuft auf Linux – immer LF, nie CRLF.
+* text eol=lf
