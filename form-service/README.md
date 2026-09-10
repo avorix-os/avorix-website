@@ -45,44 +45,40 @@ curl -s -X POST http://127.0.0.1:8081/api/formular \
   -d 'formular=kontakt&name=Test&email=test@example.com&message=Hallo'
 ```
 
-## Installation auf dem Server (Phase B – mit Uwe)
+## Installation auf dem Server (Phase B)
 
-> Server = der, der avorix.de ausliefert (vermutlich `72.61.184.225`). Vorher
-> bestätigen. Alle Befehle als root, Pfade ggf. anpassen.
+**Dieser Server läuft über Docker + Traefik** (avorix.de = Container
+`avorix-website` auf dem Netz `traefik-proxy`). Der Dienst wird deshalb als
+eigener Container ausgeliefert — nicht über systemd/nginx.
+
+Der Code liegt nach dem nächsten Deploy (Cron alle 5 Min, `git pull`) unter
+`/docker/avorix-website/form-service`.
 
 ```bash
-# 1) Code holen (Deploy zieht ohnehin das Repo; hier nur der Dienst-Ordner)
-cd /opt
-git clone https://github.com/avorix-os/avorix-website.git avorix-form-src
-cp -r /opt/avorix-form-src/form-service /opt/avorix-form
-cd /opt/avorix-form
-npm install --omit=dev
+cd /docker/avorix-website/form-service
 
-# 2) Dienstnutzer + Datenverzeichnis
-useradd --system --no-create-home --shell /usr/sbin/nologin avorix-form
-mkdir -p /var/lib/avorix-form/data
-chown -R avorix-form:avorix-form /var/lib/avorix-form
-
-# 3) .env anlegen (SMTP-Passwort NUR hier eintragen, nie ins Repo/Chat)
+# .env anlegen (SMTP-Passwort NUR hier, nie ins Repo/Chat)
 cp .env.example .env
-chown avorix-form:avorix-form .env && chmod 600 .env
-nano /opt/avorix-form/.env   # SMTP_HOST/USER/PASS etc. ausfuellen
+chmod 600 .env
+nano .env         # SMTP_USER=info@avorix.de, SMTP_PASS=<App-Passwort>,
+                  # MAIL_FROM=formular@avorix.de, MAIL_TO=info@avorix.de,
+                  # ALLOWED_ORIGINS=https://avorix.de,https://www.avorix.de
 
-# 4) systemd-Dienst
-cp deploy/avorix-form.service /etc/systemd/system/avorix-form.service
-systemctl daemon-reload
-systemctl enable --now avorix-form
-systemctl status avorix-form --no-pager
+# Container bauen + starten (Traefik-Routing kommt aus docker-compose.yml)
+docker compose up -d --build
+docker compose logs -f --tail=30
 
-# 5) nginx: Zone + location aus deploy/nginx-formular.conf uebernehmen
-#    (Zone in den http-Block, location in den server-Block von avorix.de)
-nginx -t && systemctl reload nginx
-
-# 6) Testmail
+# Testmail (nach ein paar Sekunden)
 curl -s -X POST https://avorix.de/api/formular \
   -H 'Accept: application/json' \
   -d 'formular=kontakt&name=Test&email=DEINE@ADRESSE&message=Servertest'
 ```
+
+Traefik fängt nur `avorix.de/api/formular` ab (höhere Priorität als der
+Website-Router); alles andere bleibt beim `avorix-website`-Container.
+
+> Die Dateien unter `deploy/` (systemd-Unit + nginx-Snippet) sind für einen
+> **klassischen Host ohne Docker** gedacht und hier nicht nötig.
 
 **Voraussetzungen, die nur ihr liefern könnt:**
 - SMTP-Zugang für `formular@avorix.de` (in `.env`).

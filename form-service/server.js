@@ -25,6 +25,9 @@ const { FORMS } = require('./forms');
 // ---------------------------------------------------------------------------
 const CFG = {
   port: parseInt(process.env.PORT || '8081', 10),
+  // Im Container 0.0.0.0 (Traefik erreicht den Dienst uebers Docker-Netz).
+  // Auf einem klassischen Host mit lokalem nginx besser HOST=127.0.0.1 setzen.
+  host: process.env.HOST || '0.0.0.0',
   // Kommagetrennte Liste erlaubter Urspruenge, z. B.
   // "https://avorix.de,https://www.avorix.de". Leer = alles erlauben (nur DEV).
   allowedOrigins: (process.env.ALLOWED_ORIGINS || '')
@@ -483,8 +486,8 @@ const server = http.createServer((req, res) => {
   });
 });
 
-server.listen(CFG.port, '127.0.0.1', () => {
-  log(`avorix-form hört auf 127.0.0.1:${CFG.port}`);
+server.listen(CFG.port, CFG.host, () => {
+  log(`avorix-form hört auf ${CFG.host}:${CFG.port}`);
   if (CFG.allowedOrigins.length === 0) log('WARNUNG: ALLOWED_ORIGINS leer – alle Ursprünge erlaubt (nur DEV!)');
   if (!CFG.mail.host) log('WARNUNG: SMTP_HOST leer – Mailversand wird fehlschlagen (nur DEV!)');
   cleanup();
