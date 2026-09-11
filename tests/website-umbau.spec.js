@@ -1010,9 +1010,10 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     };
     // Anweisung 37 (Alt-Content): beide Seiten haben die "Kuechenchef fuer mehrere
     // Haeuser"-FAQ bekommen -> +1. Zusammen mit der Mietkoch-FAQ auf /personal
-    // (SEO-Paket Phase 1) steht /personal bei 11, /en/staff bei 10.
+    // (SEO-Paket Phase 1) stand /personal bei 11, /en/staff bei 10.
+    // Anweisung 39B: /personal +2 FAQ (Vermitteln Sie Koeche? / Vermittlungshonorar?) -> 13.
     expect(await zaehle('/en/staff')).toBe(10);
-    expect(await zaehle('/personal')).toBe(11);
+    expect(await zaehle('/personal')).toBe(13);
   });
 
   test('6.6 — /en/contact hat Pflichtfeld-Zeile und Sternchen', async ({ page }) => {
