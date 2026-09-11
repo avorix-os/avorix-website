@@ -87,8 +87,11 @@ const schema = {
 
         {/* Kontaktformular */}
         <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
-        <form id="contact-form" class="space-y-4" action="https://formspree.io/f/xqegwngo" method="POST">
-          <input type="hidden" name="_subject" value="Demo-Anfrage über avorix.de" />
+        <form id="contact-form" class="space-y-4" action="/api/formular" method="POST">
+          {/* Anweisung 45: eigener Formular-Dienst statt Formspree. Betreff setzt der Dienst. */}
+          <input type="hidden" name="formular" value="kontakt" />
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="form_ts" id="kontakt-ts" value="" />
           <div>
             <label for="name" class="block text-sm font-medium mb-2" style="color:var(--druck)">
               Name <span style="color:var(--akzent)">*</span>
@@ -144,6 +147,8 @@ const schema = {
 </BaseLayout>
 
 <style>
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 /* E-Mail-Link: Kupfer-Farbe, Unterstrich bei Hover (§3.14 Kontaktdaten) */
 .kontakt-mailto {
   color: var(--akzent);
@@ -189,6 +194,8 @@ textarea.kontakt-field {
   const contactForm = document.getElementById('contact-form') as HTMLFormElement;
   if (contactForm) {
     let leadSent = false;
+    const tsField = document.getElementById('kontakt-ts') as HTMLInputElement | null;
+    if (tsField) tsField.value = String(Date.now());
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = contactForm.querySelector('[type="submit"]') as HTMLButtonElement;

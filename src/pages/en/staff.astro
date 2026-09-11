@@ -484,8 +484,11 @@ const schemaOrg = [
       <h2 class="mb-6" style="color:var(--druck)">Request Staff.</h2>
       <p class="formular-pflicht">Fields marked * are the ones we need, everything else is optional.</p>
       <div class="anfrage-grid">
-        <form id="staff-form" class="card anfrage-form-wrap space-y-6" action="https://formspree.io/f/xqegwngo" method="POST">
-          <input type="hidden" name="_subject" value="Staff enquiry via avorix.de" />
+        <form id="staff-form" class="card anfrage-form-wrap space-y-6" action="/api/formular" method="POST">
+          {/* Anweisung 45: own form service instead of Formspree. Subject set by the service. */}
+          <input type="hidden" name="formular" value="en-staff" />
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="form_ts" value="" />
 
           <div>
             <label for="st-business" class="anfrage-label">
@@ -583,6 +586,8 @@ const schemaOrg = [
 </BaseLayout>
 
 <style>
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 /* Telefon-Zeile im Hero (12b) */
 .hero-telefon {
   font-size: 15px;
