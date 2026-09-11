@@ -17,7 +17,7 @@ const schema = [
     "@type": "Article",
     "headline": "Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt",
     "datePublished": "2026-08-25",
-    "dateModified": "2026-08-25",
+    "dateModified": "2026-09-11",
     "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
     "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
@@ -45,7 +45,7 @@ const schema = [
     <div class="content-width">
       <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
       <h1 class="mb-4">Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt</h1>
-      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p class="artikel-datum mb-6">Aktualisiert am 11.09.2026</p>
       <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Arbeitnehmerüberlassung heißt: Ein Koch ist bei einem Personaldienstleister fest angestellt und arbeitet auf Zeit in Ihrem Betrieb. Sie führen ihn im Alltag wie Ihr eigenes Teammitglied, der Dienstleister bleibt Arbeitgeber und trägt Lohn, Sozialversicherung und Ausfallrisiko. Erlaubt ist das nur mit einer behördlichen Arbeitnehmerüberlassungserlaubnis der Bundesagentur für Arbeit.
       </p>
@@ -63,6 +63,29 @@ const schema = [
           <li><strong>Der Koch</strong> arbeitet bei Ihnen in der Küche, angestellt und sozialversichert beim Verleiher.</li>
         </ul>
         <p>Der Unterschied zum selbständigen Mietkoch auf Rechnung liegt genau in diesem Punkt: Beim Selbständigen ist Ihre Weisung ein Problem, bei der Arbeitnehmerüberlassung ist sie der vorgesehene Normalfall. Warum das rechtlich so einen Unterschied macht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+
+        {/* Anweisung 39B: Abgrenzung Vermittlung/Überlassung/Werkvertrag, von RA'in Tsankova freigegeben 11.09.2026 */}
+        <h2>Vermittlung, Überlassung, Werkvertrag: drei Wege, ein Unterschied</h2>
+        <p>Für dieselbe Aufgabe, einen Koch in Ihrer Küche, gibt es drei rechtlich völlig verschiedene Wege. Wer sie verwechselt, merkt es erst bei der Prüfung.</p>
+        <p><strong>Die Vermittlung</strong> endet mit dem Vertragsschluss. Der Vermittler bekommt ein Honorar, der Koch wird Ihr Arbeitnehmer. Ab diesem Tag zahlen Sie Gehalt, Sozialabgaben, Urlaub und Lohnfortzahlung im Krankheitsfall. Das ist sauber, aber es ist eine Festanstellung mit Anlaufkosten.</p>
+        <p><strong>Die Arbeitnehmerüberlassung</strong> überträgt die Arbeitsleistung, nicht das Arbeitsverhältnis. Der Koch bleibt beim Verleiher angestellt, arbeitet aber in Ihrer Küche und nach Ihren Anweisungen. Dafür braucht der Verleiher die Erlaubnis der Bundesagentur für Arbeit. Sie zahlen Stunden, keine Personalkosten.</p>
+        <p><strong>Der Werkvertrag</strong> schuldet ein Ergebnis, nicht Arbeitszeit. Er passt für abgrenzbare Gewerke, etwa ein Cateringunternehmen, das eine Veranstaltung komplett verantwortet. Er passt nicht für einen Koch, der im Schichtplan steht und den Anweisungen Ihres Küchenchefs folgt. Genau daran scheitern die meisten Konstruktionen in der Praxis.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th></th><th>Vermittlung</th><th>Arbeitnehmerüberlassung (Avorix)</th><th>Freier Koch auf Rechnung</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Wer ist der Arbeitgeber?</th><td>Sie, ab dem Tag der Einstellung</td><td>Avorix, dauerhaft</td><td>formal niemand. Stellt eine Prüfung Scheinselbständigkeit fest, sind Sie es rückwirkend (§ 7 SGB IV)</td></tr>
+              <tr><th scope="row">Wer trägt Krankheit und Urlaub?</th><td>Sie</td><td>Avorix</td><td>ungeklärt, im Zweifel Sie</td></tr>
+              <tr><th scope="row">Wie wird abgerechnet?</th><td>in der Regel einmaliges Vermittlungshonorar, danach Ihr Gehaltslauf</td><td>Stundensatz für geleistete Stunden</td><td>Rechnung des Kochs</td></tr>
+              <tr><th scope="row">Braucht es eine behördliche Erlaubnis?</th><td>nein</td><td>ja, und Avorix hat sie von der Bundesagentur für Arbeit (§ 1 AÜG)</td><td>nein, und genau darin liegt das Risiko</td></tr>
+              <tr><th scope="row">Was passiert bei einer Prüfung?</th><td>Ihr Beschäftigungsverhältnis wird geprüft wie jedes andere</td><td>Die Erlaubnis liegt vor, geprüft werden die Bedingungen des Einsatzes</td><td>Prüffall Scheinselbständigkeit: Nachzahlung der Sozialbeiträge für rund vier Jahre, bei Vorsatz bis zu dreißig (§ 25 SGB IV)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Alle drei Wege sind erlaubt. Der Unterschied ist nur, wo das Risiko liegt.</p>
+        <p>Wie das bei Avorix konkret abläuft, steht auf der Seite <a href="/personal/" class="typo-link">Personal</a>.</p>
 
         <h2>Die wichtigsten AÜG-Regeln im Überblick</h2>
         <div class="tabelle-scroll">
