@@ -314,8 +314,11 @@ const schemaOrg = [
       <p class="text-lg mb-10" style="color:var(--grau)">Three minutes. We will get back to you within two working days.</p>
 
       <p class="formular-pflicht">Fields marked * are the ones we need, everything else is optional.</p>
-      <form id="pilot-form" class="card pilot-form-wrap space-y-6" action="https://formspree.io/f/xqegwngo" method="POST">
-        <input type="hidden" name="_subject" value="Pilot enquiry via avorix.de" />
+      <form id="pilot-form" class="card pilot-form-wrap space-y-6" action="/api/formular" method="POST">
+        {/* Anweisung 45: own form service instead of Formspree. Subject set by the service. */}
+        <input type="hidden" name="formular" value="en-pilot" />
+        <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <input type="hidden" name="form_ts" value="" />
 
         <div>
           <label for="pilot-name" class="pilot-label">
@@ -400,6 +403,8 @@ const schemaOrg = [
 </BaseLayout>
 
 <style>
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 /* Formular (3.14) */
 .pilot-form-wrap {
   padding: 2rem;

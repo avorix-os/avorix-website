@@ -481,8 +481,11 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">Personal anfragen.</h2>
       <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
       <div class="anfrage-grid">
-        <form id="personal-form" class="card anfrage-form-wrap space-y-6" action="https://formspree.io/f/xqegwngo" method="POST">
-          <input type="hidden" name="_subject" value="Personal-Anfrage" />
+        <form id="personal-form" class="card anfrage-form-wrap space-y-6" action="/api/formular" method="POST">
+          {/* Anweisung 45: eigener Formular-Dienst statt Formspree. Betreff setzt der Dienst. */}
+          <input type="hidden" name="formular" value="personal" />
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="form_ts" id="personal-ts" value="" />
 
           <div>
             <label for="pa-betrieb" class="anfrage-label">
@@ -652,7 +655,8 @@ const schema = [
 </BaseLayout>
 
 <style>
-
+/* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 
 /* Telefon-Zeile im Hero (12b) */
 .hero-telefon {
@@ -799,6 +803,8 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
   const personalForm = document.getElementById('personal-form') as HTMLFormElement;
   if (personalForm) {
     let personalSent = false;
+    const tsField = document.getElementById('personal-ts') as HTMLInputElement | null;
+    if (tsField) tsField.value = String(Date.now());
     personalForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = personalForm.querySelector('[type="submit"]') as HTMLButtonElement;
