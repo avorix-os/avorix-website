@@ -1,0 +1,171 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Rezepte standardisieren: gleiche Qualität, egal wer am Posten steht", "item": "https://avorix.de/wissen/rezepte-standardisieren/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Rezepte standardisieren: gleiche Qualität, egal wer am Posten steht",
+    "datePublished": "2026-09-14",
+    "dateModified": "2026-09-14",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Tötet Standardisierung die Kreativität?", "acceptedAnswer": { "@type": "Answer", "text": "Nein, sie verlegt sie an die richtige Stelle. Kreativ ist die Entwicklung eines Gerichts; ist es auf der Karte, schuldet die Küche jedem Gast dieselbe Ausführung. Der Standard schützt genau das." } },
+      { "@type": "Question", "name": "Mit wie vielen Rezepten sollten wir anfangen?", "acceptedAnswer": { "@type": "Answer", "text": "Mit den Verkaufsschlagern, meist die 15 bis 20 Gerichte, die den Großteil des Umsatzes tragen. Danach der Rest, Stück für Stück." } },
+      { "@type": "Question", "name": "Was ist mit Tagesgerichten und Aktionen?", "acceptedAnswer": { "@type": "Answer", "text": "Auch die brauchen mindestens Mengen und kritische Punkte, gerade weil sie neu sind. Ein kurzer Standard am Vortag erspart dem Posten das Improvisieren im Service." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Rezepte standardisieren in der Gastronomie"
+  description="Gleiche Qualität, egal wer am Posten steht: was ein brauchbarer Rezept-Standard enthält und wie er sich im Küchenalltag wirklich durchsetzt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Rezepte standardisieren: gleiche Qualität, egal wer am Posten steht</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Ein Rezept-Standard legt für jedes Gericht Zutaten, Mengen je Portion, Zubereitungsschritte und kritische Punkte verbindlich fest, so, dass jemand anderes danach kochen kann. Er sichert Qualität, Kalkulation und Tempo, und er ist die beste Versicherung gegen das Wissen, das mit einer Kündigung geht.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum „Rezepte im Kopf" der teuerste Standard sind</h2>
+        <p>Jede Küche hat Standards. Die Frage ist nur, wo sie liegen. Liegen sie im Kopf einer einzigen Person, dann schwankt die Qualität mit der Tagesform, die Portionen schwanken mit dem Gefühl, und die Kalkulation rechnet mit Mengen, die am Herd niemand einhält. Und wenn diese Person geht, geht alles mit. Was dann zu tun ist, steht hier: <a href="/wissen/kuechenchef-kuendigt-notfallplan/" class="typo-link">Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage</a></p>
+
+        <h2>Was ein brauchbarer Rezept-Standard enthält</h2>
+        <ul>
+          <li><strong>Zutaten mit Mengen je Portion,</strong> bewertet zu Einstandspreisen, damit Rezept und Kalkulation dasselbe rechnen.</li>
+          <li><strong>Zubereitungsschritte in Reihenfolge,</strong> mit Zeiten und Temperaturen, wo sie kritisch sind.</li>
+          <li><strong>Die kritischen Punkte,</strong> an denen das Gericht kippt: Kerntemperatur, Ruhezeit, der Moment zum Abschmecken.</li>
+          <li><strong>Ein Bild vom fertigen Teller,</strong> denn das Anrichten ist der Teil, den Worte am schlechtesten transportieren.</li>
+        </ul>
+        <p>Was nicht hineingehört: Prosa. Ein Standard ist eine Arbeitsanweisung für den Posten, kein Kochbuchtext.</p>
+
+        <h2>So sieht ein Standard aus: ein Gericht als Beispiel</h2>
+        <p>Nehmen wir ein Gericht, das in fast jeder Halbpension vorkommt: Rinderbraten mit Rotweinjus. Der Unterschied zwischen Rezept und Standard ist nicht die Menge an Text, sondern die Art der Angaben.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Angabe</th><th>So steht es im Kochbuch</th><th>So steht es im Standard</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Menge</td><td>„ein Stück Rinderbraten"</td><td>180 g Rohgewicht je Portion, geschnitten aus der Schulter</td></tr>
+              <tr><td>Garen</td><td>„langsam schmoren"</td><td>Kerntemperatur 85 °C, dann 15 Minuten Ruhezeit</td></tr>
+              <tr><td>Sauce</td><td>„mit Rotwein ablöschen"</td><td>60 ml je Portion, reduzieren bis Löffelprobe</td></tr>
+              <tr><td>Anrichten</td><td>„schön anrichten"</td><td>Foto, Sauce unter dem Fleisch, zwei Scheiben, Beilage links</td></tr>
+              <tr><td>Kritischer Punkt</td><td>fehlt</td><td>Ruhezeit nicht verkürzen, sonst läuft das Fleisch aus</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die Zahlen in der Tabelle sind Beispielwerte für die Form, nicht für Ihren Braten. Ihr Standard trägt Ihre Werte. Entscheidend ist, dass jede Angabe prüfbar ist: Ein Posten kann 180 Gramm abwiegen und 85 Grad messen. „Langsam" und „schön" kann er nicht messen.</p>
+
+        <h2>Wie sich Standards im Alltag durchsetzen</h2>
+        <p>Der häufigste Fehler ist nicht das Schreiben, sondern der Ordner: Viele Küchen haben Rezepte, gekocht wird trotzdem nach Gefühl, weil der Ordner im Büro steht und der Posten in der Küche. Ein Standard setzt sich nur durch, wenn der einfachste Weg der richtige ist: Das Rezept muss dort verfügbar sein, wo gekocht wird, in Schritten, die man während der Arbeit lesen kann. Dann greift auch die Aushilfe zum Standard, weil er schneller ist als Nachfragen.</p>
+
+        <h2>Standards für Teams, die nicht alle Deutsch sprechen</h2>
+        <p>In vielen Küchen arbeiten Menschen mit fünf Muttersprachen. Ein Standard, der aus langen deutschen Sätzen besteht, wird dort nicht gelesen, sondern umgangen. Drei Dinge helfen mehr als jede Übersetzung: Zahlen statt Adjektive (180 g versteht jeder, „reichlich" niemand), ein Foto je Schritt, wo der Schritt sichtbar ist, und eine feste Reihenfolge, die auf jedem Standard gleich aussieht. Wer das hat, braucht die Übersetzung nur noch für die wenigen Wörter, die wirklich Sprache sind. Und die kann jede Rezept-App heute liefern.</p>
+
+        <h2>Die Rezeptkarte als Vorlage: die Felder</h2>
+        <p>Wer mit Papier oder Tabelle anfängt, braucht eine Vorlage mit festen Feldern. Weniger ist hier mehr:</p>
+        <ol>
+          <li>Gerichtname und Kartenkategorie</li>
+          <li>Portionen, für die das Rezept gerechnet ist</li>
+          <li>Zutaten mit Menge je Portion und Einstandspreis</li>
+          <li>Wareneinsatz je Portion, rechnet die Tabelle</li>
+          <li>Zubereitung in nummerierten Schritten, mit Zeit und Temperatur, wo sie zählen</li>
+          <li>Kritische Punkte, maximal drei</li>
+          <li>Foto vom Teller</li>
+          <li>Stand: Datum und wer es freigegeben hat</li>
+        </ol>
+        <p>Punkt 8 wird am häufigsten vergessen und ist der wichtigste: Ein Standard ohne Datum ist nach einem halben Jahr keiner mehr, weil niemand weiß, ob er noch gilt.</p>
+
+        <h2>Vom Standard zur Skalierung</h2>
+        <p>Der zweite Gewinn zeigt sich am ersten vollen Wochenende: Wer Mengen je Portion festgeschrieben hat, rechnet ein Gericht in Sekunden von 40 auf 80 Portionen hoch, inklusive Einkaufsmengen. Ohne Standard wird aus jeder Skalierung eine Schätzung, und aus jeder Schätzung Schwund oder Engpass.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Tötet Standardisierung die Kreativität?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein, sie verlegt sie an die richtige Stelle. Kreativ ist die Entwicklung eines Gerichts; ist es auf der Karte, schuldet die Küche jedem Gast dieselbe Ausführung. Der Standard schützt genau das.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Mit wie vielen Rezepten sollten wir anfangen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Mit den Verkaufsschlagern, meist die 15 bis 20 Gerichte, die den Großteil des Umsatzes tragen. Danach der Rest, Stück für Stück.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist mit Tagesgerichten und Aktionen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Auch die brauchen mindestens Mengen und kritische Punkte, gerade weil sie neu sind. Ein kurzer Standard am Vortag erspart dem Posten das Improvisieren im Service.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; Küchen-Know-how</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        In der <a href="/koch-app/" class="typo-link">Avorix Koch-App</a> hängt das Rezept am Posten: Schritt für Schritt, mit Mengen je Portion und Portionsrechner. Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.
+      </p>
+      <a href="/koch-app/" data-cta-location="wissen-standards-ende" class="btn btn-primary">Koch-App ansehen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
