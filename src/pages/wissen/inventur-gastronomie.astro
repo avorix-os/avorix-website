@@ -1,0 +1,169 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Inventur in der Küche: Ablauf, Lagerorte, typische Fehler", "item": "https://avorix.de/wissen/inventur-gastronomie/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Inventur in der Küche: Ablauf, Lagerorte, typische Fehler",
+    "datePublished": "2026-09-14",
+    "dateModified": "2026-09-14",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie oft sollte eine Küche Inventur machen?", "acceptedAnswer": { "@type": "Answer", "text": "Monatlich als feste Stichtagsinventur für die Betriebssteuerung; bei hohem Frischeanteil zusätzlich wöchentlich für die kritischen Warengruppen. Die Jahresinventur für den Abschluss bleibt davon unberührt." } },
+      { "@type": "Question", "name": "Wer sollte zählen?", "acceptedAnswer": { "@type": "Answer", "text": "Zählen kann das Team, den Abschluss macht eine verantwortliche Person, die die Zahlen prüft und festschreibt. Vier Augen sind gut, eine Unterschrift ist Pflicht." } },
+      { "@type": "Question", "name": "Wie gehe ich mit angebrochenen Gebinden um?", "acceptedAnswer": { "@type": "Answer", "text": "Anteilig schätzen, immer nach derselben Methode. Die einzelne Schätzung darf ungenau sein, die Methode muss konstant bleiben, sonst springt die Quote ohne Grund." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Inventur in der Gastronomie: Ablauf & Fehler"
+  description="So gelingt die Monatsinventur in der Küche: feste Lagerorte, klarer Ablauf in fünf Schritten, Umgang mit Anbruch und die häufigsten Fehler."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Inventur in der Küche: Ablauf, Lagerorte, typische Fehler</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Die Inventur in der Gastronomie zählt und bewertet alle Warenbestände zu einem festen Stichtag, am besten je Lagerort. Für die Betriebssteuerung reicht ein monatlicher Rhythmus; mit fester Lagerordnung dauert das Stunden, nicht Tage. Bewertet wird immer zu Einstandspreisen, nie zu Verkaufspreisen.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum ohne Inventur jede Quote Schätzung bleibt</h2>
+        <p>Der Wareneinsatz braucht Anfangs- und Endbestand, und beide kommen aus der Inventur. Wer nicht zählt, kennt weder seinen Verbrauch noch seinen Schwund: Verderb, Bruch und Fehlmengen bleiben unsichtbar und tauchen erst in der Jahresauswertung auf, als unerklärlicher Posten. Die Rechnung dahinter: <a href="/wissen/wareneinsatz-berechnen/" class="typo-link">Wareneinsatz berechnen: Formel, Rechner und Zielwerte</a></p>
+
+        <h2>Vorbereitung: feste Lagerorte</h2>
+        <p>Die halbe Inventur passiert vor dem Zählen. Jeder Artikel bekommt einen festen Lagerort (Kühlhaus, Trockenlager, Tiefkühlung, Bar), und innerhalb des Lagerorts gilt: Neues nach hinten, Altes nach vorn. Diese Ordnung beschleunigt nicht nur das Zählen, sie senkt nebenbei den Verderb, weil nichts mehr hinter der neuen Lieferung verschwindet.</p>
+
+        <h2>Der Ablauf in fünf Schritten</h2>
+        <ol>
+          <li><strong>Stichtag festlegen</strong> und jeden Monat beibehalten, am besten der Monatsletzte nach Küchenschluss oder vor der ersten Lieferung.</li>
+          <li><strong>Je Lagerort zählen,</strong> immer in derselben Reihenfolge, damit nichts doppelt oder gar nicht erfasst wird.</li>
+          <li><strong>Anbruch anteilig schätzen,</strong> aber immer nach derselben Methode (halbe Dose ist eine halbe Dose, nicht heute die Hälfte und nächsten Monat „fast leer").</li>
+          <li><strong>Zu Einstandspreisen bewerten,</strong> nicht zu Verkaufspreisen.</li>
+          <li><strong>Abschließen und festschreiben:</strong> Eine verantwortliche Person prüft und schließt die Inventur ab. Danach wird nichts mehr geändert, sonst ist die Zahl beim nächsten Vergleich wertlos.</li>
+        </ol>
+
+        <h2>Die häufigsten Fehler</h2>
+        <ol>
+          <li><strong>Wechselnde Stichtage:</strong> Mal der 28., mal der 3., damit sind die Monate nicht vergleichbar.</li>
+          <li><strong>Bewertung zu Verkaufspreisen:</strong> macht den Bestand künstlich groß und die Quote künstlich schön.</li>
+          <li><strong>Anbruch ignorieren oder würfeln:</strong> gerade bei teuren Artikeln summiert sich das.</li>
+          <li><strong>Zählen ohne Lagerordnung:</strong> doppelt gezählt, übersehen, geschätzt.</li>
+          <li><strong>Nachträgliche Korrekturen:</strong> Wer nach dem Abschluss „noch etwas gefunden" einträgt, kann die Zahlen niemandem mehr erklären.</li>
+        </ol>
+
+        <h2>Die Inventur-Vorlage: welche Spalten sie braucht</h2>
+        <p>Eine brauchbare Inventurliste ist keine Tabelle mit allem, sondern eine mit genau den Spalten, die die Rechnung braucht. Mehr Spalten heißt mehr Fehler beim Zählen um Mitternacht.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Spalte</th><th>Warum sie da ist</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lagerort</td><td>Zählen in fester Reihenfolge, nichts doppelt</td></tr>
+              <tr><td>Artikel und Gebindegröße</td><td>„Tomaten passiert 2,5 kg" statt „Tomaten"</td></tr>
+              <tr><td>Zähleinheit</td><td>Stück, Kilo, Liter, halbe Gebinde</td></tr>
+              <tr><td>Gezählte Menge</td><td>die einzige Spalte, die beim Zählen ausgefüllt wird</td></tr>
+              <tr><td>Einstandspreis je Einheit</td><td>vorab eingetragen, nicht während der Inventur</td></tr>
+              <tr><td>Wert</td><td>Menge mal Einstandspreis, rechnet die Tabelle</td></tr>
+              <tr><td>Bemerkung</td><td>Anbruch, Verderb, Fehlmenge</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Was nicht hineingehört: Verkaufspreise, Lieferanten, Mindesthaltbarkeit. Das sind andere Listen. Wer alles in eine Tabelle packt, bekommt eine, die niemand mehr pflegt.</p>
+
+        <h2>Ist die Inventur Pflicht?</h2>
+        <p>Für den Jahresabschluss ja: Wer bilanziert, muss zum Ende des Geschäftsjahres eine Inventur machen, das ergibt sich aus dem Handelsgesetzbuch. Die monatliche Inventur, um die es in diesem Artikel geht, schreibt kein Gesetz vor. Sie ist trotzdem die wichtigere, weil die Jahresinventur nur sagt, was am Ende übrig war, und nicht, in welchem Monat es verschwunden ist. Wer zwölf Monatswerte hat, kann steuern. Wer einen Jahreswert hat, kann nur noch erklären.</p>
+
+        <h2>Inventur-App oder Tabelle?</h2>
+        <p>Für einen Betrieb mit einer Küche reicht eine gepflegte Tabelle, wenn zwei Dinge stimmen: Die Artikel sind mit Einstandspreisen hinterlegt, und niemand ändert die Struktur zwischen zwei Monaten. Eine App lohnt sich, sobald mehrere Personen zählen, mehrere Lagerorte parallel laufen oder die Inventurwerte direkt in die Wareneinsatz-Rechnung fließen sollen, statt abgetippt zu werden. Der Fehler passiert selten beim Zählen, meistens beim Übertragen. Was eine App dafür können muss: Artikelstamm mit Einstandspreisen, Lagerorte, eine Prüfansicht vor dem Abschluss und einen Abschluss, nach dem nichts mehr änderbar ist.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie oft sollte eine Küche Inventur machen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Monatlich als feste Stichtagsinventur für die Betriebssteuerung; bei hohem Frischeanteil zusätzlich wöchentlich für die kritischen Warengruppen. Die Jahresinventur für den Abschluss bleibt davon unberührt.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wer sollte zählen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Zählen kann das Team, den Abschluss macht eine verantwortliche Person, die die Zahlen prüft und festschreibt. Vier Augen sind gut, eine Unterschrift ist Pflicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie gehe ich mit angebrochenen Gebinden um?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Anteilig schätzen, immer nach derselben Methode. Die einzelne Schätzung darf ungenau sein, die Methode muss konstant bleiben, sonst springt die Quote ohne Grund.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; Küchen-Know-how</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Mit festen Lagerorten, gepflegten Artikeln und einem verbindlichen Abschluss wird die Inventur vom Wochenendprojekt zur Routine. Die <a href="/koch-app/" class="typo-link">Avorix Koch-App</a> bringt die Grundlage dafür mit: Artikel, Einstandspreise und Bestände in einem System.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/koch-app/" data-cta-location="wissen-inventur-ende" class="btn btn-primary">Koch-App ansehen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
