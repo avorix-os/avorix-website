@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Menüplan und Einkaufsliste: Wochenplanung, die im Alltag hält", "item": "https://avorix.de/wissen/menueplan-einkaufsliste/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Menüplan und Einkaufsliste: Wochenplanung, die im Alltag hält",
+    "datePublished": "2026-09-14",
+    "dateModified": "2026-09-14",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie weit im Voraus sollte eine Küche planen?", "acceptedAnswer": { "@type": "Answer", "text": "Eine Woche ist der praktikable Standard: nah genug für realistische Zahlen, weit genug für Bestellrhythmen. Saisonbetriebe planen die Grobstruktur weiter voraus und verfeinern wöchentlich." } },
+      { "@type": "Question", "name": "Funktioniert das auch im À-la-carte-Restaurant ohne festes Menü?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, dann planen Sie keine Menüfolgen, sondern erwartete Verkaufszahlen je Gericht. Die Verkaufsschlager machen den Großteil des Bedarfs aus, der Rest ist Sicherheitsbestand." } },
+      { "@type": "Question", "name": "Was bringt Wochenplanung für den Wareneinsatz?", "acceptedAnswer": { "@type": "Answer", "text": "Sie ersetzt Gefühl durch Bedarf: weniger Überbestellung, weniger Verderb, weniger „sicherheitshalber“. Das ist einer der schnellsten Hebel gegen eine schleichend steigende Quote." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Menüplan und Einkaufsliste für die Küche"
+  description="Menüplanung in der Gastronomie, die im Alltag hält: vom Wochenplan über die Mengen zur Einkaufsliste, in der richtigen Reihenfolge."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Menüplan und Einkaufsliste: Wochenplanung, die im Alltag hält</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Eine belastbare Wochenplanung läuft in einer festen Reihenfolge: erst die erwarteten Portionen je Tag, dann die Gerichte, dann die Mengen aus den Rezepturen, zuletzt die Einkaufsliste als Bedarf minus Lagerbestand. Wer die Reihenfolge umdreht und mit dem Einkauf anfängt, kauft das Lager voll statt den Plan ein.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum Wochenplanung so oft scheitert</h2>
+        <p>Nicht am Willen, sondern am Werkzeug: Der Plan hängt als Zettel, die Rezepturen liegen woanders, die Mengen stehen nirgends. Also wird mittwochs bestellt, was „immer" bestellt wird, und die Küche kocht gegen das an, was da ist. Das Ergebnis sind volle Lager, Verderb und trotzdem fehlende Ware am Samstag.</p>
+
+        <h2>Der Wochenplan in vier Schritten</h2>
+        <ol>
+          <li><strong>Portionen schätzen:</strong> je Tag und Mahlzeit, aus Reservierungen, Erfahrungswerten und Saison. Die Schätzung darf grob sein, sie wird jede Woche besser.</li>
+          <li><strong>Gerichte zuordnen:</strong> Karte, Tagesgerichte, Aktionen, in der Gemeinschaftsverpflegung der Speiseplan. Wer Wochen wiederverwendet, plant in Minuten statt Stunden.</li>
+          <li><strong>Mengen rechnen:</strong> Portionen mal Mengen je Portion aus der Rezeptur. Ohne standardisierte Rezepte bleibt dieser Schritt eine Schätzung, deshalb zuerst: <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a></li>
+          <li><strong>Bedarf bündeln:</strong> gleiche Zutaten über alle Gerichte der Woche zusammenfassen. Aus 30 Gerichten werden so zum Beispiel 40 Bestellpositionen statt 200 Einzelmengen.</li>
+        </ol>
+
+        <h2>Beispiel: vier Tage Halbpension, einmal durchgerechnet</h2>
+        <p>So sieht die Reihenfolge an einem konkreten Fall aus. Ein Hotel mit Halbpension, Donnerstag bis Sonntag, drei Gänge am Abend.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Schritt</th><th>Donnerstag</th><th>Freitag</th><th>Samstag</th><th>Sonntag</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Portionen (aus Belegung)</th><td>60</td><td>80</td><td>110</td><td>70</td></tr>
+              <tr><th scope="row">Hauptgang</th><td>Rinderbraten</td><td>Lachsfilet</td><td>Schnitzel</td><td>Hähnchenbrust</td></tr>
+              <tr><th scope="row">Menge je Portion (Rezeptur)</th><td>180 g</td><td>160 g</td><td>150 g</td><td>170 g</td></tr>
+              <tr><th scope="row">Bedarf</th><td>10,8 kg</td><td>12,8 kg</td><td>16,5 kg</td><td>11,9 kg</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Aus vier Tagen werden vier Bestellpositionen für Fleisch und Fisch, dazu die gebündelten Beilagen und Saucen über alle Tage. Erst jetzt kommt der Blick ins Lager: Liegen von letzter Woche noch 4 kg Hähnchenbrust, werden 7,9 kg bestellt, nicht 11,9. Die Zahlen sind ein Rechenbeispiel, keine Empfehlung für Ihre Portionen.</p>
+
+        <h2>Vom Bedarf zur Einkaufsliste</h2>
+        <p>Die Einkaufsliste ist kein eigenes Dokument, sie ist das Ergebnis einer Subtraktion: Wochenbedarf minus vorhandener Lagerbestand gleich Bestellmenge. Dafür braucht es zwei Dinge, die viele Küchen nicht haben: verlässliche Bedarfszahlen (Schritt 3) und einen gezählten Bestand. Ohne Inventur wird auch die beste Liste zur Vermutung: <a href="/wissen/inventur-gastronomie/" class="typo-link">Inventur in der Küche</a></p>
+
+        <h2>Reservierungen und Veranstaltungen einbauen</h2>
+        <p>Der Wochenplan kennt zwei Arten von Zahlen: die erwartete Belegung, die aus Erfahrung kommt, und die feste Buchung, die aus dem Reservierungsbuch kommt. Die zweite schlägt die erste. Ein Bankett mit 90 Personen am Samstag ist keine Schätzung, sondern ein Auftrag, und er gehört als eigene Zeile in den Plan, mit eigener Menüfolge und eigenem Bedarf. Der häufigste Planungsfehler ist, das Bankett „im Kopf" zu haben und die Küche mit der normalen Bestellung in den Samstag laufen zu lassen.</p>
+
+        <h2>Speiseplan in Kantine und Gemeinschaftsverpflegung</h2>
+        <p>In der Betriebsgastronomie dreht sich die Logik: Die Portionen schwanken wenig, dafür wiederholt sich der Plan. Wer einen Vier-Wochen-Zyklus fährt, plant einmal und passt danach nur Saison und Preise an. Der Bedarf je Woche steht damit fest, bevor die Woche beginnt, und der Einkauf kann Rahmenmengen mit dem Lieferanten vereinbaren. Der Preis dafür: Der Zyklus muss gepflegt werden. Ein Speiseplan, der seit zwei Jahren unverändert läuft, rechnet mit Einstandspreisen von vor zwei Jahren.</p>
+
+        <h2>Woran Wochenpläne im Alltag kippen</h2>
+        <ol>
+          <li><strong>Der Plan kennt die Realität nicht:</strong> Reservierungen und Veranstaltungen fließen nicht ein, geplant wird der Normalfall.</li>
+          <li><strong>Mengen ohne Rezeptur:</strong> Der Plan sagt „Schnitzel", aber niemand weiß, wie viel Kartoffeln das bedeutet.</li>
+          <li><strong>Bestellt wird am Lager vorbei:</strong> Der Bedarf stimmt, aber niemand zieht ab, was noch da ist.</li>
+          <li><strong>Der Plan lebt nicht:</strong> Änderungen im Laufe der Woche landen im Kopf statt im Plan, und der Einkauf arbeitet mit dem Stand von Montag.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie weit im Voraus sollte eine Küche planen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Eine Woche ist der praktikable Standard: nah genug für realistische Zahlen, weit genug für Bestellrhythmen. Saisonbetriebe planen die Grobstruktur weiter voraus und verfeinern wöchentlich.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Funktioniert das auch im À-la-carte-Restaurant ohne festes Menü?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, dann planen Sie keine Menüfolgen, sondern erwartete Verkaufszahlen je Gericht. Die Verkaufsschlager machen den Großteil des Bedarfs aus, der Rest ist Sicherheitsbestand.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was bringt Wochenplanung für den Wareneinsatz?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Sie ersetzt Gefühl durch Bedarf: weniger Überbestellung, weniger Verderb, weniger „sicherheitshalber“. Das ist einer der schnellsten Hebel gegen eine schleichend steigende Quote.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; Küchen-Know-how</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        In der <a href="/koch-app/" class="typo-link">Avorix Koch-App</a> hängen Menüplan, Rezepturen und Bedarf zusammen: Der Wochenplan kennt die Mengen je Portion, der Bedarf rechnet sich daraus, und die Einkaufsliste arbeitet mit echten Zahlen.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/koch-app/" data-cta-location="wissen-menueplan-ende" class="btn btn-primary">Koch-App ansehen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
