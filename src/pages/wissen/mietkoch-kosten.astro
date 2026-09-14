@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Was kostet ein Mietkoch? Der Stundensatz, was drinsteckt, und der ehrliche Vergleich", "item": "https://avorix.de/wissen/mietkoch-kosten/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Was kostet ein Mietkoch? Der Stundensatz, was drinsteckt, und der ehrliche Vergleich",
+    "datePublished": "2026-09-14",
+    "dateModified": "2026-09-14",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Warum ist ein Mietkoch pro Stunde teurer als mein Angestellter?", "acceptedAnswer": { "@type": "Answer", "text": "Weil der Stundensatz Vollkosten sind und der Stundenlohn Teilkosten. Rechnen Sie Ihren Angestellten auf produktive Stunden um, inklusive Urlaub, Krankheit und Arbeitgeberanteilen, dann schrumpft der Abstand erheblich." } },
+      { "@type": "Question", "name": "Gibt es eine Mindestabnahme oder Mindestdauer?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Avorix nicht. Viele Häuser überbrücken zwei Wochen, andere buchen eine Saison. Der Satz je Stunde ist bei längeren Einsätzen niedriger." } },
+      { "@type": "Question", "name": "Kommen zum Stundensatz noch Kosten dazu?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Avorix nicht. Fahrt und gegebenenfalls Unterkunft werden vorab besprochen und stehen im Angebot, nicht auf der Rechnung als Überraschung." } },
+      { "@type": "Question", "name": "Was kostet ein selbständiger Mietkoch auf Rechnung?", "acceptedAnswer": { "@type": "Answer", "text": "Auf dem Papier oft weniger. Im Prüffall kann daraus eine Nachzahlung der Sozialbeiträge für rund vier Jahre werden, bei Vorsatz bis zu dreißig. Das ist der teuerste Stundensatz, den es gibt." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Was kostet ein Mietkoch? Stundensatz erklärt"
+  description="Was im Stundensatz eines Leihkochs steckt, warum er über dem Lohn eines Angestellten liegt und wie Sie ihn mit den Vollkosten einer Festanstellung vergleichen."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Was kostet ein Mietkoch? Der Stundensatz, was drinsteckt, und der ehrliche Vergleich</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Ein Mietkoch kostet einen Stundenverrechnungssatz, in dem Lohn, Arbeitgeberanteile zur Sozialversicherung, Urlaub, Krankheit, Ausfallrisiko und die Leistung des Verleihers enthalten sind. Er liegt deshalb deutlich über dem reinen Stundenlohn eines angestellten Kochs. Öffentlich genannte Sätze im deutschen Markt reichen von etwa 60 bis 100 Euro je Stunde. Ob das teuer ist, entscheidet nicht der Satz, sondern der Vergleich mit dem, was die Stunde eines Angestellten wirklich kostet, und mit dem, was ein leerer Posten kostet.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Was im Stundensatz steckt</h2>
+        <p>Der Stundensatz ist keine Marge auf einen Lohn, sondern eine Summe aus Positionen, die bei einem angestellten Koch einzeln anfallen und meist niemand zusammenzählt.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Bestandteil</th><th>Wer ihn beim Mietkoch trägt</th><th>Wer ihn bei Ihrem Angestellten trägt</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Bruttolohn</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Arbeitgeberanteil Sozialversicherung</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Bezahlter Urlaub</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Lohnfortzahlung bei Krankheit</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Leerlauf zwischen Einsätzen</th><td>Verleiher</td><td>Sie (Saisonlöcher, Ruhetage)</td></tr>
+              <tr><th scope="row">Rekrutierung und Ersatz bei Ausfall</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Verwaltung, Lohnabrechnung, Meldungen</th><td>Verleiher</td><td>Sie</td></tr>
+              <tr><th scope="row">Erlaubnis, Prüfungen, Haftung als Arbeitgeber</th><td>Verleiher</td><td>entfällt, weil Sie selbst Arbeitgeber sind</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Die rechte Spalte ist der Grund, warum der Vergleich „Stundensatz gegen Stundenlohn“ immer schief ist. Er vergleicht eine Vollkostenzahl mit einer Teilkostenzahl.</p>
+
+        <h2>Was die Stunde eines angestellten Kochs wirklich kostet</h2>
+        <p>Rechnen Sie es einmal für Ihren Betrieb durch, mit Ihren Zahlen. Die Formel ist einfach, die Ehrlichkeit ist der schwere Teil:</p>
+        <ol>
+          <li><strong>Jahresbruttolohn</strong> des Kochs.</li>
+          <li><strong>Plus Arbeitgeberanteile</strong> zur Sozialversicherung.</li>
+          <li><strong>Plus Sonderzahlungen,</strong> falls vereinbart.</li>
+          <li><strong>Geteilt durch die produktiven Stunden.</strong> Nicht durch die vertraglichen. Vom Vertragsjahr gehen Urlaub, Feiertage, Krankheitstage und Schulungen ab. Was bleibt, sind die Stunden, in denen tatsächlich gekocht wird.</li>
+        </ol>
+        <p>Das Ergebnis liegt bei fast jedem Betrieb spürbar über dem, was auf dem Lohnzettel als Stundenlohn steht. Erst diese Zahl ist mit einem Stundensatz vergleichbar. Und sie enthält noch nicht, was in der Tabelle oben in den letzten drei Zeilen steht.</p>
+
+        <h2>Die dritte Zahl: was der leere Posten kostet</h2>
+        <p>Der eigentliche Vergleich läuft nicht zwischen Mietkoch und Angestelltem, sondern zwischen Mietkoch und niemandem. Ein unbesetzter Posten kostet auf drei Wegen: Umsatz, der nicht gemacht wird (geschlossene Tische, abgesagte Bankette, eingeschränkte Karte), Qualität, die kippt, weil das Restteam auf Anschlag arbeitet, und Personal, das kündigt, weil die Überstunden nicht enden. Keine dieser drei Positionen steht in einer Kostenstelle, und alle drei sind meist teurer als jeder Stundensatz. Wie Sie die ersten 14 Tage überstehen: <a href="/wissen/kuechenchef-kuendigt-notfallplan/" class="typo-link">Der Küchenchef kündigt: Notfallplan</a></p>
+
+        <h2>Warum ein zu niedriger Satz ein Warnsignal ist</h2>
+        <p>Ein Stundensatz, der unter den Vollkosten eines angestellten Kochs liegt, kann nicht aus Lohn, Sozialabgaben und Urlaub bestehen. Irgendetwas fehlt. In der Praxis fehlt meistens die Anstellung: Der „Mietkoch“ ist ein Selbständiger auf Rechnung, der Vermittler kassiert eine Provision, und das Risiko der Scheinselbständigkeit liegt bei Ihnen. Was das im Prüffall kostet, steht hier: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+
+        <h2>Was den Satz nach oben oder unten bewegt</h2>
+        <p>Innerhalb der Marktspanne entscheiden vier Dinge über den konkreten Satz: die <strong>Qualifikation</strong> (Commis, Chef de Partie, Sous-Chef, Küchenchef), die <strong>Einsatzdauer</strong> (ein Wochenende kostet je Stunde mehr als eine Saison), der <strong>Vorlauf</strong> (wer heute für morgen sucht, zahlt für die Verfügbarkeit) und die <strong>Region</strong> (Anfahrt, Unterkunft, Auslandsmeldungen). Wer den Satz senken will, dreht am zweiten und dritten Punkt: früh anfragen und länger planen.</p>
+
+        <h2>Wie Avorix abrechnet</h2>
+        <p>Avorix nennt keinen Katalogpreis, weil die vier Faktoren oben in jedem Haus anders liegen. Sie bekommen im Erstgespräch (30 Minuten, kostenlos) einen festen Stundensatz für Ihren Einsatz, ohne versteckte Posten, und der gilt, bevor der Koch kommt. Für die ersten Betriebe gelten 2026 Pilotkonditionen deutlich unter dem regulären Preis. Was Sie nie zahlen: Vermittlungshonorar, Ausfalltage des Kochs, Sozialabgaben.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Warum ist ein Mietkoch pro Stunde teurer als mein Angestellter?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Weil der Stundensatz Vollkosten sind und der Stundenlohn Teilkosten. Rechnen Sie Ihren Angestellten auf produktive Stunden um, inklusive Urlaub, Krankheit und Arbeitgeberanteilen, dann schrumpft der Abstand erheblich.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gibt es eine Mindestabnahme oder Mindestdauer?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei Avorix nicht. Viele Häuser überbrücken zwei Wochen, andere buchen eine Saison. Der Satz je Stunde ist bei längeren Einsätzen niedriger.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kommen zum Stundensatz noch Kosten dazu?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei Avorix nicht. Fahrt und gegebenenfalls Unterkunft werden vorab besprochen und stehen im Angebot, nicht auf der Rechnung als Überraschung.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was kostet ein selbständiger Mietkoch auf Rechnung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Auf dem Papier oft weniger. Im Prüffall kann daraus eine Nachzahlung der Sozialbeiträge für rund vier Jahre werden, bei Vorsatz bis zu dreißig. Das ist der teuerste Stundensatz, den es gibt.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Ein fester Stundensatz, bevor der Koch kommt. Keine Ausfalltage, keine Sozialabgaben, kein Vermittlungshonorar.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal/" data-cta-location="wissen-kosten-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
