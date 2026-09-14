@@ -20,7 +20,12 @@ const schema = [
     "@id": "https://avorix.de/#organization",
     "name": "AVORIX GmbH",
     "url": "https://avorix.de",
-    "logo": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
+      "width": 1024,
+      "height": 1024
+    },
     "description": "Festangestellte Köche, wenn Ihrer fehlt, in der Regel innerhalb von 24 bis 72 Stunden. Dazu Koch-App und Schulung, damit Ihre Küche Ihr Niveau hält.",
     "telephone": "+49 7541 3973915",
     "email": "info@avorix.de",
