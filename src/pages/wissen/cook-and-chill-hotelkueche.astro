@@ -1,0 +1,164 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Cook and Chill in der Hotelküche: Verfahren, Temperaturen, Grenzen", "item": "https://avorix.de/wissen/cook-and-chill-hotelkueche/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cook and Chill in der Hotelküche: Verfahren, Temperaturen, Grenzen",
+    "datePublished": "2026-09-14",
+    "dateModified": "2026-09-14",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie lange darf Cook-and-Chill-Ware gelagert werden?", "acceptedAnswer": { "@type": "Answer", "text": "Nach den Normvorgaben bei 0 bis 3 °C in der Praxis meist bis zu 72 Stunden; die konkrete Frist legt Ihr HACCP-Konzept je Produkt fest. Vakuumierte Ware hält länger als offen gelagerte, die Frist gehört trotzdem auf jede Charge." } },
+      { "@type": "Question", "name": "Brauche ich zwingend einen Schnellkühler?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Vorgabe, innerhalb von 90 Minuten auf 3 °C zu kommen, erreicht ein normaler Kühlschrank bei gefüllten Gastronormbehältern nicht. Ohne Schnellkühler ist es kein Cook and Chill, sondern Vorkochen mit Risiko." } },
+      { "@type": "Question", "name": "Ist Cook and Chill dasselbe wie Convenience?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Convenience ist gekaufte Vorproduktion nach fremder Rezeptur. Cook and Chill ist Ihre eigene Küche, Ihre Rezeptur, Ihre Qualität, nur zeitversetzt." } },
+      { "@type": "Question", "name": "Schmeckt man den Unterschied?", "acceptedAnswer": { "@type": "Answer", "text": "Bei geeigneten Gerichten und sauberem Regenerieren nicht. Bei ungeeigneten Gerichten immer. Deshalb entscheidet die Auswahl der Gerichte über den Erfolg, nicht das Gerät." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Cook and Chill in der Hotelküche: Verfahren & Grenzen"
+  description="Wie Cook and Chill in der Hotel- und Gastronomieküche funktioniert: Ablauf, Temperaturen nach DIN, was es bringt, wo es nicht passt, und was es von der Küche verlangt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Cook and Chill in der Hotelküche: Verfahren, Temperaturen, Grenzen</h1>
+      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Cook and Chill heißt: Speisen fertig garen, sofort schnell kühlen, gekühlt lagern und erst kurz vor dem Service regenerieren. Der Kern ist die Kühlung: innerhalb von 90 Minuten auf 3 °C Kerntemperatur, danach Lagerung bei 0 bis 3 °C und Regenerieren auf mindestens 72 °C im Kern für zwei Minuten. Das Verfahren trennt Produktion und Service zeitlich und macht die Küche unabhängig davon, wer am Abend am Herd steht. Es passt für Häuser mit wiederkehrender Karte, nicht für Küchen, die jeden Teller à la minute bauen.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Was das Verfahren löst</h2>
+        <p>In einer klassischen Küche fällt die Arbeit dann an, wenn die Gäste da sind: abends, am Wochenende, zur Saison. Genau dann fehlen die Leute. Cook and Chill verschiebt die anspruchsvolle Arbeit, das Garen, in Zeiten, in denen die Küche ruhig ist und der erfahrene Koch da ist. Der Service wird zum Regenerieren und Anrichten, und das kann ein eingearbeitetes Team nach Standard, auch ohne den Spitzenkoch. Das ist der ganze Punkt, und er ist derselbe wie bei standardisierten Rezepten: Das Wissen sitzt im Ablauf, nicht in der Person.</p>
+
+        <h2>Der Ablauf in fünf Schritten</h2>
+        <ol>
+          <li><strong>Garen</strong> wie gewohnt, nach standardisierter Rezeptur, mit dokumentierter Kerntemperatur.</li>
+          <li><strong>Schnellkühlen</strong> im Schnellkühler: innerhalb von 90 Minuten auf 3 °C Kerntemperatur. Das ist der Schritt, an dem das Verfahren steht oder fällt, und der Grund, warum ein normaler Kühlschrank nicht reicht.</li>
+          <li><strong>Verpacken und kennzeichnen:</strong> Gericht, Datum, Uhrzeit der Kühlung, Verbrauchsfrist. Vakuumieren verlängert die Frist und schützt vor Austrocknung.</li>
+          <li><strong>Lagern</strong> bei 0 bis 3 °C, in der Praxis meist bis zu 72 Stunden, je nach Produkt und betrieblicher Festlegung.</li>
+          <li><strong>Regenerieren</strong> auf mindestens 72 °C Kerntemperatur für zwei Minuten, dann anrichten und sofort servieren.</li>
+        </ol>
+        <p>Die Temperaturen und Zeiten in dieser Liste folgen den Vorgaben der DIN 10536 (Cook-and-Chill-Verfahren) und der DIN 10508 (Temperaturen für Lebensmittel). Sie sind die Untergrenze, nicht die Empfehlung. Ihr HACCP-Konzept legt fest, was bei Ihnen gilt.</p>
+
+        <h2>Die Temperaturen auf einen Blick</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Schritt</th><th>Vorgabe</th><th>Warum</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Ende des Garens</th><td>Kerntemperatur je Produkt, dokumentiert</td><td>Ausgangspunkt der Kühlkette</td></tr>
+              <tr><th scope="row">Schnellkühlen</th><td>auf 3 °C in höchstens 90 Minuten</td><td>der kritische Temperaturbereich wird schnell durchlaufen</td></tr>
+              <tr><th scope="row">Lagern</th><td>0 bis 3 °C</td><td>Keimwachstum bleibt minimal</td></tr>
+              <tr><th scope="row">Regenerieren</th><td>mindestens 72 °C Kern, 2 Minuten</td><td>Sicherheit vor dem Servieren</td></tr>
+              <tr><th scope="row">Warmhalten nach dem Regenerieren</th><td>so kurz wie möglich</td><td>Qualität sinkt mit jeder Minute</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Wer diese Tabelle im Kopf hat, hat das Verfahren verstanden. Alles andere ist Organisation.</p>
+
+        <h2>Was es von der Küche verlangt</h2>
+        <p>Cook and Chill ist kein Gerät, das man kauft, sondern ein Ablauf, der gepflegt wird. Drei Dinge müssen vorher stehen: <strong>standardisierte Rezepturen</strong> mit Mengen je Portion, sonst weiß niemand, wie viel produziert wird (<a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a>); ein <strong>Produktionsplan</strong>, der aus der erwarteten Belegung den Bedarf je Tag ableitet (<a href="/wissen/menueplan-einkaufsliste/" class="typo-link">Menüplan und Einkaufsliste</a>); und eine <strong>Dokumentation</strong> je Charge, die Uhrzeit, Temperatur und Verbrauchsfrist festhält, sonst ist das Verfahren im Prüffall nicht nachweisbar. Dazu die Geräte: ein Schnellkühler mit ausreichender Kapazität für Ihre größte Charge, ein Vakuumierer und Kühlraum bei 0 bis 3 °C.</p>
+
+        <h2>Wo es nicht passt</h2>
+        <p>Ehrlich gesagt: nicht überall. Cook and Chill lohnt sich, wenn Gerichte wiederkehren und in Mengen produziert werden, also in der Halbpension, im Bankett, in der Kantine, im Sporthotel mit Gruppen. Es passt nicht für Küchen, die täglich wechselnd à la minute kochen, für Gerichte, die durch das Kühlen und Regenerieren Textur verlieren (viele Fischgerichte, frittierte Komponenten, zarte Salate), und für Betriebe, die die Disziplin für die Dokumentation nicht aufbringen wollen. Wer das Verfahren halb macht, hat die Nachteile ohne die Vorteile.</p>
+
+        <h2>Die Nachteile, die niemand verschweigen sollte</h2>
+        <p>Erstens die Investition: Schnellkühler und Vakuumierer kosten, und der Kühlraum muss die Temperatur halten. Zweitens der Vorlauf: Wer heute produziert, was in zwei Tagen serviert wird, braucht eine belastbare Belegungsprognose. Drittens der Geschmack: Gut gemacht merkt der Gast nichts, schlecht gemacht merkt er es sofort. Regenerieren ist eine eigene Fertigkeit, sie gehört in die Einarbeitung wie das Garen selbst.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie lange darf Cook-and-Chill-Ware gelagert werden?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nach den Normvorgaben bei 0 bis 3 °C in der Praxis meist bis zu 72 Stunden; die konkrete Frist legt Ihr HACCP-Konzept je Produkt fest. Vakuumierte Ware hält länger als offen gelagerte, die Frist gehört trotzdem auf jede Charge.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Brauche ich zwingend einen Schnellkühler?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Die Vorgabe, innerhalb von 90 Minuten auf 3 °C zu kommen, erreicht ein normaler Kühlschrank bei gefüllten Gastronormbehältern nicht. Ohne Schnellkühler ist es kein Cook and Chill, sondern Vorkochen mit Risiko.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ist Cook and Chill dasselbe wie Convenience?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Convenience ist gekaufte Vorproduktion nach fremder Rezeptur. Cook and Chill ist Ihre eigene Küche, Ihre Rezeptur, Ihre Qualität, nur zeitversetzt.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Schmeckt man den Unterschied?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei geeigneten Gerichten und sauberem Regenerieren nicht. Bei ungeeigneten Gerichten immer. Deshalb entscheidet die Auswahl der Gerichte über den Erfolg, nicht das Gerät.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag beschreibt das Verfahren allgemein. Maßgeblich für Ihren Betrieb sind Ihr HACCP-Konzept und die geltenden Normen.</p>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; Küchen-Know-how</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Produktion und Service zu trennen funktioniert nur mit Rezepturen, die jeder ausführen kann. Genau dafür ist die <a href="/koch-app/" class="typo-link">Avorix Koch-App</a> gebaut: Schritt für Schritt, mit Mengen, Temperaturen und kritischen Punkten am Posten. Und wenn am Abend jemand fehlt, steht ein <a href="/personal/" class="typo-link">Avorix-Koch</a> in Ihrer Küche, der das Verfahren kennt.
+      </p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/system/" data-cta-location="wissen-cookchill-ende" class="btn btn-primary">So arbeitet das Avorix-System</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
