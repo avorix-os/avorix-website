@@ -1,0 +1,184 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Personal", "item": "https://avorix.de/personal" },
+      { "@type": "ListItem", "position": 3, "name": "Servicepersonal mieten", "item": "https://avorix.de/personal/service/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Arbeitnehmerüberlassung von Servicekräften",
+    "serviceType": "Arbeitnehmerüberlassung",
+    "provider": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de/" },
+    "areaServed": "Deutschland und Österreich",
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Ab wann können wir jemanden bekommen?", "acceptedAnswer": { "@type": "Answer", "text": "Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab. Rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu." } },
+      { "@type": "Question", "name": "Gibt es eine Mindest-Einsatzdauer?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Manche Häuser buchen einen einzigen Abend für ein Bankett, andere eine ganze Saison." } },
+      { "@type": "Question", "name": "Sind die Servicekräfte bei Ihnen angestellt oder selbständig?", "acceptedAnswer": { "@type": "Answer", "text": "Fest angestellt und sozialversichert, wie unsere Köche. Wir arbeiten ausschließlich im Rahmen der Arbeitnehmerüberlassung, mit behördlicher Erlaubnis. Rechnungen von Einzelpersonen gibt es bei uns nicht." } },
+      { "@type": "Question", "name": "Können wir Küche und Service zusammen anfragen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, und das ist der häufigste Fall. Ein Anruf, ein Ansprechpartner, ein Vertrag." } },
+      { "@type": "Question", "name": "Braucht mein Betrieb für den Einsatz eine eigene Genehmigung?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel nicht: Die Meldepflichten für die grenzüberschreitende Überlassung liegen beim Verleiher, also bei uns. Was auf Ihrer Seite zu beachten ist, klären wir im Erstgespräch: 30 Minuten, kostenlos, unverbindlich." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Servicepersonal mieten für Gastronomie und Hotel"
+  description="Servicekräfte mieten: festangestellt bei Avorix, sozialversichert, mit Arbeitnehmerüberlassungserlaubnis. Für Bankette, Ausfälle und die Saison, in Deutschland und Österreich."
+  schemaOrg={schema}
+>
+  {/* Hero */}
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/personal/" class="eyebrow-link">Personal</a></p>
+      <h1 class="mb-6 max-w-[var(--spalte-schmal)]">Servicepersonal mieten: festangestellte Kräfte für Ihren Saal</h1>
+      <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Wenn im Saal jemand fehlt, merkt es der Gast zuerst. Wir leihen Ihnen festangestellte Servicekräfte: für das Bankett am Samstag, für den Ausfall im Stammteam, für die Wochen, in denen die Saison hochfährt.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/personal#anfrage" data-cta-location="service-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
+      </div>
+      <div class="hero-badges mb-6">
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
+      <p class="hero-telefon">
+        Im Notfall direkt anrufen:
+        <a href="tel:+4975413973915" data-cta-location="service-hero" data-cta-event="personal_anruf_click" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+    </div>
+  </section>
+
+  {/* Direktantwort (GEO) */}
+ <section class="reveal">
+    <div class="content-width">
+      <p id="direktantwort" class="lead py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Avorix verleiht festangestellte, sozialversicherte Servicekräfte an Hotellerie und Gastronomie in Deutschland und Österreich, mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit. Sie zahlen die geleisteten Stunden, wir tragen Lohn, Sozialabgaben und Ausfall. Der Schwerpunkt von Avorix liegt in der Küche; Servicekräfte stellen wir zusätzlich. Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab. Rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu.
+      </p>
+    </div>
+  </section>
+
+  {/* Wen wir in den Saal schicken */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Wen wir in den Saal schicken</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Unsere Servicekräfte haben im Gastraum gearbeitet, nicht nur in einer Schulung davon gehört. Sie kennen den Ablauf eines Abendservice, sie wissen, wie ein Bankett getaktet ist, und sie brauchen keine Einweisung, um ein Tablett zu tragen.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Was wir stellen:</p>
+      <ul class="list-disc pl-6 space-y-2 mt-2 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong>Servicekräfte für den Restaurantbetrieb</strong>, für den regulären Service am Abend oder am Mittag.</li>
+        <li><strong>Servicekräfte für Bankett und Veranstaltung</strong>, wenn an einem Abend mehr Hände gebraucht werden, als das Haus hat.</li>
+        <li><strong>Erfahrene Kräfte für den Frühstücksservice</strong>, den Dienst, für den sich am schwersten jemand findet.</li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Typische Einsätze */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Typische Einsätze</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)"><strong>Das Bankett am Wochenende.</strong> Hundertzwanzig Personen im Saal, das Stammteam ist auf achtzig ausgelegt. Drei zusätzliche Kräfte machen den Unterschied zwischen einem Abend, über den gesprochen wird, und einem, über den geschwiegen wird.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)"><strong>Der Ausfall mitten in der Woche.</strong> Zwei Krankmeldungen am selben Tag, und plötzlich steht der Gastgeber selbst am Tisch statt bei den Gästen. Für solche Wochen leihen Sie jemanden, statt das Restteam über die Belastungsgrenze zu schieben.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)"><strong>Der Saisonhochlauf.</strong> Das Haus fährt hoch, die Zimmer sind gebucht, und im Service fehlen zwei Leute, die Sie über den regulären Arbeitsmarkt nicht mehr bekommen. Sie überbrücken die Wochen, bis die Stellen besetzt sind.</p>
+    </div>
+  </section>
+
+  {/* Warum wir das anbieten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Warum wir das anbieten, obwohl wir eine Küchenfirma sind</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Weil die Frage ohnehin kommt. Häuser, die bei uns einen Koch leihen, fragen irgendwann, ob auch jemand für den Saal kommen kann. Bisher mussten wir nein sagen.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Was sich dadurch nicht ändert: Unser Schwerpunkt bleibt die Küche. Dort sitzt unsere Erfahrung, dort kommen unsere Köche her, dorthin gehört unsere App und unsere Schulung. Servicekräfte stellen wir, weil sie zum selben Abend gehören, nicht weil wir ein Personaldienstleister für alles werden wollen.</p>
+    </div>
+  </section>
+
+  {/* So läuft ein Einsatz (wortgleich tirol, weiche Zeitzusage) */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">So läuft ein Einsatz</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab. Rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+    </div>
+  </section>
+
+  {/* Fest angestellt statt auf Rechnung (wortgleich tirol, Servicekräfte) */}
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Fest angestellt statt auf Rechnung</h2>
+      <p class="max-w-[var(--spalte-text)]">Unsere Servicekräfte sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren die Servicekraft in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+      <p class="max-w-[var(--spalte-text)]">Im Sprachgebrauch heißt dieses Modell Zeitarbeit, in der Küche Leihkoch oder Mietkoch. Rechtlich ist es immer dasselbe: Arbeitnehmerüberlassung mit behördlicher Erlaubnis, durch einen Personaldienstleister, der seine Köche selbst anstellt.</p>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Ab wann können wir jemanden bekommen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab. Rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gibt es eine Mindest-Einsatzdauer?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Manche Häuser buchen einen einzigen Abend für ein Bankett, andere eine ganze Saison.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Sind die Servicekräfte bei Ihnen angestellt oder selbständig?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Fest angestellt und sozialversichert, wie unsere Köche. Wir arbeiten ausschließlich im Rahmen der Arbeitnehmerüberlassung, mit behördlicher Erlaubnis. Rechnungen von Einzelpersonen gibt es bei uns nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Können wir Küche und Service zusammen anfragen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, und das ist der häufigste Fall. Ein Anruf, ein Ansprechpartner, ein Vertrag.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Braucht mein Betrieb für den Einsatz eine eigene Genehmigung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel nicht: Die Meldepflichten für die grenzüberschreitende Überlassung liegen beim Verleiher, also bei uns. Was auf Ihrer Seite zu beachten ist, klären wir im Erstgespräch: 30 Minuten, kostenlos, unverbindlich. Wie ein grenzüberschreitender Einsatz in Österreich läuft: <a href="/personal/tirol/" class="typo-link">Mietkoch in Tirol</a></p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">Im Saal zählt, wer da ist.</p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal#anfrage" data-cta-location="service-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schließ-Animation, progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

@@ -1013,8 +1013,9 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     // (SEO-Paket Phase 1) stand /personal bei 11, /en/staff bei 10.
     // Anweisung 39B: /personal +2 FAQ (Vermitteln Sie Koeche? / Vermittlungshonorar?) -> 13.
     // Anweisung 47 B2: /personal +1 FAQ ("Was kostet ein Mietkoch bei Avorix?") -> 14.
+    // Anweisung 48: /personal +1 FAQ ("Stellt ihr auch Servicepersonal?") -> 15.
     expect(await zaehle('/en/staff')).toBe(10);
-    expect(await zaehle('/personal')).toBe(14);
+    expect(await zaehle('/personal')).toBe(15);
   });
 
   test('6.6 — /en/contact hat Pflichtfeld-Zeile und Sternchen', async ({ page }) => {
