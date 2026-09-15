@@ -26,7 +26,8 @@ const schema = [
       { "@type": "Question", "name": "Führt die App die Allergenkennzeichnung?", "acceptedAnswer": { "@type": "Answer", "text": "Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht." } },
       { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf." } },
       { "@type": "Question", "name": "Übernehmt ihr unsere Kantine komplett?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert." } },
-      { "@type": "Question", "name": "Was ist günstiger: outsourcen oder Personal mieten?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos)." } }
+      { "@type": "Question", "name": "Was ist günstiger: outsourcen oder Personal mieten?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos)." } },
+      { "@type": "Question", "name": "Gilt das Angebot auch für Ausgabe und Service?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Wir stellen neben Köchen auch Servicekräfte, im selben Vertragsmodell und über dieselbe Anfrage." } }
     ]
   }
 ];
@@ -105,6 +106,7 @@ const schema = [
           <h3 class="mb-4">Köche, wenn jemand ausfällt</h3>
           <p class="text-sm mb-4" style="color:var(--grau)">Wir schicken Ihnen festangestellte Köche, rechtssicher über unsere Arbeitnehmerüberlassungserlaubnis. In der Regel innerhalb von 24 bis 72 Stunden. Eine Mindestdauer gibt es nicht, Sie buchen genau die Tage, die Sie brauchen.</p>
           <p class="text-sm" style="color:var(--grau)"><strong>Und ein Argument, das Ihnen gehört: Bei Ihnen ist um sechs Feierabend, keine Abende, keine Wochenenden.</strong> Für viele Köche ist das der Grund zu wechseln. Wir kennen unsere Leute und wissen, wen das anspricht.</p>
+          <p class="text-sm mt-4" style="color:var(--grau)">Fällt an der Ausgabe jemand aus, stellen wir Ihnen ebenso festangestellte <strong>Servicekräfte</strong>. <a href="/personal/service/" class="typo-link">Servicepersonal mieten</a></p>
         </div>
         <div class="card-modul">
           <div class="card-modul-header">
@@ -231,6 +233,10 @@ const schema = [
         <details class="faq-item">
           <summary class="faq-q">Was ist günstiger: outsourcen oder Personal mieten?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><div class="faq-inner"><p>Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos).</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gilt das Angebot auch für Ausgabe und Service?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Wir stellen neben Köchen auch Servicekräfte, im selben Vertragsmodell und über dieselbe Anfrage.</p></div></div>
         </details>
       </div>
     </div>
