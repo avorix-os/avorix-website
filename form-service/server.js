@@ -52,6 +52,12 @@ const CFG = {
   honeypotField: process.env.HONEYPOT_FIELD || 'website',
   tsField: process.env.TS_FIELD || 'form_ts',
   minFillMs: parseInt(process.env.MIN_FILL_MS || '3000', 10),
+  // Link-/Inhaltsfilter: Freitext mit echtem Link -> still verwerfen (Bot glaubt
+  // an Erfolg). Standard an. LINK_FILTER=false schaltet ihn aus.
+  linkFilter: String(process.env.LINK_FILTER || 'true') !== 'false',
+  // Strenger Modus: auch nackte Domains ohne Schema (www.foo.de) blocken.
+  // Standard aus, weil echte Interessenten mal ihre Adresse nennen koennten.
+  linkFilterStrict: String(process.env.LINK_FILTER_STRICT || 'false') === 'true',
   maxTotalUpload: 10 * 1024 * 1024, // 10 MB gesamt (3.3 Punkt 17)
   maxFiles: 3,
 };
@@ -116,6 +122,26 @@ function isValidEmail(v) {
 
 function hasCRLF(v) {
   return /[\r\n]/.test(v);
+}
+
+// Link-/Inhaltsfilter (Empfehlung 1 der Spamschutz-Uebergabe 2026-09-14).
+// Echte Personal-/Demo-Anfragen enthalten so gut wie nie einen Hyperlink;
+// klassischer Formspam dagegen fast immer (Gewinnspiel-Link, URL-Shortener,
+// telegra.ph/t.me). Hochpraezise per Default: nur echte Links, Link-Markup und
+// reine Spam-Hosts. Nackte Domains (www.foo.de) nur im strengen Modus.
+const LINK_RE = /(https?:\/\/|<a\s|\[url\b|\[\/url\]|\]\(\s*https?:|\bt\.me\/|\btelegra\.ph\b)/i;
+const BARE_DOMAIN_RE = /\bwww\.[a-z0-9-]+\.[a-z]{2,}/i;
+
+// Gibt den Feldnamen zurueck, in dem ein Link steckt, sonst null.
+function linkSpamField(def, fields) {
+  for (const fld of def.fields) {
+    if (fld.name === CFG.honeypotField || fld.name === 'newsletter') continue;
+    const v = fields[fld.name];
+    if (typeof v !== 'string' || v === '') continue;
+    if (LINK_RE.test(v)) return fld.name;
+    if (CFG.linkFilterStrict && BARE_DOMAIN_RE.test(v)) return fld.name;
+  }
+  return null;
 }
 
 function sendJson(res, code, obj) {
@@ -378,6 +404,15 @@ async function handleForm(req, res) {
   if (!Number.isNaN(ts) && Date.now() - ts < CFG.minFillMs) {
     log('spam timetrap', kennung);
     return respondOk(req, res, def);
+  }
+  // Link-/Inhaltsfilter (3.2 Nachtrag): Freitext mit Link = mit hoher Sicherheit
+  // Spam -> still verwerfen (keine Ablage, keine Mail).
+  if (CFG.linkFilter) {
+    const spamField = linkSpamField(def, fields);
+    if (spamField) {
+      log('spam link', kennung, spamField);
+      return respondOk(req, res, def);
+    }
   }
 
   // Dateien nur behalten, wenn die Kennung sie zulaesst

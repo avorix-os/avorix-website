@@ -11,8 +11,11 @@ Läuft **neben** der (weiterhin statischen) Website: nginx reicht nur den Pfad
 
 - **Eine Kennung je Formular** (Feld `formular`), Betreff wird vom Dienst
   gesetzt (nicht mehr fälschbar über `_subject`).
-- **Spamabwehr ohne Drittanbieter:** Honigtopf-Feld + Zeitfalle (< 3 s = Bot);
-  Ratenbegrenzung macht nginx. Kein reCAPTCHA/hCaptcha.
+- **Spamabwehr ohne Drittanbieter:** Honigtopf-Feld + Zeitfalle (< 3 s = Bot)
+  + **Link-/Inhaltsfilter** (Freitext mit echtem Link → still verworfen);
+  Ratenbegrenzung macht nginx. Kein reCAPTCHA/hCaptcha. Alle drei Fallen
+  antworten dem Bot mit „ok" und legen nichts ab. Filter per `LINK_FILTER=false`
+  abschaltbar, strenger Modus (nackte Domains) per `LINK_FILTER_STRICT=true`.
 - **Validierung:** Pflichtfelder, Feldlängen (Name 100, Betrieb 150, Freitext
   5000), E-Mail-Format, Abweisung von Zeilenumbrüchen in Kopfzeilenfeldern.
 - **Zustellung** an `info@avorix.de`, `Reply-To` = Absender, `From` =
