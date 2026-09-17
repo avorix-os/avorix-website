@@ -26,6 +26,13 @@ const jobDescriptionHtml = `
 <p>Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Küche hast. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p>
 `.trim();
 
+// Anweisung 49: zweites JobPosting fuer Servicekraefte. Beschreibung = die zwei
+// Service-Absaetze (Was der Job ist / Wen wir suchen), als HTML wie beim Koch.
+const serviceDescriptionHtml = `
+<p><strong>Und wenn du im Service arbeitest:</strong> Dasselbe Prinzip, anderer Ort im Haus. Wir schicken dich dorthin, wo an einem Abend Hände fehlen: auf ein Bankett, in ein Restaurant mit zwei Krankmeldungen, in ein Haus, das gerade in die Saison fährt. Du arbeitest im Restaurantservice, beim Bankett oder am Frühstück, je nachdem, was du kannst und willst.</p>
+<p><strong>Für den Service suchen wir</strong> Menschen mit Erfahrung im Gastraum: Restaurantfachleute, Hotelfachleute, Quereinsteiger mit ein paar Jahren am Tisch. Du solltest einen Abendservice kennen, unter Druck freundlich bleiben und dich in einem fremden Haus schnell zurechtfinden. Ein Abschluss ist auch hier keine Bedingung, Erfahrung schon.</p>
+`.trim();
+
 const schema = [
   {
     "@context": "https://schema.org",
@@ -64,6 +71,36 @@ const schema = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "JobPosting",
+    "title": "Servicekraft (m/w/d)",
+    "description": serviceDescriptionHtml,
+    "datePosted": "2026-09-17",
+    "validThrough": "2027-03-17",
+    "employmentType": ["FULL_TIME", "PART_TIME"],
+    "hiringOrganization": {
+      "@type": "Organization",
+      "@id": "https://avorix.de/#organization",
+      "name": "AVORIX GmbH",
+      "sameAs": "https://avorix.de",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
+        "width": 1024,
+        "height": 1024
+      },
+    },
+    "directApply": false,
+    "jobLocation": [
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Friedrichshafen", "addressRegion": "BW", "postalCode": "88045", "streetAddress": "Fallenbrunnen 14", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "München", "addressRegion": "BY", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Frankfurt am Main", "addressRegion": "HE", "addressCountry": "DE" } },
+      { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Innsbruck", "addressRegion": "Tirol", "addressCountry": "AT" } },
+    ],
+    "industry": "Gastronomie",
+    "qualifications": "Erfahrung im Gastraum, etwa als Restaurant- oder Hotelfachkraft oder als Quereinsteiger mit einigen Jahren am Tisch. Eine abgeschlossene Ausbildung ist erwünscht, aber keine Bedingung.",
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
       { "@type": "Question", "name": "Was verdiene ich als Koch bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "Das besprechen wir offen im ersten Telefonat. Wir zahlen nach Erfahrung und Qualifikation, und du weißt, was du bekommst, bevor du unterschreibst." } },
@@ -80,15 +117,15 @@ const schema = [
 ---
 
 <BaseLayout
-  title="Koch Jobs am Bodensee, in München, Frankfurt und Tirol"
-  description="Als Koch bei Avorix fest angestellt, in wechselnden Küchen im Einsatz. Feste Anstellung auch zwischen den Einsätzen, keine Arbeit auf Rechnung. Jetzt bewerben."
+  title="Jobs bei Avorix: Koch und Servicekraft, fest angestellt"
+  description="Als Koch oder Servicekraft fest angestellt bei Avorix, in wechselnden Häusern am Bodensee, in München, Frankfurt und Tirol. Kein Saisonvertrag, keine Rechnung."
   schemaOrg={schema}
 >
   {/* Hero (ohne Foto: kommt separat, Anweisung 42) */}
  <section class="hero-section px-6">
     <div class="content-width">
       <p class="eyebrow mb-4">Arbeiten bei Avorix</p>
-      <h1 class="mb-6">Koch werden bei Avorix: fest angestellt, in wechselnden Küchen</h1>
+      <h1 class="mb-6">Koch oder Servicekraft bei Avorix: fest angestellt, in wechselnden Häusern</h1>
       <div class="flex flex-wrap gap-4 mb-6">
         <a href="#bewerben" data-cta-location="jobs-hero" class="btn btn-primary">Jetzt bewerben</a>
       </div>
@@ -108,7 +145,7 @@ const schema = [
  <section class="reveal">
     <div class="content-width">
       <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Avorix stellt Köche fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag in derselben Küche. Bewerben kannst du dich telefonisch oder per E-Mail.
+        Avorix stellt Köche und Servicekräfte fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag im selben Haus. Bewerben kannst du dich telefonisch oder per E-Mail.
       </p>
     </div>
   </section>
@@ -122,6 +159,9 @@ const schema = [
       </p>
       <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Zwischen den Einsätzen endet nichts. Dein Vertrag läuft weiter, dein Gehalt kommt weiter. Das ist der Unterschied zum Saisonvertrag, bei dem du im November wieder auf der Straße stehst.
+      </p>
+      <p class="max-w-[var(--spalte-text)] mt-6" style="color:var(--grau)">
+        <strong>Und wenn du im Service arbeitest:</strong> Dasselbe Prinzip, anderer Ort im Haus. Wir schicken dich dorthin, wo an einem Abend Hände fehlen: auf ein Bankett, in ein Restaurant mit zwei Krankmeldungen, in ein Haus, das gerade in die Saison fährt. Du arbeitest im Restaurantservice, beim Bankett oder am Frühstück, je nachdem, was du kannst und willst.
       </p>
     </div>
   </section>
@@ -140,8 +180,8 @@ const schema = [
           <p class="leading-relaxed" style="color:var(--grau)">Andere Küchen, andere Karten, andere Teams. Wer nach fünf Jahren an derselben Station das Gefühl hat, alles schon gekocht zu haben, findet hier wieder etwas Neues.</p>
         </div>
         <div class="card">
-          <h3 class="mb-4">Du kochst nicht ins Blaue.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Küche und weißt trotzdem, wie das Haus seine Sachen macht.</p>
+          <h3 class="mb-4">Du arbeitest nicht ins Blaue.</h3>
+          <p class="leading-relaxed" style="color:var(--grau)">In den Betrieben, die mit unserem System arbeiten, sind die Gerichte dokumentiert: Zutaten, Mengen, Arbeitsschritte, Fotos. Du stehst am ersten Tag in einer fremden Küche und weißt trotzdem, wie das Haus seine Sachen macht. Und wenn du im Service bist: Du bekommst vor dem Einsatz gesagt, wie das Haus arbeitet, wie viele Gäste erwartet werden und wer dein Ansprechpartner vor Ort ist.</p>
         </div>
         <div class="card">
           <h3 class="mb-4">Dein Chef ist Koch.</h3>
@@ -159,7 +199,10 @@ const schema = [
         Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren.
       </p>
       <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        <strong>Und wenn du keinen Abschluss hast?</strong> Dann bewirb dich trotzdem, wenn du die Jahre in der Küche hast. Börge hat seine Laufbahn damit begonnen, Menschen ohne klassische Kochausbildung an die Küche heranzuführen, und einige von ihnen kochen heute besser als mancher mit Brief. Uns interessiert, was du am Posten kannst, nicht welches Papier du darüber hast. Was wir nicht suchen, sind Küchenhilfen ohne Erfahrung: Unsere Kunden bekommen zugesagt, dass jeder, den wir schicken, eine Küche kennt. Daran halten wir uns.
+        <strong>Und wenn du keinen Abschluss hast?</strong> Dann bewirb dich trotzdem, wenn du die Jahre in der Küche hast. Börge hat seine Laufbahn damit begonnen, Menschen ohne klassische Kochausbildung an die Küche heranzuführen, und einige von ihnen kochen heute besser als mancher mit Brief. Uns interessiert, was du am Posten kannst, nicht welches Papier du darüber hast. Was wir nicht suchen, sind Menschen ohne jede Erfahrung im Betrieb. Unsere Kunden bekommen zugesagt, dass jeder, den wir schicken, weiß, wie ein laufender Betrieb funktioniert: in der Küche am Posten, im Service im Gastraum. Daran halten wir uns.
+      </p>
+      <p class="max-w-[var(--spalte-text)] mt-6" style="color:var(--grau)">
+        <strong>Für den Service suchen wir</strong> Menschen mit Erfahrung im Gastraum: Restaurantfachleute, Hotelfachleute, Quereinsteiger mit ein paar Jahren am Tisch. Du solltest einen Abendservice kennen, unter Druck freundlich bleiben und dich in einem fremden Haus schnell zurechtfinden. Ein Abschluss ist auch hier keine Bedingung, Erfahrung schon.
       </p>
     </div>
   </section>
