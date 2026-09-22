@@ -3,19 +3,147 @@ import { getLangFromUrl, useTranslations } from "../i18n/translations";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+
+// Anweisung 50: vollstaendiger Footer. Vier Spalten auf dem Desktop, damit jede
+// Seite (besonders die Regionalseiten) von ueberall verlinkt ist; die zehn
+// Wissen-Artikel bleiben bewusst draussen, sie haengen am Hub /wissen/.
+const footerSpaltenDe = [
+  {
+    titel: "Personal",
+    links: [
+      { label: "Personal", href: "/personal/" },
+      { label: "Servicepersonal", href: "/personal/service/" },
+      { label: "Mietkoch am Bodensee", href: "/personal/bodensee/" },
+      { label: "Mietkoch in München", href: "/personal/muenchen/" },
+      { label: "Mietkoch in Frankfurt", href: "/personal/frankfurt/" },
+      { label: "Mietkoch in Tirol", href: "/personal/tirol/" },
+    ],
+  },
+  {
+    titel: "Angebot",
+    links: [
+      { label: "Unser System", href: "/system/" },
+      { label: "Die Koch-App", href: "/koch-app/" },
+      { label: "Schulung", href: "/schulung/" },
+      { label: "F&B-Beratung", href: "/fb-beratung/" },
+      { label: "Pilotprogramm 2026", href: "/pilotprogramm/" },
+    ],
+  },
+  {
+    titel: "Für wen",
+    links: [
+      { label: "Ferienhotels", href: "/fuer-hotels/" },
+      { label: "Restaurants und Gasthöfe", href: "/fuer-restaurants/" },
+      { label: "Sporthotels", href: "/fuer-sporthotels/" },
+      { label: "Catering und Events", href: "/fuer-catering/" },
+      { label: "Kantinen und Betriebsgastronomie", href: "/fuer-kantinen/" },
+    ],
+  },
+  {
+    titel: "Wissen und Kontakt",
+    links: [
+      { label: "Wissen", href: "/wissen/" },
+      { label: "Leitfaden zum Fachkräftemangel", href: "/leitfaden/" },
+      { label: "Jobs bei Avorix", href: "/jobs/" },
+      { label: "Kontakt", href: "/kontakt/" },
+      { label: "Über uns", href: "/ueber-uns/" },
+    ],
+  },
+];
+
+// Englisch: dieselbe Struktur, aber ohne die Zeilen, die es auf Englisch nicht
+// gibt (Regionalseiten, Servicepersonal, Leitfaden, Jobs, F&B-Beratung, Segmentseiten).
+const footerSpaltenEn = [
+  {
+    titel: "Staff",
+    links: [
+      { label: "Staff", href: "/en/staff/" },
+    ],
+  },
+  {
+    titel: "The Offer",
+    links: [
+      { label: "How It All Works Together", href: "/en/system/" },
+      { label: "The Cook App", href: "/en/cook-app/" },
+      { label: "The Training", href: "/en/training/" },
+      { label: "Pilot Program 2026", href: "/en/pilot-program/" },
+    ],
+  },
+  {
+    titel: "Company",
+    links: [
+      { label: "About Us", href: "/en/about/" },
+      { label: "Contact", href: "/en/contact/" },
+    ],
+  },
+];
+
+const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
 ---
 
 <style>
-  /* H1 (Anweisung 18): Grundfassung ist das Handy. Ab 640 wird daraus die Zeile. */
   .site-footer {
     background: var(--eisen);
-    padding: 24px 20px;
+    padding: 40px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Anweisung 50: Spaltenblock. Untereinander auf dem Handy, zwei Spalten ab
+     560px, vier Spalten ab 900px. */
+  .footer-columns {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px 24px;
+  }
+  @media (min-width: 560px) {
+    .footer-columns { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 900px) {
+    .footer-columns { grid-template-columns: repeat(4, 1fr); }
+  }
+
+  /* Ueberschrift in der Auszeichnungsschrift, Links in Fliesstextgroesse. */
+  .footer-col-titel {
+    font-family: var(--f-head);
+    color: var(--papier);
+    font-size: 15px;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+  .footer-nav-link {
+    display: block;
+    color: rgba(247, 246, 242, 0.62);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 6px 0;
+    transition: color 0.15s ease;
+  }
+  .footer-nav-link:hover { color: var(--papier); }
+
+  /* Schlusszeile: Logo links, Rechtszeile rechts, mit Trennlinie darueber. */
+  .footer-schluss {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 16px;
-    flex-wrap: wrap;
+    padding-top: 24px;
+    border-top: 1px solid rgba(247, 246, 242, 0.1);
+  }
+  @media (min-width: 640px) {
+    .footer-schluss {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 
   .footer-logo {
@@ -32,23 +160,18 @@ const t = useTranslations(lang);
   .footer-right {
     display: flex;
     align-items: center;
-    /* C6 (Anweisung 23): 12px lag neben der Skala. */
     gap: 16px;
     flex-wrap: wrap;
     font-family: var(--f-mono);
     font-size: 13px;
   }
 
-  /* Paper-white at 55% opacity via rgba – allows children to override on hover */
   .footer-text,
   .footer-sep {
     color: rgba(247, 246, 242, 0.55);
   }
 
-  /* C7 (Anweisung 23): Impressum, Datenschutz und Cookie-Einstellungen sind
-     eigenstaendige Ziele und waren 21px hoch. Die Zielhoehe kommt aus der
-     Mindesthoehe, nicht aus einer groesseren Schrift -- die bleibt bei 13px.
-     Links im Fliesstext sind ausdruecklich nicht betroffen. */
+  /* C7 (Anweisung 23): eigenstaendige Ziele mit 44px Mindesthoehe. */
   .footer-link,
   .footer-cookie-btn {
     color: rgba(247, 246, 242, 0.55);
@@ -59,12 +182,10 @@ const t = useTranslations(lang);
     align-items: center;
     min-height: 44px;
   }
-
   .footer-link:hover,
   .footer-cookie-btn:hover {
     color: var(--papier);
   }
-
   .footer-cookie-btn {
     background: none;
     border: none;
@@ -73,47 +194,47 @@ const t = useTranslations(lang);
     font-family: inherit;
     cursor: pointer;
   }
-
-  @media (min-width: 640px) {
-    .site-footer {
-      flex-direction: row;
-      align-items: center;
-      gap: 20px;
-      padding: 28px 34px;
-    }
-  }
 </style>
 
 <footer class="site-footer">
-  <a href={lang === "de" ? "/" : "/en"} class="footer-logo" aria-label="Avorix – Startseite">
-    <img src="/logo.png" alt="Avorix" width="1743" height="445" />
-  </a>
+  <div class="footer-columns">
+    {footerSpalten.map(spalte => (
+      <div class="footer-col">
+        <p class="footer-col-titel">{spalte.titel}</p>
+        {spalte.links.map(link => (
+          <a href={link.href} class="footer-nav-link">{link.label}</a>
+        ))}
+      </div>
+    ))}
+  </div>
 
-  {lang === "de" ? (
-    <div class="footer-right">
-      <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
-      <span class="footer-sep">·</span>
-      <a href="/impressum" class="footer-link">Impressum</a>
-      <span class="footer-sep">·</span>
-      <a href="/datenschutz" class="footer-link">Datenschutz</a>
-      <span class="footer-sep">·</span>
-      <a href="/wissen/" class="footer-link">Wissen</a>
-      <span class="footer-sep">·</span>
-      <a href="/jobs/" class="footer-link">Jobs bei Avorix</a>
-      <span class="footer-sep">·</span>
-      <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie-Einstellungen</button>
-    </div>
-  ) : (
-    <div class="footer-right">
-      <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
-      <span class="footer-sep">·</span>
-      <a href="/en/legal-notice" class="footer-link">{t("footer.imprint")}</a>
-      <span class="footer-sep">·</span>
-      <a href="/en/privacy" class="footer-link">{t("footer.privacy")}</a>
-      <span class="footer-sep">·</span>
-      <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie settings</button>
-    </div>
-  )}
+  <div class="footer-schluss">
+    <a href={lang === "de" ? "/" : "/en"} class="footer-logo" aria-label="Avorix – Startseite">
+      <img src="/logo.png" alt="Avorix" width="1743" height="445" />
+    </a>
+
+    {lang === "de" ? (
+      <div class="footer-right">
+        <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
+        <span class="footer-sep">·</span>
+        <a href="/impressum" class="footer-link">Impressum</a>
+        <span class="footer-sep">·</span>
+        <a href="/datenschutz" class="footer-link">Datenschutz</a>
+        <span class="footer-sep">·</span>
+        <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie-Einstellungen</button>
+      </div>
+    ) : (
+      <div class="footer-right">
+        <span class="footer-text">Avorix GmbH, Friedrichshafen</span>
+        <span class="footer-sep">·</span>
+        <a href="/en/legal-notice" class="footer-link">{t("footer.imprint")}</a>
+        <span class="footer-sep">·</span>
+        <a href="/en/privacy" class="footer-link">{t("footer.privacy")}</a>
+        <span class="footer-sep">·</span>
+        <button type="button" id="footer-cookie-settings" class="footer-cookie-btn">Cookie settings</button>
+      </div>
+    )}
+  </div>
 </footer>
 
 <script is:inline>

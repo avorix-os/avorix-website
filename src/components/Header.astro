@@ -125,9 +125,17 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 32px;
+    /* Anweisung 50: 24px zwischen den vier gleichrangigen Menuepunkten (von 32),
+       damit sie als eine Gruppe lesbar sind. Der gesparte Platz geht als groesserer
+       Abstand vor die Knopfgruppe (siehe .nav-cta-erst). */
+    gap: 24px;
     flex: 1;
   }
+
+  /* Anweisung 50: 40px zwischen "Ueber uns" und "Personal anfragen". Die
+     .nav-desktop-Luecke bleibt 16px; die 24px hier ergeben zusammen 40px, sodass
+     Navigation (links) und Handlung (rechts) als zwei Bloecke erkennbar werden. */
+  .nav-cta-erst { margin-left: 24px; }
 
   /* Nav links: paper-white, 82% opacity, hover underline */
   /* D1: 16px statt 14,5 und Gewicht 500 statt 400. Der Innenabstand steht
@@ -554,7 +562,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
           href="/personal#anfrage"
           data-cta-location="header"
           data-cta-event="cta_personal_click"
-          class="nav-cta"
+          class="nav-cta nav-cta-erst"
         >
           Personal anfragen
         </a>
@@ -597,7 +605,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
           href="/en/staff#request"
           data-cta-location="header"
           data-cta-event="cta_personal_click"
-          class="nav-cta"
+          class="nav-cta nav-cta-erst"
         >
           Request Staff
         </a>
