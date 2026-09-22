@@ -313,8 +313,13 @@ test.describe('T8: D1 — die Navigation traegt die Seite', () => {
         expect(p.hoehe).toBeGreaterThanOrEqual(44);
       }
 
+      // Anweisung 50: 24px zwischen den vier gleichrangigen Menuepunkten (von 32).
       const luecke = await page.$eval('.nav-links', (el) => getComputedStyle(el).columnGap);
-      expect(luecke).toBe('32px');
+      expect(luecke).toBe('24px');
+      // Anweisung 50: +24px vor der Knopfgruppe; mit dem 16px-Gap der .nav-desktop
+      // ergeben sich 40px zwischen "Ueber uns" und "Personal anfragen".
+      const ctaLuecke = await page.$eval('.nav-cta-erst', (el) => getComputedStyle(el).marginLeft);
+      expect(ctaLuecke).toBe('24px');
 
       const ctas = await page.$$eval('.nav-desktop .nav-cta', (els) =>
         els.map((el) => ({ weight: getComputedStyle(el).fontWeight, hoehe: Math.round(el.getBoundingClientRect().height) }))
