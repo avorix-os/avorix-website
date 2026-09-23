@@ -1,14 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Kostenloser Leitfaden: 5 Strategien gegen den Fachkräftemangel in der Küche",
-  "description": "Praxisnaher Leitfaden für Hoteliers und Küchenchefs. Jetzt kostenlos herunterladen.",
-  "url": "https://avorix.de/leitfaden",
-  "inLanguage": "de",
-};
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Kostenloser Leitfaden: 5 Strategien gegen den Fachkräftemangel in der Küche",
+    "description": "Praxisnaher Leitfaden für Hoteliers und Küchenchefs. Jetzt kostenlos herunterladen.",
+    "url": "https://avorix.de/leitfaden",
+    "inLanguage": "de",
+    "dateModified": "2026-09-23",
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Ist der Fachkräftemangel in der Gastronomie 2026 vorbei?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Die gemeldeten Stellen sinken, aber die Beschäftigung ist über dem Niveau von 2019 und der Nachwuchs an Köchen schrumpft. Die Bundesagentur führt Koch und Köchin weiter als Engpassberuf." } },
+      { "@type": "Question", "name": "Wie viele Köche fehlen in Deutschland?", "acceptedAnswer": { "@type": "Answer", "text": "Eine belastbare Gesamtzahl gibt es nicht; Verbandsschätzungen schwanken stark. Belastbar sind die Ausbildungszahlen: 2025 wurden 7.464 Koch-Ausbildungsverträge neu abgeschlossen, neun Prozent weniger als 2019." } },
+      { "@type": "Question", "name": "Gilt das auch für Österreich?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Koch steht auf der Mangelberufsliste, das AMS meldet sehr hohe Nachfrage, vor allem in Tirol und Salzburg." } }
+    ]
+  }
+];
 ---
 
 <BaseLayout
@@ -188,6 +201,69 @@ const schema = {
     </div>
   </section>
 
+  {/* Anweisung 51/2 (A47 B3): Direktantwort (Speakable) + Fachkräftemangel-Zahlen */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <p id="direktantwort" class="lead py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Der Fachkräftemangel in der Gastronomie ist 2026 kein Mangel an Stellen, sondern ein Mangel an Köchen: Die Beschäftigung im deutschen Gastgewerbe liegt wieder über dem Niveau von 2019, die Zahl der neuen Koch-Ausbildungsverträge liegt neun Prozent darunter, und die Bundesagentur führt Koch und Köchin als Engpassberuf. In Österreich steht der Beruf auf der Mangelberufsliste. Wer einen Koch verliert, ersetzt ihn nicht mehr über den Arbeitsmarkt, sondern über Organisation.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Deutschland: die Zahlen, Stand Anfang 2026</h2>
+        <p>Die verlässlichste Quelle ist der Zahlenspiegel des DEHOGA, der die Daten der Bundesagentur für Arbeit auswertet. Stand 24. Februar 2026:</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Kennzahl</th><th>Wert</th><th>Was sie bedeutet</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sozialversicherungspflichtig Beschäftigte im Gastgewerbe, November 2025</td><td>1.097.200, plus 0,2 Prozent gegenüber November 2019</td><td>Die Branche hat das Vorkrisenniveau wieder erreicht</td></tr>
+              <tr><td>Beschäftigte in der Hotellerie, Juni 2025</td><td>265.714, minus 6,7 Prozent gegenüber 2019</td><td>Hotels haben Personal verloren, Restaurants gewonnen</td></tr>
+              <tr><td>Bei der BA gemeldete offene Stellen, Januar 2026</td><td>17.667, minus 18,3 Prozent gegenüber Vorjahr, Tiefstwert seit Corona</td><td>Weniger Betriebe suchen überhaupt noch</td></tr>
+              <tr><td>Arbeitslose in der Speisenzubereitung, Januar 2026</td><td>128.903, plus 1,3 Prozent</td><td>Es gibt Arbeitslose, aber nicht die gesuchten Qualifikationen</td></tr>
+              <tr><td>Neue Ausbildungsverträge Koch/Köchin 2025</td><td>7.464, minus 9,0 Prozent gegenüber 2019</td><td>Der Nachwuchs schrumpft seit sechs Jahren</td></tr>
+              <tr><td>Neue Verträge Fachkraft Küche 2025</td><td>1.188, plus 21,8 Prozent gegenüber Vorjahr</td><td>Die kürzere Ausbildung wächst, die volle Kochausbildung nicht</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Quelle: DEHOGA-Zahlenspiegel IV/2025 (Daten der Bundesagentur für Arbeit, des Statistischen Bundesamts und des BIBB). Die Bundesagentur führt Koch und Köchin in ihrer Fachkräfteengpassanalyse 2025 als Engpassberuf.</p>
+        <p>Was die Tabelle zusammen sagt: Die Zahl der gemeldeten Stellen sinkt nicht, weil die Küchen voll sind, sondern weil viele Betriebe das Suchen aufgegeben haben oder kleiner fahren. Gleichzeitig kommen jedes Jahr weniger ausgebildete Köche nach. Das ist kein vorübergehender Engpass, das ist eine Strukturverschiebung.</p>
+
+        <h2>Österreich: Koch bleibt Mangelberuf</h2>
+        <p>In Österreich weist das AMS-JobBarometer für Koch und Köchin eine sehr hohe Nachfrage aus, mit rund 29.800 Stelleninseraten im Jahr 2025 und besonders hoher Nachfrage in Tirol und Salzburg. Der Beruf steht auf der Mangelberufsliste, die Wirtschaftskammer nennt für den Gaststättenkoch einen Stellenandrang von 1,8 Arbeitsuchenden je offener Stelle, gegenüber 1,4 zuvor. Für die Aufnahme in die Liste gilt eine Schwelle von 1,5. Der Beruf ist damit nah an der Grenze, und die Rot-Weiß-Rot-Karte für Köche aus Drittstaaten läuft in der bisherigen Form bis Ende 2026.</p>
+        <p>Quellen: AMS-JobBarometer, Beruf Koch/Köchin (Stand 2025); Wirtschaftskammer Niederösterreich, „Aktuelles zur Mangelberufsliste".</p>
+
+        <h2>Was das für Ihre Küche heißt</h2>
+        <p>Wenn der Markt keinen Ersatz liefert, bleiben drei Wege: das Wissen im Haus so festhalten, dass es nicht mit einer Person geht; die Einarbeitung so verkürzen, dass auch angelernte Kräfte nach Standard arbeiten; und für den Engpass einen Weg haben, der innerhalb von Tagen jemanden an den Posten bringt. Die ersten beiden Wege beschreibt der Leitfaden unten. Den dritten beschreibt die Seite <a href="/personal/" class="typo-link">Personal</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ (A47 B3) */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Ist der Fachkräftemangel in der Gastronomie 2026 vorbei?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Die gemeldeten Stellen sinken, aber die Beschäftigung ist über dem Niveau von 2019 und der Nachwuchs an Köchen schrumpft. Die Bundesagentur führt Koch und Köchin weiter als Engpassberuf.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Köche fehlen in Deutschland?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Eine belastbare Gesamtzahl gibt es nicht; Verbandsschätzungen schwanken stark. Belastbar sind die Ausbildungszahlen: 2025 wurden 7.464 Koch-Ausbildungsverträge neu abgeschlossen, neun Prozent weniger als 2019.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gilt das auch für Österreich?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Koch steht auf der Mangelberufsliste, das AMS meldet sehr hohe Nachfrage, vor allem in Tirol und Salzburg.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   {/* Stats / Social Proof strip */}
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
@@ -335,4 +411,25 @@ const schema = {
       window.history.replaceState({}, document.title, window.location.pathname);
     }
   }
+</script>
+
+<script>
+/* FAQ-Schliess-Animation, progressive enhancement (Anweisung 51/2) */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
 </script>
