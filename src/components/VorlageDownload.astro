@@ -1,0 +1,147 @@
+---
+// Anweisung 51/3 (B6): Download-Gate fuer Vorlagen, exakt nach dem Leitfaden-Muster.
+// Neutraler Hinweis, getrenntes und NICHT vorausgewaehltes Newsletter-Haekchen,
+// Download kommt AUCH ohne Haekchen (und selbst wenn der Mailversand scheitert).
+export interface Datei { href: string; label: string; filename: string }
+interface Props {
+  kennung: string;      // muss in form-service/forms.js freigeschaltet sein
+  kurzsatz: string;     // eine Zeile, was die Vorlage ist
+  dateien: Datei[];     // erste Datei wird nach dem Absenden automatisch geladen
+}
+const { kennung, kurzsatz, dateien } = Astro.props as Props;
+---
+<section class="reveal section-gap">
+  <div class="content-width">
+    <div class="card card-text vorlage-box" data-vorlage-download>
+      {/* Formular-Zustand */}
+      <div data-vd-form>
+        <h2 class="mb-4" style="color:var(--druck)">Die Vorlage zum Herunterladen</h2>
+        <p class="mb-6" style="color:var(--grau)">{kurzsatz}</p>
+
+        <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
+        <form action="/api/formular" method="POST" class="space-y-4">
+          <input type="hidden" name="formular" value={kennung} />
+          <input type="hidden" name="source" value={`artikel-${kennung}`} />
+          {/* Spamabwehr: Honigtopf + Zeitstempel (Anweisung 45) */}
+          <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="hidden" name="form_ts" value="" data-vd-ts />
+
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color:var(--druck)">
+              Ihr Name <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="text" name="name" autocomplete="name" required placeholder="z. B. Maria Huber" class="vorlage-field w-full" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color:var(--druck)">
+              E-Mail-Adresse <span style="color:var(--akzent)">*</span>
+            </label>
+            <input type="email" name="email" autocomplete="email" required placeholder="ihre@email.de" class="vorlage-field w-full" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2" style="color:var(--druck)">
+              Betrieb / Hotel <span style="color:var(--grau)">(optional)</span>
+            </label>
+            <input type="text" name="betrieb" autocomplete="organization" placeholder="z. B. Hotel Alpenhof" class="vorlage-field w-full" />
+          </div>
+
+          {/* Getrennte, NICHT vorausgewaehlte Werbe-Einwilligung. Download haengt NICHT davon ab. */}
+          <label class="newsletter-consent">
+            <input type="checkbox" name="newsletter" value="on" />
+            <span>Sie d&uuml;rfen mir gelegentlich Neuigkeiten von Avorix per E-Mail schicken. Ich kann das jederzeit widerrufen.</span>
+          </label>
+
+          <button type="submit" class="btn btn-primary w-full" data-vd-submit>Vorlage jetzt herunterladen</button>
+
+          <p class="formular-hinweis">
+            Wir verarbeiten Ihre Angaben, um Ihnen die Vorlage zuzusenden.
+            Weitere Informationen finden Sie in unserer <a href="/datenschutz" class="typo-link">Datenschutzerkl&auml;rung</a>.
+          </p>
+        </form>
+      </div>
+
+      {/* Erfolgs-Zustand (versteckt bis nach dem Absenden) */}
+      <div class="hidden text-center py-4" data-vd-success>
+        <h3 class="mb-4" style="color:var(--druck)">Vielen Dank!</h3>
+        <p class="text-sm mb-6" style="color:var(--grau)">Ihr Download startet automatisch. Falls nicht, klicken Sie hier:</p>
+        <div class="flex flex-wrap gap-4 justify-center">
+          {dateien.map((d) => (
+            <a href={d.href} download={d.filename} class="btn btn-primary">{d.label}</a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vorlage-box { max-width: var(--spalte-text); }
+  .vorlage-field {
+    display: block;
+    background: var(--flaeche);
+    border: 1px solid var(--linie);
+    border-radius: var(--radius);
+    padding: 16px;
+    font-size: 16px;
+    font-family: var(--f-body);
+    color: var(--druck);
+    outline: none;
+    box-sizing: border-box;
+  }
+  .vorlage-field:focus {
+    border-color: var(--akzent);
+    box-shadow: 0 0 0 3px rgba(168, 83, 43, 0.15);
+  }
+  /* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder */
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .newsletter-consent {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--grau);
+  }
+  .newsletter-consent input { margin-top: 3px; flex-shrink: 0; }
+</style>
+
+<script>
+  document.querySelectorAll('[data-vorlage-download]').forEach(function (box) {
+    var form = box.querySelector('form');
+    var formC = box.querySelector('[data-vd-form]');
+    var successC = box.querySelector('[data-vd-success]');
+    var btn = box.querySelector('[data-vd-submit]');
+    var ts = box.querySelector('[data-vd-ts]');
+    if (!form || !formC || !successC) return;
+    if (ts) ts.value = String(Date.now());
+
+    function showSuccess() {
+      formC.classList.add('hidden');
+      successC.classList.remove('hidden');
+      // erste Datei automatisch laden (Download unabhaengig vom Haekchen)
+      var first = successC.querySelector('a[download]');
+      if (first) {
+        var a = document.createElement('a');
+        a.href = first.getAttribute('href');
+        a.setAttribute('download', first.getAttribute('download') || '');
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }
+      if (window.history.replaceState) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    }
+
+    // Nicht-JS-Redirect des Dienstes: ?download=1 -> Erfolg zeigen
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('download') === '1') showSuccess();
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
+      try {
+        await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+      } catch (err) { /* Netzfehler: Download trotzdem */ }
+      showSuccess();
+    });
+  });
+</script>

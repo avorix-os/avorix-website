@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Stempel from "../../components/Stempel.astro";
+import VorlageDownload from "../../components/VorlageDownload.astro";
 
 const schema = [
   {
@@ -142,6 +143,15 @@ const schema = [
       </div>
     </div>
   </section>
+
+  {/* Anweisung 51/3: Vorlagen-Download (zwischen FAQ und Abschluss) */}
+  <VorlageDownload
+    kennung="vorlage-kalkulation"
+    kurzsatz="Die Rezeptkalkulation als Excel, mit Beispielblatt, kostenlos."
+    dateien={[
+      { href: "/downloads/avorix-rezeptkalkulation.xlsx", label: "Excel (.xlsx)", filename: "Avorix-Rezeptkalkulation.xlsx" },
+    ]}
+  />
 
   {/* Anweisung 51: Autorenkasten */}
  <section class="reveal section-gap">
