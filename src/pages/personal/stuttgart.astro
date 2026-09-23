@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Personal", "item": "https://avorix.de/personal" },
+      { "@type": "ListItem", "position": 3, "name": "Mietkoch in Stuttgart", "item": "https://avorix.de/personal/stuttgart/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Arbeitnehmerüberlassung von Köchen in Stuttgart",
+    "serviceType": "Arbeitnehmerüberlassung",
+    "provider": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de/" },
+    "areaServed": "Stuttgart",
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Übernehmt ihr auch Kantinen und Betriebsgastronomie?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, Kantinen und Betriebsgastronomie gehören zu unseren Einsatzfeldern. Wie das für Kantinen im Detail läuft, steht auf der Seite Für Kantinen." } },
+      { "@type": "Question", "name": "Wie schnell seid ihr in Stuttgart?", "acceptedAnswer": { "@type": "Answer", "text": "In der Regel innerhalb von 24 bis 72 Stunden. Eine Mindest-Einsatzdauer gibt es nicht." } },
+      { "@type": "Question", "name": "Kommt der Koch aus der Region?", "acceptedAnswer": { "@type": "Answer", "text": "Nicht immer. Unsere Köche sind bei uns fest angestellt und arbeiten in wechselnden Küchen. Fahrt und gegebenenfalls Unterkunft besprechen wir vorab, bevor der Einsatz beginnt." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Mietkoch Stuttgart: Koch mieten in der Region"
+  description="Koch mieten in Stuttgart und Umgebung: festangestellte Köche für Hotels, Restaurants und Kantinen, mit AÜ-Erlaubnis. In der Regel innerhalb von 24 bis 72 Stunden."
+  schemaOrg={schema}
+>
+  {/* Hero */}
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/personal/" class="eyebrow-link">Personal</a></p>
+      <h1 class="mb-6 max-w-[var(--spalte-schmal)]">Mietkoch in Stuttgart: Köche mieten für Hotel, Restaurant und Kantine</h1>
+      <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Wenn in Stuttgart oder im Umland ein Posten leer bleibt, leihen wir Ihnen unsere festangestellten Köche aus: für die Messewoche, für die Kantine, für die Zeit bis die Nachfolge steht.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-6">
+        <a href="/personal#anfrage" data-cta-location="personal-stuttgart-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Personal anfragen</a>
+      </div>
+      <div class="hero-badges mb-6">
+        <span class="check-badge"><span class="check-badge-mark">&#10003;</span> Behördliche Arbeitnehmerüberlassungserlaubnis (Agentur für Arbeit)</span>
+      </div>
+      <p class="hero-telefon">
+        Im Notfall direkt anrufen:
+        <a href="tel:+4975413973915" data-cta-location="personal-stuttgart-hero" data-cta-event="personal_anruf_click" class="hero-telefon-link">07541 3973915</a>
+        <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
+      </p>
+    </div>
+  </section>
+
+  {/* Direktantwort (GEO) */}
+ <section class="reveal">
+    <div class="content-width">
+      <p id="direktantwort" class="lead py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Avorix verleiht festangestellte, sozialversicherte Köche an Hotellerie, Gastronomie und Betriebsgastronomie in Stuttgart und der Region, mit behördlicher Arbeitnehmerüberlassungserlaubnis. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche.
+      </p>
+    </div>
+  </section>
+
+  {/* Unser Einsatzgebiet (schmale Spalte) */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Unser Einsatzgebiet</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Stuttgart ist eine Region mit vielen Betriebskantinen: Industrie, Zulieferer, Verwaltungen, dazu Messe und Kongresse mit Spitzen, die ein Stammteam nicht abfängt. Wir verleihen Köche in Stuttgart und im Umland, von Ludwigsburg bis Esslingen, von Böblingen bis Göppingen.</p>
+      <p class="max-w-[var(--spalte-text)] mt-4" style="color:var(--grau)">Wir sind außerdem <a href="/personal/bodensee/">am Bodensee</a>, im Großraum <a href="/personal/muenchen/">München</a>, in <a href="/personal/frankfurt/">Frankfurt und Rhein-Main</a> sowie in <a href="/personal/tirol/">Tirol</a> und <a href="/personal/vorarlberg/">Vorarlberg</a> im Einsatz.</p>
+    </div>
+  </section>
+
+  {/* Typische Einsätze */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Typische Einsätze in Stuttgart</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Die Betriebskantine verliert ihren Koch, und 400 Mittagessen warten nicht auf eine Ausschreibung.</p></div>
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Das Messehotel hat zwei Wochen Vollbelegung und eine Küche, die für Normalbetrieb geplant ist.</p></div>
+        <div class="card"><p class="text-sm" style="color:var(--grau)">Der Gasthof im Umland hat einen Küchenchef in der Kündigungsfrist und noch keinen Nachfolger.</p></div>
+      </div>
+    </div>
+  </section>
+
+  {/* So läuft ein Einsatz (wortgleich von Tirol, schmale Spalte) */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">So läuft ein Einsatz</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Sie rufen an oder schreiben uns, wir klären in einem kurzen Gespräch, wen Sie brauchen und ab wann. In der Regel steht Ihr Koch innerhalb von 24 bis 72 Stunden in der Küche, unsere Einsätze sind rund um die Uhr möglich, auch nachts und am Wochenende. Eine Mindest-Einsatzdauer gibt es nicht: Viele Häuser überbrücken zwei Wochen, andere eine ganze Saison. Ihr Erstgespräch: 30 Minuten, kostenlos, unverbindlich.</p>
+    </div>
+  </section>
+
+  {/* Fest angestellt statt auf Rechnung (wortgleich von Tirol, dunkler Block) */}
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Fest angestellt statt auf Rechnung</h2>
+      <p class="max-w-[var(--spalte-text)]">Unsere Köche sind bei Avorix fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Sie integrieren den Koch in Ihre Abläufe und erteilen arbeitsbezogene Weisungen, genau das ist bei diesem Modell vorgesehen. Verträge in dieser Form reduzieren zugleich die rechtlichen Risiken beim Fremdpersonaleinsatz. Warum das beim selbständigen Mietkoch auf Rechnung anders aussieht: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+      <p class="max-w-[var(--spalte-text)]">Im Sprachgebrauch heißt dieses Modell Zeitarbeit, in der Küche Leihkoch oder Mietkoch. Rechtlich ist es immer dasselbe: Arbeitnehmerüberlassung mit behördlicher Erlaubnis, durch einen Personaldienstleister, der seine Köche selbst anstellt.</p>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Übernehmt ihr auch Kantinen und Betriebsgastronomie?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, Kantinen und Betriebsgastronomie gehören zu unseren Einsatzfeldern. Wie das für Kantinen im Detail läuft, steht auf der Seite <a href="/fuer-kantinen/" class="typo-link">Für Kantinen</a>.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie schnell seid ihr in Stuttgart?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>In der Regel innerhalb von 24 bis 72 Stunden. Eine Mindest-Einsatzdauer gibt es nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kommt der Koch aus der Region?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nicht immer. Unsere Köche sind bei uns fest angestellt und arbeiten in wechselnden Küchen. Fahrt und gegebenenfalls Unterkunft besprechen wir vorab, bevor der Einsatz beginnt.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel>Geprüft &middot; AÜ-Erlaubnis</Stempel>
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">Die Messewoche wartet nicht.</p>
+      <p class="mb-6" style="font-family:Charter, Georgia, serif; font-style:italic; font-size:24px; color:var(--druck)">Es ist geregelt.</p>
+      <a href="/personal#anfrage" data-cta-location="personal-stuttgart-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+/* FAQ-Schliess-Animation, progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
