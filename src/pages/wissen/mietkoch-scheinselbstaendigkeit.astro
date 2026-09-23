@@ -19,7 +19,14 @@ const schema = [
     "datePublished": "2026-08-25",
     "dateModified": "2026-08-25",
     "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
-    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
   },
   {
@@ -45,7 +52,7 @@ const schema = [
     <div class="content-width">
       <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
       <h1 class="mb-4">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt und was sie den Betrieb kostet</h1>
-      <p class="artikel-datum mb-6">Aktualisiert am 25.08.2026</p>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 25.08.2026</p>
       <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Ein selbständiger Mietkoch, der in Ihrer Küche nach Ihren Anweisungen, zu Ihren Zeiten und mit Ihrer Ware arbeitet, ist aus Sicht der Prüfbehörden in aller Regel kein Selbständiger, sondern ein nicht angemeldeter Arbeitnehmer. Das nennt sich Scheinselbständigkeit.
       </p>
@@ -157,6 +164,15 @@ const schema = [
         </details>
       </div>
       <p class="artikel-rechtshinweis">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechtsberatung. Wie Ihr Einzelfall zu bewerten ist, klären Sie mit Ihrer Steuer- oder Rechtsberatung.</p>
+    </div>
+  </section>
+
+  {/* Anweisung 51: Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color:var(--grau)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
     </div>
   </section>
 

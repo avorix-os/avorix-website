@@ -19,7 +19,14 @@ const schema = [
     "datePublished": "2026-09-14",
     "dateModified": "2026-09-14",
     "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
-    "author": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
     "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
   },
   {
@@ -44,7 +51,7 @@ const schema = [
     <div class="content-width">
       <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
       <h1 class="mb-4">Was kostet ein Mietkoch? Der Stundensatz, was drinsteckt, und der ehrliche Vergleich</h1>
-      <p class="artikel-datum mb-6">Aktualisiert am 14.09.2026</p>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 14.09.2026</p>
       <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
         Ein Mietkoch kostet einen Stundenverrechnungssatz, in dem Lohn, Arbeitgeberanteile zur Sozialversicherung, Urlaub, Krankheit, Ausfallrisiko und die Leistung des Verleihers enthalten sind. Er liegt deshalb deutlich über dem reinen Stundenlohn eines angestellten Kochs. Öffentlich genannte Sätze im deutschen Markt reichen von etwa 60 bis 100 Euro je Stunde. Ob das teuer ist, entscheidet nicht der Satz, sondern der Vergleich mit dem, was die Stunde eines Angestellten wirklich kostet, und mit dem, was ein leerer Posten kostet.
       </p>
@@ -123,6 +130,15 @@ const schema = [
         </details>
       </div>
       <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* Anweisung 51: Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color:var(--grau)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
     </div>
   </section>
 
