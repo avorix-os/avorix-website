@@ -3,12 +3,6 @@ services:
     build: .
     container_name: avorix-website
     restart: unless-stopped
-    volumes:
-      # Anweisung 52 Punkt 6: nginx-Access-Log persistent auf dem Host, damit die
-      # monatliche KI-Bot-Zaehlung (scripts/ki-bot-zaehlung.sh) einen vollen Monat
-      # sieht. Das nginx:alpine-Image symlinkt access.log sonst auf stdout; mit
-      # diesem Mount schreibt nginx echte Dateien nach ./logs/nginx/ auf dem Host.
-      - ./logs/nginx:/var/log/nginx
     networks:
       - traefik-proxy
     labels:

@@ -2,6 +2,3 @@ node_modules/
 .astro/
 dist/
 .env
-
-# Anweisung 52 Punkt 6: Runtime-Logs (nginx-Access-Log + KI-Bot-Zaehlung) nicht committen
-logs/
