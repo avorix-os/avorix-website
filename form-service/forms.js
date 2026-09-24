@@ -116,6 +116,34 @@ const FORMS = {
     // Redirect-Ziel relativ zu SITE_BASE (mit Schraegstrich, 2.1 Warnung).
     redirect: '/leitfaden/?download=1',
   },
+  // Vorlagen-Downloads (Anweisung 51/3, B6). Gleiche Mechanik wie Leitfaden:
+  // eigenes, nicht vorausgewaehltes Werbe-Haekchen; Download haengt NICHT davon ab.
+  'vorlage-inventur': {
+    lang: 'de',
+    subject: 'Vorlage-Download: Inventurliste',
+    fields: [
+      f('name', true, LEN.name, true),
+      f('email', true, LEN.email, true),
+      f('betrieb', false, LEN.betrieb, true),
+      f('source', false, LEN.auswahl, true),
+      f('newsletter', false, 10, true),
+    ],
+    ack: true,
+    redirect: '/wissen/inventur-gastronomie/?download=1',
+  },
+  'vorlage-kalkulation': {
+    lang: 'de',
+    subject: 'Vorlage-Download: Rezeptkalkulation',
+    fields: [
+      f('name', true, LEN.name, true),
+      f('email', true, LEN.email, true),
+      f('betrieb', false, LEN.betrieb, true),
+      f('source', false, LEN.auswahl, true),
+      f('newsletter', false, 10, true),
+    ],
+    ack: true,
+    redirect: '/wissen/kalkulation-gastronomie/?download=1',
+  },
   // Vorsorge fuer spaetere Bewerbungen (Anweisung 45, 3.3). Heute nutzt
   // kein Formular diese Kennung; der Weg ist bewusst schon da.
   bewerbung: {

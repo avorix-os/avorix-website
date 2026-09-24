@@ -1,0 +1,10 @@
+# Binaerdateien nie als Text behandeln (keine EOL-Konvertierung).
+*.pdf  binary
+*.xlsx binary
+*.xls  binary
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.webp binary
+*.woff binary
+*.woff2 binary
