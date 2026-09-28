@@ -44,7 +44,7 @@ async function gtmErreichbar() {
   return gtmErreichbarCache;
 }
 
-test.describe('Consent Banner v2', () => {
+test.describe('Consent Banner v3', () => {
 
   test.beforeEach(async ({ context }) => {
     await context.clearCookies();
@@ -70,19 +70,19 @@ test.describe('Consent Banner v2', () => {
   });
 
   // T2 – Alle akzeptieren
-  test('T2: Alle akzeptieren – v2-Format, Consent-Update vor GTM, GTM lädt einmal', async ({ page }) => {
+  test('T2: Alle akzeptieren – v3-Format, Consent-Update vor GTM, GTM lädt einmal', async ({ page }) => {
     await page.goto('/');
     await expect(page.locator('#consent-banner')).toBeVisible();
     const gtmRequest = page.waitForRequest(/googletagmanager\.com\/gtm\.js/);
     await page.locator('#cb-accept-all').click();
     await gtmRequest;
 
-    // v2 stored
+    // v3 stored, beide Kategorien erteilt
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
-    expect(stored.version).toBe(2);
+    expect(stored.version).toBe(3);
     expect(stored.categories.necessary).toBe(true);
     expect(stored.categories.statistics).toBe(true);
-    expect(stored.categories.marketing).toBe(false);
+    expect(stored.categories.marketing).toBe(true);
     expect(stored.timestamp).toBeTruthy();
 
     // Consent update before gtm.js in dataLayer
@@ -104,13 +104,14 @@ test.describe('Consent Banner v2', () => {
       return window.dataLayer.find(e => e && e[0] === 'consent' && e[1] === 'update');
     });
     expect(consentEntry[2].analytics_storage).toBe('granted');
-    expect(consentEntry[2].ad_storage).toBe('denied');
-    expect(consentEntry[2].ad_user_data).toBe('denied');
+    expect(consentEntry[2].ad_storage).toBe('granted');
+    expect(consentEntry[2].ad_user_data).toBe('granted');
+    // Remarketing setzen wir nie ein: ad_personalization bleibt in jedem Zustand denied
     expect(consentEntry[2].ad_personalization).toBe('denied');
   });
 
   // T3 – Alle ablehnen
-  test('T3: Alle ablehnen – v2-Format, kein GTM, Banner nach Reload weg', async ({ page }) => {
+  test('T3: Alle ablehnen – v3-Format, kein GTM, Banner nach Reload weg', async ({ page }) => {
     const hits = collectGoogleRequests(page);
     await page.goto('/');
     await expect(page.locator('#consent-banner')).toBeVisible();
@@ -118,7 +119,7 @@ test.describe('Consent Banner v2', () => {
     await expect(page.locator('#consent-banner')).toBeHidden();
 
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
-    expect(stored.version).toBe(2);
+    expect(stored.version).toBe(3);
     expect(stored.categories.necessary).toBe(true);
     expect(stored.categories.statistics).toBe(false);
     expect(stored.categories.marketing).toBe(false);
@@ -171,7 +172,7 @@ test.describe('Consent Banner v2', () => {
   });
 
   // T5 – Auswahl speichern: Statistik an
-  test('T5: Auswahl speichern mit Statistik an – v2-Format, Consent-Update, GTM einmal', async ({ page }) => {
+  test('T5: Auswahl speichern mit Statistik an, Marketing aus – Consent-Update, GTM einmal', async ({ page }) => {
     await page.goto('/');
     await page.locator('#cb-settings').click();
     await expect(page.locator('#consent-panel')).toBeVisible();
@@ -261,51 +262,51 @@ test.describe('Consent Banner v2', () => {
     await expect(page.locator('#consent-panel')).toBeHidden();
   });
 
-  // T8 – Migration
-  test('T8: Migration v1 granted – kein Banner, GTM lädt, v2-Format', async ({ page }) => {
-    // Pre-set v1 granted
+  // T8 – Alter v2-Eintrag gilt als nicht vorhanden (Marketing-Kategorie neu, A3)
+  test('T8: alter v2-Eintrag – Banner erscheint erneut, kein GTM ohne neue Wahl', async ({ page }) => {
+    await page.goto('/');
+    await page.evaluate(() => {
+      localStorage.setItem('avorix_consent', JSON.stringify({
+        version: 2,
+        categories: { necessary: true, statistics: true, marketing: false },
+        timestamp: '2026-01-01T00:00:00.000Z'
+      }));
+    });
+    const hits = collectGoogleRequests(page);
+    await page.goto('/', { waitUntil: 'load' });
+    // Banner erscheint erneut, weil v2 als nicht vorhanden gilt
+    await expect(page.locator('#consent-banner')).toBeVisible();
+    await page.waitForTimeout(2000);
+    // Ohne neue Entscheidung wird nichts geladen
+    expect(hits).toHaveLength(0);
+  });
+
+  test('T8b: alter v1-Eintrag – Banner erscheint erneut, kein GTM ohne neue Wahl', async ({ page }) => {
     await page.goto('/');
     await page.evaluate(() => {
       localStorage.setItem('avorix_consent', JSON.stringify({
         status: 'granted', version: 1, timestamp: '2026-01-01T00:00:00.000Z'
       }));
     });
-    const gtmHits = collectGTMRequests(page);
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('#consent-banner')).toBeHidden();
-    await page.waitForTimeout(3000);
-    expect(gtmHits.length).toBeGreaterThanOrEqual(1);
-
-    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
-    expect(stored.version).toBe(2);
-    expect(stored.categories.statistics).toBe(true);
-    expect(stored.categories.marketing).toBe(false);
-  });
-
-  test('T8b: Migration v1 denied – kein Banner, kein GTM, v2-Format', async ({ page }) => {
-    await page.goto('/');
-    await page.evaluate(() => {
-      localStorage.setItem('avorix_consent', JSON.stringify({
-        status: 'denied', version: 1, timestamp: '2026-01-01T00:00:00.000Z'
-      }));
-    });
     const hits = collectGoogleRequests(page);
     await page.goto('/', { waitUntil: 'load' });
-    await expect(page.locator('#consent-banner')).toBeHidden();
+    await expect(page.locator('#consent-banner')).toBeVisible();
     await page.waitForTimeout(2000);
     expect(hits).toHaveLength(0);
-
-    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
-    expect(stored.version).toBe(2);
-    expect(stored.categories.statistics).toBe(false);
-    expect(stored.categories.marketing).toBe(false);
   });
 
   // T9 – Widerruf
   test('T9: Widerruf – Statistik aus, consent denied, GA-Cookies gelöscht, kein GTM nach Reload', async ({ page }) => {
-    // First accept
+    // Nur Statistik erteilen (Marketing bleibt aus), damit der Widerruf keinen
+    // Marketing-Reload ausloest und die Ad-Signale von vornherein denied sind.
     await page.goto('/');
-    await page.locator('#cb-accept-all').click();
+    await page.locator('#cb-settings').click();
+    await expect(page.locator('#consent-panel')).toBeVisible();
+    await page.evaluate(() => {
+      const el = document.getElementById('cp-statistics-toggle');
+      if (!el.checked) { el.checked = true; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+    await page.locator('#cp-save').click();
     await page.waitForTimeout(2000);
 
     // Open footer settings
@@ -434,6 +435,7 @@ test.describe('Consent Banner v2', () => {
     expect(panelText).toContain('Technisch notwendig');
     expect(panelText).toContain('immer aktiv');
     expect(panelText).toContain('Statistik');
+    expect(panelText).toContain('Marketing');
     expect(panelText).toContain('Auswahl speichern');
   });
 
@@ -451,6 +453,7 @@ test.describe('Consent Banner v2', () => {
     expect(panelText).toContain('Technically necessary');
     expect(panelText).toContain('always active');
     expect(panelText).toContain('Statistics');
+    expect(panelText).toContain('Marketing');
     expect(panelText).toContain('Save selection');
   });
 
@@ -463,6 +466,34 @@ test.describe('Consent Banner v2', () => {
     await expect(page.locator('#consent-banner')).toBeHidden();
     const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
     expect(stored.categories.statistics).toBe(true);
+  });
+
+  // T13 – Nur Marketing: GTM lädt, ad_storage granted, analytics_storage denied
+  test('T13: Nur Marketing an – GTM lädt, ad granted, analytics denied', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('#cb-settings').click();
+    await expect(page.locator('#consent-panel')).toBeVisible();
+    // Marketing an, Statistik bleibt aus
+    await page.evaluate(() => {
+      const el = document.getElementById('cp-marketing-toggle');
+      if (!el.checked) { el.checked = true; el.dispatchEvent(new Event('change', { bubbles: true })); }
+    });
+    const gtmRequest = page.waitForRequest(/googletagmanager\.com\/gtm\.js/);
+    await page.locator('#cp-save').click();
+    await gtmRequest;
+
+    const stored = await page.evaluate(() => JSON.parse(localStorage.getItem('avorix_consent')));
+    expect(stored.version).toBe(3);
+    expect(stored.categories.statistics).toBe(false);
+    expect(stored.categories.marketing).toBe(true);
+
+    const consentEntry = await page.evaluate(() =>
+      window.dataLayer.find((e) => e && e[0] === 'consent' && e[1] === 'update')
+    );
+    expect(consentEntry[2].analytics_storage).toBe('denied');
+    expect(consentEntry[2].ad_storage).toBe('granted');
+    expect(consentEntry[2].ad_user_data).toBe('granted');
+    expect(consentEntry[2].ad_personalization).toBe('denied');
   });
 
   // Existing test: CTA tracking

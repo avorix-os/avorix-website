@@ -77,6 +77,23 @@ if (SPRACHPAARE[pfad]) {
         analytics_storage: 'denied'
       });
     </script>
+    {/* Anweisung 53 (A7): Klick-Kennung fuer Google Ads global bereitstellen.
+         Liest den gclid aus dem _gcl_aw-Cookie, aber nur mit Marketing-Einwilligung
+         (avorix_consent v3, categories.marketing). Die Formulare haengen den Wert
+         vor dem Absenden an, damit aus einem Anzeigenklick spaeter ein Auftrag
+         zugeordnet werden kann. Ohne Einwilligung wird nichts gelesen. */}
+    <script is:inline>
+      window.avorixGclid = function () {
+        try {
+          var c = JSON.parse(localStorage.getItem('avorix_consent') || 'null');
+          if (!c || c.version !== 3 || !c.categories || !c.categories.marketing) return '';
+        } catch (e) { return ''; }
+        var m = document.cookie.match(/(?:^|;\s*)_gcl_aw=([^;]+)/);
+        if (!m) return '';
+        var teile = decodeURIComponent(m[1]).split('.');
+        return teile.length >= 3 ? teile.slice(2).join('.') : '';
+      };
+    </script>
     {/* Scroll-Reveal: js-Klasse setzt CSS-Hide, bevor Body gerendert wird (kein FOUC) */}
     <script is:inline>
       if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

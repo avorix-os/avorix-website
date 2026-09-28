@@ -702,3 +702,51 @@ const schemaOrg = [
   margin: 0;
 }
 </style>
+
+<script>
+  /* Anweisung 53 (A5/A7): Erfolg per fetch, dataLayer-Event nur bei ok und einmal,
+     Klick-Kennung (gclid) vor dem Absenden anhaengen. Muster wie /en/contact. */
+  const staffForm = document.getElementById('staff-form') as HTMLFormElement;
+  if (staffForm) {
+    let staffSent = false;
+    const tsField = staffForm.querySelector('[name="form_ts"]') as HTMLInputElement | null;
+    if (tsField) tsField.value = String(Date.now());
+    const successMsg = document.getElementById('staff-success');
+    staffForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = staffForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+      try {
+        const fd = new FormData(staffForm);
+        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
+        if (g) fd.append('gclid', g);
+        const response = await fetch(staffForm.action, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok && !staffSent) {
+          staffSent = true;
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'en_staff' });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = response.ok ? 'Sent ✔' : 'Send enquiry';
+        }
+        if (response.ok) {
+          staffForm.reset();
+          if (successMsg) successMsg.classList.remove('hidden');
+        }
+      } catch {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send enquiry';
+        }
+      }
+    });
+  }
+</script>

@@ -102,6 +102,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Bewerbungsunterlagen bewahren wir abweichend nach den Fristen im Abschnitt
         &bdquo;Bewerbungen&ldquo; auf.
       </p>
+      <p class="mt-6" style="color:var(--grau)">
+        Haben Sie in die Kategorie Marketing eingewilligt und sind &uuml;ber eine Google-Anzeige zu
+        uns gekommen, speichern wir mit Ihrer Anfrage zus&auml;tzlich die Klick-Kennung dieser Anzeige.
+        Einzelheiten dazu stehen im Abschnitt &bdquo;Google Ads Conversion-Tracking&ldquo;.
+      </p>
 
       <h3 class="mt-6 mb-4" style="color:var(--druck)">Bewerbungen</h3>
       <p style="color:var(--grau)">
@@ -140,7 +145,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <h2 class="mt-8 mb-6" style="color:var(--druck)">6. Cookies und Tracking</h2>
       <p style="color:var(--grau)">
-        Diese Website setzt standardm&auml;&szlig;ig keine Analyse- oder Marketing-Cookies. Die einzige derzeit optionale Kategorie ist &bdquo;Statistik&ldquo;. Analyse-Dienste werden ausschlie&szlig;lich geladen, wenn Sie &uuml;ber unseren Cookie-Banner in die Kategorie Statistik einwilligen. Derzeit werden keine Google-Ads-, Remarketing- oder sonstigen Marketing-Tags eingesetzt.
+        Diese Website setzt standardm&auml;&szlig;ig keine Analyse- oder Marketing-Cookies. Optional sind die Kategorien &bdquo;Statistik&ldquo; und &bdquo;Marketing&ldquo;. Analyse-Dienste werden ausschlie&szlig;lich geladen, wenn Sie &uuml;ber unseren Cookie-Banner in die Kategorie Statistik einwilligen, die Messung unserer Anzeigen ausschlie&szlig;lich, wenn Sie in die Kategorie Marketing einwilligen. Remarketing, also das erneute Ansprechen von Besuchern mit Werbung auf anderen Websites, setzen wir nicht ein.
       </p>
 
       <h2 class="mt-8 mb-6" style="color:var(--druck)">7. Google Tag Manager und Google Analytics 4</h2>
@@ -166,7 +171,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         <strong>Speicherdauer:</strong> GA4-Cookies (<code>_ga</code>, <code>_ga_*</code>) verbleiben nach der aktuell eingesetzten Standardkonfiguration bis zu 2 Jahre im Browser. Ereignisdaten werden in der Avorix-GA4-Property 14 Monate aufbewahrt.
       </p>
       <p class="mt-6" style="color:var(--grau)">
-        <strong>Google Consent Mode v2:</strong> Wir verwenden den Google Consent Mode v2 im Basic Mode. Ohne Ihre Einwilligung werden weder Cookies gesetzt noch Daten an Google &uuml;bertragen. Das GTM-Skript wird erst nach Einwilligung geladen.
+        <strong>Google Consent Mode v2:</strong> Wir verwenden den Google Consent Mode v2 im Basic Mode. Ohne Ihre Einwilligung werden weder Cookies gesetzt noch Daten an Google &uuml;bertragen. Das GTM-Skript wird erst geladen, wenn Sie in mindestens eine der Kategorien Statistik oder Marketing eingewilligt haben. Google Analytics 4 wird dabei nur ausgel&ouml;st, wenn Sie in Statistik eingewilligt haben.
       </p>
       <p class="mt-6" style="color:var(--grau)">
         <strong>Widerruf:</strong> Sie k&ouml;nnen Ihre Einwilligung jederzeit &uuml;ber den Link &bdquo;Cookie-Einstellungen&ldquo; im Footer widerrufen. Der Widerruf gilt f&uuml;r die Zukunft; bereits &uuml;bermittelte Daten werden dadurch nicht r&uuml;ckwirkend gel&ouml;scht.
@@ -176,7 +181,39 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="typo-link">https://policies.google.com/privacy</a>
       </p>
 
-      <h2 class="mt-8 mb-6" style="color:var(--druck)">8. Ihre Rechte</h2>
+      <h2 class="mt-8 mb-6" style="color:var(--druck)">8. Google Ads Conversion-Tracking</h2>
+      <p style="color:var(--grau)">
+        Bei Ihrer Einwilligung in die Kategorie Marketing nutzen wir das Conversion-Tracking von Google Ads der Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Rechtsgrundlage:</strong> Ihre Einwilligung nach Art.&nbsp;6 Abs.&nbsp;1 lit.&nbsp;a DSGVO. Der Zugriff auf beziehungsweise die Speicherung von Informationen in Ihrem Endger&auml;t erfolgt auf Grundlage Ihrer Einwilligung nach &sect;&nbsp;25 Abs.&nbsp;1 TDDDG.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Zweck:</strong> Wir schalten Anzeigen bei Google. Das Conversion-Tracking zeigt uns, ob jemand, der &uuml;ber eine solche Anzeige auf unsere Website gekommen ist, anschlie&szlig;end eine Anfrage gesendet, eine Vorlage heruntergeladen oder unsere Telefonnummer angetippt hat. So erkennen wir, welche Anzeigen wirken, und verteilen unser Werbebudget entsprechend.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Verarbeitete Daten:</strong> die Kennung des Anzeigenklicks (GCLID), Zeitpunkt und Art der Aktion, technische Ger&auml;te- und Browserinformationen sowie pseudonyme Onlinekennungen. Ihren Namen, Ihre E-Mail-Adresse oder den Inhalt Ihrer Anfrage &uuml;bermitteln wir dabei nicht an Google.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Klick-Kennung und Anfrage:</strong> Sind Sie &uuml;ber eine Google-Anzeige zu uns gekommen und haben in die Kategorie Marketing eingewilligt, speichern wir die Klick-Kennung zusammen mit Ihrer Anfrage. Entsteht aus der Anfrage ein Auftrag, k&ouml;nnen wir Google mitteilen, dass zu dieser Klick-Kennung ein Auftrag geh&ouml;rt. &Uuml;bermittelt werden dabei nur die Klick-Kennung und der Zeitpunkt, keine Kontaktdaten. Die Klick-Kennung wird zusammen mit Ihrer Anfrage gel&ouml;scht.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Empf&auml;nger:</strong> Google Ireland Limited. Google verarbeitet die Daten im Rahmen von Google Ads in eigener Verantwortung. Eine Verarbeitung au&szlig;erhalb des Europ&auml;ischen Wirtschaftsraums (EWR) kann stattfinden. Die &Uuml;bermittlung in Drittl&auml;nder st&uuml;tzt sich auf die von der Europ&auml;ischen Kommission erlassenen Standardvertragsklauseln (Art.&nbsp;46 Abs.&nbsp;2 lit.&nbsp;c DSGVO) sowie erg&auml;nzend auf den Angemessenheitsbeschluss der Europ&auml;ischen Kommission f&uuml;r die USA (EU-U.S. Data Privacy Framework).
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Speicherdauer:</strong> Die Cookies <code>_gcl_au</code> und <code>_gcl_aw</code> verbleiben bis zu 90&nbsp;Tage in Ihrem Browser.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Google Consent Mode v2:</strong> Wir verwenden den Consent Mode im Basic Mode. Ohne Ihre Einwilligung in die Kategorie Marketing werden keine Google-Ads-Tags ausgel&ouml;st und keine Daten zu Werbezwecken an Google &uuml;bertragen.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        <strong>Widerruf:</strong> Sie k&ouml;nnen Ihre Einwilligung jederzeit &uuml;ber den Link &bdquo;Cookie-Einstellungen&ldquo; im Footer widerrufen. Der Widerruf gilt f&uuml;r die Zukunft; bereits &uuml;bermittelte Daten werden dadurch nicht r&uuml;ckwirkend gel&ouml;scht.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="typo-link">https://policies.google.com/privacy</a>
+      </p>
+
+      <h2 class="mt-8 mb-6" style="color:var(--druck)">9. Ihre Rechte</h2>
       <p style="color:var(--grau)">
         Sie haben jederzeit das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten personenbezogenen
         Daten, deren Herkunft und Empf&auml;nger und den Zweck der Datenverarbeitung sowie ein Recht auf

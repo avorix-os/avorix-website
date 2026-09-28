@@ -459,3 +459,51 @@ const schemaOrg = [
   .pilot-field { transition: none; }
 }
 </style>
+
+<script>
+  /* Anweisung 53 (A5/A7): Erfolg per fetch, dataLayer-Event nur bei ok und einmal,
+     Klick-Kennung (gclid) vor dem Absenden anhaengen. Muster wie /en/contact. */
+  const pilotForm = document.getElementById('pilot-form') as HTMLFormElement;
+  if (pilotForm) {
+    let pilotSent = false;
+    const tsField = pilotForm.querySelector('[name="form_ts"]') as HTMLInputElement | null;
+    if (tsField) tsField.value = String(Date.now());
+    const successMsg = document.getElementById('pilot-success');
+    pilotForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = pilotForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+      }
+      try {
+        const fd = new FormData(pilotForm);
+        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
+        if (g) fd.append('gclid', g);
+        const response = await fetch(pilotForm.action, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' },
+        });
+        if (response.ok && !pilotSent) {
+          pilotSent = true;
+          (window as any).dataLayer = (window as any).dataLayer || [];
+          (window as any).dataLayer.push({ event: 'pilot_bewerbung', form_name: 'en_pilot' });
+        }
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = response.ok ? 'Sent ✔' : 'Apply for a pilot place';
+        }
+        if (response.ok) {
+          pilotForm.reset();
+          if (successMsg) successMsg.classList.remove('hidden');
+        }
+      } catch {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Apply for a pilot place';
+        }
+      }
+    });
+  }
+</script>
