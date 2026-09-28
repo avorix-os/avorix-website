@@ -227,6 +227,10 @@ function buildBody(def, kennung, fields, files) {
     lines.push(`Anhänge: ${files.length}`);
     for (const f of files) lines.push(`  - ${f.filename} (${f.size} Bytes)`);
   }
+  // Anweisung 53 (A7): Klick-Kennung als letzte Zeile, nur wenn vorhanden.
+  if (fields.gclid) {
+    lines.push(`Google-Ads-Klick: ${fields.gclid}`);
+  }
   return lines.join('\n');
 }
 
@@ -442,6 +446,19 @@ async function handleForm(req, res) {
   }
   if (fields.email && fields.email.trim() !== '' && !isValidEmail(fields.email)) {
     return respondErr(req, res, 400, 'invalid_email');
+  }
+
+  // Anweisung 53 (A7): Google-Ads-Klick-Kennung. Optionales Feld, hoechstens 200
+  // Zeichen, nur Buchstaben, Ziffern, Unter- und Bindestrich. Alles andere still
+  // verwerfen (kein Fehler). Reist mit der Anfrage mit (keine eigene Speicherung),
+  // erscheint in der Benachrichtigung als letzte Zeile, nie in der Bestaetigung.
+  {
+    const raw = String(fields.gclid || '').trim();
+    if (/^[A-Za-z0-9_-]{1,200}$/.test(raw)) {
+      fields.gclid = raw;
+    } else {
+      delete fields.gclid;
+    }
   }
 
   // --- Ablegen, dann senden (3.2 Punkt 12) ---

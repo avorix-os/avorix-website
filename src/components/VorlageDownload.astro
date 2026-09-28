@@ -115,6 +115,11 @@ const { kennung, kurzsatz, dateien } = Astro.props as Props;
     if (!form || !formC || !successC) return;
     if (ts) ts.value = String(Date.now());
 
+    // Anweisung 53 (A5): Asset-Name aus der Kennung (vorlage-inventur -> vorlage_inventur)
+    var kennungEl = form.querySelector('[name="formular"]');
+    var asset = kennungEl ? String(kennungEl.value).replace(/-/g, '_') : '';
+    var eventSent = false;
+
     function showSuccess() {
       formC.classList.add('hidden');
       successC.classList.remove('hidden');
@@ -139,7 +144,16 @@ const { kennung, kurzsatz, dateien } = Astro.props as Props;
       e.preventDefault();
       if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
       try {
-        await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+        var fd = new FormData(form);
+        var g = window.avorixGclid ? window.avorixGclid() : '';
+        if (g) fd.append('gclid', g);
+        var response = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
+        // Event nur bei Erfolg und nur einmal (A5)
+        if (response && response.ok && !eventSent) {
+          eventSent = true;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'lead_magnet_download', asset: asset });
+        }
       } catch (err) { /* Netzfehler: Download trotzdem */ }
       showSuccess();
     });

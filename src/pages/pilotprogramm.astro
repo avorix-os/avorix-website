@@ -537,9 +537,12 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
         submitBtn.textContent = 'Wird gesendet…';
       }
       try {
+        const fd = new FormData(pilotForm);
+        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
+        if (g) fd.append('gclid', g);
         const response = await fetch(pilotForm.action, {
           method: 'POST',
-          body: new FormData(pilotForm),
+          body: fd,
           headers: { 'Accept': 'application/json' },
         });
         if (response.ok && !pilotSent) {

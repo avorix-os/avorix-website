@@ -13,9 +13,9 @@ const isEN = lang === "en";
       <strong>{isEN ? "We use cookies and similar technologies" : "Wir verwenden Cookies und \u00e4hnliche Technologien"}</strong>
       <p>
         {isEN ? (
-          <>We store your choice in your browser where technically necessary. With your consent, we use Google Analytics 4 to statistically evaluate how our website is used and to improve our services. You can find further information in the settings and in the <a href="/en/privacy">privacy policy</a>.</>
+          <>We store your choice in your browser where technically necessary. With your consent, we use Google Analytics 4 to statistically evaluate how our website is used, and Google Ads conversion tracking to measure which of our ads lead to enquiries. You can find further information in the settings and in the <a href="/en/privacy">privacy policy</a>.</>
         ) : (
-          <>Wir speichern Ihre Auswahl technisch notwendig in Ihrem Browser. Mit Ihrer Einwilligung nutzen wir Google Analytics 4, um die Nutzung unserer Website statistisch auszuwerten und unser Angebot zu verbessern. Weitere Informationen finden Sie in den Einstellungen und in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.</>
+          <>Wir speichern Ihre Auswahl technisch notwendig in Ihrem Browser. Mit Ihrer Einwilligung nutzen wir Google Analytics 4, um die Nutzung unserer Website statistisch auszuwerten, und das Conversion-Tracking von Google Ads, um zu messen, welche unserer Anzeigen zu Anfragen f&uuml;hren. Weitere Informationen finden Sie in den Einstellungen und in der <a href="/datenschutz">Datenschutzerkl&auml;rung</a>.</>
         )}
       </p>
     </div>
@@ -38,9 +38,9 @@ const isEN = lang === "en";
     <div class="cp-body">
       <p class="cp-intro">
         {isEN ? (
-          <>Here you can decide whether we may use Google Analytics 4 to statistically evaluate our website. You can change your choice at any time via &ldquo;Cookie settings&rdquo; in the footer. The legal basis for statistical processing is your consent under Art. 6(1)(a) GDPR. Access to or storage of information on your device is based, where required, on your consent under Section 25(1) TDDDG.</>
+          <>Here you decide whether we may use Google Analytics 4 to statistically evaluate our website and Google Ads conversion tracking to measure our ads. You can change your choice at any time via &ldquo;Cookie settings&rdquo; in the footer. The legal basis in each case is your consent under Art. 6(1)(a) GDPR. Access to or storage of information on your device is based, where required, on your consent under Section 25(1) TDDDG.</>
         ) : (
-          <>Hier entscheiden Sie, ob wir Google Analytics 4 zur statistischen Auswertung unserer Website verwenden d&uuml;rfen. Ihre Auswahl k&ouml;nnen Sie jederzeit &uuml;ber &bdquo;Cookie-Einstellungen&ldquo; im Footer &auml;ndern. Rechtsgrundlage der statistischen Verarbeitung ist Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Der Zugriff auf beziehungsweise die Speicherung von Informationen in Ihrem Endger&auml;t erfolgt, soweit erforderlich, auf Grundlage Ihrer Einwilligung nach &sect; 25 Abs. 1 TDDDG.</>
+          <>Hier entscheiden Sie, ob wir Google Analytics 4 zur statistischen Auswertung unserer Website und das Conversion-Tracking von Google Ads zur Messung unserer Anzeigen verwenden d&uuml;rfen. Ihre Auswahl k&ouml;nnen Sie jederzeit &uuml;ber &bdquo;Cookie-Einstellungen&ldquo; im Footer &auml;ndern. Rechtsgrundlage ist jeweils Ihre Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO. Der Zugriff auf beziehungsweise die Speicherung von Informationen in Ihrem Endger&auml;t erfolgt, soweit erforderlich, auf Grundlage Ihrer Einwilligung nach &sect; 25 Abs. 1 TDDDG.</>
         )}
       </p>
 
@@ -117,6 +117,48 @@ const isEN = lang === "en";
                   <td>Google Ireland Limited</td>
                   <td>{isEN ? "statistical reach and usage analysis" : "statistische Reichweiten- und Nutzungsanalyse"}</td>
                   <td>{isEN ? "GA4 cookies under the currently used standard configuration for up to 2 years; event data in the Avorix GA4 property for 14 months" : "GA4-Cookies nach der aktuell eingesetzten Standardkonfiguration bis zu 2 Jahre; Ereignisdaten in der Avorix-GA4-Property 14 Monate"}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      {/* Marketing */}
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">{isEN ? "Marketing" : "Marketing"}</h3>
+          </div>
+          <label class="cp-toggle" for="cp-marketing-toggle">
+            <input type="checkbox" id="cp-marketing-toggle" />
+            <span class="cp-toggle-slider"></span>
+            <span class="sr-only">Marketing</span>
+          </label>
+        </div>
+        <p class="cp-cat-desc">
+          {isEN
+            ? "With your consent, we use Google Ads conversion tracking provided by Google Ireland Limited. It shows us whether someone who came to our website via one of our ads on Google then sends an enquiry, downloads a template or taps our phone number. The ad click identifier, the time and type of the action and technical device information are processed. Google does not receive your name, your email address or the content of your enquiry. We do not use remarketing."
+            : "Mit Ihrer Einwilligung nutzen wir das Conversion-Tracking von Google Ads der Google Ireland Limited. Es zeigt uns, ob jemand, der über eine unserer Anzeigen bei Google auf die Website gekommen ist, anschließend eine Anfrage sendet, eine Vorlage herunterlädt oder unsere Telefonnummer antippt. Dabei werden die Kennung des Anzeigenklicks, Zeitpunkt und Art der Aktion sowie technische Geräteinformationen verarbeitet. Ihren Namen, Ihre E-Mail-Adresse oder den Inhalt Ihrer Anfrage erhält Google dabei nicht. Remarketing setzen wir nicht ein."}
+        </p>
+        <details class="cp-details">
+          <summary>{isEN ? "Details" : "Details"}</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>{isEN ? "Entries/data" : "Einträge/Daten"}</th>
+                  <th>{isEN ? "Provider" : "Anbieter"}</th>
+                  <th>{isEN ? "Purpose" : "Zweck"}</th>
+                  <th>{isEN ? "Duration" : "Dauer"}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>_gcl_au</code>, <code>_gcl_aw</code>{isEN ? ", ad click identifier" : ", Kennung des Anzeigenklicks"}</td>
+                  <td>Google Ireland Limited</td>
+                  <td>{isEN ? "Measuring whether a click on a Google ad led to an enquiry, a download or a call" : "Messung, ob ein Klick auf eine Google-Anzeige zu einer Anfrage, einem Download oder einem Anruf geführt hat"}</td>
+                  <td>{isEN ? "up to 90 days" : "bis zu 90 Tage"}</td>
                 </tr>
               </tbody>
             </table>
@@ -393,23 +435,11 @@ const isEN = lang === "en";
       if (!raw) return null;
       var obj = JSON.parse(raw);
       if (!obj) return null;
-      // v2 format
-      if (obj.version === 2 && obj.categories && typeof obj.categories.necessary === 'boolean') {
+      // Nur v3 gilt als vorhanden. Eintraege mit version 1 oder 2 gelten als
+      // nicht vorhanden: der Banner erscheint diesen Besuchern erneut, weil die
+      // Marketing-Kategorie neu hinzugekommen ist (Anweisung 53, A3).
+      if (obj.version === 3 && obj.categories && typeof obj.categories.necessary === 'boolean') {
         return obj;
-      }
-      // v1 migration
-      if (obj.version === 1 && (obj.status === 'granted' || obj.status === 'denied')) {
-        var migrated = {
-          version: 2,
-          categories: {
-            necessary: true,
-            statistics: obj.status === 'granted',
-            marketing: false
-          },
-          timestamp: obj.timestamp || new Date().toISOString()
-        };
-        write(migrated);
-        return migrated;
       }
       return null;
     } catch (e) { return null; }
@@ -419,21 +449,21 @@ const isEN = lang === "en";
     try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch (e) { /* private mode */ }
   }
 
-  function makeConsent(statistics) {
+  function makeConsent(statistics, marketing) {
     return {
-      version: 2,
-      categories: { necessary: true, statistics: !!statistics, marketing: false },
+      version: 3,
+      categories: { necessary: true, statistics: !!statistics, marketing: !!marketing },
       timestamp: new Date().toISOString()
     };
   }
 
   /* ---------- Consent Mode v2 ---------- */
 
-  function consentUpdate(analyticsGranted) {
+  function consentUpdate(c) {
     gtag('consent', 'update', {
-      analytics_storage: analyticsGranted ? 'granted' : 'denied',
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
+      analytics_storage: c.statistics ? 'granted' : 'denied',
+      ad_storage: c.marketing ? 'granted' : 'denied',
+      ad_user_data: c.marketing ? 'granted' : 'denied',
       ad_personalization: 'denied'
     });
   }
@@ -462,6 +492,20 @@ const isEN = lang === "en";
     }
   }
 
+  function deleteGclCookies() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      if (name.indexOf('_gcl_') === 0) {
+        var domains = [window.location.hostname, '.' + window.location.hostname];
+        for (var d = 0; d < domains.length; d++) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + domains[d];
+        }
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      }
+    }
+  }
+
   /* ---------- Banner / Panel DOM ---------- */
 
   function showBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = false; }
@@ -475,10 +519,12 @@ const isEN = lang === "en";
     if (!panel) return;
     _panelTrigger = trigger || null;
     _panelOpen = true;
-    // Populate toggle from stored consent
+    // Populate toggles from stored consent
     var stored = read();
     var toggle = document.getElementById('cp-statistics-toggle');
     if (toggle) toggle.checked = !!(stored && stored.categories && stored.categories.statistics);
+    var mToggle = document.getElementById('cp-marketing-toggle');
+    if (mToggle) mToggle.checked = !!(stored && stored.categories && stored.categories.marketing);
     panel.hidden = false;
     // Set inert on body content
     var main = document.querySelector('main');
@@ -537,20 +583,33 @@ const isEN = lang === "en";
 
   /* ---------- Apply consent decision ---------- */
 
-  function applyConsent(statistics, source) {
-    var consent = makeConsent(statistics);
+  function applyConsent(statistics, marketing, source) {
+    var prev = read();
+    var wasMarketing = !!(prev && prev.categories && prev.categories.marketing);
+    var consent = makeConsent(statistics, marketing);
     write(consent);
-    consentUpdate(statistics);
-    if (statistics) {
+    // Reihenfolge (A3, Punkt 4): erst consentUpdate, dann loadGTM, sonst feuern
+    // die ersten Tags noch mit dem alten Stand.
+    consentUpdate(consent.categories);
+    if (statistics || marketing) {
       loadGTM();
-    } else {
-      // Revoke: delete GA cookies, disable further measurement
+    }
+    if (!statistics) {
+      // Statistik-Widerruf: GA-Cookies loeschen
       deleteGACookies();
-      // Remove GTM script to prevent further tracking on this page
       if (window.ga) { window.ga('remove'); }
+    }
+    if (!marketing) {
+      // Marketing-Widerruf: Google-Ads-Cookies loeschen (_gcl_*)
+      deleteGclCookies();
     }
     hideBanner();
     if (_panelOpen) closePanel();
+    // A3, Punkt 5: nach einem Marketing-Widerruf die Seite einmal neu laden,
+    // damit bereits geladene Ads-Tags sicher weg sind.
+    if (wasMarketing && !marketing) {
+      window.location.reload();
+    }
   }
 
   /* ---------- Public API ---------- */
@@ -566,8 +625,8 @@ const isEN = lang === "en";
   function init() {
     var stored = read();
     if (stored) {
-      if (stored.categories.statistics) {
-        consentUpdate(true);
+      consentUpdate(stored.categories);
+      if (stored.categories.statistics || stored.categories.marketing) {
         loadGTM();
       }
       // Don't show banner
@@ -579,8 +638,8 @@ const isEN = lang === "en";
     var banner = document.getElementById('consent-banner');
     if (banner && !banner.dataset.bound) {
       banner.dataset.bound = '1';
-      document.getElementById('cb-accept-all').addEventListener('click', function () { applyConsent(true, 'banner'); });
-      document.getElementById('cb-reject-all').addEventListener('click', function () { applyConsent(false, 'banner'); });
+      document.getElementById('cb-accept-all').addEventListener('click', function () { applyConsent(true, true, 'banner'); });
+      document.getElementById('cb-reject-all').addEventListener('click', function () { applyConsent(false, false, 'banner'); });
       document.getElementById('cb-settings').addEventListener('click', function () {
         openPanel(document.getElementById('cb-settings'));
       });
@@ -592,11 +651,12 @@ const isEN = lang === "en";
       panel.dataset.bound = '1';
       document.getElementById('cp-close').addEventListener('click', closePanel);
       document.querySelector('#consent-panel .cp-backdrop').addEventListener('click', closePanel);
-      document.getElementById('cp-accept-all').addEventListener('click', function () { applyConsent(true, 'panel'); });
-      document.getElementById('cp-reject-all').addEventListener('click', function () { applyConsent(false, 'panel'); });
+      document.getElementById('cp-accept-all').addEventListener('click', function () { applyConsent(true, true, 'panel'); });
+      document.getElementById('cp-reject-all').addEventListener('click', function () { applyConsent(false, false, 'panel'); });
       document.getElementById('cp-save').addEventListener('click', function () {
         var toggle = document.getElementById('cp-statistics-toggle');
-        applyConsent(toggle && toggle.checked, 'panel');
+        var mToggle = document.getElementById('cp-marketing-toggle');
+        applyConsent(toggle && toggle.checked, mToggle && mToggle.checked, 'panel');
       });
       document.addEventListener('keydown', trapFocus);
     }
