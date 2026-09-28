@@ -237,11 +237,11 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     justify-content: center;
   }
   .footer-partner-name {
-    /* A53 will fuer den Markennamen eine schlichte Schrift, ausdruecklich NICHT die
-       Ueberschriftenschrift. Statt einer vierten (System-)Schriftfamilie nehmen wir
-       die bereits genutzte Mono-Familie: das haelt die seitenweite 3-Font-Regel (E1,
-       Test T8c) heil und bleibt trotzdem eine eigene, nicht die Avorix-Auszeichnung. */
-    font-family: var(--f-mono);
+    /* A53 B2: der Markenname "HACCP Control" steht bewusst in einer schlichten fetten
+       Systemschrift (wie im Original der Marke), NICHT in der Avorix-Ueberschriftenschrift.
+       Das ist eine vierte Schriftfamilie -- als bewusste Ausnahme fuer diesen einen
+       Marken-Schriftzug ist sie vom 3-Font-Test (T8c) ausgenommen. */
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     font-weight: 700;
     font-size: 16px;
     color: var(--papier);
