@@ -196,6 +196,53 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     font-family: inherit;
     cursor: pointer;
   }
+
+  /* Anweisung 53, Teil B: Partnerblock HACCP Control, zwischen den Linkspalten und
+     der Schlusszeile. Das Logo ist im Code nachgebaut (Schild + Name), damit keine
+     fremde Bilddatei die Content-Security-Policy (img-src 'self') trifft. */
+  .footer-partner {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .footer-partner-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: none;
+    color: rgba(247, 246, 242, 0.62);   /* wie .footer-nav-link */
+    transition: color .15s ease;
+  }
+  .footer-partner-link:hover,
+  .footer-partner-link:focus-visible {
+    color: var(--papier);
+  }
+  .footer-partner-titel {
+    font-family: var(--f-mono);
+    font-size: 13px;
+  }
+  .footer-partner-marke {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer-partner-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 7px;
+    background: rgba(247, 246, 242, .1);
+    color: var(--papier);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-partner-name {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--papier);
+    opacity: .9;
+  }
 </style>
 
 <footer class="site-footer">
@@ -208,6 +255,29 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
         ))}
       </div>
     ))}
+  </div>
+
+  <div class="footer-partner">
+    <a
+      href="https://haccp-control.com/"
+      target="_blank"
+      rel="noopener"
+      class="footer-partner-link"
+      aria-label={lang === "de"
+        ? "Verifiziert geprüft durch HACCP-Control.com (öffnet in neuem Tab)"
+        : "Verified by HACCP-Control.com (opens in a new tab)"}
+    >
+      <span class="footer-partner-titel">{lang === "de" ? "Verifiziert geprüft durch HACCP-Control.com" : "Verified by HACCP-Control.com"}</span>
+      <span class="footer-partner-marke">
+        <span class="footer-partner-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </span>
+        <span class="footer-partner-name">HACCP Control</span>
+      </span>
+    </a>
   </div>
 
   <div class="footer-schluss">
