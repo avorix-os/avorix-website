@@ -1,43 +1,36 @@
 ---
+/* Rundes AÜ-Siegel (Anweisung 58). Ersetzt den rechteckigen Textstempel.
+   groesse: 'klein' (88 px, Hero/Karten) oder 'gross' (200 px, Schlussblock).
+   hell: helle Fassung für dunklen Grund (nur klein). */
 interface Props {
-  class?: string;
+  lang?: 'de' | 'en';
+  groesse?: 'klein' | 'gross';
+  hell?: boolean;
 }
-const { class: className = '' } = Astro.props;
+const { lang = 'de', groesse = 'klein', hell = false } = Astro.props;
+const alt = lang === 'en'
+  ? 'Certified: German staffing licence under § 1 AÜG, Avorix GmbH'
+  : 'Geprüft: Erlaubnis zur Arbeitnehmerüberlassung nach § 1 AÜG, Avorix GmbH';
+const datei = `/siegel/avorix-siegel-${lang}${groesse === 'klein' ? '-klein' : ''}${groesse === 'klein' && hell ? '-hell' : ''}.svg`;
+const mass = groesse === 'gross' ? 200 : 88;
 ---
-<span class={`stempel${className ? ' ' + className : ''}`}>
-  <slot />
-</span>
+<img class={`siegel siegel--${groesse}`} src={datei} alt={alt} width={mass} height={mass}>
 
 <style>
-.stempel {
-  display: inline-block;
-  border: 1.5px solid var(--akzent);
-  color: var(--akzent);
-  font-family: var(--f-mono);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .14em;
-  /* C6 (Anweisung 23): 14px lag neben der Skala. 16 sprengt die Komponente
-     nicht, der Stempel wird nur 4px breiter -- also 16. */
-  padding: 8px 16px;
-  border-radius: 3px;
-  background: var(--flaeche);
-  transform: rotate(-1deg);
-  transition: transform .18s;
+/* object-fit + feste Maße: die globale Regel img { object-fit: cover } würde
+   das Siegel in Flex-Containern sonst strecken und abschneiden. */
+.siegel {
+  display: block;
+  flex: none;
+  object-fit: contain;
 }
-.stempel:hover {
-  transform: rotate(0deg);
+.siegel--klein {
+  width: 88px;
+  height: 88px;
 }
-.stempel.stempel--hell {
-  border-color: var(--akzent-hell);
-  color: var(--akzent-hell);
-  background: transparent;
-}
-@media (prefers-reduced-motion: reduce) {
-  .stempel {
-    transform: none;
-    transition: none;
-  }
+.siegel--gross {
+  width: 200px;
+  height: 200px;
+  margin-inline: auto;
 }
 </style>
