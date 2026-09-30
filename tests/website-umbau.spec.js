@@ -384,9 +384,6 @@ test.describe('T8c: E1 — hoechstens drei Schriftfamilien', () => {
         for (const el of document.querySelectorAll('body *')) {
           if (!el.innerText || !el.innerText.trim()) continue;
           if (el.children.length > 0 && el.tagName !== 'BUTTON' && el.tagName !== 'A') continue;
-          // Bewusste Ausnahme (A53 B2): der HACCP-Control-Markenname steht in einer
-          // schlichten Systemschrift wie im Original der Marke, nicht in der Avorix-Schrift.
-          if (el.closest('.footer-partner-name')) continue;
           menge.add(getComputedStyle(el).fontFamily.split(',')[0].replace(/["']/g, '').trim());
         }
         return [...menge];
