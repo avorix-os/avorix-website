@@ -221,10 +221,17 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     font-family: var(--f-mono);
     font-size: 13px;
   }
+  .footer-partner-domain {
+    white-space: nowrap;
+  }
+  /* Anweisung 58 Teil 4: object-fit contain + align-self, sonst zieht die
+     Flex-Spalte das Logo auf Titelbreite und img { object-fit: cover } schneidet es an. */
   .footer-partner-logo {
     display: block;
-    height: 32px;
+    height: 28px;
     width: auto;
+    align-self: flex-start;
+    object-fit: contain;
     opacity: .9;
     transition: opacity .15s ease;
   }
@@ -256,8 +263,8 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
         ? "Verifiziert geprüft durch HACCP-Control.com (öffnet in neuem Tab)"
         : "Verified by HACCP-Control.com (opens in a new tab)"}
     >
-      <span class="footer-partner-titel">{lang === "de" ? "Verifiziert geprüft durch HACCP-Control.com" : "Verified by HACCP-Control.com"}</span>
-      <img class="footer-partner-logo" src="/partner/haccp-control-logo-weiss.svg" alt="HACCP Control" width="177" height="32" />
+      <span class="footer-partner-titel">{lang === "de" ? "Verifiziert geprüft durch" : "Verified by"} <span class="footer-partner-domain">HACCP-Control.com</span></span>
+      <img class="footer-partner-logo" src="/partner/haccp-control-logo-weiss.svg" alt="HACCP Control" width="155" height="28" />
     </a>
   </div>
 

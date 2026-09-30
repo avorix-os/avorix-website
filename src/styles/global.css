@@ -973,6 +973,24 @@ h2 {
 .hero-section + .section-gap {
   padding-top: 0;
 }
+/* Anweisung 58 Teil 3: ist der Abschnitt nach dem Hero ein farbiges Band,
+   beginnt die Farbe an der Kante, die Ueberschrift braucht den normalen Abstand. */
+.hero-section + .section-gap.section-band,
+.hero-section + .section-gap.section-dunkel {
+  padding-top: 64px;
+}
+@media (min-width: 640px) {
+  .hero-section + .section-gap.section-band,
+  .hero-section + .section-gap.section-dunkel {
+    padding-top: 96px;
+  }
+}
+@media (min-width: 900px) {
+  .hero-section + .section-gap.section-band,
+  .hero-section + .section-gap.section-dunkel {
+    padding-top: 128px;
+  }
+}
 .hero-grid {
   display: grid;
   /* C6 (Anweisung 23): 48px lag neben der Skala, naechster Wert ist 40. */

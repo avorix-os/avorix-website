@@ -517,7 +517,6 @@ test.describe('T10: C6 — Komponenten-Innenabstaende auf der Skala', () => {
         navInner: w('.nav-inner', 'paddingLeft'),
         btnX: w('.btn', 'paddingLeft'),
         btnY: w('.btn', 'paddingTop'),
-        stempelX: w('.stempel', 'paddingLeft'),
       };
     });
     expect(werte.footerRight).toBe('16px');
@@ -527,8 +526,6 @@ test.describe('T10: C6 — Komponenten-Innenabstaende auf der Skala', () => {
     // Ausnahmeliste aus Abschnitt 2: die Buttonwerte erzeugen die Buttonhoehe
     expect(werte.btnX).toBe('28px');
     expect(werte.btnY).toBe('13px');
-    // selbst entschieden: 16 sprengt den Stempel nicht
-    expect(werte.stempelX).toBe('16px');
   });
 });
 
@@ -1074,5 +1071,63 @@ test.describe('T15: Anweisung 30 -- Cache-Kopf der gehashten Assets', () => {
     // webp und avif gehoeren auch in die allgemeine Asset-Regel -- sonst faellt
     // Astros Bildformat ausserhalb von /_astro/ weiter in den no-cache-Zweig.
     expect(conf).toContain('|svg|webp|avif|');
+  });
+});
+
+test.describe('A58: rundes Siegel, Satz raus, Abstaende, Partnerlogo', () => {
+  for (const [pfad, lang] of [['/', 'de'], ['/en/', 'en'], ['/wissen/inventur-gastronomie/', 'de'], ['/personal/tirol/', 'de']]) {
+    test(`${pfad}: kein Stempel mehr, Siegel rund und nicht abgeschnitten`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(pfad);
+      expect(await page.locator('.stempel').count()).toBe(0);
+      const html = await page.content();
+      expect(html).not.toContain('Es ist geregelt.');
+      expect(html).not.toMatch(/It(’|&#8217;|&rsquo;|')s sorted\./);
+      const siegel = await page.$$eval('img.siegel', (els) => els.map((el) => ({
+        src: el.getAttribute('src'),
+        gross: el.classList.contains('siegel--gross'),
+        w: el.getBoundingClientRect().width,
+        h: el.getBoundingClientRect().height,
+        fit: getComputedStyle(el).objectFit,
+      })));
+      expect(siegel.length).toBeGreaterThan(0);
+      for (const s of siegel) {
+        expect(s.src).toContain(`/siegel/avorix-siegel-${lang}`);
+        expect(s.fit).toBe('contain');
+        expect(s.w).toBe(s.gross ? 200 : 88);
+        expect(s.h).toBe(s.w);
+      }
+      // Schlussblock: grosses Siegel, Knopf bleibt
+      expect(siegel.some((s) => s.gross)).toBe(true);
+    });
+  }
+
+  test('Siegel-Dateien werden als SVG ausgeliefert', async ({ request }) => {
+    for (const f of ['de', 'de-klein', 'en', 'en-klein', 'de-klein-hell', 'en-klein-hell']) {
+      const r = await request.get(`/siegel/avorix-siegel-${f}.svg`);
+      expect(r.status()).toBe(200);
+      expect(r.headers()['content-type']).toContain('image/svg+xml');
+    }
+  });
+
+  for (const pfad of ['/schulung/', '/en/training/']) {
+    test(`${pfad}: Band nach dem Hero hat oben Abstand`, async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto(pfad);
+      const pt = await page.$eval('.hero-section + .section-gap', (el) => getComputedStyle(el).paddingTop);
+      expect(pt).toBe('128px');
+    });
+  }
+
+  test('Partnerlogo im Footer 155 x 28, Domain ungetrennt', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/');
+    const logo = await page.$eval('.footer-partner-logo', (el) => {
+      const r = el.getBoundingClientRect();
+      return { w: Math.round(r.width), h: Math.round(r.height) };
+    });
+    expect(logo).toEqual({ w: 155, h: 28 });
+    const ws = await page.$eval('.footer-partner-domain', (el) => getComputedStyle(el).whiteSpace);
+    expect(ws).toBe('nowrap');
   });
 });
