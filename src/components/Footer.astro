@@ -197,9 +197,9 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     cursor: pointer;
   }
 
-  /* Anweisung 53, Teil B: Partnerblock HACCP Control, zwischen den Linkspalten und
-     der Schlusszeile. Das Logo ist im Code nachgebaut (Schild + Name), damit keine
-     fremde Bilddatei die Content-Security-Policy (img-src 'self') trifft. */
+  /* Anweisung 53/56, Teil B: Partnerblock HACCP Control, zwischen den Linkspalten und
+     der Schlusszeile. Seit A56 das echte Logo als SVG-Bild von der eigenen Domain
+     (public/partner/haccp-control-logo-weiss.svg) -- img-src 'self' erlaubt es ohne CSP-Aenderung. */
   .footer-partner {
     width: 100%;
     max-width: 1080px;
@@ -221,31 +221,16 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     font-family: var(--f-mono);
     font-size: 13px;
   }
-  .footer-partner-marke {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .footer-partner-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 7px;
-    background: rgba(247, 246, 242, .1);
-    color: var(--papier);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .footer-partner-name {
-    /* A53 B2: der Markenname "HACCP Control" steht bewusst in einer schlichten fetten
-       Systemschrift (wie im Original der Marke), NICHT in der Avorix-Ueberschriftenschrift.
-       Das ist eine vierte Schriftfamilie -- als bewusste Ausnahme fuer diesen einen
-       Marken-Schriftzug ist sie vom 3-Font-Test (T8c) ausgenommen. */
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--papier);
+  .footer-partner-logo {
+    display: block;
+    height: 32px;
+    width: auto;
     opacity: .9;
+    transition: opacity .15s ease;
+  }
+  .footer-partner-link:hover .footer-partner-logo,
+  .footer-partner-link:focus-visible .footer-partner-logo {
+    opacity: 1;
   }
 </style>
 
@@ -272,15 +257,7 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
         : "Verified by HACCP-Control.com (opens in a new tab)"}
     >
       <span class="footer-partner-titel">{lang === "de" ? "Verifiziert geprüft durch HACCP-Control.com" : "Verified by HACCP-Control.com"}</span>
-      <span class="footer-partner-marke">
-        <span class="footer-partner-icon" aria-hidden="true">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          </svg>
-        </span>
-        <span class="footer-partner-name">HACCP Control</span>
-      </span>
+      <img class="footer-partner-logo" src="/partner/haccp-control-logo-weiss.svg" alt="HACCP Control" width="177" height="32" />
     </a>
   </div>
 
