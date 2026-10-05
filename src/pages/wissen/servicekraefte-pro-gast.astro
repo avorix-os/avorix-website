@@ -1,0 +1,197 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+/* Anweisung 59, Artikel 3 */
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Wie viele Servicekräfte pro Gast? Die Faustregeln, und warum die Küche den Takt vorgibt", "item": "https://avorix.de/wissen/servicekraefte-pro-gast/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wie viele Servicekräfte pro Gast? Die Faustregeln, und warum die Küche den Takt vorgibt",
+    "datePublished": "2026-10-05",
+    "dateModified": "2026-10-05",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie viele Servicekräfte brauche ich für 100 Gäste?", "acceptedAnswer": { "@type": "Answer", "text": "Beim mehrgängigen Menü, bei dem jeder Gang für alle gleichzeitig kommt, nach der Faustregel 8 bis 10, beim Buffet 4 bis 5. Mehr Gänge, Getränke am Tisch und lange Wege schieben die Zahl nach oben. Mit 10 Kräften liegen Sie an der Grenze, ab der eine eigene Serviceleitung lohnt." } },
+      { "@type": "Question", "name": "Wie viele Servicekräfte braucht eine Hochzeit mit 80 Gästen?", "acceptedAnswer": { "@type": "Answer", "text": "Beim mehrgängigen Menü, bei dem jeder Gang für alle gleichzeitig kommt, 7 bis 8, beim Buffet 3 bis 4. Mit Weinbegleitung am Tisch oder langen Wegen eher eine Kraft mehr." } },
+      { "@type": "Question", "name": "Braucht ein Buffet überhaupt Servicepersonal?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, nur weniger. Jemand muss auffüllen, abräumen und die Getränke übernehmen. Ein Buffet, das halb leer steht, wirkt am Abend schlechter als ein kleineres, das immer voll ist." } },
+      { "@type": "Question", "name": "Wie viele Köche braucht ein Bankett?", "acceptedAnswer": { "@type": "Answer", "text": "Dafür gibt es keine verlässliche Faustregel, weil es an der Karte hängt. Ein kalt vorbereitetes Buffet braucht wenige Hände am Abend, ein warm angerichtetes Menü für alle gleichzeitig sehr viele am Pass. Rechnen Sie vom Pass aus: wie viele Teller, in welcher Zeit, an wie vielen Plätzen." } },
+      { "@type": "Question", "name": "Kann ich Servicekräfte nur für einen Abend buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Avorix ja. Eine Mindest-Einsatzdauer gibt es nicht. Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab; rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Wie viele Servicekräfte pro Gast? Die Faustregeln"
+  description="Wie viele Servicekräfte ein Bankett, eine Hochzeit oder ein Buffet braucht: die gängigen Faustregeln, was sie verschiebt, und warum am Ende der Pass den Takt vorgibt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Wie viele Servicekräfte pro Gast? Die Faustregeln, und warum die Küche den Takt vorgibt</h1>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 05.10.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Als Faustregel plant die Branche beim servierten Menü eine Servicekraft für 10 bis 15 Gäste, beim mehrgängigen Bankett eher eine für 10 bis 12 und beim Buffet eine für 20 bis 30 Gäste. Ab etwa 10 bis 15 Servicekräften kommt eine eigene Serviceleitung dazu. Diese Werte sind ein Startpunkt, kein Ergebnis: Sie verschieben sich mit der Zahl der Gänge, dem Getränkeservice, den Wegen zwischen Küche und Saal und vor allem damit, ob ein Gang für alle Gäste gleichzeitig eingesetzt wird.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Die Faustregeln auf einen Blick</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Serviceform</th><th>Faustregel</th><th>Was die Kräfte vor allem tun</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Serviertes Menü</th><td>1 Servicekraft für 10 bis 15 Gäste</td><td>einsetzen, abräumen, Getränke am Tisch</td></tr>
+              <tr><th scope="row">Mehrgängiges Bankett, Gang für alle gleichzeitig</th><td>1 Servicekraft für 10 bis 12 Gäste</td><td>viele Teller in kurzer Zeit, im Takt der Küche</td></tr>
+              <tr><th scope="row">Buffet</th><td>1 Servicekraft für 20 bis 30 Gäste</td><td>auffüllen, abräumen, Getränke</td></tr>
+              <tr><th scope="row">Serviceleitung</th><td>ab etwa 10 bis 15 Servicekräften</td><td>Ablauf steuern, Abstimmung mit der Küche</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Das sind Werte, wie sie in der Branche als Faustregel kursieren. Sie stimmen für einen durchschnittlichen Abend mit eingespieltem Team. Für Ihren Abend müssen Sie nachrechnen.</p>
+
+        <h2>Was die Faustregel verschiebt</h2>
+        <p>Nach oben, also mehr Kräfte, brauchen Sie bei:</p>
+        <ul>
+          <li><strong>mehr Gängen.</strong> Jeder Gang heißt einmal einsetzen und einmal abräumen.</li>
+          <li><strong>Getränken am Tisch</strong> statt an der Bar, und noch einmal mehr bei einer Weinbegleitung zu jedem Gang.</li>
+          <li><strong>langen Wegen.</strong> Treppen, ein Saal am anderen Ende des Hauses, ein Durchgang durch die Lobby.</li>
+          <li><strong>einem Team, das sich nicht kennt.</strong> Neue Kräfte brauchen Absprache, eingespielte nicht.</li>
+          <li><strong>einem Programm mit Reden oder Einlagen.</strong> Dann reißt der Takt, und danach muss alles auf einmal raus.</li>
+          <li><strong>einem Umbau während des Abends,</strong> etwa wenn bei einer Hochzeit nach dem Essen die Tanzfläche frei werden soll.</li>
+        </ul>
+        <p>Nach unten, also weniger Kräfte, kommen Sie bei einem Buffet mit Selbstbedienung an den Getränken, kurzen Wegen und einem kleinen, eingespielten Team aus.</p>
+
+        <h2>Rechnen Sie vom Pass aus, nicht vom Saal</h2>
+        <p>Die meisten rechnen Servicekräfte vom Saal aus: so viele Tische, so viele Leute. Tatsächlich bestimmt der Pass den Bedarf, also die Stelle, an der die Küche die Teller übergibt. Die eigentliche Frage lautet: Wie viele Teller müssen in welcher Zeit von der Küche zum Gast?</p>
+        <p>Ein Beispiel. 120 Gäste, der Hauptgang soll für alle gleichzeitig kommen. Das sind 120 Teller am Pass. Eine geübte Servicekraft trägt drei Teller auf einmal, also braucht es 40 Wege vom Pass zum Tisch. Mit 10 Kräften sind das vier Wege pro Person, mit 7 Kräften fast sechs. Jeder zusätzliche Weg verlängert die Zeit, bis der letzte Tisch seinen Teller hat, und so lange wird beim ersten Tisch das Essen kalt.</p>
+        <p>Die Faustregel von einer Kraft für 12 Gäste ergibt für 120 Gäste genau diese 10 Kräfte. Ein Stammteam, das auf 80 Gäste ausgelegt ist, hat etwa 7. Die drei, die fehlen, sind der Unterschied zwischen einem Abend, über den gesprochen wird, und einem, über den geschwiegen wird.</p>
+
+        <h2>Und die Küche?</h2>
+        <p>Dieselbe Rechnung gilt eine Station früher. 120 Teller müssen nicht nur getragen, sondern in kurzer Zeit angerichtet werden. Wer im Saal aufstockt, aber am Pass nicht, verschiebt den Stau nur nach hinten: Dann stehen zehn Servicekräfte da und warten auf Teller.</p>
+        <p>Für die Zahl der Köche gibt es keine verlässliche Faustregel, weil sie an der Karte hängt. Ein kalt vorbereitetes Buffet braucht am Abend wenige Hände, ein warm angerichtetes Menü für alle gleichzeitig sehr viele, und zwar genau in den Minuten, in denen der Gang rausgeht. Rechnen Sie es wie im Saal: Wie viele Teller, in welcher Zeit, an wie vielen Plätzen am Pass?</p>
+
+        <h2>Ein Beispiel durchgerechnet: Hochzeit mit 80 Gästen</h2>
+        <p>Vier Gänge, serviert, Weinbegleitung am Tisch, der Saal liegt im ersten Stock.</p>
+        <ul>
+          <li><strong>Faustregel:</strong> 1 Kraft für 10 bis 12 Gäste ergibt 7 bis 8 Servicekräfte.</li>
+          <li><strong>Vom Pass gerechnet:</strong> 80 Teller je Gang, drei pro Weg, also gut 27 Wege. Mit 8 Kräften sind das drei bis vier Wege pro Person, über eine Treppe.</li>
+          <li><strong>Die Verschiebung:</strong> Weinbegleitung und Treppe sprechen für das obere Ende, also 8, und für jemanden, der sich nur um die Getränke kümmert.</li>
+          <li><strong>Leitung:</strong> Bei 9 Kräften übernimmt eine erfahrene Kraft aus dem Team die Abstimmung mit der Küche; eine eigene Serviceleitung lohnt sich in dieser Größe noch nicht.</li>
+        </ul>
+        <p>Das Ergebnis ist kein Gesetz, sondern eine begründete Zahl. Sie wissen danach, warum es 9 sind, und können am Abend selbst sehen, ob die Rechnung aufgeht.</p>
+
+        <h2>Woher die zusätzlichen Kräfte kommen</h2>
+        <p>Für einzelne Abende greifen viele Häuser auf eigene Aushilfen zurück, und das ist ein guter erster Weg. Wenn die Aushilfen nicht reichen oder nicht verfügbar sind, bleiben Servicekräfte über einen Personaldienstleister. Für Servicekräfte auf Rechnung stellt sich dieselbe Frage wie beim Mietkoch: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+        <p>Bei Avorix sind Servicekräfte wie Köche fest angestellt und sozialversichert und arbeiten bei Ihnen im Rahmen der Arbeitnehmerüberlassung. Küche und Service fragen Sie in einer Anfrage zusammen an: ein Anruf, ein Ansprechpartner, ein Vertrag. Manche Häuser buchen einen einzigen Abend für ein Bankett, andere eine ganze Saison.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie viele Servicekräfte brauche ich für 100 Gäste?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Beim mehrgängigen Menü, bei dem jeder Gang für alle gleichzeitig kommt, nach der Faustregel 8 bis 10, beim Buffet 4 bis 5. Mehr Gänge, Getränke am Tisch und lange Wege schieben die Zahl nach oben. Mit 10 Kräften liegen Sie an der Grenze, ab der eine eigene Serviceleitung lohnt.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Servicekräfte braucht eine Hochzeit mit 80 Gästen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Beim mehrgängigen Menü, bei dem jeder Gang für alle gleichzeitig kommt, 7 bis 8, beim Buffet 3 bis 4. Mit Weinbegleitung am Tisch oder langen Wegen eher eine Kraft mehr.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Braucht ein Buffet überhaupt Servicepersonal?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, nur weniger. Jemand muss auffüllen, abräumen und die Getränke übernehmen. Ein Buffet, das halb leer steht, wirkt am Abend schlechter als ein kleineres, das immer voll ist.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Köche braucht ein Bankett?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Dafür gibt es keine verlässliche Faustregel, weil es an der Karte hängt. Ein kalt vorbereitetes Buffet braucht wenige Hände am Abend, ein warm angerichtetes Menü für alle gleichzeitig sehr viele am Pass. Rechnen Sie vom Pass aus: wie viele Teller, in welcher Zeit, an wie vielen Plätzen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kann ich Servicekräfte nur für einen Abend buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei Avorix ja. Eine Mindest-Einsatzdauer gibt es nicht. Wie schnell jemand bei Ihnen steht, hängt vom Einsatzort und vom Termin ab; rufen Sie an, dann sagen wir Ihnen im Gespräch einen konkreten Tag zu.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* Anweisung 51: Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color:var(--grau)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Im Saal zählt, wer da ist.
+      </p>
+      <a href="/personal/service/" data-cta-location="wissen-service-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
