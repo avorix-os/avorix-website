@@ -1,14 +1,14 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import BewerbungFormular from "../components/BewerbungFormular.astro";
+import { WHATSAPP_LINK, WHATSAPP_LINK_BEWERBUNG } from "../data/whatsapp";
 
 // Anweisung 42: Jobs-Seite. Duzt durchgehend (Zielgruppe Koeche), waehrend der
 // Rest von avorix.de siezt. Kein hreflang (bewusst keine englische Fassung).
 //
-// Formular ist zum Start NICHT freigeschaltet: Der Datenschutz-Absatz zu
-// Bewerbungen liegt noch in der anwaltlichen Gegenlese, und ein eigener
-// Formular-Endpoint steht noch aus. Bis dahin laeuft die Bewerbung ueber
-// Telefon und E-Mail. Entsprechend steht directApply im JobPosting auf false,
-// bis das Formular live ist.
+// Anweisung 60: Bewerbungsformular live (Kennung `bewerbung`, quelle=jobs),
+// WhatsApp als zweiter Weg, Gehalt fuer Koeche (2.500 bis 3.500 Euro brutto
+// im Monat in Vollzeit). Service ohne eigene Spanne. directApply jetzt true.
 
 // JobPosting-Beschreibung: enthaelt den sichtbaren Stellentext (Was der Job
 // ist, Was du bei uns hast, Wen wir suchen), damit Schema und Seite sich decken.
@@ -24,6 +24,9 @@ const jobDescriptionHtml = `
 </ul>
 <h3>Wen wir suchen</h3>
 <p>Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Küche hast. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p>
+<h3>Was du verdienst</h3>
+<p>Als Koch verdienst du bei uns <strong>2.500 bis 3.500 Euro brutto im Monat</strong> in Vollzeit, je nach Erfahrung und Qualifikation. In Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst.</p>
+<p><strong>Fahrtkosten und Unterkunft zahlen wir.</strong> Du fährst zu deinen Einsätzen auf unsere Kosten, und wenn ein Einsatz zu weit zum täglichen Pendeln ist, zahlen wir auch die Unterkunft.</p>
 `.trim();
 
 // Anweisung 49: zweites JobPosting fuer Servicekraefte. Beschreibung = die zwei
@@ -44,8 +47,18 @@ const schema = [
     "@type": "JobPosting",
     "title": "Koch (m/w/d)",
     "description": jobDescriptionHtml,
-    "datePosted": "2026-09-02",
-    "validThrough": "2027-03-02",
+    "datePosted": "2026-10-05",
+    "validThrough": "2027-04-05",
+    "baseSalary": {
+      "@type": "MonetaryAmount",
+      "currency": "EUR",
+      "value": {
+        "@type": "QuantitativeValue",
+        "minValue": 2500,
+        "maxValue": 3500,
+        "unitText": "MONTH"
+      }
+    },
     "employmentType": ["FULL_TIME", "PART_TIME"],
     "hiringOrganization": {
       "@type": "Organization",
@@ -59,7 +72,7 @@ const schema = [
         "height": 1024
       },
     },
-    "directApply": false,
+    "directApply": true,
     "jobLocation": [
       { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Friedrichshafen", "addressRegion": "BW", "postalCode": "88045", "streetAddress": "Fallenbrunnen 14", "addressCountry": "DE" } },
       { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "München", "addressRegion": "BY", "addressCountry": "DE" } },
@@ -89,7 +102,7 @@ const schema = [
         "height": 1024
       },
     },
-    "directApply": false,
+    "directApply": true,
     "jobLocation": [
       { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "Friedrichshafen", "addressRegion": "BW", "postalCode": "88045", "streetAddress": "Fallenbrunnen 14", "addressCountry": "DE" } },
       { "@type": "Place", "address": { "@type": "PostalAddress", "addressLocality": "München", "addressRegion": "BY", "addressCountry": "DE" } },
@@ -103,14 +116,14 @@ const schema = [
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Was verdiene ich als Koch bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "Das besprechen wir offen im ersten Telefonat. Wir zahlen nach Erfahrung und Qualifikation, und du weißt, was du bekommst, bevor du unterschreibst." } },
+      { "@type": "Question", "name": "Was verdiene ich als Koch bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "2.500 bis 3.500 Euro brutto im Monat in Vollzeit, je nach Erfahrung und Qualifikation. Was genau für dich gilt, weißt du, bevor du unterschreibst." } },
       { "@type": "Question", "name": "Ist das Zeitarbeit?", "acceptedAnswer": { "@type": "Answer", "text": "Rechtlich ja, es ist Arbeitnehmerüberlassung mit behördlicher Erlaubnis. Praktisch unterscheidet es sich von dem, was viele darunter verstehen: Wir verleihen ausschließlich Köche, keine Aushilfen in beliebige Branchen, unser Chef ist selbst Küchenchef, und dein Vertrag läuft zwischen den Einsätzen weiter." } },
       { "@type": "Question", "name": "Kann ich mich ohne abgeschlossene Ausbildung bewerben?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wenn du Erfahrung in einer Profiküche hast. Wir entscheiden danach, was du am Posten kannst, nicht nach deinem Zeugnis. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen." } },
       { "@type": "Question", "name": "Brauche ich einen Führerschein und ein Auto?", "acceptedAnswer": { "@type": "Answer", "text": "Für die meisten Einsätze ist es sehr hilfreich, weil du zu wechselnden Häusern fährst. Ohne geht es auch, dann suchen wir Einsätze, die du mit Bus und Bahn erreichst." } },
-      { "@type": "Question", "name": "Bekomme ich eine Unterkunft?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft." } },
+      { "@type": "Question", "name": "Bekomme ich eine Unterkunft?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wenn ein Einsatz zu weit zum täglichen Pendeln ist. Die Unterkunft zahlen wir, genau wie deine Fahrtkosten." } },
       { "@type": "Question", "name": "Wie lange dauert ein Einsatz?", "acceptedAnswer": { "@type": "Answer", "text": "Von wenigen Tagen bis zu einer ganzen Saison. Kurze Einsätze sind die Ausnahme, die meisten laufen über mehrere Wochen." } },
       { "@type": "Question", "name": "Muss ich Rechnungen schreiben?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Du bist bei uns fest angestellt und sozialversichert. Genau das ist der Unterschied zu den Vermittlern, die dir eine Selbständigkeit anbieten." } },
-      { "@type": "Question", "name": "Ich will Mietkoch werden. Ist das bei euch möglich?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, genau das ist der Job. Du bist bei Avorix fest angestellt und arbeitest als Mietkoch in wechselnden Küchen, ohne Selbständigkeit, wie in der Frage zu den Rechnungen oben beschrieben. Bewirb dich wie oben beschrieben." } },
+      { "@type": "Question", "name": "Ich will Mietkoch werden. Ist das bei euch möglich?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, genau das ist der Job. Du bist bei Avorix fest angestellt und arbeitest als Mietkoch in wechselnden Küchen, ohne Selbständigkeit. Bewirb dich über das Formular oder per WhatsApp." } },
     ],
   },
 ];
@@ -128,6 +141,7 @@ const schema = [
       <h1 class="mb-6">Koch oder Servicekraft bei Avorix: fest angestellt, in wechselnden Häusern</h1>
       <div class="flex flex-wrap gap-4 mb-6">
         <a href="#bewerben" data-cta-location="jobs-hero" class="btn btn-primary">Jetzt bewerben</a>
+        <a href={WHATSAPP_LINK_BEWERBUNG} data-cta-location="jobs-hero-whatsapp" class="btn btn-secondary" target="_blank" rel="noopener">Per WhatsApp schreiben</a>
       </div>
       <p class="hero-telefon mt-6">
         Lieber direkt anrufen:
@@ -137,15 +151,11 @@ const schema = [
     </div>
   </section>
 
-  {/* Direktantwort (GEO/Speakable).
-     FORMULAR-REVERT: Der letzte Satz nennt vorerst Telefon/E-Mail, weil das
-     Formular noch nicht freigeschaltet ist. Mit der Formular-Freischaltung
-     zurueck auf "Bewerben kannst du dich mit dem Formular auf dieser Seite oder
-     telefonisch." (Anweisung 42, Simon-Review). */}
+  {/* Direktantwort (GEO/Speakable). Letzter Satz nach Anweisung 60. */}
  <section class="reveal">
     <div class="content-width">
       <p id="direktantwort" class="py-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Avorix stellt Köche und Servicekräfte fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag im selben Haus. Bewerben kannst du dich telefonisch oder per E-Mail.
+        Avorix stellt Köche und Servicekräfte fest an und setzt sie in Hotels, Restaurants und Kantinen in Deutschland und Österreich ein. Du bist bei uns angestellt und sozialversichert, auch zwischen zwei Einsätzen, und arbeitest trotzdem nicht jeden Tag im selben Haus. Bewerben dauert zwei Minuten: Formular ausfüllen oder per WhatsApp schreiben. Wir melden uns innerhalb von 24 Stunden.
       </p>
     </div>
   </section>
@@ -230,10 +240,13 @@ const schema = [
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Was du verdienst</h2>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Was du bei uns verdienst, besprechen wir offen im ersten Telefonat, bevor du irgendetwas unterschreibst. Wir zahlen nach Erfahrung und Qualifikation.
+        Als Koch verdienst du bei uns <strong>2.500 bis 3.500 Euro brutto im Monat</strong> in Vollzeit, je nach Erfahrung und Qualifikation. In Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst.
+      </p>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <strong>Im Service</strong> besprechen wir, was du verdienst, offen im ersten Telefonat, bevor du irgendetwas unterschreibst. Wir zahlen nach Erfahrung und Qualifikation.
       </p>
       <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft.
+        <strong>Fahrtkosten und Unterkunft zahlen wir.</strong> Du fährst zu deinen Einsätzen auf unsere Kosten, und wenn ein Einsatz zu weit zum täglichen Pendeln ist, zahlen wir auch die Unterkunft.
       </p>
     </div>
   </section>
@@ -243,17 +256,14 @@ const schema = [
     <div class="content-width">
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">So läuft deine Bewerbung</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {/* FORMULAR-REVERT: Schritt 1 nennt vorerst Anruf/E-Mail. Mit der
-           Formular-Freischaltung zurueck auf "Du schickst das Formular ab." /
-           "Fuenf Felder, zwei Minuten, kein Anschreiben noetig." */}
         <div class="card">
           <div class="mb-4"><span class="schritt-chip">1</span></div>
           <h3 class="mb-4">Du meldest dich bei uns.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">Ein Anruf oder eine kurze E-Mail, kein Anschreiben nötig.</p>
+          <p class="leading-relaxed" style="color:var(--grau)">Über das Formular unten oder per WhatsApp, in zwei Minuten. Kein Anschreiben, kein Lebenslauf nötig.</p>
         </div>
         <div class="card">
           <div class="mb-4"><span class="schritt-chip">2</span></div>
-          <h3 class="mb-4">Wir melden uns innerhalb von zwei Werktagen.</h3>
+          <h3 class="mb-4">Wir melden uns innerhalb von 24 Stunden.</h3>
           <p class="leading-relaxed" style="color:var(--grau)">Meistens telefonisch, weil das schneller geht.</p>
         </div>
         <div class="card">
@@ -270,20 +280,18 @@ const schema = [
     </div>
   </section>
 
-  {/* Jetzt bewerben (Formular folgt; interim Telefon + E-Mail) */}
+  {/* Jetzt bewerben (Anweisung 60: Formular statt „in Kürze“) */}
  <section id="bewerben" class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Jetzt bewerben</h2>
-      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Das Online-Formular schalten wir in Kürze frei. Am schnellsten geht deine Bewerbung solange telefonisch, oder du schreibst uns kurz per E-Mail: wer du bist, was du bisher gekocht hast und wo du arbeiten möchtest. Wir melden uns.
-      </p>
-      <p class="hero-telefon mb-4">
-        Ruf uns an:
+      <div class="max-w-[var(--spalte-text)] mb-6">
+        <BewerbungFormular quelle="jobs" />
+      </div>
+      <p class="hero-telefon max-w-[var(--spalte-text)]">
+        Lieber direkt? Ruf an:
         <a href="tel:+4975413973915" data-cta-location="jobs-bewerben" class="hero-telefon-link">07541 3973915</a>
         <span class="hero-telefon-zeit">(Mo bis Fr 8 bis 17 Uhr, außerhalb über Band)</span>
-      </p>
-      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Oder per E-Mail an <a href="mailto:info@avorix.de?subject=Bewerbung%20als%20Koch" class="typo-link">info@avorix.de</a>.
+        oder schreib uns per <a href={WHATSAPP_LINK} data-cta-location="jobs-bewerben-whatsapp" class="hero-telefon-link" target="_blank" rel="noopener">WhatsApp</a>.
       </p>
     </div>
   </section>
@@ -295,7 +303,7 @@ const schema = [
       <div class="faq-list">
         <details class="faq-item" open>
           <summary class="faq-q">Was verdiene ich als Koch bei Avorix?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="faq-body"><div class="faq-inner"><p>Das besprechen wir offen im ersten Telefonat. Wir zahlen nach Erfahrung und Qualifikation, und du weißt, was du bekommst, bevor du unterschreibst.</p></div></div>
+          <div class="faq-body"><div class="faq-inner"><p>2.500 bis 3.500 Euro brutto im Monat in Vollzeit, je nach Erfahrung und Qualifikation. Was genau für dich gilt, weißt du, bevor du unterschreibst.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Ist das Zeitarbeit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
@@ -311,7 +319,7 @@ const schema = [
         </details>
         <details class="faq-item">
           <summary class="faq-q">Bekomme ich eine Unterkunft?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="faq-body"><div class="faq-inner"><p>Bei Einsätzen, die zu weit für das tägliche Pendeln sind, organisieren wir eine Unterkunft.</p></div></div>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, wenn ein Einsatz zu weit zum täglichen Pendeln ist. Die Unterkunft zahlen wir, genau wie deine Fahrtkosten.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Wie lange dauert ein Einsatz?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
@@ -323,7 +331,7 @@ const schema = [
         </details>
         <details class="faq-item">
           <summary class="faq-q">Ich will Mietkoch werden. Ist das bei euch möglich?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="faq-body"><div class="faq-inner"><p>Ja, genau das ist der Job. Du bist bei Avorix fest angestellt und arbeitest als Mietkoch in wechselnden Küchen, ohne Selbständigkeit, wie in der Frage zu den Rechnungen oben beschrieben. Bewirb dich wie oben beschrieben.</p></div></div>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, genau das ist der Job. Du bist bei Avorix fest angestellt und arbeitest als Mietkoch in wechselnden Küchen, ohne Selbständigkeit. Bewirb dich über das <a href="#bewerben" class="typo-link">Formular</a> oder per <a href={WHATSAPP_LINK_BEWERBUNG} class="typo-link" target="_blank" rel="noopener">WhatsApp</a>.</p></div></div>
         </details>
       </div>
     </div>

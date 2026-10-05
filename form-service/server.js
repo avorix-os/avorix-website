@@ -18,7 +18,7 @@ const crypto = require('crypto');
 const Busboy = require('busboy');
 const nodemailer = require('nodemailer');
 
-const { FORMS } = require('./forms');
+const { FORMS, ROLLEN, WHATSAPP } = require('./forms');
 
 // ---------------------------------------------------------------------------
 // Konfiguration (alles ueber Umgebungsvariablen / .env)
@@ -77,6 +77,10 @@ const LABELS = {
   einsatzgebiet: 'Einsatzgebiet',
   source: 'Herkunft',
   newsletter: 'Newsletter-Einwilligung',
+  rolle: 'Bewirbt sich als',
+  region: 'Region',
+  erfahrung: 'Erfahrung',
+  quelle: 'Quelle',
 };
 
 const MAGIC = {
@@ -217,6 +221,7 @@ function buildBody(def, kennung, fields, files) {
     if (fld.name === CFG.honeypotField) continue;
     const label = LABELS[fld.name] || fld.name;
     let val = fields[fld.name];
+    if (fld.name === 'rolle' && def.bewerbung) val = ROLLEN[val] || val;
     if (fld.name === 'newsletter') {
       val = fields.newsletter ? 'JA – eingewilligt' : 'nein – nicht eingewilligt';
     }
@@ -249,6 +254,57 @@ function ackBody(def) {
   );
 }
 
+// Anweisung 60: Betreff der Bewerbung mit Rolle und Region.
+function subjectFor(def, fields) {
+  if (def.bewerbung) {
+    return `Bewerbung: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}`;
+  }
+  return def.subject;
+}
+
+function escHtml(v) {
+  return String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+// Anweisung 60: Eingangsbestaetigung der Bewerbung, im Du. Zeigt die Felder
+// ohne gclid und ohne quelle. WhatsApp ist in der HTML-Fassung ein Link.
+function bewerbungAck(fields) {
+  const wa = `https://wa.me/${WHATSAPP}`;
+  const zeilen = [
+    ['Name', fields.name],
+    ['Telefon', fields.telefon],
+    ['E-Mail', fields.email],
+    ['Ich bewerbe mich als', ROLLEN[fields.rolle] || fields.rolle],
+    ['Wo du arbeiten willst', fields.region],
+    ['Erfahrung in der Gastronomie', fields.erfahrung],
+    ['Was du zuletzt gemacht hast', fields.nachricht],
+  ].filter(([, v]) => v && String(v).trim() !== '');
+  const text = [
+    `Hallo ${fields.name},`,
+    '',
+    'danke für deine Bewerbung. Sie ist bei uns angekommen, wir melden uns innerhalb von 24 Stunden, meistens telefonisch.',
+    '',
+    `Wenn du vorher etwas fragen willst: 07541 3973915, Montag bis Freitag von 8 bis 17 Uhr, oder per WhatsApp (${wa}).`,
+    '',
+    'Viele Grüße',
+    'dein Avorix-Team',
+    '',
+    'Das hast du uns geschickt:',
+    ...zeilen.map(([k, v]) => `${k}: ${v}`),
+    '',
+    'Avorix GmbH',
+  ].join('\n');
+  const html =
+    `<p>Hallo ${escHtml(fields.name)},</p>` +
+    '<p>danke für deine Bewerbung. Sie ist bei uns angekommen, wir melden uns innerhalb von 24 Stunden, meistens telefonisch.</p>' +
+    `<p>Wenn du vorher etwas fragen willst: 07541 3973915, Montag bis Freitag von 8 bis 17 Uhr, oder per <a href="${wa}">WhatsApp</a>.</p>` +
+    '<p>Viele Grüße<br>dein Avorix-Team</p>' +
+    '<p><strong>Das hast du uns geschickt:</strong><br>' +
+    zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+    '</p><p>Avorix GmbH</p>';
+  return { subject: 'Deine Bewerbung bei Avorix', text, html };
+}
+
 async function deliver(def, kennung, fields, files) {
   const t = getTransport();
   const to =
@@ -259,7 +315,7 @@ async function deliver(def, kennung, fields, files) {
     from: CFG.mail.from,
     to,
     replyTo, // Antwort geht direkt an den Absender (3.2 Punkt 9)
-    subject: def.subject, // vom Dienst gesetzt, nie aus dem Formular (3.2 Punkt 2)
+    subject: subjectFor(def, fields), // vom Dienst gesetzt, nie frei aus dem Formular (3.2 Punkt 2)
     text: buildBody(def, kennung, fields, files),
   };
   if (files && files.length) {
@@ -267,15 +323,16 @@ async function deliver(def, kennung, fields, files) {
   }
   await t.sendMail(mail);
 
-  // Eingangsbestaetigung an den Absender (nicht bei Bewerbung; 3.2 Punkt 11).
+  // Eingangsbestaetigung an den Absender (3.2 Punkt 11), nur mit E-Mail.
   if (def.ack && replyTo) {
     try {
-      await t.sendMail({
-        from: CFG.mail.from,
-        to: replyTo,
-        subject: def.lang === 'en' ? 'We received your enquiry' : 'Ihre Anfrage bei Avorix',
-        text: ackBody(def),
-      });
+      const ack = def.bewerbung
+        ? bewerbungAck(fields)
+        : {
+            subject: def.lang === 'en' ? 'We received your enquiry' : 'Ihre Anfrage bei Avorix',
+            text: ackBody(def),
+          };
+      await t.sendMail({ from: CFG.mail.from, to: replyTo, ...ack });
     } catch (e) {
       errlog('Eingangsbestaetigung fehlgeschlagen', e.message);
     }
@@ -442,6 +499,8 @@ async function handleForm(req, res) {
     if (fld.required && v.trim() === '') return respondErr(req, res, 400, `missing_${fld.name}`);
     if (v.length > fld.max) return respondErr(req, res, 400, `too_long_${fld.name}`);
     if (fld.header && hasCRLF(v)) return respondErr(req, res, 400, `invalid_${fld.name}`);
+    // Anweisung 60: Auswahlfelder nur mit festen Werten.
+    if (fld.options && v !== '' && !fld.options.includes(v)) return respondErr(req, res, 400, `invalid_${fld.name}`);
     fields[fld.name] = v;
   }
   if (fields.email && fields.email.trim() !== '' && !isValidEmail(fields.email)) {

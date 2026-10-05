@@ -23,6 +23,21 @@ function f(name, required, max, header = false) {
   return { name, required, max, header };
 }
 
+// Anweisung 60: feste Werte des Bewerbungsformulars.
+const ROLLEN = { koch: 'Koch', service: 'Servicekraft' };
+const REGIONEN = [
+  'Bodensee und Oberschwaben',
+  'München und Oberbayern',
+  'Stuttgart und Region',
+  'Frankfurt und Rhein-Main',
+  'Tirol',
+  'Vorarlberg',
+  'Egal, ich bin flexibel',
+];
+const ERFAHRUNG = ['1 bis 2 Jahre', '3 bis 5 Jahre', 'mehr als 5 Jahre'];
+// WhatsApp-Nummer fuer Bestaetigung und Seite (international, nur Ziffern).
+const WHATSAPP = '4915754123492';
+
 const FORMS = {
   kontakt: {
     lang: 'de',
@@ -144,22 +159,28 @@ const FORMS = {
     ack: true,
     redirect: '/wissen/kalkulation-gastronomie/?download=1',
   },
-  // Vorsorge fuer spaetere Bewerbungen (Anweisung 45, 3.3). Heute nutzt
-  // kein Formular diese Kennung; der Weg ist bewusst schon da.
+  // Bewerbungsformular (Anweisung 60). Kein Upload, kein Lebenslauf.
+  // Betreff, Mailtext und Eingangsbestaetigung kommen aus eigenen Funktionen
+  // in server.js (subjectFn/ackFn), weil Rolle und Region in den Betreff
+  // gehoeren und die Bestaetigung duzt. Auswahlfelder nur mit festen Werten
+  // (options), damit nichts Fremdes in den Betreff gelangt.
   bewerbung: {
     lang: 'de',
     subject: 'Bewerbung über avorix.de',
     fields: [
+      f('telefon', true, LEN.telefon, true),
       f('name', true, LEN.name, true),
-      f('email', true, LEN.email, true),
-      f('telefon', false, LEN.telefon, true),
-      f('einsatzgebiet', false, LEN.auswahl, true),
+      f('email', false, LEN.email, true),
+      { ...f('rolle', true, LEN.auswahl, true), options: Object.keys(ROLLEN) },
+      { ...f('region', true, LEN.auswahl, true), options: REGIONEN },
+      { ...f('erfahrung', true, LEN.auswahl, true), options: ERFAHRUNG },
       f('nachricht', false, LEN.freitext),
+      { ...f('quelle', false, LEN.auswahl, true), options: ['jobs', 'lp-koch'] },
     ],
-    ack: false, // eigener Bewerbungs-Text spaeter, kein Standard-Ack
-    attachments: true, // PDF/JPG/PNG, max 3, zusammen 10 MB (3.3)
-    toBewerbung: true, // an bewerbung@ statt info@ (falls konfiguriert)
+    ack: true, // nur wenn E-Mail angegeben (deliver prueft replyTo)
+    bewerbung: true,
+    toBewerbung: true, // an bewerbung@ statt info@ (falls MAIL_TO_BEWERBUNG gesetzt)
   },
 };
 
-module.exports = { FORMS, LEN };
+module.exports = { FORMS, LEN, ROLLEN, WHATSAPP };
