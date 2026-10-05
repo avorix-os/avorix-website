@@ -1,0 +1,218 @@
+---
+// Anweisung 60: Bewerbungsformular fuer /jobs/ und /jobs/koch/.
+// Kennung `bewerbung` im eigenen Formular-Dienst (form-service/forms.js).
+// Kein Upload, kein Einwilligungs-Haekchen (Bewerberdaten nach § 26 BDSG).
+// Messung: genau ein dataLayer-Ereignis `bewerbung`, nur bei { ok: true }.
+import { WHATSAPP_LINK_BEWERBUNG } from "../data/whatsapp";
+
+interface Props {
+  quelle: "jobs" | "lp-koch";
+  // true: Rolle steht fest auf Koch, die Auswahl Koch/Servicekraft entfaellt.
+  nurKoch?: boolean;
+  // true: unter dem Knopf zusaetzlich „Lieber per WhatsApp?“ (Landingpage).
+  whatsappHinweis?: boolean;
+}
+const { quelle, nurKoch = false, whatsappHinweis = false } = Astro.props as Props;
+const p = `bw-${quelle}`;
+
+const regionen = [
+  "Bodensee und Oberschwaben",
+  "München und Oberbayern",
+  "Stuttgart und Region",
+  "Frankfurt und Rhein-Main",
+  "Tirol",
+  "Vorarlberg",
+  "Egal, ich bin flexibel",
+];
+const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
+---
+<div class="bw-wrap" data-bewerbung>
+  <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle}>
+    <input type="hidden" name="formular" value="bewerbung" />
+    <input type="hidden" name="quelle" value={quelle} />
+    <input type="text" name="website" class="bw-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <input type="hidden" name="form_ts" value="" data-bw-ts />
+    {nurKoch && <input type="hidden" name="rolle" value="koch" />}
+
+    <div>
+      <label for={`${p}-name`} class="bw-label">Dein Name <span class="bw-pflicht">*</span></label>
+      <input type="text" id={`${p}-name`} name="name" required autocomplete="name" class="bw-field" />
+    </div>
+
+    <div>
+      <label for={`${p}-telefon`} class="bw-label">Telefonnummer, wir rufen dich an <span class="bw-pflicht">*</span></label>
+      <input type="tel" id={`${p}-telefon`} name="telefon" required autocomplete="tel" inputmode="tel" class="bw-field" />
+    </div>
+
+    <div>
+      <label for={`${p}-email`} class="bw-label">E-Mail <span class="bw-opt">(wenn du eine Bestätigung willst)</span></label>
+      <input type="email" id={`${p}-email`} name="email" autocomplete="email" class="bw-field" />
+    </div>
+
+    {!nurKoch && (
+      <fieldset class="bw-fieldset">
+        <legend class="bw-label">Ich bewerbe mich als: <span class="bw-pflicht">*</span></legend>
+        <div class="bw-rollen">
+          <label class="bw-rolle">
+            <input type="radio" name="rolle" value="koch" required />
+            <span>Koch</span>
+          </label>
+          <label class="bw-rolle">
+            <input type="radio" name="rolle" value="service" />
+            <span>Servicekraft</span>
+          </label>
+        </div>
+      </fieldset>
+    )}
+
+    <div>
+      <label for={`${p}-region`} class="bw-label">Wo willst du arbeiten? <span class="bw-pflicht">*</span></label>
+      <select id={`${p}-region`} name="region" required class="bw-field">
+        <option value="" selected disabled>Bitte wählen</option>
+        {regionen.map((r) => <option value={r}>{r}</option>)}
+      </select>
+    </div>
+
+    <div>
+      <label for={`${p}-erfahrung`} class="bw-label">Wie lange arbeitest du schon in der Gastronomie? <span class="bw-pflicht">*</span></label>
+      <select id={`${p}-erfahrung`} name="erfahrung" required class="bw-field">
+        <option value="" selected disabled>Bitte wählen</option>
+        {erfahrung.map((e) => <option value={e}>{e}</option>)}
+      </select>
+    </div>
+
+    <div>
+      <label for={`${p}-nachricht`} class="bw-label">Was hast du zuletzt gemacht? <span class="bw-opt">(freiwillig)</span></label>
+      <textarea id={`${p}-nachricht`} name="nachricht" rows="3" class="bw-field bw-textarea"></textarea>
+    </div>
+
+    <p class="bw-fehler hidden" data-bw-fehler role="alert">
+      Das hat gerade nicht geklappt. Versuch es bitte noch einmal oder ruf uns an: 07541 3973915.
+    </p>
+
+    <button type="submit" class="btn btn-primary bw-submit">Bewerbung abschicken</button>
+    {whatsappHinweis && (
+      <p class="bw-whatsapp">
+        Lieber per WhatsApp?
+        <a href={WHATSAPP_LINK_BEWERBUNG} data-cta-location={`${quelle}-formular-whatsapp`} class="typo-link" target="_blank" rel="noopener">Schreib uns</a>
+      </p>
+    )}
+    <p class="formular-hinweis">
+      Wir verarbeiten deine Angaben, um deine Bewerbung zu bearbeiten. Mehr dazu steht in unserer <a href="/datenschutz/">Datenschutzerklärung</a> im Abschnitt „Bewerbungen“.
+    </p>
+  </form>
+
+  <div class="card bw-danke hidden" data-bw-danke role="status" tabindex="-1">
+    <p class="bw-danke-titel">Danke, deine Bewerbung ist da.</p>
+    <p>Wir melden uns innerhalb von 24 Stunden, meistens per Telefon. Halte dein Handy in der Nähe.</p>
+  </div>
+</div>
+
+<style>
+.bw-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.bw-form, .bw-danke { padding: 2rem; }
+@media (max-width: 480px) {
+  .bw-form, .bw-danke { padding: 1.25rem; }
+}
+.bw-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--druck);
+  margin-bottom: 8px;
+}
+.bw-pflicht { color: var(--akzent); }
+.bw-opt { font-weight: 400; color: var(--grau); }
+.bw-field {
+  width: 100%;
+  min-height: 58px;
+  line-height: 24px;
+  background: var(--flaeche);
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 16px;
+  font-family: var(--f-body);
+  color: var(--druck);
+  transition: border-color .15s;
+  appearance: auto;
+  box-sizing: border-box;
+}
+.bw-field:focus { outline: none; border-color: var(--akzent); }
+.bw-field:focus-visible { outline: 3px solid var(--akzent); outline-offset: 2px; }
+.bw-textarea { resize: none; min-height: 0; }
+.bw-fieldset { border: 0; padding: 0; margin-inline: 0; margin-top: 0; }
+.bw-fieldset legend { padding: 0; }
+.bw-rollen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.bw-rolle { position: relative; display: block; cursor: pointer; }
+.bw-rolle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.bw-rolle span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 58px;
+  padding: 0 16px;
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  background: var(--flaeche);
+  font-weight: 600;
+  color: var(--druck);
+  transition: border-color .15s, background-color .15s;
+}
+.bw-rolle input:checked + span {
+  border-color: var(--akzent);
+  background: #F3D9C8;
+  color: var(--akzent);
+}
+.bw-rolle input:focus-visible + span { outline: 3px solid var(--akzent); outline-offset: 2px; }
+.bw-submit { width: 100%; }
+.bw-whatsapp { font-size: 15px; color: var(--grau); text-align: center; }
+.bw-fehler { font-size: 14px; color: var(--akzent); font-weight: 600; }
+.bw-danke { background: #F3D9C8; }
+.bw-danke p { color: var(--druck); }
+.bw-danke-titel { font-family: var(--f-head); font-weight: 700; font-size: 20px; margin-bottom: 8px; }
+@media (prefers-reduced-motion: reduce) {
+  .bw-field, .bw-rolle span { transition: none; }
+}
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-bewerbung]').forEach((wrap) => {
+    const form = wrap.querySelector<HTMLFormElement>('[data-bewerbung-form]');
+    const danke = wrap.querySelector<HTMLElement>('[data-bw-danke]');
+    const fehler = wrap.querySelector<HTMLElement>('[data-bw-fehler]');
+    if (!form) return;
+    const ts = form.querySelector<HTMLInputElement>('[data-bw-ts]');
+    if (ts) ts.value = String(Date.now());
+    let gesendet = false;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (gesendet) return;
+      const knopf = form.querySelector<HTMLButtonElement>('[type="submit"]');
+      if (knopf) { knopf.disabled = true; knopf.textContent = 'Wird gesendet…'; }
+      fehler?.classList.add('hidden');
+      try {
+        const fd = new FormData(form);
+        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
+        if (g) fd.append('gclid', g);
+        const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+        const daten = await res.json().catch(() => null);
+        if (res.ok && daten && daten.ok === true) {
+          gesendet = true;
+          const w = window as any;
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({ event: 'bewerbung', rolle: String(fd.get('rolle') || ''), quelle: form.dataset.quelle || '' });
+          form.classList.add('hidden');
+          danke?.classList.remove('hidden');
+          danke?.focus();
+          return;
+        }
+        throw new Error('nicht ok');
+      } catch {
+        if (knopf) { knopf.disabled = false; knopf.textContent = 'Bewerbung abschicken'; }
+        fehler?.classList.remove('hidden');
+      }
+    });
+  });
+</script>

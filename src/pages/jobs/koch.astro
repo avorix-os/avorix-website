@@ -1,0 +1,159 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+import BewerbungFormular from "../../components/BewerbungFormular.astro";
+import { WHATSAPP_LINK, WHATSAPP_LINK_BEWERBUNG } from "../../data/whatsapp";
+import kochVonHintenPass from "../../assets/bilder/koch-von-hinten-pass.jpg";
+
+// Anweisung 60, Teil 3: Landingpage nur fuer Google-Anzeigen.
+// noindex, follow; nicht in Sitemap (astro.config.mjs), nicht in llms.txt,
+// nicht in Navigation oder Footer; kein JobPosting- und kein FAQ-Schema.
+// Im ersten Bildschirm nur Formular und WhatsApp, keine anderen Knoepfe.
+---
+<BaseLayout
+  title="Koch (m/w/d) bei Avorix: 2.500 bis 3.500 € brutto"
+  description="Fest angestellt als Koch in wechselnden Küchen. 2.500 bis 3.500 Euro brutto im Monat, Fahrtkosten und Unterkunft bezahlt. Antwort in 24 Stunden."
+  robots="noindex, follow"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-3">Jobs bei Avorix · Koch (m/w/d)</p>
+      <h1 class="mb-4">Koch, fest angestellt, in wechselnden Küchen.</h1>
+      <ul class="lp-haken mb-6">
+        <li>2.500 bis 3.500 Euro brutto im Monat, je nach Erfahrung</li>
+        <li>Fahrtkosten und Unterkunft zahlen wir</li>
+        <li>Antwort innerhalb von 24 Stunden</li>
+      </ul>
+      <div id="bewerben" class="lp-formular">
+        <BewerbungFormular quelle="lp-koch" nurKoch whatsappHinweis />
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <Image
+        src={kochVonHintenPass}
+        alt="Koch von hinten am Pass einer Profiküche, richtet Teller an"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Warum Köche zu uns kommen</h2>
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p><strong style="color:var(--druck)">Fest angestellt, auch zwischen den Einsätzen.</strong> Arbeitsvertrag, volle Sozialversicherung, bezahlter Urlaub, Lohnfortzahlung im Krankheitsfall. Zwischen zwei Einsätzen läuft dein Gehalt weiter. Kein Saisonvertrag, keine Rechnung.</p>
+        <p><strong style="color:var(--druck)">Fahrtkosten und Unterkunft zahlen wir.</strong> Du fährst auf unsere Kosten zum Einsatz. Ist er zu weit zum Pendeln, zahlen wir die Unterkunft.</p>
+        <p><strong style="color:var(--druck)">Dein Chef ist Koch.</strong> Börge Penk hat zwanzig Jahre in Profiküchen gearbeitet, vom Auszubildenden bis zum Küchenchef. Er sucht die Einsätze selbst aus.</p>
+        <p><strong style="color:var(--druck)">Abwechslung statt Trott.</strong> Andere Küchen, andere Karten, andere Teams. Ein Einsatz dauert ein paar Wochen oder eine ganze Saison.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">So geht es weiter</h2>
+      <ol class="lp-schritte max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong style="color:var(--druck)">Formular oder WhatsApp.</strong> Zwei Minuten, ohne Lebenslauf.</li>
+        <li><strong style="color:var(--druck)">Wir rufen dich an,</strong> innerhalb von 24 Stunden.</li>
+        <li><strong style="color:var(--druck)">Probekochen und Vertrag.</strong> Passt es für beide Seiten, unterschreiben wir.</li>
+      </ol>
+    </div>
+  </section>
+
+  {/* Kurz gefragt: sichtbar, bewusst OHNE FAQ-Schema (Seite ist noindex) */}
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Kurz gefragt</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Muss ich eine abgeschlossene Ausbildung haben?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein, wenn du Erfahrung in einer Profiküche hast. Uns interessiert, was du am Posten kannst, nicht dein Zeugnis.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ist das Zeitarbeit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Rechtlich ja, es ist Arbeitnehmerüberlassung mit behördlicher Erlaubnis. Du bist bei Avorix fest angestellt, und dein Vertrag läuft zwischen den Einsätzen weiter.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Geht das auch in Teilzeit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Das Gehalt ist dann entsprechend anteilig.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Brauche ich ein Auto?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Für die meisten Einsätze ist es sehr hilfreich. Ohne geht es auch, dann suchen wir Einsätze, die du mit Bus und Bahn erreichst.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <a href="#bewerben" data-cta-location="lp-koch-ende" class="btn btn-primary mb-6">Jetzt bewerben</a>
+      <p class="lp-telefon max-w-[var(--spalte-text)]" style="margin-inline:auto">
+        Lieber direkt? Ruf an:
+        <a href="tel:+4975413973915" data-cta-location="lp-koch-ende" data-cta-event="personal_anruf_click" class="typo-link">07541 3973915</a>
+        (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band) oder schreib uns per
+        <a href={WHATSAPP_LINK} data-cta-location="lp-koch-ende-whatsapp" class="typo-link" target="_blank" rel="noopener">WhatsApp</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+/* Erster Bildschirm: wenig Abstand ueber der H1, damit auf dem Handy der
+   Anfang des Formulars ohne Scrollen sichtbar ist (Anweisung 60, Teil 3). */
+.lp-hero { padding-top: 24px; padding-bottom: 48px; }
+@media (min-width: 768px) {
+  .lp-hero { padding-top: 64px; padding-bottom: 64px; }
+}
+.lp-hero h1 { font-size: clamp(28px, 7vw, 48px); line-height: 1.15; }
+.lp-haken { list-style: none; padding: 0; margin: 0; color: var(--druck); }
+.lp-haken li { position: relative; padding-left: 28px; margin-bottom: 6px; font-weight: 600; }
+.lp-haken li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.35em;
+  width: 14px;
+  height: 8px;
+  border-left: 3px solid var(--akzent);
+  border-bottom: 3px solid var(--akzent);
+  transform: rotate(-45deg);
+}
+.lp-formular { max-width: 560px; }
+.lp-schritte { list-style: decimal; padding-left: 24px; line-height: 1.7; }
+.lp-schritte li { margin-bottom: 12px; }
+.lp-telefon { font-size: 15px; color: var(--grau); }
+</style>
+
+<script>
+/* FAQ-Schliess-Animation, wie auf den anderen Seiten */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!(item as HTMLDetailsElement).open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body!.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

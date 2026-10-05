@@ -1131,3 +1131,91 @@ test.describe('A58: rundes Siegel, Satz raus, Abstaende, Partnerlogo', () => {
     expect(ws).toBe('nowrap');
   });
 });
+
+// Anweisung 60: Bewerbungsformular, /jobs/ und Landingpage /jobs/koch/.
+test.describe('A60: Bewerbungen', () => {
+  async function einwilligen(page) {
+    const banner = page.locator('#consent-banner');
+    if (await banner.isVisible()) await page.locator('#cb-accept-all').click();
+  }
+
+  for (const [pfad, quelle, rolle] of [['/jobs/', 'jobs', 'service'], ['/jobs/koch/', 'lp-koch', 'koch']]) {
+    test(`${pfad}: genau 1 Ereignis bewerbung bei Erfolg, danach Danke-Text`, async ({ page }) => {
+      let gesendet = null;
+      await page.route('**/api/formular', async (route) => {
+        gesendet = route.request().postData() || '';
+        await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+      });
+      await page.goto(pfad);
+      await einwilligen(page);
+      const form = page.locator('[data-bewerbung-form]');
+      await form.locator('input[name="name"]').fill('TEST');
+      await form.locator('input[name="telefon"]').fill('+43 664 123 45 67');
+      if (rolle === 'service') await form.locator('label.bw-rolle', { hasText: 'Servicekraft' }).click();
+      await form.locator('select[name="region"]').selectOption('Tirol');
+      await form.locator('select[name="erfahrung"]').selectOption('3 bis 5 Jahre');
+      await page.waitForTimeout(3100); // Zeitfalle des Dienstes (3 s) realistisch abwarten
+      await form.locator('button[type="submit"]').click();
+      await expect(page.locator('[data-bw-danke]')).toBeVisible();
+      await expect(form).toBeHidden();
+      const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'bewerbung'));
+      expect(ev).toHaveLength(1);
+      expect(ev[0]).toMatchObject({ rolle, quelle });
+      expect(gesendet).toContain('name="quelle"');
+      expect(gesendet).toContain(quelle);
+    });
+  }
+
+  test('/jobs/: kein Ereignis, wenn der Dienst nicht ok meldet', async ({ page }) => {
+    await page.route('**/api/formular', (route) =>
+      route.fulfill({ status: 400, contentType: 'application/json', body: '{"ok":false,"error":"missing_telefon"}' })
+    );
+    await page.goto('/jobs/');
+    await einwilligen(page);
+    const form = page.locator('[data-bewerbung-form]');
+    await form.locator('input[name="name"]').fill('TEST');
+    await form.locator('input[name="telefon"]').fill('0151 1');
+    await form.locator('label.bw-rolle', { hasText: 'Koch' }).click();
+    await form.locator('select[name="region"]').selectOption('Tirol');
+    await form.locator('select[name="erfahrung"]').selectOption('1 bis 2 Jahre');
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator('[data-bw-fehler]')).toBeVisible();
+    const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'bewerbung'));
+    expect(ev).toHaveLength(0);
+  });
+
+  test('/jobs/: neue Angaben, kein „in Kürze“, keine zwei Werktage, Schema mit Gehalt', async ({ page }) => {
+    await page.goto('/jobs/');
+    const text = await page.locator('main').innerText();
+    expect(text).not.toContain('in Kürze');
+    expect(text).not.toContain('zwei Werktag');
+    expect(text).toContain('2.500 bis 3.500 Euro brutto im Monat');
+    expect(text).toContain('Fahrtkosten und Unterkunft zahlen wir');
+    await expect(page.locator('a[href^="https://wa.me/4915754123492"]').first()).toBeVisible();
+    const schemas = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((e) => JSON.parse(e.textContent)));
+    const flat = schemas.flat();
+    const koch = flat.find((s) => s['@type'] === 'JobPosting' && s.title === 'Koch (m/w/d)');
+    const service = flat.find((s) => s['@type'] === 'JobPosting' && s.title === 'Servicekraft (m/w/d)');
+    expect(koch.directApply).toBe(true);
+    expect(koch.baseSalary.value).toMatchObject({ minValue: 2500, maxValue: 3500, unitText: 'MONTH' });
+    expect(koch.description).toContain('2.500 bis 3.500 Euro brutto im Monat');
+    expect(service.directApply).toBe(true);
+    expect(service.baseSalary).toBeUndefined();
+  });
+
+  test('/jobs/koch/: noindex, follow, nicht in Sitemap, kein JobPosting, Formular im ersten Bildschirm (390 px)', async ({ page, request }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/jobs/koch/');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+    const typen = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((e) => e.textContent).join(' '));
+    expect(typen).not.toContain('JobPosting');
+    expect(typen).not.toContain('FAQPage');
+    const name = page.locator('[data-bewerbung-form] input[name="name"]');
+    const box = await name.boundingBox();
+    expect(box && box.y + box.height).toBeLessThanOrEqual(844);
+    const sitemap = await (await request.get('/sitemap-0.xml')).text();
+    expect(sitemap).not.toContain('/jobs/koch');
+    const llms = await (await request.get('/llms.txt')).text();
+    expect(llms).not.toContain('/jobs/koch');
+  });
+});

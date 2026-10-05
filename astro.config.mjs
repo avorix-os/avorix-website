@@ -75,7 +75,8 @@ export default defineConfig({
   site: SITE,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/produkt") && !page.includes("/404"),
+      // Anweisung 60: /jobs/koch/ ist nur Anzeigenziel (noindex), nicht in die Sitemap.
+      filter: (page) => !page.includes("/produkt") && !page.includes("/404") && !page.includes("/jobs/koch/"),
       serialize(item) {
         const images = PAGE_IMAGES[item.url];
         if (images) {
