@@ -1,0 +1,211 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+/* Anweisung 59, Artikel 2 */
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Koch kurzfristig gesucht: was in 72 Stunden geht, und was Ihre Küche dafür vorbereitet", "item": "https://avorix.de/wissen/koch-kurzfristig-gesucht/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Koch kurzfristig gesucht: was in 72 Stunden geht, und was Ihre Küche dafür vorbereitet",
+    "datePublished": "2026-10-05",
+    "dateModified": "2026-10-05",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie schnell kann ein Koch über einen Personaldienstleister eingesetzt werden?", "acceptedAnswer": { "@type": "Answer", "text": "Bei Avorix in der Regel innerhalb von 24 bis 72 Stunden, je nach Standort und Anforderung. Auf eine Anfrage melden wir uns innerhalb von 24 Stunden; im Notfall rufen Sie am besten direkt an." } },
+      { "@type": "Question", "name": "Geht es auch am selben Tag?", "acceptedAnswer": { "@type": "Answer", "text": "Pauschal zusagen können wir das nicht, die Regel sind 24 bis 72 Stunden. Rufen Sie trotzdem an: Einsatzbereit sind wir rund um die Uhr, und was in Ihrem Fall geht, klären wir am Telefon." } },
+      { "@type": "Question", "name": "Kann ich einen Koch nur für ein paar Tage buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindest-Einsatzdauer gibt es nicht. Ein einzelner Tag ist genauso möglich wie eine ganze Saison." } },
+      { "@type": "Question", "name": "Ist ein kurzfristiger Einsatz teurer?", "acceptedAnswer": { "@type": "Answer", "text": "Der Vorlauf ist einer der Faktoren, die einen Stundensatz bewegen: Wer heute für morgen sucht, zahlt für die Verfügbarkeit. Bei Avorix steht der Stundensatz fest, bevor der Einsatz beginnt. Was in einem Stundensatz steckt: Was kostet ein Mietkoch?" } },
+      { "@type": "Question", "name": "Fehlt auch im Service jemand?", "acceptedAnswer": { "@type": "Answer", "text": "Dann fragen Sie beides zusammen an. Unsere Servicekräfte sind wie unsere Köche bei Avorix fest angestellt und arbeiten im Rahmen der Arbeitnehmerüberlassung. Wie schnell jemand im Service steht, hängt vom Einsatzort und vom Termin ab. Mehr dazu: Servicepersonal mieten" } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Koch kurzfristig gesucht: was in 72 Stunden geht"
+  description="Ein Koch fällt aus, und zwar jetzt. Welche Wege in 24, 48 und 72 Stunden realistisch sind und was Ihre Küche vorbereitet, damit die Verstärkung am ersten Abend trägt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Koch kurzfristig gesucht: was in 72 Stunden geht, und was Ihre Küche dafür vorbereitet</h1>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 05.10.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Innerhalb von ein bis drei Tagen gibt es für einen fehlenden Koch im Kern zwei Wege: einen Personaldienstleister mit Arbeitnehmerüberlassungserlaubnis oder einen selbständigen Mietkoch auf Rechnung, der rechtlich heikel ist, sobald er weisungsgebunden in Ihrer Küche mitarbeitet. Eine Festanstellung dauert Wochen bis Monate. Bei Avorix steht ein festangestellter Koch in der Regel innerhalb von 24 bis 72 Stunden bei Ihnen, je nach Standort und Anforderung. Ob die Verstärkung am ersten Abend trägt, entscheidet aber weniger, wie schnell sie kommt, als was sie vorfindet: einen klaren Posten, Rezepte mit Mengen und jemanden, der sie einweist.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Das eigentliche Problem ist selten die Geschwindigkeit</h2>
+        <p>Wenn ein Koch ausfällt, denken die meisten zuerst an die Suche: Wer kann morgen da sein? Das ist der richtige erste Gedanke, und er reicht trotzdem nicht. Denn auch der beste Koch, der morgen früh in Ihre Küche kommt, kennt Ihre Karte nicht, Ihre Mengen nicht und Ihre Lieferanten nicht. Was er in den ersten Stunden schafft, hängt davon ab, wie viel davon irgendwo steht und wie viel nur im Kopf der Person, die gerade fehlt.</p>
+        <p>Ihre Küche steht und fällt mit einer einzigen Person. Bei einer Kündigung merkt man das über Wochen. Bei einem kurzfristigen Ausfall merkt man es an einem einzigen Abend.</p>
+
+        <h2>Die ersten Stunden: drei Klärungen vor dem ersten Anruf</h2>
+        <ol>
+          <li><strong>Wie lange fehlt die Person?</strong> Eine Krankmeldung über drei Tage, eine Verletzung über sechs Wochen und eine Kündigung mitten in der Saison verlangen verschiedene Lösungen. Wer die Dauer schätzt, auch grob, bekommt am Telefon schneller die passende Antwort.</li>
+          <li><strong>Welcher Posten fehlt, nicht welche Person?</strong> „Ein Koch“ ist zu ungenau. Fehlt jemand an der Kalten, am Herd, am Pass oder in der Führung? Je genauer der Posten, desto schneller findet sich jemand, der ihn kann.</li>
+          <li><strong>Was kann die Karte bis dahin weglassen?</strong> Streichen Sie, was nur die fehlende Person sicher kann. Eine kleine Karte, die jeden Abend gelingt, schützt Ihren Ruf besser als eine große, die wackelt. Wenn der Küchenchef selbst geht, gilt ein eigener Ablauf: <a href="/wissen/kuechenchef-kuendigt-notfallplan/" class="typo-link">Der Küchenchef kündigt: Notfallplan für die ersten 14 Tage</a></li>
+        </ol>
+
+        <h2>Was in 24, 48 und 72 Stunden realistisch ist</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Weg</th><th>Wie schnell</th><th>Was Sie bekommen</th><th>Worauf Sie achten</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Eigenes Team umplanen</th><td>sofort</td><td>Zeit, aber keine zusätzliche Hand</td><td>trägt Tage, nicht Wochen; die Grenzen setzt das Arbeitszeitgesetz</td></tr>
+              <tr><th scope="row">Koch über einen Personaldienstleister mit Erlaubnis</th><td>bei Avorix in der Regel 24 bis 72 Stunden</td><td>einen Koch, der beim Dienstleister fest angestellt ist und den Sie im Alltag anweisen</td><td>sich die Arbeitnehmerüberlassungserlaubnis zeigen lassen</td></tr>
+              <tr><th scope="row">Selbständiger Mietkoch auf Rechnung</th><td>oft kurzfristig</td><td>einen Koch, der Ihnen eine Rechnung schreibt</td><td>rechtlich heikel, sobald er weisungsgebunden in Ihrer Küche mitarbeitet</td></tr>
+              <tr><th scope="row">Aushilfe aus dem Umfeld</th><td>wenige Tage</td><td>eine Hand für einfache Arbeiten</td><td>ersetzt keinen Posten; ganz normal anmelden</td></tr>
+              <tr><th scope="row">Festanstellung</th><td>Wochen bis Monate</td><td>die dauerhafte Lösung</td><td>nicht unter Zeitdruck besetzen; eine Fehlbesetzung kostet mehr als jede Übergangslösung</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Warum der selbständige Mietkoch das Risiko zu Ihnen verschiebt: <a href="/wissen/mietkoch-scheinselbstaendigkeit/" class="typo-link">Mietkoch auf Rechnung: Wo Scheinselbständigkeit beginnt</a></p>
+
+        <h2>Was Sie beim Anruf sagen sollten</h2>
+        <p>Je vollständiger die erste Anfrage, desto schneller steht jemand bei Ihnen. Diese sieben Angaben reichen fast immer:</p>
+        <ol>
+          <li>Betrieb und Einsatzort</li>
+          <li>der fehlende Posten und das Niveau, zum Beispiel Chef de Partie für à la carte oder Verstärkung für ein Bankett mit 120 Gästen</li>
+          <li>ab wann und voraussichtlich wie lange</li>
+          <li>die Arbeitszeiten, auch Teildienste und Wochenenden</li>
+          <li>Küchenstil und Besonderheiten: Diätküche, Allergene, Cook and Chill, große Mengen</li>
+          <li>wer den Koch vor Ort empfängt und einweist</li>
+          <li>ob eine Unterkunft nötig ist</li>
+        </ol>
+        <p>Wenn noch etwas fehlt, fragen wir nach. Wichtig ist, dass Sie anrufen, bevor alles feststeht.</p>
+
+        <h2>Der erste Abend: was die Verstärkung vorfinden muss</h2>
+        <p>Ein erfahrener Koch braucht keine Einführung ins Kochen. Er braucht eine Einführung in Ihre Küche. Diese fünf Dinge entscheiden, ob er am ersten Abend trägt oder sucht:</p>
+        <ul>
+          <li><strong>Ein Posten, nicht die ganze Küche.</strong> Geben Sie ihm am ersten Tag einen klar umrissenen Bereich, und erweitern Sie, wenn er sitzt.</li>
+          <li><strong>Die Gerichte des Postens als Rezept.</strong> Mit Zutaten, Mengen, Anrichteweise und am besten einem Foto. Wie so ein Standard aussieht: <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a></li>
+          <li><strong>Die Mise-en-place-Liste.</strong> Was muss bis zum Service vorbereitet sein, in welcher Menge?</li>
+          <li><strong>Ihre Hygieneregeln.</strong> Kühlstellen, Reinigungsplan, Allergenkennzeichnung. Ihr HACCP-Konzept gilt für ihn wie für alle anderen. Lassen Sie sich die Bescheinigung nach § 43 Infektionsschutzgesetz zeigen, die viele noch Gesundheitszeugnis nennen.</li>
+          <li><strong>Ein Ansprechpartner.</strong> Eine Person, die er fragen kann, ohne den Service aufzuhalten.</li>
+        </ul>
+        <p>Wer das vorbereitet hat, bekommt am ersten Abend einen Koch, der kocht, statt einen, der sucht.</p>
+
+        <h2>Warum die Vorbereitung auch den nächsten Ausfall löst</h2>
+        <p>Alles, was Sie für die Verstärkung aufschreiben, bleibt. Die Rezepte, die Mengen, die Mise-en-place-Liste helfen beim nächsten Ausfall wieder, beim neuen Mitarbeiter, bei der Urlaubsvertretung. Betriebe, die ihre Gerichte dauerhaft dokumentiert haben, trifft ein Ausfall deutlich weniger hart.</p>
+        <p>Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. Unsere Köche arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da. Wie die App aufgebaut ist: <a href="/koch-app/" class="typo-link">Avorix Koch-App</a></p>
+
+        <h2>So läuft es bei Avorix</h2>
+        <ol>
+          <li><strong>Sie fragen an oder rufen an.</strong> Wir melden uns innerhalb von 24 Stunden. Im Notfall ist das Telefon schneller: <a href="tel:+4975413973915" data-cta-location="wissen-kurzfristig-ablauf" data-cta-event="personal_anruf_click" class="typo-link">07541 3973915</a>, Montag bis Freitag von 8 bis 17 Uhr persönlich, außerhalb über Band. Einsatzbereit sind wir rund um die Uhr, auch nachts und am Wochenende.</li>
+          <li><strong>Wir klären Bedarf, Zeitraum und Anforderung.</strong> Kurz und konkret: Was für ein Betrieb, was für eine Karte, ab wann.</li>
+          <li><strong>Börge Penk sucht den passenden Koch aus.</strong> Jeder, den wir schicken, ist Koch mit langjähriger Küchenerfahrung und bei Avorix fest angestellt und sozialversichert. Küchenhilfen schicken wir nicht.</li>
+          <li><strong>Der Einsatz startet.</strong> Die geleisteten Stunden werden dokumentiert.</li>
+        </ol>
+        <p>Avorix arbeitet in Deutschland und Österreich, mit eigenen Seiten für <a href="/personal/bodensee/" class="typo-link">Bodensee</a>, <a href="/personal/muenchen/" class="typo-link">München</a>, <a href="/personal/frankfurt/" class="typo-link">Frankfurt</a>, <a href="/personal/stuttgart/" class="typo-link">Stuttgart</a>, <a href="/personal/tirol/" class="typo-link">Tirol</a> und <a href="/personal/vorarlberg/" class="typo-link">Vorarlberg</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie schnell kann ein Koch über einen Personaldienstleister eingesetzt werden?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Bei Avorix in der Regel innerhalb von 24 bis 72 Stunden, je nach Standort und Anforderung. Auf eine Anfrage melden wir uns innerhalb von 24 Stunden; im Notfall rufen Sie am besten direkt an.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Geht es auch am selben Tag?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Pauschal zusagen können wir das nicht, die Regel sind 24 bis 72 Stunden. Rufen Sie trotzdem an: Einsatzbereit sind wir rund um die Uhr, und was in Ihrem Fall geht, klären wir am Telefon.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kann ich einen Koch nur für ein paar Tage buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Eine Mindest-Einsatzdauer gibt es nicht. Ein einzelner Tag ist genauso möglich wie eine ganze Saison.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ist ein kurzfristiger Einsatz teurer?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Der Vorlauf ist einer der Faktoren, die einen Stundensatz bewegen: Wer heute für morgen sucht, zahlt für die Verfügbarkeit. Bei Avorix steht der Stundensatz fest, bevor der Einsatz beginnt. Was in einem Stundensatz steckt: <a href="/wissen/mietkoch-kosten/" class="typo-link">Was kostet ein Mietkoch?</a></p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Fehlt auch im Service jemand?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Dann fragen Sie beides zusammen an. Unsere Servicekräfte sind wie unsere Köche bei Avorix fest angestellt und arbeiten im Rahmen der Arbeitnehmerüberlassung. Wie schnell jemand im Service steht, hängt vom Einsatzort und vom Termin ab. Mehr dazu: <a href="/personal/service/" class="typo-link">Servicepersonal mieten</a></p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* Anweisung 51: Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color:var(--grau)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Es fehlt jemand, und zwar jetzt? Rufen Sie an: <a href="tel:+4975413973915" data-cta-location="wissen-kurzfristig-ende" data-cta-event="personal_anruf_click" class="typo-link">07541 3973915</a> (Mo bis Fr 8 bis 17 Uhr, außerhalb über Band).
+      </p>
+      <a href="/personal/" data-cta-location="wissen-kurzfristig-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
