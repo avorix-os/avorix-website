@@ -1,0 +1,193 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+/* Anweisung 59, Artikel 1 */
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Küche outsourcen: drei Wege, und was Sie bei jedem aus der Hand geben", "item": "https://avorix.de/wissen/kueche-outsourcen/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Küche outsourcen: drei Wege, und was Sie bei jedem aus der Hand geben",
+    "datePublished": "2026-10-05",
+    "dateModified": "2026-10-05",
+    "publisher": { "@type": "Organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Was kostet es, eine Kantine oder Küche outzusourcen?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an der Vertragsform: Pacht, Preis oder Zuschuss je Essen oder eine Gebühr für die Führung. Ein ehrlicher Vergleich legt die Vollkosten Ihrer eigenen Küche (Personal mit Urlaub und Ausfällen, Ware, Energie) neben das Angebot, und zwar über die ganze Vertragslaufzeit, nicht über einen Monat." } },
+      { "@type": "Question", "name": "Kann ich die Küche outsourcen und mein Personal behalten?", "acceptedAnswer": { "@type": "Answer", "text": "Ob Ihre Mitarbeiter beim Wechsel zu einem Caterer mitgehen, ist eine arbeitsrechtliche Frage, die Sie vorab klären sollten. Beim geteilten Küchenchef und bei Köchen auf Zeit stellt sich die Frage nicht: Ihr Team bleibt Ihr Team, die Verstärkung kommt dazu." } },
+      { "@type": "Question", "name": "Was ist günstiger: outsourcen oder Personal mieten?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos)." } },
+      { "@type": "Question", "name": "Übernimmt Avorix unsere Kantine komplett?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Küche outsourcen: drei Wege und wann welcher passt"
+  description="Küche an einen Caterer abgeben, den Küchenchef teilen oder Köche auf Zeit holen: was jeder Weg bedeutet, was Sie dabei aus der Hand geben und wann er sich rechnet."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Küche outsourcen: drei Wege, und was Sie bei jedem aus der Hand geben</h1>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 05.10.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        Eine Küche outsourcen kann drei verschiedene Dinge heißen: den ganzen Betrieb an einen Caterer abgeben, sich die Küchenleitung mit anderen Häusern teilen oder Köche auf Zeit über einen Personaldienstleister holen. Der Unterschied liegt weniger im Preis als darin, was Sie behalten: Karte, Qualität, den Kontakt zu Ihren Gästen und die Freiheit, wieder umzusteuern. Die Fremdvergabe an einen Caterer passt zu konstant hohen Essenszahlen und dem Wunsch, sich ganz aus der Küche zurückzuziehen. Wer die Küche behalten und nur das Personalproblem lösen will, kommt mit den beiden anderen Wegen meist weiter.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum die Frage gerade jetzt so oft gestellt wird</h2>
+        <p>Über Outsourcing denken die meisten Betriebe nach, wenn die Küche schon eine Weile wackelt. Der Küchenchef geht in Rente, zwei Stellen sind seit Monaten offen, der Dienstplan hält nur noch, weil alle Überstunden machen. Dann wirkt die Fremdvergabe wie der Ausweg, und die Überlegung ist vernünftig: Ein Caterer bringt Personal, Einkauf und Organisation mit.</p>
+        <p>Dahinter steht eine Veränderung, für die kein Betrieb etwas kann. Die Beschäftigung im deutschen Gastgewerbe liegt wieder über dem Niveau von 2019, aber 2025 wurden nur 7.464 neue Ausbildungsverträge zum Koch geschlossen, neun Prozent weniger als 2019 (DEHOGA-Zahlenspiegel IV/2025). Die Bundesagentur für Arbeit führt Koch und Köchin als Engpassberuf. Es fehlt nicht an Stellen, es fehlt an Köchen. Wie die Zahlen im Einzelnen aussehen: <a href="/leitfaden/" class="typo-link">Fachkräftemangel in der Küche</a></p>
+        <p>Das erklärt, warum so viele Küchen gleichzeitig an dieselbe Grenze stoßen. Ihre Küche steht und fällt mit einer einzigen Person. Die Fremdvergabe löst dieses Problem, indem sie den ganzen Betrieb abgibt. Das ist ein möglicher Weg, aber nicht der einzige.</p>
+
+        <h2>Weg 1: Die Küche an einen Caterer abgeben</h2>
+        <p>Bei der Fremdvergabe übernimmt ein externer Betreiber die Küche: Personal, Einkauf, Produktion, oft auch Ausgabe und Abrechnung. In der Praxis gibt es zwei Grundformen und viele Mischungen dazwischen. Entweder wirtschaftet der Betreiber auf eigene Rechnung und trägt das Risiko, häufig gegen Pacht oder Miete für die Räume. Oder er führt die Küche in Ihrem Auftrag, Sie tragen die Kosten und zahlen für die Führung. Dazwischen liegen Verträge mit festem Preis oder Zuschuss je Essen.</p>
+        <p><strong>Was Sie gewinnen:</strong> planbare Kosten, kein eigenes Personalproblem mehr, die Einkaufsmacht eines großen Betreibers.</p>
+        <p><strong>Was Sie abgeben:</strong> Karte, Qualität und den direkten Kontakt zu Ihren Gästen, meist für mehrere Jahre. Und der Rückweg ist aufwendig, weil Personal und Wissen dann beim Betreiber liegen.</p>
+        <p><strong>Eine Frage, die Sie vor jeder Ausschreibung klären sollten:</strong> Arbeiten heute eigene Leute in der Küche, was geschieht mit ihnen? Das ist eine arbeitsrechtliche Frage, das Stichwort heißt Betriebsübergang. Klären Sie sie, bevor Sie Angebote einholen, nicht danach.</p>
+        <p><strong>Wann dieser Weg passt:</strong> wenn Ihre Essenszahlen über das ganze Jahr hoch und stabil sind, die Küche nicht Teil dessen ist, wofür Ihre Gäste kommen, und Sie sich bewusst aus dem Küchenbetrieb zurückziehen wollen.</p>
+
+        <h2>Weg 2: Ein Küchenchef für mehrere Häuser</h2>
+        <p>Nicht jedes Haus braucht einen Spitzen-Küchenchef in Vollzeit. Deshalb stellen wir Ihrem Haus einen erfahrenen Küchenchef für den operativen Einsatz zur Verfügung: Er arbeitet vor Ort in Ihr Küchenteam integriert, unterstützt Sie bei der Weiterentwicklung Ihrer Speisekarte, sorgt im laufenden Küchenbetrieb für die Umsetzung Ihrer Qualitätsstandards und begleitet Ihr Team im Arbeitsalltag. Mehrere Häuser einer Region können sich diese Expertise teilen.</p>
+        <p>Ihre Küche bleibt dabei Ihre Küche: Sie behalten Karte, Team und Gäste. Manche Häuser nennen das Interim-Küchenchef: ein erfahrener Koch, der für eine begrenzte Zeit im operativen Einsatz die Küche mitträgt, bis die Nachfolge steht. Auch das ist bei uns Arbeitnehmerüberlassung, mit allem, was dazugehört.</p>
+        <p><strong>Wann dieser Weg passt:</strong> in kleineren Häusern, die keinen Küchenchef in Vollzeit tragen können, und überall dort, wo die Suche nach einer Nachfolge länger dauert als geplant.</p>
+
+        <h2>Weg 3: Köche auf Zeit</h2>
+        <p>Ein Koch ist bei einem Personaldienstleister fest angestellt und arbeitet auf Zeit in Ihrem Betrieb. Sie führen ihn im Alltag wie Ihr eigenes Teammitglied, der Dienstleister bleibt Arbeitgeber und trägt Lohn, Sozialversicherung und Ausfallrisiko. Erlaubt ist das nur mit einer behördlichen Arbeitnehmerüberlassungserlaubnis der Bundesagentur für Arbeit. Wie das im Einzelnen funktioniert: <a href="/wissen/arbeitnehmerueberlassung-gastronomie/" class="typo-link">Arbeitnehmerüberlassung in der Gastronomie, einfach erklärt</a></p>
+        <p>Sie zahlen geleistete Stunden statt eines Fixkostenblocks. Pro Stunde ist das teurer als ein Angestellter, weil im Stundensatz Lohn, Sozialabgaben, Urlaub und Ausfallrisiko stecken. Wie Sie das ehrlich vergleichen: <a href="/wissen/mietkoch-kosten/" class="typo-link">Was kostet ein Mietkoch?</a></p>
+        <p><strong>Wann dieser Weg passt:</strong> bei einem Ausfall, in der Saison, im Übergang bis zur Neubesetzung und überall, wo die Auslastung schwankt. Bei Avorix steht ein festangestellter Koch in der Regel innerhalb von 24 bis 72 Stunden bei Ihnen.</p>
+
+        <h2>Die drei Wege nebeneinander</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th><span class="sr-only">Frage</span></th><th>Caterer</th><th>Geteilter Küchenchef</th><th>Köche auf Zeit</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Wer führt die Küche?</th><td>der Betreiber</td><td>Sie, der Küchenchef arbeitet in Ihrem Team mit</td><td>Sie</td></tr>
+              <tr><th scope="row">Wer bestimmt die Karte?</th><td>der Betreiber, im Rahmen des Vertrags</td><td>Sie</td><td>Sie</td></tr>
+              <tr><th scope="row">Wer ist Arbeitgeber der Köche?</th><td>der Betreiber</td><td>bei Avorix der Personaldienstleister, im Rahmen der Arbeitnehmerüberlassung</td><td>der Personaldienstleister, für Ihr Stammteam weiter Sie</td></tr>
+              <tr><th scope="row">Wie wird bezahlt?</th><td>Pacht, Preis oder Zuschuss je Essen, Gebühr für die Führung, je nach Vertrag</td><td>Stundensatz für die Einsatzzeit</td><td>Stundensatz für geleistete Stunden</td></tr>
+              <tr><th scope="row">Wie lange binden Sie sich?</th><td>meist mehrere Jahre</td><td>nach Vereinbarung</td><td>kurz; bei Avorix ohne Mindestdauer</td></tr>
+              <tr><th scope="row">Wie schnell geht es?</th><td>Ausschreibung, Verhandlung und Übergabe brauchen eher Monate als Wochen</td><td>nach Absprache</td><td>bei Avorix in der Regel 24 bis 72 Stunden</td></tr>
+              <tr><th scope="row">Passt, wenn</th><td>Sie sich aus der Küche zurückziehen wollen</td><td>Ihnen ein erfahrener Küchenchef fehlt, aber keine volle Stelle trägt</td><td>Ihnen Hände fehlen, für Tage, Wochen oder eine Saison</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Drei Fragen vor der Entscheidung</h2>
+        <ol>
+          <li><strong>Ist die Küche Teil dessen, wofür Ihre Gäste kommen?</strong> In einem Ferienhotel mit Halbpension, einem Gasthof mit eigener Karte oder einer Kantine, die als Arbeitgebervorteil gilt, ist sie das fast immer. Dann wiegt schwer, was Sie mit der Fremdvergabe abgeben.</li>
+          <li><strong>Wie stabil sind Ihre Essenszahlen über das Jahr?</strong> Ein Vertrag mit Preis je Essen rechnet sich bei konstant hohem Volumen. Bei Saison, Ferienzeiten und schwankender Belegung zahlen Sie die ruhigen Wochen mit.</li>
+          <li><strong>Fehlt Ihnen die Küche, oder fehlen Ihnen zwei Leute?</strong> Wer diese Frage ehrlich beantwortet, merkt oft: Nicht der Betrieb ist das Problem, sondern eine Lücke im Team und das Wissen, das an einer einzigen Person hängt.</li>
+        </ol>
+
+        <h2>Was danach bleibt</h2>
+        <p>Wer outsourct, um ein Personalproblem zu lösen, hat danach kein Personalproblem mehr, aber auch keine eigene Küche. Wer die Lücke auf Zeit schließt, hat nach dem Einsatz wieder dieselbe Lücke, wenn nichts weiter passiert ist.</p>
+        <p>Deshalb arbeitet Avorix an beiden Enden. Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt. Unsere Köche arbeiten mit der Avorix Koch-App und dokumentieren dabei weiter. Der Leihkoch geht irgendwann wieder. Sein Wissen bleibt da.</p>
+        <p>Wer unsicher ist, ob die Fremdvergabe wirklich nötig ist, kann es im Kleinen prüfen: Behalten Sie alles, wie es ist, holen Sie für zwei Wochen einen Koch auf Zeit, und entscheiden Sie danach. Eine Mindestdauer gibt es bei uns nicht. Sie führen Ihre Küche. Nicht Ihre Küche Sie.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Was kostet es, eine Kantine oder Küche outzusourcen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt an der Vertragsform: Pacht, Preis oder Zuschuss je Essen oder eine Gebühr für die Führung. Ein ehrlicher Vergleich legt die Vollkosten Ihrer eigenen Küche (Personal mit Urlaub und Ausfällen, Ware, Energie) neben das Angebot, und zwar über die ganze Vertragslaufzeit, nicht über einen Monat.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Kann ich die Küche outsourcen und mein Personal behalten?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ob Ihre Mitarbeiter beim Wechsel zu einem Caterer mitgehen, ist eine arbeitsrechtliche Frage, die Sie vorab klären sollten. Beim geteilten Küchenchef und bei Köchen auf Zeit stellt sich die Frage nicht: Ihr Team bleibt Ihr Team, die Verstärkung kommt dazu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist günstiger: outsourcen oder Personal mieten?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos).</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Übernimmt Avorix unsere Kantine komplett?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* Anweisung 51: Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color:var(--grau)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color:var(--grau)">
+        Die Küche behalten, die Lücke schließen.
+      </p>
+      <a href="/personal/" data-cta-location="wissen-outsourcen-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
