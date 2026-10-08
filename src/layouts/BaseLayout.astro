@@ -15,6 +15,9 @@ interface Props {
   noindex?: boolean;
   // Anweisung 60: eigener robots-Wert, z. B. "noindex, follow" fuer /jobs/koch/.
   robots?: string;
+  // Anweisung 61, Teil 6: expliziter hreflang-Satz (z. B. /jobs/ -> de/en/hu +
+  // x-default). Wenn gesetzt, ersetzt er die automatische Sprachpaar-Logik.
+  alternates?: { hreflang: string; href: string }[];
 }
 
 const {
@@ -26,6 +29,7 @@ const {
   schemaOrg,
   noindex = false,
   robots,
+  alternates,
 } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.de";
@@ -104,7 +108,9 @@ if (SPRACHPAARE[pfad]) {
       }
     </script>
     <link rel="canonical" href={canonicalUrl} />
-    {paar && (
+    {alternates ? (
+      alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)
+    ) : paar && (
       <>
         <link rel="alternate" hreflang="de" href={`${siteUrl}${paar.de === "/" ? "/" : paar.de}`} />
         <link rel="alternate" hreflang="en" href={`${siteUrl}${paar.en}`} />

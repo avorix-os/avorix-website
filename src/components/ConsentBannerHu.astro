@@ -1,0 +1,659 @@
+---
+/* Anweisung 61, Teil 4: ungarischer Cookie-Banner. Technik, Kategorien und
+   Speicherung sind identisch zum deutschen Banner (gleiche ids, dasselbe CSS
+   und Skript weiter unten) — nur die sichtbaren Texte sind Ungarisch.
+   HINWEIS Gegenlese: Die generischen UI-Woerter, die in Anweisung 61 nicht
+   woertlich vorgegeben sind (Tabellenkoepfe, „Részletek", aria-Labels), hat
+   Claude uebersetzt; sie sind beim Muttersprachler mitzupruefen. */
+---
+
+{/* Ebene 1: Consent-Banner */}
+<div id="consent-banner" hidden role="region" aria-label="Süti-hozzájárulás">
+  <div class="cb-inner">
+    <div class="cb-text">
+      <strong>Sütiket és hasonló technológiákat használunk</strong>
+      <p>
+        A választásodat a böngésződben tároljuk; ez technikailag szükséges. A hozzájárulásoddal a Google Analytics 4 szolgáltatást használjuk a weboldal használatának statisztikai elemzésére, és a Google Ads konverziókövetését annak mérésére, hogy mely hirdetéseink vezetnek jelentkezéshez. További információt a beállításokban és az <a href="/en/privacy">adatvédelmi tájékoztatóban</a> (angol nyelven) találsz.
+      </p>
+    </div>
+    <div class="cb-buttons">
+      <button type="button" id="cb-accept-all">Mindet elfogadom</button>
+      <button type="button" id="cb-reject-all">Mindet elutasítom</button>
+      <button type="button" id="cb-settings" class="cb-btn-neutral">Beállítások</button>
+    </div>
+  </div>
+</div>
+
+{/* Ebene 2: Einstellungs-Panel (Modal) */}
+<div id="consent-panel" hidden role="dialog" aria-modal="true" aria-label="Süti-beállítások">
+  <div class="cp-backdrop"></div>
+  <div class="cp-dialog" role="document">
+    <div class="cp-header">
+      <h2 class="cp-title">Süti-beállítások</h2>
+      <button type="button" id="cp-close" aria-label="Bezárás" class="cp-close-btn">&times;</button>
+    </div>
+    <div class="cp-body">
+      <p class="cp-intro">
+        Itt döntheted el, hogy használhatjuk-e a Google Analytics 4 szolgáltatást a weboldal statisztikai elemzésére, és a Google Ads konverziókövetését hirdetéseink mérésére. A választásodat bármikor módosíthatod a láblécben található „Süti-beállítások” linken. A jogalap mindkét esetben a hozzájárulásod (GDPR 6. cikk (1) bekezdés a) pont). Az eszközödön tárolt információkhoz való hozzáférés, amennyiben szükséges, a hozzájárulásod alapján történik (a német TDDDG 25. § (1) bekezdése).
+      </p>
+
+      {/* Technisch notwendig */}
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">Technikailag szükséges</h3>
+            <span class="cp-always-active">mindig aktív</span>
+          </div>
+        </div>
+        <p class="cp-cat-desc">
+          Erre a tárolásra azért van szükség, hogy figyelembe vehessük a süti-döntésedet. A döntést kizárólag helyben, a böngésződben tároljuk, és ezzel semmilyen adat nem kerül harmadik félhez.
+        </p>
+        <details class="cp-details">
+          <summary>Részletek</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>Bejegyzés</th>
+                  <th>Cél</th>
+                  <th>Tárolás helye</th>
+                  <th>Időtartam</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>avorix_consent</code></td>
+                  <td>a süti-döntésed tárolása</td>
+                  <td>a böngésződ helyi tárhelye (localStorage)</td>
+                  <td>visszavonásig, a böngészőadatok törléséig vagy a kérdés technikai megújításáig</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      {/* Statistik */}
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">Statisztika</h3>
+          </div>
+          <label class="cp-toggle" for="cp-statistics-toggle">
+            <input type="checkbox" id="cp-statistics-toggle" />
+            <span class="cp-toggle-slider"></span>
+            <span class="sr-only">Statisztika</span>
+          </label>
+        </div>
+        <p class="cp-cat-desc">
+          A hozzájárulásoddal a Google Ireland Limited Google Tag Manager és Google Analytics 4 szolgáltatását használjuk, hogy megértsük, hogyan használják a weboldalunkat, és mely tartalmak hasznosak a látogatóknak. Ennek során technikai használati adatokat, eszközadatokat, eseményadatokat és álnevesített online azonosítókat dolgozhatunk fel. A Google tájékoztatása szerint az EU-ból érkező hozzáférések IP-címét hozzávetőleges helymeghatározásra használja, majd törli, anélkül hogy a Google Analyticsben rögzítené.
+        </p>
+        <details class="cp-details">
+          <summary>Részletek</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>Bejegyzések/adatok</th>
+                  <th>Szolgáltató</th>
+                  <th>Cél</th>
+                  <th>Időtartam</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>_ga</code>, <code>_ga_*</code>, technikai használati és eseményadatok</td>
+                  <td>Google Ireland Limited</td>
+                  <td>statisztikai elérés- és használatelemzés</td>
+                  <td>a GA4 sütik legfeljebb 2 évig; az eseményadatokat az Avorix GA4-fiókjában 14 hónapig őrizzük</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+
+      {/* Marketing */}
+      <div class="cp-category">
+        <div class="cp-cat-header">
+          <div>
+            <h3 class="cp-cat-title">Marketing</h3>
+          </div>
+          <label class="cp-toggle" for="cp-marketing-toggle">
+            <input type="checkbox" id="cp-marketing-toggle" />
+            <span class="cp-toggle-slider"></span>
+            <span class="sr-only">Marketing</span>
+          </label>
+        </div>
+        <p class="cp-cat-desc">
+          A hozzájárulásoddal a Google Ireland Limited Google Ads konverziókövetését használjuk. Ez megmutatja, hogy aki a Google-ben az egyik hirdetésünkön keresztül érkezett a weboldalra, elküldött-e utána jelentkezést vagy ajánlatkérést, letöltött-e egy sablont, vagy megérintette-e a telefonszámunkat. Ennek során a hirdetéskattintás azonosítóját, a művelet időpontját és típusát, valamint technikai eszközadatokat dolgozunk fel. A nevedet, az e-mail-címedet vagy a jelentkezésed tartalmát a Google nem kapja meg. Remarketinget nem használunk.
+        </p>
+        <details class="cp-details">
+          <summary>Részletek</summary>
+          <div class="cp-table-wrap">
+            <table class="cp-table">
+              <thead>
+                <tr>
+                  <th>Bejegyzések/adatok</th>
+                  <th>Szolgáltató</th>
+                  <th>Cél</th>
+                  <th>Időtartam</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>_gcl_au</code>, <code>_gcl_aw</code>, a hirdetéskattintás azonosítója</td>
+                  <td>Google Ireland Limited</td>
+                  <td>annak mérése, hogy egy Google-hirdetésre való kattintás jelentkezéshez vagy híváshoz vezetett-e</td>
+                  <td>legfeljebb 90 nap</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </div>
+    <div class="cp-footer">
+      <button type="button" id="cp-save">Beállítások mentése</button>
+      <button type="button" id="cp-accept-all">Mindet elfogadom</button>
+      <button type="button" id="cp-reject-all">Mindet elutasítom</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ===== Banner (Ebene 1) ===== */
+  #consent-banner {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 9000;
+    background: #ffffff;
+    border-top: 1px solid #e8e8e8;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.08);
+    padding: 16px;
+  }
+  #consent-banner[hidden] { display: none; }
+  /* H1 (Anweisung 18): Grundfassung ist das Handy, ab 640 die Zeile.
+     Vorher lag die Grenze bei 480 und damit ausserhalb der drei Grenzen. */
+  .cb-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: stretch;
+    justify-content: space-between;
+  }
+  .cb-text {
+    flex: 1 1 500px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #1a1a1a;
+  }
+  .cb-text p { margin: 4px 0 0; }
+  .cb-text a { color: #1a1a1a; text-decoration: underline; }
+  .cb-buttons {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .cb-buttons button { width: 100%; }
+  .cb-buttons button {
+    min-height: 44px;
+    padding: 10px 20px;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  #cb-accept-all, #cb-reject-all {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cb-accept-all:hover, #cb-reject-all:hover {
+    background: #333333;
+    border-color: #333333;
+  }
+  .cb-btn-neutral {
+    background: transparent;
+    border: 1px solid #9a9a9a;
+    color: #1a1a1a;
+  }
+  .cb-btn-neutral:hover { background: #f5f5f5; }
+  @media (min-width: 640px) {
+    .cb-inner { flex-direction: row; align-items: center; }
+    .cb-buttons { flex-direction: row; }
+    .cb-buttons button { width: auto; }
+  }
+
+  /* ===== Panel (Ebene 2) ===== */
+  #consent-panel { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+  #consent-panel[hidden] { display: none; }
+  .cp-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.5); }
+  .cp-dialog {
+    position: relative;
+    background: #ffffff;
+    border-radius: 0;
+    max-width: 640px;
+    width: 100%;
+    height: 100%;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  }
+  .cp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 0;
+  }
+  .cp-title { font-size: 20px; font-weight: 700; margin: 0; color: #1a1a1a; }
+  .cp-close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: #4a4a4a;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .cp-close-btn:hover { background: #f5f5f5; }
+  .cp-body {
+    padding: 16px 24px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .cp-intro { font-size: 13px; line-height: 1.6; color: #4a4a4a; margin: 0 0 20px; }
+  .cp-category {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .cp-cat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .cp-cat-title { font-size: 15px; font-weight: 600; margin: 0; color: #1a1a1a; }
+  .cp-always-active {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: #16a34a;
+    background: #f0fdf4;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 2px;
+  }
+  .cp-cat-desc { font-size: 13px; line-height: 1.5; color: #4a4a4a; margin: 8px 0 0; }
+  .cp-details { margin-top: 8px; }
+  .cp-details summary {
+    font-size: 13px;
+    color: #4a4a4a;
+    cursor: pointer;
+    font-weight: 500;
+  }
+  .cp-table-wrap { overflow-x: auto; margin-top: 8px; }
+  .cp-table {
+    width: 100%;
+    font-size: 12px;
+    border-collapse: collapse;
+    color: #4a4a4a;
+  }
+  .cp-table th, .cp-table td {
+    text-align: left;
+    padding: 6px 8px;
+    border: 1px solid #e8e8e8;
+    vertical-align: top;
+  }
+  .cp-table th { background: #f9f9f9; font-weight: 600; }
+  .cp-table code { font-size: 11px; background: #f5f5f5; padding: 1px 4px; border-radius: 3px; }
+
+  /* Toggle Switch */
+  .cp-toggle { position: relative; display: inline-flex; align-items: center; cursor: pointer; flex-shrink: 0; }
+  .cp-toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+  .cp-toggle-slider {
+    width: 44px;
+    height: 24px;
+    background: #d1d5db;
+    border-radius: 12px;
+    position: relative;
+    transition: background 0.2s;
+  }
+  .cp-toggle-slider::after {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #ffffff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.2s;
+  }
+  .cp-toggle input:checked + .cp-toggle-slider { background: #1a1a1a; }
+  .cp-toggle input:checked + .cp-toggle-slider::after { transform: translateX(20px); }
+  .cp-toggle input:focus-visible + .cp-toggle-slider { outline: 2px solid #1a1a1a; outline-offset: 2px; }
+
+  /* Panel Footer */
+  .cp-footer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 24px 20px;
+    border-top: 1px solid #e8e8e8;
+  }
+  .cp-footer button {
+    flex: 1;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: background 0.15s;
+  }
+  #cp-save {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cp-save:hover { background: #333333; }
+  #cp-accept-all {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cp-accept-all:hover { background: #333333; }
+  #cp-reject-all {
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+    color: #ffffff;
+  }
+  #cp-reject-all:hover { background: #333333; }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Ab 640 wird aus dem Vollbild-Dialog wieder ein Kasten. */
+  @media (min-width: 640px) {
+    .cp-dialog {
+      width: calc(100% - 32px);
+      height: auto;
+      max-height: calc(100vh - 32px);
+      border-radius: 12px;
+    }
+    .cp-footer { flex-direction: row; }
+    .cp-footer button { width: auto; }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var KEY = 'avorix_consent';
+  var GTM_ID = 'GTM-TGC3HD6M';
+
+  /* ---------- Storage helpers ---------- */
+
+  function read() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return null;
+      var obj = JSON.parse(raw);
+      if (!obj) return null;
+      // Nur v3 gilt als vorhanden. Eintraege mit version 1 oder 2 gelten als
+      // nicht vorhanden: der Banner erscheint diesen Besuchern erneut, weil die
+      // Marketing-Kategorie neu hinzugekommen ist (Anweisung 53, A3).
+      if (obj.version === 3 && obj.categories && typeof obj.categories.necessary === 'boolean') {
+        return obj;
+      }
+      return null;
+    } catch (e) { return null; }
+  }
+
+  function write(obj) {
+    try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch (e) { /* private mode */ }
+  }
+
+  function makeConsent(statistics, marketing) {
+    return {
+      version: 3,
+      categories: { necessary: true, statistics: !!statistics, marketing: !!marketing },
+      timestamp: new Date().toISOString()
+    };
+  }
+
+  /* ---------- Consent Mode v2 ---------- */
+
+  function consentUpdate(c) {
+    gtag('consent', 'update', {
+      analytics_storage: c.statistics ? 'granted' : 'denied',
+      ad_storage: c.marketing ? 'granted' : 'denied',
+      ad_user_data: c.marketing ? 'granted' : 'denied',
+      ad_personalization: 'denied'
+    });
+  }
+
+  function loadGTM() {
+    if (window.__gtmLoaded) return;
+    window.__gtmLoaded = true;
+    window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID;
+    document.head.appendChild(s);
+  }
+
+  function deleteGACookies() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      if (name === '_ga' || name.indexOf('_ga_') === 0) {
+        var domains = [window.location.hostname, '.' + window.location.hostname];
+        for (var d = 0; d < domains.length; d++) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + domains[d];
+        }
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      }
+    }
+  }
+
+  function deleteGclCookies() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var name = cookies[i].split('=')[0].trim();
+      if (name.indexOf('_gcl_') === 0) {
+        var domains = [window.location.hostname, '.' + window.location.hostname];
+        for (var d = 0; d < domains.length; d++) {
+          document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + domains[d];
+        }
+        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+      }
+    }
+  }
+
+  /* ---------- Banner / Panel DOM ---------- */
+
+  function showBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = false; }
+  function hideBanner() { var b = document.getElementById('consent-banner'); if (b) b.hidden = true; }
+
+  var _panelTrigger = null;
+  var _panelOpen = false;
+
+  function openPanel(trigger) {
+    var panel = document.getElementById('consent-panel');
+    if (!panel) return;
+    _panelTrigger = trigger || null;
+    _panelOpen = true;
+    // Populate toggles from stored consent
+    var stored = read();
+    var toggle = document.getElementById('cp-statistics-toggle');
+    if (toggle) toggle.checked = !!(stored && stored.categories && stored.categories.statistics);
+    var mToggle = document.getElementById('cp-marketing-toggle');
+    if (mToggle) mToggle.checked = !!(stored && stored.categories && stored.categories.marketing);
+    panel.hidden = false;
+    // Set inert on body content
+    var main = document.querySelector('main');
+    var header = document.querySelector('header');
+    var footer = document.querySelector('footer');
+    var banner = document.getElementById('consent-banner');
+    if (main) main.setAttribute('inert', '');
+    if (header) header.setAttribute('inert', '');
+    if (footer) footer.setAttribute('inert', '');
+    if (banner) banner.setAttribute('inert', '');
+    // Focus the close button
+    var closeBtn = document.getElementById('cp-close');
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closePanel() {
+    var panel = document.getElementById('consent-panel');
+    if (!panel) return;
+    _panelOpen = false;
+    panel.hidden = true;
+    // Remove inert
+    var main = document.querySelector('main');
+    var header = document.querySelector('header');
+    var footer = document.querySelector('footer');
+    var banner = document.getElementById('consent-banner');
+    if (main) main.removeAttribute('inert');
+    if (header) header.removeAttribute('inert');
+    if (footer) footer.removeAttribute('inert');
+    if (banner) banner.removeAttribute('inert');
+    // Return focus
+    if (_panelTrigger && typeof _panelTrigger.focus === 'function') {
+      _panelTrigger.focus();
+    }
+    _panelTrigger = null;
+  }
+
+  /* ---------- Focus trap ---------- */
+
+  function trapFocus(e) {
+    if (!_panelOpen) return;
+    var dialog = document.querySelector('#consent-panel .cp-dialog');
+    if (!dialog) return;
+    var focusable = dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length === 0) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.key === 'Tab') {
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    }
+    if (e.key === 'Escape') { e.preventDefault(); closePanel(); }
+  }
+
+  /* ---------- Apply consent decision ---------- */
+
+  function applyConsent(statistics, marketing, source) {
+    var prev = read();
+    var wasMarketing = !!(prev && prev.categories && prev.categories.marketing);
+    var consent = makeConsent(statistics, marketing);
+    write(consent);
+    // Reihenfolge (A3, Punkt 4): erst consentUpdate, dann loadGTM, sonst feuern
+    // die ersten Tags noch mit dem alten Stand.
+    consentUpdate(consent.categories);
+    if (statistics || marketing) {
+      loadGTM();
+    }
+    if (!statistics) {
+      // Statistik-Widerruf: GA-Cookies loeschen
+      deleteGACookies();
+      if (window.ga) { window.ga('remove'); }
+    }
+    if (!marketing) {
+      // Marketing-Widerruf: Google-Ads-Cookies loeschen (_gcl_*)
+      deleteGclCookies();
+    }
+    hideBanner();
+    if (_panelOpen) closePanel();
+    // A3, Punkt 5: nach einem Marketing-Widerruf die Seite einmal neu laden,
+    // damit bereits geladene Ads-Tags sicher weg sind.
+    if (wasMarketing && !marketing) {
+      window.location.reload();
+    }
+  }
+
+  /* ---------- Public API ---------- */
+
+  window.avorixConsent = {
+    openPanel: function (trigger) { openPanel(trigger); },
+    open: function () { openPanel(null); },
+    get: read
+  };
+
+  /* ---------- Init ---------- */
+
+  function init() {
+    var stored = read();
+    if (stored) {
+      consentUpdate(stored.categories);
+      if (stored.categories.statistics || stored.categories.marketing) {
+        loadGTM();
+      }
+      // Don't show banner
+    } else {
+      showBanner();
+    }
+
+    // Bind Banner buttons
+    var banner = document.getElementById('consent-banner');
+    if (banner && !banner.dataset.bound) {
+      banner.dataset.bound = '1';
+      document.getElementById('cb-accept-all').addEventListener('click', function () { applyConsent(true, true, 'banner'); });
+      document.getElementById('cb-reject-all').addEventListener('click', function () { applyConsent(false, false, 'banner'); });
+      document.getElementById('cb-settings').addEventListener('click', function () {
+        openPanel(document.getElementById('cb-settings'));
+      });
+    }
+
+    // Bind Panel buttons
+    var panel = document.getElementById('consent-panel');
+    if (panel && !panel.dataset.bound) {
+      panel.dataset.bound = '1';
+      document.getElementById('cp-close').addEventListener('click', closePanel);
+      document.querySelector('#consent-panel .cp-backdrop').addEventListener('click', closePanel);
+      document.getElementById('cp-accept-all').addEventListener('click', function () { applyConsent(true, true, 'panel'); });
+      document.getElementById('cp-reject-all').addEventListener('click', function () { applyConsent(false, false, 'panel'); });
+      document.getElementById('cp-save').addEventListener('click', function () {
+        var toggle = document.getElementById('cp-statistics-toggle');
+        var mToggle = document.getElementById('cp-marketing-toggle');
+        applyConsent(toggle && toggle.checked, mToggle && mToggle.checked, 'panel');
+      });
+      document.addEventListener('keydown', trapFocus);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  document.addEventListener('astro:page-load', init);
+})();
+</script>
