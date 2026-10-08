@@ -81,6 +81,10 @@ const LABELS = {
   region: 'Region',
   erfahrung: 'Erfahrung',
   quelle: 'Quelle',
+  // Anweisung 61 (HU/EN-Bewerberseiten)
+  sprache: 'Seitensprache',
+  sprachen: 'Sprachen',
+  land: 'Land',
 };
 
 const MAGIC = {
@@ -219,6 +223,11 @@ function buildBody(def, kennung, fields, files) {
   lines.push('');
   for (const fld of def.fields) {
     if (fld.name === CFG.honeypotField) continue;
+    // Anweisung 61: Sprache/Land/Sprachen nur zeigen, wenn belegt (deutsche
+    // /jobs/-Bewerbungen senden sie nicht; die Seitensprache de ist der Normalfall
+    // und bleibt aus der Benachrichtigung).
+    if (fld.name === 'sprache' && (!fields.sprache || fields.sprache === 'de')) continue;
+    if ((fld.name === 'land' || fld.name === 'sprachen') && !fields[fld.name]) continue;
     const label = LABELS[fld.name] || fld.name;
     let val = fields[fld.name];
     if (fld.name === 'rolle' && def.bewerbung) val = ROLLEN[val] || val;
@@ -305,6 +314,106 @@ function bewerbungAck(fields) {
   return { subject: 'Deine Bewerbung bei Avorix', text, html };
 }
 
+// Anweisung 61, Teil 7: Pflichtangaben nach § 35a GmbHG unter jede
+// Eingangsbestaetigung (Geschaeftsbrief). DE fuer deutsche Formulare und
+// deutschsprachige Bewerbungen, EN fuer englische Formulare, /en/jobs/cook/ und
+// die ungarische Seite (Registerdaten, englisch, das versteht jeder Bewerber).
+function pflichtFooter(lang) {
+  const zeilenDe = [
+    'AVORIX GmbH, Sitz Friedrichshafen · Fallenbrunnen 14 · 88045 Friedrichshafen',
+    'Geschäftsführer: Börge Penk · Amtsgericht Ulm, HRB 751118 · USt-IdNr. DE368762673',
+    'info@avorix.de · 07541 3973915 · https://avorix.de/datenschutz/',
+  ];
+  const zeilenEn = [
+    'AVORIX GmbH, registered office Friedrichshafen · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany',
+    'Managing Director: Börge Penk · Registered at Amtsgericht Ulm, HRB 751118 · VAT ID DE368762673',
+    'info@avorix.de · +49 7541 3973915 · https://avorix.de/en/privacy/',
+  ];
+  const zeilen = lang === 'en' ? zeilenEn : zeilenDe;
+  const text = '\n\n' + zeilen.join('\n');
+  const html =
+    '<hr style="border:none;border-top:1px solid #ddd;margin:16px 0">' +
+    '<p style="color:#888;font-size:12px;line-height:1.5;margin:0">' +
+    zeilen.map((z) => escHtml(z)).join('<br>') +
+    '</p>';
+  return { text, html };
+}
+
+// WhatsApp-Link mit vorformulierter englischer Nachricht (Anweisung 61, Teil 1).
+const WA_BEWERBUNG = `https://wa.me/${WHATSAPP}?text=Hello%20Avorix%2C%20I%20would%20like%20to%20apply%20as%20a%20cook.`;
+
+// Anweisung 61: ungarische Eingangsbestaetigung. Felder uebersetzt, ohne
+// gclid/quelle/sprache/land; WhatsApp als Link.
+function bewerbungAckHu(fields) {
+  const zeilen = [
+    ['A neved', fields.name],
+    ['Telefonszám', fields.telefon],
+    ['E-mail', fields.email],
+    ['Hol szeretnél dolgozni?', fields.region],
+    ['Mennyi tapasztalatod van a vendéglátásban?', fields.erfahrung],
+    ['Milyen nyelven tudsz dolgozni?', fields.sprachen],
+    ['Mit csináltál legutóbb?', fields.nachricht],
+  ].filter(([, v]) => v && String(v).trim() !== '');
+  const text = [
+    `Szia ${fields.name}!`,
+    '',
+    'Köszönjük a jelentkezésedet, megérkezett hozzánk. 24 órán belül jelentkezünk, telefonon vagy WhatsAppon, angolul vagy németül.',
+    '',
+    `Ha addig kérdésed van, írj nekünk WhatsAppon (${WA_BEWERBUNG}).`,
+    '',
+    'Üdvözlettel,',
+    'az Avorix csapata',
+    '',
+    'Amit elküldtél nekünk:',
+    ...zeilen.map(([k, v]) => `${k}: ${v}`),
+  ].join('\n');
+  const html =
+    `<p>Szia ${escHtml(fields.name)}!</p>` +
+    '<p>Köszönjük a jelentkezésedet, megérkezett hozzánk. 24 órán belül jelentkezünk, telefonon vagy WhatsAppon, angolul vagy németül.</p>' +
+    `<p>Ha addig kérdésed van, írj nekünk <a href="${WA_BEWERBUNG}">WhatsAppon</a>.</p>` +
+    '<p>Üdvözlettel,<br>az Avorix csapata</p>' +
+    '<p><strong>Amit elküldtél nekünk:</strong><br>' +
+    zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+    '</p>';
+  return { subject: 'Jelentkezésed az Avorixnál', text, html };
+}
+
+// Anweisung 61: englische Eingangsbestaetigung.
+function bewerbungAckEn(fields) {
+  const zeilen = [
+    ['Your name', fields.name],
+    ['Phone number', fields.telefon],
+    ['Email', fields.email],
+    ['Where do you live?', fields.land],
+    ['Where would you like to work?', fields.region],
+    ['How long have you worked in hospitality?', fields.erfahrung],
+    ['Which languages can you work in?', fields.sprachen],
+    ['What did you do most recently?', fields.nachricht],
+  ].filter(([, v]) => v && String(v).trim() !== '');
+  const text = [
+    `Hello ${fields.name},`,
+    '',
+    'thank you for your application, it has reached us. We will get back to you within 24 hours, by phone or WhatsApp, in English or German.',
+    '',
+    `If you have a question before then, write to us on WhatsApp (${WA_BEWERBUNG}).`,
+    '',
+    'Kind regards,',
+    'the Avorix team',
+    '',
+    'What you sent us:',
+    ...zeilen.map(([k, v]) => `${k}: ${v}`),
+  ].join('\n');
+  const html =
+    `<p>Hello ${escHtml(fields.name)},</p>` +
+    '<p>thank you for your application, it has reached us. We will get back to you within 24 hours, by phone or WhatsApp, in English or German.</p>' +
+    `<p>If you have a question before then, write to us on <a href="${WA_BEWERBUNG}">WhatsApp</a>.</p>` +
+    '<p>Kind regards,<br>the Avorix team</p>' +
+    '<p><strong>What you sent us:</strong><br>' +
+    zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+    '</p>';
+  return { subject: 'Your application at Avorix', text, html };
+}
+
 async function deliver(def, kennung, fields, files) {
   const t = getTransport();
   const to =
@@ -326,12 +435,24 @@ async function deliver(def, kennung, fields, files) {
   // Eingangsbestaetigung an den Absender (3.2 Punkt 11), nur mit E-Mail.
   if (def.ack && replyTo) {
     try {
-      const ack = def.bewerbung
-        ? bewerbungAck(fields)
-        : {
-            subject: def.lang === 'en' ? 'We received your enquiry' : 'Ihre Anfrage bei Avorix',
-            text: ackBody(def),
-          };
+      let ack;
+      if (def.bewerbung) {
+        ack = fields.sprache === 'hu' ? bewerbungAckHu(fields)
+            : fields.sprache === 'en' ? bewerbungAckEn(fields)
+            : bewerbungAck(fields);
+      } else {
+        ack = {
+          subject: def.lang === 'en' ? 'We received your enquiry' : 'Ihre Anfrage bei Avorix',
+          text: ackBody(def),
+        };
+      }
+      // Anweisung 61, Teil 7: Pflichtangaben unter jede Eingangsbestaetigung.
+      const footLang = def.bewerbung
+        ? (fields.sprache && fields.sprache !== 'de' ? 'en' : 'de')
+        : (def.lang === 'en' ? 'en' : 'de');
+      const foot = pflichtFooter(footLang);
+      ack.text = (ack.text || '') + foot.text;
+      if (ack.html) ack.html = ack.html + foot.html;
       await t.sendMail({ from: CFG.mail.from, to: replyTo, ...ack });
     } catch (e) {
       errlog('Eingangsbestaetigung fehlgeschlagen', e.message);
@@ -488,6 +609,25 @@ async function handleForm(req, res) {
   if (Object.prototype.hasOwnProperty.call(def.fields.reduce((a, x) => ((a[x.name] = 1), a), {}), 'newsletter')) {
     const nv = String(fields.newsletter || '').toLowerCase();
     fields.newsletter = ['on', 'true', '1', 'ja', 'yes'].includes(nv);
+  }
+
+  // Anweisung 61: Seitensprache und Land ableiten/setzen VOR der Validierung,
+  // damit die gesetzten Werte gegen die Options-Listen geprueft werden.
+  if (def.bewerbung) {
+    if (fields.quelle === 'lp-hu') fields.sprache = 'hu';
+    else if (fields.quelle === 'lp-en') fields.sprache = 'en';
+    else if (!fields.sprache) fields.sprache = 'de';
+    // Die ungarische Seite hat kein Land-Feld.
+    if (fields.sprache === 'hu' && !String(fields.land || '').trim()) {
+      fields.land = 'Ungarn (ungarische Seite)';
+    }
+    // Pflicht je nach Seitensprache: Sprachen auf HU und EN, Land nur auf EN.
+    if ((fields.sprache === 'hu' || fields.sprache === 'en') && !String(fields.sprachen || '').trim()) {
+      return respondErr(req, res, 400, 'missing_sprachen');
+    }
+    if (fields.sprache === 'en' && !String(fields.land || '').trim()) {
+      return respondErr(req, res, 400, 'missing_land');
+    }
   }
 
   // --- Validierung (3.2 Punkt 3 + 4) ---

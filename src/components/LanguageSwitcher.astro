@@ -26,6 +26,9 @@ if (lang === "de") {
     "/schulung": "/en/training",
     "/system": "/en/system",
     "/pilotprogramm": "/en/pilot-program",
+    // Anweisung 61, Teil 6: von /jobs/ zeigt "English" auf die englische
+    // Bewerberseite, nicht auf die englische Startseite.
+    "/jobs": "/en/jobs/cook",
   };
   otherPath = deToEn[pathname] || `/en`;
 } else {

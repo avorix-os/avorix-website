@@ -1,0 +1,273 @@
+---
+// Anweisung 61: schlanke Layout-Huelle fuer die Bewerberseiten
+// (/jobs/koch/, /hu/szakacs-allas/, /en/jobs/cook/). Schmaler Kopf (Logo +
+// Sprachwechsel) und schmaler Fuss (nur Rechtsseiten + Cookie-Einstellungen),
+// KEIN Kundenmenue und KEINE Kundenlinks. Bewusst eigenstaendig statt BaseLayout,
+// weil Kopf/Fuss und die Seitensprache (auch "hu") anders sind. Kopf-Infrastruktur
+// (Consent-Mode-Default, gclid, Canonical, OG, Tracking) ist mit BaseLayout gleich.
+import "../styles/global.css";
+import ConsentBanner from "../components/ConsentBanner.astro";
+import ConsentBannerHu from "../components/ConsentBannerHu.astro";
+
+interface SprachLink { label: string; href: string; lang: string; hreflang: string; }
+interface Alternate { hreflang: string; href: string; }
+interface RechtLink { label: string; href: string; }
+interface Props {
+  title: string;
+  description?: string;
+  lang: "de" | "en" | "hu";
+  robots?: string;
+  noindex?: boolean;
+  schemaOrg?: object | object[];
+  ogType?: string;
+  // Kopf: Sprachwechsel-Links (ohne die aktuelle Sprache).
+  sprachwechsel: SprachLink[];
+  // hreflang-Satz (alle Fassungen + x-default).
+  alternates: Alternate[];
+  // Fuss: Rechtsseiten + Cookie-Knopf-Beschriftung + Adresszeile.
+  impressum: RechtLink;
+  datenschutz: RechtLink;
+  cookieLabel: string;
+  footerAdresse: string;
+  // Consent-Banner-Sprache.
+  consent: "de" | "en" | "hu";
+  // Ziel des Logos (die Seite selbst; keine Kundenseite).
+  logoHref: string;
+}
+const {
+  title,
+  description = "Avorix",
+  lang,
+  robots,
+  noindex = false,
+  schemaOrg,
+  ogType = "website",
+  sprachwechsel,
+  alternates,
+  impressum,
+  datenschutz,
+  cookieLabel,
+  footerAdresse,
+  consent,
+  logoHref,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://avorix.de";
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
+const ogImageUrl = `${siteUrl}/og-image.jpg`;
+const fullTitle = `${title} | Avorix`;
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#F7F6F2" />
+    <meta name="description" content={description} />
+    {(robots || noindex) && <meta name="robots" content={robots ?? "noindex"} />}
+    <meta name="google-site-verification" content="WuMVUFKkYclVOtZyiyU_PZwYn-Zhk4kdLf3ws9I26eM" />
+    {/* Google Consent Mode v2: Default-Deny vor allen anderen Skripten */}
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied'
+      });
+    </script>
+    {/* Klick-Kennung fuer Google Ads (Anweisung 53, A7). */}
+    <script is:inline>
+      window.avorixGclid = function () {
+        try {
+          var c = JSON.parse(localStorage.getItem('avorix_consent') || 'null');
+          if (!c || c.version !== 3 || !c.categories || !c.categories.marketing) return '';
+        } catch (e) { return ''; }
+        var m = document.cookie.match(/(?:^|;\s*)_gcl_aw=([^;]+)/);
+        if (!m) return '';
+        var teile = decodeURIComponent(m[1]).split('.');
+        return teile.length >= 3 ? teile.slice(2).join('.') : '';
+      };
+    </script>
+    <script is:inline>
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.documentElement.classList.add('js');
+      }
+    </script>
+    <link rel="canonical" href={canonicalUrl} />
+    {alternates.map((a) => (
+      <link rel="alternate" hreflang={a.hreflang} href={a.href} />
+    ))}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    {/* Open Graph */}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Avorix" />
+    <meta property="og:locale" content={lang === "en" ? "en_US" : lang === "hu" ? "hu_HU" : "de_DE"} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <title>{fullTitle}</title>
+    {schemaOrg && (
+      <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+    )}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{lang === "hu" ? "Ugrás a tartalomhoz" : lang === "en" ? "Skip to content" : "Zum Inhalt springen"}</a>
+
+    {/* Schmaler Kopf: Logo + Sprachwechsel, kein Kundenmenue */}
+    <header class="bw-header">
+      <div class="bw-header-inner">
+        <a href={logoHref} class="bw-logo" aria-label="Avorix">
+          <img src="/logo.png" alt="Avorix" width="1743" height="445" />
+        </a>
+        <nav class="bw-langnav" aria-label={lang === "hu" ? "Nyelvválasztás" : lang === "en" ? "Language" : "Sprache"}>
+          {sprachwechsel.map((s, i) => (
+            <>
+              {i > 0 && <span class="bw-sep" aria-hidden="true">·</span>}
+              <a href={s.href} lang={s.lang} hreflang={s.hreflang} class="bw-langlink">{s.label}</a>
+            </>
+          ))}
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="inhalt">
+      <slot />
+    </main>
+
+    {/* Schmaler Fuss: nur Rechtsseiten + Cookie-Einstellungen, keine Kundenlinks */}
+    <footer class="bw-footer">
+      <div class="bw-footer-inner">
+        <span class="bw-foot-adresse">{footerAdresse}</span>
+        <nav class="bw-foot-links" aria-label={lang === "hu" ? "Jogi információk" : lang === "en" ? "Legal" : "Rechtliches"}>
+          <a href={impressum.href} class="bw-foot-link">{impressum.label}</a>
+          <span class="bw-sep" aria-hidden="true">·</span>
+          <a href={datenschutz.href} class="bw-foot-link">{datenschutz.label}</a>
+          <span class="bw-sep" aria-hidden="true">·</span>
+          <button type="button" id="footer-cookie-settings" class="bw-cookie-btn">{cookieLabel}</button>
+        </nav>
+      </div>
+    </footer>
+
+    {consent === "hu" ? <ConsentBannerHu /> : <ConsentBanner lang={consent} />}
+
+    {/* CTA-Klick-Tracking (wie BaseLayout) */}
+    <script is:inline>
+      (function () {
+        if (window.__ctaBound) return;
+        window.__ctaBound = true;
+        document.addEventListener('click', function (e) {
+          var el = e.target.closest('[data-cta-location]');
+          if (!el) return;
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: el.getAttribute('data-cta-event') || 'cta_demo_click',
+            cta_location: el.getAttribute('data-cta-location')
+          });
+        });
+      })();
+    </script>
+    {/* Scroll-Reveal Observer (wie BaseLayout) */}
+    <script is:inline>
+      (function () {
+        if (!document.documentElement.classList.contains('js')) return;
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('reveal-visible');
+            io.unobserve(entry.target);
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -12% 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      })();
+    </script>
+    {/* Cookie-Einstellungen aus dem Fuss oeffnen (wie Footer.astro) */}
+    <script is:inline>
+      (function () {
+        var el = document.getElementById('footer-cookie-settings');
+        if (el && !el.dataset.bound) {
+          el.dataset.bound = '1';
+          el.addEventListener('click', function () {
+            if (window.avorixConsent) window.avorixConsent.openPanel(el);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .bw-header {
+    background: var(--eisen);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+  }
+  .bw-header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: var(--header-hoehe);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .bw-logo { display: flex; align-items: center; flex-shrink: 0; }
+  .bw-logo img { height: 26px; width: auto; display: block; filter: brightness(0) invert(1); }
+  .bw-langnav { display: flex; align-items: center; gap: 4px; }
+  .bw-langlink {
+    color: rgba(247, 246, 242, 0.82);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 8px 10px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    transition: color 0.18s ease;
+  }
+  .bw-langlink:hover { color: var(--papier); text-decoration: underline; }
+  .bw-sep { color: rgba(247, 246, 242, 0.45); }
+
+  .bw-footer {
+    background: var(--eisen);
+    color: rgba(247, 246, 242, 0.7);
+    padding: 24px;
+    margin-top: 64px;
+  }
+  .bw-footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 16px;
+    font-size: 14px;
+  }
+  .bw-foot-adresse { color: rgba(247, 246, 242, 0.7); }
+  .bw-foot-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .bw-foot-link, .bw-cookie-btn {
+    color: rgba(247, 246, 242, 0.82);
+    font-size: 14px;
+    text-decoration: none;
+    background: none;
+    border: 0;
+    padding: 4px 0;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .bw-foot-link:hover, .bw-cookie-btn:hover { color: var(--papier); text-decoration: underline; }
+  .bw-footer .bw-sep { color: rgba(247, 246, 242, 0.45); }
+</style>

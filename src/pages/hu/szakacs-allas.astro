@@ -1,0 +1,142 @@
+---
+// Anweisung 61, Teil 1: ungarische Bewerberseite. Schmaler Kopf/Fuss
+// (BewerberLayout), kein Kundenmenue, kein JobPosting-Schema. Texte Ungarisch,
+// Werte im Formular deutsch. Vor Livegang vom Muttersprachler gegengelesen.
+import BewerberLayout from "../../layouts/BewerberLayout.astro";
+import BewerbungFormular from "../../components/BewerbungFormular.astro";
+
+const WA = "https://wa.me/4915754123492?text=Hello%20Avorix%2C%20I%20would%20like%20to%20apply%20as%20a%20cook.";
+const alternates = [
+  { hreflang: "de", href: "https://avorix.de/jobs/" },
+  { hreflang: "en", href: "https://avorix.de/en/jobs/cook/" },
+  { hreflang: "hu", href: "https://avorix.de/hu/szakacs-allas/" },
+  { hreflang: "x-default", href: "https://avorix.de/en/jobs/cook/" },
+];
+const kurz = [
+  { f: "Ez munkaerő-kölcsönzés?", a: "Jogilag igen: munkaerő-kölcsönzés német hatósági engedéllyel. Az Avorix alkalmazottja vagy, és a szerződésed két megbízás között is érvényben marad." },
+  { f: "Bruttó vagy nettó a fizetés?", a: "Bruttó, vagyis adók és járulékok levonása előtti összeg. Hogy pontosan mennyi marad, az több dologtól függ; az első beszélgetésben átbeszéljük." },
+  { f: "Kell autó?", a: "Sokat segít, de nem feltétel. Autó nélkül olyan megbízásokat keresünk, amelyek tömegközlekedéssel is elérhetők." },
+  { f: "Lehet részmunkaidőben is?", a: "Igen. A fizetés ilyenkor arányosan kevesebb." },
+];
+---
+<BewerberLayout
+  title="Szakács állás Ausztriában és Németországban"
+  description="Munkaszerződés szakácsként egy német cégnél, teljes munkaidőben havi bruttó 2500 és 3500 euró között. A szállást fizetjük, az utazási költségeket megtérítjük. Elég a jó angoltudás."
+  lang="hu"
+  sprachwechsel={[
+    { label: "Deutsch", href: "/jobs/", lang: "de", hreflang: "de" },
+    { label: "English", href: "/en/jobs/cook/", lang: "en", hreflang: "en" },
+  ]}
+  alternates={alternates}
+  impressum={{ label: "Impresszum", href: "/en/legal-notice/" }}
+  datenschutz={{ label: "Adatvédelem", href: "/en/privacy/" }}
+  cookieLabel="Süti-beállítások"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
+  consent="hu"
+  logoHref="/hu/szakacs-allas/"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-3">Állás az Avorixnál · Szakács</p>
+      <h1 class="mb-4">Szakács munka Ausztriában és Németországban, német munkáltatónál.</h1>
+      <ul class="lp-haken mb-6">
+        <li>Teljes munkaidőben havi bruttó 2500 és 3500 euró között, a tapasztalatodtól függően</li>
+        <li>A szállást mi fizetjük, az utazási költségeidet megtérítjük</li>
+        <li>Elég, ha jól beszélsz angolul. A német előny, de nem feltétel.</li>
+      </ul>
+      <div id="bewerben" class="lp-formular">
+        <BewerbungFormular quelle="lp-hu" lang="hu" nurKoch />
+      </div>
+      <p class="lp-wa mt-6">
+        Inkább WhatsAppon írnál? <a href={WA} class="typo-link" target="_blank" rel="noopener" data-cta-location="lp-hu-formular-whatsapp">Írj nekünk</a> angolul vagy németül.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Miért jönnek hozzánk a szakácsok</h2>
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p><strong style="color:var(--druck)">Munkaszerződés egy német cégnél.</strong> Bejelentett munka, teljes társadalombiztosítás, fizetett szabadság, betegség esetén is jár a fizetés. Két megbízás között is megkapod a béredet. Nem szezonális szerződés, és nem kell számlát adnod.</p>
+        <p><strong style="color:var(--druck)">Szállás és utazás.</strong> A szállást mi fizetjük. Az utazási költségeidet (jegyek és minden egyéb) megtérítjük, az odaútra és a hazaútra is.</p>
+        <p><strong style="color:var(--druck)">A főnököd szakács.</strong> Börge Penk húsz évig dolgozott profi konyhákban, tanulóként kezdte és konyhafőnök lett. A megbízásokat ő maga választja ki.</p>
+        <p><strong style="color:var(--druck)">Változatosság.</strong> Más konyhák, más étlapok, más csapatok. Egy megbízás néhány hétig vagy egy egész szezonon át tart.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Hol dolgozol</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Ausztriában Tirolban és Vorarlbergben, Németországban a Bodeni-tó környékén, Münchenben, Stuttgartban és Frankfurtban. Szállodákban, éttermekben és üzemi konyhákban. A cég székhelye Friedrichshafenben van, a Bodeni-tó partján.</p>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Kit keresünk</h2>
+      <ul class="max-w-[var(--spalte-text)]" style="color:var(--grau);list-style:disc;padding-left:24px;line-height:1.7">
+        <li class="mb-2"><strong style="color:var(--druck)">Tapasztalatot szállodai vagy éttermi konyhában.</strong> Szakmai végzettség nem feltétel, a tapasztalat igen.</li>
+        <li class="mb-2"><strong style="color:var(--druck)">Jó angoltudást.</strong> A német előny, de nem feltétel. A felvételi beszélgetés angolul vagy németül zajlik.</li>
+        <li><strong style="color:var(--druck)">Munkavállalási jogot vízum nélkül</strong> Németországban és Ausztriában, például uniós állampolgárként.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Így megy tovább</h2>
+      <ol class="lp-schritte max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong style="color:var(--druck)">Űrlap vagy WhatsApp.</strong> Két perc, önéletrajz nélkül.</li>
+        <li><strong style="color:var(--druck)">24 órán belül jelentkezünk,</strong> telefonon vagy WhatsAppon, angolul vagy németül.</li>
+        <li><strong style="color:var(--druck)">Próbafőzés és szerződés.</strong> Ha mindkét félnek megfelel, aláírjuk a szerződést.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Röviden</h2>
+      <div class="lp-kurz max-w-[var(--spalte-text)]">
+        {kurz.map((k) => (
+          <div class="lp-kurz-item">
+            <p class="lp-kurz-f">{k.f}</p>
+            <p class="lp-kurz-a" style="color:var(--grau)">{k.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <img src="/siegel/avorix-siegel-en.svg" alt="Avorix" class="lp-siegel" />
+      </div>
+      <a href="#bewerben" data-cta-location="lp-hu-ende" class="btn btn-primary mb-6">Jelentkezem</a>
+      <p class="lp-wa max-w-[var(--spalte-text)]" style="margin-inline:auto">
+        Inkább WhatsAppon írnál? <a href={WA} class="typo-link" target="_blank" rel="noopener" data-cta-location="lp-hu-ende-whatsapp">Írj nekünk</a> angolul vagy németül.
+      </p>
+    </div>
+  </section>
+</BewerberLayout>
+
+<style>
+.lp-hero { padding-top: 24px; padding-bottom: 48px; }
+@media (min-width: 768px) { .lp-hero { padding-top: 64px; padding-bottom: 64px; } }
+.lp-hero h1 { font-size: clamp(28px, 7vw, 48px); line-height: 1.15; }
+.lp-haken { list-style: none; padding: 0; margin: 0; color: var(--druck); }
+.lp-haken li { position: relative; padding-left: 28px; margin-bottom: 6px; font-weight: 600; }
+.lp-haken li::before {
+  content: ""; position: absolute; left: 2px; top: 0.35em; width: 14px; height: 8px;
+  border-left: 3px solid var(--akzent); border-bottom: 3px solid var(--akzent); transform: rotate(-45deg);
+}
+.lp-formular { max-width: 560px; }
+.lp-schritte { list-style: decimal; padding-left: 24px; line-height: 1.7; }
+.lp-schritte li { margin-bottom: 12px; }
+.lp-wa { font-size: 15px; color: var(--grau); }
+.lp-kurz-item { padding: 16px 0; border-top: 1px solid var(--linie); }
+.lp-kurz-item:first-child { border-top: 0; }
+.lp-kurz-f { font-weight: 700; color: var(--druck); margin-bottom: 6px; }
+.lp-siegel { width: 140px; height: auto; display: inline-block; }
+</style>

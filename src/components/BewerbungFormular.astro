@@ -1,30 +1,132 @@
 ---
 // Anweisung 60: Bewerbungsformular fuer /jobs/ und /jobs/koch/.
+// Anweisung 61: zusaetzlich ungarische und englische Fassung fuer die
+// Bewerberseiten /hu/szakacs-allas/ und /en/jobs/cook/. Nur die Beschriftung
+// ist uebersetzt, die GESENDETEN Werte sind immer deutsch (der Formular-Dienst
+// wertet ueber alle Sprachen gleich aus). Zwei Zusatzfelder: `sprachen` (HU+EN)
+// und `land` (nur EN), dazu ein verstecktes `sprache`.
 // Kennung `bewerbung` im eigenen Formular-Dienst (form-service/forms.js).
 // Kein Upload, kein Einwilligungs-Haekchen (Bewerberdaten nach § 26 BDSG).
 // Messung: genau ein dataLayer-Ereignis `bewerbung`, nur bei { ok: true }.
 import { WHATSAPP_LINK_BEWERBUNG } from "../data/whatsapp";
 
+type Sprache = "de" | "hu" | "en";
 interface Props {
-  quelle: "jobs" | "lp-koch";
-  // true: Rolle steht fest auf Koch, die Auswahl Koch/Servicekraft entfaellt.
+  quelle: "jobs" | "lp-koch" | "lp-hu" | "lp-en";
   nurKoch?: boolean;
-  // true: unter dem Knopf zusaetzlich „Lieber per WhatsApp?“ (Landingpage).
   whatsappHinweis?: boolean;
+  lang?: Sprache;
 }
-const { quelle, nurKoch = false, whatsappHinweis = false } = Astro.props as Props;
+const { quelle, nurKoch = false, whatsappHinweis = false, lang = "de" } = Astro.props as Props;
 const p = `bw-${quelle}`;
 
-const regionen = [
-  "Bodensee und Oberschwaben",
-  "München und Oberbayern",
-  "Stuttgart und Region",
-  "Frankfurt und Rhein-Main",
-  "Tirol",
-  "Vorarlberg",
-  "Egal, ich bin flexibel",
+// Auswahlwerte: gesendeter Wert (v) + angezeigte Beschriftung (l).
+const REGION_VALUES = {
+  de: [
+    "Bodensee und Oberschwaben",
+    "München und Oberbayern",
+    "Stuttgart und Region",
+    "Frankfurt und Rhein-Main",
+    "Tirol",
+    "Vorarlberg",
+    "Egal, ich bin flexibel",
+  ].map((r) => ({ v: r, l: r })),
+  hu: [
+    { v: "Österreich (Tirol, Vorarlberg)", l: "Ausztria (Tirol, Vorarlberg)" },
+    { v: "Deutschland", l: "Németország" },
+    { v: "Egal, ich bin flexibel", l: "Mindegy, rugalmas vagyok" },
+  ],
+  en: [
+    { v: "Österreich (Tirol, Vorarlberg)", l: "Austria (Tyrol, Vorarlberg)" },
+    { v: "Deutschland", l: "Germany" },
+    { v: "Egal, ich bin flexibel", l: "Either, I am flexible" },
+  ],
+};
+const ERFAHRUNG_VALUES = {
+  de: ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"].map((e) => ({ v: e, l: e })),
+  hu: [
+    { v: "1 bis 2 Jahre", l: "1 vagy 2 év" },
+    { v: "3 bis 5 Jahre", l: "3 és 5 év között" },
+    { v: "mehr als 5 Jahre", l: "Több mint 5 év" },
+  ],
+  en: [
+    { v: "1 bis 2 Jahre", l: "1 or 2 years" },
+    { v: "3 bis 5 Jahre", l: "3 to 5 years" },
+    { v: "mehr als 5 Jahre", l: "More than 5 years" },
+  ],
+};
+const SPRACHEN_VALUES = {
+  hu: [
+    { v: "Englisch", l: "Angol" },
+    { v: "Deutsch", l: "Német" },
+    { v: "Englisch und Deutsch", l: "Angol és német" },
+    { v: "keine der beiden", l: "Egyiken sem" },
+  ],
+  en: [
+    { v: "Englisch", l: "English" },
+    { v: "Deutsch", l: "German" },
+    { v: "Englisch und Deutsch", l: "English and German" },
+    { v: "keine der beiden", l: "Neither" },
+  ],
+};
+const LAND_VALUES = [
+  { v: "Polen", l: "Poland" },
+  { v: "Rumänien", l: "Romania" },
+  { v: "Slowakei", l: "Slovakia" },
+  { v: "Tschechien", l: "Czech Republic" },
+  { v: "Kroatien", l: "Croatia" },
+  { v: "Ungarn", l: "Hungary" },
+  { v: "Slowenien", l: "Slovenia" },
+  { v: "Bulgarien", l: "Bulgaria" },
+  { v: "anderes EU-Land", l: "Other EU country" },
+  { v: "anderes Land", l: "Other country" },
 ];
-const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
+
+const T = {
+  de: {
+    name: "Dein Name", telefon: "Telefonnummer, wir rufen dich an",
+    email: "E-Mail", emailOpt: "(wenn du eine Bestätigung willst)",
+    rolleLegend: "Ich bewerbe mich als:", rolleKoch: "Koch", rolleService: "Servicekraft",
+    land: "", region: "Wo willst du arbeiten?", erfahrung: "Wie lange arbeitest du schon in der Gastronomie?",
+    sprachen: "", nachricht: "Was hast du zuletzt gemacht?", nachrichtOpt: "(freiwillig)",
+    bitteWaehlen: "Bitte wählen", button: "Bewerbung abschicken", sending: "Wird gesendet…",
+    fehler: "Das hat gerade nicht geklappt. Versuch es bitte noch einmal oder ruf uns an: 07541 3973915.",
+    hinweisPre: "Wir verarbeiten deine Angaben, um deine Bewerbung zu bearbeiten. Mehr dazu steht in unserer ",
+    hinweisLink: "Datenschutzerklärung", hinweisHref: "/datenschutz/", hinweisPost: " im Abschnitt „Bewerbungen“.",
+    dankeTitel: "Danke, deine Bewerbung ist da.",
+    dankeText: "Wir melden uns innerhalb von 24 Stunden, meistens per Telefon. Halte dein Handy in der Nähe.",
+  },
+  hu: {
+    name: "A neved", telefon: "Telefonszám (WhatsAppos szám is jó)",
+    email: "E-mail", emailOpt: "(ha visszaigazolást kérsz)",
+    land: "", region: "Hol szeretnél dolgozni?", erfahrung: "Mennyi tapasztalatod van a vendéglátásban?",
+    sprachen: "Milyen nyelven tudsz dolgozni?", nachricht: "Mit csináltál legutóbb?", nachrichtOpt: "(nem kötelező)",
+    bitteWaehlen: "Kérlek, válassz", button: "Jelentkezés elküldése", sending: "Küldés…",
+    fehler: "Ez most nem sikerült. Kérlek, próbáld újra, vagy hívj minket: +49 7541 3973915.",
+    hinweisPre: "Az adataidat a jelentkezésed feldolgozásához használjuk. Részletek az ",
+    hinweisLink: "adatvédelmi tájékoztatóban", hinweisHref: "/en/privacy/", hinweisPost: " (angol nyelven), az „Applications” részben.",
+    dankeTitel: "Köszönjük, megkaptuk a jelentkezésedet.",
+    dankeText: "24 órán belül jelentkezünk, telefonon vagy WhatsAppon. Tartsd kéznél a telefonodat.",
+  },
+  en: {
+    name: "Your name", telefon: "Phone number (WhatsApp is fine)",
+    email: "Email", emailOpt: "(if you want a confirmation)",
+    land: "Where do you live?", region: "Where would you like to work?", erfahrung: "How long have you worked in hospitality?",
+    sprachen: "Which languages can you work in?", nachricht: "What did you do most recently?", nachrichtOpt: "(optional)",
+    bitteWaehlen: "Please choose", button: "Send application", sending: "Sending…",
+    fehler: "That did not work just now. Please try again or call us: +49 7541 3973915.",
+    hinweisPre: "We process your details to handle your application. More in our ",
+    hinweisLink: "privacy policy", hinweisHref: "/en/privacy/", hinweisPost: ", section “Applications”.",
+    dankeTitel: "Thank you, we have received your application.",
+    dankeText: "We will get back to you within 24 hours, by phone or WhatsApp. Keep your phone close.",
+  },
+}[lang];
+
+const istBewerberseite = lang !== "de";
+// Auf HU/EN steht die Rolle fest auf Koch; Pflichtstern immer sichtbar.
+const rolleFest = nurKoch || istBewerberseite;
+const regionen = REGION_VALUES[lang];
+const erfahrung = ERFAHRUNG_VALUES[lang];
 ---
 <div class="bw-wrap" data-bewerbung>
   <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle}>
@@ -32,65 +134,84 @@ const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
     <input type="hidden" name="quelle" value={quelle} />
     <input type="text" name="website" class="bw-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <input type="hidden" name="form_ts" value="" data-bw-ts />
-    {nurKoch && <input type="hidden" name="rolle" value="koch" />}
+    {rolleFest && <input type="hidden" name="rolle" value="koch" />}
+    {istBewerberseite && <input type="hidden" name="sprache" value={lang} />}
 
     <div>
-      <label for={`${p}-name`} class="bw-label">Dein Name <span class="bw-pflicht">*</span></label>
+      <label for={`${p}-name`} class="bw-label">{T.name} <span class="bw-pflicht">*</span></label>
       <input type="text" id={`${p}-name`} name="name" required autocomplete="name" class="bw-field" />
     </div>
 
     <div>
-      <label for={`${p}-telefon`} class="bw-label">Telefonnummer, wir rufen dich an <span class="bw-pflicht">*</span></label>
+      <label for={`${p}-telefon`} class="bw-label">{T.telefon} <span class="bw-pflicht">*</span></label>
       <input type="tel" id={`${p}-telefon`} name="telefon" required autocomplete="tel" inputmode="tel" class="bw-field" />
     </div>
 
     <div>
-      <label for={`${p}-email`} class="bw-label">E-Mail <span class="bw-opt">(wenn du eine Bestätigung willst)</span></label>
+      <label for={`${p}-email`} class="bw-label">{T.email} <span class="bw-opt">{T.emailOpt}</span></label>
       <input type="email" id={`${p}-email`} name="email" autocomplete="email" class="bw-field" />
     </div>
 
-    {!nurKoch && (
+    {!rolleFest && (
       <fieldset class="bw-fieldset">
-        <legend class="bw-label">Ich bewerbe mich als: <span class="bw-pflicht">*</span></legend>
+        <legend class="bw-label">{T.rolleLegend} <span class="bw-pflicht">*</span></legend>
         <div class="bw-rollen">
           <label class="bw-rolle">
             <input type="radio" name="rolle" value="koch" required />
-            <span>Koch</span>
+            <span>{T.rolleKoch}</span>
           </label>
           <label class="bw-rolle">
             <input type="radio" name="rolle" value="service" />
-            <span>Servicekraft</span>
+            <span>{T.rolleService}</span>
           </label>
         </div>
       </fieldset>
     )}
 
+    {lang === "en" && (
+      <div>
+        <label for={`${p}-land`} class="bw-label">{T.land} <span class="bw-pflicht">*</span></label>
+        <select id={`${p}-land`} name="land" required class="bw-field">
+          <option value="" selected disabled>{T.bitteWaehlen}</option>
+          {LAND_VALUES.map((o) => <option value={o.v}>{o.l}</option>)}
+        </select>
+      </div>
+    )}
+
     <div>
-      <label for={`${p}-region`} class="bw-label">Wo willst du arbeiten? <span class="bw-pflicht">*</span></label>
+      <label for={`${p}-region`} class="bw-label">{T.region} <span class="bw-pflicht">*</span></label>
       <select id={`${p}-region`} name="region" required class="bw-field">
-        <option value="" selected disabled>Bitte wählen</option>
-        {regionen.map((r) => <option value={r}>{r}</option>)}
+        <option value="" selected disabled>{T.bitteWaehlen}</option>
+        {regionen.map((o) => <option value={o.v}>{o.l}</option>)}
       </select>
     </div>
 
     <div>
-      <label for={`${p}-erfahrung`} class="bw-label">Wie lange arbeitest du schon in der Gastronomie? <span class="bw-pflicht">*</span></label>
+      <label for={`${p}-erfahrung`} class="bw-label">{T.erfahrung} <span class="bw-pflicht">*</span></label>
       <select id={`${p}-erfahrung`} name="erfahrung" required class="bw-field">
-        <option value="" selected disabled>Bitte wählen</option>
-        {erfahrung.map((e) => <option value={e}>{e}</option>)}
+        <option value="" selected disabled>{T.bitteWaehlen}</option>
+        {erfahrung.map((o) => <option value={o.v}>{o.l}</option>)}
       </select>
     </div>
 
+    {istBewerberseite && (
+      <div>
+        <label for={`${p}-sprachen`} class="bw-label">{T.sprachen} <span class="bw-pflicht">*</span></label>
+        <select id={`${p}-sprachen`} name="sprachen" required class="bw-field">
+          <option value="" selected disabled>{T.bitteWaehlen}</option>
+          {SPRACHEN_VALUES[lang].map((o) => <option value={o.v}>{o.l}</option>)}
+        </select>
+      </div>
+    )}
+
     <div>
-      <label for={`${p}-nachricht`} class="bw-label">Was hast du zuletzt gemacht? <span class="bw-opt">(freiwillig)</span></label>
+      <label for={`${p}-nachricht`} class="bw-label">{T.nachricht} <span class="bw-opt">{T.nachrichtOpt}</span></label>
       <textarea id={`${p}-nachricht`} name="nachricht" rows="3" class="bw-field bw-textarea"></textarea>
     </div>
 
-    <p class="bw-fehler hidden" data-bw-fehler role="alert">
-      Das hat gerade nicht geklappt. Versuch es bitte noch einmal oder ruf uns an: 07541 3973915.
-    </p>
+    <p class="bw-fehler hidden" data-bw-fehler role="alert">{T.fehler}</p>
 
-    <button type="submit" class="btn btn-primary bw-submit">Bewerbung abschicken</button>
+    <button type="submit" class="btn btn-primary bw-submit" data-bw-sending={T.sending}>{T.button}</button>
     {whatsappHinweis && (
       <p class="bw-whatsapp">
         Lieber per WhatsApp?
@@ -98,13 +219,13 @@ const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
       </p>
     )}
     <p class="formular-hinweis">
-      Wir verarbeiten deine Angaben, um deine Bewerbung zu bearbeiten. Mehr dazu steht in unserer <a href="/datenschutz/">Datenschutzerklärung</a> im Abschnitt „Bewerbungen“.
+      {T.hinweisPre}<a href={T.hinweisHref}>{T.hinweisLink}</a>{T.hinweisPost}
     </p>
   </form>
 
   <div class="card bw-danke hidden" data-bw-danke role="status" tabindex="-1">
-    <p class="bw-danke-titel">Danke, deine Bewerbung ist da.</p>
-    <p>Wir melden uns innerhalb von 24 Stunden, meistens per Telefon. Halte dein Handy in der Nähe.</p>
+    <p class="bw-danke-titel">{T.dankeTitel}</p>
+    <p>{T.dankeText}</p>
   </div>
 </div>
 
@@ -190,7 +311,9 @@ const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
       e.preventDefault();
       if (gesendet) return;
       const knopf = form.querySelector<HTMLButtonElement>('[type="submit"]');
-      if (knopf) { knopf.disabled = true; knopf.textContent = 'Wird gesendet…'; }
+      const label = knopf ? knopf.textContent : '';
+      const sending = knopf ? (knopf.getAttribute('data-bw-sending') || 'Wird gesendet…') : '';
+      if (knopf) { knopf.disabled = true; knopf.textContent = sending; }
       fehler?.classList.add('hidden');
       try {
         const fd = new FormData(form);
@@ -210,7 +333,7 @@ const erfahrung = ["1 bis 2 Jahre", "3 bis 5 Jahre", "mehr als 5 Jahre"];
         }
         throw new Error('nicht ok');
       } catch {
-        if (knopf) { knopf.disabled = false; knopf.textContent = 'Bewerbung abschicken'; }
+        if (knopf) { knopf.disabled = false; knopf.textContent = label; }
         fehler?.classList.remove('hidden');
       }
     });

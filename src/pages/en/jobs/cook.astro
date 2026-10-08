@@ -1,0 +1,142 @@
+---
+// Anweisung 61, Teil 2: englische Bewerberseite fuer EU-Bewerber, die Englisch
+// sprechen. Schmaler Kopf/Fuss (BewerberLayout), kein Kundenmenue, kein
+// JobPosting-Schema. Formular mit zusaetzlichem Feld `land`.
+import BewerberLayout from "../../../layouts/BewerberLayout.astro";
+import BewerbungFormular from "../../../components/BewerbungFormular.astro";
+
+const WA = "https://wa.me/4915754123492?text=Hello%20Avorix%2C%20I%20would%20like%20to%20apply%20as%20a%20cook.";
+const alternates = [
+  { hreflang: "de", href: "https://avorix.de/jobs/" },
+  { hreflang: "en", href: "https://avorix.de/en/jobs/cook/" },
+  { hreflang: "hu", href: "https://avorix.de/hu/szakacs-allas/" },
+  { hreflang: "x-default", href: "https://avorix.de/en/jobs/cook/" },
+];
+const kurz = [
+  { f: "Is this temporary agency work?", a: "Legally, yes: it is temporary agency work under an official German licence. You are employed by Avorix, and your contract continues between assignments." },
+  { f: "Is the salary gross or net?", a: "Gross, meaning before taxes and social security contributions. How much you take home depends on several factors; we go through it in the first conversation." },
+  { f: "Do I need a car?", a: "It helps a lot, but it is not a requirement. Without a car, we look for assignments you can reach by public transport." },
+  { f: "Can I work part time?", a: "Yes. The salary is then reduced accordingly." },
+];
+---
+<BewerberLayout
+  title="Chef jobs in Austria and Germany, accommodation paid"
+  description="Employed as a chef by a German company. 2,500 to 3,500 euros gross per month, full time. We pay your accommodation and reimburse your travel costs. Good English is enough."
+  lang="en"
+  sprachwechsel={[
+    { label: "Deutsch", href: "/jobs/", lang: "de", hreflang: "de" },
+    { label: "Magyar", href: "/hu/szakacs-allas/", lang: "hu", hreflang: "hu" },
+  ]}
+  alternates={alternates}
+  impressum={{ label: "Legal notice", href: "/en/legal-notice/" }}
+  datenschutz={{ label: "Privacy", href: "/en/privacy/" }}
+  cookieLabel="Cookie settings"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
+  consent="en"
+  logoHref="/en/jobs/cook/"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-3">Jobs at Avorix · Chef</p>
+      <h1 class="mb-4">Chef jobs in Austria and Germany, employed by a German company.</h1>
+      <ul class="lp-haken mb-6">
+        <li>2,500 to 3,500 euros gross per month full time, depending on your experience</li>
+        <li>We pay your accommodation and reimburse your travel costs</li>
+        <li>Good English is enough. German is a plus, not a requirement.</li>
+      </ul>
+      <div id="bewerben" class="lp-formular">
+        <BewerbungFormular quelle="lp-en" lang="en" nurKoch />
+      </div>
+      <p class="lp-wa mt-6">
+        Prefer WhatsApp? <a href={WA} class="typo-link" target="_blank" rel="noopener" data-cta-location="lp-en-formular-whatsapp">Write to us</a> in English or German.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Why chefs join us</h2>
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p><strong style="color:var(--druck)">Employed by a German company.</strong> Employment contract, full social insurance, paid holidays, sick pay. You keep getting paid between two assignments. No seasonal contract, and no invoices to write.</p>
+        <p><strong style="color:var(--druck)">Accommodation and travel.</strong> We pay your accommodation. We reimburse your travel costs, tickets and everything else, for the journey there and back home.</p>
+        <p><strong style="color:var(--druck)">Your boss is a chef.</strong> Börge Penk worked in professional kitchens for twenty years, from apprentice to head chef. He picks the assignments himself.</p>
+        <p><strong style="color:var(--druck)">Variety.</strong> Different kitchens, different menus, different teams. An assignment lasts a few weeks or a whole season.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Where you work</h2>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">In Austria in Tyrol and Vorarlberg, in Germany around Lake Constance, in Munich, Stuttgart and Frankfurt. In hotels, restaurants and staff canteens. Our head office is in Friedrichshafen on Lake Constance.</p>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Who we are looking for</h2>
+      <ul class="max-w-[var(--spalte-text)]" style="color:var(--grau);list-style:disc;padding-left:24px;line-height:1.7">
+        <li class="mb-2"><strong style="color:var(--druck)">Experience in a hotel or restaurant kitchen.</strong> A formal qualification is not required, experience is.</li>
+        <li class="mb-2"><strong style="color:var(--druck)">Good English.</strong> German is a plus, not a requirement. The interview is in English or German.</li>
+        <li><strong style="color:var(--druck)">The right to work in Germany and Austria without a visa,</strong> for example as an EU citizen.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">What happens next</h2>
+      <ol class="lp-schritte max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong style="color:var(--druck)">Form or WhatsApp.</strong> Two minutes, no CV needed.</li>
+        <li><strong style="color:var(--druck)">We get back to you within 24 hours,</strong> by phone or WhatsApp, in English or German.</li>
+        <li><strong style="color:var(--druck)">Trial cooking and contract.</strong> If it works for both sides, we sign.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">In short</h2>
+      <div class="lp-kurz max-w-[var(--spalte-text)]">
+        {kurz.map((k) => (
+          <div class="lp-kurz-item">
+            <p class="lp-kurz-f">{k.f}</p>
+            <p class="lp-kurz-a" style="color:var(--grau)">{k.a}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <img src="/siegel/avorix-siegel-en.svg" alt="Avorix" class="lp-siegel" />
+      </div>
+      <a href="#bewerben" data-cta-location="lp-en-ende" class="btn btn-primary mb-6">Apply now</a>
+      <p class="lp-wa max-w-[var(--spalte-text)]" style="margin-inline:auto">
+        Prefer WhatsApp? <a href={WA} class="typo-link" target="_blank" rel="noopener" data-cta-location="lp-en-ende-whatsapp">Write to us</a> in English or German.
+      </p>
+    </div>
+  </section>
+</BewerberLayout>
+
+<style>
+.lp-hero { padding-top: 24px; padding-bottom: 48px; }
+@media (min-width: 768px) { .lp-hero { padding-top: 64px; padding-bottom: 64px; } }
+.lp-hero h1 { font-size: clamp(28px, 7vw, 48px); line-height: 1.15; }
+.lp-haken { list-style: none; padding: 0; margin: 0; color: var(--druck); }
+.lp-haken li { position: relative; padding-left: 28px; margin-bottom: 6px; font-weight: 600; }
+.lp-haken li::before {
+  content: ""; position: absolute; left: 2px; top: 0.35em; width: 14px; height: 8px;
+  border-left: 3px solid var(--akzent); border-bottom: 3px solid var(--akzent); transform: rotate(-45deg);
+}
+.lp-formular { max-width: 560px; }
+.lp-schritte { list-style: decimal; padding-left: 24px; line-height: 1.7; }
+.lp-schritte li { margin-bottom: 12px; }
+.lp-wa { font-size: 15px; color: var(--grau); }
+.lp-kurz-item { padding: 16px 0; border-top: 1px solid var(--linie); }
+.lp-kurz-item:first-child { border-top: 0; }
+.lp-kurz-f { font-weight: 700; color: var(--druck); margin-bottom: 6px; }
+.lp-siegel { width: 140px; height: auto; display: inline-block; }
+</style>

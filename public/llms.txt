@@ -13,7 +13,7 @@
 - [Mietkoch in Stuttgart](https://avorix.de/personal/stuttgart): Festangestellte Köche mieten in Stuttgart und im Umland, für Hotels, Restaurants und Betriebskantinen.
 - [Mietkoch in Vorarlberg](https://avorix.de/personal/vorarlberg): Festangestellte Köche mieten in Vorarlberg, vom Rheintal bis zum Arlberg, grenzüberschreitend ordnungsgemäß gemeldet.
 - [Servicepersonal](https://avorix.de/personal/service): Festangestellte Servicekräfte für Restaurant, Bankett und Saison, zusätzlich zum Küchenpersonal.
-- [Jobs bei Avorix](https://avorix.de/jobs): Als Koch oder Servicekraft fest angestellt in wechselnden Häusern, Bodensee, München, Frankfurt, Tirol.
+- [Jobs bei Avorix](https://avorix.de/jobs): Als Koch oder Servicekraft fest angestellt in wechselnden Häusern, Bodensee, München, Frankfurt, Stuttgart, Tirol, Vorarlberg.
 - [Unser System](https://avorix.de/system): Wie Koch-App, Schulung und Personal ineinandergreifen
 - [Koch-App](https://avorix.de/koch-app): Funktionen der App im Detail
 - [Schulung](https://avorix.de/schulung): Anlernen des Küchenteams durch Avorix-Köche
@@ -52,6 +52,8 @@
 - [Pilot Program](https://avorix.de/en/pilot-program): The 2026 Pilot Program, three hotel kitchens at around half the regular price, results evaluated anonymously.
 - [About Us](https://avorix.de/en/about): Founder Börge Penk, head chef with 20 years of practice.
 - [Contact](https://avorix.de/en/contact): Request a demo or ask about staff.
+- [Chef jobs (English)](https://avorix.de/en/jobs/cook): Employed as a chef by a German company, working in Austria and Germany. 2,500 to 3,500 euros gross per month, accommodation paid, travel reimbursed. Good English is enough.
+- [Szakács állás (magyarul)](https://avorix.de/hu/szakacs-allas): Chef job in Austria and Germany, employed by a German company, page in Hungarian. Accommodation paid, travel reimbursed, good English is enough.
 
 ## Fakten
 

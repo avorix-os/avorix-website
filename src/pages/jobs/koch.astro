@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BewerberLayout from "../../layouts/BewerberLayout.astro";
 import Stempel from "../../components/Stempel.astro";
 import BewerbungFormular from "../../components/BewerbungFormular.astro";
 import { WHATSAPP_LINK, WHATSAPP_LINK_BEWERBUNG } from "../../data/whatsapp";
@@ -11,10 +11,22 @@ import kochVonHintenPass from "../../assets/bilder/koch-von-hinten-pass.jpg";
 // nicht in Navigation oder Footer; kein JobPosting- und kein FAQ-Schema.
 // Im ersten Bildschirm nur Formular und WhatsApp, keine anderen Knoepfe.
 ---
-<BaseLayout
+<BewerberLayout
   title="Koch (m/w/d) bei Avorix: 2.500 bis 3.500 € brutto"
   description="Fest angestellt als Koch in wechselnden Küchen. 2.500 bis 3.500 Euro brutto im Monat, Fahrtkosten und Unterkunft bezahlt. Antwort in 24 Stunden."
+  lang="de"
   robots="noindex, follow"
+  sprachwechsel={[
+    { label: "English", href: "/en/jobs/cook/", lang: "en", hreflang: "en" },
+    { label: "Magyar", href: "/hu/szakacs-allas/", lang: "hu", hreflang: "hu" },
+  ]}
+  alternates={[]}
+  impressum={{ label: "Impressum", href: "/impressum/" }}
+  datenschutz={{ label: "Datenschutz", href: "/datenschutz/" }}
+  cookieLabel="Cookie-Einstellungen"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen"
+  consent="de"
+  logoHref="/jobs/koch/"
 >
   <section class="lp-hero px-6">
     <div class="content-width">
@@ -108,7 +120,7 @@ import kochVonHintenPass from "../../assets/bilder/koch-von-hinten-pass.jpg";
       </p>
     </div>
   </section>
-</BaseLayout>
+</BewerberLayout>
 
 <style>
 /* Erster Bildschirm: wenig Abstand ueber der H1, damit auf dem Handy der
