@@ -13,7 +13,7 @@
 - [Mietkoch in Stuttgart](https://avorix.de/personal/stuttgart): Festangestellte Köche mieten in Stuttgart und im Umland, für Hotels, Restaurants und Betriebskantinen.
 - [Mietkoch in Vorarlberg](https://avorix.de/personal/vorarlberg): Festangestellte Köche mieten in Vorarlberg, vom Rheintal bis zum Arlberg, grenzüberschreitend ordnungsgemäß gemeldet.
 - [Servicepersonal](https://avorix.de/personal/service): Festangestellte Servicekräfte für Restaurant, Bankett und Saison, zusätzlich zum Küchenpersonal.
-- [Jobs bei Avorix](https://avorix.de/jobs): Als Koch oder Servicekraft fest angestellt in wechselnden Häusern, Bodensee, München, Frankfurt, Tirol.
+- [Jobs bei Avorix](https://avorix.de/jobs): Als Koch oder Servicekraft fest angestellt in wechselnden Häusern, Bodensee, München, Frankfurt, Stuttgart, Tirol, Vorarlberg.
 - [Unser System](https://avorix.de/system): Wie Koch-App, Schulung und Personal ineinandergreifen
 - [Koch-App](https://avorix.de/koch-app): Funktionen der App im Detail
 - [Schulung](https://avorix.de/schulung): Anlernen des Küchenteams durch Avorix-Köche

@@ -125,11 +125,18 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
   .nav-links {
     display: flex;
     align-items: center;
-    /* Anweisung 50: 24px zwischen den vier gleichrangigen Menuepunkten (von 32),
-       damit sie als eine Gruppe lesbar sind. Der gesparte Platz geht als groesserer
-       Abstand vor die Knopfgruppe (siehe .nav-cta-erst). */
-    gap: 24px;
+    /* Anweisung 50: 24px zwischen den vier gleichrangigen Menuepunkten, damit sie
+       als eine Gruppe lesbar sind. Anweisung 61, Teil 9: Die 24px kamen bisher
+       aus gap PLUS je 16px Innenabstand, sichtbar standen also 56px. Jetzt kommt
+       der Abstand allein aus dem Innenabstand (12px je Seite = sichtbar 24px),
+       gap faellt weg, und die Gruppe rueckt rechts an die Knopfgruppe. */
+    gap: 0;
+    justify-content: flex-end;
     flex: 1;
+  }
+  .nav-links .nav-link,
+  .nav-links .nav-dropdown-trigger {
+    --nav-pad-x: 12px;
   }
 
   /* Anweisung 50: 40px zwischen "Ueber uns" und "Personal anfragen". Die
