@@ -35,6 +35,19 @@ const REGIONEN = [
   'Egal, ich bin flexibel',
 ];
 const ERFAHRUNG = ['1 bis 2 Jahre', '3 bis 5 Jahre', 'mehr als 5 Jahre'];
+// Anweisung 61: HU/EN-Bewerberseiten. Werte kommen IMMER auf Deutsch an,
+// egal in welcher Sprache die Seite ist (nur die Beschriftung im Formular ist
+// uebersetzt). Darum kommen die neuen Werte hier zu den erlaubten Optionen dazu.
+const SPRACHEN = ['Englisch', 'Deutsch', 'Englisch und Deutsch', 'keine der beiden'];
+const LAENDER = [
+  'Polen', 'Rumänien', 'Slowakei', 'Tschechien', 'Kroatien', 'Ungarn',
+  'Slowenien', 'Bulgarien', 'anderes EU-Land', 'anderes Land',
+  // Auf der ungarischen Seite gibt es kein Feld `land`; der Dienst setzt diesen Wert.
+  'Ungarn (ungarische Seite)',
+];
+// Die HU/EN-Seiten bieten eine groebere Regionswahl; beide Zusatzwerte zusaetzlich erlaubt.
+const REGIONEN_BEWERBUNG = [...REGIONEN, 'Österreich (Tirol, Vorarlberg)', 'Deutschland'];
+const SPRACHE_SEITE = ['de', 'hu', 'en'];
 // WhatsApp-Nummer fuer Bestaetigung und Seite (international, nur Ziffern).
 const WHATSAPP = '4915754123492';
 
@@ -167,15 +180,22 @@ const FORMS = {
   bewerbung: {
     lang: 'de',
     subject: 'Bewerbung über avorix.de',
+    // Reihenfolge = Reihenfolge in der Benachrichtigung. Anweisung 61: `sprache`
+    // und `land` stehen gleich unter der Telefonnummer. `sprachen`/`land` sind
+    // serverseitig nur bedingt Pflicht (abhaengig von der Seitensprache, siehe
+    // server.js), darum hier required:false mit fester Options-Liste.
     fields: [
       f('telefon', true, LEN.telefon, true),
+      { ...f('sprache', false, LEN.auswahl, true), options: SPRACHE_SEITE },
+      { ...f('land', false, LEN.auswahl, true), options: LAENDER },
       f('name', true, LEN.name, true),
       f('email', false, LEN.email, true),
       { ...f('rolle', true, LEN.auswahl, true), options: Object.keys(ROLLEN) },
-      { ...f('region', true, LEN.auswahl, true), options: REGIONEN },
+      { ...f('region', true, LEN.auswahl, true), options: REGIONEN_BEWERBUNG },
       { ...f('erfahrung', true, LEN.auswahl, true), options: ERFAHRUNG },
+      { ...f('sprachen', false, LEN.auswahl, true), options: SPRACHEN },
       f('nachricht', false, LEN.freitext),
-      { ...f('quelle', false, LEN.auswahl, true), options: ['jobs', 'lp-koch'] },
+      { ...f('quelle', false, LEN.auswahl, true), options: ['jobs', 'lp-koch', 'lp-hu', 'lp-en'] },
     ],
     ack: true, // nur wenn E-Mail angegeben (deliver prueft replyTo)
     bewerbung: true,
