@@ -22,7 +22,7 @@
 - [Für Restaurants und Gasthöfe](https://avorix.de/fuer-restaurants)
 - [Für Sporthotels](https://avorix.de/fuer-sporthotels)
 - [Für Catering](https://avorix.de/fuer-catering): Köche und ganze Teams für Catering und Veranstaltungen, dazu die Koch-App für Abläufe am Einsatzort.
-- [Für Kantinen](https://avorix.de/fuer-kantinen): Festangestellte Köche für Kantinen und Betriebsgastronomie, dazu die Koch-App für gleichbleibende Abläufe.
+- [Betriebsgastronomie](https://avorix.de/betriebsgastronomie): Betriebsgastronomie in Eigenregie: Betriebsformen, Kosten und Zuschuss, festangestellte Köche bei Ausfall und die Koch-App für gleichbleibende Abläufe.
 - [Über uns](https://avorix.de/ueber-uns): Gründer Börge Penk, Küchenchef mit 20 Jahren Praxis
 - [F&B-Beratung](https://avorix.de/fb-beratung): Blick von außen auf Karte, Abläufe und Kalkulation.
 

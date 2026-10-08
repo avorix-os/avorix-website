@@ -1,0 +1,480 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Stempel from "../components/Stempel.astro";
+import Lightbox from "../components/Lightbox.astro";
+import { Image, getImage } from "astro:assets";
+import heroAusgabe from "../assets/bilder/betriebsgastronomie-ausgabe.jpg";
+import bildSchulung from "../assets/bilder/betriebsgastronomie-schulung.jpg";
+import bildMittagspause from "../assets/bilder/betriebsgastronomie-mittagspause.jpg";
+import appKochmodus1 from "../assets/bilder/app-kochmodus-schritt1.png";
+import appPortionsrechner from "../assets/bilder/app-rezept-detail-portionsrechner.png";
+import appMenuplaner from "../assets/bilder/app-menuplaner-woche.png";
+
+const ogImg = await getImage({ src: heroAusgabe, width: 1200, format: "webp" });
+const heroAlt = "Ausgabe einer Betriebskantine mit zwei Linien, durch die Glaswand eine Werkshalle";
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Betriebsgastronomie", "item": "https://avorix.de/betriebsgastronomie/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "url": "https://avorix.de/betriebsgastronomie/",
+    "name": "Betriebsgastronomie in Eigenregie: Köche und System",
+    "about": { "@type": "Thing", "name": "Betriebsgastronomie" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Was ist Betriebsgastronomie?", "acceptedAnswer": { "@type": "Answer", "text": "Die Verpflegung der Beschäftigten im eigenen Unternehmen, als Kantine, Betriebsrestaurant oder Ausgabe. Sie gehört zur Gemeinschaftsverpflegung, zu der auch Kitas, Schulen, Kliniken und Heime zählen." } },
+      { "@type": "Question", "name": "Braucht unsere Kantine eine ausgebildete Köchin oder einen Koch?", "acceptedAnswer": { "@type": "Answer", "text": "Nicht zwingend. Die App führt jede Kraft Schritt für Schritt durch das Gericht. Für den Einstieg dokumentiert ein Avorix-Koch Ihre Gerichte und schult Ihr Team vor Ort. Fällt jemand aus, schicken wir einen erfahrenen Koch." } },
+      { "@type": "Question", "name": "Wir haben keinen festen Speiseplan und keine aufgeschriebenen Rezepte.", "acceptedAnswer": { "@type": "Answer", "text": "Das ist ein häufiger Ausgangspunkt. Genau dafür kocht ein Avorix-Koch bei Ihnen mit und legt Ihre Gerichte an. Daraus bauen Sie den Plan über mehrere Wochen." } },
+      { "@type": "Question", "name": "Wir kochen für mehrere Linien gleichzeitig. Bildet die App das ab?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Menüvarianten liegen als eigene Vorlagen vor, jede mit eigener Portionslogik." } },
+      { "@type": "Question", "name": "Unsere Essenszahlen schwanken täglich.", "acceptedAnswer": { "@type": "Answer", "text": "Der Portionsrechner skaliert jedes Rezept auf die Zahl, die Sie eintragen. Der Bedarf rechnet sich daraus neu." } },
+      { "@type": "Question", "name": "Können wir Köche auch nur für einzelne Tage buchen?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Eine Mindestdauer gibt es nicht." } },
+      { "@type": "Question", "name": "Führt die App die Allergenkennzeichnung?", "acceptedAnswer": { "@type": "Answer", "text": "Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht." } },
+      { "@type": "Question", "name": "Müssen wir beides nehmen?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf." } },
+      { "@type": "Question", "name": "Übernehmt ihr unsere Kantine komplett?", "acceptedAnswer": { "@type": "Answer", "text": "Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert." } },
+      { "@type": "Question", "name": "Was ist günstiger: outsourcen oder Personal mieten?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos)." } },
+      { "@type": "Question", "name": "Gilt das Angebot auch für Ausgabe und Service?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Wir stellen neben Köchen auch Servicekräfte, im selben Vertragsmodell und über dieselbe Anfrage." } },
+      { "@type": "Question", "name": "Was brauchen wir technisch?", "acceptedAnswer": { "@type": "Answer", "text": "Ein Tablet in der Küche mit WLAN oder Mobilfunk." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Betriebsgastronomie in Eigenregie: Köche und System"
+  description="Betriebsgastronomie selbst führen: Was eine Kantine braucht, was das Essen kostet und wie sie läuft, wenn jemand fehlt. Köche auf Zeit und die Koch-App."
+  ogImage={ogImg.src}
+  ogImageAlt={heroAlt}
+  schemaOrg={schema}
+>
+  {/* Abschnitt 1 · Hero (Split 55/45, Bild rechts) */}
+ <section class="hero-section px-6">
+    <div class="content-width hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow mb-4">Betriebsgastronomie</p>
+        <h1 class="mb-6" set:html="Betriebs&shy;gastronomie in Eigenregie: Ihre Kantine läuft jeden Tag. Auch wenn jemand fehlt."></h1>
+        <p id="direktantwort" class="lead mb-6" style="color:var(--grau)">
+          Betriebsgastronomie ist die Verpflegung der eigenen Belegschaft im Unternehmen, meist als Kantine oder Betriebsrestaurant. Unternehmen führen sie selbst, geben sie an einen Caterer ab oder holen sich Unterstützung, ohne den Betrieb abzugeben. Avorix unterstützt Betriebsgastronomie in Eigenregie auf zwei Wegen: mit festangestellten Köchen, wenn jemand ausfällt, und mit einer Koch-App, in der Ihre Gerichte Schritt für Schritt stehen.
+        </p>
+        <div class="flex flex-wrap gap-4 mb-6">
+          <a href="/kontakt" data-cta-location="betriebsgastronomie-hero" class="btn btn-primary">App-Demo vereinbaren</a>
+          <a href="/personal#anfrage" data-cta-location="betriebsgastronomie-hero" data-cta-event="cta_personal_click" class="btn btn-secondary">Personal anfragen</a>
+        </div>
+        <div class="hero-badges">
+          <Stempel />
+        </div>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={heroAusgabe}
+          alt={heroAlt}
+          widths={[480, 800, 1200, 1600]}
+          sizes="(max-width: 900px) 100vw, 528px"
+          loading="eager"
+          fetchpriority="high"
+          class="w-full h-full object-cover"
+          style="object-position:28% 50%"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 2 · Drei Wege, eine Betriebsgastronomie zu führen */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)" set:html="Drei Wege, eine Betriebs&shy;gastronomie zu führen"></h2>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Ob Ihre Kantine 60 oder 600 Essen am Tag ausgibt: Am Anfang steht die Frage, wer sie führt.</p>
+      <div class="tabelle-scroll">
+        <table class="vergleich-tabelle">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Eigenregie</th>
+              <th>Fremdvergabe an einen Caterer</th>
+              <th class="spalte-avorix"><span class="spalte-avorix-label">Das macht Avorix</span>Eigenregie mit Avorix</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Wer führt die Küche?</th>
+              <td>Sie, mit eigenem Team</td>
+              <td>der Betreiber</td>
+              <td class="spalte-avorix">Sie, mit eigenem Team</td>
+            </tr>
+            <tr>
+              <th scope="row">Wer bestimmt Speiseplan und Qualität?</th>
+              <td>Sie</td>
+              <td>der Betreiber, im Rahmen des Vertrags</td>
+              <td class="spalte-avorix">Sie</td>
+            </tr>
+            <tr>
+              <th scope="row">Wie lange binden Sie sich?</th>
+              <td>gar nicht</td>
+              <td>meist mehrere Jahre</td>
+              <td class="spalte-avorix">kurz; bei Avorix ohne Mindestdauer</td>
+            </tr>
+            <tr>
+              <th scope="row">Was passiert, wenn jemand ausfällt?</th>
+              <td>Sie suchen selbst Ersatz, unter Zeitdruck</td>
+              <td>Sache des Betreibers</td>
+              <td class="spalte-avorix">Ein Avorix-Koch springt ein, in der Regel innerhalb von 24 bis 72 Stunden. Das System hält die Abläufe.</td>
+            </tr>
+            <tr>
+              <th scope="row">Wo steckt das Wissen über Rezepte und Abläufe?</th>
+              <td>im Kopf der Leute, die kochen</td>
+              <td>meist beim Betreiber; endet der Vertrag, geht es mit</td>
+              <td class="spalte-avorix">in der Koch-App, Schritt für Schritt für jede Kraft, und es bleibt bei Ihnen</td>
+            </tr>
+            <tr>
+              <th scope="row">Passt, wenn</th>
+              <td>Sie ein eingespieltes Team haben</td>
+              <td>Sie sich aus der Küche zurückziehen wollen</td>
+              <td class="spalte-avorix">Sie Ihre Kantine behalten, aber nicht von einer Person abhängig sein wollen</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">Avorix macht den dritten Weg. Den Betrieb selbst geben Sie nicht aus der Hand. Den ausführlichen Vergleich mit dem geteilten Küchenchef finden Sie in <a href="/wissen/kueche-outsourcen/" class="typo-link">Küche outsourcen: drei Wege und wann welcher passt</a>.</p>
+    </div>
+  </section>
+
+  {/* Abschnitt 3 · Was eine Kantine in Eigenregie braucht */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Was eine Kantine in Eigenregie braucht</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Ein Team, und eine Vertretung.</h3>
+          <p class="text-sm" style="color:var(--grau)">In vielen Betriebskantinen kochen zwei oder drei Leute. Fällt eine Kraft aus, fehlt nicht ein Gericht, sondern die Ausgabe wackelt. Wer keine Vertretung geregelt hat, regelt sie im Ernstfall unter Zeitdruck.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Rezepte mit Mengen, aufgeschrieben.</h3>
+          <p class="text-sm" style="color:var(--grau)">Was gekocht wird und in welcher Menge, steckt oft im Kopf der Person, die seit Jahren kocht. Solange sie da ist, merkt das niemand. Mehr dazu: <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a>.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Ein Speiseplan, der sich wiederholt.</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein Plan über mehrere Wochen, der sich danach wiederholt, macht Einkauf und Vorbereitung planbar. Ohne Plan wird jeden Tag neu entschieden.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Einkauf und Kalkulation.</h3>
+          <p class="text-sm" style="color:var(--grau)">Der Preis je Essen ist gesetzt, oft über Jahre. Steigt der Wareneinsatz, lässt sich das nicht über die Karte auffangen. Wer nicht weiß, was jede Portion kostet, merkt es erst im Jahresabschluss. Mehr dazu: <a href="/wissen/wareneinsatz-berechnen/" class="typo-link">Wareneinsatz berechnen</a>.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Hygiene und Allergene.</h3>
+          <p class="text-sm" style="color:var(--grau)">Jede Küche, die Lebensmittel ausgibt, braucht ein Eigenkontrollkonzept nach den HACCP-Grundsätzen (Verordnung (EG) Nr. 852/2004, Art. 5). Über die 14 Hauptallergene müssen Ihre Gäste auch bei unverpacktem Essen informiert werden (Lebensmittelinformations-Verordnung, Art. 44, in Deutschland § 4 der Lebensmittelinformations-Durchführungsverordnung).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 4 · Was das Essen kostet */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Was das Essen kostet, und was der Arbeitgeber dazugibt</h2>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die meisten Unternehmen bezuschussen das Mittagessen. Für die Lohnabrechnung zählt der amtliche Sachbezugswert: <strong>2026 sind das 4,57 Euro je Mittagessen</strong> (Sozialversicherungsentgeltverordnung). Zahlen Ihre Beschäftigten mindestens diesen Betrag, entsteht kein geldwerter Vorteil. Zahlen sie weniger, ist die Differenz Arbeitslohn. Wie Sie das im Einzelfall abrechnen, klärt Ihre Steuerberatung.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Für die Kantine selbst heißt das: Der Preis, den Ihre Leute zahlen, liegt fest, und der Zuschuss ist ein Budget. Was sich bewegt, sind Wareneinsatz und Personal. Genau dort setzt Avorix an.</p>
+    </div>
+  </section>
+
+  {/* Abschnitt 5 · Das Problem */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Ihre Kantine steht und fällt mit einer Person. Muss sie nicht.</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="card">
+          <h3 class="mb-4">Die Rezepte stehen nirgends.</h3>
+          <p class="text-sm" style="color:var(--grau)">Mengen, Abläufe, was die Belegschaft mag: alles Erfahrung, nichts aufgeschrieben.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Mehrere Linien, jeden Tag.</h3>
+          <p class="text-sm" style="color:var(--grau)">Menü eins, Menü zwei, vegetarisch, dazu Sonderkost. Vier Abläufe parallel, und jeder muss pünktlich fertig sein. Fällt eine Kraft aus, wackelt nicht ein Gericht, sondern die ganze Ausgabe.</p>
+        </div>
+        <div class="card">
+          <h3 class="mb-4">Köche sind schwer zu finden, auch hier.</h3>
+          <p class="text-sm" style="color:var(--grau)">Sie konkurrieren um dieselben Leute wie jedes Restaurant. Dabei haben Sie das bessere Angebot, es weiß nur niemand.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 6 · Avorix hilft doppelt */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</h2>
+      <p class="max-w-[var(--spalte-text)] mb-8" style="color:var(--grau)">Das eine hilft nächste Woche, das andere ab dem nächsten Zyklus. Die meisten Betriebe fangen mit dem ersten an.</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">Personal</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Köche, wenn jemand ausfällt</h3>
+          <p class="text-sm mb-4" style="color:var(--grau)">Wir schicken Ihnen festangestellte Köche, rechtssicher über unsere Arbeitnehmerüberlassungserlaubnis. In der Regel innerhalb von 24 bis 72 Stunden. Eine Mindestdauer gibt es nicht, Sie buchen genau die Tage, die Sie brauchen.</p>
+          <p class="text-sm" style="color:var(--grau)"><strong>Und ein Argument, das Ihnen gehört: Bei Ihnen ist um sechs Feierabend, keine Abende, keine Wochenenden.</strong> Für viele Köche ist das der Grund zu wechseln. Wir kennen unsere Leute und wissen, wen das anspricht.</p>
+          <p class="text-sm mt-4" style="color:var(--grau)">Fällt an der Ausgabe jemand aus, stellen wir Ihnen ebenso festangestellte <strong>Servicekräfte</strong>. <a href="/personal/service/" class="typo-link">Servicepersonal mieten</a></p>
+        </div>
+        <div class="card-modul">
+          <div class="card-modul-header">
+            <span class="card-modul-label">System</span>
+            <span class="card-modul-leader"></span>
+          </div>
+          <h3 class="mb-4">Ihre Gerichte als Anleitung am Tablet</h3>
+          <p class="text-sm" style="color:var(--grau)">Ein Avorix-Koch kocht bei Ihnen mit, dokumentiert Ihre Gerichte und legt sie in der Koch-App an, mit Fotos, Mengen und Zeiten. Jede Kraft folgt dem Ablauf, auch am ersten Tag. Der Menüplaner legt Wochenpläne an, bewährte Wochen kopieren Sie in die nächste. Dazu lernt ein Avorix-Koch Ihr Team direkt an, an Ihrer Ausgabe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 7 · Feste Essenszahlen */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Feste Essenszahlen und ein fester Kostenrahmen sind der Idealfall für das System.</h2>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Was in der à-la-carte-Küche schwierig ist, ist bei Ihnen einfach: Sie wissen vorher, wie viele Essen ausgegeben werden. Genau daraus rechnet die App. Der Portionsrechner skaliert jedes Rezept auf die tatsächliche Zahl, aus dem Wochenplan entsteht der Gesamtbedarf und daraus die Einkaufsliste. Mehrere Linien bilden Sie als Menüvarianten ab, jede mit eigener Portionslogik.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Die Kalkulation läuft mit: Sie sehen je Gericht, was die Portion kostet, und in der Monatsauswertung, wie sich Wareneinsatz und Personalkosten zu Ihren Zielwerten verhalten. Bei einem Preis, den Sie nicht anheben können, ist das der einzige Hebel, den Sie haben.</p>
+      <p class="mb-4 max-w-[var(--spalte-text)]" style="color:var(--grau)">Wie Sie Wareneinsatz und Verkaufspreis selbst nachrechnen, steht in unseren Beiträgen zu <a href="/wissen/wareneinsatz-berechnen/">Wareneinsatz berechnen</a> und <a href="/wissen/kalkulation-gastronomie/">Kalkulation in der Gastronomie</a>.</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 my-8">
+        <Lightbox label="Koch-Modus" caption="Schritt für Schritt: was jetzt zu tun ist, mit Menge und Zeit." flach>
+          <Image src={appKochmodus1} alt="Screenshot der Avorix Koch-App: Rezeptschritt im Koch-Modus mit Temperatur und Timer" widths={[320, 480, 640]} sizes="(max-width: 640px) 90vw, 260px" loading="lazy" decoding="async" class="w-full h-auto" />
+        </Lightbox>
+        <Lightbox label="Portionsrechner" caption="Ein Rezept, jede Essenszahl: Der Portionsrechner rechnet um." flach>
+          <Image src={appPortionsrechner} alt="Screenshot der Avorix Koch-App: Portionsrechner skaliert ein Rezept auf 80 Portionen" widths={[320, 480, 640]} sizes="(max-width: 640px) 90vw, 260px" loading="lazy" decoding="async" class="w-full h-auto" />
+        </Lightbox>
+        <Lightbox label="Menüplaner" caption="Der Speiseplan steht. Bewährte Wochen kopieren Sie in die nächste." flach>
+          <Image src={appMenuplaner} alt="Screenshot der Avorix Koch-App: Wochenplan mit Mittagessen und Abendessen inklusive Portionszahlen" widths={[320, 480, 640]} sizes="(max-width: 640px) 90vw, 260px" loading="lazy" decoding="async" class="w-full h-auto" />
+        </Lightbox>
+      </div>
+
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">Ihre Küche hält Ihr Niveau. Auch wenn der Spitzenkoch fehlt.</p>
+    </div>
+  </section>
+
+  {/* Abschnitt 8 · Vier Schritte (dunkler Block) */}
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Vier Schritte, am besten in den Betriebsferien.</h2>
+      <div class="space-y-6">
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">1</div>
+          <div>
+            <h3 class="mb-4">Gespräch (30 Minuten, kostenlos)</h3>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Sie erzählen, wo es klemmt. Wir sagen ehrlich, ob Avorix passt.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">2</div>
+          <div>
+            <h3 class="mb-4">Aufnahme</h3>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ein Avorix-Koch kocht mit, dokumentiert Ihre Menüs und legt sie in der App an.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">3</div>
+          <div>
+            <h3 class="mb-4">Schulung</h3>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Ihr Team lernt das System am Herd, im laufenden Betrieb.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="schritt-chip shrink-0">4</div>
+          <div>
+            <h3 class="mb-4">Selbstständig arbeiten</h3>
+            <p class="text-sm mt-6 max-w-[var(--spalte-text)]">Die App führt Ihr Team durch jeden Zyklus. Wir bleiben erreichbar.</p>
+          </div>
+        </div>
+      </div>
+      <p class="text-sm mt-8 max-w-[var(--spalte-text)]">In den Betriebsferien sind Aufnahme und Schulung am einfachsten. Wenn der Betrieb wieder anläuft, steht Ihr System.</p>
+      <div class="bild-breit mt-8">
+        <Image
+          src={bildSchulung}
+          alt="Zwei Köche am Herd, einer zeigt dem anderen einen Handgriff, daneben ein Tablet"
+          widths={[480, 800, 1024]}
+          sizes="(max-width: 760px) 100vw, 680px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-auto object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 9 · Veränderung (Split, Text links, Bild rechts) */}
+ <section class="reveal section-gap">
+    <div class="content-width split-row">
+      <div class="split-copy">
+        <h2 class="mb-6" style="color:var(--druck)">Sie führen Ihre Küche. Nicht Ihre Küche Sie.</h2>
+        <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Ihre Kantine bleibt Ihre Kantine. Sie geben nichts an einen Caterer ab, Ihre Leute bleiben Ihre Leute. Sie bekommen ein System, das ihr Wissen sichert, und einen Partner, der einspringt, wenn es brennt. Und Ihre Gäste? Merken nichts.</p>
+      </div>
+      <div class="split-media">
+        <Image
+          src={bildMittagspause}
+          alt="Beschäftigte beim Mittagessen in der Betriebskantine, Blick in die Werkshalle"
+          widths={[480, 800, 1024]}
+          sizes="(max-width: 900px) 100vw, 420px"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* Abschnitt 10 · Pilotangebot (schmale Spalte) */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Als Pilotbetrieb zur halben Rechnung.</h2>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">Wir nehmen 2026 eine kleine Zahl von Pilotbetrieben auf: rund die Hälfte des regulären Preises, im Gegenzug ehrliches Feedback und die anonyme Auswertung Ihrer Ergebnisse. <strong>Ihr Name taucht nirgends auf.</strong> Die Pilotkonditionen gelten für die App, nicht für das Personal.</p>
+      <a href="/pilotprogramm" data-cta-location="betriebsgastronomie-pilot" class="btn btn-primary">Zum Pilotprogramm</a>
+    </div>
+  </section>
+
+  {/* Abschnitt 11 · FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Was ist Betriebsgastronomie?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Die Verpflegung der Beschäftigten im eigenen Unternehmen, als Kantine, Betriebsrestaurant oder Ausgabe. Sie gehört zur Gemeinschaftsverpflegung, zu der auch Kitas, Schulen, Kliniken und Heime zählen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Braucht unsere Kantine eine ausgebildete Köchin oder einen Koch?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nicht zwingend. Die App führt jede Kraft Schritt für Schritt durch das Gericht. Für den Einstieg dokumentiert ein Avorix-Koch Ihre Gerichte und schult Ihr Team vor Ort. Fällt jemand aus, schicken wir einen erfahrenen Koch.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wir haben keinen festen Speiseplan und keine aufgeschriebenen Rezepte.<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das ist ein häufiger Ausgangspunkt. Genau dafür kocht ein Avorix-Koch bei Ihnen mit und legt Ihre Gerichte an. Daraus bauen Sie den Plan über mehrere Wochen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wir kochen für mehrere Linien gleichzeitig. Bildet die App das ab?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Menüvarianten liegen als eigene Vorlagen vor, jede mit eigener Portionslogik.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Unsere Essenszahlen schwanken täglich.<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Der Portionsrechner skaliert jedes Rezept auf die Zahl, die Sie eintragen. Der Bedarf rechnet sich daraus neu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Können wir Köche auch nur für einzelne Tage buchen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Eine Mindestdauer gibt es nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Führt die App die Allergenkennzeichnung?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Allergene werden je Rezept hinterlegt und angezeigt. Nährwerte führt die App derzeit nicht.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Müssen wir beides nehmen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Viele Betriebe fangen mit einem Personal-Einsatz an und bauen das System später auf.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Übernehmt ihr unsere Kantine komplett?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein. Wir übernehmen nicht den Betrieb, wir besetzen ihn. Ihre Küche, Ihre Speisenpläne und Ihre Verträge bleiben bei Ihnen. Wir stellen die Köche und das System, mit dem der Ablauf jeden Tag gleich funktioniert.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was ist günstiger: outsourcen oder Personal mieten?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt an Ihren Essenszahlen. Eine Fremdvergabe rechnet sich meist erst bei konstant hohem Volumen und bindet Sie langfristig. Personal auf Zeit kostet pro Stunde mehr, lässt sich aber an Ihre Auslastung anpassen. Was in Ihrem Fall näher liegt, klären wir im Erstgespräch (30 Minuten, kostenlos).</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gilt das Angebot auch für Ausgabe und Service?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja. Wir stellen neben Köchen auch Servicekräfte, im selben Vertragsmodell und über dieselbe Anfrage.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was brauchen wir technisch?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ein Tablet in der Küche mit WLAN oder Mobilfunk.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  {/* Final CTA */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <a href="/kontakt" data-cta-location="betriebsgastronomie-final" class="btn btn-primary">App-Demo vereinbaren</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Vergleichstabelle (Anweisung 62, Teil 3): dritte Spalte hervorgehoben */
+  th.spalte-avorix,
+  td.spalte-avorix {
+    background: var(--flaeche);
+    color: var(--druck);
+    font-weight: 600;
+    border-left: 2px solid var(--akzent);
+    border-right: 2px solid var(--akzent);
+  }
+  th.spalte-avorix {
+    border-top: 4px solid var(--akzent);
+    vertical-align: top;
+  }
+  tbody tr:last-child td.spalte-avorix {
+    border-bottom: 2px solid var(--akzent);
+  }
+  .spalte-avorix-label {
+    display: block;
+    font-family: var(--f-mono);
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: var(--akzent);
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  /* Handy: Fragen-Spalte bleibt beim Querwischen stehen */
+  .tabelle-scroll th:first-child,
+  .tabelle-scroll td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--papier);
+    z-index: 1;
+  }
+  @media (max-width: 640px) {
+    .tabelle-scroll th:first-child,
+    .tabelle-scroll td:first-child {
+      width: 110px;
+      min-width: 110px;
+      max-width: 110px;
+    }
+  }
+
+  /* Bild in der Breite der Textspalte (Abschnitt 8) */
+  .bild-breit {
+    overflow: hidden;
+    border-radius: var(--radius);
+    box-shadow: var(--schatten);
+  }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
