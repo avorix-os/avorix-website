@@ -351,8 +351,8 @@ function bewerbungAckHu(fields) {
     ['E-mail', fields.email],
     ['Hol szeretnél dolgozni?', fields.region],
     ['Mennyi tapasztalatod van a vendéglátásban?', fields.erfahrung],
-    ['Milyen nyelven tudsz dolgozni?', fields.sprachen],
-    ['Mit csináltál legutóbb?', fields.nachricht],
+    ['Milyen nyelven beszélsz?', fields.sprachen],
+    ['Milyen pozícióban dolgoztál?', fields.nachricht],
   ].filter(([, v]) => v && String(v).trim() !== '');
   const text = [
     `Szia ${fields.name}!`,
