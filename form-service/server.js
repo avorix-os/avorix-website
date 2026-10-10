@@ -19,6 +19,8 @@ const Busboy = require('busboy');
 const nodemailer = require('nodemailer');
 
 const { FORMS, ROLLEN, WHATSAPP } = require('./forms');
+const altcha = require('./altcha');
+const spamfilter = require('./spamfilter');
 
 // ---------------------------------------------------------------------------
 // Konfiguration (alles ueber Umgebungsvariablen / .env)
@@ -52,6 +54,12 @@ const CFG = {
   honeypotField: process.env.HONEYPOT_FIELD || 'website',
   tsField: process.env.TS_FIELD || 'form_ts',
   minFillMs: parseInt(process.env.MIN_FILL_MS || '3000', 10),
+  // Anweisung 63: ALTCHA-Signierschluessel (zufaellig, >= 32 Zeichen, nur in .env).
+  altchaKey: process.env.ALTCHA_HMAC_KEY || '',
+  // Ratenfenster (Teil 4 / V5 / Datenschutz: hoechstens 60 Min im Speicher).
+  rateWindowMs: 60 * 60 * 1000,
+  rateVerdacht: 3, // mehr als 3 je IP oder E-Mail in 60 Min -> Verdacht (V5)
+  rateHart: 10,    // mehr als 10 je IP in 60 Min -> harte Sperre 429 (Teil 4)
   // Link-/Inhaltsfilter: Freitext mit echtem Link -> still verwerfen (Bot glaubt
   // an Erfolg). Standard an. LINK_FILTER=false schaltet ihn aus.
   linkFilter: String(process.env.LINK_FILTER || 'true') !== 'false',
@@ -92,6 +100,71 @@ const MAGIC = {
   jpg: [0xff, 0xd8, 0xff],
   png: [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
 };
+
+// ---------------------------------------------------------------------------
+// Anweisung 63: Zustand im Arbeitsspeicher. Alles laeuft nach 60 Min ab, damit
+// die IP-Adresse hoechstens 60 Minuten gehalten wird (Datenschutz, Teil 5).
+// ---------------------------------------------------------------------------
+const usedSolutions = new Map(); // ALTCHA-Signatur -> Ablauf (ms), Einmal-Nutzung
+const ipHits = new Map();        // IP -> [ts(ms)]
+const emailHits = new Map();     // E-Mail (klein) -> [ts(ms)]
+
+function pruneHits(map) {
+  const grenze = Date.now() - CFG.rateWindowMs;
+  for (const [k, arr] of map) {
+    const neu = arr.filter((t) => t > grenze);
+    if (neu.length) map.set(k, neu);
+    else map.delete(k);
+  }
+}
+
+// Zaehlt einen Treffer und gibt die Anzahl im Fenster zurueck (inkl. diesem).
+function hit(map, key) {
+  if (!key) return 0;
+  const grenze = Date.now() - CFG.rateWindowMs;
+  const arr = (map.get(key) || []).filter((t) => t > grenze);
+  arr.push(Date.now());
+  map.set(key, arr);
+  return arr.length;
+}
+
+// Client-IP aus X-Forwarded-For (Traefik setzt den Kopf). Nur fuer Zaehler im
+// Speicher, nie gespeichert, nie in Mail/Log.
+function clientIp(req) {
+  const xff = String(req.headers['x-forwarded-for'] || '');
+  if (xff) return xff.split(',')[0].trim();
+  return (req.socket && req.socket.remoteAddress) || '';
+}
+
+// Zaehl-Log fuer Sperren und Verdacht: Datum, Uhrzeit, Kennung, Regel. KEINE
+// Namen, E-Mail-Adressen oder Texte (Teil 4).
+function logSpam(kennung, regel) {
+  try {
+    const now = new Date();
+    const monat = now.toISOString().slice(0, 7);
+    const dir = path.join(CFG.dataDir, 'spam-log');
+    fs.mkdirSync(dir, { recursive: true });
+    const zeile = `${now.toISOString()},${kennung},${regel}\n`;
+    fs.appendFileSync(path.join(dir, `${monat}.csv`), zeile);
+  } catch (e) { errlog('spam-log', e.message); }
+  log('spam', kennung, regel);
+}
+
+// Einfache HTML-Fehlerseite fuer Nicht-JS-Absendungen (Teil 1): Meldung + Link
+// zurueck, statt rohem JSON.
+function sendHtmlError(req, res, code, text) {
+  let back = CFG.siteBase + '/';
+  if (req.headers.referer) {
+    try { const u = new URL(req.headers.referer); back = u.origin + u.pathname; } catch (_) {}
+  }
+  const body = '<!doctype html><html lang="de"><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Anfrage nicht gesendet</title></head><body style="font-family:system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1rem;color:#26251f">' +
+    '<p>' + text.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])) + '</p>' +
+    '<p><a href="' + back + '">Zurück zum Formular</a></p></body></html>';
+  res.writeHead(code, { 'Content-Type': 'text/html; charset=utf-8', 'Content-Length': Buffer.byteLength(body) });
+  res.end(body);
+}
 
 // ---------------------------------------------------------------------------
 // Hilfsfunktionen
@@ -167,8 +240,10 @@ function sendRedirect(res, location) {
 }
 
 // Antwort je nach Aufrufart: JSON (Hintergrundversand) oder Redirect (Nicht-JS).
-function respondOk(req, res, def) {
-  if (wantsJson(req)) return sendJson(res, 200, { ok: true });
+// Anweisung 63: `verdacht` haengt das Flag an das JSON, damit das Skript bei
+// Verdacht KEIN dataLayer-Ereignis ausloest (sonst zaehlt Google Ads Spam).
+function respondOk(req, res, def, verdacht) {
+  if (wantsJson(req)) return sendJson(res, 200, verdacht ? { ok: true, verdacht: true } : { ok: true });
   if (def && def.redirect) return sendRedirect(res, CFG.siteBase + def.redirect);
   // Standard: zurueck zur Formularseite mit ?sent=1
   let back = CFG.siteBase + '/';
@@ -179,6 +254,14 @@ function respondOk(req, res, def) {
     } catch (_) {}
   }
   return sendRedirect(res, back);
+}
+
+// Anweisung 63, Teil 4: harte Sperre (ALTCHA ungueltig, zu viele Anfragen).
+// JSON { ok:false } mit Statuscode; Nicht-JS bekommt eine HTML-Fehlerseite.
+function respondBlock(req, res, code) {
+  if (wantsJson(req)) return sendJson(res, code, { ok: false });
+  return sendHtmlError(req, res, code,
+    'Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal, Ihre Angaben bleiben erhalten. Oder rufen Sie uns an: 07541 3973915 · info@avorix.de');
 }
 
 function respondErr(req, res, code, error) {
@@ -216,8 +299,13 @@ function getTransport() {
   return transporter;
 }
 
-function buildBody(def, kennung, fields, files) {
+function buildBody(def, kennung, fields, files, reasons) {
   const lines = [];
+  // Anweisung 63, Teil 3: bei Verdacht sagt die erste Zeile, warum.
+  if (reasons && reasons.length) {
+    lines.push(`Verdacht, weil: ${reasons.join(', ')}`);
+    lines.push('');
+  }
   lines.push(`Formular: ${kennung}`);
   lines.push(`Eingegangen: ${new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })}`);
   lines.push('');
@@ -264,11 +352,15 @@ function ackBody(def) {
 }
 
 // Anweisung 60: Betreff der Bewerbung mit Rolle und Region.
-function subjectFor(def, fields) {
+// Anweisung 63: bei Verdacht "[Verdacht] " davor.
+function subjectFor(def, fields, verdacht) {
+  let s;
   if (def.bewerbung) {
-    return `Bewerbung: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}`;
+    s = `Bewerbung: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}`;
+  } else {
+    s = def.subject;
   }
-  return def.subject;
+  return verdacht ? `[Verdacht] ${s}` : s;
 }
 
 function escHtml(v) {
@@ -414,7 +506,7 @@ function bewerbungAckEn(fields) {
   return { subject: 'Your application at Avorix', text, html };
 }
 
-async function deliver(def, kennung, fields, files) {
+async function deliver(def, kennung, fields, files, verdacht, reasons) {
   const t = getTransport();
   const to =
     def.toBewerbung && CFG.mail.toBewerbung ? CFG.mail.toBewerbung : CFG.mail.to;
@@ -424,13 +516,17 @@ async function deliver(def, kennung, fields, files) {
     from: CFG.mail.from,
     to,
     replyTo, // Antwort geht direkt an den Absender (3.2 Punkt 9)
-    subject: subjectFor(def, fields), // vom Dienst gesetzt, nie frei aus dem Formular (3.2 Punkt 2)
-    text: buildBody(def, kennung, fields, files),
+    subject: subjectFor(def, fields, verdacht), // vom Dienst gesetzt, nie frei aus dem Formular (3.2 Punkt 2)
+    text: buildBody(def, kennung, fields, files, reasons),
   };
   if (files && files.length) {
     mail.attachments = files.map((f) => ({ filename: f.filename, content: f.buffer }));
   }
   await t.sendMail(mail);
+
+  // Anweisung 63, Teil 3: bei Verdacht KEINE Eingangsbestaetigung an den Absender
+  // (sonst Spam-Schleuder an Dritte).
+  if (verdacht) return;
 
   // Eingangsbestaetigung an den Absender (3.2 Punkt 11), nur mit E-Mail.
   if (def.ack && replyTo) {
@@ -575,26 +671,32 @@ async function handleForm(req, res) {
   const def = FORMS[kennung];
   if (!def) return respondErr(req, res, 400, 'unknown_form');
 
-  // --- Spamabwehr (freundlich: Bot bekommt "Erfolg", Nachricht wird verworfen) ---
+  // --- Anweisung 63, Teil 1: ALTCHA zuerst, vor allem anderen ---
+  if (CFG.altchaKey) {
+    const v = altcha.verifySolution(fields.altcha, CFG.altchaKey);
+    if (!v.ok) { logSpam(kennung, 'ALTCHA ' + v.reason); return respondBlock(req, res, 400); }
+    // Jede Loesung gilt nur einmal (Teil 1).
+    if (usedSolutions.has(v.signature)) { logSpam(kennung, 'ALTCHA benutzt'); return respondBlock(req, res, 400); }
+    usedSolutions.set(v.signature, v.expires ? v.expires * 1000 : Date.now() + CFG.rateWindowMs);
+  }
+
+  // --- Ratenbegrenzung je IP (Teil 4: mehr als 10 in 60 Min -> harte Sperre) ---
+  const ip = clientIp(req);
+  const ipCount = hit(ipHits, ip);
+  if (ipCount > CFG.rateHart) { logSpam(kennung, 'Rate >10/IP'); return respondBlock(req, res, 429); }
+
+  // --- Stille Ablehnungen: Erfolg fuer den Absender, aber verdacht:true (damit
+  //     Google Ads keinen Spam als Conversion zaehlt) und KEINE Mail (Teil 4) ---
   // Honigtopf (3.2 Punkt 5)
   if (fields[CFG.honeypotField]) {
-    log('spam honeypot', kennung);
-    return respondOk(req, res, def);
+    logSpam(kennung, 'Honigtopf');
+    return respondOk(req, res, def, true);
   }
   // Zeitfalle (3.2 Punkt 6): nur pruefen, wenn ts gesetzt ist (Nicht-JS hat keinen).
   const ts = parseInt(fields[CFG.tsField], 10);
   if (!Number.isNaN(ts) && Date.now() - ts < CFG.minFillMs) {
-    log('spam timetrap', kennung);
-    return respondOk(req, res, def);
-  }
-  // Link-/Inhaltsfilter (3.2 Nachtrag): Freitext mit Link = mit hoher Sicherheit
-  // Spam -> still verwerfen (keine Ablage, keine Mail).
-  if (CFG.linkFilter) {
-    const spamField = linkSpamField(def, fields);
-    if (spamField) {
-      log('spam link', kennung, spamField);
-      return respondOk(req, res, def);
-    }
+    logSpam(kennung, 'Zeitfalle');
+    return respondOk(req, res, def, true);
   }
 
   // Dateien nur behalten, wenn die Kennung sie zulaesst
@@ -660,6 +762,23 @@ async function handleForm(req, res) {
     }
   }
 
+  // --- Anweisung 63, Teil 2+4: Verdachtsfilter (nach ALTCHA und Validierung) ---
+  // "Nur Links" in allen Freitextfeldern -> stille Ablehnung (keine Mail),
+  // Erfolgsmeldung fuer den Absender, verdacht:true.
+  if (spamfilter.nurLinks(def, fields)) {
+    logSpam(kennung, 'nur Links');
+    return respondOk(req, res, def, true);
+  }
+  const reasons = spamfilter.regelnFelder(kennung, def, fields);
+  // V5: Haeufung je IP oder E-Mail in 60 Min (nicht fuer Download-Formulare).
+  if (!spamfilter.DOWNLOAD_FORMULARE.includes(kennung)) {
+    const em = String(fields.email || '').toLowerCase().trim();
+    const emailCount = em ? hit(emailHits, em) : 0;
+    if (ipCount > CFG.rateVerdacht || emailCount > CFG.rateVerdacht) reasons.push('V5 Häufung');
+  }
+  const verdacht = reasons.length > 0;
+  if (verdacht) reasons.forEach((r) => logSpam(kennung, r));
+
   // --- Ablegen, dann senden (3.2 Punkt 12) ---
   let base;
   try {
@@ -670,8 +789,8 @@ async function handleForm(req, res) {
   }
 
   try {
-    await deliver(def, kennung, fields, files);
-    log('ok', kennung, base);
+    await deliver(def, kennung, fields, files, verdacht, reasons);
+    log('ok', kennung, base, verdacht ? '(Verdacht)' : '');
   } catch (e) {
     // Anfrage ist gespeichert -> nicht verloren. Fehler muss auffallen (3.2 Punkt 13).
     errlog('mail send failed', kennung, base, e.message);
@@ -688,10 +807,10 @@ async function handleForm(req, res) {
       }
     }
     // Fuer den Nutzer trotzdem Erfolg: seine Anfrage ist sicher abgelegt.
-    return respondOk(req, res, def);
+    return respondOk(req, res, def, verdacht);
   }
 
-  return respondOk(req, res, def);
+  return respondOk(req, res, def, verdacht);
 }
 
 // ---------------------------------------------------------------------------
@@ -724,10 +843,31 @@ function cleanup() {
 // ---------------------------------------------------------------------------
 // Server
 // ---------------------------------------------------------------------------
+// Anweisung 63, Teil 1: alte Aufgaben/Zaehler aus dem Speicher werfen. Haeufig,
+// damit die IP hoechstens 60 Min gehalten wird (Teil 5).
+function pruneState() {
+  const now = Date.now();
+  for (const [sig, exp] of usedSolutions) if (exp < now) usedSolutions.delete(sig);
+  pruneHits(ipHits);
+  pruneHits(emailHits);
+}
+
 const server = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://localhost');
   if (req.method === 'GET' && u.pathname === '/api/formular/health') {
-    return sendJson(res, 200, { ok: true, service: 'avorix-form', forms: Object.keys(FORMS) });
+    return sendJson(res, 200, { ok: true, service: 'avorix-form', forms: Object.keys(FORMS), altcha: !!CFG.altchaKey });
+  }
+  // Anweisung 63: signierte ALTCHA-Aufgabe ausgeben.
+  if (req.method === 'GET' && u.pathname === '/api/altcha/challenge') {
+    if (!CFG.altchaKey) return sendJson(res, 503, { error: 'altcha_not_configured' });
+    const ch = altcha.createChallenge(CFG.altchaKey);
+    const body = JSON.stringify(ch);
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Content-Length': Buffer.byteLength(body),
+      'Cache-Control': 'no-store',
+    });
+    return res.end(body);
   }
   if (u.pathname !== '/api/formular') return respondErr(req, res, 404, 'not_found');
   if (req.method !== 'POST') return respondErr(req, res, 405, 'method_not_allowed');
@@ -741,6 +881,9 @@ server.listen(CFG.port, CFG.host, () => {
   log(`avorix-form hört auf ${CFG.host}:${CFG.port}`);
   if (CFG.allowedOrigins.length === 0) log('WARNUNG: ALLOWED_ORIGINS leer – alle Ursprünge erlaubt (nur DEV!)');
   if (!CFG.mail.host) log('WARNUNG: SMTP_HOST leer – Mailversand wird fehlschlagen (nur DEV!)');
+  if (!CFG.altchaKey) log('WARNUNG: ALTCHA_HMAC_KEY leer – ALTCHA-Prüfung ist AUS (nur DEV!)');
   cleanup();
   setInterval(cleanup, 24 * 60 * 60 * 1000);
+  pruneState();
+  setInterval(pruneState, 5 * 60 * 1000);
 });
