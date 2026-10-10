@@ -1,0 +1,75 @@
+---
+// Anweisung 63, Teil 1: ALTCHA-Element direkt ueber dem Absende-Knopf.
+// Loest die Aufgabe automatisch, sobald jemand ins Formular klickt (auto="onfocus"),
+// nicht beim Laden. Kein Logo, kein Link (hidelogo/hidefooter). Das native
+// Widget-UI ist ausgeblendet; sichtbar ist nur eine kleine, ruhige Statuszeile
+// in der Sprache der Seite. Das Skript kommt aus dem eigenen Build (npm-Paket
+// `altcha`, von Astro gebuendelt), nicht von einem CDN.
+interface Props { sprache?: 'de' | 'en' | 'hu'; }
+const { sprache = 'de' } = Astro.props;
+---
+<div class="altcha-feld" data-altcha-feld data-altcha-lang={sprache}>
+  <altcha-widget
+    challenge="/api/altcha/challenge"
+    auto="onfocus"
+    hidelogo
+    hidefooter
+    class="altcha-hidden"
+  ></altcha-widget>
+  <p class="altcha-status" data-altcha-status aria-live="polite"></p>
+</div>
+
+<style>
+  .altcha-feld { margin: 4px 0 12px; }
+  /* Native Widget-Oberflaeche ausblenden (bleibt funktionsfaehig): kein
+     Kaestchen, kein Logo. Sichtbar ist nur die eigene Statuszeile. */
+  .altcha-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .altcha-status {
+    font-size: 13px;
+    color: var(--grau);
+    min-height: 1.2em;
+    margin: 0;
+  }
+  .altcha-status[data-zustand="fertig"] { color: var(--akzent); }
+  .altcha-status[data-zustand="fehler"] { color: var(--akzent); font-weight: 600; }
+</style>
+
+<script>
+  import 'altcha';
+
+  const TEXTE = {
+    de: { laeuft: 'Wird geprüft …', fertig: 'Geprüft', fehler: 'Prüfung fehlgeschlagen. Bitte noch einmal senden.' },
+    en: { laeuft: 'Verifying …', fertig: 'Verified', fehler: 'Verification failed. Please send again.' },
+    hu: { laeuft: 'Ellenőrzés …', fertig: 'Ellenőrizve', fehler: 'Az ellenőrzés nem sikerült. Kérjük, küldd el újra.' },
+  };
+
+  function wire() {
+    document.querySelectorAll('[data-altcha-feld]').forEach((feld) => {
+      if (feld.getAttribute('data-altcha-bound')) return;
+      const widget = feld.querySelector('altcha-widget');
+      const status = feld.querySelector('[data-altcha-status]');
+      if (!widget || !status) return;
+      feld.setAttribute('data-altcha-bound', '1');
+      const lang = feld.getAttribute('data-altcha-lang') || 'de';
+      const t = TEXTE[lang] || TEXTE.de;
+      widget.addEventListener('statechange', (ev) => {
+        const s = ev.detail && ev.detail.state;
+        if (s === 'verifying') { status.textContent = t.laeuft; status.setAttribute('data-zustand', 'laeuft'); }
+        else if (s === 'verified') { status.textContent = t.fertig; status.setAttribute('data-zustand', 'fertig'); }
+        else if (s === 'error') { status.textContent = t.fehler; status.setAttribute('data-zustand', 'fehler'); }
+        else { status.textContent = ''; status.removeAttribute('data-zustand'); }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', wire);
+  else wire();
+  document.addEventListener('astro:page-load', wire);
+</script>

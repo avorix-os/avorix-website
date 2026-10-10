@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Altcha from "../../components/Altcha.astro";
 
 
 const schema = {
@@ -100,6 +101,7 @@ const schema = {
               class="kontakt-field w-full"
             ></textarea>
           </div>
+          <Altcha sprache="en" />
           <button
             type="submit"
             class="btn btn-primary w-full"
@@ -159,6 +161,7 @@ textarea.kontakt-field {
 </style>
 
 <script>
+  import { absenden } from '../../scripts/formular';
   const contactForm = document.getElementById('contact-form') as HTMLFormElement;
   if (contactForm) {
     let leadSent = false;
@@ -167,37 +170,18 @@ textarea.kontakt-field {
     contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = contactForm.querySelector('[type="submit"]') as HTMLButtonElement;
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      const r = await absenden(contactForm, { sprache: 'en' });
+      if (r.ok && !r.verdacht && !leadSent) {
+        leadSent = true;
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'generate_lead', form_name: 'demo_kontakt' });
+      }
       if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
+        submitBtn.disabled = false;
+        submitBtn.textContent = r.ok ? 'Sent ✔' : 'Send';
       }
-      try {
-        const fd = new FormData(contactForm);
-        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
-        if (g) fd.append('gclid', g);
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: fd,
-          headers: { 'Accept': 'application/json' },
-        });
-        if (response.ok && !leadSent) {
-          leadSent = true;
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({ event: 'generate_lead', form_name: 'demo_kontakt' });
-        }
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = response.ok ? 'Sent ✔' : 'Send';
-        }
-        if (response.ok) {
-          contactForm.reset();
-        }
-      } catch {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send';
-        }
-      }
+      if (r.ok) contactForm.reset();
     });
   }
 </script>
