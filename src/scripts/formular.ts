@@ -67,9 +67,11 @@ function ensureAltcha(form: HTMLFormElement): Promise<boolean> {
   const widget = form.querySelector<HTMLElement & { verify?: () => void; getState?: () => string }>('altcha-widget');
   if (!widget) return Promise.resolve(true); // kein Widget -> nichts zu pruefen
   const feld = () => form.querySelector<HTMLInputElement>('[name="altcha"]');
-  const state = typeof widget.getState === 'function' ? widget.getState() : '';
+  // Schneller Pfad: liegt schon eine Loesung im Feld, absenden. Die echte
+  // Pruefung macht ohnehin der Server; der Client sorgt nur dafuer, dass eine
+  // Loesung mitgeht (das Widget fuellt das Feld erst im Zustand 'verified').
   const vorhanden = feld();
-  if (state === 'verified' && vorhanden && vorhanden.value) return Promise.resolve(true);
+  if (vorhanden && vorhanden.value) return Promise.resolve(true);
   return new Promise<boolean>((resolve) => {
     let fertig = false;
     const onState = (ev: Event) => {
