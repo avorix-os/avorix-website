@@ -9,6 +9,7 @@ interface Props {
   dateien: Datei[];     // erste Datei wird nach dem Absenden automatisch geladen
 }
 const { kennung, kurzsatz, dateien } = Astro.props as Props;
+import Altcha from "./Altcha.astro";
 ---
 <section class="reveal section-gap">
   <div class="content-width">
@@ -50,6 +51,8 @@ const { kennung, kurzsatz, dateien } = Astro.props as Props;
             <input type="checkbox" name="newsletter" value="on" />
             <span>Sie d&uuml;rfen mir gelegentlich Neuigkeiten von Avorix per E-Mail schicken. Ich kann das jederzeit widerrufen.</span>
           </label>
+
+          <Altcha sprache="de" />
 
           <button type="submit" class="btn btn-primary w-full" data-vd-submit>Vorlage jetzt herunterladen</button>
 
@@ -106,6 +109,7 @@ const { kennung, kurzsatz, dateien } = Astro.props as Props;
 </style>
 
 <script>
+  import { absenden } from '../scripts/formular';
   document.querySelectorAll('[data-vorlage-download]').forEach(function (box) {
     var form = box.querySelector('form');
     var formC = box.querySelector('[data-vd-form]');
@@ -143,18 +147,13 @@ const { kennung, kurzsatz, dateien } = Astro.props as Props;
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
       if (btn) { btn.disabled = true; btn.textContent = 'Wird gesendet…'; }
-      try {
-        var fd = new FormData(form);
-        var g = window.avorixGclid ? window.avorixGclid() : '';
-        if (g) fd.append('gclid', g);
-        var response = await fetch(form.action, { method: 'POST', body: fd, headers: { 'Accept': 'application/json' } });
-        // Event nur bei Erfolg und nur einmal (A5)
-        if (response && response.ok && !eventSent) {
-          eventSent = true;
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ event: 'lead_magnet_download', asset: asset });
-        }
-      } catch (err) { /* Netzfehler: Download trotzdem */ }
+      // Download-Formular: Download startet immer; Ereignis nur bei ok ohne Verdacht (A63).
+      var r = await absenden(form, { sprache: 'de', download: true });
+      if (r.ok && !r.verdacht && !eventSent) {
+        eventSent = true;
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'lead_magnet_download', asset: asset });
+      }
       showSuccess();
     });
   });

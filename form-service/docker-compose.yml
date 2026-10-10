@@ -29,9 +29,10 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-proxy"
 
-      # Router: nur /api/formular auf avorix.de (+ www), hoehere Prioritaet als
-      # der Website-Router, damit dieser Pfad hier landet.
-      - "traefik.http.routers.formular.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && PathPrefix(`/api/formular`)"
+      # Router: /api/formular und /api/altcha auf avorix.de (+ www), hoehere
+      # Prioritaet als der Website-Router, damit diese Pfade hier landen.
+      # Anweisung 63: /api/altcha (ALTCHA-Challenge) kommt dazu.
+      - "traefik.http.routers.formular.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && (PathPrefix(`/api/formular`) || PathPrefix(`/api/altcha`))"
       - "traefik.http.routers.formular.entrypoints=websecure"
       - "traefik.http.routers.formular.tls.certresolver=le"
       - "traefik.http.routers.formular.priority=100"
@@ -39,7 +40,7 @@ services:
       - "traefik.http.services.formular.loadbalancer.server.port=8081"
 
       # HTTP -> HTTPS (damit ein Nicht-JS-POST ueber http nicht ins Leere laeuft)
-      - "traefik.http.routers.formular-http.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && PathPrefix(`/api/formular`)"
+      - "traefik.http.routers.formular-http.rule=(Host(`avorix.de`) || Host(`www.avorix.de`)) && (PathPrefix(`/api/formular`) || PathPrefix(`/api/altcha`))"
       - "traefik.http.routers.formular-http.entrypoints=web"
       - "traefik.http.routers.formular-http.priority=100"
       - "traefik.http.routers.formular-http.middlewares=formular-to-https"

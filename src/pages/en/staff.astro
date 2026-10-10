@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Altcha from "../../components/Altcha.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../../components/Stempel.astro";
 import dampfTopf from "../../assets/bilder/dampf-topf.jpg";
@@ -546,6 +547,7 @@ const schemaOrg = [
             We have your enquiry. We will get back to you within 24 hours.
           </div>
 
+          <Altcha sprache="en" />
           <button type="submit" class="btn btn-primary anfrage-submit">
             Send enquiry
           </button>
@@ -705,6 +707,7 @@ const schemaOrg = [
 <script>
   /* Anweisung 53 (A5/A7): Erfolg per fetch, dataLayer-Event nur bei ok und einmal,
      Klick-Kennung (gclid) vor dem Absenden anhaengen. Muster wie /en/contact. */
+  import { absenden } from '../../scripts/formular';
   const staffForm = document.getElementById('staff-form') as HTMLFormElement;
   if (staffForm) {
     let staffSent = false;
@@ -714,37 +717,20 @@ const schemaOrg = [
     staffForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const submitBtn = staffForm.querySelector('[type="submit"]') as HTMLButtonElement;
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      const r = await absenden(staffForm, { sprache: 'en' });
+      if (r.ok && !r.verdacht && !staffSent) {
+        staffSent = true;
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'en_staff' });
       }
-      try {
-        const fd = new FormData(staffForm);
-        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
-        if (g) fd.append('gclid', g);
-        const response = await fetch(staffForm.action, {
-          method: 'POST',
-          body: fd,
-          headers: { 'Accept': 'application/json' },
-        });
-        if (response.ok && !staffSent) {
-          staffSent = true;
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'en_staff' });
-        }
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = response.ok ? 'Sent ✔' : 'Send enquiry';
-        }
-        if (response.ok) {
-          staffForm.reset();
-          if (successMsg) successMsg.classList.remove('hidden');
-        }
-      } catch {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send enquiry';
-        }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = r.ok ? 'Sent ✔' : 'Send enquiry';
+      }
+      if (r.ok) {
+        staffForm.reset();
+        if (successMsg) successMsg.classList.remove('hidden');
       }
     });
   }

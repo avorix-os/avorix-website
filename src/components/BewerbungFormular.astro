@@ -9,6 +9,7 @@
 // Kein Upload, kein Einwilligungs-Haekchen (Bewerberdaten nach § 26 BDSG).
 // Messung: genau ein dataLayer-Ereignis `bewerbung`, nur bei { ok: true }.
 import { WHATSAPP_LINK_BEWERBUNG } from "../data/whatsapp";
+import Altcha from "./Altcha.astro";
 
 type Sprache = "de" | "hu" | "en";
 interface Props {
@@ -129,7 +130,7 @@ const regionen = REGION_VALUES[lang];
 const erfahrung = ERFAHRUNG_VALUES[lang];
 ---
 <div class="bw-wrap" data-bewerbung>
-  <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle}>
+  <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle} data-sprache={lang} data-whatsapp={WHATSAPP_LINK_BEWERBUNG}>
     <input type="hidden" name="formular" value="bewerbung" />
     <input type="hidden" name="quelle" value={quelle} />
     <input type="text" name="website" class="bw-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -209,7 +210,7 @@ const erfahrung = ERFAHRUNG_VALUES[lang];
       <textarea id={`${p}-nachricht`} name="nachricht" rows="3" class="bw-field bw-textarea"></textarea>
     </div>
 
-    <p class="bw-fehler hidden" data-bw-fehler role="alert">{T.fehler}</p>
+    <Altcha sprache={lang} />
 
     <button type="submit" class="btn btn-primary bw-submit" data-bw-sending={T.sending}>{T.button}</button>
     {whatsappHinweis && (
@@ -298,10 +299,10 @@ const erfahrung = ERFAHRUNG_VALUES[lang];
 </style>
 
 <script>
+  import { absenden } from '../scripts/formular';
   document.querySelectorAll<HTMLElement>('[data-bewerbung]').forEach((wrap) => {
     const form = wrap.querySelector<HTMLFormElement>('[data-bewerbung-form]');
     const danke = wrap.querySelector<HTMLElement>('[data-bw-danke]');
-    const fehler = wrap.querySelector<HTMLElement>('[data-bw-fehler]');
     if (!form) return;
     const ts = form.querySelector<HTMLInputElement>('[data-bw-ts]');
     if (ts) ts.value = String(Date.now());
@@ -314,27 +315,25 @@ const erfahrung = ERFAHRUNG_VALUES[lang];
       const label = knopf ? knopf.textContent : '';
       const sending = knopf ? (knopf.getAttribute('data-bw-sending') || 'Wird gesendet…') : '';
       if (knopf) { knopf.disabled = true; knopf.textContent = sending; }
-      fehler?.classList.add('hidden');
-      try {
-        const fd = new FormData(form);
-        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
-        if (g) fd.append('gclid', g);
-        const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-        const daten = await res.json().catch(() => null);
-        if (res.ok && daten && daten.ok === true) {
-          gesendet = true;
+
+      const sprache = (form.getAttribute('data-sprache') || 'de') as 'de' | 'en' | 'hu';
+      const whatsapp = form.getAttribute('data-whatsapp') || '';
+      const r = await absenden(form, { sprache, variante: 'bewerber', whatsapp });
+
+      if (r.ok) {
+        gesendet = true;
+        // Anweisung 63: Ereignis nur ohne Verdacht (sonst zaehlt Google Ads Spam).
+        if (!r.verdacht) {
           const w = window as any;
           w.dataLayer = w.dataLayer || [];
-          w.dataLayer.push({ event: 'bewerbung', rolle: String(fd.get('rolle') || ''), quelle: form.dataset.quelle || '' });
-          form.classList.add('hidden');
-          danke?.classList.remove('hidden');
-          danke?.focus();
-          return;
+          w.dataLayer.push({ event: 'bewerbung', rolle: String(new FormData(form).get('rolle') || ''), quelle: form.dataset.quelle || '' });
         }
-        throw new Error('nicht ok');
-      } catch {
+        form.classList.add('hidden');
+        danke?.classList.remove('hidden');
+        danke?.focus();
+      } else {
+        // Fehlermeldung zeigt absenden() bereits; Knopf wieder freigeben.
         if (knopf) { knopf.disabled = false; knopf.textContent = label; }
-        fehler?.classList.remove('hidden');
       }
     });
   });

@@ -1,4 +1,22 @@
 import { test, expect } from '@playwright/test';
+import crypto from 'node:crypto';
+
+// Anweisung 63: ALTCHA sitzt jetzt vor jedem Formular. In der Vorschau gibt es
+// keinen Formular-Dienst, deshalb liefern wir fuer die Submit-Tests eine
+// loesbare Challenge aus (kleine maxnumber, das Widget loest sofort). Die
+// Signatur prueft nur der echte Server; die Tests mocken /api/formular ohnehin.
+async function mockAltcha(page) {
+  await page.route('**/api/altcha/challenge', (route) => {
+    const salt = 'testsalt';
+    const secret = 7;
+    const challenge = crypto.createHash('sha256').update(salt + secret).digest('hex');
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ algorithm: 'SHA-256', challenge, salt, maxnumber: 100, signature: 'test' }),
+    });
+  });
+}
 
 /**
  * Tests for AVOA-137 Website-Umbau Korrektur
@@ -194,17 +212,24 @@ test.describe('T4: Pilotprogramm-Formular', () => {
     await page.route('**/formspree.io/**', (route) =>
       route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
     );
+    await mockAltcha(page);
 
-    // Fill required fields
+    // Fill required fields (das Fokussieren loest ALTCHA aus)
     await page.fill('input[name="name"], input[name="Name"]', 'Test Hotel');
     await page.fill('input[name="betrieb"], input[name="Betrieb"], input[name="betrieb_ort"]', 'Testhotel Friedrichshafen');
     await page.fill('input[name="email"], input[name="E-Mail"], input[type="email"]', 'test@example.com');
+
+    // Auf die ALTCHA-Loesung warten, dann absenden
+    await page.waitForFunction(() => {
+      const w = document.querySelector('altcha-widget');
+      return w && w.getState && w.getState() === 'verified';
+    }, { timeout: 8000 });
 
     // Submit
     const submitBtn = page.locator('form button[type="submit"], form input[type="submit"]');
     await submitBtn.click();
 
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(1500);
 
     const events = await page.evaluate(() =>
       (window.dataLayer || []).filter((e) => e && e.event === 'pilot_bewerbung')
@@ -1197,6 +1222,7 @@ test.describe('A60: Bewerbungen', () => {
         gesendet = route.request().postData() || '';
         await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
       });
+      await mockAltcha(page);
       await page.goto(pfad);
       await einwilligen(page);
       const form = page.locator('[data-bewerbung-form]');
@@ -1206,6 +1232,10 @@ test.describe('A60: Bewerbungen', () => {
       await form.locator('select[name="region"]').selectOption('Tirol');
       await form.locator('select[name="erfahrung"]').selectOption('3 bis 5 Jahre');
       await page.waitForTimeout(3100); // Zeitfalle des Dienstes (3 s) realistisch abwarten
+      await page.waitForFunction(() => {
+        const w = document.querySelector('altcha-widget');
+        return w && w.getState && w.getState() === 'verified';
+      }, { timeout: 8000 });
       await form.locator('button[type="submit"]').click();
       await expect(page.locator('[data-bw-danke]')).toBeVisible();
       await expect(form).toBeHidden();
@@ -1221,6 +1251,7 @@ test.describe('A60: Bewerbungen', () => {
     await page.route('**/api/formular', (route) =>
       route.fulfill({ status: 400, contentType: 'application/json', body: '{"ok":false,"error":"missing_telefon"}' })
     );
+    await mockAltcha(page);
     await page.goto('/jobs/');
     await einwilligen(page);
     const form = page.locator('[data-bewerbung-form]');
@@ -1229,8 +1260,13 @@ test.describe('A60: Bewerbungen', () => {
     await form.locator('label.bw-rolle', { hasText: 'Koch' }).click();
     await form.locator('select[name="region"]').selectOption('Tirol');
     await form.locator('select[name="erfahrung"]').selectOption('1 bis 2 Jahre');
+    await page.waitForFunction(() => {
+      const w = document.querySelector('altcha-widget');
+      return w && w.getState && w.getState() === 'verified';
+    }, { timeout: 8000 });
     await form.locator('button[type="submit"]').click();
-    await expect(page.locator('[data-bw-fehler]')).toBeVisible();
+    // Anweisung 63: Fehlermeldung kommt jetzt aus der gemeinsamen Hilfsfunktion.
+    await expect(page.locator('[data-form-fehler]')).toBeVisible();
     const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'bewerbung'));
     expect(ev).toHaveLength(0);
   });

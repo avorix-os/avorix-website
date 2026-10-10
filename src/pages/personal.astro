@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
+import Altcha from "../components/Altcha.astro";
 import dampfTopf from "../assets/bilder/dampf-topf.jpg";
 
 const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
@@ -576,6 +577,7 @@ const schema = [
             Ihre Anfrage ist da. Wir melden uns innerhalb von 24 Stunden.
           </div>
 
+          <Altcha sprache="de" />
           <button
             type="submit"
             class="btn btn-primary anfrage-submit"
@@ -842,7 +844,8 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
 </script>
 
 <script>
-  /* Personal-Anfrage — Mechanik wie Pilot-Formular, Event nur bei Erfolg */
+  /* Personal-Anfrage — gemeinsame Absende-Logik (A63), Event nur ohne Verdacht */
+  import { absenden } from '../scripts/formular';
   const personalForm = document.getElementById('personal-form') as HTMLFormElement;
   if (personalForm) {
     let personalSent = false;
@@ -852,39 +855,20 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
       e.preventDefault();
       const submitBtn = personalForm.querySelector('[type="submit"]') as HTMLButtonElement;
       const successMsg = document.getElementById('personal-success');
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Wird gesendet…';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Wird gesendet…'; }
+      const r = await absenden(personalForm, { sprache: 'de' });
+      if (r.ok && !r.verdacht && !personalSent) {
+        personalSent = true;
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'personal' });
       }
-      try {
-        const fd = new FormData(personalForm);
-        const g = (window as any).avorixGclid ? (window as any).avorixGclid() : '';
-        if (g) fd.append('gclid', g);
-        const response = await fetch(personalForm.action, {
-          method: 'POST',
-          body: fd,
-          headers: { 'Accept': 'application/json' },
-        });
-        if (response.ok && !personalSent) {
-          personalSent = true;
-          (window as any).dataLayer = (window as any).dataLayer || [];
-          (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'personal' });
-        }
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = response.ok ? 'Gesendet ✔' : 'Anfrage senden';
-        }
-        if (response.ok) {
-          personalForm.reset();
-          if (successMsg) {
-            successMsg.classList.remove('hidden');
-          }
-        }
-      } catch {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Anfrage senden';
-        }
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = r.ok ? 'Gesendet ✔' : 'Anfrage senden';
+      }
+      if (r.ok) {
+        personalForm.reset();
+        if (successMsg) successMsg.classList.remove('hidden');
       }
     });
   }

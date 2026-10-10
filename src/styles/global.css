@@ -1104,6 +1104,15 @@ h2 {
   margin-top: 16px;
   line-height: 1.5;
 }
+/* Anweisung 63: Fehlermeldung unter dem Absende-Knopf (alle Formulare). */
+.form-fehler {
+  font-size: 14px;
+  color: var(--akzent);
+  font-weight: 600;
+  margin-top: 12px;
+  line-height: 1.5;
+}
+.form-fehler a { color: var(--akzent); text-decoration: underline; }
 .formular-hinweis a {
   color: var(--akzent);
   text-decoration: underline;
