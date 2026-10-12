@@ -1209,6 +1209,24 @@ h2 {
 .tabelle-scroll tbody td { color: var(--grau); }
 .tabelle-scroll tbody tr:last-child td { border-bottom: none; }
 .tabelle-scroll td:first-child { color: var(--druck); font-weight: 600; }
+/* Anweisung 63, Teil 8: Die erste Spalte (Frage bzw. Merkmal) bleibt beim
+   Querwischen stehen, damit die Zuordnung sichtbar bleibt. Gilt fuer alle
+   .tabelle-scroll-Tabellen (Betriebsgastronomie und Wissen-Artikel). */
+.tabelle-scroll th:first-child,
+.tabelle-scroll td:first-child {
+  position: sticky;
+  left: 0;
+  background: var(--papier);
+  z-index: 1;
+}
+@media (max-width: 640px) {
+  .tabelle-scroll th:first-child,
+  .tabelle-scroll td:first-child {
+    width: 110px;
+    min-width: 110px;
+    max-width: 110px;
+  }
+}
 
 /* === Regionale Personal-Seiten (SEO-Paket Phase 2) ======================== */
 /* Eyebrow als Rueckverweis-Link (Wissen- und Personal-Regionalseiten).
