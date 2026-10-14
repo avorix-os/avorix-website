@@ -35,6 +35,14 @@ const REGIONEN = [
   'Egal, ich bin flexibel',
 ];
 const ERFAHRUNG = ['1 bis 2 Jahre', '3 bis 5 Jahre', 'mehr als 5 Jahre'];
+// Anweisung 66: Arbeitserlaubnis. Werte kommen IMMER auf Deutsch an (nur die
+// Beschriftung im Formular ist uebersetzt). Fehlt das Feld (z. B. zwischen-
+// gespeicherte Seite), wird nicht abgelehnt, sondern "keine Angabe" gezeigt.
+const ARBEITSERLAUBNIS = [
+  'EU, EWR oder Schweiz',
+  'Aufenthaltstitel ohne Einschränkung',
+  'Nein oder unklar',
+];
 // Anweisung 61: HU/EN-Bewerberseiten. Werte kommen IMMER auf Deutsch an,
 // egal in welcher Sprache die Seite ist (nur die Beschriftung im Formular ist
 // uebersetzt). Darum kommen die neuen Werte hier zu den erlaubten Optionen dazu.
@@ -188,6 +196,9 @@ const FORMS = {
       f('telefon', true, LEN.telefon, true),
       { ...f('sprache', false, LEN.auswahl, true), options: SPRACHE_SEITE },
       { ...f('land', false, LEN.auswahl, true), options: LAENDER },
+      // Anweisung 66: nicht Pflicht im Dienst (fehlt -> keine Angabe, siehe
+      // buildBody); nur feste Werte zugelassen.
+      { ...f('arbeitserlaubnis', false, LEN.auswahl, true), options: ARBEITSERLAUBNIS },
       f('name', true, LEN.name, true),
       f('email', false, LEN.email, true),
       { ...f('rolle', true, LEN.auswahl, true), options: Object.keys(ROLLEN) },

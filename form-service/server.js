@@ -93,7 +93,35 @@ const LABELS = {
   sprache: 'Seitensprache',
   sprachen: 'Sprachen',
   land: 'Land',
+  // Anweisung 66
+  arbeitserlaubnis: 'Arbeitserlaubnis',
 };
+
+// Anweisung 66: die gesendeten (deutschen) Werte je Seitensprache so, wie der
+// Bewerber sie angeklickt hat – fuer die Eingangsbestaetigung in der
+// Seitensprache. Die HU-Fassung liest Csaba gegen.
+const ARBEITSERLAUBNIS_LABELS = {
+  de: {
+    'EU, EWR oder Schweiz': 'Ja, ich habe einen Pass oder Ausweis aus der EU, dem EWR oder der Schweiz',
+    'Aufenthaltstitel ohne Einschränkung': 'Ja, ich habe einen Aufenthaltstitel, der jede Arbeit erlaubt',
+    'Nein oder unklar': 'Nein, oder ich weiß es nicht',
+  },
+  en: {
+    'EU, EWR oder Schweiz': 'Yes, I have a passport or ID card from the EU, the EEA or Switzerland',
+    'Aufenthaltstitel ohne Einschränkung': 'Yes, I have a residence permit that allows any employment',
+    'Nein oder unklar': "No, or I'm not sure",
+  },
+  hu: {
+    'EU, EWR oder Schweiz': 'Igen, uniós, EGT-s vagy svájci útlevelem vagy személyi igazolványom van',
+    'Aufenthaltstitel ohne Einschränkung': 'Igen, olyan tartózkodási engedélyem van, amely bármilyen munkát megenged',
+    'Nein oder unklar': 'Nem, vagy nem tudom',
+  },
+};
+function arbeitserlaubnisLabel(lang, wert) {
+  if (!wert) return '';
+  const tab = ARBEITSERLAUBNIS_LABELS[lang] || ARBEITSERLAUBNIS_LABELS.de;
+  return tab[wert] || wert;
+}
 
 const MAGIC = {
   pdf: [0x25, 0x50, 0x44, 0x46], // %PDF
@@ -319,6 +347,9 @@ function buildBody(def, kennung, fields, files, reasons) {
     const label = LABELS[fld.name] || fld.name;
     let val = fields[fld.name];
     if (fld.name === 'rolle' && def.bewerbung) val = ROLLEN[val] || val;
+    // Anweisung 66: fehlt die Angabe (z. B. zwischengespeicherte Seite), steht
+    // "keine Angabe" an der Stelle des Feldes, nicht der Platzhalter "—".
+    if (fld.name === 'arbeitserlaubnis' && def.bewerbung && !val) val = 'keine Angabe';
     if (fld.name === 'newsletter') {
       val = fields.newsletter ? 'JA – eingewilligt' : 'nein – nicht eingewilligt';
     }
@@ -357,6 +388,9 @@ function subjectFor(def, fields, verdacht) {
   let s;
   if (def.bewerbung) {
     s = `Bewerbung: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}`;
+    // Anweisung 66: zum Vorsortieren. Nur bei "Nein oder unklar", nicht bei
+    // "keine Angabe" (dort ist offen, ob eine Erlaubnis besteht).
+    if (fields.arbeitserlaubnis === 'Nein oder unklar') s += ' · ohne Arbeitserlaubnis';
   } else {
     s = def.subject;
   }
@@ -377,6 +411,7 @@ function bewerbungAck(fields) {
     ['E-Mail', fields.email],
     ['Ich bewerbe mich als', ROLLEN[fields.rolle] || fields.rolle],
     ['Wo du arbeiten willst', fields.region],
+    ['Darfst du in Deutschland und Österreich ohne Visum arbeiten?', arbeitserlaubnisLabel('de', fields.arbeitserlaubnis)],
     ['Erfahrung in der Gastronomie', fields.erfahrung],
     ['Was du zuletzt gemacht hast', fields.nachricht],
   ].filter(([, v]) => v && String(v).trim() !== '');
@@ -442,6 +477,7 @@ function bewerbungAckHu(fields) {
     ['Telefonszám', fields.telefon],
     ['E-mail', fields.email],
     ['Hol szeretnél dolgozni?', fields.region],
+    ['Dolgozhatsz vízum nélkül Németországban és Ausztriában?', arbeitserlaubnisLabel('hu', fields.arbeitserlaubnis)],
     ['Mennyi tapasztalatod van a vendéglátásban?', fields.erfahrung],
     ['Milyen nyelven beszélsz?', fields.sprachen],
     ['Milyen pozícióban dolgoztál?', fields.nachricht],
@@ -478,6 +514,7 @@ function bewerbungAckEn(fields) {
     ['Email', fields.email],
     ['Where do you live?', fields.land],
     ['Where would you like to work?', fields.region],
+    ['Are you allowed to work in Germany and Austria without a visa?', arbeitserlaubnisLabel('en', fields.arbeitserlaubnis)],
     ['How long have you worked in hospitality?', fields.erfahrung],
     ['Which languages can you work in?', fields.sprachen],
     ['What did you do most recently?', fields.nachricht],

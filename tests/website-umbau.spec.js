@@ -1221,6 +1221,8 @@ test.describe('A60: Bewerbungen', () => {
       await form.locator('input[name="telefon"]').fill('+43 664 123 45 67');
       if (rolle === 'service') await form.locator('label.bw-rolle', { hasText: 'Servicekraft' }).click();
       await form.locator('select[name="region"]').selectOption('Tirol');
+      // Anweisung 66: neues Pflichtfeld Arbeitserlaubnis.
+      await form.locator('label.bw-rolle', { hasText: 'Pass oder Ausweis' }).click();
       await form.locator('select[name="erfahrung"]').selectOption('3 bis 5 Jahre');
       await page.waitForTimeout(3100); // Zeitfalle des Dienstes (3 s) realistisch abwarten
       await altchaVerify(page);
@@ -1232,6 +1234,8 @@ test.describe('A60: Bewerbungen', () => {
       expect(ev[0]).toMatchObject({ rolle, quelle });
       expect(gesendet).toContain('name="quelle"');
       expect(gesendet).toContain(quelle);
+      // Anweisung 66: das Pflichtfeld geht mit.
+      expect(gesendet).toContain('name="arbeitserlaubnis"');
     });
   }
 
@@ -1246,6 +1250,7 @@ test.describe('A60: Bewerbungen', () => {
     await form.locator('input[name="telefon"]').fill('0151 1');
     await form.locator('label.bw-rolle', { hasText: 'Koch' }).click();
     await form.locator('select[name="region"]').selectOption('Tirol');
+    await form.locator('label.bw-rolle', { hasText: 'Pass oder Ausweis' }).click();
     await form.locator('select[name="erfahrung"]').selectOption('1 bis 2 Jahre');
     await altchaVerify(page);
     await form.locator('button[type="submit"]').click();

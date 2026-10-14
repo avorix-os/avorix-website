@@ -82,12 +82,32 @@ const LAND_VALUES = [
   { v: "anderes EU-Land", l: "Other EU country" },
   { v: "anderes Land", l: "Other country" },
 ];
+// Anweisung 66: Pflichtfeld Arbeitserlaubnis. Gesendeter Wert (v) immer deutsch,
+// Beschriftung (l) in der Seitensprache. Die HU-Fassung liest Csaba gegen.
+const ARBEITSERLAUBNIS_VALUES = {
+  de: [
+    { v: "EU, EWR oder Schweiz", l: "Ja, ich habe einen Pass oder Ausweis aus der EU, dem EWR oder der Schweiz" },
+    { v: "Aufenthaltstitel ohne Einschränkung", l: "Ja, ich habe einen Aufenthaltstitel, der jede Arbeit erlaubt" },
+    { v: "Nein oder unklar", l: "Nein, oder ich weiß es nicht" },
+  ],
+  en: [
+    { v: "EU, EWR oder Schweiz", l: "Yes, I have a passport or ID card from the EU, the EEA or Switzerland" },
+    { v: "Aufenthaltstitel ohne Einschränkung", l: "Yes, I have a residence permit that allows any employment" },
+    { v: "Nein oder unklar", l: "No, or I'm not sure" },
+  ],
+  hu: [
+    { v: "EU, EWR oder Schweiz", l: "Igen, uniós, EGT-s vagy svájci útlevelem vagy személyi igazolványom van" },
+    { v: "Aufenthaltstitel ohne Einschränkung", l: "Igen, olyan tartózkodási engedélyem van, amely bármilyen munkát megenged" },
+    { v: "Nein oder unklar", l: "Nem, vagy nem tudom" },
+  ],
+};
 
 const T = {
   de: {
     name: "Dein Name", telefon: "Telefonnummer, wir rufen dich an",
     email: "E-Mail", emailOpt: "(wenn du eine Bestätigung willst)",
     rolleLegend: "Ich bewerbe mich als:", rolleKoch: "Koch", rolleService: "Servicekraft",
+    arbeitLegend: "Darfst du in Deutschland und Österreich ohne Visum arbeiten?",
     land: "", region: "Wo willst du arbeiten?", erfahrung: "Wie lange arbeitest du schon in der Gastronomie?",
     sprachen: "", nachricht: "Was hast du zuletzt gemacht?", nachrichtOpt: "(freiwillig)",
     bitteWaehlen: "Bitte wählen", button: "Bewerbung abschicken", sending: "Wird gesendet…",
@@ -100,6 +120,7 @@ const T = {
   hu: {
     name: "A neved", telefon: "Telefonszám (WhatsAppos szám is jó)",
     email: "E-mail", emailOpt: "(ha visszaigazolást kérsz)",
+    arbeitLegend: "Dolgozhatsz vízum nélkül Németországban és Ausztriában?",
     land: "", region: "Hol szeretnél dolgozni?", erfahrung: "Mennyi tapasztalatod van a vendéglátásban?",
     sprachen: "Milyen nyelven beszélsz?", nachricht: "Milyen pozícióban dolgoztál?", nachrichtOpt: "(nem kötelező)",
     bitteWaehlen: "Kérlek, válassz", button: "Jelentkezés elküldése", sending: "Küldés…",
@@ -112,6 +133,7 @@ const T = {
   en: {
     name: "Your name", telefon: "Phone number (WhatsApp is fine)",
     email: "Email", emailOpt: "(if you want a confirmation)",
+    arbeitLegend: "Are you allowed to work in Germany and Austria without a visa?",
     land: "Where do you live?", region: "Where would you like to work?", erfahrung: "How long have you worked in hospitality?",
     sprachen: "Which languages can you work in?", nachricht: "What did you do most recently?", nachrichtOpt: "(optional)",
     bitteWaehlen: "Please choose", button: "Send application", sending: "Sending…",
@@ -128,6 +150,7 @@ const istBewerberseite = lang !== "de";
 const rolleFest = nurKoch || istBewerberseite;
 const regionen = REGION_VALUES[lang];
 const erfahrung = ERFAHRUNG_VALUES[lang];
+const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
 ---
 <div class="bw-wrap" data-bewerbung>
   <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle} data-sprache={lang} data-whatsapp={WHATSAPP_LINK_BEWERBUNG}>
@@ -186,6 +209,20 @@ const erfahrung = ERFAHRUNG_VALUES[lang];
         {regionen.map((o) => <option value={o.v}>{o.l}</option>)}
       </select>
     </div>
+
+    {/* Anweisung 66: Pflichtfeld Arbeitserlaubnis, drei Radios untereinander,
+        keine Vorauswahl. Wert immer deutsch, Beschriftung in der Seitensprache. */}
+    <fieldset class="bw-fieldset">
+      <legend class="bw-label">{T.arbeitLegend} <span class="bw-pflicht">*</span></legend>
+      <div class="bw-arbeit">
+        {arbeitOptionen.map((o) => (
+          <label class="bw-rolle bw-rolle--block">
+            <input type="radio" name="arbeitserlaubnis" value={o.v} required />
+            <span>{o.l}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
 
     <div>
       <label for={`${p}-erfahrung`} class="bw-label">{T.erfahrung} <span class="bw-pflicht">*</span></label>
@@ -266,6 +303,16 @@ const erfahrung = ERFAHRUNG_VALUES[lang];
 .bw-fieldset { border: 0; padding: 0; margin-inline: 0; margin-top: 0; }
 .bw-fieldset legend { padding: 0; }
 .bw-rollen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+/* Anweisung 66: Arbeitserlaubnis – drei Optionen untereinander, Text links und
+   mehrzeilig (die Beschriftungen sind laenger als Koch/Servicekraft). */
+.bw-arbeit { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.bw-rolle--block span {
+  justify-content: flex-start;
+  text-align: left;
+  min-height: 0;
+  padding: 14px 16px;
+  line-height: 1.4;
+}
 .bw-rolle { position: relative; display: block; cursor: pointer; }
 .bw-rolle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .bw-rolle span {
