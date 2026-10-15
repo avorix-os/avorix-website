@@ -303,16 +303,9 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
 .bw-fieldset { border: 0; padding: 0; margin-inline: 0; margin-top: 0; }
 .bw-fieldset legend { padding: 0; }
 .bw-rollen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-/* Anweisung 66: Arbeitserlaubnis – drei Optionen untereinander, Text links und
-   mehrzeilig (die Beschriftungen sind laenger als Koch/Servicekraft). */
+/* Anweisung 66: Arbeitserlaubnis – drei Optionen untereinander. Die Kaestchen
+   bekommen ihr Styling ueber .bw-rolle--block NACH der Basisregel .bw-rolle span. */
 .bw-arbeit { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.bw-rolle--block span {
-  justify-content: flex-start;
-  text-align: left;
-  min-height: 0;
-  padding: 14px 16px;
-  line-height: 1.4;
-}
 .bw-rolle { position: relative; display: block; cursor: pointer; }
 .bw-rolle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .bw-rolle span {
@@ -334,6 +327,17 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
   color: var(--akzent);
 }
 .bw-rolle input:focus-visible + span { outline: 3px solid var(--akzent); outline-offset: 2px; }
+/* Anweisung 68: Die Arbeitserlaubnis-Antworten sind ganze Saetze und brechen auf
+   dem Handy um. Innenabstand oben/unten (sonst klebt der Text am Rahmen) und
+   linksbuendig. Steht NACH .bw-rolle span, damit die Regel bei gleicher
+   Spezifitaet gewinnt; min-height:0, damit auch eine einzeilige Antwort denselben
+   12px-Abstand oben/unten hat. */
+.bw-rolle--block > span {
+  padding: 12px 16px;
+  min-height: 0;
+  justify-content: flex-start;
+  text-align: left;
+}
 .bw-submit { width: 100%; }
 .bw-whatsapp { font-size: 15px; color: var(--grau); text-align: center; }
 .bw-fehler { font-size: 14px; color: var(--akzent); font-weight: 600; }
