@@ -7,8 +7,10 @@ import { WHATSAPP_LINK, WHATSAPP_LINK_BEWERBUNG } from "../data/whatsapp";
 // Rest von avorix.de siezt. Kein hreflang (bewusst keine englische Fassung).
 //
 // Anweisung 60: Bewerbungsformular live (Kennung `bewerbung`, quelle=jobs),
-// WhatsApp als zweiter Weg, Gehalt fuer Koeche (2.500 bis 3.500 Euro brutto
-// im Monat in Vollzeit). Service ohne eigene Spanne. directApply jetzt true.
+// WhatsApp als zweiter Weg, directApply true.
+// Anweisung 71/72: Rollen Beikoch/Koch/Souschef, Einsatzgebiet ganz DE+AT,
+// KEINE Gehaltszahlen mehr (neutral: faires, marktuebliches Gehalt); baseSalary
+// aus den JobPostings entfernt.
 
 // JobPosting-Beschreibung: enthaelt den sichtbaren Stellentext (Was der Job
 // ist, Was du bei uns hast, Wen wir suchen), damit Schema und Seite sich decken.
@@ -23,10 +25,11 @@ const jobDescriptionHtml = `
 <li><strong>Dein Chef ist Koch.</strong> Börge Penk hat zwanzig Jahre in Profiküchen gearbeitet, vom Auszubildenden bis zum Küchenchef mit großen Teams. Er sucht die Einsätze selbst aus. Du redest bei uns nicht mit einem Disponenten, der noch nie an einem Pass gestanden hat.</li>
 </ul>
 <h3>Wen wir suchen</h3>
-<p>Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Küche hast. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p>
-<h3>Was du verdienst</h3>
-<p>Als Koch verdienst du bei uns <strong>2.500 bis 3.500 Euro brutto im Monat</strong> in Vollzeit, je nach Erfahrung und Qualifikation. In Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst.</p>
+<p>Beiköche, Köche und Souschefs mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren. Auch ohne abgeschlossene Ausbildung kannst du dich bewerben, wenn du die Jahre in der Küche hast. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen.</p>
+<h3>Was du bekommst</h3>
+<p>Wir zahlen ein faires, marktübliches Gehalt, je nach deiner Rolle, deiner Erfahrung und deiner Qualifikation, in Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst. Zwischen zwei Einsätzen läuft dein Gehalt weiter.</p>
 <p><strong>Fahrtkosten und Unterkunft zahlen wir.</strong> Du fährst zu deinen Einsätzen auf unsere Kosten, und wenn ein Einsatz zu weit zum täglichen Pendeln ist, zahlen wir auch die Unterkunft.</p>
+<p><strong>Wo du arbeitest:</strong> Unser Sitz ist in Friedrichshafen am Bodensee. Gearbeitet wird in ganz Deutschland und Österreich, bis hinauf zu den Nord- und Ostfriesischen Inseln. Schwerpunkte sind der Bodensee, München, Stuttgart, Frankfurt, Tirol und Vorarlberg.</p>
 `.trim();
 
 // Anweisung 49: zweites JobPosting fuer Servicekraefte. Beschreibung = die zwei
@@ -34,6 +37,7 @@ const jobDescriptionHtml = `
 const serviceDescriptionHtml = `
 <p><strong>Und wenn du im Service arbeitest:</strong> Dasselbe Prinzip, anderer Ort im Haus. Wir schicken dich dorthin, wo an einem Abend Hände fehlen: auf ein Bankett, in ein Restaurant mit zwei Krankmeldungen, in ein Haus, das gerade in die Saison fährt. Du arbeitest im Restaurantservice, beim Bankett oder am Frühstück, je nachdem, was du kannst und willst.</p>
 <p><strong>Für den Service suchen wir</strong> Menschen mit Erfahrung im Gastraum: Restaurantfachleute, Hotelfachleute, Quereinsteiger mit ein paar Jahren am Tisch. Du solltest einen Abendservice kennen, unter Druck freundlich bleiben und dich in einem fremden Haus schnell zurechtfinden. Ein Abschluss ist auch hier keine Bedingung, Erfahrung schon.</p>
+<p><strong>Wo du arbeitest:</strong> Unser Sitz ist in Friedrichshafen am Bodensee. Gearbeitet wird in ganz Deutschland und Österreich, bis hinauf zu den Nord- und Ostfriesischen Inseln. Schwerpunkte sind der Bodensee, München, Stuttgart, Frankfurt, Tirol und Vorarlberg.</p>
 `.trim();
 
 const schema = [
@@ -47,18 +51,8 @@ const schema = [
     "@type": "JobPosting",
     "title": "Koch (m/w/d)",
     "description": jobDescriptionHtml,
-    "datePosted": "2026-10-05",
+    "datePosted": "2026-10-18",
     "validThrough": "2027-04-05",
-    "baseSalary": {
-      "@type": "MonetaryAmount",
-      "currency": "EUR",
-      "value": {
-        "@type": "QuantitativeValue",
-        "minValue": 2500,
-        "maxValue": 3500,
-        "unitText": "MONTH"
-      }
-    },
     "employmentType": ["FULL_TIME", "PART_TIME"],
     "hiringOrganization": {
       "@type": "Organization",
@@ -89,7 +83,7 @@ const schema = [
     "@type": "JobPosting",
     "title": "Servicekraft (m/w/d)",
     "description": serviceDescriptionHtml,
-    "datePosted": "2026-09-17",
+    "datePosted": "2026-10-18",
     "validThrough": "2027-03-17",
     "employmentType": ["FULL_TIME", "PART_TIME"],
     "hiringOrganization": {
@@ -120,7 +114,7 @@ const schema = [
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      { "@type": "Question", "name": "Was verdiene ich als Koch bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "2.500 bis 3.500 Euro brutto im Monat in Vollzeit, je nach Erfahrung und Qualifikation. Was genau für dich gilt, weißt du, bevor du unterschreibst." } },
+      { "@type": "Question", "name": "Was verdiene ich bei Avorix?", "acceptedAnswer": { "@type": "Answer", "text": "Wir zahlen ein faires, marktübliches Gehalt, je nach Rolle, Erfahrung und Qualifikation. Was genau für dich gilt, besprechen wir im ersten Telefonat, und du kennst es, bevor du unterschreibst. Dein Gehalt läuft auch zwischen zwei Einsätzen weiter." } },
       { "@type": "Question", "name": "Ist das Zeitarbeit?", "acceptedAnswer": { "@type": "Answer", "text": "Rechtlich ja, es ist Arbeitnehmerüberlassung mit behördlicher Erlaubnis. Praktisch unterscheidet es sich von dem, was viele darunter verstehen: Wir verleihen ausschließlich Köche, keine Aushilfen in beliebige Branchen, unser Chef ist selbst Küchenchef, und dein Vertrag läuft zwischen den Einsätzen weiter." } },
       { "@type": "Question", "name": "Brauche ich eine Arbeitserlaubnis?", "acceptedAnswer": { "@type": "Answer", "text": "Ja. Du musst in Deutschland und Österreich ohne Visum arbeiten dürfen, zum Beispiel mit einem Pass oder Ausweis aus der EU, dem EWR oder der Schweiz oder mit einem Aufenthaltstitel, der jede Arbeit erlaubt." } },
       { "@type": "Question", "name": "Kann ich mich ohne abgeschlossene Ausbildung bewerben?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, wenn du Erfahrung in einer Profiküche hast. Wir entscheiden danach, was du am Posten kannst, nicht nach deinem Zeugnis. Ohne jede Küchenerfahrung passt es dagegen nicht, weil unsere Kunden auf erfahrene Köche zählen." } },
@@ -217,7 +211,7 @@ const schema = [
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Wen wir suchen</h2>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Köche mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren.
+        Beiköche, Köche und Souschefs mit Berufserfahrung in Hotel- oder Restaurantküchen, in Vollzeit oder Teilzeit. Du solltest selbständig arbeiten können, weil du oft in fremde Abläufe kommst, und du solltest bereit sein, für einen Einsatz zu fahren.
       </p>
       <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
         <strong>Und wenn du keinen Abschluss hast?</strong> Dann bewirb dich trotzdem, wenn du die Jahre in der Küche hast. Börge hat seine Laufbahn damit begonnen, Menschen ohne klassische Kochausbildung an die Küche heranzuführen, und einige von ihnen kochen heute besser als mancher mit Brief. Uns interessiert, was du am Posten kannst, nicht welches Papier du darüber hast. Was wir nicht suchen, sind Menschen ohne jede Erfahrung im Betrieb. Unsere Kunden bekommen zugesagt, dass jeder, den wir schicken, weiß, wie ein laufender Betrieb funktioniert: in der Küche am Posten, im Service im Gastraum. Daran halten wir uns.
@@ -236,7 +230,7 @@ const schema = [
         Du sprichst kein Deutsch, aber gut Englisch? <a href="/en/jobs/cook/" class="typo-link">Hier geht es zur englischen Seite</a>. · <a href="/hu/szakacs-allas/" class="typo-link">Magyarul</a>
       </p>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Unser Sitz ist in Friedrichshafen am Bodensee, gearbeitet wird in Deutschland und Österreich. Unsere Schwerpunkte:
+        Unser Sitz ist in Friedrichshafen am Bodensee. Gearbeitet wird in ganz Deutschland und Österreich, bis hinauf zu den Nord- und Ostfriesischen Inseln. Unsere Schwerpunkte:
       </p>
       <ul class="max-w-[var(--spalte-text)]" style="color:var(--grau);list-style:disc;padding-left:24px;line-height:1.7">
         <li class="mb-2"><strong>Bodensee und Oberschwaben:</strong> Friedrichshafen, Konstanz, Lindau, Überlingen, Meersburg, Ravensburg bis ins Allgäu.</li>
@@ -252,9 +246,9 @@ const schema = [
   {/* Was du verdienst */}
  <section class="reveal section-gap">
     <div class="content-width text-spalte">
-      <h2 class="mb-6" style="color:var(--druck)">Was du verdienst</h2>
+      <h2 class="mb-6" style="color:var(--druck)">Was du bekommst</h2>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Als Koch verdienst du bei uns <strong>2.500 bis 3.500 Euro brutto im Monat</strong> in Vollzeit, je nach Erfahrung und Qualifikation. In Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst.
+        Wir zahlen ein faires, marktübliches Gehalt, je nach deiner Rolle, deiner Erfahrung und deiner Qualifikation, in Teilzeit entsprechend anteilig. Was genau für dich gilt, sagen wir dir im ersten Telefonat, bevor du irgendetwas unterschreibst. Zwischen zwei Einsätzen läuft dein Gehalt weiter.
       </p>
       <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">
         <strong>Im Service</strong> besprechen wir, was du verdienst, offen im ersten Telefonat, bevor du irgendetwas unterschreibst. Wir zahlen nach Erfahrung und Qualifikation.
@@ -316,8 +310,8 @@ const schema = [
       <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
       <div class="faq-list">
         <details class="faq-item" open>
-          <summary class="faq-q">Was verdiene ich als Koch bei Avorix?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
-          <div class="faq-body"><div class="faq-inner"><p>2.500 bis 3.500 Euro brutto im Monat in Vollzeit, je nach Erfahrung und Qualifikation. Was genau für dich gilt, weißt du, bevor du unterschreibst.</p></div></div>
+          <summary class="faq-q">Was verdiene ich bei Avorix?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Wir zahlen ein faires, marktübliches Gehalt, je nach Rolle, Erfahrung und Qualifikation. Was genau für dich gilt, besprechen wir im ersten Telefonat, und du kennst es, bevor du unterschreibst. Dein Gehalt läuft auch zwischen zwei Einsätzen weiter.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-q">Ist das Zeitarbeit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>

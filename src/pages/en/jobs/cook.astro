@@ -14,14 +14,54 @@ const alternates = [
 ];
 const kurz = [
   { f: "Is this temporary agency work?", a: "Legally, yes: it is temporary agency work under an official German licence. You are employed by Avorix, and your contract continues between assignments." },
-  { f: "Is the salary gross or net?", a: "Gross, meaning before taxes and social security contributions. How much you take home depends on several factors; we go through it in the first conversation." },
+  { f: "How much do I earn?", a: "We pay a fair salary in line with the market, depending on your role, your experience and your qualifications. We go through the details in the first conversation, so you know your salary before you sign anything. You keep getting paid between two assignments." },
   { f: "Do I need a car?", a: "It helps a lot, but it is not a requirement. Without a car, we look for assignments you can reach by public transport." },
   { f: "Can I work part time?", a: "Yes. The salary is then reduced accordingly." },
+  { f: "Are you also hiring commis chefs and sous chefs?", a: "Yes. We hire commis chefs, cooks and sous chefs. We do not hire kitchen assistants or junior cooks." },
 ];
+
+// Anweisung 67: JobPosting fuer Google for Jobs. description nur aus dem,
+// was auf dieser Seite sichtbar steht. datePosted = Livegang des Blocks.
+const jobPosting = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  title: "Cook (m/f/d)",
+  description:
+    "<p>Work as a chef in changing professional kitchens, employed by a German company. We pay a fair salary in line with the market, depending on your role, your experience and your qualifications, part-time pro rata.</p>" +
+    "<p><strong>What you get:</strong></p>" +
+    "<ul><li>An employment contract with full social insurance, paid holidays and sick pay. You keep getting paid between two assignments — no seasonal contract and no invoices to write.</li>" +
+    "<li>We pay your accommodation and reimburse your travel costs there and back.</li>" +
+    "<li>Your boss is a chef: Börge Penk worked in professional kitchens for twenty years and picks the assignments himself.</li>" +
+    "<li>Variety: different kitchens, menus and teams. An assignment lasts a few weeks or a whole season.</li></ul>" +
+    "<p><strong>Where you work:</strong> anywhere in Germany and Austria, all the way up to the North and East Frisian Islands. Our main areas are Lake Constance, Munich, Stuttgart and Frankfurt, and Tyrol and Vorarlberg in Austria — in hotels, restaurants and staff canteens. Our head office is in Friedrichshafen on Lake Constance.</p>" +
+    "<p><strong>What you bring:</strong></p>" +
+    "<ul><li>Experience in a hotel or restaurant kitchen. A formal qualification is not required, experience is.</li>" +
+    "<li>Good English. German is a plus, not a requirement.</li>" +
+    "<li>The right to work in Germany and Austria without a visa, for example as an EU citizen.</li></ul>" +
+    "<p><strong>How to apply:</strong> fill in the form or write on WhatsApp, no CV needed. We get back to you within 24 hours. If the trial cooking works for both sides, we sign.</p>",
+  datePosted: "2026-10-18",
+  employmentType: "FULL_TIME",
+  directApply: true,
+  hiringOrganization: {
+    "@type": "Organization",
+    name: "Avorix GmbH",
+    sameAs: "https://avorix.de/",
+    logo: "https://avorix.de/avorix-logo-quadrat-dunkel.png",
+  },
+  jobLocation: [
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Friedrichshafen", addressRegion: "Baden-Württemberg", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "München", addressRegion: "Bayern", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Stuttgart", addressRegion: "Baden-Württemberg", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Frankfurt am Main", addressRegion: "Hessen", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: "Tirol", addressCountry: "AT" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: "Vorarlberg", addressCountry: "AT" } },
+  ],
+  experienceInPlaceOfEducation: true,
+};
 ---
 <BewerberLayout
   title="Chef jobs in Austria and Germany, accommodation paid"
-  description="Employed as a chef by a German company. 2,500 to 3,500 euros gross per month, full time. We pay your accommodation and reimburse your travel costs. Good English is enough."
+  description="Employed as a chef by a German company, with a fair salary in line with the market. We pay your accommodation and reimburse your travel costs. Good English is enough."
   lang="en"
   sprachwechsel={[
     { label: "Deutsch", href: "/jobs/", lang: "de", hreflang: "de" },
@@ -34,13 +74,14 @@ const kurz = [
   footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
   consent="en"
   logoHref="/en/jobs/cook/"
+  schemaOrg={jobPosting}
 >
   <section class="lp-hero px-6">
     <div class="content-width">
       <p class="eyebrow mb-3">Jobs at Avorix · Chef</p>
       <h1 class="mb-4">Chef jobs in Austria and Germany, employed by a German company.</h1>
       <ul class="lp-haken mb-6">
-        <li>2,500 to 3,500 euros gross per month full time, depending on your experience</li>
+        <li>A fair salary in line with the market, depending on your experience</li>
         <li>We pay your accommodation and reimburse your travel costs</li>
         <li>Good English is enough. German is a plus, not a requirement.</li>
       </ul>
@@ -68,7 +109,7 @@ const kurz = [
   <section class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Where you work</h2>
-      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">In Austria in Tyrol and Vorarlberg, in Germany around Lake Constance, in Munich, Stuttgart and Frankfurt. In hotels, restaurants and staff canteens. Our head office is in Friedrichshafen on Lake Constance.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Anywhere in Germany and Austria, all the way up to the North and East Frisian Islands. Our main areas are Lake Constance, Munich, Stuttgart and Frankfurt, and Tyrol and Vorarlberg in Austria. In hotels, restaurants and staff canteens. Our head office is in Friedrichshafen on Lake Constance.</p>
     </div>
   </section>
 

@@ -14,14 +14,54 @@ const alternates = [
 ];
 const kurz = [
   { f: "Munkaerő kölcsönzésről van szó?", a: "Jogilag igen: munkaerő-kölcsönzés német hatósági engedéllyel. Az Avorix alkalmazottja vagy, és a szerződésed két megbízás között is érvényben marad." },
-  { f: "Bruttó vagy nettó a fizetés?", a: "Bruttó, vagyis adók és járulékok levonása előtti összeg. Hogy pontosan mennyi marad, az több dologtól függ; az első beszélgetésben átbeszéljük." },
+  { f: "Mennyit keresek?", a: "Tisztességes, piaci szintű fizetést adunk, a beosztásodtól, a tapasztalatodtól és a képzettségedtől függően. A részleteket az első beszélgetésben megbeszéljük, így még az aláírás előtt tudod, mennyit keresel. Két megbízás között is megkapod a béredet." },
   { f: "Rendelkeznem kell autóval?", a: "Sokat segít, de nem feltétel. Autó nélkül olyan megbízásokat keresünk, amelyek tömegközlekedéssel is elérhetők." },
   { f: "Lehet részmunkaidőben is dolgozni?", a: "Igen. A fizetés ilyenkor arányosan kevesebb." },
+  { f: "Szakácssegédet és sous chefet is kerestek?", a: "Igen. Szakácssegédeket, szakácsokat és sous chefeket veszünk fel. Konyhai kisegítőt és pályakezdő szakácsot nem veszünk fel." },
 ];
+
+// Anweisung 67: JobPosting a Google Állásokhoz. A description csak abból, ami
+// ezen az oldalon látható. datePosted = a blokk élesítésének napja.
+const jobPosting = {
+  "@context": "https://schema.org",
+  "@type": "JobPosting",
+  title: "Szakács",
+  description:
+    "<p>Dolgozz szakácsként váltakozó profi konyhákban, német munkáltatónál. Tisztességes, piaci szintű fizetést adunk, a beosztásodtól, a tapasztalatodtól és a képzettségedtől függően, részmunkaidőben arányosan.</p>" +
+    "<p><strong>Amit kapsz:</strong></p>" +
+    "<ul><li>Munkaszerződés teljes társadalombiztosítással, fizetett szabadsággal és betegszabadsággal. Két megbízás között is megkapod a béredet — nem szezonális szerződés, és nem kell számlát adnod.</li>" +
+    "<li>A szállást mi fizetjük, az utazási költségeidet oda-vissza megtérítjük.</li>" +
+    "<li>A főnököd szakács: Börge Penk húsz évig dolgozott profi konyhákban, és ő maga választja ki a megbízásokat.</li>" +
+    "<li>Változatosság: más konyhák, más étlapok, más csapatok. Egy megbízás néhány hétig vagy egy egész szezonon át tart.</li></ul>" +
+    "<p><strong>Hol dolgozol:</strong> Németország és Ausztria egész területén, egészen az Északi- és Keleti-fríz-szigetekig. Fő területeink a Bodeni-tó környéke, München, Stuttgart és Frankfurt, valamint Ausztriában Tirol és Vorarlberg — szállodákban, éttermekben és üzemi konyhákban. A cég székhelye Friedrichshafenben van, a Bodeni-tó partján.</p>" +
+    "<p><strong>Amit hozol:</strong></p>" +
+    "<ul><li>Tapasztalat szállodai vagy éttermi konyhában. Szakmai végzettség nem feltétel, a tapasztalat igen.</li>" +
+    "<li>Jó angoltudás. A német előny, de nem feltétel.</li>" +
+    "<li>Munkavállalási jog vízum nélkül Németországban és Ausztriában, például uniós állampolgárként.</li></ul>" +
+    "<p><strong>Hogyan jelentkezz:</strong> töltsd ki az űrlapot vagy írj WhatsAppon, önéletrajz nélkül. 24 órán belül jelentkezünk. Ha a próbafőzés mindkét félnek megfelel, aláírjuk a szerződést.</p>",
+  datePosted: "2026-10-18",
+  employmentType: "FULL_TIME",
+  directApply: true,
+  hiringOrganization: {
+    "@type": "Organization",
+    name: "Avorix GmbH",
+    sameAs: "https://avorix.de/",
+    logo: "https://avorix.de/avorix-logo-quadrat-dunkel.png",
+  },
+  jobLocation: [
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Friedrichshafen", addressRegion: "Baden-Württemberg", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "München", addressRegion: "Bayern", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Stuttgart", addressRegion: "Baden-Württemberg", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Frankfurt am Main", addressRegion: "Hessen", addressCountry: "DE" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: "Tirol", addressCountry: "AT" } },
+    { "@type": "Place", address: { "@type": "PostalAddress", addressRegion: "Vorarlberg", addressCountry: "AT" } },
+  ],
+  experienceInPlaceOfEducation: true,
+};
 ---
 <BewerberLayout
   title="Szakács állás Ausztriában és Németországban"
-  description="Munkaszerződés szakácsként egy német cégnél, teljes munkaidőben havi bruttó 2500 és 3500 euró között. A szállást fizetjük, az utazási költségeket megtérítjük. Elég a jó angoltudás."
+  description="Munkaszerződés szakácsként egy német cégnél, tisztességes, piaci szintű fizetéssel. A szállást fizetjük, az utazási költségeket megtérítjük. Elég a jó angoltudás."
   lang="hu"
   sprachwechsel={[
     { label: "Deutsch", href: "/jobs/", lang: "de", hreflang: "de" },
@@ -34,13 +74,14 @@ const kurz = [
   footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
   consent="hu"
   logoHref="/hu/szakacs-allas/"
+  schemaOrg={jobPosting}
 >
   <section class="lp-hero px-6">
     <div class="content-width">
       <p class="eyebrow mb-3">Állás az Avorixnál · Szakács</p>
       <h1 class="mb-4">Szakács munka Ausztriában és Németországban, német munkáltatónál.</h1>
       <ul class="lp-haken mb-6">
-        <li>Teljes munkaidőben havi bruttó 2500 és 3500 euró között, a tapasztalatodtól függően</li>
+        <li>Tisztességes, piaci szintű fizetés, a tapasztalatodtól függően</li>
         <li>A szállást mi fizetjük, az utazási költségeidet megtérítjük</li>
         <li>Elég, ha jól beszélsz angolul. A német előny, de nem feltétel.</li>
       </ul>
@@ -68,7 +109,7 @@ const kurz = [
   <section class="reveal section-gap section-band">
     <div class="content-width text-spalte">
       <h2 class="mb-6" style="color:var(--druck)">Hol dolgozol</h2>
-      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Ausztriában Tirolban és Vorarlbergben, Németországban a Bodeni-tó környékén, Münchenben, Stuttgartban és Frankfurtban. Szállodákban, éttermekben és üzemi konyhákban. A cég székhelye Friedrichshafenben van, a Bodeni-tó partján.</p>
+      <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Németország és Ausztria egész területén, egészen az Északi- és Keleti-fríz-szigetekig. Fő területeink a Bodeni-tó környéke, München, Stuttgart és Frankfurt, valamint Ausztriában Tirol és Vorarlberg. Szállodákban, éttermekben és üzemi konyhákban. A cég székhelye Friedrichshafenben van, a Bodeni-tó partján.</p>
     </div>
   </section>
 

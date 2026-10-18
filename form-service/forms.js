@@ -53,8 +53,11 @@ const LAENDER = [
   // Auf der ungarischen Seite gibt es kein Feld `land`; der Dienst setzt diesen Wert.
   'Ungarn (ungarische Seite)',
 ];
-// Die HU/EN-Seiten bieten eine groebere Regionswahl; beide Zusatzwerte zusaetzlich erlaubt.
-const REGIONEN_BEWERBUNG = [...REGIONEN, 'Österreich (Tirol, Vorarlberg)', 'Deutschland'];
+// Die HU/EN-Seiten bieten eine groebere Regionswahl; die Zusatzwerte zusaetzlich erlaubt.
+// Anweisung 71: DE-Formular bekommt "Anderswo in Deutschland/Österreich"; EN/HU-Wert
+// fuer Oesterreich ist jetzt schlicht "Österreich". Der alte Wert
+// "Österreich (Tirol, Vorarlberg)" bleibt erlaubt (zwischengespeicherte Seiten).
+const REGIONEN_BEWERBUNG = [...REGIONEN, 'Anderswo in Deutschland', 'Anderswo in Österreich', 'Österreich', 'Österreich (Tirol, Vorarlberg)', 'Deutschland'];
 const SPRACHE_SEITE = ['de', 'hu', 'en'];
 // WhatsApp-Nummer fuer Bestaetigung und Seite (international, nur Ziffern).
 const WHATSAPP = '4915754123492';
