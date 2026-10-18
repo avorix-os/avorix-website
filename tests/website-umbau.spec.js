@@ -1260,12 +1260,15 @@ test.describe('A60: Bewerbungen', () => {
     expect(ev).toHaveLength(0);
   });
 
-  test('/jobs/: neue Angaben, kein „in Kürze“, keine zwei Werktage, Schema mit Gehalt', async ({ page }) => {
+  test('/jobs/: neue Angaben, kein „in Kürze“, keine zwei Werktage, Schema ohne Gehalt (A72)', async ({ page }) => {
     await page.goto('/jobs/');
     const text = await page.locator('main').innerText();
     expect(text).not.toContain('in Kürze');
     expect(text).not.toContain('zwei Werktag');
-    expect(text).toContain('2.500 bis 3.500 Euro brutto im Monat');
+    // Anweisung 72: keine Gehaltszahlen mehr, neutraler Satz.
+    expect(text).not.toContain('2.500 bis 3.500');
+    expect(text).not.toContain('brutto');
+    expect(text).toContain('faires, marktübliches Gehalt');
     expect(text).toContain('Fahrtkosten und Unterkunft zahlen wir');
     await expect(page.locator('a[href^="https://wa.me/4915754123492"]').first()).toBeVisible();
     const schemas = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((e) => JSON.parse(e.textContent)));
@@ -1273,8 +1276,10 @@ test.describe('A60: Bewerbungen', () => {
     const koch = flat.find((s) => s['@type'] === 'JobPosting' && s.title === 'Koch (m/w/d)');
     const service = flat.find((s) => s['@type'] === 'JobPosting' && s.title === 'Servicekraft (m/w/d)');
     expect(koch.directApply).toBe(true);
-    expect(koch.baseSalary.value).toMatchObject({ minValue: 2500, maxValue: 3500, unitText: 'MONTH' });
-    expect(koch.description).toContain('2.500 bis 3.500 Euro brutto im Monat');
+    // Anweisung 72: baseSalary aus allen JobPostings entfernt, description ohne Zahl.
+    expect(koch.baseSalary).toBeUndefined();
+    expect(koch.description).not.toContain('brutto');
+    expect(koch.description).not.toContain('2.500 bis 3.500');
     expect(service.directApply).toBe(true);
     expect(service.baseSalary).toBeUndefined();
   });
