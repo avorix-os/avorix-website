@@ -110,6 +110,9 @@ const T = {
     email: "E-Mail", emailOpt: "(wenn du eine Bestätigung willst)",
     rolleLegend: "Ich bewerbe mich als:", rolleKoch: "Koch", rolleService: "Servicekraft",
     arbeitLegend: "Darfst du in Deutschland und Österreich ohne Visum arbeiten?",
+    arbeitHinweis: "Bitte bewirb dich nur, wenn du in Deutschland und Österreich ohne Visum arbeiten darfst: mit einem Pass oder Ausweis aus der EU, dem EWR oder der Schweiz oder mit einem Aufenthaltstitel, der jede Arbeit erlaubt. Ohne Arbeitserlaubnis können wir dich leider nicht einstellen.",
+    arbeitSperrePre: "Ohne Arbeitserlaubnis für Deutschland und Österreich können wir dich leider nicht einstellen. Bitte bewirb dich, sobald du eine hast. Du bist nicht sicher, ob deine Papiere reichen? Schreib uns kurz per ",
+    arbeitSperreWa: "WhatsApp", arbeitSperrePost: ".",
     land: "", region: "Wo willst du arbeiten?", erfahrung: "Wie lange arbeitest du schon in der Gastronomie?",
     sprachen: "", nachricht: "Was hast du zuletzt gemacht?", nachrichtOpt: "(freiwillig)",
     bitteWaehlen: "Bitte wählen", button: "Bewerbung abschicken", sending: "Wird gesendet…",
@@ -123,6 +126,9 @@ const T = {
     name: "A neved", telefon: "Telefonszám (WhatsAppos szám is jó)",
     email: "E-mail", emailOpt: "(ha visszaigazolást kérsz)",
     arbeitLegend: "Dolgozhatsz vízum nélkül Németországban és Ausztriában?",
+    arbeitHinweis: "Kérjük, csak akkor jelentkezz, ha vízum nélkül dolgozhatsz Németországban és Ausztriában: uniós, EGT-s vagy svájci útlevéllel vagy személyi igazolvánnyal, illetve olyan tartózkodási engedéllyel, amely bármilyen munkát megenged. Munkavállalási engedély nélkül sajnos nem tudunk felvenni.",
+    arbeitSperrePre: "Németországra és Ausztriára érvényes munkavállalási engedély nélkül sajnos nem tudunk felvenni. Kérjük, akkor jelentkezz, ha már megvan. Nem vagy biztos benne, hogy elegendőek-e az irataid? Írj nekünk röviden ",
+    arbeitSperreWa: "WhatsAppon", arbeitSperrePost: ".",
     land: "", region: "Hol szeretnél dolgozni?", erfahrung: "Mennyi tapasztalatod van a vendéglátásban?",
     sprachen: "Milyen nyelven beszélsz?", nachricht: "Milyen pozícióban dolgoztál?", nachrichtOpt: "(nem kötelező)",
     bitteWaehlen: "Kérlek, válassz", button: "Jelentkezés elküldése", sending: "Küldés…",
@@ -136,6 +142,9 @@ const T = {
     name: "Your name", telefon: "Phone number (WhatsApp is fine)",
     email: "Email", emailOpt: "(if you want a confirmation)",
     arbeitLegend: "Are you allowed to work in Germany and Austria without a visa?",
+    arbeitHinweis: "Please only apply if you are allowed to work in Germany and Austria without a visa: with a passport or ID card from the EU, the EEA or Switzerland, or with a residence permit that allows any employment. Without a work permit we unfortunately cannot hire you.",
+    arbeitSperrePre: "Without a work permit for Germany and Austria we unfortunately cannot hire you. Please apply once you have one. Not sure whether your documents are enough? Send us a short ",
+    arbeitSperreWa: "WhatsApp", arbeitSperrePost: " message.",
     land: "Where do you live?", region: "Where would you like to work?", erfahrung: "How long have you worked in hospitality?",
     sprachen: "Which languages can you work in?", nachricht: "What did you do most recently?", nachrichtOpt: "(optional)",
     bitteWaehlen: "Please choose", button: "Send application", sending: "Sending…",
@@ -162,6 +171,9 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
     <input type="hidden" name="form_ts" value="" data-bw-ts />
     {rolleFest && <input type="hidden" name="rolle" value="koch" />}
     {istBewerberseite && <input type="hidden" name="sprache" value={lang} />}
+
+    {/* Anweisung 74: Hinweis ueber dem ersten Feld, wer sich bewerben kann. */}
+    <p class="bw-hinweis">{T.arbeitHinweis}</p>
 
     <div>
       <label for={`${p}-name`} class="bw-label">{T.name} <span class="bw-pflicht">*</span></label>
@@ -225,6 +237,12 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
         ))}
       </div>
     </fieldset>
+
+    {/* Anweisung 74: bei „Nein oder unklar" erscheint diese Meldung, der
+        Absende-Knopf wird gesperrt (Logik im Skript unten). */}
+    <p class="bw-sperre" data-bw-sperre role="status" aria-live="polite" hidden>
+      {T.arbeitSperrePre}<a href={WHATSAPP_LINK_BEWERBUNG} class="typo-link" target="_blank" rel="noopener">{T.arbeitSperreWa}</a>{T.arbeitSperrePost}
+    </p>
 
     <div>
       <label for={`${p}-erfahrung`} class="bw-label">{T.erfahrung} <span class="bw-pflicht">*</span></label>
@@ -342,6 +360,9 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
 }
 .bw-submit { width: 100%; }
 .bw-whatsapp { font-size: 15px; color: var(--grau); text-align: center; }
+/* Anweisung 74: Hinweis ueber dem Formular + Sperr-Meldung unter dem Feld. */
+.bw-hinweis { font-size: 15px; line-height: 1.5; color: var(--grau); }
+.bw-sperre { font-size: 15px; line-height: 1.5; color: var(--akzent); font-weight: 600; }
 .bw-fehler { font-size: 14px; color: var(--akzent); font-weight: 600; }
 .bw-danke { background: #F3D9C8; }
 .bw-danke p { color: var(--druck); }
@@ -360,6 +381,19 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
     const ts = form.querySelector<HTMLInputElement>('[data-bw-ts]');
     if (ts) ts.value = String(Date.now());
     let gesendet = false;
+
+    // Anweisung 74: Bei „Nein oder unklar" Meldung zeigen und Absende-Knopf sperren;
+    // bei einer Ja-Antwort Meldung weg und Knopf wieder frei.
+    const sperre = wrap.querySelector<HTMLElement>('[data-bw-sperre]');
+    const sperrKnopf = form.querySelector<HTMLButtonElement>('[type="submit"]');
+    const pruefeArbeit = () => {
+      const sel = form.querySelector<HTMLInputElement>('input[name="arbeitserlaubnis"]:checked');
+      const gesperrt = !!(sel && sel.value === 'Nein oder unklar');
+      if (sperre) sperre.hidden = !gesperrt;
+      if (sperrKnopf) sperrKnopf.disabled = gesperrt;
+    };
+    form.querySelectorAll<HTMLInputElement>('input[name="arbeitserlaubnis"]').forEach((r) => r.addEventListener('change', pruefeArbeit));
+    pruefeArbeit();
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();

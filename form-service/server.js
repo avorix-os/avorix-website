@@ -123,6 +123,19 @@ function arbeitserlaubnisLabel(lang, wert) {
   return tab[wert] || wert;
 }
 
+// Anweisung 74: Bewerbung nur mit Arbeitserlaubnis. Meldungen in der Seitensprache
+// (Fallback de). Bei "Nein oder unklar" bzw. fehlender Angabe lehnt der Dienst ab.
+const AE_SPERRE_TEXT = {
+  de: 'Ohne Arbeitserlaubnis für Deutschland und Österreich können wir dich leider nicht einstellen. Bitte bewirb dich, sobald du eine hast. Du bist nicht sicher, ob deine Papiere reichen? Schreib uns kurz per WhatsApp.',
+  en: 'Without a work permit for Germany and Austria we unfortunately cannot hire you. Please apply once you have one. Not sure whether your documents are enough? Send us a short WhatsApp message.',
+  hu: 'Németországra és Ausztriára érvényes munkavállalási engedély nélkül sajnos nem tudunk felvenni. Kérjük, akkor jelentkezz, ha már megvan. Nem vagy biztos benne, hogy elegendőek-e az irataid? Írj nekünk röviden WhatsAppon.',
+};
+const AE_FEHLT_TEXT = {
+  de: 'Bitte beantworte die Frage, ob du in Deutschland und Österreich ohne Visum arbeiten darfst.',
+  en: 'Please answer the question whether you are allowed to work in Germany and Austria without a visa.',
+  hu: 'Kérjük, válaszolj arra a kérdésre, hogy dolgozhatsz-e vízum nélkül Németországban és Ausztriában.',
+};
+
 const MAGIC = {
   pdf: [0x25, 0x50, 0x44, 0x46], // %PDF
   jpg: [0xff, 0xd8, 0xff],
@@ -784,6 +797,16 @@ async function handleForm(req, res) {
   }
   if (fields.email && fields.email.trim() !== '' && !isValidEmail(fields.email)) {
     return respondErr(req, res, 400, 'invalid_email');
+  }
+
+  // Anweisung 74: Bewerbung nur mit Arbeitserlaubnis. Fehlt die Angabe oder lautet
+  // sie "Nein oder unklar", lehnt der Dienst ab: nichts speichern, nichts senden,
+  // kein Ereignis (ok:false). Faengt direkte Anfragen ab, die die Browser-Sperre umgehen.
+  if (def.bewerbung) {
+    const aeLang = (fields.sprache === 'en' || fields.sprache === 'hu') ? fields.sprache : 'de';
+    const ae = String(fields.arbeitserlaubnis || '').trim();
+    if (ae === '') return respondErr(req, res, 400, AE_FEHLT_TEXT[aeLang]);
+    if (ae === 'Nein oder unklar') return respondErr(req, res, 400, AE_SPERRE_TEXT[aeLang]);
   }
 
   // Anweisung 53 (A7): Google-Ads-Klick-Kennung. Optionales Feld, hoechstens 200

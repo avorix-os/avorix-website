@@ -1239,6 +1239,23 @@ test.describe('A60: Bewerbungen', () => {
     });
   }
 
+  // Anweisung 74: Bei „Nein, oder ich weiß es nicht" wird der Absende-Knopf gesperrt
+  // und die Meldung gezeigt; eine Ja-Antwort gibt den Knopf wieder frei.
+  test('A74: /jobs/ — „Nein oder unklar" sperrt den Knopf und zeigt die Meldung', async ({ page }) => {
+    await page.goto('/jobs/');
+    await einwilligen(page);
+    const form = page.locator('[data-bewerbung-form]');
+    const knopf = form.locator('button[type="submit"]');
+    const sperre = page.locator('[data-bw-sperre]');
+    await expect(knopf).toBeEnabled();
+    await form.locator('label.bw-rolle', { hasText: 'Nein, oder ich weiß es nicht' }).click();
+    await expect(sperre).toBeVisible();
+    await expect(knopf).toBeDisabled();
+    await form.locator('label.bw-rolle', { hasText: 'Pass oder Ausweis' }).click();
+    await expect(sperre).toBeHidden();
+    await expect(knopf).toBeEnabled();
+  });
+
   test('/jobs/: kein Ereignis, wenn der Dienst nicht ok meldet', async ({ page }) => {
     await page.route('**/api/formular', (route) =>
       route.fulfill({ status: 400, contentType: 'application/json', body: '{"ok":false,"error":"missing_telefon"}' })
