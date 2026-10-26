@@ -703,6 +703,12 @@ const schema = [
 /* Honigtopf: fuer Menschen unsichtbar, fuer Bots ein Koeder (Anweisung 45) */
 .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
 
+/* A70/71/72-Nachwirkung: Die Hervorhebung wuchs von "Rechtssicher verliehen."
+   auf "Rechtssicher an Sie verliehen." und passt nicht mehr in eine Zeile der
+   Hero-Spalte. Der globale Desktop-nowrap (global.css 421-427) liess sie unter
+   das Bild laufen. Hier Umbruch wieder erlauben -- gezielt nur fuer diese H1. */
+.hero-copy h1 mark { white-space: normal; }
+
 /* Telefon-Zeile im Hero (12b) */
 .hero-telefon {
   font-size: 15px;
