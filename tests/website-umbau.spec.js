@@ -520,11 +520,21 @@ test.describe('T9: B4 — keine Seite scrollt seitwaerts', () => {
     }
   });
 
-  test('ab 640px darf die Hervorhebung wieder zusammenbleiben', async ({ page }) => {
+  test('ab 640px bricht die lange /personal-Hervorhebung um, statt zu ueberlaufen', async ({ page }) => {
+    // A70/71/72: Die Hervorhebung wuchs von "Rechtssicher verliehen." auf
+    // "Rechtssicher an Sie verliehen." und passt nicht mehr in eine Zeile der
+    // Hero-Spalte. Der globale Desktop-nowrap (global.css) liess sie unter das
+    // Bild laufen; personal.astro erlaubt der .hero-copy-H1 deshalb wieder den
+    // Umbruch. Hier pruefen wir beides: der Umbruch greift und die H1 laeuft
+    // nicht mehr waagerecht ueber.
     await page.setViewportSize({ width: 1280, height: 800 });
     await page.goto('/personal');
-    const nowrap = await page.$eval('h1 mark', (el) => getComputedStyle(el).whiteSpace);
-    expect(nowrap).toBe('nowrap');
+    const h1 = await page.$eval('.hero-copy h1', (el) => ({
+      ws: getComputedStyle(el.querySelector('mark')).whiteSpace,
+      overlauf: el.scrollWidth - el.clientWidth,
+    }));
+    expect(h1.ws).toBe('normal');
+    expect(h1.overlauf, `h1 laeuft um ${h1.overlauf}px ueber`).toBeLessThanOrEqual(1);
   });
 });
 
