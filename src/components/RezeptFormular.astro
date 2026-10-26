@@ -1,0 +1,179 @@
+---
+// Anweisung 75: Rezept fuer die App-Demo. Upload (Foto/PDF) ODER Freitext,
+// mindestens eines. Eigene Kennung im Formular-Dienst (`rezept` / `en-rezept`),
+// eigene Fehleranzeige (Server-`error`-Code wird clientseitig uebersetzt),
+// Erfolgsmeldung mit Calendly-Link, Messereignis `rezept_demo`.
+import Altcha from "./Altcha.astro";
+
+interface Props { lang?: "de" | "en"; }
+const { lang = "de" } = Astro.props as Props;
+const kennung = lang === "en" ? "en-rezept" : "rezept";
+const CAL = "https://calendly.com/avorix/kostenfreies-erstgesprach";
+const DS = lang === "en" ? "/en/privacy" : "/datenschutz";
+
+const T = {
+  de: {
+    anchor: "rezept",
+    h: "Lieber zuerst ein Rezept schicken?",
+    intro: "Schicken Sie uns ein Foto von einem Rezept aus Ihrer Küche. Handschrift, Ausdruck oder Karteikarte, alles geht. Wir legen es in der Koch-App an und zeigen es Ihnen in der Demo Schritt für Schritt, so wie Ihr Team es am Posten sieht.",
+    name: "Name", email: "E-Mail", betrieb: "Betrieb",
+    datei: "Rezeptfoto", dateiHinweis: "Bis zu drei Fotos oder PDFs, zusammen höchstens 10 MB. Am Handy können Sie das Rezept direkt fotografieren.",
+    text: "Rezept oder Anmerkung", textHinweis: "Zum Beispiel, für wie viele Portionen das Rezept gedacht ist. Steht das Rezept nur im Kopf, schreiben Sie es hier in ein paar Zeilen auf.",
+    button: "Rezept schicken", sending: "Wird gesendet…",
+    dsPre: "Wir verarbeiten Ihre Angaben zur Bearbeitung Ihrer Anfrage. Weitere Informationen finden Sie in unserer ",
+    dsLink: "Datenschutzerklärung", dsPost: ".",
+    rezeptSatz: "Ihr Rezept bleibt Ihres. Wir nutzen es nur für Ihre Demo und zeigen es keinem anderen Betrieb.",
+    fehlerKeinFoto: "Bitte schicken Sie uns ein Foto des Rezepts oder schreiben Sie es ins Feld „Rezept oder Anmerkung“.",
+    fehlerDatei: "Diese Datei können wir nicht annehmen. Bitte schicken Sie JPG, PNG oder PDF, höchstens drei Dateien und zusammen bis 10 MB.",
+    fehlerAllg: "Das hat gerade nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie uns an info@avorix.de.",
+    erfolgPre: "Danke, Ihr Rezept ist angekommen. Wir legen es in der Koch-App an und melden uns innerhalb von zwei Werktagen mit zwei Bildern davon. Den Demo-Termin können Sie schon jetzt festmachen: ",
+    erfolgLink: "Termin auswählen",
+  },
+  en: {
+    anchor: "recipe",
+    h: "Prefer to send a recipe first?",
+    intro: "Send us a photo of a recipe from your kitchen. Handwritten, printed or on an index card, anything works. We set it up in the Cook App and show it to you step by step in the demo, just as your team would see it at their station.",
+    name: "Name", email: "Email", betrieb: "Business",
+    datei: "Photo of the recipe", dateiHinweis: "Up to three photos or PDFs, 10 MB in total. On your phone you can take the photo right away.",
+    text: "Recipe or note", textHinweis: "For example, how many portions the recipe is for. If the recipe only exists in your head, write it down here in a few lines.",
+    button: "Send recipe", sending: "Sending…",
+    dsPre: "We process the information you provide to handle your enquiry. For more information, please see our ",
+    dsLink: "privacy policy", dsPost: ".",
+    rezeptSatz: "Your recipe stays yours. We only use it for your demo and never show it to any other business.",
+    fehlerKeinFoto: "Please send us a photo of the recipe or write it in the field “Recipe or note”.",
+    fehlerDatei: "We can't accept this file. Please send JPG, PNG or PDF, no more than three files and 10 MB in total.",
+    fehlerAllg: "That did not work just now. Please try again or write to us at info@avorix.de.",
+    erfolgPre: "Thank you, your recipe has arrived. We will set it up in the Cook App and get back to you within two working days with two screenshots of it. You can already book the demo now: ",
+    erfolgLink: "Select a Time",
+  },
+}[lang];
+---
+<div class="card rz-card" id={T.anchor}>
+  <h2 class="mb-4" style="color:var(--druck)">{T.h}</h2>
+  <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">{T.intro}</p>
+
+  <form class="rz-form space-y-4" action="/api/formular" method="POST" enctype="multipart/form-data" data-rezept-form data-lang={lang} data-kennung={kennung}>
+    <input type="hidden" name="formular" value={kennung} />
+    <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+    <input type="hidden" name="form_ts" value="" data-rz-ts />
+
+    <div>
+      <label for={`rz-${lang}-name`} class="rz-label">{T.name} <span style="color:var(--akzent)">*</span></label>
+      <input type="text" id={`rz-${lang}-name`} name="name" required autocomplete="name" class="rz-field w-full" />
+    </div>
+    <div>
+      <label for={`rz-${lang}-email`} class="rz-label">{T.email} <span style="color:var(--akzent)">*</span></label>
+      <input type="email" id={`rz-${lang}-email`} name="email" required autocomplete="email" class="rz-field w-full" />
+    </div>
+    <div>
+      <label for={`rz-${lang}-betrieb`} class="rz-label">{T.betrieb}</label>
+      <input type="text" id={`rz-${lang}-betrieb`} name="betrieb" autocomplete="organization" class="rz-field w-full" />
+    </div>
+    <div>
+      <label for={`rz-${lang}-datei`} class="rz-label">{T.datei}</label>
+      <input type="file" id={`rz-${lang}-datei`} name="rezept_dateien" accept="image/jpeg,image/png,application/pdf" multiple class="rz-field w-full rz-datei" />
+      <p class="rz-hinweis">{T.dateiHinweis}</p>
+    </div>
+    <div>
+      <label for={`rz-${lang}-text`} class="rz-label">{T.text}</label>
+      <textarea id={`rz-${lang}-text`} name="rezept_text" rows="4" class="rz-field w-full rz-textarea"></textarea>
+      <p class="rz-hinweis">{T.textHinweis}</p>
+    </div>
+
+    <Altcha sprache={lang} />
+
+    <p class="rz-fehler" data-rz-fehler role="alert" hidden></p>
+
+    <button type="submit" class="btn btn-primary w-full" data-rz-sending={T.sending}>{T.button}</button>
+
+    <p class="formular-hinweis">
+      {T.dsPre}<a href={DS} class="typo-link">{T.dsLink}</a>{T.dsPost}
+      <br />{T.rezeptSatz}
+    </p>
+  </form>
+
+  <div class="rz-danke" data-rz-danke role="status" tabindex="-1" hidden>
+    <p>{T.erfolgPre}<a href={CAL} target="_blank" rel="noopener" class="btn btn-primary rz-danke-btn">{T.erfolgLink}</a></p>
+  </div>
+</div>
+
+<style>
+  .rz-card { margin-bottom: 4rem; }
+  .hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .rz-label { display: block; font-size: 14px; font-weight: 500; color: var(--druck); margin-bottom: 8px; }
+  .rz-field {
+    display: block; width: 100%; min-height: 58px; background: var(--flaeche); border: 1px solid var(--linie);
+    border-radius: var(--radius); padding: 16px; font-size: 16px; font-family: var(--f-body);
+    color: var(--druck); outline: none; box-sizing: border-box;
+  }
+  .rz-field:focus { border-color: var(--akzent); box-shadow: 0 0 0 3px rgba(168, 83, 43, 0.15); }
+  .rz-textarea { min-height: 0; resize: none; }
+  .rz-datei { min-height: 0; padding: 12px 16px; font-size: 15px; }
+  .rz-hinweis { font-size: 14px; line-height: 1.5; color: var(--grau); margin-top: 6px; }
+  .rz-fehler { font-size: 15px; font-weight: 600; color: var(--akzent); }
+  .rz-danke-btn { display: inline-block; margin-top: 12px; }
+  @media (prefers-reduced-motion: reduce) { .kontakt-field { transition: none; } }
+</style>
+
+<script>
+  import { absenden } from '../scripts/formular';
+  document.querySelectorAll<HTMLFormElement>('[data-rezept-form]').forEach((form) => {
+    const lang = (form.getAttribute('data-lang') || 'de') as 'de' | 'en';
+    const kennung = form.getAttribute('data-kennung') || 'rezept';
+    const ts = form.querySelector<HTMLInputElement>('[data-rz-ts]');
+    if (ts) ts.value = String(Date.now());
+    const fehler = form.querySelector<HTMLElement>('[data-rz-fehler]');
+    const danke = form.closest('.rz-card')?.querySelector<HTMLElement>('[data-rz-danke]') || null;
+    const datei = form.querySelector<HTMLInputElement>('input[name="rezept_dateien"]');
+    const textfeld = form.querySelector<HTMLTextAreaElement>('textarea[name="rezept_text"]');
+
+    const MSG = {
+      de: {
+        keinFoto: 'Bitte schicken Sie uns ein Foto des Rezepts oder schreiben Sie es ins Feld „Rezept oder Anmerkung“.',
+        datei: 'Diese Datei können wir nicht annehmen. Bitte schicken Sie JPG, PNG oder PDF, höchstens drei Dateien und zusammen bis 10 MB.',
+        allg: 'Das hat gerade nicht geklappt. Bitte versuchen Sie es noch einmal oder schreiben Sie uns an info@avorix.de.',
+      },
+      en: {
+        keinFoto: 'Please send us a photo of the recipe or write it in the field “Recipe or note”.',
+        datei: "We can't accept this file. Please send JPG, PNG or PDF, no more than three files and 10 MB in total.",
+        allg: 'That did not work just now. Please try again or write to us at info@avorix.de.',
+      },
+    }[lang];
+
+    const zeigeFehler = (t: string) => { if (fehler) { fehler.textContent = t; fehler.hidden = false; } };
+    const versteckeFehler = () => { if (fehler) fehler.hidden = true; };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      versteckeFehler();
+      // Anweisung 75: Foto ODER Text, mindestens eines (Pruefung vor dem Senden).
+      const hatDatei = !!(datei && datei.files && datei.files.length > 0);
+      const hatText = !!(textfeld && textfeld.value.trim() !== '');
+      if (!hatDatei && !hatText) { zeigeFehler(MSG.keinFoto); return; }
+
+      const knopf = form.querySelector<HTMLButtonElement>('[type="submit"]');
+      const label = knopf ? knopf.textContent : '';
+      if (knopf) { knopf.disabled = true; knopf.textContent = knopf.getAttribute('data-rz-sending') || 'Wird gesendet…'; }
+
+      const r = await absenden(form, { sprache: lang, stillerFehler: true });
+
+      if (r.ok) {
+        // Anweisung 63/75: Ereignis nur ohne Verdacht.
+        if (!r.verdacht) {
+          const w = window as any;
+          w.dataLayer = w.dataLayer || [];
+          w.dataLayer.push({ event: 'rezept_demo', form_name: kennung });
+        }
+        form.hidden = true;
+        if (danke) { danke.hidden = false; danke.focus(); }
+        return;
+      }
+      // Fehler: Server-Code auf Meldung abbilden.
+      const code = r.error || '';
+      if (['file_type_not_allowed', 'too_many_files', 'upload_too_large', 'bad_content_type'].includes(code)) zeigeFehler(MSG.datei);
+      else if (code === 'kein_foto_kein_text') zeigeFehler(MSG.keinFoto);
+      else zeigeFehler(MSG.allg);
+      if (knopf) { knopf.disabled = false; knopf.textContent = label; }
+    });
+  });
+</script>

@@ -1092,7 +1092,8 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     await page.goto('/en/contact');
     const zeile = await page.textContent('.formular-pflicht');
     expect(zeile.trim()).toBe('Fields marked * are the ones we need, everything else is optional.');
-    const labels = await page.$$eval('form label', (els) => els.map((el) => el.innerText.trim()));
+    // Anweisung 75: nur das Kontaktformular zaehlen, nicht den neuen Rezept-Block.
+    const labels = await page.$$eval('#contact-form label', (els) => els.map((el) => el.innerText.trim()));
     const mitStern = labels.filter((l) => l.includes('*'));
     expect(mitStern.length).toBe(3);
   });

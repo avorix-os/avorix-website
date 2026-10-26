@@ -135,6 +135,35 @@ const FORMS = {
     ],
     ack: true,
   },
+  // Anweisung 75: Rezept fuer die App-Demo. Upload (Foto/PDF) ODER Freitext,
+  // mindestens eines (Pruefung im Handler). Betreff + Eingangsbestaetigung
+  // kommen aus eigenen Funktionen in server.js (def.rezept). Geht an info@.
+  rezept: {
+    lang: 'de',
+    subject: 'Rezept für App-Demo',
+    fields: [
+      f('name', true, LEN.name, true),
+      f('email', true, LEN.email, true),
+      f('betrieb', false, LEN.betrieb, true),
+      f('rezept_text', false, LEN.freitext),
+    ],
+    ack: true,
+    attachments: true,
+    rezept: true,
+  },
+  'en-rezept': {
+    lang: 'en',
+    subject: 'Recipe for app demo',
+    fields: [
+      f('name', true, LEN.name, true),
+      f('email', true, LEN.email, true),
+      f('betrieb', false, LEN.betrieb, true),
+      f('rezept_text', false, LEN.freitext),
+    ],
+    ack: true,
+    attachments: true,
+    rezept: true,
+  },
   // Sonderfall Leitfaden (Anweisung 45, 2.1):
   // - Redirect-Antwort bei Nicht-JS-Absendung auf die Download-Seite MIT Schraegstrich.
   // - verstecktes Feld `source` wandert in die Mail.

@@ -95,6 +95,8 @@ const LABELS = {
   land: 'Land',
   // Anweisung 66
   arbeitserlaubnis: 'Arbeitserlaubnis',
+  // Anweisung 75
+  rezept_text: 'Rezept oder Anmerkung',
 };
 
 // Anweisung 66: die gesendeten (deutschen) Werte je Seitensprache so, wie der
@@ -404,6 +406,10 @@ function subjectFor(def, fields, verdacht) {
     // Anweisung 66: zum Vorsortieren. Nur bei "Nein oder unklar", nicht bei
     // "keine Angabe" (dort ist offen, ob eine Erlaubnis besteht).
     if (fields.arbeitserlaubnis === 'Nein oder unklar') s += ' · ohne Arbeitserlaubnis';
+  } else if (def.rezept) {
+    // Anweisung 75: "Rezept für App-Demo: [Name], [Betrieb]" (Betrieb optional).
+    s = `Rezept für App-Demo: ${fields.name}`;
+    if (fields.betrieb && String(fields.betrieb).trim()) s += `, ${fields.betrieb}`;
   } else {
     s = def.subject;
   }
@@ -556,6 +562,38 @@ function bewerbungAckEn(fields) {
   return { subject: 'Your application at Avorix', text, html };
 }
 
+// Anweisung 75: Eingangsbestaetigung fuer das Rezeptformular (Teil 4a), DE/EN,
+// mit Name und derselben Telefonzeile wie die uebrigen Bestaetigungen. Der
+// Pflichtfooter (Anweisung 61, Teil 7) kommt in deliver() dazu.
+function rezeptAck(def, fields) {
+  if (def.lang === 'en') {
+    const text = [
+      `Hello ${fields.name},`,
+      '',
+      'thank you for your recipe. We will set it up in the Avorix Cook App and get back to you within two working days with two screenshots of it.',
+      '',
+      'Your recipe stays yours. We only use it for your demo and never show it to any other business.',
+      '',
+      'If it is urgent, call us on 07541 3973915.',
+      '',
+      'Your Avorix team',
+    ].join('\n');
+    return { subject: 'We have received your recipe', text };
+  }
+  const text = [
+    `Guten Tag ${fields.name},`,
+    '',
+    'danke für Ihr Rezept. Wir legen es in der Avorix Koch-App an und melden uns innerhalb von zwei Werktagen mit zwei Bildern davon.',
+    '',
+    'Ihr Rezept bleibt Ihres. Wir nutzen es nur für Ihre Demo und zeigen es keinem anderen Betrieb.',
+    '',
+    'Wenn es eilig ist, erreichen Sie uns unter 07541 3973915.',
+    '',
+    'Ihr Avorix-Team',
+  ].join('\n');
+  return { subject: 'Ihr Rezept ist bei uns angekommen', text };
+}
+
 async function deliver(def, kennung, fields, files, verdacht, reasons) {
   const t = getTransport();
   const to =
@@ -586,6 +624,8 @@ async function deliver(def, kennung, fields, files, verdacht, reasons) {
         ack = fields.sprache === 'hu' ? bewerbungAckHu(fields)
             : fields.sprache === 'en' ? bewerbungAckEn(fields)
             : bewerbungAck(fields);
+      } else if (def.rezept) {
+        ack = rezeptAck(def, fields);
       } else {
         ack = {
           subject: def.lang === 'en' ? 'We received your enquiry' : 'Ihre Anfrage bei Avorix',
@@ -807,6 +847,15 @@ async function handleForm(req, res) {
     const ae = String(fields.arbeitserlaubnis || '').trim();
     if (ae === '') return respondErr(req, res, 400, AE_FEHLT_TEXT[aeLang]);
     if (ae === 'Nein oder unklar') return respondErr(req, res, 400, AE_SPERRE_TEXT[aeLang]);
+  }
+
+  // Anweisung 75: Rezept nur mit Foto ODER Text absendbar. Fehlen beide,
+  // lehnt der Dienst ab (Backstop zur Browser-Pruefung); Code 'kein_foto_kein_text'.
+  if (def.rezept) {
+    const hatText = String(fields.rezept_text || '').trim() !== '';
+    if (files.length === 0 && !hatText) {
+      return respondErr(req, res, 400, 'kein_foto_kein_text');
+    }
   }
 
   // Anweisung 53 (A7): Google-Ads-Klick-Kennung. Optionales Feld, hoechstens 200

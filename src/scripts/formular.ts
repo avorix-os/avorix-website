@@ -15,6 +15,9 @@ interface Opt {
   variante?: Variante;
   whatsapp?: string; // Link fuer die Bewerber-/HU-Fehlermeldung
   download?: boolean; // Download-Formulare zeigen keine Fehlermeldung
+  // Anweisung 75: Formulare mit eigener Fehleranzeige (z. B. Rezept) unterdruecken
+  // die generische Meldung und werten den zurueckgegebenen `error`-Code selbst aus.
+  stillerFehler?: boolean;
 }
 
 // Fehlermeldungen (Teil 4), nach Sprache und Variante (Kunde = Telefon,
@@ -99,11 +102,12 @@ function gclid(): string {
   } catch (e) { return ''; }
 }
 
-export async function absenden(form: HTMLFormElement, opt: Opt = {}): Promise<{ ok: boolean; verdacht: boolean }> {
+export async function absenden(form: HTMLFormElement, opt: Opt = {}): Promise<{ ok: boolean; verdacht: boolean; error?: string }> {
   versteckeFehler(form);
+  const zeigen = !opt.download && !opt.stillerFehler;
   const okAltcha = await ensureAltcha(form);
   if (!okAltcha) {
-    if (!opt.download) zeigeFehler(form, opt);
+    if (zeigen) zeigeFehler(form, opt);
     return { ok: false, verdacht: false };
   }
   try {
@@ -114,13 +118,14 @@ export async function absenden(form: HTMLFormElement, opt: Opt = {}): Promise<{ 
     const daten = await res.json().catch(() => null as any);
     const ok = !!(res.ok && daten && daten.ok === true);
     const verdacht = !!(daten && daten.verdacht === true);
+    const error = daten && typeof daten.error === 'string' ? daten.error : undefined;
     if (!ok) {
-      if (!opt.download) zeigeFehler(form, opt);
-      return { ok: false, verdacht };
+      if (zeigen) zeigeFehler(form, opt);
+      return { ok: false, verdacht, error };
     }
     return { ok: true, verdacht };
   } catch (e) {
-    if (!opt.download) zeigeFehler(form, opt);
+    if (zeigen) zeigeFehler(form, opt);
     return { ok: false, verdacht: false };
   }
 }

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Altcha from "../components/Altcha.astro";
+import RezeptFormular from "../components/RezeptFormular.astro";
 
 
 const schema = {
@@ -74,6 +75,9 @@ const schema = {
           </a>
         </div>
       </div>
+
+      {/* Anweisung 75: Rezept-Demo-Block, unter dem Kalender/Personal. */}
+      <RezeptFormular lang="de" />
 
       <p class="eyebrow mb-8">Oder schreiben Sie uns</p>
 
