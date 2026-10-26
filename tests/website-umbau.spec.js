@@ -1328,3 +1328,67 @@ test.describe('A60: Bewerbungen', () => {
     expect(llms).not.toContain('/jobs/koch');
   });
 });
+
+// Anweisung 77: freiwilliges Feld „Fuer wie lange?" + Messung + Wort „Vermittler".
+test.describe('A77: Personal-Anfrage dauer und das Wort „Vermittler"', () => {
+  async function consent(page) {
+    const banner = page.locator('#consent-banner');
+    if (await banner.isVisible()) await page.locator('#cb-accept-all').click();
+  }
+
+  test('/personal: „Fuer wie lange?" sind drei freiwillige Knoepfe ohne Vorauswahl', async ({ page }) => {
+    await page.goto('/personal');
+    const radios = page.locator('#personal-form input[name="dauer"]');
+    await expect(radios).toHaveCount(3);
+    expect(await radios.evaluateAll((els) => els.some((e) => e.required))).toBe(false);
+    expect(await radios.evaluateAll((els) => els.some((e) => e.checked))).toBe(false);
+  });
+
+  test('/personal: personal_anfrage feuert mit dauer-Kuerzel, dauer geht mit', async ({ page }) => {
+    let gesendet = null;
+    await page.route('**/api/formular', async (route) => {
+      gesendet = route.request().postData() || '';
+      await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+    await page.goto('/personal');
+    await consent(page);
+    const form = page.locator('#personal-form');
+    await form.locator('input[name="betrieb"]').fill('TEST');
+    await form.locator('input[name="name"]').fill('TEST');
+    await form.locator('input[name="telefon"]').fill('+43 664 123 45 67');
+    await form.locator('input[name="ab_wann"]').fill('sofort');
+    await form.locator('label.anfrage-dauer-opt', { hasText: 'Eine Saison' }).click();
+    await page.waitForTimeout(3100);
+    await altchaVerify(page);
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator('#personal-success')).toBeVisible();
+    const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'personal_anfrage'));
+    expect(ev).toHaveLength(1);
+    expect(ev[0]).toMatchObject({ form_name: 'personal', dauer: 'saison' });
+    expect(gesendet).toContain('name="dauer"');
+  });
+
+  test('Teil 4: „Vermittler" nur noch neutral, FAQ-Antworten und Absatz sind neu', async ({ page }) => {
+    await page.goto('/');
+    let t = await page.evaluate(() => document.body.textContent || '');
+    expect(t).not.toContain('Bei Avorix passiert Ihnen das nicht');
+    expect(t).not.toContain('Viele Vermittler');
+
+    await page.goto('/jobs/');
+    t = await page.evaluate(() => document.body.textContent || '');
+    expect(t).not.toContain('zu den Vermittlern');
+
+    await page.goto('/wissen/mietkoch-kosten/');
+    t = await page.evaluate(() => document.body.textContent || '');
+    expect(t).not.toContain('der Vermittler kassiert');
+    expect(t).toContain('Was Sie für einen Mietkoch nie zahlen');
+
+    await page.goto('/personal');
+    t = await page.evaluate(() => document.body.textContent || '');
+    expect(t).not.toContain('Wir vermitteln nicht');
+    expect(t).not.toContain('Vermittler-Rechnung');
+    expect(t).toContain('Auf Wunsch ja, unser Schwerpunkt ist aber die Überlassung');
+    expect(t).toContain('Ein Vermittlungshonorar fällt nur an');
+    expect(t).toContain('Was nach Ihrer Anfrage passiert');
+  });
+});
