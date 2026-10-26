@@ -566,6 +566,27 @@ const schema = [
             />
           </div>
 
+          {/* Anweisung 77: freiwilliges Feld, drei Knoepfe, keine Vorauswahl. */}
+          <fieldset class="anfrage-fieldset">
+            <legend class="anfrage-label">
+              F&uuml;r wie lange brauchen Sie jemanden? <span class="anfrage-label-opt">(optional)</span>
+            </legend>
+            <div class="anfrage-dauer">
+              <label class="anfrage-dauer-opt">
+                <input type="radio" name="dauer" value="ein paar Tage oder Wochen" />
+                <span>Ein paar Tage oder Wochen</span>
+              </label>
+              <label class="anfrage-dauer-opt">
+                <input type="radio" name="dauer" value="eine Saison" />
+                <span>Eine Saison</span>
+              </label>
+              <label class="anfrage-dauer-opt">
+                <input type="radio" name="dauer" value="dauerhaft" />
+                <span>Dauerhaft</span>
+              </label>
+            </div>
+          </fieldset>
+
           <div>
             <label for="pa-hinweis" class="anfrage-label">
               Was sollen wir wissen? <span class="anfrage-label-opt">(optional)</span>
@@ -811,6 +832,22 @@ const schema = [
 .anfrage-textarea {
   resize: none;
 }
+/* Anweisung 77: Feld „Fuer wie lange?" — drei Knoepfe gestapelt, linksbuendig. */
+.anfrage-fieldset { border: 0; padding: 0; margin: 0; }
+.anfrage-fieldset legend { padding: 0; }
+.anfrage-dauer { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.anfrage-dauer-opt { position: relative; display: block; cursor: pointer; }
+.anfrage-dauer-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.anfrage-dauer-opt span {
+  display: flex; align-items: center; justify-content: flex-start; text-align: left;
+  min-height: 0; padding: 12px 16px;
+  border: 1px solid var(--linie); border-radius: var(--radius);
+  background: var(--flaeche); font-weight: 600; color: var(--druck);
+  transition: border-color .15s, background-color .15s;
+}
+.anfrage-dauer-opt input:checked + span { border-color: var(--akzent); background: #F3D9C8; color: var(--akzent); }
+.anfrage-dauer-opt input:focus-visible + span { outline: 3px solid var(--akzent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .anfrage-dauer-opt span { transition: none; } }
 .anfrage-field:invalid:not(:placeholder-shown) {
   border-color: var(--fehler);
 }
@@ -865,8 +902,12 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
       const r = await absenden(personalForm, { sprache: 'de' });
       if (r.ok && !r.verdacht && !personalSent) {
         personalSent = true;
+        // Anweisung 77: Kuerzel des Felds „Fuer wie lange?" mitgeben; leer, wenn nichts gewaehlt.
+        const dauerSel = personalForm.querySelector('input[name="dauer"]:checked') as HTMLInputElement | null;
+        const dauerMap: Record<string, string> = { 'ein paar Tage oder Wochen': 'kurz', 'eine Saison': 'saison', 'dauerhaft': 'dauerhaft' };
+        const dauer = dauerSel ? (dauerMap[dauerSel.value] || '') : '';
         (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'personal' });
+        (window as any).dataLayer.push({ event: 'personal_anfrage', form_name: 'personal', dauer });
       }
       if (submitBtn) {
         submitBtn.disabled = false;

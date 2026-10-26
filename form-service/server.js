@@ -79,6 +79,8 @@ const LABELS = {
   message: 'Nachricht',
   hinweis: 'Hinweis',
   ab_wann: 'Ab wann',
+  // Anweisung 77: Feld „Fuer wie lange?" auf /personal/ (Zeile unter „Ab wann").
+  dauer: 'Für wie lange',
   kuechenteam: 'Küchenteam',
   kuechenproblem: 'Küchenproblem',
   nachricht: 'Nachricht',
@@ -359,6 +361,8 @@ function buildBody(def, kennung, fields, files, reasons) {
     // und bleibt aus der Benachrichtigung).
     if (fld.name === 'sprache' && (!fields.sprache || fields.sprache === 'de')) continue;
     if ((fld.name === 'land' || fld.name === 'sprachen') && !fields[fld.name]) continue;
+    // Anweisung 77: „Fuer wie lange?" ist freiwillig – leer bleibt die Zeile weg.
+    if (fld.name === 'dauer' && !fields.dauer) continue;
     const label = LABELS[fld.name] || fld.name;
     let val = fields[fld.name];
     if (fld.name === 'rolle' && def.bewerbung) val = ROLLEN[val] || val;

@@ -82,6 +82,8 @@ const FORMS = {
       f('telefon', true, LEN.telefon, true),
       f('email', false, LEN.email, true),
       f('ab_wann', true, LEN.ab_wann, true),
+      // Anweisung 77: freiwilliges Feld „Fuer wie lange?", direkt unter „Ab wann".
+      f('dauer', false, LEN.auswahl, true),
       f('hinweis', false, LEN.freitext),
     ],
     ack: true,
