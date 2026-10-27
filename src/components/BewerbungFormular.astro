@@ -239,11 +239,14 @@ const WUNSCHE = {
 }[lang];
 
 // Anweisung 76: Freigabe fuer Betriebe (freiwillig, nicht vorausgewaehlt). Der
-// Link zeigt auf die Datenschutzerklaerung (DE eigene, EN/HU die englische).
+// Link zeigt auf die Datenschutzerklaerung (DE und HU eigene, EN die englische).
+// Kanzlei-Vorgabe 27.10.2026: fuer eine informierte Einwilligung muss der
+// Abschnitt den ungarischen Bewerbern auf Ungarisch zugaenglich sein, deshalb
+// eigene Seite /hu/adatvedelem-bemutatas/ statt Verweis auf die englische Fassung.
 const FREIGABE = {
   de: { pre: "Avorix darf mein Profil ohne Name und Kontaktdaten passenden Betrieben zeigen. Name und Kontaktdaten gibt Avorix erst weiter, wenn ich im Einzelfall zugestimmt habe. Ich kann das jederzeit widerrufen. Mehr dazu in der ", link: "Datenschutzerklärung", href: "/datenschutz/", post: " im Abschnitt „Vorstellung bei Betrieben“." },
   en: { pre: "Avorix may show my profile without my name and contact details to suitable businesses. Avorix only passes on my name and contact details after I have agreed in the individual case. I can withdraw this at any time. More in the ", link: "privacy policy", href: "/en/privacy/", post: ", section “Presenting your profile to businesses”." },
-  hu: { pre: "Az Avorix a profilomat név és elérhetőségek nélkül megmutathatja a hozzám illő munkahelyeknek. A nevemet és az elérhetőségeimet az Avorix csak akkor adja tovább, ha az adott esetben hozzájárultam. Ezt bármikor visszavonhatom. Részletek az ", link: "adatvédelmi tájékoztatóban", href: "/en/privacy/", post: " (angol nyelven), a „Presenting your profile to businesses“ részben." },
+  hu: { pre: "Az Avorix a profilomat név és elérhetőségek nélkül megmutathatja a hozzám illő munkahelyeknek. A nevemet és az elérhetőségeimet az Avorix csak akkor adja tovább, ha az adott esetben hozzájárultam. Ezt bármikor visszavonhatom. Részletek a ", link: "„Bemutatás a vállalkozásoknál“ adatkezelési tájékoztatóban", href: "/hu/adatvedelem-bemutatas/", post: "." },
 }[lang];
 
 // Anweisung 76: Knopf, Hinweis unter dem Knopf und die beiden Danke-Fassungen

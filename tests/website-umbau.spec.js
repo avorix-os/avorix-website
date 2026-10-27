@@ -1537,9 +1537,37 @@ test.describe('A76: Bewerberprofil-Seite (profil/profile/profil)', () => {
     let t = (await page.evaluate(() => document.body.textContent || '')).replace(/\s+/g, ' ');
     expect(t).toContain('Vorstellung bei Betrieben');
     expect(t).toContain('Ihre Wünsche zu Arbeitsform, Arbeitszeit, Arbeitsbeginn, Umzug, Unterkunft und Gehalt');
+    // Kanzlei 27.10.: Rechtsgrundlage Bewerbungen auf Art. 6 Abs. 1 lit. b DSGVO, nicht mehr § 26 BDSG.
+    expect(t).toContain('Artikel 6 Absatz 1 Buchstabe b DSGVO');
+    expect(t).not.toContain('26 Absatz 1 Satz 1 BDSG');
+    // Kanzlei 27.10.: Profil-Speicherdauer sechs statt zwoelf Monate + regelmaessige Pruefung.
+    expect(t).toContain('sechs Monate nach Ihrer');
+    expect(t).not.toContain('zwölf Monate nach Ihrer');
+    expect(t).toContain('überprüfen regelmäßig');
     await page.goto('/en/privacy/');
     t = (await page.evaluate(() => document.body.textContent || '')).replace(/\s+/g, ' ');
     expect(t).toContain('Presenting your profile to businesses');
     expect(t).toContain('your wishes regarding type of employment, working hours, start date, relocation, accommodation and salary');
+    expect(t).toContain('Art. 6(1)(b) GDPR');
+    expect(t).not.toContain('Section 26(1) sentence 1');
+    expect(t).toContain('six months after your');
+    expect(t).not.toContain('twelve months after your');
+    expect(t).toContain('review regularly');
+  });
+
+  test('Kanzlei 27.10.: ungarische Datenschutzseite + HU-Freigabe-Link zeigt dorthin', async ({ page, request }) => {
+    await page.goto('/hu/adatvedelem-bemutatas/');
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+    const t = (await page.evaluate(() => document.body.textContent || '')).replace(/\s+/g, ' ');
+    expect(t).toContain('Bemutatás a vállalkozásoknál');
+    expect(t).toContain('hat hónappal az utolsó');
+    expect(t).toContain('GDPR 6. cikk (1) bekezdés a) pont');
+    // noindex-Seite: nicht in Sitemap.
+    const sitemap = await (await request.get('/sitemap-0.xml')).text();
+    expect(sitemap).not.toContain('/hu/adatvedelem-bemutatas/');
+    // Das ungarische Freigabe-Haekchen verlinkt jetzt auf die ungarische Seite.
+    await page.goto('/hu/profil/');
+    const href = await page.locator('.bw-freigabe-label a').getAttribute('href');
+    expect(href).toBe('/hu/adatvedelem-bemutatas/');
   });
 });

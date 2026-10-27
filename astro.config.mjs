@@ -83,7 +83,8 @@ export default defineConfig({
         !page.includes("/jobs/koch/") &&
         !page.includes("/jobs/profil/") &&
         !page.includes("/en/jobs/profile/") &&
-        !page.includes("/hu/profil/"),
+        !page.includes("/hu/profil/") &&
+        !page.includes("/hu/adatvedelem-bemutatas/"),
       serialize(item) {
         const images = PAGE_IMAGES[item.url];
         if (images) {
