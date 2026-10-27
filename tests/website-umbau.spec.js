@@ -1392,3 +1392,154 @@ test.describe('A77: Personal-Anfrage dauer und das Wort „Vermittler"', () => {
     expect(t).toContain('Was nach Ihrer Anfrage passiert');
   });
 });
+
+// Anweisung 76: Bewerberprofil-Seite in drei Sprachen „Hotels und Restaurants
+// bewerben sich bei dir". Erweitertes Bewerbungsformular (Rolle Leitung,
+// Wuensche, Freigabe), Messung, Datenschutz-Abschnitt.
+test.describe('A76: Bewerberprofil-Seite (profil/profile/profil)', () => {
+  async function consent(page) {
+    const banner = page.locator('#consent-banner');
+    if (await banner.isVisible()) await page.locator('#cb-accept-all').click();
+  }
+
+  const SEITEN = [
+    { pfad: '/jobs/profil/', quelle: 'profil' },
+    { pfad: '/en/jobs/profile/', quelle: 'profil-en' },
+    { pfad: '/hu/profil/', quelle: 'profil-hu' },
+  ];
+
+  for (const { pfad, quelle } of SEITEN) {
+    test(`${pfad}: noindex/follow, kein JobPosting/FAQ, nicht in Sitemap/llms`, async ({ page, request }) => {
+      await page.goto(pfad);
+      await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex, follow');
+      const typen = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((e) => e.textContent).join(' '));
+      expect(typen).not.toContain('JobPosting');
+      expect(typen).not.toContain('FAQPage');
+      // Kein <link rel="alternate" hreflang> (nur die Anker im Sprachwechsel tragen hreflang).
+      expect(await page.locator('link[rel="alternate"][hreflang]').count()).toBe(0);
+      const sitemap = await (await request.get('/sitemap-0.xml')).text();
+      expect(sitemap).not.toContain(pfad);
+      const llms = await (await request.get('/llms.txt')).text();
+      expect(llms).not.toContain(pfad);
+      // Keine Kundenlinks im Inhalt (weder Fliesstext noch Fuss).
+      const kundenlinks = await page.locator('a[href*="/personal/"], a[href*="/fuer-"], a[href*="/koch-app"], a[href*="/pilotprogramm"]').count();
+      expect(kundenlinks).toBe(0);
+    });
+  }
+
+  test('Sprachwechsel verlinkt nur die drei Fassungen dieser Seite', async ({ page }) => {
+    await page.goto('/jobs/profil/');
+    const hrefs = await page.locator('.bw-langnav a').evaluateAll((els) => els.map((e) => e.getAttribute('href')));
+    expect(hrefs.sort()).toEqual(['/en/jobs/profile/', '/hu/profil/']);
+  });
+
+  test('/jobs/profil/: H1, drei Zeilen und Formularanfang ohne Scrollen (375 px)', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/jobs/profil/');
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('.lp-haken li')).toHaveCount(3);
+    // „Anfang des Formulars" = Oberkante der Formularkarte, ohne Scrollen sichtbar.
+    const box = await page.locator('.lp-formular').boundingBox();
+    expect(box && box.y).toBeLessThanOrEqual(812);
+  });
+
+  test('/jobs/profil/: Rolle drei Knoepfe, Wuensche ohne Pflicht, Freigabe freiwillig', async ({ page }) => {
+    await page.goto('/jobs/profil/');
+    const rollen = page.locator('[data-bewerbung-form] input[name="rolle"]');
+    await expect(rollen).toHaveCount(3);
+    expect(await rollen.evaluateAll((els) => els.map((e) => e.value).sort())).toEqual(['koch', 'leitung', 'service']);
+    expect(await rollen.evaluateAll((els) => els.some((e) => e.checked))).toBe(false);
+    // Wuensche: wege (Mehrfach), keine Pflicht, keine Vorauswahl.
+    const wege = page.locator('[data-bewerbung-form] input[name="wege"]');
+    await expect(wege).toHaveCount(3);
+    expect(await wege.evaluateAll((els) => els.some((e) => e.required || e.checked))).toBe(false);
+    for (const n of ['arbeitszeit', 'umzug', 'unterkunft']) {
+      const r = page.locator(`[data-bewerbung-form] input[name="${n}"]`);
+      expect(await r.evaluateAll((els) => els.some((e) => e.required || e.checked))).toBe(false);
+    }
+    for (const n of ['verfuegbar_ab', 'gehaltswunsch']) {
+      await expect(page.locator(`[data-bewerbung-form] input[name="${n}"]`)).not.toHaveAttribute('required', '');
+    }
+    const freigabe = page.locator('[data-bewerbung-form] input[name="profil_freigabe"]');
+    await expect(freigabe).toHaveCount(1);
+    expect(await freigabe.evaluate((e) => e.required)).toBe(false);
+    expect(await freigabe.evaluate((e) => e.checked)).toBe(false);
+  });
+
+  test('A74 greift auch auf der Profil-Seite (Knopf gesperrt bei „Nein oder unklar")', async ({ page }) => {
+    await page.goto('/jobs/profil/');
+    await consent(page);
+    const form = page.locator('[data-bewerbung-form]');
+    const knopf = form.locator('button[type="submit"]');
+    await form.locator('label.bw-rolle', { hasText: 'Nein, oder ich weiß es nicht' }).click();
+    await expect(page.locator('[data-bw-sperre]')).toBeVisible();
+    await expect(knopf).toBeDisabled();
+  });
+
+  test('/jobs/profil/: Erfolg MIT Freigabe — Ereignis mit rolle/quelle/freigabe/wege, Danke „Profil angelegt"', async ({ page }) => {
+    let gesendet = null;
+    await page.route('**/api/formular', async (route) => {
+      gesendet = route.request().postData() || '';
+      await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' });
+    });
+    await page.goto('/jobs/profil/');
+    await consent(page);
+    const form = page.locator('[data-bewerbung-form]');
+    await form.locator('input[name="name"]').fill('Test Avorix');
+    await form.locator('input[name="telefon"]').fill('+43 664 123 45 67');
+    await form.locator('label.bw-rolle', { hasText: 'Leitung' }).click();
+    await form.locator('select[name="region"]').selectOption('Tirol');
+    await form.locator('label.bw-rolle', { hasText: 'Pass oder Ausweis' }).click();
+    await form.locator('select[name="erfahrung"]').selectOption('3 bis 5 Jahre');
+    // zwei Wege ankreuzen
+    await form.locator('label.bw-check', { hasText: 'Bei Avorix angestellt' }).click();
+    await form.locator('label.bw-check', { hasText: 'für eine Saison' }).click();
+    await form.locator('input[name="profil_freigabe"]').check();
+    await page.waitForTimeout(3100);
+    await altchaVerify(page);
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator('[data-bw-danke]')).toBeVisible();
+    await expect(page.locator('[data-bw-danke]')).toContainText('dein Profil ist angelegt');
+    const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'bewerbung'));
+    expect(ev).toHaveLength(1);
+    expect(ev[0]).toMatchObject({ rolle: 'leitung', quelle: 'profil', freigabe: 'ja', wege: 'avorix,saison' });
+    // Messung ohne Gehalt und ohne Personendaten (GTM ergaenzt eigene Schluessel).
+    for (const k of ['gehaltswunsch', 'name', 'telefon', 'nachricht', 'email']) {
+      expect(Object.prototype.hasOwnProperty.call(ev[0], k)).toBe(false);
+    }
+    expect(gesendet).toContain('name="profil_freigabe"');
+    expect(gesendet).toContain('name="wege"');
+  });
+
+  test('/jobs/profil/: Erfolg OHNE Freigabe — freigabe nein, Danke „Bewerbung ist da"', async ({ page }) => {
+    await page.route('**/api/formular', (route) =>
+      route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' })
+    );
+    await page.goto('/jobs/profil/');
+    await consent(page);
+    const form = page.locator('[data-bewerbung-form]');
+    await form.locator('input[name="name"]').fill('Test Avorix');
+    await form.locator('input[name="telefon"]').fill('+43 664 123 45 67');
+    await form.locator('label.bw-rolle', { hasText: 'Koch' }).first().click();
+    await form.locator('select[name="region"]').selectOption('Tirol');
+    await form.locator('label.bw-rolle', { hasText: 'Pass oder Ausweis' }).click();
+    await form.locator('select[name="erfahrung"]').selectOption('1 bis 2 Jahre');
+    await page.waitForTimeout(3100);
+    await altchaVerify(page);
+    await form.locator('button[type="submit"]').click();
+    await expect(page.locator('[data-bw-danke]')).toContainText('deine Bewerbung ist da');
+    const ev = await page.evaluate(() => (window.dataLayer || []).filter((e) => e && e.event === 'bewerbung'));
+    expect(ev[0]).toMatchObject({ freigabe: 'nein', wege: '' });
+  });
+
+  test('Teil 5: Datenschutz DE+EN haben den neuen Abschnitt und die Ergaenzung', async ({ page }) => {
+    await page.goto('/datenschutz/');
+    let t = (await page.evaluate(() => document.body.textContent || '')).replace(/\s+/g, ' ');
+    expect(t).toContain('Vorstellung bei Betrieben');
+    expect(t).toContain('Ihre Wünsche zu Arbeitsform, Arbeitszeit, Arbeitsbeginn, Umzug, Unterkunft und Gehalt');
+    await page.goto('/en/privacy/');
+    t = (await page.evaluate(() => document.body.textContent || '')).replace(/\s+/g, ' ');
+    expect(t).toContain('Presenting your profile to businesses');
+    expect(t).toContain('your wishes regarding type of employment, working hours, start date, relocation, accommodation and salary');
+  });
+});

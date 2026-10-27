@@ -1,0 +1,169 @@
+---
+import { Image } from "astro:assets";
+import BewerberLayout from "../../../layouts/BewerberLayout.astro";
+import Stempel from "../../../components/Stempel.astro";
+import BewerbungFormular from "../../../components/BewerbungFormular.astro";
+import { WHATSAPP_LINK } from "../../../data/whatsapp";
+import koecheAmPass from "../../../assets/bilder/koeche-am-pass-mit-tablet.jpg";
+
+// Anweisung 76: englische Fassung der Bewerberprofil-Seite. noindex, follow;
+// nicht in Sitemap/llms.txt/Navigation; kein JobPosting-, FAQ- oder hreflang-Markup.
+// Geht erst mit 77 und nach der Kanzlei-Freigabe live.
+---
+<BewerberLayout
+  title="Hotels and restaurants apply to you"
+  description="Create a short profile in two minutes. We show it to suitable hotels and restaurants without your name, and you decide whom you want to meet. Free of charge."
+  lang="en"
+  robots="noindex, follow"
+  sprachwechsel={[
+    { label: "Deutsch", href: "/jobs/profil/", lang: "de", hreflang: "de" },
+    { label: "Magyar", href: "/hu/profil/", lang: "hu", hreflang: "hu" },
+  ]}
+  alternates={[]}
+  impressum={{ label: "Legal notice", href: "/en/legal-notice/" }}
+  datenschutz={{ label: "Privacy", href: "/en/privacy/" }}
+  cookieLabel="Cookie settings"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
+  consent="en"
+  logoHref="/en/jobs/profile/"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-3">Jobs at Avorix · Kitchen, service, management</p>
+      <h1 class="mb-4">Hotels and restaurants apply to you.</h1>
+      <p class="lp-sub mb-5">Create a short profile. We show it to suitable hotels, restaurants and staff canteens, without your name. You decide whom you want to meet.</p>
+      <ul class="lp-haken mb-6">
+        <li>Free of charge for you</li>
+        <li>Your name stays with us until you agree</li>
+        <li>We get back to you within 24 hours</li>
+      </ul>
+      <div id="bewerben" class="lp-formular">
+        <BewerbungFormular quelle="profil-en" lang="en" whatsappHinweis />
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <Image
+        src={koecheAmPass}
+        alt="Two chefs at the pass of a professional kitchen checking a tablet together"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">How it works</h2>
+      <ol class="lp-schritte max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong style="color:var(--druck)">Create your profile.</strong> Two minutes, no CV needed.</li>
+        <li><strong style="color:var(--druck)">We get back to you</strong> within 24 hours, usually by phone or WhatsApp, and talk about what you are looking for.</li>
+        <li><strong style="color:var(--druck)">We show your short profile to suitable businesses,</strong> without your name and contact details. If a business wants to meet you, we ask you before it learns your name.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Three ways, you decide</h2>
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p><strong style="color:var(--druck)">Employed by Avorix.</strong> Avorix is your employer, and you work in changing places. Your contract continues between two assignments.</p>
+        <p><strong style="color:var(--druck)">Hired directly by a business, long-term.</strong> The hotel or restaurant employs you itself. We introduce you to each other and support you until you start.</p>
+        <p><strong style="color:var(--druck)">Hired directly by a business, for one season.</strong> The hotel or restaurant employs you for the season, and the contract ends with it.</p>
+        <p>You can tick more than one way. We only show your profile for the ways you have chosen.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* In short: visible, deliberately WITHOUT FAQ schema (page is noindex) */}
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">In short</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Does this cost me anything?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>No. It is free of charge for you, whichever way you choose.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Will my current boss find out?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Your short profile shows neither your name nor your contact details or your current employer. Tell us during the call which businesses we should not show it to, and we will leave them out.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What is in my short profile?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Your role, your experience, where and from when you want to work, full-time or part-time and the ways you have chosen. No name, no phone number, no salary expectation.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Can I have my profile deleted?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Yes, at any time. A short message via WhatsApp or to info@avorix.de is enough.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel lang="en" groesse="gross" />
+      </div>
+      <a href="#bewerben" data-cta-location="profil-en-ende" class="btn btn-primary mb-6">Create my profile</a>
+      <p class="lp-telefon max-w-[var(--spalte-text)]" style="margin-inline:auto">
+        Prefer to talk? Call
+        <a href="tel:+4975413973915" data-cta-location="profil-en-ende" data-cta-event="personal_anruf_click" class="typo-link">+49 7541 3973915</a>
+        (Mon to Fri, 8 to 17) or write to us on
+        <a href={WHATSAPP_LINK} data-cta-location="profil-en-ende-whatsapp" class="typo-link" target="_blank" rel="noopener">WhatsApp</a>.
+      </p>
+    </div>
+  </section>
+</BewerberLayout>
+
+<style>
+.lp-hero { padding-top: 24px; padding-bottom: 48px; }
+@media (min-width: 768px) {
+  .lp-hero { padding-top: 64px; padding-bottom: 64px; }
+}
+.lp-hero h1 { font-size: clamp(28px, 7vw, 48px); line-height: 1.15; }
+.lp-sub { font-size: 18px; line-height: 1.5; color: var(--grau); max-width: var(--spalte-text); }
+.lp-haken { list-style: none; padding: 0; margin: 0; color: var(--druck); }
+.lp-haken li { position: relative; padding-left: 28px; margin-bottom: 6px; font-weight: 600; }
+.lp-haken li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.35em;
+  width: 14px;
+  height: 8px;
+  border-left: 3px solid var(--akzent);
+  border-bottom: 3px solid var(--akzent);
+  transform: rotate(-45deg);
+}
+.lp-formular { max-width: 560px; }
+.lp-schritte { list-style: decimal; padding-left: 24px; line-height: 1.7; }
+.lp-schritte li { margin-bottom: 12px; }
+.lp-telefon { font-size: 15px; color: var(--grau); }
+</style>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!(item as HTMLDetailsElement).open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body!.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

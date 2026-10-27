@@ -1,0 +1,171 @@
+---
+import { Image } from "astro:assets";
+import BewerberLayout from "../../layouts/BewerberLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+import BewerbungFormular from "../../components/BewerbungFormular.astro";
+import { WHATSAPP_LINK } from "../../data/whatsapp";
+import koecheAmPass from "../../assets/bilder/koeche-am-pass-mit-tablet.jpg";
+
+// Anweisung 76: ungarische Fassung der Bewerberprofil-Seite (Csaba gegenlesen).
+// noindex, follow; nicht in Sitemap/llms.txt/Navigation; kein JobPosting-, FAQ-
+// oder hreflang-Markup. Siegel in der englischen Fassung. Geht erst mit 77 und
+// nach der Kanzlei-Freigabe live.
+---
+<BewerberLayout
+  title="Szállodák és éttermek jelentkeznek nálad"
+  description="Két perc alatt létrehozod a rövid profilodat. A neved nélkül megmutatjuk a hozzád illő szállodáknak és éttermeknek, te döntöd el, kivel ismerkedsz meg. Ingyenes."
+  lang="hu"
+  robots="noindex, follow"
+  sprachwechsel={[
+    { label: "Deutsch", href: "/jobs/profil/", lang: "de", hreflang: "de" },
+    { label: "English", href: "/en/jobs/profile/", lang: "en", hreflang: "en" },
+  ]}
+  alternates={[]}
+  impressum={{ label: "Impresszum", href: "/en/legal-notice/" }}
+  datenschutz={{ label: "Adatvédelem", href: "/en/privacy/" }}
+  cookieLabel="Süti-beállítások"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
+  consent="hu"
+  logoHref="/hu/profil/"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-3">Állás az Avorixnál · Konyha, felszolgálás, vezetés</p>
+      <h1 class="mb-4">Szállodák és éttermek jelentkeznek nálad.</h1>
+      <p class="lp-sub mb-5">Hozd létre a rövid profilodat. A neved nélkül megmutatjuk a hozzád illő szállodáknak, éttermeknek és üzemi konyháknak. Te döntöd el, kivel ismerkedsz meg.</p>
+      <ul class="lp-haken mb-6">
+        <li>Számodra ingyenes</li>
+        <li>A neved nálunk marad, amíg bele nem egyezel</li>
+        <li>24 órán belül jelentkezünk</li>
+      </ul>
+      <div id="bewerben" class="lp-formular">
+        <BewerbungFormular quelle="profil-hu" lang="hu" whatsappHinweis />
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <Image
+        src={koecheAmPass}
+        alt="Két szakács a profi konyha átadópultjánál egy tabletet néz"
+        widths={[480, 800, 1200, 1600]}
+        sizes="(max-width: 1024px) 100vw, 1080px"
+        loading="lazy"
+        decoding="async"
+        class="w-full object-cover"
+        style="height:360px;border-radius:var(--radius);box-shadow:var(--schatten)"
+      />
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Így működik</h2>
+      <ol class="lp-schritte max-w-[var(--spalte-text)]" style="color:var(--grau)">
+        <li><strong style="color:var(--druck)">Profil létrehozása.</strong> Két perc, önéletrajz nélkül.</li>
+        <li><strong style="color:var(--druck)">24 órán belül jelentkezünk,</strong> telefonon vagy WhatsAppon, angolul vagy németül, és megbeszéljük, mit keresel.</li>
+        <li><strong style="color:var(--druck)">A rövid profilodat megmutatjuk a hozzád illő munkahelyeknek,</strong> név és elérhetőség nélkül. Ha egy munkahely meg szeretne ismerni, előbb téged kérdezünk meg, és csak utána tudja meg a nevedet.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">Három út, te döntesz</h2>
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p><strong style="color:var(--druck)">Az Avorix alkalmazottjaként.</strong> Az Avorix a munkáltatód, és változó helyeken dolgozol. A szerződésed két megbízás között is érvényben marad.</p>
+        <p><strong style="color:var(--druck)">Közvetlenül egy munkahelyen, tartósan.</strong> A szálloda vagy az étterem maga vesz fel. Bemutatunk benneteket egymásnak, és a kezdésig segítünk.</p>
+        <p><strong style="color:var(--druck)">Közvetlenül egy munkahelyen, egy szezonra.</strong> A szálloda vagy az étterem a szezonra vesz fel, a szerződés a szezonnal együtt ér véget.</p>
+        <p>Több utat is bejelölhetsz. A profilodat csak azokhoz az utakhoz mutatjuk meg, amelyeket választottál.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* Röviden: látható, szándékosan FAQ-séma NÉLKÜL (az oldal noindex) */}
+  <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Röviden</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Kerül ez nekem valamibe?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nem. Számodra ingyenes, bármelyik utat választod.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Megtudja a mostani főnököm?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>A rövid profilod nem mutatja sem a nevedet, sem az elérhetőségeidet, sem a mostani munkáltatódat. A telefonbeszélgetésben mondd meg, melyik munkahelyeknek ne mutassuk meg, és őket kihagyjuk.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Mi szerepel a rövid profilomban?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>A szereped, a tapasztalatod, hol és mikortól szeretnél dolgozni, teljes vagy részmunkaidőben, és az utak, amelyeket választottál. Nincs benne név, telefonszám és fizetési elvárás.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Töröltethetem a profilomat?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Igen, bármikor. Elég egy rövid üzenet WhatsAppon vagy az info@avorix.de címre.</p></div></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel lang="en" groesse="gross" />
+      </div>
+      <a href="#bewerben" data-cta-location="profil-hu-ende" class="btn btn-primary mb-6">Létrehozom a profilom</a>
+      <p class="lp-telefon max-w-[var(--spalte-text)]" style="margin-inline:auto">
+        Inkább beszélnél? Hívj minket:
+        <a href="tel:+4975413973915" data-cta-location="profil-hu-ende" data-cta-event="personal_anruf_click" class="typo-link">+49 7541 3973915</a>
+        (hétfőtől péntekig 8 és 17 óra között), vagy írj nekünk
+        <a href={WHATSAPP_LINK} data-cta-location="profil-hu-ende-whatsapp" class="typo-link" target="_blank" rel="noopener">WhatsAppon</a>
+        angolul vagy németül.
+      </p>
+    </div>
+  </section>
+</BewerberLayout>
+
+<style>
+.lp-hero { padding-top: 24px; padding-bottom: 48px; }
+@media (min-width: 768px) {
+  .lp-hero { padding-top: 64px; padding-bottom: 64px; }
+}
+.lp-hero h1 { font-size: clamp(28px, 7vw, 48px); line-height: 1.15; }
+.lp-sub { font-size: 18px; line-height: 1.5; color: var(--grau); max-width: var(--spalte-text); }
+.lp-haken { list-style: none; padding: 0; margin: 0; color: var(--druck); }
+.lp-haken li { position: relative; padding-left: 28px; margin-bottom: 6px; font-weight: 600; }
+.lp-haken li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.35em;
+  width: 14px;
+  height: 8px;
+  border-left: 3px solid var(--akzent);
+  border-bottom: 3px solid var(--akzent);
+  transform: rotate(-45deg);
+}
+.lp-formular { max-width: 560px; }
+.lp-schritte { list-style: decimal; padding-left: 24px; line-height: 1.7; }
+.lp-schritte li { margin-bottom: 12px; }
+.lp-telefon { font-size: 15px; color: var(--grau); }
+</style>
+
+<script>
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!(item as HTMLDetailsElement).open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body!.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

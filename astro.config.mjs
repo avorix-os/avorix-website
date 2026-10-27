@@ -76,7 +76,14 @@ export default defineConfig({
   integrations: [
     sitemap({
       // Anweisung 60: /jobs/koch/ ist nur Anzeigenziel (noindex), nicht in die Sitemap.
-      filter: (page) => !page.includes("/produkt") && !page.includes("/404") && !page.includes("/jobs/koch/"),
+      // Anweisung 76: die drei Bewerberprofil-Seiten ebenso (noindex, nur Anzeigen/Links).
+      filter: (page) =>
+        !page.includes("/produkt") &&
+        !page.includes("/404") &&
+        !page.includes("/jobs/koch/") &&
+        !page.includes("/jobs/profil/") &&
+        !page.includes("/en/jobs/profile/") &&
+        !page.includes("/hu/profil/"),
       serialize(item) {
         const images = PAGE_IMAGES[item.url];
         if (images) {

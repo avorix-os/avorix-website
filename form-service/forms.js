@@ -24,7 +24,15 @@ function f(name, required, max, header = false) {
 }
 
 // Anweisung 60: feste Werte des Bewerbungsformulars.
-const ROLLEN = { koch: 'Koch', service: 'Servicekraft' };
+// Anweisung 76: Rolle „Leitung" kommt dazu (nur ueber die Profil-Seite erreichbar).
+const ROLLEN = { koch: 'Koch', service: 'Servicekraft', leitung: 'Leitung' };
+// Anweisung 76: Wege-Auswahl der Profil-Seite (Mehrfachauswahl). Gesendete Werte
+// immer deutsch; mehrere kommen als wiederholtes Feld und werden im Dienst
+// geprueft und mit Komma verbunden.
+const WEGE = ['Bei Avorix angestellt', 'Direkt im Betrieb, dauerhaft', 'Direkt im Betrieb, Saison'];
+const ARBEITSZEIT = ['Vollzeit', 'Teilzeit', 'beides'];
+const UMZUG = ['ja', 'nein', 'kommt auf die Stelle an'];
+const UNTERKUNFT = ['ja', 'nein'];
 const REGIONEN = [
   'Bodensee und Oberschwaben',
   'München und Oberbayern',
@@ -226,10 +234,26 @@ const FORMS = {
     // und `land` stehen gleich unter der Telefonnummer. `sprachen`/`land` sind
     // serverseitig nur bedingt Pflicht (abhaengig von der Seitensprache, siehe
     // server.js), darum hier required:false mit fester Options-Liste.
+    // Anweisung 76: Die Reihenfolge ist die der Benachrichtigung. Nach Telefon,
+    // Sprache und Land kommt die Freigabe mit Zeitpunkt und Fassung, dann der
+    // Wuensche-Block, dann die uebrigen Bewerbungsfelder; gehaltswunsch steht
+    // ganz unten mit „(nur intern)". Auf den vier bestehenden Bewerbungsseiten
+    // bleiben alle Profil-Felder leer und werden in buildBody uebersprungen, die
+    // Benachrichtigung dort sieht also aus wie bisher.
     fields: [
       f('telefon', true, LEN.telefon, true),
       { ...f('sprache', false, LEN.auswahl, true), options: SPRACHE_SEITE },
       { ...f('land', false, LEN.auswahl, true), options: LAENDER },
+      // Anweisung 76: Freigabe fuer Betriebe (ja/nein). Der Dienst setzt den Wert.
+      { ...f('profil_freigabe', false, 10, true), options: ['ja', 'nein'] },
+      // Anweisung 76: Wuensche-Block (alle freiwillig). wege ist Mehrfachauswahl
+      // und wird vor der Pruefung aus den wiederholten Feldern zusammengesetzt,
+      // darum hier ohne options (Pruefung der Einzelwerte im Handler).
+      f('wege', false, 200, true),
+      f('verfuegbar_ab', false, LEN.ab_wann, true),
+      { ...f('arbeitszeit', false, LEN.auswahl, true), options: ARBEITSZEIT },
+      { ...f('umzug', false, LEN.auswahl, true), options: UMZUG },
+      { ...f('unterkunft', false, LEN.auswahl, true), options: UNTERKUNFT },
       // Anweisung 66: nicht Pflicht im Dienst (fehlt -> keine Angabe, siehe
       // buildBody); nur feste Werte zugelassen.
       { ...f('arbeitserlaubnis', false, LEN.auswahl, true), options: ARBEITSERLAUBNIS },
@@ -240,7 +264,9 @@ const FORMS = {
       { ...f('erfahrung', true, LEN.auswahl, true), options: ERFAHRUNG },
       { ...f('sprachen', false, LEN.auswahl, true), options: SPRACHEN },
       f('nachricht', false, LEN.freitext),
-      { ...f('quelle', false, LEN.auswahl, true), options: ['jobs', 'lp-koch', 'lp-hu', 'lp-en'] },
+      { ...f('quelle', false, LEN.auswahl, true), options: ['jobs', 'lp-koch', 'lp-hu', 'lp-en', 'profil', 'profil-en', 'profil-hu'] },
+      // Anweisung 76: Gehaltswunsch – Freitext, „nur intern", ganz unten.
+      f('gehaltswunsch', false, 120, true),
     ],
     ack: true, // nur wenn E-Mail angegeben (deliver prueft replyTo)
     bewerbung: true,
@@ -248,4 +274,4 @@ const FORMS = {
   },
 };
 
-module.exports = { FORMS, LEN, ROLLEN, WHATSAPP };
+module.exports = { FORMS, LEN, ROLLEN, WHATSAPP, WEGE };

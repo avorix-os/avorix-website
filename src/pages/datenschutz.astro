@@ -132,7 +132,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <p style="color:var(--grau)">
         Wenn Sie sich bei uns bewerben, verarbeiten wir die Daten, die Sie uns dabei &uuml;bermitteln:
         Ihre Kontaktdaten, Ihre Angaben zu Ihrer beruflichen Erfahrung und zum gew&uuml;nschten
-        Einsatzgebiet, Ihre Angabe dazu, ob Sie in Deutschland und &Ouml;sterreich ohne Visum arbeiten
+        Einsatzgebiet, Ihre W&uuml;nsche zu Arbeitsform, Arbeitszeit, Arbeitsbeginn, Umzug, Unterkunft und
+        Gehalt, soweit Sie diese angeben, Ihre Angabe dazu, ob Sie in Deutschland und &Ouml;sterreich ohne Visum arbeiten
         d&uuml;rfen, sowie Unterlagen, die Sie uns freiwillig zusenden. Diese Daten verwenden wir
         ausschlie&szlig;lich zur Durchf&uuml;hrung des Bewerbungsverfahrens. Rechtsgrundlage ist
         Paragraf 26 Absatz 1 Satz 1 BDSG in Verbindung mit Artikel 88 DSGVO: Die Verarbeitung ist f&uuml;r
@@ -160,6 +161,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </p>
       <p class="mt-6" style="color:var(--grau)">
         Haben Sie in die Kategorie Marketing eingewilligt und sind über eine Google-Anzeige zu uns gekommen, speichern wir mit Ihrer Bewerbung zusätzlich die Klick-Kennung dieser Anzeige. Einzelheiten dazu stehen im Abschnitt &bdquo;Google Ads Conversion-Tracking&ldquo;.
+      </p>
+
+      {/* Anweisung 76, Teil 5: neuer Abschnitt, Wortlaut Kanzlei-Vorbehalt. */}
+      <h3 class="mt-6 mb-4" style="color:var(--druck)">Vorstellung bei Betrieben</h3>
+      <p style="color:var(--grau)">
+        Auf unserer Seite &bdquo;Hotels und Restaurants bewerben sich bei dir&ldquo; k&ouml;nnen Sie zus&auml;tzlich
+        zu Ihrer Bewerbung einwilligen, dass wir Ihr Profil passenden Betrieben aus Gastronomie und Hotellerie
+        zeigen, die Personal suchen. Daf&uuml;r erstellen wir aus Ihren Angaben ein Kurzprofil mit Ihrer Rolle,
+        Ihrer Erfahrung, Ihrem gew&uuml;nschten Einsatzgebiet und Arbeitsbeginn, Ihrer gew&uuml;nschten Arbeitszeit
+        und den Wegen, die Sie gew&auml;hlt haben (Anstellung bei uns, dauerhafte Anstellung oder Saisonstelle in
+        einem Betrieb). Das Kurzprofil enth&auml;lt weder Ihren Namen noch Ihre Kontaktdaten, Ihren Gehaltswunsch
+        oder Ihren aktuellen Arbeitgeber. Je nach Angaben kann ein Betrieb Sie dennoch erkennen, etwa in einer
+        kleinen Region; Sie k&ouml;nnen uns deshalb jederzeit sagen, welchen Betrieben wir Ihr Kurzprofil nicht
+        zeigen sollen.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        M&ouml;chte ein Betrieb Sie kennenlernen, geben wir Ihren Namen und Ihre Kontaktdaten erst weiter, nachdem
+        Sie im Einzelfall zugestimmt haben. Diese Zustimmung dokumentieren wir. Empf&auml;nger des Kurzprofils und,
+        nach Ihrer Zustimmung, Ihrer Kontaktdaten sind die Betriebe, denen wir Sie vorstellen. Stellt ein Betrieb
+        Sie selbst ein, ist er f&uuml;r die Daten, die er von uns erhalten hat, ab dann selbst verantwortlich.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        Rechtsgrundlage ist Ihre Einwilligung nach Artikel 6 Absatz 1 Buchstabe a DSGVO. Die Einwilligung ist
+        freiwillig; Ihre Bewerbung bei uns bearbeiten wir auch ohne sie. Sie k&ouml;nnen die Einwilligung jederzeit
+        mit Wirkung f&uuml;r die Zukunft widerrufen, etwa per E-Mail an info@avorix.de oder per WhatsApp. Die
+        Rechtm&auml;&szlig;igkeit der bis zum Widerruf erfolgten Verarbeitung bleibt davon unber&uuml;hrt. Nach einem
+        Widerruf zeigen wir Ihr Kurzprofil keinem Betrieb mehr.
+      </p>
+      <p class="mt-6" style="color:var(--grau)">
+        Ihre Profildaten l&ouml;schen wir, sobald Sie widerrufen, sp&auml;testens aber zw&ouml;lf Monate nach Ihrer
+        letzten R&uuml;ckmeldung an uns, sofern kein Besch&auml;ftigungsverh&auml;ltnis zustande gekommen ist. F&uuml;r
+        Ihre &uuml;brigen Bewerbungsdaten gelten die Fristen aus dem Abschnitt &bdquo;Bewerbungen&ldquo;.
       </p>
 
       <h3 class="mt-6 mb-4" style="color:var(--druck)">Kontakt über WhatsApp</h3>
