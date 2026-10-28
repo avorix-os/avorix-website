@@ -1,6 +1,6 @@
 # Avorix
 
-> Avorix ist ein Küchensystem für Hotels und Gastronomie aus Friedrichshafen am Bodensee (Deutschland). Es verbindet rechtssicheren Küchenpersonal-Verleih mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit, die Avorix Koch-App (Schritt-für-Schritt-Rezeptführung, Menüplaner, Portionsrechner, Einkaufslisten, Kalkulation) und Schulung durch erfahrene Köche mit mindestens Sous-Chef-Erfahrung. Zielgruppen sind Ferienhotels mit Halbpension, Restaurants und Gasthöfe mit fester Karte sowie Sporthotels in Deutschland und Österreich. An English section covers the same offering for kitchen managers in Germany and Austria who do not speak German.
+> Avorix ist ein Küchensystem für Hotels und Gastronomie aus Friedrichshafen am Bodensee (Deutschland). Es verbindet rechtssicheren Küchenpersonal-Verleih mit behördlicher Arbeitnehmerüberlassungserlaubnis der Agentur für Arbeit, die Avorix Koch-App für geführtes Arbeiten (Schritt-für-Schritt-Rezeptführung, Menüplaner, Portionsrechner, Einkaufslisten, Kalkulation) und Schulung durch erfahrene Köche mit mindestens Sous-Chef-Erfahrung. Geführtes Arbeiten heißt: Am Posten zeigt die Koch-App jeder Kraft, was jetzt zu tun ist. Schritt für Schritt, mit Foto, Menge und Zeit, bis zum Haken. Zielgruppen sind Ferienhotels mit Halbpension, Restaurants und Gasthöfe mit fester Karte sowie Sporthotels in Deutschland und Österreich. An English section covers the same offering for kitchen managers in Germany and Austria who do not speak German.
 
 ## Seiten
 
@@ -15,7 +15,7 @@
 - [Servicepersonal](https://avorix.de/personal/service): Festangestellte Servicekräfte für Restaurant, Bankett und Saison, zusätzlich zum Küchenpersonal.
 - [Jobs bei Avorix](https://avorix.de/jobs): Als Beikoch, Koch, Souschef oder Servicekraft fest angestellt in wechselnden Häusern in ganz Deutschland und Österreich, mit fairem, marktüblichem Gehalt.
 - [Unser System](https://avorix.de/system): Wie Koch-App, Schulung und Personal ineinandergreifen
-- [Koch-App](https://avorix.de/koch-app): Funktionen der App im Detail
+- [Koch-App](https://avorix.de/koch-app): Geführtes Arbeiten in der Küche, Funktionen der App im Detail
 - [Schulung](https://avorix.de/schulung): Anlernen des Küchenteams durch Avorix-Köche
 - [Pilotprogramm](https://avorix.de/pilotprogramm): Einstiegsangebot für Pilotbetriebe 2026
 - [Für Ferienhotels](https://avorix.de/fuer-hotels)
