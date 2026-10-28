@@ -18,7 +18,7 @@ const crypto = require('crypto');
 const Busboy = require('busboy');
 const nodemailer = require('nodemailer');
 
-const { FORMS, ROLLEN, WHATSAPP } = require('./forms');
+const { FORMS, ROLLEN, WHATSAPP, WEGE } = require('./forms');
 const altcha = require('./altcha');
 const spamfilter = require('./spamfilter');
 
@@ -79,6 +79,8 @@ const LABELS = {
   message: 'Nachricht',
   hinweis: 'Hinweis',
   ab_wann: 'Ab wann',
+  // Anweisung 77: Feld „Fuer wie lange?" auf /personal/ (Zeile unter „Ab wann").
+  dauer: 'Für wie lange',
   kuechenteam: 'Küchenteam',
   kuechenproblem: 'Küchenproblem',
   nachricht: 'Nachricht',
@@ -97,6 +99,14 @@ const LABELS = {
   arbeitserlaubnis: 'Arbeitserlaubnis',
   // Anweisung 75
   rezept_text: 'Rezept oder Anmerkung',
+  // Anweisung 76: Profil-Seite
+  profil_freigabe: 'Freigabe',
+  wege: 'Wege',
+  verfuegbar_ab: 'Ab wann',
+  arbeitszeit: 'Arbeitszeit',
+  umzug: 'Umzug',
+  unterkunft: 'Unterkunft',
+  gehaltswunsch: 'Gehaltswunsch (nur intern)',
 };
 
 // Anweisung 66: die gesendeten (deutschen) Werte je Seitensprache so, wie der
@@ -359,9 +369,24 @@ function buildBody(def, kennung, fields, files, reasons) {
     // und bleibt aus der Benachrichtigung).
     if (fld.name === 'sprache' && (!fields.sprache || fields.sprache === 'de')) continue;
     if ((fld.name === 'land' || fld.name === 'sprachen') && !fields[fld.name]) continue;
+    // Anweisung 77: „Fuer wie lange?" ist freiwillig – leer bleibt die Zeile weg.
+    if (fld.name === 'dauer' && !fields.dauer) continue;
+    // Anweisung 76: Profil-Felder nur zeigen, wenn belegt. Auf den bestehenden
+    // Bewerbungsseiten sind sie leer, die Benachrichtigung bleibt dort gleich.
+    if (['wege', 'verfuegbar_ab', 'arbeitszeit', 'umzug', 'unterkunft', 'gehaltswunsch'].includes(fld.name) && !fields[fld.name]) continue;
+    if (fld.name === 'profil_freigabe' && !fields.profil_freigabe) continue;
     const label = LABELS[fld.name] || fld.name;
     let val = fields[fld.name];
     if (fld.name === 'rolle' && def.bewerbung) val = ROLLEN[val] || val;
+    // Anweisung 76: Freigabe mit Zeitpunkt und Fassung als Nachweis.
+    if (fld.name === 'profil_freigabe') {
+      if (fields.profil_freigabe === 'ja') {
+        const zusatz = [fields.freigabe_zeit, fields.freigabe_fassung].filter(Boolean).join(', ');
+        val = zusatz ? `ja (${zusatz})` : 'ja';
+      } else {
+        val = 'nein';
+      }
+    }
     // Anweisung 66: fehlt die Angabe (z. B. zwischengespeicherte Seite), steht
     // "keine Angabe" an der Stelle des Feldes, nicht der Platzhalter "—".
     if (fld.name === 'arbeitserlaubnis' && def.bewerbung && !val) val = 'keine Angabe';
@@ -401,7 +426,10 @@ function ackBody(def) {
 // Anweisung 63: bei Verdacht "[Verdacht] " davor.
 function subjectFor(def, fields, verdacht) {
   let s;
-  if (def.bewerbung) {
+  if (def.bewerbung && String(fields.quelle || '').startsWith('profil')) {
+    // Anweisung 76: Profil-Seite. Betreff mit Rolle, Region und Freigabe.
+    s = `Profil: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}, Freigabe ${fields.profil_freigabe === 'ja' ? 'ja' : 'nein'}`;
+  } else if (def.bewerbung) {
     s = `Bewerbung: ${ROLLEN[fields.rolle] || fields.rolle}, ${fields.region}`;
     // Anweisung 66: zum Vorsortieren. Nur bei "Nein oder unklar", nicht bei
     // "keine Angabe" (dort ist offen, ob eine Erlaubnis besteht).
@@ -562,6 +590,121 @@ function bewerbungAckEn(fields) {
   return { subject: 'Your application at Avorix', text, html };
 }
 
+// Anweisung 76: Eingangsbestaetigung der Profil-Seite. Wie die Bewerbungs-
+// bestaetigungen (Block „Das hast du uns geschickt" + Pflichtfooter in deliver),
+// aber mit eigenem Brieftext und einem Absatz, der von der Freigabe abhaengt.
+// Betreff und Absatz richten sich nach profil_freigabe (ja/nein). Der Gehalts-
+// wunsch bleibt „nur intern" und steht NICHT in der Bestaetigung an den Bewerber.
+function bewerbungProfilAck(fields) {
+  const lang = fields.sprache === 'hu' ? 'hu' : fields.sprache === 'en' ? 'en' : 'de';
+  const mit = fields.profil_freigabe === 'ja';
+  const wa = `https://wa.me/${WHATSAPP}`;
+
+  if (lang === 'en') {
+    const zeilen = [
+      ['Your name', fields.name],
+      ['Phone number', fields.telefon],
+      ['Email', fields.email],
+      ['I am applying as', ROLLEN[fields.rolle] || fields.rolle],
+      ['Where do you live?', fields.land],
+      ['Where would you like to work?', fields.region],
+      ['Are you allowed to work in Germany and Austria without a visa?', arbeitserlaubnisLabel('en', fields.arbeitserlaubnis)],
+      ['How long have you worked in hospitality?', fields.erfahrung],
+      ['Which languages can you work in?', fields.sprachen],
+      ['What did you do most recently?', fields.nachricht],
+    ].filter(([, v]) => v && String(v).trim() !== '');
+    const absatz = mit
+      ? 'After that we show your short profile to suitable businesses, without your name and contact details. A business only learns your name once you have agreed. You can withdraw your consent at any time; a short message via WhatsApp or to info@avorix.de is enough.'
+      : 'We only show your profile to businesses once you agree. You can do that during the call.';
+    const text = [
+      `Hello ${fields.name},`, '',
+      'thank you, your profile has reached us. We will get back to you within 24 hours, by phone or WhatsApp, in English or German, and talk about what you are looking for.',
+      '', absatz, '',
+      `If you have a question before then, write to us on WhatsApp (${wa}).`,
+      '', 'Kind regards,', 'the Avorix team', '',
+      'What you sent us:', ...zeilen.map(([k, v]) => `${k}: ${v}`),
+    ].join('\n');
+    const html =
+      `<p>Hello ${escHtml(fields.name)},</p>` +
+      '<p>thank you, your profile has reached us. We will get back to you within 24 hours, by phone or WhatsApp, in English or German, and talk about what you are looking for.</p>' +
+      `<p>${escHtml(absatz)}</p>` +
+      `<p>If you have a question before then, write to us on <a href="${wa}">WhatsApp</a>.</p>` +
+      '<p>Kind regards,<br>the Avorix team</p>' +
+      '<p><strong>What you sent us:</strong><br>' +
+      zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+      '</p>';
+    return { subject: mit ? 'Your profile at Avorix' : 'Your application at Avorix', text, html };
+  }
+
+  if (lang === 'hu') {
+    const zeilen = [
+      ['A neved', fields.name],
+      ['Telefonszám', fields.telefon],
+      ['E-mail', fields.email],
+      ['Ebben a szerepben jelentkezem', ROLLEN[fields.rolle] || fields.rolle],
+      ['Hol szeretnél dolgozni?', fields.region],
+      ['Dolgozhatsz vízum nélkül Németországban és Ausztriában?', arbeitserlaubnisLabel('hu', fields.arbeitserlaubnis)],
+      ['Mennyi tapasztalatod van a vendéglátásban?', fields.erfahrung],
+      ['Milyen nyelven beszélsz?', fields.sprachen],
+      ['Milyen pozícióban dolgoztál?', fields.nachricht],
+    ].filter(([, v]) => v && String(v).trim() !== '');
+    const absatz = mit
+      ? 'Ezután a rövid profilodat megmutatjuk a hozzád illő munkahelyeknek, a neved és az elérhetőségeid nélkül. A nevedet egy munkahely csak akkor tudja meg, ha hozzájárultál. A hozzájárulásodat bármikor visszavonhatod, elég egy rövid üzenet WhatsAppon vagy az info@avorix.de címre.'
+      : 'A profilodat csak akkor mutatjuk meg munkahelyeknek, ha hozzájárulsz. Ezt a telefonbeszélgetésben is megteheted.';
+    const text = [
+      `Szia ${fields.name}!`, '',
+      'Köszönjük, megérkezett hozzánk a profilod. 24 órán belül jelentkezünk, telefonon vagy WhatsAppon, angolul vagy németül, és megbeszéljük, mit keresel.',
+      '', absatz, '',
+      `Ha addig kérdésed van, írj nekünk WhatsAppon (${wa}).`,
+      '', 'Üdvözlettel,', 'az Avorix csapata', '',
+      'Amit elküldtél nekünk:', ...zeilen.map(([k, v]) => `${k}: ${v}`),
+    ].join('\n');
+    const html =
+      `<p>Szia ${escHtml(fields.name)}!</p>` +
+      '<p>Köszönjük, megérkezett hozzánk a profilod. 24 órán belül jelentkezünk, telefonon vagy WhatsAppon, angolul vagy németül, és megbeszéljük, mit keresel.</p>' +
+      `<p>${escHtml(absatz)}</p>` +
+      `<p>Ha addig kérdésed van, írj nekünk <a href="${wa}">WhatsAppon</a>.</p>` +
+      '<p>Üdvözlettel,<br>az Avorix csapata</p>' +
+      '<p><strong>Amit elküldtél nekünk:</strong><br>' +
+      zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+      '</p>';
+    return { subject: mit ? 'Profilod az Avorixnál' : 'Jelentkezésed az Avorixnál', text, html };
+  }
+
+  // Deutsch
+  const zeilen = [
+    ['Name', fields.name],
+    ['Telefon', fields.telefon],
+    ['E-Mail', fields.email],
+    ['Ich bewerbe mich als', ROLLEN[fields.rolle] || fields.rolle],
+    ['Wo du arbeiten willst', fields.region],
+    ['Darfst du in Deutschland und Österreich ohne Visum arbeiten?', arbeitserlaubnisLabel('de', fields.arbeitserlaubnis)],
+    ['Erfahrung in der Gastronomie', fields.erfahrung],
+    ['Was du zuletzt gemacht hast', fields.nachricht],
+  ].filter(([, v]) => v && String(v).trim() !== '');
+  const absatz = mit
+    ? 'Danach zeigen wir dein Kurzprofil passenden Betrieben, ohne deinen Namen und ohne deine Kontaktdaten. Deinen Namen erfährt ein Betrieb erst, wenn du zugestimmt hast. Du kannst die Freigabe jederzeit widerrufen, eine kurze Nachricht per WhatsApp oder an info@avorix.de reicht.'
+    : 'Betrieben zeigen wir dein Profil erst, wenn du zustimmst. Das kannst du beim Telefonat nachholen.';
+  const text = [
+    `Hallo ${fields.name},`, '',
+    'danke, dein Profil ist bei uns angekommen. Wir melden uns innerhalb von 24 Stunden, meistens telefonisch, und klären mit dir, was du suchst.',
+    '', absatz, '',
+    `Wenn du vorher etwas fragen willst: 07541 3973915, Montag bis Freitag von 8 bis 17 Uhr, oder per WhatsApp (${wa}).`,
+    '', 'Viele Grüße', 'dein Avorix-Team', '',
+    'Das hast du uns geschickt:', ...zeilen.map(([k, v]) => `${k}: ${v}`),
+  ].join('\n');
+  const html =
+    `<p>Hallo ${escHtml(fields.name)},</p>` +
+    '<p>danke, dein Profil ist bei uns angekommen. Wir melden uns innerhalb von 24 Stunden, meistens telefonisch, und klären mit dir, was du suchst.</p>' +
+    `<p>${escHtml(absatz)}</p>` +
+    `<p>Wenn du vorher etwas fragen willst: 07541 3973915, Montag bis Freitag von 8 bis 17 Uhr, oder per <a href="${wa}">WhatsApp</a>.</p>` +
+    '<p>Viele Grüße<br>dein Avorix-Team</p>' +
+    '<p><strong>Das hast du uns geschickt:</strong><br>' +
+    zeilen.map(([k, v]) => `${escHtml(k)}: ${escHtml(v).replace(/\r?\n/g, '<br>')}`).join('<br>') +
+    '</p>';
+  return { subject: mit ? 'Dein Profil bei Avorix' : 'Deine Bewerbung bei Avorix', text, html };
+}
+
 // Anweisung 75: Eingangsbestaetigung fuer das Rezeptformular (Teil 4a), DE/EN,
 // mit Name und derselben Telefonzeile wie die uebrigen Bestaetigungen. Der
 // Pflichtfooter (Anweisung 61, Teil 7) kommt in deliver() dazu.
@@ -620,7 +763,10 @@ async function deliver(def, kennung, fields, files, verdacht, reasons) {
   if (def.ack && replyTo) {
     try {
       let ack;
-      if (def.bewerbung) {
+      if (def.bewerbung && String(fields.quelle || '').startsWith('profil')) {
+        // Anweisung 76: eigene Bestaetigung der Profil-Seite (DE/EN/HU, Absatz je Freigabe).
+        ack = bewerbungProfilAck(fields);
+      } else if (def.bewerbung) {
         ack = fields.sprache === 'hu' ? bewerbungAckHu(fields)
             : fields.sprache === 'en' ? bewerbungAckEn(fields)
             : bewerbungAck(fields);
@@ -691,12 +837,17 @@ function parseBody(req, allowFiles) {
     }
 
     const fields = {};
+    const multi = {}; // Anweisung 76: wiederholte Felder (Haekchen „wege") sammeln.
     const files = [];
     let totalBytes = 0;
     let tooBig = false;
     let tooMany = false;
 
     bb.on('field', (name, val) => {
+      if (Object.prototype.hasOwnProperty.call(fields, name)) {
+        if (!multi[name]) multi[name] = [fields[name]];
+        multi[name].push(val);
+      }
       fields[name] = val;
     });
 
@@ -729,7 +880,7 @@ function parseBody(req, allowFiles) {
     bb.on('close', () => {
       if (tooBig) return reject(Object.assign(new Error('upload_too_large'), { code: 400 }));
       if (tooMany) return reject(Object.assign(new Error('too_many_files'), { code: 400 }));
-      resolve({ fields, files });
+      resolve({ fields, files, multi });
     });
     bb.on('error', (e) => reject(Object.assign(new Error('parse_error'), { code: 400, cause: e })));
 
@@ -755,7 +906,7 @@ async function handleForm(req, res) {
     return respondErr(req, res, e.code || 400, e.message);
   }
 
-  const { fields } = parsed;
+  const { fields, multi } = parsed;
   let { files } = parsed;
   const kennung = String(fields.formular || '').trim();
   const def = FORMS[kennung];
@@ -812,6 +963,27 @@ async function handleForm(req, res) {
     // Die ungarische Seite hat kein Land-Feld.
     if (fields.sprache === 'hu' && !String(fields.land || '').trim()) {
       fields.land = 'Ungarn (ungarische Seite)';
+    }
+    // Anweisung 76: Profil-Seite. wege aus den wiederholten Haekchen-Feldern
+    // zusammensetzen (nur erlaubte Werte), Freigabe auf ja/nein normalisieren
+    // und bei „ja" Zeitpunkt und Fassung des Einwilligungstexts als Nachweis
+    // festhalten (zunaechst freigabe-v1; aendert die Kanzlei den Text -> v2).
+    const istProfil = String(fields.quelle || '').startsWith('profil');
+    if (istProfil) {
+      const rohWege = (multi && multi.wege) ? multi.wege
+        : (fields.wege !== undefined && fields.wege !== '' ? [fields.wege] : []);
+      const gewaehlt = rohWege.map(String).filter((w) => WEGE.includes(w));
+      if (gewaehlt.length) fields.wege = gewaehlt.join(', ');
+      else delete fields.wege;
+      const ja = String(fields.profil_freigabe || '') === 'ja';
+      fields.profil_freigabe = ja ? 'ja' : 'nein';
+      if (ja) {
+        fields.freigabe_zeit = new Date().toLocaleString('de-DE', { timeZone: 'Europe/Berlin' });
+        fields.freigabe_fassung = 'freigabe-v1';
+      }
+    } else {
+      // Die vier bestehenden Bewerbungsseiten haben diese Felder nicht.
+      for (const k of ['profil_freigabe', 'wege', 'verfuegbar_ab', 'arbeitszeit', 'umzug', 'unterkunft', 'gehaltswunsch']) delete fields[k];
     }
     // Pflicht je nach Seitensprache: Sprachen auf HU und EN, Land nur auf EN.
     if ((fields.sprache === 'hu' || fields.sprache === 'en') && !String(fields.sprachen || '').trim()) {

@@ -13,13 +13,18 @@ import Altcha from "./Altcha.astro";
 
 type Sprache = "de" | "hu" | "en";
 interface Props {
-  quelle: "jobs" | "lp-koch" | "lp-hu" | "lp-en";
+  // Anweisung 76: `profil`/`profil-en`/`profil-hu` sind die drei Fassungen der
+  // neuen Bewerberprofil-Seite. Dort kommt die Rolle „Leitung", ein Block mit
+  // Wuenschen und die Freigabe fuer Betriebe dazu.
+  quelle: "jobs" | "lp-koch" | "lp-hu" | "lp-en" | "profil" | "profil-en" | "profil-hu";
   nurKoch?: boolean;
   whatsappHinweis?: boolean;
   lang?: Sprache;
 }
 const { quelle, nurKoch = false, whatsappHinweis = false, lang = "de" } = Astro.props as Props;
 const p = `bw-${quelle}`;
+// Anweisung 76: Profil-Seite erkennen (erweitertes Formular).
+const istProfil = quelle === "profil" || quelle === "profil-en" || quelle === "profil-hu";
 
 // Auswahlwerte: gesendeter Wert (v) + angezeigte Beschriftung (l).
 const REGION_VALUES = {
@@ -158,13 +163,132 @@ const T = {
 
 const istBewerberseite = lang !== "de";
 // Auf HU/EN steht die Rolle fest auf Koch; Pflichtstern immer sichtbar.
-const rolleFest = nurKoch || istBewerberseite;
+// Anweisung 76: Auf der Profil-Seite ist die Rolle in ALLEN Sprachen eine Auswahl.
+const rolleFest = (nurKoch || istBewerberseite) && !istProfil;
 const regionen = REGION_VALUES[lang];
 const erfahrung = ERFAHRUNG_VALUES[lang];
 const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
+
+// Anweisung 76: Rollen-Auswahl in drei Sprachen. Gesendeter Wert immer deutsch
+// (koch/service/leitung). Auf den bestehenden Seiten (nicht Profil) stehen nur
+// koch/service; auf der Profil-Seite kommt „leitung" dazu.
+const ROLLE_LABELS = {
+  de: { legend: "Ich bewerbe mich als:", koch: "Koch", service: "Servicekraft", leitung: "Leitung (Küchenchef, Restaurant- oder Betriebsleitung)" },
+  en: { legend: "I am applying as:", koch: "Chef or cook", service: "Service staff", leitung: "Management (head chef, restaurant or general manager)" },
+  hu: { legend: "Ebben a szerepben jelentkezem:", koch: "Szakács", service: "Felszolgáló", leitung: "Vezető (konyhafőnök, étterem- vagy üzletvezető)" },
+}[lang];
+
+// Anweisung 76: Block „Deine Wünsche (freiwillig)". Alle Felder freiwillig, keine
+// Vorauswahl. Gesendete Werte immer deutsch (wege/arbeitszeit/umzug/unterkunft),
+// verfuegbar_ab und gehaltswunsch sind Freitext.
+const WUNSCHE = {
+  de: {
+    gruppe: "Deine Wünsche (freiwillig)", unter: "Damit wir dich passend vorstellen können.",
+    wegeLegend: "Wie möchtest du arbeiten?", wegeHint: "Mehrere Antworten möglich.",
+    wege: [
+      { v: "Bei Avorix angestellt", l: "Bei Avorix angestellt, Einsätze in verschiedenen Häusern" },
+      { v: "Direkt im Betrieb, dauerhaft", l: "Direkt in einem Betrieb, dauerhaft" },
+      { v: "Direkt im Betrieb, Saison", l: "Direkt in einem Betrieb, für eine Saison" },
+    ],
+    verfuegbar: "Ab wann kannst du anfangen?", verfuegbarPh: "z. B. sofort, 1. Dezember",
+    arbeitszeitLegend: "Vollzeit oder Teilzeit?",
+    arbeitszeit: [{ v: "Vollzeit", l: "Vollzeit" }, { v: "Teilzeit", l: "Teilzeit" }, { v: "beides", l: "Beides möglich" }],
+    umzugLegend: "Würdest du für eine Stelle umziehen?",
+    umzug: [{ v: "ja", l: "Ja" }, { v: "nein", l: "Nein" }, { v: "kommt auf die Stelle an", l: "Kommt auf die Stelle an" }],
+    unterkunftLegend: "Brauchst du eine Unterkunft?",
+    unterkunft: [{ v: "ja", l: "Ja" }, { v: "nein", l: "Nein" }],
+    gehalt: "Dein Gehaltswunsch im Monat, brutto",
+    gehaltHint: "Das sieht nur Avorix. Es steht nicht in deinem Kurzprofil und nirgends auf der Website.",
+  },
+  en: {
+    gruppe: "Your wishes (optional)", unter: "So that we can introduce you to the right places.",
+    wegeLegend: "How would you like to work?", wegeHint: "You can choose more than one.",
+    wege: [
+      { v: "Bei Avorix angestellt", l: "Employed by Avorix, assignments in different places" },
+      { v: "Direkt im Betrieb, dauerhaft", l: "Hired directly by a business, long-term" },
+      { v: "Direkt im Betrieb, Saison", l: "Hired directly by a business, for one season" },
+    ],
+    verfuegbar: "When can you start?", verfuegbarPh: "e.g. now, 1 December",
+    arbeitszeitLegend: "Full-time or part-time?",
+    arbeitszeit: [{ v: "Vollzeit", l: "Full-time" }, { v: "Teilzeit", l: "Part-time" }, { v: "beides", l: "Either" }],
+    umzugLegend: "Would you move for a job?",
+    umzug: [{ v: "ja", l: "Yes" }, { v: "nein", l: "No" }, { v: "kommt auf die Stelle an", l: "Depends on the job" }],
+    unterkunftLegend: "Do you need accommodation?",
+    unterkunft: [{ v: "ja", l: "Yes" }, { v: "nein", l: "No" }],
+    gehalt: "Your desired monthly salary, gross",
+    gehaltHint: "Only Avorix sees this. It is not part of your short profile and does not appear anywhere on the website.",
+  },
+  hu: {
+    gruppe: "A kívánságaid (nem kötelező)", unter: "Hogy a hozzád illő helyeken mutathassunk be.",
+    wegeLegend: "Hogyan szeretnél dolgozni?", wegeHint: "Több válasz is lehetséges.",
+    wege: [
+      { v: "Bei Avorix angestellt", l: "Az Avorix alkalmazottjaként, megbízásokkal különböző helyeken" },
+      { v: "Direkt im Betrieb, dauerhaft", l: "Közvetlenül egy munkahelyen, tartósan" },
+      { v: "Direkt im Betrieb, Saison", l: "Közvetlenül egy munkahelyen, egy szezonra" },
+    ],
+    verfuegbar: "Mikortól tudsz kezdeni?", verfuegbarPh: "pl. azonnal, december 1.",
+    arbeitszeitLegend: "Teljes vagy részmunkaidő?",
+    arbeitszeit: [{ v: "Vollzeit", l: "Teljes munkaidő" }, { v: "Teilzeit", l: "Részmunkaidő" }, { v: "beides", l: "Mindkettő jó" }],
+    umzugLegend: "Elköltöznél egy állás miatt?",
+    umzug: [{ v: "ja", l: "Igen" }, { v: "nein", l: "Nem" }, { v: "kommt auf die Stelle an", l: "Az állástól függ" }],
+    unterkunftLegend: "Szükséged van szállásra?",
+    unterkunft: [{ v: "ja", l: "Igen" }, { v: "nein", l: "Nem" }],
+    gehalt: "Havi fizetési elvárásod, bruttó",
+    gehaltHint: "Ezt csak az Avorix látja. Nem szerepel a rövid profilodban, és sehol nem jelenik meg a weboldalon.",
+  },
+}[lang];
+
+// Anweisung 76: Freigabe fuer Betriebe (freiwillig, nicht vorausgewaehlt). Der
+// Link zeigt auf die Datenschutzerklaerung (DE und HU eigene, EN die englische).
+// Kanzlei-Vorgabe 27.10.2026: fuer eine informierte Einwilligung muss der
+// Abschnitt den ungarischen Bewerbern auf Ungarisch zugaenglich sein, deshalb
+// eigene Seite /hu/adatvedelem-bemutatas/ statt Verweis auf die englische Fassung.
+const FREIGABE = {
+  de: { pre: "Avorix darf mein Profil ohne Name und Kontaktdaten passenden Betrieben zeigen. Name und Kontaktdaten gibt Avorix erst weiter, wenn ich im Einzelfall zugestimmt habe. Ich kann das jederzeit widerrufen. Mehr dazu in der ", link: "Datenschutzerklärung", href: "/datenschutz/", post: " im Abschnitt „Vorstellung bei Betrieben“." },
+  en: { pre: "Avorix may show my profile without my name and contact details to suitable businesses. Avorix only passes on my name and contact details after I have agreed in the individual case. I can withdraw this at any time. More in the ", link: "privacy policy", href: "/en/privacy/", post: ", section “Presenting your profile to businesses”." },
+  hu: { pre: "Az Avorix a profilomat név és elérhetőségek nélkül megmutathatja a hozzám illő munkahelyeknek. A nevemet és az elérhetőségeimet az Avorix csak akkor adja tovább, ha az adott esetben hozzájárultam. Ezt bármikor visszavonhatom. Részletek a ", link: "„Bemutatás a vállalkozásoknál“ adatkezelési tájékoztatóban", href: "/hu/adatvedelem-bemutatas/", post: "." },
+}[lang];
+
+// Anweisung 76: Knopf, Hinweis unter dem Knopf und die beiden Danke-Fassungen
+// (mit/ohne Freigabe) der Profil-Seite.
+const PROFIL = {
+  de: {
+    button: "Profil anlegen",
+    hinweisPre: "Wir verarbeiten deine Angaben, um deine Bewerbung zu bearbeiten und, wenn du zugestimmt hast, um dein Kurzprofil passenden Betrieben zu zeigen. Mehr dazu steht in unserer ",
+    hinweisLink: "Datenschutzerklärung", hinweisHref: "/datenschutz/",
+    hinweisPost: " in den Abschnitten „Bewerbungen“ und „Vorstellung bei Betrieben“.",
+    jaTitel: "Danke, dein Profil ist angelegt.",
+    jaText: "Wir melden uns innerhalb von 24 Stunden, meistens per Telefon. Erst danach zeigen wir dein Kurzprofil passenden Betrieben, ohne deinen Namen.",
+    neinTitel: "Danke, deine Bewerbung ist da.",
+    neinText: "Wir melden uns innerhalb von 24 Stunden, meistens per Telefon. Betrieben zeigen wir dein Profil erst, wenn du zustimmst. Das kannst du beim Telefonat nachholen.",
+    waPre: "Lieber per WhatsApp? ", waLink: "Schreib uns",
+  },
+  en: {
+    button: "Create profile",
+    hinweisPre: "We process your details to handle your application and, if you have agreed, to show your short profile to suitable businesses. More in our ",
+    hinweisLink: "privacy policy", hinweisHref: "/en/privacy/",
+    hinweisPost: ", sections “Applications” and “Presenting your profile to businesses”.",
+    jaTitel: "Thank you, your profile has been created.",
+    jaText: "We will get back to you within 24 hours, by phone or WhatsApp. Only after that do we show your short profile to suitable businesses, without your name.",
+    neinTitel: "Thank you, we have received your application.",
+    neinText: "We will get back to you within 24 hours, by phone or WhatsApp. We only show your profile to businesses once you agree. You can do that during the call.",
+    waPre: "Prefer WhatsApp? ", waLink: "Write to us",
+  },
+  hu: {
+    button: "Profil létrehozása",
+    hinweisPre: "Az adataidat a jelentkezésed feldolgozásához használjuk, és ha hozzájárultál, ahhoz, hogy a rövid profilodat megmutassuk a hozzád illő munkahelyeknek. Részletek az ",
+    hinweisLink: "adatvédelmi tájékoztatóban", hinweisHref: "/en/privacy/",
+    hinweisPost: " (angol nyelven), az „Applications“ és a „Presenting your profile to businesses“ részben.",
+    jaTitel: "Köszönjük, létrehoztuk a profilodat.",
+    jaText: "24 órán belül jelentkezünk, telefonon vagy WhatsAppon. A rövid profilodat csak ezután mutatjuk meg a hozzád illő munkahelyeknek, a neved nélkül.",
+    neinTitel: "Köszönjük, megkaptuk a jelentkezésedet.",
+    neinText: "24 órán belül jelentkezünk, telefonon vagy WhatsAppon. A profilodat csak akkor mutatjuk meg munkahelyeknek, ha hozzájárulsz. Ezt a telefonbeszélgetésben is megteheted.",
+    waPre: "Inkább WhatsAppon írnál? ", waLink: "Írj nekünk angolul vagy németül.",
+  },
+}[lang];
 ---
 <div class="bw-wrap" data-bewerbung>
-  <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle} data-sprache={lang} data-whatsapp={WHATSAPP_LINK_BEWERBUNG}>
+  <form class="card bw-form space-y-6" action="/api/formular" method="POST" data-bewerbung-form data-quelle={quelle} data-sprache={lang} data-whatsapp={WHATSAPP_LINK_BEWERBUNG} data-profil={istProfil ? "true" : "false"}>
     <input type="hidden" name="formular" value="bewerbung" />
     <input type="hidden" name="quelle" value={quelle} />
     <input type="text" name="website" class="bw-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -192,16 +316,24 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
 
     {!rolleFest && (
       <fieldset class="bw-fieldset">
-        <legend class="bw-label">{T.rolleLegend} <span class="bw-pflicht">*</span></legend>
-        <div class="bw-rollen">
-          <label class="bw-rolle">
+        <legend class="bw-label">{ROLLE_LABELS.legend} <span class="bw-pflicht">*</span></legend>
+        {/* Anweisung 76: auf der Profil-Seite drei Knoepfe untereinander (die
+            Leitungs-Beschriftung ist lang), sonst die zwei Knoepfe nebeneinander. */}
+        <div class={istProfil ? "bw-arbeit" : "bw-rollen"}>
+          <label class={istProfil ? "bw-rolle bw-rolle--block" : "bw-rolle"}>
             <input type="radio" name="rolle" value="koch" required />
-            <span>{T.rolleKoch}</span>
+            <span>{ROLLE_LABELS.koch}</span>
           </label>
-          <label class="bw-rolle">
+          <label class={istProfil ? "bw-rolle bw-rolle--block" : "bw-rolle"}>
             <input type="radio" name="rolle" value="service" />
-            <span>{T.rolleService}</span>
+            <span>{ROLLE_LABELS.service}</span>
           </label>
+          {istProfil && (
+            <label class="bw-rolle bw-rolle--block">
+              <input type="radio" name="rolle" value="leitung" />
+              <span>{ROLLE_LABELS.leitung}</span>
+            </label>
+          )}
         </div>
       </fieldset>
     )}
@@ -267,24 +399,119 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
       <textarea id={`${p}-nachricht`} name="nachricht" rows="3" class="bw-field bw-textarea"></textarea>
     </div>
 
+    {/* Anweisung 76: Block „Deine Wünsche (freiwillig)". Eigene Gruppe, alle
+        Felder freiwillig, keine Vorauswahl. Nur auf der Profil-Seite. */}
+    {istProfil && (
+      <fieldset class="bw-fieldset bw-wunsch-gruppe">
+        <legend class="bw-wunsch-legend">{WUNSCHE.gruppe}</legend>
+        <p class="bw-wunsch-unter">{WUNSCHE.unter}</p>
+
+        <div class="bw-wunsch-feld">
+          <span class="bw-label" id={`${p}-wege-label`}>{WUNSCHE.wegeLegend} <span class="bw-opt">{WUNSCHE.wegeHint}</span></span>
+          <div class="bw-arbeit" role="group" aria-labelledby={`${p}-wege-label`}>
+            {WUNSCHE.wege.map((o) => (
+              <label class="bw-rolle bw-rolle--block bw-check">
+                <input type="checkbox" name="wege" value={o.v} />
+                <span>{o.l}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <div class="bw-wunsch-feld">
+          <label for={`${p}-verfuegbar`} class="bw-label">{WUNSCHE.verfuegbar}</label>
+          <input type="text" id={`${p}-verfuegbar`} name="verfuegbar_ab" class="bw-field" placeholder={WUNSCHE.verfuegbarPh} />
+        </div>
+
+        <fieldset class="bw-fieldset bw-wunsch-feld">
+          <legend class="bw-label">{WUNSCHE.arbeitszeitLegend}</legend>
+          <div class="bw-rollen bw-rollen--drei">
+            {WUNSCHE.arbeitszeit.map((o) => (
+              <label class="bw-rolle"><input type="radio" name="arbeitszeit" value={o.v} /><span>{o.l}</span></label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="bw-fieldset bw-wunsch-feld">
+          <legend class="bw-label">{WUNSCHE.umzugLegend}</legend>
+          <div class="bw-arbeit">
+            {WUNSCHE.umzug.map((o) => (
+              <label class="bw-rolle bw-rolle--block"><input type="radio" name="umzug" value={o.v} /><span>{o.l}</span></label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset class="bw-fieldset bw-wunsch-feld">
+          <legend class="bw-label">{WUNSCHE.unterkunftLegend}</legend>
+          <div class="bw-rollen">
+            {WUNSCHE.unterkunft.map((o) => (
+              <label class="bw-rolle"><input type="radio" name="unterkunft" value={o.v} /><span>{o.l}</span></label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div class="bw-wunsch-feld">
+          <label for={`${p}-gehalt`} class="bw-label">{WUNSCHE.gehalt}</label>
+          <input type="text" id={`${p}-gehalt`} name="gehaltswunsch" class="bw-field" />
+          <p class="bw-feld-hinweis">{WUNSCHE.gehaltHint}</p>
+        </div>
+      </fieldset>
+    )}
+
+    {/* Anweisung 76: Freigabe fuer Betriebe – freiwillig, nicht vorausgewaehlt,
+        optisch abgesetzt. Ist das Haekchen gesetzt, geht profil_freigabe=ja mit. */}
+    {istProfil && (
+      <div class="bw-freigabe">
+        <label class="bw-freigabe-label">
+          <input type="checkbox" name="profil_freigabe" value="ja" />
+          <span>{FREIGABE.pre}<a href={FREIGABE.href}>{FREIGABE.link}</a>{FREIGABE.post}</span>
+        </label>
+      </div>
+    )}
+
     <Altcha sprache={lang} />
 
-    <button type="submit" class="btn btn-primary bw-submit" data-bw-sending={T.sending}>{T.button}</button>
+    <button type="submit" class="btn btn-primary bw-submit" data-bw-sending={T.sending}>{istProfil ? PROFIL.button : T.button}</button>
     {whatsappHinweis && (
       <p class="bw-whatsapp">
-        Lieber per WhatsApp?
-        <a href={WHATSAPP_LINK_BEWERBUNG} data-cta-location={`${quelle}-formular-whatsapp`} class="typo-link" target="_blank" rel="noopener">Schreib uns</a>
+        {istProfil ? PROFIL.waPre : "Lieber per WhatsApp? "}
+        <a href={WHATSAPP_LINK_BEWERBUNG} data-cta-location={`${quelle}-formular-whatsapp`} class="typo-link" target="_blank" rel="noopener">{istProfil ? PROFIL.waLink : "Schreib uns"}</a>
       </p>
     )}
-    <p class="formular-hinweis">
-      {T.hinweisPre}<a href={T.hinweisHref}>{T.hinweisLink}</a>{T.hinweisPost}
-    </p>
+    {istProfil ? (
+      <p class="formular-hinweis">
+        {PROFIL.hinweisPre}<a href={PROFIL.hinweisHref}>{PROFIL.hinweisLink}</a>{PROFIL.hinweisPost}
+      </p>
+    ) : (
+      <p class="formular-hinweis">
+        {T.hinweisPre}<a href={T.hinweisHref}>{T.hinweisLink}</a>{T.hinweisPost}
+      </p>
+    )}
   </form>
 
-  <div class="card bw-danke hidden" data-bw-danke role="status" tabindex="-1">
-    <p class="bw-danke-titel">{T.dankeTitel}</p>
-    <p>{T.dankeText}</p>
-  </div>
+  {istProfil ? (
+    /* Anweisung 76: zwei Fassungen (mit/ohne Freigabe); das Skript waehlt sie
+       beim Absenden anhand des Freigabe-Haekchens aus. */
+    <div
+      class="card bw-danke hidden"
+      data-bw-danke
+      data-bw-danke-profil
+      data-ja-titel={PROFIL.jaTitel}
+      data-ja-text={PROFIL.jaText}
+      data-nein-titel={PROFIL.neinTitel}
+      data-nein-text={PROFIL.neinText}
+      role="status"
+      tabindex="-1"
+    >
+      <p class="bw-danke-titel" data-danke-titel>{PROFIL.jaTitel}</p>
+      <p data-danke-text>{PROFIL.jaText}</p>
+    </div>
+  ) : (
+    <div class="card bw-danke hidden" data-bw-danke role="status" tabindex="-1">
+      <p class="bw-danke-titel">{T.dankeTitel}</p>
+      <p>{T.dankeText}</p>
+    </div>
+  )}
 </div>
 
 <style>
@@ -358,6 +585,52 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
   justify-content: flex-start;
   text-align: left;
 }
+/* Anweisung 76: Wünsche-Block und Freigabe. */
+.bw-rollen--drei { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 400px) {
+  .bw-rollen--drei { grid-template-columns: 1fr; }
+}
+/* Mehrfachauswahl „wege": wie die Rolle-Knoepfe (bw-rolle--block liefert das
+   linksbuendige Block-Layout schon), nur die Checked-Farbe kommt hier dazu. */
+.bw-check input:checked + span { border-color: var(--akzent); background: #F3D9C8; color: var(--akzent); }
+.bw-wunsch-gruppe {
+  border: 1px solid var(--linie);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  gap: 20px;
+}
+.bw-wunsch-legend {
+  font-family: var(--f-head);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--druck);
+  padding: 0;
+  float: left; /* im Grid-Fieldset haelt das die Legende oben */
+}
+.bw-wunsch-unter { font-size: 15px; color: var(--grau); margin: 0; clear: both; }
+.bw-wunsch-feld { display: block; }
+.bw-feld-hinweis { font-size: 13px; line-height: 1.5; color: var(--grau); margin-top: 8px; }
+.bw-freigabe {
+  border-top: 1px solid var(--linie);
+  padding-top: 20px;
+}
+.bw-freigabe-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--druck);
+}
+.bw-freigabe-label input {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  accent-color: var(--akzent);
+}
 .bw-submit { width: 100%; }
 .bw-whatsapp { font-size: 15px; color: var(--grau); text-align: center; }
 /* Anweisung 74: Hinweis ueber dem Formular + Sperr-Meldung unter dem Feld. */
@@ -409,11 +682,36 @@ const arbeitOptionen = ARBEITSERLAUBNIS_VALUES[lang];
 
       if (r.ok) {
         gesendet = true;
+        const istProfil = form.dataset.profil === 'true';
+        const fd = new FormData(form);
+        const freigabe = fd.get('profil_freigabe') === 'ja';
         // Anweisung 63: Ereignis nur ohne Verdacht (sonst zaehlt Google Ads Spam).
         if (!r.verdacht) {
           const w = window as any;
           w.dataLayer = w.dataLayer || [];
-          w.dataLayer.push({ event: 'bewerbung', rolle: String(new FormData(form).get('rolle') || ''), quelle: form.dataset.quelle || '' });
+          const ereignis: Record<string, string> = {
+            event: 'bewerbung',
+            rolle: String(fd.get('rolle') || ''),
+            quelle: form.dataset.quelle || '',
+          };
+          // Anweisung 76: Profil-Seite haengt freigabe und wege an (Kuerzel).
+          if (istProfil) {
+            const map: Record<string, string> = {
+              'Bei Avorix angestellt': 'avorix',
+              'Direkt im Betrieb, dauerhaft': 'fest',
+              'Direkt im Betrieb, Saison': 'saison',
+            };
+            ereignis.freigabe = freigabe ? 'ja' : 'nein';
+            ereignis.wege = fd.getAll('wege').map((w2) => map[String(w2)] || '').filter(Boolean).join(',');
+          }
+          w.dataLayer.push(ereignis);
+        }
+        // Anweisung 76: Danke-Fassung nach Freigabe (mit/ohne) auswaehlen.
+        if (istProfil && danke && danke.hasAttribute('data-bw-danke-profil')) {
+          const titel = danke.querySelector<HTMLElement>('[data-danke-titel]');
+          const text = danke.querySelector<HTMLElement>('[data-danke-text]');
+          if (titel) titel.textContent = freigabe ? (danke.dataset.jaTitel || '') : (danke.dataset.neinTitel || '');
+          if (text) text.textContent = freigabe ? (danke.dataset.jaText || '') : (danke.dataset.neinText || '');
         }
         form.classList.add('hidden');
         danke?.classList.remove('hidden');

@@ -1,0 +1,87 @@
+---
+import BewerberLayout from "../../layouts/BewerberLayout.astro";
+
+// Anweisung 76 / Kanzlei-Vorgabe 27.10.2026: Fuer eine informierte Einwilligung
+// muessen die wesentlichen Informationen zur Vorstellung bei Betrieben auch
+// ungarischen Bewerbern auf Ungarisch zugaenglich sein. Diese Seite stellt den
+// Abschnitt „Vorstellung bei Betrieben" auf Ungarisch bereit; das Freigabe-
+// Haekchen auf /hu/profil/ verlinkt hierher. Die vollstaendige Datenschutz-
+// erklaerung bleibt deutsch/englisch (im Kopf verlinkt). noindex, follow; nicht
+// in Sitemap/llms.txt/Navigation. Ungarisch von Csaba gegenlesen lassen.
+// Geht erst mit A76/A77 und nach der Kanzlei-Freigabe live.
+---
+<BewerberLayout
+  title="Bemutatás a vállalkozásoknál – adatkezelési tájékoztató"
+  description="Magyar nyelvű összefoglaló arról, hogyan kezeljük az adataidat, ha hozzájárulsz ahhoz, hogy a profilodat bemutassuk a hozzád illő vállalkozásoknak."
+  lang="hu"
+  robots="noindex, follow"
+  sprachwechsel={[
+    { label: "Deutsch", href: "/datenschutz/", lang: "de", hreflang: "de" },
+    { label: "English", href: "/en/privacy/", lang: "en", hreflang: "en" },
+  ]}
+  alternates={[]}
+  impressum={{ label: "Impresszum", href: "/en/legal-notice/" }}
+  datenschutz={{ label: "Adatvédelem", href: "/en/privacy/" }}
+  cookieLabel="Süti-beállítások"
+  footerAdresse="AVORIX GmbH · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany"
+  consent="hu"
+  logoHref="/hu/profil/"
+>
+  <section class="lp-hero px-6">
+    <div class="content-width">
+      <h1 class="mb-4">Bemutatás a vállalkozásoknál</h1>
+      <p class="lp-sub mb-5">
+        Ez a tájékoztató magyarul foglalja össze, hogyan kezeljük az adataidat, ha a jelentkezésed mellett
+        hozzájárulsz ahhoz, hogy a profilodat bemutassuk a hozzád illő vállalkozásoknak. A teljes adatvédelmi
+        tájékoztatónk német és angol nyelven érhető el:
+        <a href="/datenschutz/" class="typo-link">németül</a> ·
+        <a href="/en/privacy/" class="typo-link">angolul</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="max-w-[var(--spalte-text)] space-y-6" style="color:var(--grau)">
+        <p>
+          A „Szállodák és éttermek jelentkeznek nálad” oldalunkon a jelentkezésed mellett külön hozzájárulhatsz
+          ahhoz, hogy a profilodat megmutassuk a hozzád illő, személyzetet kereső vendéglátó- és szállodaipari
+          vállalkozásoknak. Ehhez az adataidból rövid profilt készítünk, amely tartalmazza a szerepedet, a
+          tapasztalatodat, a kívánt munkavégzési területet és kezdési időpontot, a kívánt munkaidődet, valamint az
+          általad választott utakat (alkalmazás nálunk, tartós alkalmazás vagy szezonális állás egy vállalkozásnál).
+          A rövid profil nem tartalmazza sem a nevedet, sem az elérhetőségeidet, sem a fizetési elvárásodat, sem a
+          jelenlegi munkáltatódat. Az adataidtól függően egy vállalkozás ennek ellenére felismerhet, például egy kis
+          régióban; ezért bármikor megmondhatod, mely vállalkozásoknak ne mutassuk meg a rövid profilodat.
+        </p>
+        <p>
+          Ha egy vállalkozás meg szeretne ismerni, a nevedet és az elérhetőségeidet csak azután adjuk tovább, hogy az
+          adott esetben hozzájárultál. Ezt a hozzájárulást dokumentáljuk. A rövid profil, és a hozzájárulásod után az
+          elérhetőségeid címzettjei azok a vállalkozások, amelyeknek bemutatunk. Ha egy vállalkozás maga alkalmaz,
+          onnantól ő maga felel a tőlünk kapott adatokért.
+        </p>
+        <p>
+          A jogalap a hozzájárulásod a GDPR 6. cikk (1) bekezdés a) pontja szerint. A hozzájárulás önkéntes; a
+          jelentkezésedet enélkül is feldolgozzuk. A hozzájárulást bármikor visszavonhatod a jövőre nézve, például az
+          <a href="mailto:info@avorix.de" class="typo-link">info@avorix.de</a> címre küldött e-mailben vagy WhatsAppon.
+          Ez nem érinti a visszavonásig végzett adatkezelés jogszerűségét. A visszavonás után a rövid profilodat
+          egyetlen vállalkozásnak sem mutatjuk meg többé.
+        </p>
+        <p>
+          A profiladataidat töröljük, amint visszavonod a hozzájárulást, de legkésőbb hat hónappal az utolsó
+          visszajelzésed után, ha nem jött létre munkaviszony. Rendszeresen felülvizsgáljuk, hogy szükségünk van-e még
+          a profilodra a közvetítéshez, és töröljük, amint erre már nincs szükség. A többi jelentkezési adatodra a
+          német és angol nyelvű adatvédelmi tájékoztató „Bewerbungen” / „Applications” szakasza vonatkozik.
+        </p>
+      </div>
+    </div>
+  </section>
+</BewerberLayout>
+
+<style>
+.lp-hero { padding-top: 24px; padding-bottom: 32px; }
+@media (min-width: 768px) {
+  .lp-hero { padding-top: 64px; padding-bottom: 48px; }
+}
+.lp-hero h1 { font-size: clamp(26px, 6vw, 40px); line-height: 1.15; }
+.lp-sub { font-size: 18px; line-height: 1.5; color: var(--grau); max-width: var(--spalte-text); }
+</style>
