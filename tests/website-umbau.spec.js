@@ -852,8 +852,8 @@ test.describe('T12e: Korrektur 3 — lange Woerter sprengen die Seite nicht', ()
  * Abnahmepunkte 8, 10, 15 und 22.
  */
 test.describe('T13: Korrektur 14 — Personal steht an zwei Stellen', () => {
-  const SOLL_DE = ['Wie alles zusammenspielt', 'Die App', 'Die Schulung', 'Das Personal', 'Pilotprogramm 2026'];
-  const SOLL_EN = ['How It All Works Together', 'The Cook App', 'The Training', 'The Staff', 'Pilot Program 2026'];
+  const SOLL_DE = ['Wie alles zusammenspielt', 'Geführtes Arbeiten: die App', 'Die Schulung', 'Das Personal', 'Pilotprogramm 2026'];
+  const SOLL_EN = ['How It All Works Together', 'Guided Work: The Cook App', 'The Training', 'The Staff', 'Pilot Program 2026'];
 
   for (const [pagePath, soll] of [['/', SOLL_DE], ['/en', SOLL_EN]]) {
     for (const breite of [375, 1280]) {
