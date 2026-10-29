@@ -16,21 +16,25 @@ const ogImageAlt = "Zwei Köche am Pass einer Profiküche, davor ein Tablet mit 
 const schema = [
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "EmploymentAgency"],
     "@id": "https://avorix.de/#organization",
     "name": "AVORIX GmbH",
-    "url": "https://avorix.de",
+    "legalName": "AVORIX GmbH",
+    "alternateName": "Avorix",
+    "url": "https://avorix.de/",
     "logo": {
       "@type": "ImageObject",
       "url": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
       "width": 1024,
       "height": 1024
     },
+    "image": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
     "description": "Festangestellte Köche, wenn Ihrer fehlt, in der Regel innerhalb von 24 bis 72 Stunden. Dazu Koch-App und Schulung, damit Ihre Küche Ihr Niveau hält.",
     "telephone": "+49 7541 3973915",
     "email": "info@avorix.de",
     "founder": {
       "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
       "name": "Börge Penk"
     },
     "address": {
@@ -41,7 +45,24 @@ const schema = [
       "addressCountry": "DE"
     },
     "areaServed": ["DE", "AT"],
-    "url": "https://avorix.de"
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    },
+    "hasMap": "https://maps.google.com/?cid=3756241428225524465",
+    "vatID": "DE368762673",
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "Handelsregister",
+      "value": "HRB 751118, Amtsgericht Ulm"
+    },
+    "sameAs": [
+      "https://maps.google.com/?cid=3756241428225524465",
+      "https://www.linkedin.com/company/avorix-gmbh/",
+      "https://www.provenexpert.com/de-de/avorix-personalloesungen/"
+    ]
   },
   {
     "@context": "https://schema.org",
