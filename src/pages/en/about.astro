@@ -1,43 +1,164 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image, getImage } from "astro:assets";
+import Stempel from "../../components/Stempel.astro";
+import vakuumbeutelKuehlhaus from "../../assets/bilder/vakuumbeutel-kuehlhaus.jpg";
+import boergeKueche from "../../assets/bilder/boerge-kueche.jpg";
 
+const ogImg = await getImage({ src: vakuumbeutelKuehlhaus, width: 1200, format: "jpeg" });
+const ogImageAlt = "Labelled vacuum bags with prepped ingredients in the cold room of a professional kitchen";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://avorix.de/en"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "About",
+      "item": "https://avorix.de/en/about"
+    }
+  ]
+};
 ---
-<BaseLayout title="About" description="Meet Avorix — kitchen management for resort hotels in Germany and Austria. We help properties maintain consistent food quality despite staff shortages.">
+
+<BaseLayout
+  title="About Avorix: built by a head chef"
+  description="Avorix grew out of real kitchens: chefs first, then processes, then the app. The team and the story behind the system."
+  ogImage={ogImg.src}
+  ogImageAlt={ogImageAlt}
+  schemaOrg={[
+    breadcrumb,
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "url": "https://avorix.de/en/about",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": `https://avorix.de${ogImg.src}`,
+        "description": ogImageAlt
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Head chef and founder of Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    }
+  ]}
+>
+
+  {/* Hero (W2: text hero, left aligned) */}
  <section class="hero-section px-6">
     <div class="content-width">
-      <h1 class="mb-6" style="color:var(--druck)">About Avorix</h1>
-      <p class="mb-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        Avorix enables hotels and restaurants to consistently serve high-quality dishes using software, standardized processes, and the Avorix Cook App — <strong>even without trained chefs</strong>.
-      </p>
+      <p class="eyebrow mb-4">About us</p>
+      <h1 class="mb-6">Built by a <mark>head chef</mark>. Not by software people.</h1>
+      <p class="lead max-w-[var(--spalte-text)]" style="color:var(--grau)">Avorix grew out of practice: out of real kitchens, real duty rotas and the daily struggle for good staff.</p>
+      <p class="mt-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">We know the feeling. We have stood in kitchens like that ourselves.</p>
+    </div>
+  </section>
 
-      {/* Team photo */}
-      <div class="overflow-hidden mb-16" style="border-radius:var(--radius);box-shadow:var(--schatten)">
-        <img
-          src="/avorix_kitchen_branded.webp"
-          alt="Avorix Koch-App in action — chef in Avorix branded jacket"
-          width="1920"
-          height="1080"
-          class="w-full object-cover"
-          style="height:360px"
-          loading="lazy"
-        />
-      </div>
-
-      <div class="space-y-16">
+  {/* Founder */}
+ <section id="boerge-penk" class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">The man behind the system.</h2>
+      <div class="gruender-grid">
         <div>
-          <h2 class="mb-6" style="color:var(--druck)">Our Mission</h2>
-          <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
-            The skilled labour shortage in hospitality is structural. We believe technology can bridge the gap — <strong>not as a replacement for good chefs</strong>, but as a tool that enables every kitchen team to operate at a high level.
-          </p>
+          <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Börge Penk has worked in professional kitchens for 20 years, from apprentice to head chef with large teams. He has developed menus, led brigades and <strong>knows the staff shortage not from statistics but from every single duty rota</strong>.</p>
         </div>
-
-        <div>
-          <h2 class="mb-6" style="color:var(--druck)">Our Focus</h2>
-          <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">
-            We start with resort hotels across Germany and Austria — properties <strong>where half-board is the core promise</strong> and the kitchen faces daily pressure to deliver consistent quality.
-          </p>
+        <blockquote class="gruender-quote">&ldquo;I have seen too often that a kitchen stands or falls with a single person. It does not have to be that way. Good cooking can be written down, shown and taught.&rdquo;</blockquote>
+      </div>
+      <div class="split-row mt-12">
+        <div class="split-copy">
+          <p style="color:var(--grau)">He started at the very bottom: cutting vegetables and washing dishes as a teenager, then working his way up to kitchen manager. Over all those years he kept noticing the same thing: there were not enough qualified people, and the good ones burned out. Instead of giving up, he began to win people without classic chef training for the kitchen, and discovered how much talent they have. In 2023 he founded his first company for this, BP Gastroberatung in Berlin. Within a short time, 15 permanently employed chefs were on assignment. That company became AVORIX GmbH.</p>
+        </div>
+        <div class="split-media">
+          <Image
+            src={boergeKueche}
+            alt="Börge Penk in chef's whites in a commercial kitchen"
+            widths={[480, 800, 1200]}
+            sizes="(max-width: 900px) 100vw, 420px"
+            loading="lazy"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
+    </div>
+  </section>
+
+  {/* Story */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width">
+      <h2 style="color:var(--druck)">Chefs first. Then processes. Then the app.</h2>
+      <div class="split-row">
+        <div class="split-copy">
+          <p class="mb-4" style="color:var(--grau)">Avorix started as a staffing provider for the hospitality industry: permanently employed chefs, hired out to properties that were short of staff. The same pattern showed every time: the assignment helped, but <strong>as soon as the chef left, the business was as vulnerable as before</strong>.</p>
+          <p style="color:var(--grau)">So we started leaving the knowledge behind: first with standardised processes (prepare, vacuum-pack, regenerate), then with documented recipes, and finally with the Avorix Cook App, which makes both usable for every kitchen team. Today it has become a complete system: <strong>software, training and staff from a single source.</strong></p>
+        </div>
+        <div class="split-media">
+          <Image
+            src={vakuumbeutelKuehlhaus}
+            alt="Labelled vacuum bags with prepped ingredients in the cold room of a professional kitchen"
+            widths={[480, 800, 1200, 1600]}
+            sizes="(max-width: 900px) 100vw, 420px"
+            loading="eager"
+            fetchpriority="high"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Technology */}
+ <section class="reveal section-gap section-band">
+    <div class="content-width text-spalte">
+      <h2 style="color:var(--druck)">Technology as support. Not as a replacement.</h2>
+      <div>
+        <div>
+          <p style="color:var(--grau)">We do not want kitchens without people. We want kitchens in which people without years of training can do good work, and <strong>in which the knowledge of the house does not disappear with the next resignation</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* Facts */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6" style="color:var(--druck)">What you have in black and white.</h2>
+      <ul class="space-y-4">
+        <li class="py-4" style="border-bottom:1px solid var(--linie);color:var(--druck)">Headquarters in Friedrichshafen on Lake Constance (AVORIX GmbH)</li>
+        <li class="py-4" style="border-bottom:1px solid var(--linie);color:var(--druck)">Operating in Germany and Austria</li>
+        <li class="py-4" style="border-bottom:1px solid var(--linie);color:var(--druck)">We hold the official staffing licence issued by the Federal Employment Agency</li>
+      </ul>
+    </div>
+  </section>
+
+  {/* Discretion */}
+ <section class="reveal section-gap section-dunkel">
+    <div class="content-width text-spalte">
+      <h2 class="mb-6">Our clients do not show us off. That is deliberate.</h2>
+      <p class="max-w-[var(--spalte-text)]">Our clients run their kitchens with our system, and what happens in their kitchens is nobody's business. <strong>This discretion is part of what we offer.</strong></p>
+    </div>
+  </section>
+
+  {/* Final CTA */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel lang="en" groesse="gross" />
+      </div>
+      <a href="/en/contact" data-cta-location="about-final" class="btn btn-primary">Book a Demo</a>
+      <a href="/en/staff#request" data-cta-location="about-final" data-cta-event="cta_personal_click" class="btn btn-secondary">Request Staff</a>
     </div>
   </section>
 </BaseLayout>

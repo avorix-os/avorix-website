@@ -16,26 +16,53 @@ const ogImageAlt = "Two chefs at the pass of a professional kitchen with a table
 const schema = [
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Avorix",
-    "url": "https://avorix.de",
+    "@type": ["Organization", "EmploymentAgency"],
+    "@id": "https://avorix.de/#organization",
+    "name": "AVORIX GmbH",
+    "legalName": "AVORIX GmbH",
+    "alternateName": "Avorix",
+    "url": "https://avorix.de/",
     "logo": {
       "@type": "ImageObject",
       "url": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
       "width": 1024,
       "height": 1024
     },
+    "image": "https://avorix.de/avorix-logo-quadrat-dunkel.png",
     "description": "Permanently employed chefs when yours is missing, usually within 24 to 72 hours. Plus the Cook App and training, so your kitchen holds your standard.",
+    "telephone": "+49 7541 3973915",
+    "email": "info@avorix.de",
     "founder": {
       "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
       "name": "Börge Penk"
     },
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Fallenbrunnen 14",
+      "postalCode": "88045",
       "addressLocality": "Friedrichshafen",
       "addressCountry": "DE"
     },
-    "areaServed": ["DE", "AT"]
+    "areaServed": ["DE", "AT"],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:00",
+      "closes": "17:00"
+    },
+    "hasMap": "https://maps.google.com/?cid=3756241428225524465",
+    "vatID": "DE368762673",
+    "identifier": {
+      "@type": "PropertyValue",
+      "propertyID": "Handelsregister",
+      "value": "HRB 751118, Amtsgericht Ulm"
+    },
+    "sameAs": [
+      "https://maps.google.com/?cid=3756241428225524465",
+      "https://www.linkedin.com/company/avorix-gmbh/",
+      "https://www.provenexpert.com/de-de/avorix-personalloesungen/"
+    ]
   },
   {
     "@context": "https://schema.org",
