@@ -169,6 +169,35 @@ test.describe('A62: /fuer-kantinen -> /betriebsgastronomie Umzug', () => {
   });
 });
 
+test.describe('A80: /kundenstimmen -> /ueber-uns Weiterleitung', () => {
+  test('/kundenstimmen liefert 301 auf /ueber-uns (greift bei nginx)', async ({ page, request }) => {
+    if (process.env.PW_BASE_URL) {
+      // Deploy-Gate: geprueft wird gegen den ausliefernden nginx, dort greift der 301.
+      const antwort = await request.get('/kundenstimmen', { maxRedirects: 0 });
+      expect(antwort.status()).toBe(301);
+      expect(antwort.headers()['location']).toContain('/ueber-uns');
+      return;
+    }
+    // Am Arbeitsplatz laeuft der Astro-Vorschau-Server ohne nginx: dort 404.
+    const antwort = await page.goto('/kundenstimmen', { waitUntil: 'domcontentloaded' });
+    expect(antwort.status()).toBe(404);
+  });
+
+  test('nginx.conf enthaelt den 301 von /kundenstimmen auf /ueber-uns/', async () => {
+    const fs = await import('fs');
+    const conf = fs.readFileSync('nginx.conf', 'utf8');
+    expect(conf).toContain('location ~ ^/kundenstimmen/?$');
+    expect(conf).toContain('return 301 /ueber-uns/;');
+  });
+
+  test('/kundenstimmen steht nicht in der Sitemap', async ({ request }) => {
+    const antwort = await request.get('/sitemap-0.xml');
+    expect(antwort.status()).toBe(200);
+    const xml = await antwort.text();
+    expect(xml).not.toContain('/kundenstimmen');
+  });
+});
+
 test.describe('T4: Pilotprogramm-Formular', () => {
   test('kein pilot_bewerbung Event bei leerem Pflichtfeld', async ({ page }) => {
     await page.goto('/pilotprogramm');
