@@ -1344,3 +1344,89 @@ h2 {
   height: 100%;
   object-fit: cover;
 }
+
+/* === Anweisung 81 (Teil E): Der Bon ======================================
+   Weisser Papierstreifen, oben und unten gezackt, ein Schatten wie Papier auf
+   Stahl (der einzige Schatten der Seite -- ueber filter, weil die Maske einen
+   box-shadow mit abschneiden wuerde). Steht nur auf /, /en/, /personal/ und
+   /en/staff/, immer fuer einen Ablauf in vier Schritten. Die Schritte sind
+   eine echte <ol>, die Kopfzeile ist Dekoration. */
+.bon-wrap {
+  filter: drop-shadow(0 1px 1px rgba(31,30,26,.12)) drop-shadow(0 14px 24px rgba(31,30,26,.11));
+  max-width: 470px;
+  width: 100%;
+  justify-self: center;
+}
+.bon {
+  background: #fff;
+  padding: 36px 26px 40px;
+  font: 13.5px/1.55 var(--f-mono);
+  color: var(--druck);
+  --zz: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) top/16px 51% repeat-x,
+        conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom/16px 51% repeat-x;
+  -webkit-mask: var(--zz);
+  mask: var(--zz);
+}
+.bon-kopf {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  letter-spacing: .08em;
+  margin: 0;
+}
+.bon-unterkopf {
+  display: flex;
+  justify-content: space-between;
+  color: #4a4b48;
+  font-size: 12.5px;
+  margin: 4px 0 0;
+}
+.bon hr {
+  border: 0;
+  border-top: 1.5px dashed rgba(31,30,26,.45);
+  margin: 16px 0;
+}
+.bon ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: b;
+}
+.bon li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  padding: 10px 0;
+  counter-increment: b;
+}
+.bon li::before {
+  content: counter(b);
+  font-weight: 700;
+}
+.bon li b {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.bon li span {
+  color: #45463f;
+  font-size: 12.5px;
+}
+.bon-fuss {
+  margin: 0;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Bon-Layout (D7 / /personal): ab 900px zwei Spalten, links H2 (+Button),
+   rechts der Bon; darunter erst der linke Teil, dann der Bon mittig. */
+.bon-layout {
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 900px) {
+  .bon-layout {
+    grid-template-columns: 1fr 470px;
+    gap: 80px;
+    align-items: start;
+  }
+}
