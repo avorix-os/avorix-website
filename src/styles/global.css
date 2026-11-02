@@ -348,7 +348,10 @@ main > section:last-of-type {
 .section-dunkel p {
   color: rgba(242, 243, 242, 0.8);
 }
-.section-dunkel .eyebrow,
+/* Anweisung 81 (C2): Klartext-Etikett im dunklen Block in gedecktem Hell. */
+.section-dunkel .eyebrow {
+  color: rgba(242, 243, 242, .7);
+}
 .section-dunkel mark {
   color: var(--akzent-hell);
 }
@@ -513,17 +516,23 @@ h3 {
 
 .lead {
   font-family: var(--f-body);
-  font-size: 18px;
+  /* Anweisung 81 (C5): 20px, Zeilenhoehe 1.5, Druckfarbe. */
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--druck);
   max-width: var(--spalte-text);
 }
 
+/* Anweisung 81 (C2): Etiketten mit Wort werden ruhiger Klartext in der
+   Fliesstextschrift. Mono bleibt nur, wo wirklich eine Nummer oder ein
+   Datenfeld steht (.card-modul-label, Screenshot-Beschriftungen, Bon). */
 .eyebrow {
-  font-family: var(--f-mono);
-  font-weight: 700;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: .18em;
-  color: var(--akzent);
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 15px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--grau);
 }
 
 /* Folgerunde 1 / 6: Headline-Abstaende straffen (Desktop wie Mobil).
@@ -570,9 +579,11 @@ h1 em,   h2 em,   h3 em {
   background: var(--akzent-bg);
   color: var(--akzent-fg);
   padding: 13px 28px;
+  /* Anweisung 81 (C1): kein Schatten mehr (var(--schatten) ist none). */
   box-shadow: var(--schatten);
 }
-.btn-primary:hover  { filter: brightness(1.08); }
+/* Anweisung 81 (C1): Hover faerbt die Flaeche (#8f4523) statt sie aufzuhellen. */
+.btn-primary:hover  { background: #8f4523; }
 .btn-primary:active { transform: translateY(1px); }
 
 .btn-secondary {
@@ -776,7 +787,9 @@ figcaption,
 
 /* === Karten-System (V5.1 · 3.5 / 3.6 / 3.7) === */
 
-/* Karte (3.5): weiße Fläche, 1px Linie, Radius, Schatten + Hover-Lift */
+/* Karte (3.5) -- Anweisung 81 (C1): weisse Flaeche, 1px Linie, Radius 6px,
+   KEIN Schatten, KEIN Anheben beim Hover. Ist die ganze Karte klickbar
+   (a.card / .card-link), wird beim Hover nur der Rand dunkler. */
 .card {
   background: var(--flaeche);
   border: 1px solid var(--linie);
@@ -786,15 +799,14 @@ figcaption,
      B2 (Anweisung 18): auf dem Handy 24, ab Tablet 32. */
   padding: 24px;
   box-shadow: var(--schatten);
-  transition: transform .18s, box-shadow .18s;
+  transition: border-color .18s;
 }
-.card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--schatten-hover);
+a.card:hover,
+.card-link:hover {
+  border-color: rgba(31, 30, 26, .35);
 }
 @media (prefers-reduced-motion: reduce) {
   .card { transition: none; }
-  .card:hover { transform: none; }
 }
 
 /* Folgerunde 1 / 1: Text fuellt die Karte.
@@ -872,16 +884,16 @@ figcaption,
   border: 1px solid var(--linie);
   border-radius: var(--radius);
   padding: 32px;
+  /* Anweisung 81 (C1): kein Schatten, kein Hover-Lift. */
   box-shadow: var(--schatten);
-  transition: transform .18s, box-shadow .18s;
+  transition: border-color .18s;
 }
-.card-modul:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--schatten-hover);
+a.card-modul:hover,
+.card-modul.card-link:hover {
+  border-color: rgba(31, 30, 26, .35);
 }
 @media (prefers-reduced-motion: reduce) {
   .card-modul { transition: none; }
-  .card-modul:hover { transform: none; }
 }
 .card-modul-header {
   display: flex;
@@ -890,12 +902,13 @@ figcaption,
   margin-bottom: 1rem;
 }
 .card-modul-label {
+  /* Anweisung 81 (C2): Nummern-Etikett bleibt Mono, aber 13px/600/grau. */
   font-family: var(--f-mono);
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .18em;
-  color: var(--akzent);
+  letter-spacing: .08em;
+  color: var(--grau);
   white-space: nowrap;
   flex-shrink: 0;
   line-height: 1;
@@ -1061,7 +1074,8 @@ h2 {
   border-radius: var(--radius);
   box-shadow: var(--schatten);
   min-height: 240px;
-  order: -1;
+  /* Anweisung 81 (C6): auf dem Handy steht der Text VOR dem Bild, damit der
+     erste Button sofort sichtbar ist. (Frueher order:-1 = Bild zuerst.) */
 }
 .hero-badges {
   display: flex;
@@ -1082,7 +1096,7 @@ h2 {
 }
 @media (min-width: 900px) {
   .hero-grid { grid-template-columns: 55fr 45fr; }
-  .hero-media { order: 0; min-height: 460px; }
+  .hero-media { min-height: 460px; }
 }
 
 /* Split-Sektion (W3): H2+Absatz links, Foto rechts */
