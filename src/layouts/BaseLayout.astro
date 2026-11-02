@@ -68,8 +68,18 @@ if (SPRACHPAARE[pfad]) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {/* Anweisung 30, Schritt 7.9: faerbt die Browserleiste auf
-         Mobilgeraeten in die Papier-Hintergrundfarbe. */}
-    <meta name="theme-color" content="#F7F6F2" />
+         Mobilgeraeten in die Papier-Hintergrundfarbe.
+         Anweisung 81 (Teil A): Stahlweiss #F2F3F2 statt Creme. */}
+    <meta name="theme-color" content="#F2F3F2" />
+    {/* Anweisung 81 (Teil B): Ueberschriftenschrift vorladen (Barlow Semi
+        Condensed 600, latin), selbst gehostet. */}
+    <link
+      rel="preload"
+      href="/fonts/barlow-semi-condensed-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="description" content={description} />
     {(robots || noindex) && <meta name="robots" content={robots ?? "noindex"} />}
     <meta name="google-site-verification" content="WuMVUFKkYclVOtZyiyU_PZwYn-Zhk4kdLf3ws9I26eM" />

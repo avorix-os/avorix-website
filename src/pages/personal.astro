@@ -275,43 +275,31 @@ const schema = [
     </div>
   </section>
 
-  {/* So läuft ein Einsatz (12b, Sektion 3) */}
+  {/* So läuft ein Einsatz (Anweisung 81, Teil E: als Bon) */}
  <section class="reveal section-gap section-band">
     <div class="content-width">
-      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">So l&auml;uft ein Einsatz. In vier Schritten.</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div class="card">
-          <div class="mb-4"><span class="schritt-chip">1</span></div>
-          <h3 class="mb-4">Sie fragen an oder rufen an.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">
-            Wir melden uns innerhalb von 24 Stunden.
-          </p>
+      <div class="bon-layout">
+        <div class="bon-copy">
+          <h2>So l&auml;uft ein Einsatz. In vier Schritten.</h2>
         </div>
-        <div class="card">
-          <div class="mb-4"><span class="schritt-chip">2</span></div>
-          <h3 class="mb-4">Wir kl&auml;ren Bedarf, Zeitraum und Anforderung.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">
-            Kurz und konkret: Was f&uuml;r ein Betrieb, was f&uuml;r eine Karte, ab wann.
-          </p>
-        </div>
-        <div class="card">
-          <div class="mb-4"><span class="schritt-chip">3</span></div>
-          <h3 class="mb-4">B&ouml;rge Penk sucht den passenden Koch aus.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">
-            Unser K&uuml;chenchef nimmt jede Anfrage selbst in die Hand. <strong>Er kennt die Anforderungen einer K&uuml;che, und er kennt seine Leute.</strong>
-          </p>
-        </div>
-        <div class="card">
-          <div class="mb-4"><span class="schritt-chip">4</span></div>
-          <h3 class="mb-4">Der Einsatz startet.</h3>
-          <p class="leading-relaxed" style="color:var(--grau)">
-            Die geleisteten Stunden werden dokumentiert.
-          </p>
+        <div class="bon-wrap">
+          <div class="bon">
+            <div aria-hidden="true">
+              <p class="bon-kopf"><span>AVORIX</span><span>EINSATZ</span></p>
+              <p class="bon-unterkopf"><span>Friedrichshafen</span><span>4 Schritte</span></p>
+              <hr />
+            </div>
+            <ol>
+              <li><div><b>Sie fragen an oder rufen an.</b><span>Wir melden uns innerhalb von 24 Stunden.</span></div></li>
+              <li><div><b>Wir kl&auml;ren Bedarf, Zeitraum und Anforderung.</b><span>Kurz und konkret: Was f&uuml;r ein Betrieb, was f&uuml;r eine Karte, ab wann.</span></div></li>
+              <li><div><b>B&ouml;rge Penk sucht den passenden Koch aus.</b><span>Unser K&uuml;chenchef nimmt jede Anfrage selbst in die Hand. Er kennt die Anforderungen einer K&uuml;che, und er kennt seine Leute.</span></div></li>
+              <li><div><b>Der Einsatz startet.</b><span>Die geleisteten Stunden werden dokumentiert.</span></div></li>
+            </ol>
+            <hr />
+            <p class="bon-fuss">Sie f&uuml;hren Ihre K&uuml;che.<br />Nicht Ihre K&uuml;che Sie.</p>
+          </div>
         </div>
       </div>
-      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--druck);font-weight:700">
-        Sie f&uuml;hren Ihre K&uuml;che. Nicht Ihre K&uuml;che Sie.
-      </p>
     </div>
   </section>
 
@@ -713,9 +701,6 @@ const schema = [
   {/* Final CTA → Peak-End (3.18) */}
  <section class="reveal section-gap">
     <div class="content-width text-center">
-      <div class="mb-6">
-        <Stempel groesse="gross" />
-      </div>
       <a
         href="#anfrage"
         data-cta-location="personal-final"

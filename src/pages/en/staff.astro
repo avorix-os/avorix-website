@@ -241,43 +241,31 @@ const schemaOrg = [
     </div>
   </section>
 
-  {/* So läuft ein Einsatz */}
+  {/* How a placement works (Anweisung 81, Teil E: as the Bon) */}
  <section class="reveal section-gap section-band">
     <div class="content-width">
-      <h2 class="mb-10 md:mb-16" style="color:var(--druck)">How a placement works. In four steps.</h2>
-      <div class="space-y-6">
-        <div class="schritt">
-          <span class="schritt-chip shrink-0">1</span>
-          <div>
-            <h3 class="mb-4">You send an enquiry or call us.</h3>
-            <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">We get back to you within 24 hours.</p>
-          </div>
+      <div class="bon-layout">
+        <div class="bon-copy">
+          <h2>How a placement works. In four steps.</h2>
         </div>
-        <div class="schritt">
-          <span class="schritt-chip shrink-0">2</span>
-          <div>
-            <h3 class="mb-4">We clarify what you need, when and for how long.</h3>
-            <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Short and specific: what kind of business, what kind of menu, starting when.</p>
-          </div>
-        </div>
-        <div class="schritt">
-          <span class="schritt-chip shrink-0">3</span>
-          <div>
-            <h3 class="mb-4">B&ouml;rge Penk selects the right chef.</h3>
-            <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">Our head chef handles every enquiry personally. <strong>He knows what a kitchen demands, and he knows his people.</strong></p>
-          </div>
-        </div>
-        <div class="schritt">
-          <span class="schritt-chip shrink-0">4</span>
-          <div>
-            <h3 class="mb-4">The placement starts.</h3>
-            <p class="max-w-[var(--spalte-text)]" style="color:var(--grau)">The hours worked are documented.</p>
+        <div class="bon-wrap">
+          <div class="bon">
+            <div aria-hidden="true">
+              <p class="bon-kopf"><span>AVORIX</span><span>ASSIGNMENT</span></p>
+              <p class="bon-unterkopf"><span>Friedrichshafen</span><span>4 steps</span></p>
+              <hr />
+            </div>
+            <ol>
+              <li><div><b>You send an enquiry or call us.</b><span>We get back to you within 24 hours.</span></div></li>
+              <li><div><b>We clarify what you need, when and for how long.</b><span>Short and specific: what kind of business, what kind of menu, starting when.</span></div></li>
+              <li><div><b>B&ouml;rge Penk selects the right chef.</b><span>Our head chef handles every enquiry personally. He knows what a kitchen demands, and he knows his people.</span></div></li>
+              <li><div><b>The placement starts.</b><span>The hours worked are documented.</span></div></li>
+            </ol>
+            <hr />
+            <p class="bon-fuss">You run your kitchen.<br />Not the other way round.</p>
           </div>
         </div>
       </div>
-      <p class="mt-8 max-w-[var(--spalte-text)]" style="color:var(--grau)">
-        <strong>You run your kitchen. Not the other way round.</strong>
-      </p>
     </div>
   </section>
 
@@ -577,9 +565,6 @@ const schemaOrg = [
   {/* Final CTA → Peak-End (3.18) */}
  <section class="reveal section-gap">
     <div class="content-width text-center">
-      <div class="mb-6">
-        <Stempel lang="en" groesse="gross" />
-      </div>
       <a
         href="#request"
         data-cta-location="staff-final"
