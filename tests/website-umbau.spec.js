@@ -446,35 +446,36 @@ test.describe('T8: D1 — die Navigation traegt die Seite', () => {
   }
 });
 
-test.describe('T8b: D2 — der Hero traegt fuenf Dinge', () => {
-  test('Startseite — Satz gestrichen, Haekchen-Zeilen eine Sektion tiefer', async ({ page }) => {
+/* Anweisung 81 (C3/D0): Die Haekchen-Pillen entfallen als Komponente. Ihre zwei
+   Texte ziehen in den Hero, neben das Siegel (.hero-beleg). Kein "✓" mehr. */
+test.describe('T8b: D0 — die Belegzeilen stehen im Hero', () => {
+  test('Startseite — Belegzeilen im Hero, keine Haekchen-Pille, kein ✓', async ({ page }) => {
     await page.goto('/');
     const text = await page.evaluate(() => document.body.innerText);
 
     // Anweisung 19: der ganze Satz verschwindet, nicht nur die Fettung
     expect(text).not.toContain('Auch ohne ausgebildete');
 
-    // Im Hero steht keine Haekchen-Zeile mehr
-    const imHero = await page.$$eval('.hero-badges .check-badge', (els) => els.length);
-    expect(imHero).toBe(0);
+    // Anweisung 81 (C3): keine Haekchen-Pille mehr, kein ✓ im Text
+    const pillen = await page.$$eval('.check-badge', (els) => els.length);
+    expect(pillen).toBe(0);
+    expect(text).not.toContain('✓');
 
-    // Sie sind aber nicht geloescht, sondern stehen weiter unten
-    const belege = await page.$$eval('.beleg-badges .check-badge', (els) => els.map((el) => el.innerText.trim()));
+    // Anweisung 81 (D0): die zwei Belegzeilen stehen jetzt im Hero
+    const belege = await page.$$eval('.hero-beleg .hero-beleg-text span', (els) => els.map((el) => el.innerText.trim()));
     expect(belege.length).toBe(2);
     expect(belege.join(' ')).toContain('Von K');
     expect(belege.join(' ')).toContain('Friedrichshafen');
-
-    const [heroY, belegY] = await page.evaluate(() => [
-      document.querySelector('.hero-badges').getBoundingClientRect().top,
-      document.querySelector('.beleg-badges').getBoundingClientRect().top,
-    ]);
-    expect(belegY).toBeGreaterThan(heroY);
   });
 });
 
-test.describe('T8c: E1 — hoechstens drei Schriftfamilien', () => {
+/* Anweisung 81 (Teil B) aendert die Meisterbetrieb-Regel "nur Systemschriften":
+   Ueberschriften bekommen Barlow Semi Condensed (selbst gehostet). Damit sind es
+   vier Familien statt drei -- Barlow (Ueberschriften), Avenir (Fliesstext/Nav/
+   Buttons), Menlo (Mono-Etiketten/Bon) und Charter (die eine Serife im Zitat). */
+test.describe('T8c: E1 — hoechstens vier Schriftfamilien', () => {
   for (const pagePath of TITEL_SEITEN) {
-    test(`${pagePath} — drei Familien`, async ({ page }) => {
+    test(`${pagePath} — vier Familien`, async ({ page }) => {
       await page.goto(pagePath);
       const familien = await page.evaluate(() => {
         const menge = new Set();
@@ -485,7 +486,7 @@ test.describe('T8c: E1 — hoechstens drei Schriftfamilien', () => {
         }
         return [...menge];
       });
-      expect(familien.length, familien.join(', ')).toBeLessThanOrEqual(3);
+      expect(familien.length, familien.join(', ')).toBeLessThanOrEqual(4);
     });
   }
 });
@@ -619,16 +620,16 @@ test.describe('T10: C6 — Komponenten-Innenabstaende auf der Skala', () => {
       };
       return {
         footerRight: w('.footer-right', 'columnGap'),
-        heroBadges: w('.hero-badges', 'columnGap'),
-        heroGrid: w('.hero-grid', 'rowGap'),
+        // Anweisung 81 (D0): die Startseite hat keinen .hero-badges/.hero-grid mehr
+        // (neuer .home-hero). Die Belegzeile sitzt im Hero (.hero-beleg, 16px).
+        heroBeleg: w('.hero-beleg', 'columnGap'),
         navInner: w('.nav-inner', 'paddingLeft'),
         btnX: w('.btn', 'paddingLeft'),
         btnY: w('.btn', 'paddingTop'),
       };
     });
     expect(werte.footerRight).toBe('16px');
-    expect(werte.heroBadges).toBe('8px');
-    expect(werte.heroGrid).toBe('40px');
+    expect(werte.heroBeleg).toBe('16px');
     expect(werte.navInner).toBe('24px');
     // Ausnahmeliste aus Abschnitt 2: die Buttonwerte erzeugen die Buttonhoehe
     expect(werte.btnX).toBe('28px');
@@ -1056,28 +1057,31 @@ test.describe('T14: Anweisung 29 — die Durchsicht', () => {
     expect(felder.meta.length).toBeLessThan(150);
   });
 
-  test('6.3 — Sektion 5 ist die schmale Spalte, Sektion 6 die Linienform', async ({ page }) => {
+  /* Anweisung 81 (D4/D5): "Warum Avorix" wird zu drei Spalten mit Linie oben
+     (kein .text-spalte-Band mehr), "Was ist Avorix" bekommt drei Schritt-Spalten
+     mit Mono-Label statt der senkrechten Zeitleiste (.tagesablauf). */
+  test('6.3 — Warum als drei Spalten, Was ist Avorix als drei Schritte', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto('/');
     const warum = await page.evaluate(() => {
       const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Warum Avorix'));
       const sek = h2.closest('section');
       return {
-        schmal: !!sek.querySelector('.text-spalte'),
+        spalten: sek.querySelectorAll('.warum-spalten .spalte-linie').length,
         karten: sek.querySelectorAll('.card').length,
       };
     });
-    expect(warum.schmal).toBe(true);
+    expect(warum.spalten).toBe(3);
     expect(warum.karten).toBe(0);
 
     const ablauf = await page.evaluate(() => {
       const h2 = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Was ist Avorix'));
       const sek = h2.closest('section');
-      const ol = sek.querySelector('.tagesablauf');
+      const schritte = sek.querySelector('.was-schritte');
       return {
-        linienform: !!ol,
-        stationen: ol ? ol.querySelectorAll('.tagesablauf-station').length : 0,
-        labels: ol ? [...ol.querySelectorAll('.tagesablauf-zeit')].map((e) => e.innerText.trim()) : [],
+        linienform: !!schritte,
+        stationen: schritte ? schritte.querySelectorAll('.spalte-linie').length : 0,
+        labels: schritte ? [...schritte.querySelectorAll('.schritt-label')].map((e) => e.innerText.trim()) : [],
       };
     });
     expect(ablauf.linienform).toBe(true);
@@ -1199,14 +1203,22 @@ test.describe('A58: rundes Siegel, Satz raus, Abstaende, Partnerlogo', () => {
         fit: getComputedStyle(el).objectFit,
       })));
       expect(siegel.length).toBeGreaterThan(0);
+      // Anweisung 81 (C4/D0): Startseiten tragen genau EIN Siegel, im Hero, 60px,
+      // kein grosses Schluss-Siegel mehr. Die uebrigen Seiten bleiben wie gehabt.
+      const istHome = pfad === '/' || pfad === '/en/';
       for (const s of siegel) {
         expect(s.src).toContain(`/siegel/avorix-siegel-${lang}`);
         expect(s.fit).toBe('contain');
-        expect(s.w).toBe(s.gross ? 200 : 88);
+        expect(s.w).toBe(istHome ? 60 : (s.gross ? 200 : 88));
         expect(s.h).toBe(s.w);
       }
-      // Schlussblock: grosses Siegel, Knopf bleibt
-      expect(siegel.some((s) => s.gross)).toBe(true);
+      if (istHome) {
+        expect(siegel.length).toBe(1);
+        expect(siegel.some((s) => s.gross)).toBe(false);
+      } else {
+        // Schlussblock: grosses Siegel, Knopf bleibt
+        expect(siegel.some((s) => s.gross)).toBe(true);
+      }
     });
   }
 
