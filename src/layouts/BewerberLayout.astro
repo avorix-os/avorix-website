@@ -62,7 +62,16 @@ const fullTitle = `${title} | Avorix`;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#F7F6F2" />
+    {/* Anweisung 81 (Teil A): Stahlweiss #F2F3F2 statt Creme. */}
+    <meta name="theme-color" content="#F2F3F2" />
+    {/* Anweisung 81 (Teil B): Ueberschriftenschrift vorladen. */}
+    <link
+      rel="preload"
+      href="/fonts/barlow-semi-condensed-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <meta name="description" content={description} />
     {(robots || noindex) && <meta name="robots" content={robots ?? "noindex"} />}
     <meta name="google-site-verification" content="WuMVUFKkYclVOtZyiyU_PZwYn-Zhk4kdLf3ws9I26eM" />

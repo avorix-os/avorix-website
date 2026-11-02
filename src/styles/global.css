@@ -1,5 +1,44 @@
 @import "tailwindcss";
 
+/* Anweisung 81 (Teil B): Ueberschriftenschrift Barlow Semi Condensed,
+   selbst gehostet (SIL Open Font License). Kein Aufruf an fonts.googleapis.com
+   oder fonts.gstatic.com -- die vier woff2 liegen unter /public/fonts/ und
+   werden beim Build auf avorix.de ausgeliefert (CSP font-src 'self' deckt das).
+   Nur die Schnitte 500 und 600, Teilmengen latin und latin-ext (latin-ext fuer
+   ungarisch: ő, ű). font-display: swap, damit der Text sofort steht. */
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-semi-condensed-latin-500-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-semi-condensed-latin-ext-500-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-semi-condensed-latin-600-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face {
+  font-family: 'Barlow Semi Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-semi-condensed-latin-ext-600-normal.woff2') format('woff2');
+  unicode-range: U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
 @theme {
   /* BRAND — Kupfer (Bridge: bestehende Utility-Klassen bg-brand-*, text-brand-* lösen jetzt auf Kupfer) */
   --color-brand-50:  #FDF5EF;
@@ -62,7 +101,7 @@
   --shadow-sm:    0 1px 2px rgba(38,37,31,.05), 0 6px 20px rgba(38,37,31,.06);
   --shadow-md:    0 4px 10px rgba(38,37,31,.07), 0 16px 36px rgba(38,37,31,.1);
   --shadow-lg:    0 10px 15px -3px rgba(38,37,31,.1), 0 4px 6px -4px rgba(38,37,31,.1);
-  --shadow-brand: 0 4px 14px 0 rgba(168,83,43,.3);
+  /* --shadow-brand entfaellt (Anweisung 81, Teil A): nirgends genutzt. */
 
   /* RADIUS */
   --radius-sm:   0.25rem;
@@ -81,20 +120,22 @@
 }
 
 :root {
-  /* Design-Tokens V5.1 Kupfer */
-  --papier:        #F7F6F2;
+  /* Design-Tokens V5.1 Kupfer -- Anweisung 81 (Teil A): "Kupfer auf Stahl".
+     Nur Variablen, keine neuen Farben. Kupfer (--akzent*) bleibt exakt gleich.
+     Grund wechselt von Creme auf Stahlweiss, Kartenschatten entfallen. */
+  --papier:        #f2f3f2;          /* war #F7F6F2: Stahlweiss statt Creme */
   --flaeche:       #FFFFFF;
   --eisen:         #26251F;
   --druck:         #1F1E1A;
-  --grau:          #6E6A60;
-  --linie:         rgba(38,37,31,.14);
+  --grau:          #5e605d;          /* war #6E6A60: neutral, dunkler, 5,9:1 auf --papier */
+  --linie:         rgba(31,30,26,.16);/* war rgba(38,37,31,.14) */
   --akzent:        #A8532B;
   --akzent-bg:     #A8532B;
   --akzent-fg:     #FFFFFF;
   --akzent-hell:   #E09B63;
   --fehler:        #B3372B;
   --marker:        #F3D9C8;
-  --flaeche-hover: #F1EFE9;
+  --flaeche-hover: #e6e9e8;          /* war #F1EFE9: Wechselgrund von .section-band, jetzt sichtbar anders */
 
   /* Anweisung 40 (A2): drei Textspaltenmasse statt neun ch-Werten.
      ch rechnet die Breite aus der jeweiligen Schriftgroesse und macht aus zwei
@@ -108,6 +149,10 @@
   /* E1: eine Groteske fuer Ueberschriften und Fliesstext. */
   --f-body: var(--f-head);
   --f-mono: Menlo,Consolas,monospace;
+  /* Anweisung 81 (Teil B): Ueberschriften bekommen Barlow Semi Condensed
+     (DIN-nah, Typenschild/Bon). Fliesstext, Navigation und Buttons bleiben bei
+     --f-head/--f-body (Avenir). */
+  --f-titel: 'Barlow Semi Condensed','Avenir Next','Avenir','Segoe UI','Helvetica Neue',Arial,sans-serif;
 
   /* Korrektur 3 (Anweisung 25/26), die eigentliche Ursache: Nicht das nowrap.
    Zellen in Rastern und Flex-Reihen tragen von Haus aus `min-width: auto` und
@@ -147,8 +192,11 @@
   --header-hoehe: 72px;
 
   --radius:         6px;
-  --schatten:       0 1px 2px rgba(38,37,31,.05), 0 6px 20px rgba(38,37,31,.06);
-  --schatten-hover: 0 4px 10px rgba(38,37,31,.07), 0 16px 36px rgba(38,37,31,.1);
+  /* Anweisung 81 (Teil A/C1): keine Kartenschatten mehr -- "Kupfer auf Stahl".
+     var(--schatten) steckt in .card, .btn-primary, .hero-media, .split-media,
+     .skip-link usw.; none nimmt den Schatten ueberall auf einmal. */
+  --schatten:       none;
+  --schatten-hover: none;
 
   /* Semantik-Bridge: bestehende Variablen auf Kupfer-Tokens umleiten */
   --bg-page:           var(--papier);
@@ -164,7 +212,6 @@
   --border-brand:      var(--akzent);
   --brand-primary:     var(--akzent);
   --brand-hover:       #8A4322;
-  --shadow-brand:      0 4px 14px 0 rgba(168,83,43,.3);
 }
 
 /* Body-Basis */
@@ -235,7 +282,9 @@ main > section:last-of-type {
    Innenabstand, und der farbige Kasten begaenne exakt an der Ueberschrift.
    Die farblose Grundregel bleibt unangetastet. */
 .section-band {
-  background: var(--color-neutral-200);
+  /* Anweisung 81 (Teil A): der Wechselgrund wird der sichtbar andere Stahlton
+     --flaeche-hover (#e6e9e8), nicht mehr das creme-nahe --color-neutral-200. */
+  background: var(--flaeche-hover);
 }
 /* Die Selektoren tragen bewusst zwei Klassen (.section-gap.section-band), damit
    sie -- wie beim dunklen Block -- die Kollaps-Regel `.section-gap +
@@ -289,7 +338,7 @@ main > section:last-of-type {
 .section-dunkel {
   --hervorhebung: var(--papier);
   background: var(--eisen);
-  color: rgba(247, 246, 242, 0.8);
+  color: rgba(242, 243, 242, 0.8);
 }
 .section-dunkel h1,
 .section-dunkel h2,
@@ -297,15 +346,15 @@ main > section:last-of-type {
   color: var(--papier);
 }
 .section-dunkel p {
-  color: rgba(247, 246, 242, 0.8);
+  color: rgba(242, 243, 242, 0.8);
 }
 .section-dunkel .eyebrow,
 .section-dunkel mark {
   color: var(--akzent-hell);
 }
 .section-dunkel .card {
-  background: rgba(247, 246, 242, 0.06);
-  border-color: rgba(247, 246, 242, 0.18);
+  background: rgba(242, 243, 242, 0.06);
+  border-color: rgba(242, 243, 242, 0.18);
 }
 strong {
   color: var(--hervorhebung);
@@ -426,38 +475,40 @@ h3 mark {
   }
 }
 
-/* Typografie-Skala */
+/* Typografie-Skala -- Anweisung 81 (Teil B): Ueberschriften in Barlow Semi
+   Condensed, Gewicht 600, einheitlich straffe Zeilen. Die frueheren
+   Desktop-Overrides fuer die Zeilenhoehe entfallen; die Werte unten gelten
+   Desktop wie mobil. `.faq-item summary` (bei uns die FAQ-Frage, MD: .faq-q)
+   und `.footer-col-titel` (die vier Footer-Spaltentitel) teilen die Schrift. */
+h1, h2, h3, .faq-item summary, .footer-col-titel {
+  font-family: var(--f-titel);
+  font-weight: 600;
+  letter-spacing: -.004em;
+  text-wrap: balance;
+}
 h1 {
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: clamp(30px, 4.4vw, 52px);
-  line-height: 1.15;
-  letter-spacing: -0.008em;
+  font-size: clamp(40px, 9vw, 60px);
+  line-height: 1;
 }
-
 h2 {
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: clamp(22px, 2.9vw, 32px);
-  line-height: 1.20;
-  letter-spacing: -0.008em;
+  font-size: clamp(32px, 6vw, 48px);
+  line-height: 1.05;
 }
-
 h3 {
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: 20px;
-  /* 12h/1: vorher geerbte 1.6 vom Fliesstext — auf einer Ueberschrift zu schlaff,
-     die Zeilen banden sich nicht zu einem Block. Gilt Desktop wie mobil. */
-  line-height: 1.25;
+  font-size: 24px;
+  line-height: 1.12;
+}
+.footer-col-titel {
+  font-size: 17px;
+  line-height: 1.2;
 }
 
-/* 12h/1: Je groesser die Schrift, desto enger der Zeilenabstand. Ab der Breite,
-   ab der auch die Kartenraster nebeneinander stehen (768px), gelten die
-   Desktop-Faktoren. */
-@media (min-width: 900px) {
-  h1 { line-height: 1.05; }
-  h2 { line-height: 1.10; }
+/* Teil B, Ausnahme: Wissen-Artikel haben lange Titel -> kleinere H1.
+   Die Datumszeile .artikel-datum steht nur in Wissen-Artikel-Heroes, daher
+   trifft :has() genau diese Seiten, ohne 14 Seiten einzeln zu markieren. */
+.hero-section:has(.artikel-datum) h1 {
+  font-size: clamp(36px, 7vw, 52px);
+  line-height: 1.05;
 }
 
 .lead {
@@ -485,11 +536,13 @@ h2:has(+ p)       { margin-bottom: 16px; }  /* H2 -> Intro-Absatz */
 h2 + p:not(:last-child) { margin-bottom: 32px; } /* Intro-Absatz -> Karten */
 h3, h4            { margin-bottom: 8px; }   /* Kartentitel -> Kartentext */
 
-/* Betonte Wörter in Headlines: Kupfer ohne Hintergrund */
+/* Anweisung 81 (Teil B): Ueberschriften sind einfarbig. Der farbige Halbsatz
+   in H1/H2/H3 faellt weg, der Text bleibt (Markup darf stehen bleiben). Kupfer
+   steht danach nur noch dort, wo man etwas tun kann: Buttons und Links. */
 h1 mark, h2 mark, h3 mark,
 h1 em,   h2 em,   h3 em {
   background: none;
-  color: var(--akzent);
+  color: inherit;
   font-style: normal;
 }
 
@@ -603,10 +656,11 @@ input.leitfaden-field, select.leitfaden-field {
   align-items: center;
   gap: 16px;
   cursor: pointer;
-  font-family: var(--f-head);
-  font-weight: 700;
-  font-size: 17px;
-  line-height: 1.35;
+  /* Anweisung 81 (Teil B/D12): FAQ-Frage in der Ueberschriftenschrift, 22px. */
+  font-family: var(--f-titel);
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 1.2;
   color: var(--text-primary, #1C1B16);
   padding: 24px 0;
 }
