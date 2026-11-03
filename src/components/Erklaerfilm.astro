@@ -174,6 +174,9 @@ const BASIS = "/film/avorix-film-erster-tag";
     function push(ereignis, extra) {
       var g = window.gtag || function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
       var params = {
+        // GA4 wird via GTM als Google-Tag geladen; ohne send_to routet gtag das
+        // Ereignis nicht an die Property (per DebugView geprueft).
+        send_to: 'G-HGSJB1W0X1',
         video_title: 'Avorix-Köche, einfach erklärt',
         video_provider: 'avorix',
         video_duration: DAUER,
