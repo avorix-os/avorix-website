@@ -90,7 +90,10 @@ const BASIS = "/film/avorix-film-erster-tag";
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    /* A82 Nachtrag 1: contain, damit im Vollbild (Handy quer, breiter als 16:9)
+       Tafel, Uhr und Untertitel nicht abgeschnitten werden. */
+    object-fit: contain;
+    background: #000;
     display: block;
   }
   /* Ohne JS: Video sichtbar, Knopf aus. Mit JS (.film--js): Knopf ueber dem
