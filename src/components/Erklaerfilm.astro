@@ -165,19 +165,22 @@ const BASIS = "/film/avorix-film-erster-tag";
     var basis = box.getAttribute('data-film-basis');
     box.classList.add('film--js');
 
-    // --- Messen (GA4 via dataLayer, Consent Mode regelt die Einwilligung) ---
+    // --- Messen: GA4-Video-Ereignisse direkt per gtag('event', ...).
+    // Der Google-Tag (gtag.js, G-HGSJB1W0X1) wird erst nach Einwilligung geladen,
+    // und Consent Mode v2 (analytics_storage) regelt die Uebertragung zentral:
+    // ohne Einwilligung wird nichts gesendet. Namen wie von GA4 fuer Videos
+    // vorgesehen (video_start / video_progress / video_complete).
     var DAUER = 144;
     function push(ereignis, extra) {
-      window.dataLayer = window.dataLayer || [];
-      var d = {
-        event: ereignis,
+      var g = window.gtag || function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
+      var params = {
         video_title: 'Avorix-Köche, einfach erklärt',
         video_provider: 'avorix',
         video_duration: DAUER,
         video_current_time: Math.round(video.currentTime || 0)
       };
-      if (extra) { for (var k in extra) d[k] = extra[k]; }
-      window.dataLayer.push(d);
+      if (extra) { for (var k in extra) params[k] = extra[k]; }
+      g('event', ereignis, params);
     }
 
     var gestartet = false;
