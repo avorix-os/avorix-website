@@ -1612,3 +1612,96 @@ test.describe('A76: Bewerberprofil-Seite (profil/profile/profil)', () => {
     expect(href).toBe('/hu/adatvedelem-bemutatas/');
   });
 });
+
+/**
+ * A82: Der Erklaerfilm "Avorix-Koeche, einfach erklaert" auf /personal/.
+ * Statische, codec-unabhaengige Pruefungen (headless Chromium spielt kein H.264).
+ * Lage, kein Film-Byte vor dem Klick, Knopf/CTA, Masse und VideoObject.
+ */
+test.describe('A82: Erklaerfilm auf /personal/', () => {
+  test('steht nach #direktantwort und vor "Wann Sie uns rufen"', async ({ page }) => {
+    await page.goto('/personal');
+    const lage = await page.evaluate(() => {
+      const film = document.querySelector('[data-film]');
+      const da = document.querySelector('#direktantwort');
+      const wann = [...document.querySelectorAll('h2')].find((h) => h.innerText.includes('Wann Sie uns rufen'));
+      const y = (el) => el.getBoundingClientRect().top + window.scrollY;
+      return {
+        h2: film.closest('section').querySelector('h2').innerText,
+        daY: y(da),
+        filmY: y(film.closest('section')),
+        wannY: y(wann),
+      };
+    });
+    expect(lage.h2).toContain('Avorix-Köche, einfach erklärt');
+    expect(lage.filmY).toBeGreaterThan(lage.daY);
+    expect(lage.filmY).toBeLessThan(lage.wannY);
+  });
+
+  test('vor dem Klick kein Film-Byte; Poster laedt lazy mit festen Massen', async ({ page }) => {
+    const mp4 = [];
+    page.on('request', (r) => { if (r.url().includes('.mp4')) mp4.push(r.url()); });
+    await page.goto('/personal');
+    const v = page.locator('.film-video');
+    await expect(v).toHaveAttribute('preload', 'none');
+    expect(await v.getAttribute('src')).toBeNull();
+    const poster = page.locator('.film-poster');
+    await expect(poster).toHaveAttribute('loading', 'lazy');
+    await expect(poster).toHaveAttribute('width', '1920');
+    await expect(poster).toHaveAttribute('height', '1080');
+    expect(mp4).toEqual([]);
+  });
+
+  test('Abspielknopf ist ein echter Button mit Zugaenglichkeitsnamen; CTA zu #anfrage', async ({ page }) => {
+    await page.goto('/personal');
+    const knopf = page.locator('.film-abspielen');
+    expect(await knopf.evaluate((el) => el.tagName)).toBe('BUTTON');
+    await expect(knopf).toHaveAttribute('aria-label', /Film abspielen/);
+    const cta = page.locator('.film-cta');
+    await expect(cta).toHaveAttribute('href', '#anfrage');
+    await expect(cta).toHaveAttribute('data-cta-location', 'personal-film');
+    await expect(cta).toHaveAttribute('data-cta-event', 'cta_personal_click');
+  });
+
+  test('16:9, ohne Radius/Schatten, linksbuendig mit der H2 (1440px)', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/personal');
+    const m = await page.evaluate(() => {
+      const box = document.querySelector('[data-film]');
+      const h2 = box.closest('section').querySelector('h2');
+      const r = box.getBoundingClientRect();
+      const hr = h2.getBoundingClientRect();
+      const cs = getComputedStyle(box);
+      return {
+        ratio: Math.round((r.width / r.height) * 100) / 100,
+        breite: Math.round(r.width),
+        radius: cs.borderRadius,
+        schatten: cs.boxShadow,
+        kante: Math.abs(r.left - hr.left),
+      };
+    });
+    expect(m.ratio).toBe(1.78);
+    expect(m.breite).toBeGreaterThan(1020);
+    expect(m.breite).toBeLessThanOrEqual(1032);
+    expect(m.radius).toBe('0px');
+    expect(m.schatten).toBe('none');
+    expect(m.kante).toBeLessThan(2);
+  });
+
+  test('traegt ein VideoObject, am WebPage-Knoten verknuepft', async ({ page }) => {
+    await page.goto('/personal');
+    const graph = await page.evaluate(() =>
+      [...document.querySelectorAll('script[type="application/ld+json"]')]
+        .map((e) => JSON.parse(e.textContent)).flat()
+    );
+    const vo = graph.find((n) => n['@type'] === 'VideoObject');
+    const wp = graph.find((n) => n['@type'] === 'WebPage');
+    expect(vo).toBeTruthy();
+    expect(vo['@id']).toBe('https://avorix.de/personal/#film');
+    expect(vo.name).toBe('Avorix-Köche, einfach erklärt');
+    expect(vo.duration).toBe('PT2M24S');
+    expect(vo.contentUrl).toContain('/film/avorix-film-erster-tag-1080p.mp4');
+    expect(vo.thumbnailUrl).toContain('/film/avorix-film-erster-tag-poster.jpg');
+    expect(wp.video['@id']).toBe('https://avorix.de/personal/#film');
+  });
+});

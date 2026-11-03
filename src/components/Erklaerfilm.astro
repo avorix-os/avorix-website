@@ -1,0 +1,226 @@
+---
+// Erklaerfilm.astro -- Anweisung 82: Der Film "Avorix-Koeche, einfach erklaert"
+// auf /personal/. Der Film liegt lokal unter /film/ (kein YouTube/Vimeo, keine
+// Einwilligung noetig, kein Aufruf an Dritte).
+//
+// Vor dem Klick wird KEIN Byte des Films geladen: preload="none" am <video>,
+// Quelle wird erst beim Klick gesetzt, Vorschaubild mit loading="lazy" und festen
+// Massen (kein Layout-Sprung).
+//
+// Mit JavaScript: eigener Abspielknopf ueber dem Poster. Ab 900px startet die
+// 1080p-Datei inline mit Ton + Browser-Bedienelementen; darunter die 720p-Datei
+// im Vollbild (Untertitel sind ins Bild gebrannt und nur dort lesbar). Die Datei
+// wird per JS nach Fensterbreite gewaehlt -- das `media`-Attribut an <source>
+// waehlt in Browsern nicht zuverlaessig aus.
+//
+// Ohne JavaScript: ein normales <video controls preload="none"> mit Poster und
+// der 720p-Datei.
+//
+// Messen (Teil 5): GA4-Video-Ereignisse via window.dataLayer, denselben Weg wie
+// cta_personal_click. Google Consent Mode v2 regelt die Einwilligung zentral.
+const BASIS = "/film/avorix-film-erster-tag";
+---
+<section class="reveal section-gap section-band">
+  <div class="content-width">
+    <h2 class="mb-0" style="color:var(--druck)">Avorix-K&ouml;che, einfach erkl&auml;rt.</h2>
+
+    <div class="film" data-film data-film-basis={BASIS}>
+      {/* Ohne JS: normales Video mit Bedienelementen, laedt erst beim Start (720p). */}
+      <video
+        class="film-video"
+        controls
+        preload="none"
+        poster={`${BASIS}-poster-960.webp`}
+        width="1920"
+        height="1080"
+      >
+        <source src={`${BASIS}-720p.mp4`} type="video/mp4" />
+      </video>
+
+      {/* Mit JS: Poster + eigener Abspielknopf (per Skript sichtbar gemacht). */}
+      <button
+        type="button"
+        class="film-abspielen"
+        aria-label="Film abspielen: Avorix-K&ouml;che, einfach erkl&auml;rt, 2 Minuten 24 Sekunden"
+      >
+        <picture>
+          <source media="(min-width: 900px)" srcset={`${BASIS}-poster.webp`} type="image/webp" />
+          <img
+            class="film-poster"
+            src={`${BASIS}-poster-960.webp`}
+            alt=""
+            width="1920"
+            height="1080"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <span class="film-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true">
+            <path d="M8 5v14l11-7z" fill="#fff"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+
+    <div class="film-zeile">
+      <span class="film-dauer">2:24 Minuten, mit Untertiteln</span>
+      <a
+        href="#anfrage"
+        class="btn btn-primary film-cta"
+        data-cta-location="personal-film"
+        data-cta-event="cta_personal_click"
+      >Personal anfragen</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Film ueber die volle Inhaltsbreite, 16:9, kein Radius/Schatten/Rahmen
+     (wie die Fotos aus Anweisung 81). 32px Abstand unter der H2. */
+  .film {
+    position: relative;
+    margin-top: 32px;
+    aspect-ratio: 16 / 9;
+    background: #0d0c0a;
+    overflow: hidden;
+  }
+  .film-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Ohne JS: Video sichtbar, Knopf aus. Mit JS (.film--js): Knopf ueber dem
+     Video; nach dem Klick (.film--ab) verschwindet der Knopf. */
+  .film-abspielen {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+  .film--js .film-abspielen { display: block; }
+  .film--js.film--ab .film-abspielen { display: none; }
+  .film-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .film-abspielen:focus-visible {
+    /* sichtbarer Fokusrahmen INNEN, sonst klippt ihn das overflow:hidden */
+    outline: 3px solid var(--akzent);
+    outline-offset: -3px;
+  }
+  .film-play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background: var(--akzent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s ease;
+  }
+  .film-play svg { margin-left: 4px; } /* Dreieck optisch zentriert */
+  .film-abspielen:hover .film-play { background: #8f4523; }
+
+  .film-zeile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .film-dauer { font-size: 14px; color: var(--grau); }
+
+  @media (max-width: 899px) {
+    .film-play { width: 64px; height: 64px; }
+    .film-play svg { width: 26px; height: 26px; }
+    .film-zeile { flex-direction: column; align-items: stretch; }
+    .film-cta { width: 100%; text-align: center; }
+  }
+</style>
+
+<script>
+  // Progressive Enhancement fuer den Erklaerfilm (Anweisung 82, Teil 4 + 5).
+  (function () {
+    var box = document.querySelector('[data-film]');
+    if (!box) return;
+    var video = box.querySelector('.film-video');
+    var knopf = box.querySelector('.film-abspielen');
+    if (!video || !knopf) return;
+
+    var basis = box.getAttribute('data-film-basis');
+    box.classList.add('film--js');
+
+    // --- Messen (GA4 via dataLayer, Consent Mode regelt die Einwilligung) ---
+    var DAUER = 144;
+    function push(ereignis, extra) {
+      window.dataLayer = window.dataLayer || [];
+      var d = {
+        event: ereignis,
+        video_title: 'Avorix-Köche, einfach erklärt',
+        video_provider: 'avorix',
+        video_duration: DAUER,
+        video_current_time: Math.round(video.currentTime || 0)
+      };
+      if (extra) { for (var k in extra) d[k] = extra[k]; }
+      window.dataLayer.push(d);
+    }
+
+    var gestartet = false;
+    var marken = [25, 50, 75];
+    video.addEventListener('play', function () {
+      if (!gestartet) { gestartet = true; push('video_start'); }
+    });
+    video.addEventListener('timeupdate', function () {
+      if (!video.duration) return;
+      var p = (video.currentTime / video.duration) * 100;
+      for (var i = marken.length - 1; i >= 0; i--) {
+        if (p >= marken[i]) {
+          push('video_progress', { video_percent: marken[i] });
+          marken.splice(i, 1);
+        }
+      }
+    });
+    video.addEventListener('ended', function () { push('video_complete'); });
+
+    // --- Abspielen per Klick auf den Poster-Knopf ---
+    knopf.addEventListener('click', function () {
+      var schmal = window.matchMedia('(max-width: 899px)').matches;
+      var quelle = basis + (schmal ? '-720p.mp4' : '-1080p.mp4');
+      var datei = quelle.split('/').pop();
+      if (!video.currentSrc || video.currentSrc.indexOf(datei) === -1) {
+        video.src = quelle;
+      }
+      box.classList.add('film--ab');
+
+      if (schmal) {
+        // Android: Vollbild + Querformat erzwingen. Auf dem iPhone fehlt
+        // requestFullscreen am <video>; dort oeffnet Safari das Vollbild beim
+        // Start von selbst (kein playsinline gesetzt).
+        if (video.requestFullscreen) { try { video.requestFullscreen(); } catch (e) {} }
+        if (screen.orientation && screen.orientation.lock) {
+          try { screen.orientation.lock('landscape').catch(function () {}); } catch (e) {}
+        }
+      } else {
+        try { video.focus({ preventScroll: true }); } catch (e) { video.focus(); }
+      }
+
+      var pr = video.play();
+      if (pr && pr.catch) pr.catch(function () {});
+    });
+  })();
+</script>

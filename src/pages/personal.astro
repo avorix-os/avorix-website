@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import Altcha from "../components/Altcha.astro";
+import Erklaerfilm from "../components/Erklaerfilm.astro";
 import dampfTopf from "../assets/bilder/dampf-topf.jpg";
 
 const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
@@ -179,7 +180,21 @@ const schema = [
       "@type": "ImageObject",
       "url": `https://avorix.de${ogImg.src}`,
       "description": ogImageAlt
-    }
+    },
+    "video": { "@id": "https://avorix.de/personal/#film" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "@id": "https://avorix.de/personal/#film",
+    "name": "Avorix-Köche, einfach erklärt",
+    "description": "Wenn Ihnen Personal fehlt, leihen wir Ihnen unsere festangestellten Köche aus: für den Notfall, für die Saison, für den Übergang.",
+    "thumbnailUrl": "https://avorix.de/film/avorix-film-erster-tag-poster.jpg",
+    "uploadDate": "2026-11-03T08:00:00+01:00",
+    "duration": "PT2M24S",
+    "contentUrl": "https://avorix.de/film/avorix-film-erster-tag-1080p.mp4",
+    "inLanguage": "de",
+    "publisher": { "@id": "https://avorix.de/#organization" }
   }
 ];
 ---
@@ -241,6 +256,9 @@ const schema = [
       </p>
     </div>
   </section>
+
+  {/* Anweisung 82: Erklaerfilm, direkt nach #direktantwort, vor "Wann Sie uns rufen". */}
+  <Erklaerfilm />
 
   {/* Wann Sie uns rufen */}
  <section class="reveal section-gap">
