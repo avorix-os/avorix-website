@@ -311,10 +311,11 @@ function respondOk(req, res, def, verdacht) {
 
 // Anweisung 63, Teil 4: harte Sperre (ALTCHA ungueltig, zu viele Anfragen).
 // JSON { ok:false } mit Statuscode; Nicht-JS bekommt eine HTML-Fehlerseite.
-function respondBlock(req, res, code) {
+function respondBlock(req, res, code, def) {
   if (wantsJson(req)) return sendJson(res, code, { ok: false });
+  const mail = def && def.bewerbung ? BEWERBUNG_MAIL : 'info@avorix.de';
   return sendHtmlError(req, res, code,
-    'Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal, Ihre Angaben bleiben erhalten. Oder rufen Sie uns an: 07541 3973915 · info@avorix.de');
+    'Ihre Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es gleich noch einmal, Ihre Angaben bleiben erhalten. Oder rufen Sie uns an: 07541 3973915 · ' + mail);
 }
 
 function respondErr(req, res, code, error) {
@@ -488,20 +489,26 @@ function bewerbungAck(fields) {
   return { subject: 'Deine Bewerbung bei Avorix', text, html };
 }
 
+// Anweisung 84: Bewerber sehen und erreichen bewerbung@ statt info@ (Reply-To der
+// Bestaetigung, Fusszeile, Widerruf). Zustellung der Benachrichtigung steuert
+// weiter MAIL_TO_BEWERBUNG in der .env.
+const BEWERBUNG_MAIL = 'bewerbung@avorix.de';
+
 // Anweisung 61, Teil 7: Pflichtangaben nach § 35a GmbHG unter jede
 // Eingangsbestaetigung (Geschaeftsbrief). DE fuer deutsche Formulare und
 // deutschsprachige Bewerbungen, EN fuer englische Formulare, /en/jobs/cook/ und
 // die ungarische Seite (Registerdaten, englisch, das versteht jeder Bewerber).
-function pflichtFooter(lang) {
+function pflichtFooter(lang, bewerber) {
+  const mail = bewerber ? BEWERBUNG_MAIL : 'info@avorix.de';
   const zeilenDe = [
     'AVORIX GmbH, Sitz Friedrichshafen · Fallenbrunnen 14 · 88045 Friedrichshafen',
     'Geschäftsführer: Börge Penk · Amtsgericht Ulm, HRB 751118 · USt-IdNr. DE368762673',
-    'info@avorix.de · 07541 3973915 · https://avorix.de/datenschutz/',
+    `${mail} · 07541 3973915 · https://avorix.de/datenschutz/`,
   ];
   const zeilenEn = [
     'AVORIX GmbH, registered office Friedrichshafen · Fallenbrunnen 14 · 88045 Friedrichshafen, Germany',
     'Managing Director: Börge Penk · Registered at Amtsgericht Ulm, HRB 751118 · VAT ID DE368762673',
-    'info@avorix.de · +49 7541 3973915 · https://avorix.de/en/privacy/',
+    `${mail} · +49 7541 3973915 · https://avorix.de/en/privacy/`,
   ];
   const zeilen = lang === 'en' ? zeilenEn : zeilenDe;
   const text = '\n\n' + zeilen.join('\n');
@@ -614,7 +621,7 @@ function bewerbungProfilAck(fields) {
       ['What did you do most recently?', fields.nachricht],
     ].filter(([, v]) => v && String(v).trim() !== '');
     const absatz = mit
-      ? 'After that we show your short profile to suitable businesses, without your name and contact details. A business only learns your name once you have agreed. You can withdraw your consent at any time; a short message via WhatsApp or to info@avorix.de is enough.'
+      ? 'After that we show your short profile to suitable businesses, without your name and contact details. A business only learns your name once you have agreed. You can withdraw your consent at any time; a short message via WhatsApp or to bewerbung@avorix.de is enough.'
       : 'We only show your profile to businesses once you agree. You can do that during the call.';
     const text = [
       `Hello ${fields.name},`, '',
@@ -649,7 +656,7 @@ function bewerbungProfilAck(fields) {
       ['Milyen pozícióban dolgoztál?', fields.nachricht],
     ].filter(([, v]) => v && String(v).trim() !== '');
     const absatz = mit
-      ? 'Ezután a rövid profilodat megmutatjuk a hozzád illő munkahelyeknek, a neved és az elérhetőségeid nélkül. A nevedet egy munkahely csak akkor tudja meg, ha hozzájárultál. A hozzájárulásodat bármikor visszavonhatod, elég egy rövid üzenet WhatsAppon vagy az info@avorix.de címre.'
+      ? 'Ezután a rövid profilodat megmutatjuk a hozzád illő munkahelyeknek, a neved és az elérhetőségeid nélkül. A nevedet egy munkahely csak akkor tudja meg, ha hozzájárultál. A hozzájárulásodat bármikor visszavonhatod, elég egy rövid üzenet WhatsAppon vagy a bewerbung@avorix.de címre.'
       : 'A profilodat csak akkor mutatjuk meg munkahelyeknek, ha hozzájárulsz. Ezt a telefonbeszélgetésben is megteheted.';
     const text = [
       `Szia ${fields.name}!`, '',
@@ -683,7 +690,7 @@ function bewerbungProfilAck(fields) {
     ['Was du zuletzt gemacht hast', fields.nachricht],
   ].filter(([, v]) => v && String(v).trim() !== '');
   const absatz = mit
-    ? 'Danach zeigen wir dein Kurzprofil passenden Betrieben, ohne deinen Namen und ohne deine Kontaktdaten. Deinen Namen erfährt ein Betrieb erst, wenn du zugestimmt hast. Du kannst die Freigabe jederzeit widerrufen, eine kurze Nachricht per WhatsApp oder an info@avorix.de reicht.'
+    ? 'Danach zeigen wir dein Kurzprofil passenden Betrieben, ohne deinen Namen und ohne deine Kontaktdaten. Deinen Namen erfährt ein Betrieb erst, wenn du zugestimmt hast. Du kannst die Freigabe jederzeit widerrufen, eine kurze Nachricht per WhatsApp oder an bewerbung@avorix.de reicht.'
     : 'Betrieben zeigen wir dein Profil erst, wenn du zustimmst. Das kannst du beim Telefonat nachholen.';
   const text = [
     `Hallo ${fields.name},`, '',
@@ -782,9 +789,11 @@ async function deliver(def, kennung, fields, files, verdacht, reasons) {
       const footLang = def.bewerbung
         ? (fields.sprache && fields.sprache !== 'de' ? 'en' : 'de')
         : (def.lang === 'en' ? 'en' : 'de');
-      const foot = pflichtFooter(footLang);
+      const foot = pflichtFooter(footLang, !!def.bewerbung);
       ack.text = (ack.text || '') + foot.text;
       if (ack.html) ack.html = ack.html + foot.html;
+      // Anweisung 84: antwortet ein Bewerber auf die Bestaetigung, landet es in bewerbung@.
+      if (def.bewerbung) ack.replyTo = BEWERBUNG_MAIL;
       await t.sendMail({ from: CFG.mail.from, to: replyTo, ...ack });
     } catch (e) {
       errlog('Eingangsbestaetigung fehlgeschlagen', e.message);
@@ -915,16 +924,16 @@ async function handleForm(req, res) {
   // --- Anweisung 63, Teil 1: ALTCHA zuerst, vor allem anderen ---
   if (CFG.altchaKey) {
     const v = altcha.verifySolution(fields.altcha, CFG.altchaKey);
-    if (!v.ok) { logSpam(kennung, 'ALTCHA ' + v.reason); return respondBlock(req, res, 400); }
+    if (!v.ok) { logSpam(kennung, 'ALTCHA ' + v.reason); return respondBlock(req, res, 400, def); }
     // Jede Loesung gilt nur einmal (Teil 1).
-    if (usedSolutions.has(v.signature)) { logSpam(kennung, 'ALTCHA benutzt'); return respondBlock(req, res, 400); }
+    if (usedSolutions.has(v.signature)) { logSpam(kennung, 'ALTCHA benutzt'); return respondBlock(req, res, 400, def); }
     usedSolutions.set(v.signature, v.expires ? v.expires * 1000 : Date.now() + CFG.rateWindowMs);
   }
 
   // --- Ratenbegrenzung je IP (Teil 4: mehr als 10 in 60 Min -> harte Sperre) ---
   const ip = clientIp(req);
   const ipCount = hit(ipHits, ip);
-  if (ipCount > CFG.rateHart) { logSpam(kennung, 'Rate >10/IP'); return respondBlock(req, res, 429); }
+  if (ipCount > CFG.rateHart) { logSpam(kennung, 'Rate >10/IP'); return respondBlock(req, res, 429, def); }
 
   // --- Stille Ablehnungen: Erfolg fuer den Absender, aber verdacht:true (damit
   //     Google Ads keinen Spam als Conversion zaehlt) und KEINE Mail (Teil 4) ---
