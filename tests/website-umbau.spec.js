@@ -1832,3 +1832,18 @@ test.describe('A84: Bewerber-Adresse bewerbung@avorix.de', () => {
     }
   });
 });
+
+/*
+ * A82 Nachtrag 1: Film im Vollbild nicht beschneiden (object-fit contain).
+ */
+test.describe('A82 Nachtrag 1: Vollbild ohne Beschnitt', () => {
+  test('film-video nutzt contain auf schwarzem Grund', async ({ page }) => {
+    await page.goto('/personal');
+    const css = await page.$eval('.film-video', (el) => {
+      const cs = getComputedStyle(el);
+      return { fit: cs.objectFit, bg: cs.backgroundColor };
+    });
+    expect(css.fit).toBe('contain');
+    expect(css.bg).toBe('rgb(0, 0, 0)');
+  });
+});
