@@ -1796,3 +1796,39 @@ test.describe('A82: Erklaerfilm auf /personal/', () => {
     expect(wp.video['@id']).toBe('https://avorix.de/personal/#film');
   });
 });
+
+/*
+ * A84: Bewerbungen gehen an bewerbung@avorix.de. Profilseiten und die drei
+ * Widerruf-Stellen im Datenschutz nennen die neue Adresse, Kundenseiten
+ * behalten info@ (Kontakt, Verantwortlicher).
+ */
+test.describe('A84: Bewerber-Adresse bewerbung@avorix.de', () => {
+  const stellen = [
+    ['/jobs/profil/', 'an bewerbung@avorix.de reicht'],
+    ['/en/jobs/profile/', 'to bewerbung@avorix.de is enough'],
+    ['/hu/profil/', 'vagy a bewerbung@avorix.de címre'],
+    ['/datenschutz/', 'per E-Mail an bewerbung@avorix.de oder per WhatsApp'],
+    ['/en/privacy/', 'by email to bewerbung@avorix.de or via WhatsApp'],
+    ['/hu/adatvedelem-bemutatas/', 'például a bewerbung@avorix.de címre'],
+  ];
+  for (const [pfad, satz] of stellen) {
+    test(`${pfad} nennt Bewerbern bewerbung@`, async ({ page }) => {
+      await page.goto(pfad);
+      const text = (await page.locator('main').textContent()).replace(/\s+/g, ' ');
+      expect(text).toContain(satz);
+    });
+  }
+
+  test('HU-Datenschutz: mailto zeigt auf bewerbung@', async ({ page }) => {
+    await page.goto('/hu/adatvedelem-bemutatas/');
+    await expect(page.locator('a[href="mailto:bewerbung@avorix.de"]')).toHaveCount(1);
+    await expect(page.locator('a[href="mailto:info@avorix.de"]')).toHaveCount(0);
+  });
+
+  test('Kundenseiten und Verantwortlicher bleiben bei info@', async ({ page }) => {
+    for (const pfad of ['/kontakt/', '/datenschutz/', '/en/privacy/']) {
+      await page.goto(pfad);
+      await expect(page.locator('a[href="mailto:info@avorix.de"]').first()).toBeVisible();
+    }
+  });
+});
