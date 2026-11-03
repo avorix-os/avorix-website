@@ -42,6 +42,8 @@
 - [Menüplan und Einkaufsliste: Wochenplanung, die hält](https://avorix.de/wissen/menueplan-einkaufsliste): Vom Wochenplan über die Mengen zur Bestellung, in dieser Reihenfolge.
 - [Cook and Chill in der Hotelküche: Verfahren, Temperaturen, Grenzen](https://avorix.de/wissen/cook-and-chill-hotelkueche): Ablauf, Temperaturen nach DIN, was es bringt, wo es nicht passt und was es von der Küche verlangt.
 - [Wie viele Servicekräfte pro Gast? Die Faustregeln](https://avorix.de/wissen/servicekraefte-pro-gast): Personalbedarf im Service für Menü, Bankett, Hochzeit und Buffet, die Faktoren, die ihn verschieben, und eine Beispielrechnung vom Pass aus.
+- [Fachkräftemangel in der Küche: die Zahlen 2026](https://avorix.de/wissen/fachkraeftemangel-kueche): Belegte Zahlen zum Mangel an Köchen in Deutschland und Österreich (gemeldete Stellen, Fachkräftelücke, Vakanzzeit, Ausbildungsverträge, Vertragslösungen, Einwanderungsgeschichte), jeweils mit Stand und Primärquelle, und was daraus für Küchenbetriebe folgt.
+- [Wie viele Köche braucht ein Restaurant? Der Personalbedarf der Küche](https://avorix.de/wissen/personalbedarf-kueche): Personalbedarf der Küche in drei Schritten (Posten je Service, Wochenstunden, Nettoarbeitszeit nach Urlaub und Krankheit), mit Beispielrechnung, Arbeitszeitgesetz (Pausen, Ruhezeit, freie Sonntage) und der Frage, ob die Reserve fest oder auf Zeit besetzt wird.
 
 ## English pages
 

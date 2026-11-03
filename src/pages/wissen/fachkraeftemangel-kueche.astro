@@ -1,0 +1,259 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+/* Anweisung 83, Artikel 1: Fachkraeftemangel in der Kueche, die Zahlen 2026. */
+const quellen = [
+  { name: "Bundesagentur für Arbeit: Fachkräfteengpassanalyse 2025 (Mai 2026)", url: "https://statistik.arbeitsagentur.de/DE/Navigation/Statistiken/Interaktive-Statistiken/Fachkraeftebedarf/Engpassanalyse-Nav.html" },
+  { name: "Bundesagentur für Arbeit: Beschäftigte nach Berufen, Stichtag 31. März 2026", url: "https://statistik.arbeitsagentur.de/Statistikdaten/Detail/202603/iiia6/beschaeftigung-sozbe-bo-heft/bo-heft-d-0-202603-xlsx.xlsx?__blob=publicationFile&v=1" },
+  { name: "Institut der deutschen Wirtschaft: KOFA Kompakt 8/2025, Hotel- und Gastgewerbe", url: "https://www.kofa.de/media/Publikationen/KOFA_Kompakt/KOFA_Kompakt_Hotel-_und_Gastgewerbe.pdf" },
+  { name: "Institut der deutschen Wirtschaft: KOFA Aktuell, Valentinstag und Fachkräftemangel (Februar 2025)", url: "https://kofa.de/media/Publikationen/KOFA_Aktuell/KOFA_Aktuell_Valentinstag.pdf" },
+  { name: "KfW und ifo Institut: KfW-ifo-Fachkräftebarometer, Juni 2026", url: "https://www.kfw.de/PDF/Download-Center/Konzernthemen/Research/PDF-Dokumente-KfW-ifo-Fachkr%C3%A4ftebarometer/KfW-ifo-Fachkraeftebarometer_2026-06.pdf" },
+  { name: "Bundesministerium für Bildung, Familie, Senioren, Frauen und Jugend: Berufsbildungsbericht 2026", url: "https://www.bmbfsfj.bund.de/resource/blob/285652/2573d5930fe86f13098a9f4063d2fdb6/bbb2026-data.pdf" },
+  { name: "Bundesinstitut für Berufsbildung: Neu abgeschlossene Ausbildungsverträge zum 30. September 2025, Tabelle 66", url: "https://www.bibb.de/dokumente/pdf/naa309/naa309_2025_tab066_0bund.pdf" },
+  { name: "Bundesinstitut für Berufsbildung: Neu abgeschlossene Ausbildungsverträge zum 30. September 2025, Tabelle 59", url: "https://www.bibb.de/dokumente/pdf/naa309/naa309_2025_tab059_0bund.pdf" },
+  { name: "DEHOGA Bundesverband: DEHOGA-Zahlenspiegel IV/2025", url: "https://www.dehoga.de/fileadmin/user_upload/DEHOGA-Zahlenspiegel_4._Quartal_2025.pdf" },
+  { name: "DEHOGA Bundesverband: DEHOGA-Zahlenspiegel I/2026", url: "https://www.dehoga.de/fileadmin/user_upload/Statistik/DEHOGA-Zahlenspiegel_1._Quartal_2026_.pdf" },
+  { name: "Statistisches Bundesamt: Pressemitteilung N066 vom 28. September 2026", url: "https://www.destatis.de/DE/Presse/Pressemitteilungen/2026/09/PD26_N066_13.html" },
+  { name: "Österreich: Fachkräfteverordnung 2026, BGBl. II Nr. 316/2025", url: "https://www.ris.bka.gv.at/eli/bgbl/II/2025/316" },
+];
+
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Fachkräftemangel in der Küche: die Zahlen 2026, und was sie für Ihren Betrieb heißen", "item": "https://avorix.de/wissen/fachkraeftemangel-kueche/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Fachkräftemangel in der Küche: die Zahlen 2026, und was sie für Ihren Betrieb heißen",
+    "datePublished": "2026-11-03",
+    "dateModified": "2026-11-03",
+    "publisher": { "@type": "Organization", "@id": "https://avorix.de/#organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" },
+    "citation": quellen.map((q) => ({ "@type": "CreativeWork", "name": q.name, "url": q.url }))
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Ist der Fachkräftemangel in der Gastronomie 2026 vorbei?", "acceptedAnswer": { "@type": "Answer", "text": "Nein, aber er ist deutlich kleiner geworden. Bei Köchen fehlten von Juli 2024 bis Juni 2025 bundesweit rechnerisch 383 Fachkräfte, 2022 waren es knapp 8.800. Das Institut der deutschen Wirtschaft führt den Rückgang auf die schwache Konjunktur zurück und erwartet, dass sich der Engpass im nächsten Aufschwung wieder verschärft. Im April 2026 sah fast jedes dritte Gastronomieunternehmen sein Geschäft durch Fachkräftemangel behindert." } },
+      { "@type": "Question", "name": "Wie viele Köche fehlen in Deutschland?", "acceptedAnswer": { "@type": "Answer", "text": "Nach der Fachkräftelücke des Instituts der deutschen Wirtschaft 383, im Jahresdurchschnitt von Juli 2024 bis Juni 2025. Gezählt werden offene Stellen, für die es keine passend qualifizierten Arbeitslosen gibt. 2022 waren es knapp 8.800. Die Zahl ist ein Bundesdurchschnitt; je Region liegen die Werte weit auseinander." } },
+      { "@type": "Question", "name": "Wie viele Köche gibt es in Deutschland?", "acceptedAnswer": { "@type": "Answer", "text": "202.869 Köchinnen und Köche auf Fachkraftniveau sind sozialversicherungspflichtig beschäftigt, Stand 31. März 2026. Mit Helfern in Kochberufen sind es 477.781 (Bundesagentur für Arbeit). Minijobs kommen dazu." } },
+      { "@type": "Question", "name": "Ist Koch ein Engpassberuf?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, knapp. Die Bundesagentur für Arbeit führt Köche auf Fachkraftniveau in ihrer Fachkräfteengpassanalyse 2025 mit 2,0 Punkten als Engpassberuf, das ist genau die Schwelle. In Österreich steht der Gaststättenkoch 2026 auf der bundesweiten Liste der Mangelberufe." } },
+      { "@type": "Question", "name": "Wie lange dauert es, eine Kochstelle zu besetzen?", "acceptedAnswer": { "@type": "Answer", "text": "Eine bei der Bundesagentur gemeldete Kochstelle blieb 2025 im Mittel 84 Tage offen, gerechnet vom gewünschten Besetzungstermin bis zur Abmeldung. Für den Betrieb sind das knapp drei Monate, in denen der Ausfall anders gedeckt werden muss." } },
+      { "@type": "Question", "name": "Warum gibt es arbeitslose Köche, wenn Köche fehlen?", "acceptedAnswer": { "@type": "Answer", "text": "Weil Qualifikation, Ort und Arbeitszeit zusammenpassen müssen. Die gut 124.000 Arbeitslosen in der Speisenzubereitung reichen von Helfertätigkeiten bis zur Küchenleitung und verteilen sich auf alle Regionen. Auf eine gemeldete Kochstelle kamen 2025 rechnerisch 3,7 Arbeitsuchende." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Fachkräftemangel in der Küche: die Zahlen 2026"
+  description="Wie groß der Mangel an Köchen 2026 wirklich ist: offene Stellen, Ausbildung, Vakanzzeit, Herkunft. Jede Zahl mit Quelle, und was sie für Ihre Küche heißt."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Fachkräftemangel in der Küche: die Zahlen 2026, und was sie für Ihren Betrieb heißen</h1>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 03.11.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color: var(--druck)">
+        Der Mangel an Köchen ist 2026 deutlich kleiner als noch vor drei Jahren, aber nicht vorbei. Nach Berechnungen des Instituts der deutschen Wirtschaft fehlten von Juli 2024 bis Juni 2025 bundesweit 383 ausgebildete Köche, 2022 waren es knapp 8.800. Das liegt vor allem an der schwachen Konjunktur: Im Gastgewerbe sind nur noch halb so viele Stellen gemeldet wie 2019. Für den einzelnen Betrieb bleibt es trotzdem schwer. Eine gemeldete Kochstelle bleibt im Mittel 84 Tage offen, fast jedes dritte Gastronomieunternehmen sieht sein Geschäft durch Fachkräftemangel behindert, und 44 Prozent der Ausbildungsverträge zum Koch werden vorzeitig gelöst.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Die wichtigsten Zahlen auf einen Blick</h2>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Kennzahl</th><th>Wert</th><th>Stand</th><th>Quelle</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Offene Stellen im Gastgewerbe, bei der Bundesagentur gemeldet</th><td>19.060, halb so viele wie im April 2019 (39.626)</td><td>April 2026</td><td>Bundesagentur für Arbeit, im DEHOGA-Zahlenspiegel I/2026</td></tr>
+              <tr><th scope="row">Sozialversicherungspflichtig Beschäftigte im Gastgewerbe</th><td>1.070.700, 0,5 Prozent weniger als im Februar 2020</td><td>Februar 2026</td><td>Bundesagentur für Arbeit, im DEHOGA-Zahlenspiegel I/2026</td></tr>
+              <tr><th scope="row">Arbeitslose mit Beruf in der Speisenzubereitung</th><td>124.302, 0,1 Prozent mehr als im Vorjahr</td><td>April 2026</td><td>Bundesagentur für Arbeit, im DEHOGA-Zahlenspiegel I/2026</td></tr>
+              <tr><th scope="row">Fachkräftelücke bei Köchen (offene Stellen ohne passend qualifizierte Arbeitslose)</th><td>383, im Jahr 2022 knapp 8.800</td><td>Juli 2024 bis Juni 2025</td><td>Institut der deutschen Wirtschaft, KOFA Kompakt 8/2025</td></tr>
+              <tr><th scope="row">Köche auf Fachkraftniveau als Engpassberuf</th><td>ja, mit 2,0 Punkten genau an der Schwelle</td><td>2025</td><td>Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025</td></tr>
+              <tr><th scope="row">Vakanzzeit einer gemeldeten Kochstelle (Median)</th><td>84 Tage</td><td>2025</td><td>Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025</td></tr>
+              <tr><th scope="row">Arbeitsuchende je gemeldeter Kochstelle</th><td>3,7</td><td>2025</td><td>Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025</td></tr>
+              <tr><th scope="row">Gastronomieunternehmen, deren Geschäft Fachkräftemangel behindert</th><td>31,8 Prozent, in der Beherbergung 25,3 Prozent</td><td>April 2026</td><td>ifo-Konjunkturumfrage, KfW-ifo-Fachkräftebarometer</td></tr>
+              <tr><th scope="row">Sozialversicherungspflichtig beschäftigte Köche auf Fachkraftniveau</th><td>202.869, mit Helfern in Kochberufen 477.781</td><td>31.03.2026</td><td>Bundesagentur für Arbeit, Beschäftigungsstatistik</td></tr>
+              <tr><th scope="row">Köche auf Fachkraftniveau in Teilzeit</th><td>31,1 Prozent</td><td>2025</td><td>Bundesagentur für Arbeit, Fachkräfteengpassanalyse 2025</td></tr>
+              <tr><th scope="row">Neue Ausbildungsverträge Koch/Köchin</th><td>7.464, 9,0 Prozent weniger als 2019</td><td>Stichtag 30.09.2025</td><td>BIBB, im DEHOGA-Zahlenspiegel IV/2025</td></tr>
+              <tr><th scope="row">Neue Ausbildungsverträge Fachkraft Küche</th><td>1.188, Beruf seit 2022</td><td>Stichtag 30.09.2025</td><td>BIBB, im DEHOGA-Zahlenspiegel IV/2025</td></tr>
+              <tr><th scope="row">Vorzeitig gelöste Ausbildungsverträge Koch/Köchin</th><td>44,0 Prozent, über alle Berufe 29,7 Prozent</td><td>2024</td><td>Berufsbildungsbericht 2026</td></tr>
+              <tr><th scope="row">Köchinnen und Köche mit Einwanderungsgeschichte</th><td>56 Prozent, über alle Beschäftigten 27 Prozent</td><td>2025</td><td>Statistisches Bundesamt, Mikrozensus</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Warum die Lücke kleiner geworden ist</h2>
+        <p>Die auffälligste Zahl ist die Halbierung der gemeldeten Stellen. Sie hat zwei Gründe, die beide in den Zahlen stehen. Erstens ist die Beschäftigung zurück: Im Gastgewerbe arbeiten wieder fast so viele Menschen sozialversicherungspflichtig wie vor Corona. Zweitens läuft das Geschäft schwächer: Nach Abzug der Preissteigerung setzte das Gastgewerbe im ersten Quartal 2026 knapp ein Fünftel weniger um als 2019 (DEHOGA-Zahlenspiegel I/2026). Wer weniger umsetzt, stellt weniger ein.</p>
+        <p>Dasselbe zeigt die Fachkräftelücke, die das Institut der deutschen Wirtschaft berechnet, also die Zahl der offenen Stellen, für die es keine passend qualifizierten Arbeitslosen gibt. Bei Köchen lag sie von Juli 2024 bis Juni 2025 bei 383, im Jahr 2022 waren es knapp 8.800. Von über 14.400 offenen Kochstellen blieben damit rechnerisch weniger als drei Prozent unbesetzbar. Das Institut nennt den Rückgang ausdrücklich konjunkturbedingt und geht davon aus, dass sich der Engpass mit dem nächsten Aufschwung wieder verschärft (KOFA Kompakt 8/2025).</p>
+
+        <h2>Warum es sich in der Küche trotzdem anders anfühlt</h2>
+        <p>Eine kleine Lücke im Bundesschnitt heißt nicht, dass Ihre Stelle schnell besetzt ist. Die Bundesagentur führt Köche auf Fachkraftniveau in ihrer Engpassanalyse für 2025 weiter als Engpassberuf, mit 2,0 Punkten genau an der Schwelle, ab der ein Beruf so eingestuft wird. Und im April 2026 sah fast jedes dritte Gastronomieunternehmen sein Geschäft durch Fachkräftemangel behindert, 31,8 Prozent, in der Beherbergung jedes vierte (ifo-Konjunkturumfrage, KfW-ifo-Fachkräftebarometer).</p>
+        <p>Dazu kommt: Die 383 sind ein Bundesdurchschnitt. Das Institut der deutschen Wirtschaft weist die Fachkräftelücke auch je Region aus, und dort liegen die Werte weit auseinander. Was in einer Region rechnerisch aufgeht, hilft der Küche in einer anderen nicht.</p>
+        <p>Auch die gut 124.000 Arbeitslosen in der Speisenzubereitung sind kein Widerspruch. Die Zahl umfasst die ganze Berufsgruppe, von Helfertätigkeiten bis zur Küchenleitung, und alle Regionen. Auf eine gemeldete Kochstelle kamen 2025 rechnerisch 3,7 Arbeitsuchende (Bundesagentur für Arbeit). Ob jemand den Posten bei Ihnen übernehmen kann, entscheidet sich an Qualifikation, Ort und Arbeitszeit.</p>
+
+        <h2>Wie lange eine Kochstelle offen bleibt</h2>
+        <p>Die Bundesagentur misst auch, wie lange eine gemeldete Stelle unbesetzt bleibt, gerechnet vom gewünschten Besetzungstermin bis zur Abmeldung. Bei Köchen auf Fachkraftniveau lag dieser Wert 2025 im Mittel bei 84 Tagen. Ab 80 Tagen wertet die Bundesagentur das als Hinweis auf einen Engpass (Fachkräfteengpassanalyse 2025).</p>
+        <p>Knapp drei Monate sind in einer Küche lang. Es sind genau die Wochen, in denen die übrigen Köche den Ausfall mittragen. Wer eine Kochstelle verliert, braucht deshalb nicht nur einen Plan für die Neubesetzung, sondern einen für die Wochen davor: <a href="/wissen/koch-kurzfristig-gesucht/" class="typo-link">Koch kurzfristig gesucht: was in 72 Stunden geht</a></p>
+
+        <h2>Der Nachwuchs: weniger volle Kochausbildungen, mehr Fachkräfte Küche</h2>
+        <p>Nach dem Einbruch in der Pandemie haben sich die Ausbildungszahlen erholt, beim vollen Kochberuf aber nicht ganz. 2025 begannen bis zum Stichtag 7.464 junge Leute eine Ausbildung zum Koch oder zur Köchin, 9 Prozent weniger als 2019. Rechnet man die zweijährige Ausbildung zur Fachkraft Küche dazu, die es seit 2022 gibt, liegen die Küchenberufe zusammen 5 Prozent über 2019.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Jahr</th><th>Koch/Köchin</th><th>Fachkraft Küche</th><th>Küchenberufe zusammen</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">2019</th><td>8.205</td><td></td><td>8.205</td></tr>
+              <tr><th scope="row">2020</th><td>6.456</td><td></td><td>6.456</td></tr>
+              <tr><th scope="row">2021</th><td>6.237</td><td></td><td>6.237</td></tr>
+              <tr><th scope="row">2022</th><td>6.885</td><td>297</td><td>7.182</td></tr>
+              <tr><th scope="row">2023</th><td>7.560</td><td>792</td><td>8.352</td></tr>
+              <tr><th scope="row">2024</th><td>7.647</td><td>975</td><td>8.622</td></tr>
+              <tr><th scope="row">2025</th><td>7.464</td><td>1.188</td><td>8.652</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Neu abgeschlossene Ausbildungsverträge, jeweils Stichtag 30. September. Quelle: Bundesinstitut für Berufsbildung (BIBB), ausgewertet im DEHOGA-Zahlenspiegel IV/2025.</p>
+        <p>Für die Küche ist das ein Unterschied. Es beginnen sogar etwas mehr junge Leute eine Küchenausbildung als vor Corona, aber ein wachsender Teil die kürzere.</p>
+        <p>Dazu kommt, wie viele die Ausbildung nicht im ersten Betrieb beenden. 2024 wurden 44,0 Prozent der Ausbildungsverträge zum Koch vorzeitig gelöst, über alle Berufe waren es 29,7 Prozent (Berufsbildungsbericht 2026). Eine Lösung ist nicht dasselbe wie ein Abbruch, ein Teil wechselt nur den Betrieb oder den Beruf. Für den Betrieb, der ausgebildet hat, ist die Kraft trotzdem weg.</p>
+        <p>Was daraus folgt: Wissen, das früher in drei Jahren Ausbildung weitergegeben wurde, muss heute öfter am Posten weitergegeben werden. Wie das gelingt: <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a></p>
+
+        <h2>Wer heute in deutschen Küchen kocht</h2>
+        <p>Sozialversicherungspflichtig beschäftigt sind in Deutschland 202.869 Köchinnen und Köche auf Fachkraftniveau, Stand 31. März 2026; mit Helfern in Kochberufen sind es 477.781 (Bundesagentur für Arbeit). Knapp ein Drittel der Köche auf Fachkraftniveau arbeitet in Teilzeit, 31,1 Prozent (2025).</p>
+        <p>56 Prozent der Köchinnen und Köche in Deutschland hatten 2025 eine Einwanderungsgeschichte, über alle Beschäftigten waren es 27 Prozent (Statistisches Bundesamt, Mikrozensus 2025). Einwanderungsgeschichte heißt: Die Person selbst oder beide Eltern sind seit 1950 nach Deutschland eingewandert. Bei der Staatsangehörigkeit zeigt sich dasselbe Bild: Von den sozialversicherungspflichtig Beschäftigten im Gastgewerbe sind 44,7 Prozent Ausländer, in Restaurants, Imbissen und Cafés 54,9 Prozent, in der Gesamtwirtschaft 16,9 Prozent (Bundesagentur für Arbeit, Stand 30. September 2025, im DEHOGA-Zahlenspiegel I/2026).</p>
+        <p>Ohne diese Köche liefe in vielen Küchen kein Service. Für den Betrieb heißt das: Rezepte, Mengen und Abläufe müssen so festgehalten sein, dass sie auch verstanden werden, wenn Deutsch nicht die erste Sprache ist. Fotos und klare Schritte helfen dabei mehr als lange Texte.</p>
+
+        <h2>Österreich: Koch bleibt Mangelberuf</h2>
+        <p>In Österreich steht der Beruf Gaststättenkoch und Gaststättenköchin für 2026 auf der bundesweiten Liste der Mangelberufe (Fachkräfteverordnung 2026, BGBl. II Nr. 316/2025). Für Köche aus Ländern außerhalb der EU erleichtert das die Zulassung, weil kein Ersatzkraftverfahren nötig ist.</p>
+
+        <h2>Was die Zahlen für Ihre Küche heißen</h2>
+        <p>Aus den Zahlen folgen drei Dinge.</p>
+        <ol>
+          <li><strong>Ersatz dauert eher Monate als Wochen.</strong> Planen Sie die Überbrückung, bevor Sie sie brauchen. <a href="/wissen/koch-kurzfristig-gesucht/" class="typo-link">Koch kurzfristig gesucht</a></li>
+          <li><strong>Neue Kräfte bringen öfter eine kürzere Ausbildung oder eine andere erste Sprache mit.</strong> Halten Sie fest, was heute nur im Kopf Ihres Küchenchefs steht. <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a></li>
+          <li><strong>Eine Küche mit genau so vielen Köchen wie Posten steht bei jedem Ausfall.</strong> Rechnen Sie die Reserve für Urlaub und Krankheit ein. <a href="/wissen/personalbedarf-kueche/" class="typo-link">Wie viele Köche braucht ein Restaurant?</a></li>
+        </ol>
+        <p>Ihre Küche steht und fällt mit einer einzigen Person. Avorix hilft doppelt: sofort ein Koch, wenn Ihrer fehlt. Und ein System, damit es nie wieder so weit kommt.</p>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Ist der Fachkräftemangel in der Gastronomie 2026 vorbei?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nein, aber er ist deutlich kleiner geworden. Bei Köchen fehlten von Juli 2024 bis Juni 2025 bundesweit rechnerisch 383 Fachkräfte, 2022 waren es knapp 8.800. Das Institut der deutschen Wirtschaft führt den Rückgang auf die schwache Konjunktur zurück und erwartet, dass sich der Engpass im nächsten Aufschwung wieder verschärft. Im April 2026 sah fast jedes dritte Gastronomieunternehmen sein Geschäft durch Fachkräftemangel behindert.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Köche fehlen in Deutschland?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nach der Fachkräftelücke des Instituts der deutschen Wirtschaft 383, im Jahresdurchschnitt von Juli 2024 bis Juni 2025. Gezählt werden offene Stellen, für die es keine passend qualifizierten Arbeitslosen gibt. 2022 waren es knapp 8.800. Die Zahl ist ein Bundesdurchschnitt; je Region liegen die Werte weit auseinander.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Köche gibt es in Deutschland?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>202.869 Köchinnen und Köche auf Fachkraftniveau sind sozialversicherungspflichtig beschäftigt, Stand 31. März 2026. Mit Helfern in Kochberufen sind es 477.781 (Bundesagentur für Arbeit). Minijobs kommen dazu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Ist Koch ein Engpassberuf?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Ja, knapp. Die Bundesagentur für Arbeit führt Köche auf Fachkraftniveau in ihrer Fachkräfteengpassanalyse 2025 mit 2,0 Punkten als Engpassberuf, das ist genau die Schwelle. In Österreich steht der Gaststättenkoch 2026 auf der bundesweiten Liste der Mangelberufe.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie lange dauert es, eine Kochstelle zu besetzen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Eine bei der Bundesagentur gemeldete Kochstelle blieb 2025 im Mittel 84 Tage offen, gerechnet vom gewünschten Besetzungstermin bis zur Abmeldung. Für den Betrieb sind das knapp drei Monate, in denen der Ausfall anders gedeckt werden muss.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Warum gibt es arbeitslose Köche, wenn Köche fehlen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Weil Qualifikation, Ort und Arbeitszeit zusammenpassen müssen. Die gut 124.000 Arbeitslosen in der Speisenzubereitung reichen von Helfertätigkeiten bis zur Küchenleitung und verteilen sich auf alle Regionen. Auf eine gemeldete Kochstelle kamen 2025 rechnerisch 3,7 Arbeitsuchende.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung. Stand der Zahlen: 03.11.2026.</p>
+    </div>
+  </section>
+
+  {/* Quellen */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Quellen</h2>
+        <ul>
+          {quellen.map((q) => (
+            <li><a href={q.url} class="typo-link">{q.name}</a></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color: var(--druck)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color: var(--druck)">
+        Ersatz kommt. Selten schnell genug.
+      </p>
+      <a href="/personal/" data-cta-location="wissen-fachkraeftemangel-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>

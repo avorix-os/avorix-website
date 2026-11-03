@@ -1614,6 +1614,97 @@ test.describe('A76: Bewerberprofil-Seite (profil/profile/profil)', () => {
 });
 
 /**
+ * A83: Zwei neue Wissen-Artikel + /leitfaden/ entlasten.
+ */
+test.describe('A83: Wissen-Artikel Fachkräftemangel und Personalbedarf', () => {
+  const graphOf = async (page, pfad) => {
+    await page.goto(pfad);
+    return page.evaluate(() =>
+      [...document.querySelectorAll('script[type="application/ld+json"]')]
+        .flatMap((s) => { const d = JSON.parse(s.textContent); return Array.isArray(d) ? d : [d]; })
+    );
+  };
+
+  test('beide Artikel liefern 200 und stehen in Sitemap und llms.txt', async ({ request }) => {
+    for (const p of ['/wissen/fachkraeftemangel-kueche/', '/wissen/personalbedarf-kueche/']) {
+      expect((await request.get(p)).status()).toBe(200);
+    }
+    const sitemap = await (await request.get('/sitemap-0.xml')).text();
+    expect(sitemap).toContain('/wissen/fachkraeftemangel-kueche/');
+    expect(sitemap).toContain('/wissen/personalbedarf-kueche/');
+    const llms = await (await request.get('/llms.txt')).text();
+    expect(llms).toContain('/wissen/fachkraeftemangel-kueche');
+    expect(llms).toContain('/wissen/personalbedarf-kueche');
+  });
+
+  test('Artikel 1: Direktantwort, FAQ, citation, Autor-@id, Knopf, keine Gedankenstriche', async ({ page }) => {
+    const graph = await graphOf(page, '/wissen/fachkraeftemangel-kueche/');
+    const art = graph.find((n) => n['@type'] === 'Article');
+    expect(art.author['@id']).toBe('https://avorix.de/ueber-uns/#boerge-penk');
+    expect(art.publisher['@id']).toBe('https://avorix.de/#organization');
+    expect(art.citation.length).toBeGreaterThanOrEqual(12);
+    expect(graph.find((n) => n['@type'] === 'FAQPage').mainEntity.length).toBe(6);
+    expect(graph.some((n) => n['@type'] === 'BreadcrumbList')).toBe(true);
+    await expect(page.locator('#direktantwort')).toHaveCount(1);
+    await expect(page.locator('a[data-cta-location="wissen-fachkraeftemangel-ende"]')).toHaveAttribute('href', '/personal/');
+    const txt = await page.locator('main').innerText();
+    expect(txt).not.toContain('—');
+    expect(txt).not.toMatch(/ – /);
+  });
+
+  test('Artikel 2: Direktantwort, FAQ 6, Autor-@id, Knopf, kein citation', async ({ page }) => {
+    const graph = await graphOf(page, '/wissen/personalbedarf-kueche/');
+    const art = graph.find((n) => n['@type'] === 'Article');
+    expect(art.author['@id']).toBe('https://avorix.de/ueber-uns/#boerge-penk');
+    expect(art.citation).toBeUndefined();
+    expect(graph.find((n) => n['@type'] === 'FAQPage').mainEntity.length).toBe(6);
+    await expect(page.locator('#direktantwort')).toHaveCount(1);
+    await expect(page.locator('a[data-cta-location="wissen-personalbedarf-ende"]')).toHaveAttribute('href', '/personal/');
+  });
+
+  test('beide Tabellen ohne horizontalen Seitenüberlauf bei 390px', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 800 });
+    for (const p of ['/wissen/fachkraeftemangel-kueche/', '/wissen/personalbedarf-kueche/']) {
+      await page.goto(p);
+      const m = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth }));
+      expect(m.sw, p).toBeLessThanOrEqual(m.cw);
+    }
+  });
+
+  test('Hub /wissen/ trägt beide neuen Karten als erste ihrer Rubrik', async ({ page }) => {
+    await page.goto('/wissen/');
+    const ersteHrefs = await page.evaluate(() =>
+      [...document.querySelectorAll('section')].map((sek) => {
+        const h2 = sek.querySelector('h2');
+        const ersteKarte = sek.querySelector('a[href^="/wissen/"]');
+        return h2 ? { rubrik: h2.innerText, erste: ersteKarte?.getAttribute('href') } : null;
+      }).filter(Boolean)
+    );
+    const r1 = ersteHrefs.find((x) => x.rubrik.includes('Wenn gerade jemand fehlt'));
+    const r2 = ersteHrefs.find((x) => x.rubrik.includes('Küche rechnen und organisieren'));
+    expect(r1?.erste).toBe('/wissen/fachkraeftemangel-kueche/');
+    expect(r2?.erste).toBe('/wissen/personalbedarf-kueche/');
+  });
+
+  test('/leitfaden/: FAQ und Zahlen-Sektionen entfernt, neue Direktantwort verlinkt den Artikel', async ({ page }) => {
+    const graph = await graphOf(page, '/leitfaden/');
+    expect(graph.some((n) => n['@type'] === 'FAQPage')).toBe(false);
+    const txt = await page.locator('main').innerText();
+    expect(txt).not.toContain('Deutschland: die Zahlen');
+    expect(txt).not.toContain('Häufige Fragen');
+    expect(txt).toContain('Was das für Ihre Küche heißt');
+    await expect(page.locator('#direktantwort a[href="/wissen/fachkraeftemangel-kueche/"]')).toHaveCount(1);
+  });
+
+  test('Nachverlinkung: Outsourcing-Artikel zeigt auf den neuen Artikel, dateModified neu', async ({ page }) => {
+    const graph = await graphOf(page, '/wissen/kueche-outsourcen/');
+    expect(graph.find((n) => n['@type'] === 'Article').dateModified).toBe('2026-11-03');
+    const haus = page.locator('a[href="/wissen/fachkraeftemangel-kueche/"]');
+    await expect(haus.first()).toBeVisible();
+  });
+});
+
+/**
  * A82: Der Erklaerfilm "Avorix-Koeche, einfach erklaert" auf /personal/.
  * Statische, codec-unabhaengige Pruefungen (headless Chromium spielt kein H.264).
  * Lage, kein Film-Byte vor dem Klick, Knopf/CTA, Masse und VideoObject.

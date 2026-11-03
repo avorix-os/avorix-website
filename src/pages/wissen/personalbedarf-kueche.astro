@@ -1,0 +1,225 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Stempel from "../../components/Stempel.astro";
+
+/* Anweisung 83, Artikel 2: Wie viele Koeche braucht ein Restaurant. */
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Startseite", "item": "https://avorix.de/" },
+      { "@type": "ListItem", "position": 2, "name": "Wissen", "item": "https://avorix.de/wissen/" },
+      { "@type": "ListItem", "position": 3, "name": "Wie viele Köche braucht ein Restaurant? Der Personalbedarf der Küche in drei Schritten", "item": "https://avorix.de/wissen/personalbedarf-kueche/" }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wie viele Köche braucht ein Restaurant? Der Personalbedarf der Küche in drei Schritten",
+    "datePublished": "2026-11-03",
+    "dateModified": "2026-11-03",
+    "publisher": { "@type": "Organization", "@id": "https://avorix.de/#organization", "name": "AVORIX GmbH", "url": "https://avorix.de" },
+    "author": {
+      "@type": "Person",
+      "@id": "https://avorix.de/ueber-uns/#boerge-penk",
+      "name": "Börge Penk",
+      "jobTitle": "Küchenchef und Gründer von Avorix",
+      "url": "https://avorix.de/ueber-uns/",
+      "worksFor": { "@id": "https://avorix.de/#organization" }
+    },
+    "speakable": { "@type": "SpeakableSpecification", "cssSelector": "#direktantwort" }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Wie viele Köche braucht ein Restaurant mit 80 Plätzen?", "acceptedAnswer": { "@type": "Answer", "text": "Das hängt an Öffnungstagen und Karte, nicht an den Plätzen. Ein Restaurant mit 80 Plätzen, sechs Öffnungstagen, zwei Köchen mittags und drei abends braucht rund 222 Arbeitsstunden in der Woche. Nach Urlaub und Krankheit sind das knapp sieben Vollzeitköche, obwohl nie mehr als drei gleichzeitig in der Küche stehen." } },
+      { "@type": "Question", "name": "Gibt es eine Faustregel, wie viele Köche pro Gast?", "acceptedAnswer": { "@type": "Answer", "text": "Eine verlässliche nicht, weil die Zahl an der Karte hängt. Ein kalt vorbereitetes Buffet braucht am Abend wenige Hände, ein warm angerichtetes Menü für alle gleichzeitig sehr viele. Rechnen Sie über die Posten je Service und die Stunden in der Woche." } },
+      { "@type": "Question", "name": "Wie viel Reserve brauche ich für Urlaub und Krankheit?", "acceptedAnswer": { "@type": "Answer", "text": "Im Beispiel dieses Artikels knapp ein Fünftel mehr, als die reinen Wochenstunden ergeben: 25 Urlaubstage und 15 Krankheitstage machen aus 40 Vertragsstunden knapp 34 Stunden in der Küche. Setzen Sie Ihre eigenen Werte der letzten zwei Jahre ein." } },
+      { "@type": "Question", "name": "Darf ein Koch nach dem Spätdienst am nächsten Morgen die Frühschicht machen?", "acceptedAnswer": { "@type": "Answer", "text": "Nur, wenn dazwischen genug Ruhe liegt. Das Arbeitszeitgesetz verlangt elf Stunden, in Gaststätten und Beherbergungsbetrieben mit Ausgleich zehn. Wer um 23:30 Uhr Feierabend hat, darf frühestens um 9:30 Uhr wieder anfangen, und auch das nur mit Ausgleich." } },
+      { "@type": "Question", "name": "Wie viele Köche braucht ein Hotel mit Halbpension?", "acceptedAnswer": { "@type": "Answer", "text": "Rechnen Sie wie im Restaurant, aber vom Abendmenü aus, weil es meist für alle Gäste in einem engen Zeitfenster kommt. Frühstück, Bankette und die Hochsaison rechnen Sie als eigene Services dazu." } },
+      { "@type": "Question", "name": "Was tue ich, wenn die Rechnung mehr Köche ergibt, als ich finde?", "acceptedAnswer": { "@type": "Answer", "text": "Drei Stellschrauben: die Karte so bauen, dass mehr vorbereitet werden kann, Öffnungszeiten und Services prüfen, und die Lücke auf Zeit besetzen. Bei Avorix gibt es keine Mindest-Einsatzdauer, ein festangestellter Koch steht in der Regel innerhalb von 24 bis 72 Stunden bei Ihnen." } }
+    ]
+  }
+];
+---
+<BaseLayout
+  title="Wie viele Köche braucht ein Restaurant? So rechnen Sie"
+  description="Pro Sitzplatz gibt es keine verlässliche Faustregel. So rechnen Sie den Personalbedarf Ihrer Küche in drei Schritten, mit Urlaub, Krankheit und Ruhezeiten."
+  ogType="article"
+  schemaOrg={schema}
+>
+ <section class="hero-section px-6">
+    <div class="content-width">
+      <p class="eyebrow mb-4"><a href="/wissen/" class="eyebrow-link">Wissen</a></p>
+      <h1 class="mb-4">Wie viele Köche braucht ein Restaurant? Der Personalbedarf der Küche in drei Schritten</h1>
+      <p class="artikel-datum mb-6">Von Börge Penk, Küchenchef und Gründer &middot; Aktualisiert am 03.11.2026</p>
+      <p id="direktantwort" class="lead max-w-[var(--spalte-text)]" style="color: var(--druck)">
+        Wie viele Köche ein Restaurant braucht, lässt sich nicht an den Sitzplätzen ablesen, sondern an den Posten: Wie viele Köche müssen in jedem Service gleichzeitig in der Küche stehen, und wie viele Stunden ergibt das in der Woche? Diese Stunden teilen Sie durch das, was ein Vollzeitkoch nach Urlaub und Krankheit tatsächlich in der Küche steht, und das sind eher 33 bis 35 Stunden als 40. Ein Restaurant mit sechs Öffnungstagen, zwei Köchen mittags und drei abends kommt so auf knapp sieben Vollzeitstellen, nicht auf drei.
+      </p>
+    </div>
+  </section>
+
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <div class="artikel-prosa">
+        <h2>Warum die Faustregel nach Sitzplätzen nicht trägt</h2>
+        <p>Im Netz kursieren Faustregeln wie ein Koch für so und so viele Plätze. Sie helfen wenig, weil zwei Restaurants mit 80 Plätzen völlig verschiedene Küchen haben können. Eine kleine Karte mit viel Vorbereitung braucht am Abend weniger Hände als eine große, die à la minute gekocht wird. Ein Haus mit Mittag und Abend braucht deutlich mehr Stunden als eines, das nur abends öffnet. Und ein Bankett, bei dem 120 Teller in wenigen Minuten rausmüssen, braucht für kurze Zeit mehr Köche als jeder normale Abend.</p>
+        <p>Deshalb rechnen wir in der Küche nicht vom Saal aus, sondern vom Posten: Wer muss wann wo stehen?</p>
+
+        <h2>Schritt 1: Wie viele Köche stehen in jedem Service gleichzeitig in der Küche?</h2>
+        <p>Gehen Sie Ihre Woche durch, Service für Service. Für jeden Service zählen Sie die Posten, die besetzt sein müssen, damit die Karte in der Zeit rausgeht, zum Beispiel Pass und Fleisch, Beilagen und Gemüse, kalte Küche und Dessert. Ob zwei Posten an einem ruhigen Mittag von einer Person gehalten werden können, wissen Sie selbst am besten.</p>
+        <p>Dazu kommt die Zeit vor und nach dem Service. Vorbereitung, Reinigung und Übergabe sind Arbeitszeit. Wer den Abendservice von 18 bis 22 Uhr plant, plant in Wahrheit eine Schicht von 15 bis 23:30 Uhr.</p>
+        <p>Und vergessen Sie die Arbeit abseits des Herds nicht: Bestellungen, Wareneingang, Speiseplan, Inventur. Irgendjemand macht das, meist der Küchenchef, und meist in Stunden, die im Dienstplan nicht stehen.</p>
+
+        <h2>Schritt 2: Wie viele Stunden ergibt das in der Woche?</h2>
+        <p>Ein Beispiel: ein Restaurant mit 80 Plätzen, à la carte, Dienstag bis Sonntag geöffnet, mittags und abends.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Service</th><th>Köche gleichzeitig</th><th>Schicht</th><th>Stunden je Öffnungstag</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Mittag</th><td>2</td><td>9 bis 15 Uhr, 6 Stunden</td><td>12</td></tr>
+              <tr><th scope="row">Abend</th><td>3</td><td>15 bis 23:30 Uhr, 8 Stunden Arbeitszeit nach 30 Minuten Pause</td><td>24</td></tr>
+              <tr><th scope="row">Je Öffnungstag</th><td></td><td></td><td>36</td></tr>
+              <tr><th scope="row">Sechs Öffnungstage</th><td></td><td></td><td>216</td></tr>
+              <tr><th scope="row">Einkauf, Planung, Inventur</th><td></td><td></td><td>6</td></tr>
+              <tr><th scope="row"><strong>Bedarf je Woche</strong></th><td></td><td></td><td><strong>222</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Pausen zählen nicht als Arbeitszeit. Das Arbeitszeitgesetz verlangt bei mehr als sechs Stunden Arbeit mindestens 30 Minuten Pause, bei mehr als neun Stunden 45 Minuten (§ 4 ArbZG). Deshalb steht die Abendschicht im Beispiel achteinhalb Stunden im Haus und arbeitet acht.</p>
+
+        <h2>Schritt 3: Wie viele Stunden steht ein Vollzeitkoch wirklich in der Küche?</h2>
+        <p>Hier liegt der häufigste Rechenfehler. Wer 222 Stunden durch 40 teilt, kommt auf gut fünfeinhalb Stellen. Aber kein Koch steht 52 Wochen im Jahr 40 Stunden in der Küche.</p>
+        <div class="tabelle-scroll">
+          <table>
+            <thead>
+              <tr><th>Position</th><th>Tage im Jahr</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Arbeitstage bei fünf Tagen die Woche</th><td>260</td></tr>
+              <tr><th scope="row">Urlaub (im Beispiel 25 Tage; gesetzlich mindestens 24 Werktage, bei einer Fünftagewoche also 20 Arbeitstage)</th><td>minus 25</td></tr>
+              <tr><th scope="row">Krankheit (im Beispiel 15 Tage)</th><td>minus 15</td></tr>
+              <tr><th scope="row"><strong>Tage in der Küche</strong></th><td><strong>220</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>220 Tage zu je 8 Stunden sind 1.760 Stunden im Jahr, im Schnitt knapp 34 Stunden die Woche. 222 Stunden Bedarf geteilt durch knapp 34 ergibt 6,6 Vollzeitstellen. Gerundet: sieben Köche in Vollzeit, oder entsprechend mehr Köpfe in Teilzeit.</p>
+        <p>Die Krankheitstage setzen Sie am besten aus Ihren eigenen Zahlen der letzten zwei Jahre an. Zum Vergleich: Im Gastgewerbe fielen 2025 je Versicherungsjahr rund 19 Krankheitstage an (Barmer, Gesundheitsreport 2026), in den Berufen der Lebensmittelherstellung und -verarbeitung, zu denen die Köche gehören, rund 23 (TK, Gesundheitsreport 2026). Das sind Kalendertage einschließlich Wochenenden; auf eine Fünftagewoche umgerechnet sind es grob 14 bis 17 Arbeitstage. Die 15 im Beispiel liegen also im üblichen Bereich. Auszubildende sind an Berufsschultagen nicht in der Küche; rechnen Sie sie entsprechend nur anteilig.</p>
+        <p>Der Unterschied zwischen den fünfeinhalb und den sieben ist die Reserve für Urlaub und Krankheit. Sie macht in diesem Beispiel knapp ein Fünftel aus. Wer sie nicht einplant, hat sie trotzdem: als Überstunden, als gestrichenen Mittagstisch oder als Abend, an dem ein Koch fehlt.</p>
+
+        <h2>Was das Arbeitszeitgesetz am Dienstplan ändert</h2>
+        <p>Drei Regeln entscheiden, ob Ihre Rechnung auch im Dienstplan aufgeht.</p>
+        <ol>
+          <li><strong>Höchstens zehn Stunden am Tag.</strong> Mehr als acht Stunden Arbeitszeit am Tag sind nur erlaubt, wenn der Durchschnitt über sechs Monate oder 24 Wochen bei acht Stunden je Werktag bleibt, und mehr als zehn gar nicht (§ 3 ArbZG).</li>
+          <li><strong>Ruhezeit zwischen zwei Schichten.</strong> Nach Feierabend müssen mindestens elf Stunden Ruhe liegen. In Gaststätten und anderen Betrieben der Bewirtung und Beherbergung darf die Ruhezeit um bis zu eine Stunde kürzer sein, wenn das innerhalb eines Kalendermonats oder von vier Wochen durch eine andere Ruhezeit von mindestens zwölf Stunden ausgeglichen wird (§ 5 ArbZG). Wer abends um 23:30 Uhr die Küche schließt, kann am nächsten Morgen nicht um 9 Uhr die Mittagsschicht beginnen.</li>
+          <li><strong>Mindestens 15 freie Sonntage im Jahr.</strong> Wer sonntags öffnet, muss jedem Koch mindestens 15 Sonntage im Jahr freigeben (§ 11 ArbZG). Im Beispiel stehen sonntags fünf von sieben Köchen in der Küche. Fast jeder arbeitet also fast jeden Sonntag, und die freien Sonntage müssen Sie im Dienstplan bewusst verteilen.</li>
+        </ol>
+        <p>Diese Regeln sind der Grund, warum Küchen mit Mittag und Abend in zwei Gruppen planen: eine, die früh beginnt, und eine, die spät schließt. Wer beide Gruppen aus denselben Leuten bauen will, überlastet entweder den Dienstplan oder die Leute. Tarifverträge und Betriebsvereinbarungen können zusätzliche Regeln enthalten; maßgeblich ist, was für Ihren Betrieb gilt.</p>
+
+        <h2>Wohin mit der Reserve: fest einstellen oder auf Zeit holen?</h2>
+        <p>Die siebte Stelle im Beispiel ist die Reserve. Für sie gibt es zwei Wege, und beide sind vernünftig.</p>
+        <p>Fest eingestellt ist die Reserve immer da, kennt Ihre Karte und kostet auch in ruhigen Wochen. Auf Zeit geholt kostet sie nur, wenn sie gebraucht wird. Pro Stunde ist das teurer als ein Angestellter, weil im Stundensatz Lohn, Sozialabgaben, Urlaub und Ausfallrisiko stecken. Wie Sie beides ehrlich vergleichen: <a href="/wissen/mietkoch-kosten/" class="typo-link">Was kostet ein Mietkoch?</a></p>
+        <p>Viele Häuser mischen: Sie besetzen fest, was das ganze Jahr gebraucht wird, und holen Urlaubszeiten, Krankheitswellen und die Saisonspitze auf Zeit dazu. Bei Avorix gibt es dafür keine Mindest-Einsatzdauer, und ein festangestellter Koch steht in der Regel innerhalb von 24 bis 72 Stunden bei Ihnen.</p>
+
+        <h2>Die Stelle, die in keiner Rechnung steht</h2>
+        <p>Eine Rechnung in Stunden sagt, wie viele Köche Sie brauchen. Sie sagt nicht, wer die Küche führt, wenn der Küchenchef frei hat. In vielen Häusern geht die Rechnung in Stunden auf, und trotzdem hängt alles an einem Kopf, der die Rezepte, die Lieferanten und die Mengen kennt. Ihre Küche steht und fällt mit einer einzigen Person.</p>
+        <p>Planen Sie deshalb neben den Stunden eine zweite Person ein, die die Küche führen kann, und halten Sie das Wissen so fest, dass es nicht mit einer Person geht. Wie das gelingt: <a href="/wissen/rezepte-standardisieren/" class="typo-link">Rezepte standardisieren</a></p>
+        <p>Je mehr am Posten festgehalten ist, desto schneller trägt auch eine neue Kraft. Bei Avorix übernimmt das die Koch-App. Wir nennen das geführtes Arbeiten. Geführtes Arbeiten heißt: Am Posten zeigt die Koch-App jeder Kraft, was jetzt zu tun ist. Schritt für Schritt, mit Foto, Menge und Zeit, bis zum Haken. <a href="/koch-app/" class="typo-link">Die Koch-App</a></p>
+
+        <h2>Und im Hotel oder in der Kantine?</h2>
+        <p>Die Methode bleibt dieselbe, nur die Posten ändern sich.</p>
+        <ul>
+          <li><strong>Hotel mit Halbpension:</strong> Das Abendmenü kommt oft für alle Gäste in einem engen Zeitfenster. Dann zählt die Spitze, nicht der Durchschnitt. Frühstück, Bankette und Feiern sind eigene Services mit eigenen Stunden. In Saisonbetrieben rechnen Sie die Hochsaison für sich.</li>
+          <li><strong>Betriebskantine:</strong> meist ein Service an fünf Tagen und eine bekannte Essenszahl. Das macht die Rechnung einfacher und die Reserve wichtiger, weil das Essen jeden Tag pünktlich stehen muss. <a href="/betriebsgastronomie/" class="typo-link">Betriebsgastronomie in Eigenregie</a></li>
+          <li><strong>Bankett oder Hochzeit:</strong> Rechnen Sie vom Pass aus, wie viele Teller in welcher Zeit rausmüssen. <a href="/wissen/servicekraefte-pro-gast/" class="typo-link">Wie viele Servicekräfte pro Gast?</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+ <section class="reveal section-gap">
+    <div class="content-width">
+      <h2 class="mb-6" style="color:var(--druck)">Häufige Fragen</h2>
+      <div class="faq-list">
+        <details class="faq-item" open>
+          <summary class="faq-q">Wie viele Köche braucht ein Restaurant mit 80 Plätzen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Das hängt an Öffnungstagen und Karte, nicht an den Plätzen. Ein Restaurant mit 80 Plätzen, sechs Öffnungstagen, zwei Köchen mittags und drei abends braucht rund 222 Arbeitsstunden in der Woche. Nach Urlaub und Krankheit sind das knapp sieben Vollzeitköche, obwohl nie mehr als drei gleichzeitig in der Küche stehen.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Gibt es eine Faustregel, wie viele Köche pro Gast?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Eine verlässliche nicht, weil die Zahl an der Karte hängt. Ein kalt vorbereitetes Buffet braucht am Abend wenige Hände, ein warm angerichtetes Menü für alle gleichzeitig sehr viele. Rechnen Sie über die Posten je Service und die Stunden in der Woche.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viel Reserve brauche ich für Urlaub und Krankheit?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Im Beispiel dieses Artikels knapp ein Fünftel mehr, als die reinen Wochenstunden ergeben: 25 Urlaubstage und 15 Krankheitstage machen aus 40 Vertragsstunden knapp 34 Stunden in der Küche. Setzen Sie Ihre eigenen Werte der letzten zwei Jahre ein.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Darf ein Koch nach dem Spätdienst am nächsten Morgen die Frühschicht machen?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Nur, wenn dazwischen genug Ruhe liegt. Das Arbeitszeitgesetz verlangt elf Stunden, in Gaststätten und Beherbergungsbetrieben mit Ausgleich zehn. Wer um 23:30 Uhr Feierabend hat, darf frühestens um 9:30 Uhr wieder anfangen, und auch das nur mit Ausgleich.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Wie viele Köche braucht ein Hotel mit Halbpension?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Rechnen Sie wie im Restaurant, aber vom Abendmenü aus, weil es meist für alle Gäste in einem engen Zeitfenster kommt. Frühstück, Bankette und die Hochsaison rechnen Sie als eigene Services dazu.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Was tue ich, wenn die Rechnung mehr Köche ergibt, als ich finde?<svg class="faq-chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><div class="faq-inner"><p>Drei Stellschrauben: die Karte so bauen, dass mehr vorbereitet werden kann, Öffnungszeiten und Services prüfen, und die Lücke auf Zeit besetzen. Bei Avorix gibt es keine Mindest-Einsatzdauer, ein festangestellter Koch steht in der Regel innerhalb von 24 bis 72 Stunden bei Ihnen.</p></div></div>
+        </details>
+      </div>
+      <p class="text-sm mt-6" style="color:var(--grau)">Dieser Beitrag ist eine allgemeine Orientierung und keine Rechts- oder Steuerberatung.</p>
+    </div>
+  </section>
+
+  {/* Autorenkasten */}
+ <section class="reveal section-gap">
+    <div class="content-width text-spalte">
+      <div class="card card-text">
+        <p style="color: var(--druck)"><strong>Börge Penk</strong> hat zwanzig Jahre als Küchenchef gearbeitet, bevor er Avorix gegründet hat. Er schreibt hier über das, was er in Küchen gesehen hat, nicht über Software. <a href="/ueber-uns/" class="typo-link">Mehr über Avorix</a></p>
+      </div>
+    </div>
+  </section>
+
+  {/* CTA-Abschluss */}
+ <section class="reveal section-gap">
+    <div class="content-width text-center">
+      <div class="mb-6">
+        <Stempel groesse="gross" />
+      </div>
+      <p class="mb-6 max-w-[var(--spalte-text)]" style="margin-inline:auto;color: var(--druck)">
+        Die Reserve muss nicht fest angestellt sein.
+      </p>
+      <a href="/personal/" data-cta-location="wissen-personalbedarf-ende" class="btn btn-primary">Personal anfragen</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .eyebrow-link { color: inherit; text-decoration: none; }
+  .eyebrow-link:hover { text-decoration: underline; }
+</style>
+
+<script>
+/* FAQ-Schließ-Animation — progressive enhancement */
+document.querySelectorAll('.faq-item').forEach(function(item) {
+  var summary = item.querySelector('summary');
+  if (!summary) return;
+  summary.addEventListener('click', function(e) {
+    if (!item.open) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    item.classList.add('faq-closing');
+    var body = item.querySelector('.faq-body');
+    if (!body) { item.classList.remove('faq-closing'); item.removeAttribute('open'); return; }
+    body.addEventListener('transitionend', function handler() {
+      body.removeEventListener('transitionend', handler);
+      item.classList.remove('faq-closing');
+      item.removeAttribute('open');
+    });
+  });
+});
+</script>
