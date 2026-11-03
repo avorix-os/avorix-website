@@ -188,7 +188,7 @@ const schema = [
 
   {/* D1 Direct answer (GEO) */}
   <section class="reveal section-gap">
-    <div class="content-width linie-oben">
+    <div class="content-width">
       <p id="direktantwort" class="einordnung-text">Avorix is a kitchen system for hotels and hospitality from Friedrichshafen on Lake Constance. It combines legally compliant kitchen staffing under the official German staffing licence, the Avorix Cook App for guided work, which takes kitchen teams step by step through every dish, and training by experienced chefs. Avorix works in Germany and Austria.</p>
     </div>
   </section>
@@ -312,7 +312,7 @@ const schema = [
           <p>A tablet hangs at the station. The app shows the cook step by step what to do: photo, quantity, time, done. The app scales portions automatically and keeps an eye on food cost.</p>
         </div>
       </div>
-      <p class="was-kosten">And your costs? Trained chefs are expensive, if you can find any at all. With Avorix, semi-skilled staff cook to your standard, and your skilled people only do what genuinely needs their skill.</p>
+      <p class="was-kosten"><strong>And your costs?</strong> Trained chefs are expensive, if you can find any at all. With Avorix, semi-skilled staff cook to your standard, and your skilled people only do what genuinely needs their skill.</p>
     </div>
   </section>
 
@@ -506,11 +506,12 @@ const schema = [
 
 <style>
 /* === Home page · Anweisung 81 (Teil D/E/F) — identical layout to / ========= */
-.home-hero { background: var(--papier); }
+/* Nachtrag 1 (Punkt 4): Hero-Unterlinie über die volle Fensterbreite. */
+.home-hero { background: var(--papier); border-bottom: 1px solid var(--linie); }
 .home-hero-grid {
   display: grid;
   gap: 32px;
-  padding: 40px 20px 56px;
+  padding: 40px 24px 56px;
 }
 .home-hero-grid > * { min-width: 0; }
 .home-hero-copy { display: flex; flex-direction: column; }
@@ -553,13 +554,14 @@ const schema = [
     grid-template-columns: 1.05fr 1fr;
     gap: 0;
     min-height: 620px;
-    padding: 0;
+    /* Nachtrag 1 (Punkt 4): linke Kante aus der eigenen Breite (100%, ohne
+       Scrollbar) statt 100vw -> deckt sich exakt mit .content-width. */
+    padding: 0 0 0 max(24px, calc((100% - 1080px) / 2 + 24px));
     align-items: stretch;
   }
   .home-hero-copy {
     justify-content: center;
-    padding: 48px;
-    padding-left: max(48px, calc((100vw - 1200px) / 2 + 48px));
+    padding: 48px 48px 48px 0;
   }
   .home-hero-media { height: 100%; }
   .home-hero-media :global(img) {
@@ -569,9 +571,19 @@ const schema = [
   }
 }
 
+/* Nachtrag 1 (Punkt 4): Linie an der Textkante statt über den ganzen Container. */
 .linie-oben {
-  border-top: 1px solid var(--linie);
+  position: relative;
   padding-top: 48px;
+}
+.linie-oben::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: var(--linie);
 }
 
 .einordnung-text {
@@ -583,7 +595,7 @@ const schema = [
 }
 
 .schmerz-top { display: grid; gap: 32px; }
-.schmerz-absatz { color: var(--grau); }
+.schmerz-absatz { color: var(--druck); }
 .schmerz-bild :global(img) {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -602,19 +614,21 @@ const schema = [
   display: grid;
   gap: 8px;
 }
-.schmerz-liste p { color: var(--grau); }
+.schmerz-liste p { color: var(--druck); }
 @media (min-width: 900px) {
   .schmerz-top { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .schmerz-liste li { grid-template-columns: 5fr 6fr; gap: 40px; align-items: start; }
   .schmerz-liste h3 { font-size: 28px; }
 }
 
+/* Nachtrag 1 (Punkt 2): die drei Karten auf gleiche Höhe strecken. */
+.section-band .grid:has(> .tuer-card) { align-items: stretch; }
 .tuer-card {
   display: flex;
   flex-direction: column;
   padding: 28px 24px;
 }
-.tuer-card p { flex: 1; color: var(--grau); margin-bottom: 24px; }
+.tuer-card p { flex: 1; color: var(--druck); margin-bottom: 24px; }
 .tuer-btn { width: 100%; }
 
 .warum-spalten,
@@ -624,7 +638,7 @@ const schema = [
   border-top: 1px solid var(--druck);
   padding-top: 18px;
 }
-.spalte-linie p { color: var(--grau); }
+.spalte-linie p { color: var(--druck); }
 .schritt-label {
   font-family: var(--f-mono);
   font-size: 13px;
@@ -644,7 +658,7 @@ const schema = [
 }
 
 .was-top { display: grid; gap: 40px; }
-.was-absatz { color: var(--grau); }
+.was-absatz { color: var(--druck); }
 .was-bild :global(img) {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -653,7 +667,7 @@ const schema = [
 }
 .was-kosten {
   max-width: 64ch;
-  color: var(--grau);
+  color: var(--druck);
   font-size: 18px;
   margin-top: 32px;
 }
@@ -662,6 +676,8 @@ const schema = [
 }
 
 .dunkel-grid { display: grid; gap: 32px; }
+/* Nachtrag 1 (Punkt 3): die H2 im dunklen Block als große Überschrift. */
+.dunkel-grid h2 { font-size: clamp(38px, 8vw, 64px); line-height: 1; }
 .dunkel-absatz { max-width: var(--spalte-text); font-size: 19px; margin-bottom: 24px; }
 .dunkel-hell { color: var(--akzent-hell); }
 @media (min-width: 900px) {
@@ -689,20 +705,20 @@ const schema = [
 }
 
 .leihen-grid { display: grid; gap: 32px; }
-.leihen-p { color: var(--grau); margin-bottom: 16px; }
+.leihen-p { color: var(--druck); margin-bottom: 16px; }
 .leihen-fett { color: var(--druck); font-weight: 600; }
 @media (min-width: 900px) {
   .leihen-grid { grid-template-columns: 5fr 6fr; gap: 56px; align-items: start; }
 }
 
-.gruender-p { color: var(--grau); max-width: 64ch; margin-bottom: 16px; }
+.gruender-p { color: var(--druck); max-width: 64ch; margin-bottom: 16px; }
 .gruender-quote {
   margin: 24px 0 0;
   font-family: Charter, Georgia, serif;
   font-style: italic;
   font-size: clamp(22px, 3.4vw, 28px);
   line-height: 1.4;
-  color: var(--grau);
+  color: var(--druck);
   border-top: 0;
   border-left: 2px solid var(--druck);
   padding-top: 0;

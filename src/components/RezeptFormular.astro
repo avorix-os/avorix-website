@@ -50,7 +50,7 @@ const T = {
 ---
 <div class="card rz-card" id={T.anchor}>
   <h2 class="mb-4" style="color:var(--druck)">{T.h}</h2>
-  <p class="mb-6 max-w-[var(--spalte-text)]" style="color:var(--grau)">{T.intro}</p>
+  <p class="mb-6 max-w-[var(--spalte-text)]" style="color: var(--druck)">{T.intro}</p>
 
   <form class="rz-form space-y-4" action="/api/formular" method="POST" enctype="multipart/form-data" data-rezept-form data-lang={lang} data-kennung={kennung}>
     <input type="hidden" name="formular" value={kennung} />
