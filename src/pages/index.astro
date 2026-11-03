@@ -173,7 +173,7 @@ const schema = [
 
   {/* D1 Einordnung (GEO) */}
   <section class="reveal section-gap">
-    <div class="content-width linie-oben">
+    <div class="content-width">
       <p id="direktantwort" class="einordnung-text">Avorix ist ein K&uuml;chensystem f&uuml;r Hotels und Gastronomie aus Friedrichshafen am Bodensee. Es verleiht festangestellte K&ouml;che mit beh&ouml;rdlicher Arbeitnehmer&uuml;berlassungserlaubnis und verbindet das mit einer Koch-App f&uuml;r gef&uuml;hrtes Arbeiten, die K&uuml;chenteams Schritt f&uuml;r Schritt durch jedes Gericht f&uuml;hrt, und mit Schulung durch erfahrene K&ouml;che. Avorix arbeitet in Deutschland und &Ouml;sterreich.</p>
     </div>
   </section>
@@ -487,11 +487,13 @@ const schema = [
    Karten, Bon) stehen in global.css; hier nur die startseiteneigenen Layouts. */
 
 /* D0 Hero: Foto randabfallend rechts, Text an der Inhaltskante */
-.home-hero { background: var(--papier); }
+/* Nachtrag 1 (Punkt 4): Unterkante des Hero als 1px-Linie über die volle
+   Fensterbreite, dort wo das Foto endet. Die eigene Linie über D1 entfällt. */
+.home-hero { background: var(--papier); border-bottom: 1px solid var(--linie); }
 .home-hero-grid {
   display: grid;
   gap: 32px;
-  padding: 40px 20px 56px;
+  padding: 40px 24px 56px;
 }
 .home-hero-grid > * { min-width: 0; }
 .home-hero-copy { display: flex; flex-direction: column; }
@@ -534,13 +536,15 @@ const schema = [
     grid-template-columns: 1.05fr 1fr;
     gap: 0;
     min-height: 620px;
-    padding: 0;
+    /* Nachtrag 1 (Punkt 4): linke Kante aus der EIGENEN Breite (100%, ohne
+       Scrollbar) statt 100vw. Deckt sich damit exakt mit .content-width
+       (auto-Rand), unabhängig von der Scrollbar-Breite. Foto bleibt rechts. */
+    padding: 0 0 0 max(24px, calc((100% - 1080px) / 2 + 24px));
     align-items: stretch;
   }
   .home-hero-copy {
     justify-content: center;
-    padding: 48px;
-    padding-left: max(48px, calc((100vw - 1200px) / 2 + 48px));
+    padding: 48px 48px 48px 0;
   }
   .home-hero-media { height: 100%; }
   .home-hero-media :global(img) {
@@ -550,10 +554,22 @@ const schema = [
   }
 }
 
-/* Linie über einem Abschnitt (D1, D5, D9, D13) */
+/* Linie über einem Abschnitt (D5, D9, D13).
+   Nachtrag 1 (Punkt 4): Die Linie beginnt und endet an der Textkante, nicht am
+   Container samt Rand. Darum als Pseudo-Element um 1.5rem (= .content-width-Rand)
+   eingerückt statt als border-top über die volle Containerbreite. */
 .linie-oben {
-  border-top: 1px solid var(--linie);
+  position: relative;
   padding-top: 48px;
+}
+.linie-oben::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 1.5rem;
+  right: 1.5rem;
+  height: 1px;
+  background: var(--linie);
 }
 
 /* D1 Einordnung */
@@ -567,7 +583,7 @@ const schema = [
 
 /* D2 Problem */
 .schmerz-top { display: grid; gap: 32px; }
-.schmerz-absatz { color: var(--grau); }
+.schmerz-absatz { color: var(--druck); }
 .schmerz-bild :global(img) {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -586,7 +602,7 @@ const schema = [
   display: grid;
   gap: 8px;
 }
-.schmerz-liste p { color: var(--grau); }
+.schmerz-liste p { color: var(--druck); }
 @media (min-width: 900px) {
   .schmerz-top { grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
   .schmerz-liste li { grid-template-columns: 5fr 6fr; gap: 40px; align-items: start; }
@@ -594,12 +610,16 @@ const schema = [
 }
 
 /* D3 Wo stehen Sie: Karten mit gleich hohen Buttons */
+/* Nachtrag 1 (Punkt 2): Das Raster streckt die drei Karten auf gleiche Höhe
+   (global stehen .card-Raster auf align-items:start), damit die Buttons auf
+   einer Linie liegen. */
+.section-band .grid:has(> .tuer-card) { align-items: stretch; }
 .tuer-card {
   display: flex;
   flex-direction: column;
   padding: 28px 24px;
 }
-.tuer-card p { flex: 1; color: var(--grau); margin-bottom: 24px; }
+.tuer-card p { flex: 1; color: var(--druck); margin-bottom: 24px; }
 .tuer-btn { width: 100%; }
 
 /* D4 Warum Avorix / D5 Schritte: Spalten mit Linie oben */
@@ -610,7 +630,7 @@ const schema = [
   border-top: 1px solid var(--druck);
   padding-top: 18px;
 }
-.spalte-linie p { color: var(--grau); }
+.spalte-linie p { color: var(--druck); }
 .schritt-label {
   font-family: var(--f-mono);
   font-size: 13px;
@@ -631,7 +651,7 @@ const schema = [
 
 /* D5 Was ist Avorix: Text + Foto */
 .was-top { display: grid; gap: 40px; }
-.was-absatz { color: var(--grau); }
+.was-absatz { color: var(--druck); }
 .was-bild :global(img) {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -640,7 +660,7 @@ const schema = [
 }
 .was-kosten {
   max-width: 64ch;
-  color: var(--grau);
+  color: var(--druck);
   font-size: 18px;
   margin-top: 32px;
 }
@@ -650,6 +670,8 @@ const schema = [
 
 /* D6 dunkler Block: zwei Spalten */
 .dunkel-grid { display: grid; gap: 32px; }
+/* Nachtrag 1 (Punkt 3): die H2 im dunklen Block ist die große Überschrift. */
+.dunkel-grid h2 { font-size: clamp(38px, 8vw, 64px); line-height: 1; }
 .dunkel-absatz { max-width: var(--spalte-text); font-size: 19px; margin-bottom: 24px; }
 .dunkel-hell { color: var(--akzent-hell); }
 @media (min-width: 900px) {
@@ -680,21 +702,21 @@ const schema = [
 
 /* D9 Köche leihen: zwei Spalten */
 .leihen-grid { display: grid; gap: 32px; }
-.leihen-p { color: var(--grau); margin-bottom: 16px; }
+.leihen-p { color: var(--druck); margin-bottom: 16px; }
 .leihen-fett { color: var(--druck); font-weight: 600; }
 @media (min-width: 900px) {
   .leihen-grid { grid-template-columns: 5fr 6fr; gap: 56px; align-items: start; }
 }
 
 /* D10 Gründer: einspaltig, Zitat mit linker Linie */
-.gruender-p { color: var(--grau); max-width: 64ch; margin-bottom: 16px; }
+.gruender-p { color: var(--druck); max-width: 64ch; margin-bottom: 16px; }
 .gruender-quote {
   margin: 24px 0 0;
   font-family: Charter, Georgia, serif;
   font-style: italic;
   font-size: clamp(22px, 3.4vw, 28px);
   line-height: 1.4;
-  color: var(--grau);
+  color: var(--druck);
   border-top: 0;
   border-left: 2px solid var(--druck);
   padding-top: 0;

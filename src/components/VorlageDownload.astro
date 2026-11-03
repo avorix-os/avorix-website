@@ -17,7 +17,7 @@ import Altcha from "./Altcha.astro";
       {/* Formular-Zustand */}
       <div data-vd-form>
         <h2 class="mb-4" style="color:var(--druck)">Die Vorlage zum Herunterladen</h2>
-        <p class="mb-6" style="color:var(--grau)">{kurzsatz}</p>
+        <p class="mb-6" style="color: var(--druck)">{kurzsatz}</p>
 
         <p class="formular-pflicht">Felder mit * brauchen wir, alles andere ist freiwillig.</p>
         <form action="/api/formular" method="POST" class="space-y-4">
@@ -41,7 +41,7 @@ import Altcha from "./Altcha.astro";
           </div>
           <div>
             <label class="block text-sm font-medium mb-2" style="color:var(--druck)">
-              Betrieb / Hotel <span style="color:var(--grau)">(optional)</span>
+              Betrieb / Hotel <span style="color: var(--druck)">(optional)</span>
             </label>
             <input type="text" name="betrieb" autocomplete="organization" placeholder="z. B. Hotel Alpenhof" class="vorlage-field w-full" />
           </div>
@@ -66,7 +66,7 @@ import Altcha from "./Altcha.astro";
       {/* Erfolgs-Zustand (versteckt bis nach dem Absenden) */}
       <div class="hidden text-center py-4" data-vd-success>
         <h3 class="mb-4" style="color:var(--druck)">Vielen Dank!</h3>
-        <p class="text-sm mb-6" style="color:var(--grau)">Ihr Download startet automatisch. Falls nicht, klicken Sie hier:</p>
+        <p class="text-sm mb-6" style="color: var(--druck)">Ihr Download startet automatisch. Falls nicht, klicken Sie hier:</p>
         <div class="flex flex-wrap gap-4 justify-center">
           {dateien.map((d) => (
             <a href={d.href} download={d.filename} class="btn btn-primary">{d.label}</a>
@@ -103,7 +103,7 @@ import Altcha from "./Altcha.astro";
     align-items: flex-start;
     font-size: 0.8125rem;
     line-height: 1.5;
-    color: var(--grau);
+    color: var(--druck);
   }
   .newsletter-consent input { margin-top: 3px; flex-shrink: 0; }
 </style>
