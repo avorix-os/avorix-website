@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PartnerSlider from "../../components/PartnerSlider.astro";
 import Altcha from "../../components/Altcha.astro";
 import { Image, getImage } from "astro:assets";
 import Stempel from "../../components/Stempel.astro";
@@ -210,6 +211,9 @@ const schemaOrg = [
       </p>
     </div>
   </section>
+
+  {/* Anweisung 85: Partnerband, direkt nach dem Einleitungsabsatz. */}
+  <PartnerSlider lang="en" />
 
   {/* Wann Sie uns rufen */}
  <section class="reveal section-gap">
