@@ -1,0 +1,142 @@
+---
+// PartnerSlider.astro -- Anweisung 85: schmales Logo-Band "Unsere Partner" mit
+// drei Logos, die langsam von rechts nach links durchlaufen. Nur CSS, kein JS.
+//
+// Die zweite Liste ist eine Kopie der ersten, damit das Band ohne Sprung
+// durchlaeuft; sie traegt aria-hidden und leere Alt-Texte (Bildschirmleser
+// lesen die Namen genau einmal). Bei "Bewegung reduzieren" steht eine ruhige
+// Reihe ohne Kopie. Die Logos sind bewusst nicht verlinkt.
+//
+// Kein section-gap und kein reveal: das Band hat eigene Abstaende; mit
+// section-gap griffe die Kollaps-Regel `.section-gap + .section-gap`.
+interface Props {
+  lang?: "de" | "en";
+}
+const { lang = "de" } = Astro.props;
+const titel = lang === "en" ? "Our partners" : "Unsere Partner";
+
+// Alt-Texte sind Namen und in beiden Sprachen gleich. Die Hoehen je Logo stehen
+// im CSS (optisch gleich schwer), bitte nicht angleichen.
+const logos = [
+  { klasse: "aueg", src: "/partner/aueg-plus-logo.svg", alt: "AÜG+", w: 2385, h: 1419 },
+  { klasse: "seehotel", src: "/partner/seehotel-friedrichshafen-logo.svg", alt: "Seehotel Friedrichshafen", w: 4350, h: 1343 },
+  { klasse: "haccp", src: "/partner/haccp-control-logo-dunkel.svg", alt: "HACCP Control", w: 708, h: 128 },
+];
+---
+<section class="partner-band" aria-labelledby="partner-titel">
+  <div class="content-width partner-inhalt">
+    <p id="partner-titel" class="eyebrow partner-titel">{titel}</p>
+    <div class="partner-slider">
+      {[false, true].map((kopie) => (
+        <ul class="partner-spur" aria-hidden={kopie ? "true" : undefined}>
+          {logos.map((l) => (
+            <li><img class={`partner-logo partner-logo--${l.klasse}`} src={l.src} alt={kopie ? "" : l.alt} width={l.w} height={l.h} loading="lazy" decoding="async" /></li>
+          ))}
+        </ul>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+/* Partnerslider (Anweisung 85) */
+.partner-band {
+  background: var(--flaeche);
+  border-top: 1px solid var(--linie);
+  border-bottom: 1px solid var(--linie);
+  padding-top: 28px;
+  padding-bottom: 32px;
+}
+.partner-titel {
+  margin: 0 0 16px;
+  white-space: nowrap;
+}
+.partner-slider {
+  --partner-abstand: 48px;
+  --partner-dauer: 18s;
+  display: flex;
+  gap: var(--partner-abstand);
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+.partner-spur {
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--partner-abstand);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.partner-spur li {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 56px;
+}
+.partner-logo {
+  display: block;
+  width: auto;
+  opacity: 0.72;
+  transition: opacity 0.15s ease;
+}
+.partner-logo:hover {
+  opacity: 1;
+}
+/* optisch gleich schwer: kompakte Marke höher, breite Wortmarke flacher */
+.partner-logo--aueg { height: 44px; }
+.partner-logo--seehotel { height: 34px; }
+.partner-logo--haccp { height: 26px; }
+
+@media (min-width: 900px) {
+  .partner-band {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  .partner-inhalt {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    column-gap: 56px;
+  }
+  .partner-titel {
+    margin: 0;
+  }
+  .partner-slider { --partner-abstand: 72px; --partner-dauer: 32s; }
+  .partner-logo--aueg { height: 52px; }
+  .partner-logo--seehotel { height: 40px; }
+  .partner-logo--haccp { height: 30px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .partner-spur {
+    animation: partner-lauf var(--partner-dauer) linear infinite;
+  }
+  .partner-slider:hover .partner-spur {
+    animation-play-state: paused;
+  }
+}
+@keyframes partner-lauf {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-100% - var(--partner-abstand))); }
+}
+
+/* Ohne Bewegung: eine ruhige Reihe, Kopie aus */
+@media (prefers-reduced-motion: reduce) {
+  .partner-slider {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .partner-spur {
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+  .partner-spur[aria-hidden="true"] {
+    display: none;
+  }
+}
+</style>

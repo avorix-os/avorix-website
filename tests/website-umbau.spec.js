@@ -1847,3 +1847,106 @@ test.describe('A82 Nachtrag 1: Vollbild ohne Beschnitt', () => {
     expect(css.bg).toBe('rgb(0, 0, 0)');
   });
 });
+
+/*
+ * A85: Partnerband "Unsere Partner" mit drei Logos auf /, /en/, /personal/, /en/staff/.
+ */
+test.describe('A85: Partnerslider', () => {
+  const seiten = [
+    ['/', 'Unsere Partner', 'Kommt Ihnen das bekannt vor?', '#direktantwort'],
+    ['/en/', 'Our partners', 'Does this sound familiar?', '#direktantwort'],
+    ['/personal/', 'Unsere Partner', 'Avorix-Köche, einfach erklärt.', '#direktantwort'],
+    ['/en/staff/', 'Our partners', 'When to call us.', null],
+  ];
+  const namen = ['AÜG+', 'Seehotel Friedrichshafen', 'HACCP Control'];
+
+  for (const [pfad, titel, naechsteH2, vorher] of seiten) {
+    test(`${pfad}: Band an der richtigen Stelle, Beschriftung, Alt-Texte`, async ({ page }) => {
+      await page.goto(pfad);
+      await expect(page.locator('.partner-band')).toHaveCount(1);
+      const lage = await page.$eval('.partner-band', (band) => ({
+        titel: band.querySelector('.partner-titel').textContent.trim(),
+        vorher: band.previousElementSibling ? band.previousElementSibling.innerHTML : '',
+        naechsteH2: band.nextElementSibling.querySelector('h2')?.textContent.trim(),
+        klassen: band.className,
+      }));
+      expect(lage.titel).toBe(titel);
+      expect(lage.naechsteH2).toBe(naechsteH2);
+      if (vorher) expect(lage.vorher).toContain('id="direktantwort"');
+      else expect(lage.vorher).toContain('Avorix hires out permanently employed');
+      expect(lage.klassen).not.toContain('section-gap');
+      expect(lage.klassen).not.toContain('reveal');
+      // erste Liste mit Namen, zweite als Kopie versteckt und ohne Alt-Texte
+      const listen = await page.$$eval('.partner-spur', (uls) => uls.map((ul) => ({
+        hidden: ul.getAttribute('aria-hidden'),
+        alts: [...ul.querySelectorAll('img')].map((i) => i.getAttribute('alt')),
+        links: ul.querySelectorAll('a').length,
+      })));
+      expect(listen).toEqual([
+        { hidden: null, alts: namen, links: 0 },
+        { hidden: 'true', alts: ['', '', ''], links: 0 },
+      ]);
+    });
+  }
+
+  test('Logo-Dateien als SVG, byte-gleich', async ({ request }) => {
+    for (const [f, groesse] of [['aueg-plus-logo', 18127], ['seehotel-friedrichshafen-logo', 13915], ['haccp-control-logo-dunkel', 6215]]) {
+      const r = await request.get(`/partner/${f}.svg`);
+      expect(r.status()).toBe(200);
+      expect(r.headers()['content-type']).toContain('image/svg+xml');
+      expect((await r.body()).length).toBe(groesse);
+    }
+  });
+
+  for (const pfad of ['/', '/en/', '/en/staff/']) {
+    test(`${pfad}: Abschnitt nach dem Band hat oben wieder Abstand`, async ({ page }) => {
+      await page.setViewportSize({ width: 1440, height: 900 });
+      await page.goto(pfad);
+      const pt = await page.$eval('.partner-band + section', (el) => getComputedStyle(el).paddingTop);
+      expect(pt).toBe('128px');
+    });
+  }
+
+  test('Desktop: Beschriftung links, Logos rechts, Band laeuft', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+    const m = await page.$eval('.partner-band', (band) => {
+      const t = band.querySelector('.partner-titel').getBoundingClientRect();
+      const s = band.querySelector('.partner-slider').getBoundingClientRect();
+      return { titelRechts: t.right, sliderLinks: s.left, gleicheZeile: Math.abs((t.top + t.bottom) / 2 - (s.top + s.bottom) / 2) < 20,
+        anim: getComputedStyle(band.querySelector('.partner-spur')).animationName };
+    });
+    expect(m.titelRechts).toBeLessThan(m.sliderLinks);
+    expect(m.gleicheZeile).toBe(true);
+    expect(m.anim).not.toBe('none');
+  });
+
+  for (const pfad of ['/', '/en/staff/']) {
+    test(`${pfad}: Handy 390px ohne seitliches Scrollen, Titel ueber den Logos`, async ({ page }) => {
+      await page.setViewportSize({ width: 390, height: 844 });
+      await page.goto(pfad);
+      const m = await page.evaluate(() => {
+        const band = document.querySelector('.partner-band');
+        return {
+          ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          titelUnten: band.querySelector('.partner-titel').getBoundingClientRect().bottom,
+          sliderOben: band.querySelector('.partner-slider').getBoundingClientRect().top,
+        };
+      });
+      expect(m.ueberlauf).toBe(0);
+      expect(m.titelUnten).toBeLessThanOrEqual(m.sliderOben);
+    });
+  }
+
+  test('Bewegung reduzieren: steht still, jedes Logo einmal', async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/');
+    const m = await page.$$eval('.partner-spur', (uls) => uls.map((ul) => ({
+      display: getComputedStyle(ul).display,
+      anim: getComputedStyle(ul).animationName,
+    })));
+    expect(m[0].display).toBe('flex');
+    expect(m[0].anim).toBe('none');
+    expect(m[1].display).toBe('none');
+  });
+});

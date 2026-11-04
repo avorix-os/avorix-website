@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PartnerSlider from "../../components/PartnerSlider.astro";
 import { Image, getImage } from "astro:assets";
 import Lightbox from "../../components/Lightbox.astro";
 import Stempel from "../../components/Stempel.astro";
@@ -193,6 +194,9 @@ const schema = [
       <p id="direktantwort" class="einordnung-text">Avorix is a kitchen system for hotels and hospitality from Friedrichshafen on Lake Constance. It combines legally compliant kitchen staffing under the official German staffing licence, the Avorix Cook App for guided work, which takes kitchen teams step by step through every dish, and training by experienced chefs. Avorix works in Germany and Austria.</p>
     </div>
   </section>
+
+  {/* Anweisung 85: Partnerband, direkt nach #direktantwort. */}
+  <PartnerSlider lang="en" />
 
   {/* D2 Problem: text + photo, then list with lines */}
   <section class="reveal section-gap">

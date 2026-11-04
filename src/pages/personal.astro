@@ -4,6 +4,7 @@ import { Image, getImage } from "astro:assets";
 import Stempel from "../components/Stempel.astro";
 import Altcha from "../components/Altcha.astro";
 import Erklaerfilm from "../components/Erklaerfilm.astro";
+import PartnerSlider from "../components/PartnerSlider.astro";
 import dampfTopf from "../assets/bilder/dampf-topf.jpg";
 
 const ogImg = await getImage({ src: dampfTopf, width: 1200, format: "jpeg" });
@@ -256,6 +257,9 @@ const schema = [
       </p>
     </div>
   </section>
+
+  {/* Anweisung 85: Partnerband, direkt nach #direktantwort, vor dem Erklaerfilm. */}
+  <PartnerSlider lang="de" />
 
   {/* Anweisung 82: Erklaerfilm, direkt nach #direktantwort, vor "Wann Sie uns rufen". */}
   <Erklaerfilm />
