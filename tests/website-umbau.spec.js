@@ -1950,3 +1950,130 @@ test.describe('A85: Partnerslider', () => {
     expect(m[1].display).toBe('none');
   });
 });
+
+/*
+ * A86: Zielseite /personal/koch-mieten/ fuer die Google-Anzeigen (noindex,
+ * nirgends verlinkt). Formular und FAQ 3/4/5 sind woertlich von /personal/.
+ */
+test.describe('A86: Zielseite Koch mieten', () => {
+  const PFAD = '/personal/koch-mieten/';
+  // Astro vergibt je Seite eigene Scope-Attribute; fuer den Wortlaut-Vergleich raus.
+  const ohneCid = (html) => html.replace(/ data-astro-cid-[a-z0-9]+=""/g, '');
+
+  test('Antwort 200 ohne Umleitung', async ({ request }) => {
+    const r = await request.get(PFAD, { maxRedirects: 0 });
+    expect(r.status()).toBe(200);
+  });
+
+  test('Kopf: title, description, robots, canonical, kein hreflang, kein FAQPage', async ({ page }) => {
+    await page.goto(PFAD);
+    await expect(page).toHaveTitle('Koch mieten für Hotel, Restaurant und Kantine | Avorix');
+    expect(await page.getAttribute('meta[name="description"]', 'content')).toBe(
+      'Koch mieten für Ihren Betrieb: Rückmeldung innerhalb von 24 Stunden, Einsatz in der Regel innerhalb von 24 bis 72 Stunden, keine Mindest-Einsatzdauer.');
+    expect(await page.getAttribute('meta[name="robots"]', 'content')).toBe('noindex, follow');
+    expect(await page.getAttribute('link[rel="canonical"]', 'href')).toBe('https://avorix.de/personal/koch-mieten/');
+    await expect(page.locator('link[rel="alternate"][hreflang]')).toHaveCount(0);
+    const schema = await page.$$eval('script[type="application/ld+json"]', (els) => els.map((e) => e.textContent).join(''));
+    expect(schema).not.toContain('FAQPage');
+  });
+
+  test('nicht in Sitemap und llms.txt, robots.txt sperrt nicht', async ({ request }) => {
+    const sm = await request.get('/sitemap-0.xml');
+    expect(sm.status()).toBe(200);
+    expect(await sm.text()).not.toContain('koch-mieten');
+    expect(await (await request.get('/llms.txt')).text()).not.toContain('koch-mieten');
+    const robots = await (await request.get('/robots.txt')).text();
+    for (const zeile of robots.split('\n').filter((z) => /^disallow:/i.test(z.trim()))) {
+      const regel = zeile.split(':')[1].trim();
+      if (regel) expect(PFAD.startsWith(regel)).toBe(false);
+    }
+  });
+
+  test('keine Links auf die Seite (Menue, Footer, andere Seiten)', async ({ page }) => {
+    for (const pfad of ['/', '/personal/', '/personal/bodensee/', '/wissen/', '/kontakt/']) {
+      await page.goto(pfad);
+      await expect(page.locator('a[href*="koch-mieten"]')).toHaveCount(0);
+    }
+  });
+
+  test('Abschnitte in der Reihenfolge aus Teil 3', async ({ page }) => {
+    await page.goto(PFAD);
+    expect((await page.textContent('h1')).trim()).toBe('Koch mieten für Hotel, Restaurant und Kantine.');
+    const h2 = await page.$$eval('main h2', (els) => els.map((e) => e.textContent.trim()));
+    expect(h2).toEqual([
+      'Das gilt bei jedem Einsatz.',
+      'Wer bei Ihnen am Herd steht.',
+      'So läuft ein Einsatz. In vier Schritten.',
+      'Aus dem laufenden Betrieb.',
+      'Was kostet das?',
+      'Koch anfragen.',
+      'Häufige Fragen',
+    ]);
+    await expect(page.locator('.partner-band')).toHaveCount(1);
+    await expect(page.locator('main video')).toHaveCount(0);
+    // Inhalt: nur vier Links (Jobs, Frage 3, Frage 4, Telefon) ausser #anfrage/Datenschutz
+    const links = await page.$$eval('main a[href]', (els) => [...new Set(els.map((a) => a.getAttribute('href')))]
+      .filter((h) => !h.startsWith('#') && h !== '/datenschutz' && !h.startsWith('https://altcha.org')));
+    expect(links.sort()).toEqual(['/jobs/', '/wissen/mietkoch-kosten/', '/wissen/mietkoch-scheinselbstaendigkeit/', 'tel:+4975413973915'].sort());
+  });
+
+  test('FAQ: sechs Fragen, 3/4/5 woertlich wie /personal/', async ({ page }) => {
+    await page.goto('/personal/');
+    const quelle = await page.$$eval('.faq-item', (els) => Object.fromEntries(els.map((d) => [
+      d.querySelector('summary').textContent.trim(), d.querySelector('.faq-inner').innerHTML])));
+    await page.goto(PFAD);
+    const hier = await page.$$eval('.faq-item', (els) => els.map((d) => [
+      d.querySelector('summary').textContent.trim(), d.querySelector('.faq-inner').innerHTML]));
+    expect(hier.map(([f]) => f)).toEqual([
+      'Wie schnell kann jemand bei uns stehen?',
+      'Gibt es eine Mindest-Einsatzdauer?',
+      'Was kostet ein Mietkoch bei Avorix?',
+      'Was ist der Unterschied zwischen einem Mietkoch und einem Koch von Avorix?',
+      'Wer ist der Arbeitgeber unseres Leihkochs?',
+      'Was ist, wenn der Koch nicht zu unserem Team passt?',
+    ]);
+    for (const [frage, antwort] of hier.slice(1)) expect(ohneCid(antwort)).toBe(ohneCid(quelle[frage]));
+    expect(ohneCid(hier[0][1])).toBe('<p>In der Regel innerhalb von 24 bis 72 Stunden, je nach Standort und Anforderung.</p>');
+  });
+
+  test('Formular gleich wie /personal/ (Adresse, Felder, Ablauf-Text)', async ({ page }) => {
+    const lies = async () => page.$eval('#anfrage form', (f) => ({
+      action: f.getAttribute('action'), method: f.getAttribute('method'),
+      felder: [...f.querySelectorAll('input, textarea, select')].map((e) => `${e.name}|${e.type}|${e.required}|${e.value && e.type !== 'radio' ? '' : e.value}`),
+      ablauf: f.querySelector('.anfrage-ablauf').innerHTML,
+      hinweis: f.querySelector('.formular-hinweis').innerHTML,
+    }));
+    await page.goto('/personal/');
+    const quelle = await lies();
+    await page.goto(PFAD);
+    const hier = await lies();
+    for (const k of ['ablauf', 'hinweis']) { hier[k] = ohneCid(hier[k]); quelle[k] = ohneCid(quelle[k]); }
+    expect(hier).toEqual(quelle);
+    expect(hier.action).toBe('/api/formular');
+  });
+
+  test('Knoepfe "Koch anfragen" springen zum Formular', async ({ page }) => {
+    await page.goto(PFAD);
+    const knoepfe = await page.$$eval('main a', (els) => els.filter((a) => a.textContent.trim() === 'Koch anfragen').map((a) => a.getAttribute('href')));
+    expect(knoepfe.length).toBe(2);
+    for (const h of knoepfe) expect(h).toBe('#anfrage');
+    await expect(page.locator('section#anfrage form')).toHaveCount(1);
+  });
+
+  test('Handy 390px: H1, Absatz und Knopf ohne Scrollen, kein Seitenueberlauf', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(PFAD);
+    const m = await page.evaluate(() => {
+      const knopf = [...document.querySelectorAll('.hero-copy a')].find((a) => a.textContent.trim() === 'Koch anfragen');
+      return {
+        knopfUnten: knopf.getBoundingClientRect().bottom,
+        h1Oben: document.querySelector('h1').getBoundingClientRect().top,
+        hoehe: window.innerHeight,
+        ueberlauf: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      };
+    });
+    expect(m.h1Oben).toBeGreaterThanOrEqual(0);
+    expect(m.knopfUnten).toBeLessThanOrEqual(m.hoehe);
+    expect(m.ueberlauf).toBe(0);
+  });
+});

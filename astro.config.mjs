@@ -84,7 +84,9 @@ export default defineConfig({
         !page.includes("/jobs/profil/") &&
         !page.includes("/en/jobs/profile/") &&
         !page.includes("/hu/profil/") &&
-        !page.includes("/hu/adatvedelem-bemutatas/"),
+        !page.includes("/hu/adatvedelem-bemutatas/") &&
+        // Anweisung 86: Anzeigen-Zielseite (noindex), nicht in die Sitemap.
+        !page.includes("/personal/koch-mieten/"),
       serialize(item) {
         const images = PAGE_IMAGES[item.url];
         if (images) {

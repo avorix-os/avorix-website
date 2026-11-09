@@ -8,3 +8,5 @@
 *.webp binary
 *.woff binary
 *.woff2 binary
+# Anweisung 85/86: SVGs byte-gleich halten (keine CRLF-Umwandlung unter Windows).
+*.svg -text
