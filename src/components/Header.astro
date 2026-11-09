@@ -44,6 +44,10 @@ const zielgruppenLinks = [
 const pathname = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const isCurrent = (href: string) => (href.replace(/\/+$/, "") || "/") === pathname;
 
+// Anweisung 87: Auf der Anzeigen-Zielseite bleibt "Personal anfragen" auf der Seite
+// und springt zum eigenen Formular. Alle anderen Seiten wie bisher.
+const anfrageHref = pathname === "/personal/koch-mieten" ? "#anfrage" : "/personal#anfrage";
+
 // D1, Abnahme 4 (Anweisung 23): Der aktive Punkt muss in der geschlossenen
 // Leiste erkennbar sein. Auf den vier Seiten hinter dem Aufklapper trug nur
 // der Untereintrag die Markierung -- die sieht niemand, solange das Menue zu
@@ -566,7 +570,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
         </div>
 
         <a
-          href="/personal#anfrage"
+          href={anfrageHref}
           data-cta-location="header"
           data-cta-event="cta_personal_click"
           class="nav-cta nav-cta-erst"
@@ -655,7 +659,7 @@ const aufklapperAktiv = (lang === "de" ? angebotLinks.concat(zielgruppenLinks) :
       <>
         {/* Beide Wege stehen oben, "Personal anfragen" zuerst (Anweisung 12a). */}
         <a
-          href="/personal#anfrage"
+          href={anfrageHref}
           data-cta-location="header"
           data-cta-event="cta_personal_click"
           class="nav-mobile-cta nav-mobile-cta-oben"

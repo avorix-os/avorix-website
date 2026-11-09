@@ -32,11 +32,12 @@ const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profik
         <p class="eyebrow mb-4">Mietkoch f&uuml;r Betriebe</p>
         <h1 class="mb-6">Koch mieten f&uuml;r Hotel, Restaurant und Kantine.</h1>
         <p class="lead mb-6 max-w-[var(--spalte-text)]" style="color: var(--druck)">
-          Es fehlt jemand, wir schicken einen Koch. Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich, tageweise, wochenweise oder f&uuml;r die ganze Saison.
+          Es fehlt jemand, wir schicken einen Koch. Kurzfristige Eins&auml;tze sind in der Regel innerhalb von 24 bis 72 Stunden m&ouml;glich, tageweise, wochenweise oder f&uuml;r die ganze Saison. Wir arbeiten in ganz Deutschland und &Ouml;sterreich.
         </p>
-        <div class="flex flex-wrap gap-4 mb-6">
+        <div class="flex flex-wrap gap-4 mb-4">
           <a href="#anfrage" data-cta-location="koch-mieten-hero" data-cta-event="cta_personal_click" class="btn btn-primary">Koch anfragen</a>
         </div>
+        <p class="hero-beleg">&Uuml;ber 1.000 Einsatztage in den K&uuml;chen unserer Kunden.</p>
         <p class="hero-telefon">
           Im Notfall direkt anrufen:
           <a
@@ -71,6 +72,12 @@ const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profik
       <h2 class="mb-10 md:mb-16" style="color:var(--druck)">Das gilt bei jedem Einsatz.</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div class="card">
+          <h3 class="mb-4">Fest angestellt statt auf Rechnung.</h3>
+          <p class="text-sm leading-relaxed" style="color: var(--druck)">
+            Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Avorix bleibt der Arbeitgeber.
+          </p>
+        </div>
+        <div class="card">
           <h3 class="mb-4">In der Regel innerhalb von 24 bis 72 Stunden.</h3>
           <p class="text-sm leading-relaxed" style="color: var(--druck)">
             Wir melden uns innerhalb von 24 Stunden. Danach steht in der Regel innerhalb von 24 bis 72 Stunden ein Koch in Ihrer K&uuml;che, je nach Standort und Anforderung.
@@ -88,12 +95,6 @@ const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profik
             Der Stundensatz steht fest, bevor der Einsatz beginnt. Keine versteckten Posten.
           </p>
         </div>
-        <div class="card">
-          <h3 class="mb-4">Fest angestellt statt auf Rechnung.</h3>
-          <p class="text-sm leading-relaxed" style="color: var(--druck)">
-            Unsere K&ouml;che sind bei Avorix fest angestellt und sozialversichert. Avorix bleibt der Arbeitgeber.
-          </p>
-        </div>
       </div>
     </div>
   </section>
@@ -106,7 +107,7 @@ const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profik
         Wir arbeiten f&uuml;r Betriebe: Hotels, Restaurants, Kantinen und Caterer. F&uuml;r private Feiern und Haushalte schicken wir keine K&ouml;che.
       </p>
       <p class="lead max-w-[var(--spalte-text)] mt-6" style="color: var(--druck)">
-        Jeder, den wir schicken, ist Koch mit langj&auml;hriger K&uuml;chenerfahrung, je nach Bedarf als Beikoch, Koch oder Souschef, in Ausnahmen auch als K&uuml;chenchef. <strong>K&uuml;chenhilfen schicken wir nicht.</strong> Wir arbeiten in ganz Deutschland und &Ouml;sterreich.
+        Jeder, den wir schicken, ist Koch mit langj&auml;hriger K&uuml;chenerfahrung, je nach Bedarf als Beikoch, Koch oder Souschef, in Ausnahmen auch als K&uuml;chenchef. <strong>K&uuml;chenhilfen schicken wir nicht.</strong>
       </p>
       <p class="max-w-[var(--spalte-text)] mt-6" style="color: var(--druck)">
         Du bist selbst Koch und suchst eine Stelle? Dann geht es hier entlang: <a href="/jobs/" class="typo-link">Jobs bei Avorix</a>.
@@ -355,6 +356,14 @@ const ogImageAlt = "Dampf über einem Edelstahltopf auf dem Gasherd einer Profik
    das Bild laufen. Hier Umbruch wieder erlauben -- gezielt nur fuer diese H1. */
 .hero-copy h1 mark { white-space: normal; }
 
+/* Anweisung 87, 1.2: Beleg direkt unter dem Knopf, schlicht, ohne Siegel. */
+.hero-beleg {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--druck);
+  margin-bottom: 0.75rem;
+}
+
 /* Telefon-Zeile im Hero (12b).
    Nachtrag 1 (Punkt 1): 15px -> Druckfarbe (Faustregel: grau ab 15px wird druck). */
 .hero-telefon {
@@ -548,4 +557,13 @@ document.querySelectorAll('.faq-item').forEach(function(item) {
       }
     });
   }
+</script>
+
+<script>
+  /* Anweisung 87: "Personal anfragen" im Handy-Menue springt hier zu #anfrage.
+     Das Menue schliesst sich dabei, sonst bliebe es ueber dem Formular stehen.
+     Nur auf dieser Seite, die Kopfzeile der anderen Seiten bleibt unveraendert. */
+  document.querySelectorAll('#mobile-nav-overlay a[href="#anfrage"]').forEach((a) => {
+    a.addEventListener('click', () => document.getElementById('mobile-close-btn')?.click());
+  });
 </script>

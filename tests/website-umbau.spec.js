@@ -2077,3 +2077,86 @@ test.describe('A86: Zielseite Koch mieten', () => {
     expect(m.ueberlauf).toBe(0);
   });
 });
+
+/*
+ * A87: Feinschliff /personal/koch-mieten/. Hero mit Einsatzgebiet und Beleg,
+ * Karten neu sortiert, "Personal anfragen" in der Kopfzeile bleibt auf der Seite.
+ */
+test.describe('A87: Koch mieten Feinschliff', () => {
+  const PFAD = '/personal/koch-mieten/';
+  const GEBIET = 'Wir arbeiten in ganz Deutschland und Österreich.';
+  const norm = (t) => t.replace(/\s+/g, ' ').trim();
+
+  test('Hero: Absatz, Beleg unter dem Knopf, dann Notfall-Zeile', async ({ page }) => {
+    await page.goto(PFAD);
+    expect(norm(await page.textContent('.hero-copy .lead'))).toBe(
+      'Es fehlt jemand, wir schicken einen Koch. Kurzfristige Einsätze sind in der Regel innerhalb von 24 bis 72 Stunden möglich, tageweise, wochenweise oder für die ganze Saison. ' + GEBIET);
+    const folge = await page.$$eval('.hero-copy > *', (els) => els.map((e) => e.className));
+    const i = folge.indexOf('hero-beleg');
+    expect(i).toBeGreaterThan(0);
+    expect(folge[i - 1]).toContain('flex');
+    expect(folge[i + 1]).toBe('hero-telefon');
+    expect(norm(await page.textContent('.hero-beleg'))).toBe('Über 1.000 Einsatztage in den Küchen unserer Kunden.');
+    // Beleg bleibt auch im Abschnitt "Aus dem laufenden Betrieb."
+    const body = norm(await page.textContent('main'));
+    expect(body.split('Über 1.000 Einsatztage in den Küchen unserer Kunden.').length - 1).toBe(2);
+    expect(body.split(GEBIET).length - 1).toBe(1);
+    expect(body).not.toMatch(/[–—]/);
+  });
+
+  test('Wer bei Ihnen am Herd steht: zweiter Absatz endet mit Küchenhilfen', async ({ page }) => {
+    await page.goto(PFAD);
+    const absaetze = await page.$$eval('h2', (els) => {
+      const h = els.find((e) => e.textContent.trim() === 'Wer bei Ihnen am Herd steht.');
+      return [...h.parentElement.querySelectorAll('p')].map((p) => p.textContent.replace(/\s+/g, ' ').trim());
+    });
+    expect(absaetze).toEqual([
+      'Wir arbeiten für Betriebe: Hotels, Restaurants, Kantinen und Caterer. Für private Feiern und Haushalte schicken wir keine Köche.',
+      'Jeder, den wir schicken, ist Koch mit langjähriger Küchenerfahrung, je nach Bedarf als Beikoch, Koch oder Souschef, in Ausnahmen auch als Küchenchef. Küchenhilfen schicken wir nicht.',
+      'Du bist selbst Koch und suchst eine Stelle? Dann geht es hier entlang: Jobs bei Avorix.',
+    ]);
+  });
+
+  test('Karten in neuer Reihenfolge, Texte unverändert, 2x2 auf dem Desktop', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto(PFAD);
+    const karten = await page.$$eval('h2', (els) => {
+      const h = els.find((e) => e.textContent.trim() === 'Das gilt bei jedem Einsatz.');
+      return [...h.parentElement.querySelectorAll('.card')].map((c) => ({
+        t: c.querySelector('h3').textContent.trim(),
+        p: c.querySelector('p').textContent.replace(/\s+/g, ' ').trim(),
+        x: Math.round(c.getBoundingClientRect().left),
+      }));
+    });
+    expect(karten.map((k) => [k.t, k.p])).toEqual([
+      ['Fest angestellt statt auf Rechnung.', 'Unsere Köche sind bei Avorix fest angestellt und sozialversichert. Avorix bleibt der Arbeitgeber.'],
+      ['In der Regel innerhalb von 24 bis 72 Stunden.', 'Wir melden uns innerhalb von 24 Stunden. Danach steht in der Regel innerhalb von 24 bis 72 Stunden ein Koch in Ihrer Küche, je nach Standort und Anforderung.'],
+      ['Keine Mindest-Einsatzdauer.', 'Ein einzelner Tag ist genauso möglich wie eine ganze Saison.'],
+      ['Fester Stundensatz.', 'Der Stundensatz steht fest, bevor der Einsatz beginnt. Keine versteckten Posten.'],
+    ]);
+    expect(karten[0].x).toBe(karten[2].x);
+    expect(karten[1].x).toBeGreaterThan(karten[0].x);
+  });
+
+  test('Kopfzeile: "Personal anfragen" springt hier zu #anfrage, sonst wie bisher', async ({ page }) => {
+    const ziele = async () => page.$$eval('a.nav-cta, a.nav-mobile-cta', (els) =>
+      els.filter((a) => a.textContent.trim() === 'Personal anfragen').map((a) => a.getAttribute('href')));
+    await page.goto(PFAD);
+    expect(await ziele()).toEqual(['#anfrage', '#anfrage']);
+    for (const pfad of ['/', '/personal/', '/personal/bodensee/']) {
+      await page.goto(pfad);
+      expect(await ziele()).toEqual(['/personal#anfrage', '/personal#anfrage']);
+    }
+  });
+
+  test('Handy: Menü schließt sich beim Sprung zu #anfrage', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(PFAD);
+    await page.click('#mobile-menu-btn');
+    await expect(page.locator('#mobile-nav-overlay')).toHaveClass(/is-open/);
+    await page.click('#mobile-nav-overlay a[href="#anfrage"]');
+    await expect(page.locator('#mobile-nav-overlay')).not.toHaveClass(/is-open/);
+    expect(page.url()).toContain('#anfrage');
+    await expect(page.locator('section#anfrage')).toBeInViewport();
+  });
+});
