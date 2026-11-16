@@ -170,6 +170,18 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
     font-size: 13px;
   }
 
+  /* Anweisung 89: KI-Hinweis, gleiche Schrift und Farbe wie footer-text */
+  .footer-ki {
+    width: 100%;
+    max-width: 1080px;
+    margin: -16px auto 0; /* Flex-gap 32px des Footers, hier enger an die Rechtszeile */
+    font-family: var(--f-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(242, 243, 242, 0.55);
+    overflow-wrap: anywhere;
+  }
+
   .footer-text,
   .footer-sep {
     color: rgba(242, 243, 242, 0.55);
@@ -297,6 +309,11 @@ const footerSpalten = lang === "de" ? footerSpaltenDe : footerSpaltenEn;
       </div>
     )}
   </div>
+
+  {/* Anweisung 89: Kennzeichnung KI-Inhalte (EU-KI-Verordnung Art. 50) */}
+  <p class="footer-ki">{lang === "de"
+    ? "Einige Fotos auf dieser Website sind Symbolbilder und mit KI erzeugt, ebenso die Sprecherstimme im Film."
+    : "Some photos on this website are illustrative images created with AI."}</p>
 </footer>
 
 <script is:inline>
