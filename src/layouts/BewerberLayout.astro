@@ -164,6 +164,12 @@ const fullTitle = `${title} | Avorix`;
           <button type="button" id="footer-cookie-settings" class="bw-cookie-btn">{cookieLabel}</button>
         </nav>
       </div>
+      {/* Anweisung 89: KI-Hinweis, nicht auf der ungarischen Seite */}
+      {lang !== "hu" && (
+        <p class="bw-foot-ki">{lang === "en"
+          ? "Some photos on this website are illustrative images created with AI."
+          : "Einige Fotos auf dieser Website sind Symbolbilder und mit KI erzeugt, ebenso die Sprecherstimme im Film."}</p>
+      )}
     </footer>
 
     {consent === "hu" ? <ConsentBannerHu /> : <ConsentBanner lang={consent} />}
@@ -266,6 +272,7 @@ const fullTitle = `${title} | Avorix`;
     font-size: 14px;
   }
   .bw-foot-adresse { color: rgba(247, 246, 242, 0.7); }
+  .bw-foot-ki { max-width: 1080px; margin: 12px auto 0; font-size: 14px; color: rgba(247, 246, 242, 0.7); }
   .bw-foot-links { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
   .bw-foot-link, .bw-cookie-btn {
     color: rgba(247, 246, 242, 0.82);

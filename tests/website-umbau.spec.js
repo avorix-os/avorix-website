@@ -2160,3 +2160,49 @@ test.describe('A87: Koch mieten Feinschliff', () => {
     await expect(page.locator('section#anfrage')).toBeInViewport();
   });
 });
+
+/**
+ * A89: KI-Hinweis als eigene Zeile in der Fußzeile (EU-KI-Verordnung Art. 50).
+ * Deutsch und Englisch je genau einmal innerhalb von <footer>, Ungarisch ohne.
+ */
+test.describe('A89: KI-Hinweis Fußzeile', () => {
+  const DE = 'Einige Fotos auf dieser Website sind Symbolbilder und mit KI erzeugt, ebenso die Sprecherstimme im Film.';
+  const EN = 'Some photos on this website are illustrative images created with AI.';
+  const FAELLE = [
+    ['/', DE, 'footer-text'],
+    ['/personal/', DE, 'footer-text'],
+    ['/personal/koch-mieten/', DE, 'footer-text'],
+    ['/jobs/koch/', DE, 'bw-foot-adresse'],
+    ['/en/', EN, 'footer-text'],
+    ['/en/jobs/cook/', EN, 'bw-foot-adresse'],
+  ];
+
+  for (const [pfad, satz, vergleich] of FAELLE) {
+    test(`${pfad}: Satz genau einmal in <footer>, Schrift wie Firmenname`, async ({ page }) => {
+      for (const breite of [390, 1280]) {
+        await page.setViewportSize({ width: breite, height: 900 });
+        await page.goto(pfad);
+        const html = await page.content();
+        expect(html.split(satz).length - 1).toBe(1);
+        expect(html.split(satz === DE ? EN : DE).length - 1).toBe(0);
+        const zeile = page.locator('footer', { hasText: satz }).getByText(satz, { exact: true });
+        await expect(zeile).toBeVisible();
+        const stil = (sel) => page.locator(sel).first().evaluate((el) => {
+          const s = getComputedStyle(el);
+          return [s.fontSize, s.color];
+        });
+        expect(await zeile.evaluate((el) => [getComputedStyle(el).fontSize, getComputedStyle(el).color]))
+          .toEqual(await stil(`footer .${vergleich}`));
+        const ueber = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
+        expect(ueber).toBeLessThanOrEqual(0);
+      }
+    });
+  }
+
+  test('/hu/szakacs-allas/: kein KI-Satz', async ({ page }) => {
+    await page.goto('/hu/szakacs-allas/');
+    const html = await page.content();
+    expect(html).not.toContain(DE);
+    expect(html).not.toContain(EN);
+  });
+});
